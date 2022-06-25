@@ -28,8 +28,7 @@ from pypaystack import Transaction
 ## Installation
 
 1. Create your [Paystack account](https://paystack.com/) to get your Authorization key that is required to use this package.
-2. Store your authorization key in your environment variable as "PAYSTACK_AUTHORIZATION_KEY" or pass it into the  
-pypaystack objects at initiatialization.
+2. Store your authorization key in your environment variable as "PAYSTACK_AUTHORIZATION_KEY" or pass it into the pypaystack objects at initiatialization.
 3. Install pypaystack2 package.
 
 ```bash
