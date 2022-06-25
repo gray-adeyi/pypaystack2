@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "pypaystack2"
+version = "0.3.0"
+description = "A fork of PyPaystack. A simple python wrapper for Paystack API."
+authors = ["Edward Popoola <edwardpopoola@gmail.com>", "Gbenga Adeyi <adeyigbenga005@gmail.com>"]
+readme = "README.md"
+packages = [{include = "pypaystack2"}]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+requests = "^2.28.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
