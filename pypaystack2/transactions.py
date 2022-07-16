@@ -4,6 +4,10 @@ from .errors import InvalidDataError
 
 
 class Transaction(BaseAPI):
+    """
+    The Transaction API allows you create and manage
+    payments on your integration
+    """
     def getall(self, start_date: str | None = None, end_date: str | None = None, status: str | None = None, pagination=10):
         """
         Gets all your transactions
