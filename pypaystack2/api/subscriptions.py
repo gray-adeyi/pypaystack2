@@ -4,7 +4,7 @@ from . import utils
 from .utils import add_to_payload, append_query_params
 
 
-class Plan(BaseAPI):
+class Subscription(BaseAPI):
     """
     The Subscriptions API allows
     you create and manage recurring
