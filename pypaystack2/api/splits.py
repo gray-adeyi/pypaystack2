@@ -1,27 +1,34 @@
 from typing import Mapping, Optional
 
-from pypaystack2 import subaccounts
-from .baseapi import BaseAPI
-from . import utils
-from .utils import add_to_payload, prepend_query_params
-from .errors import InvalidDataError
+from ..baseapi import BaseAPI
+from ..utils import (
+    Bearer,
+    Channel,
+    Currency,
+    SplitType,
+    TransactionStatus,
+    add_to_payload,
+    prepend_query_params,
+    validate_amount,
+)
+from ..errors import InvalidDataError
 
 
 class Split(BaseAPI):
     """
-    The Transaction Splits API enables merchants split 
-    the settlement for a transaction across their 
+    The Transaction Splits API enables merchants split
+    the settlement for a transaction across their
     payout account, and one or more Subaccounts.
     """
 
     def create(
         self,
         name: str,
-        type: utils.SplitType,
-        currency: utils.Currency,
+        type: SplitType,
+        currency: Currency,
         subaccounts: list[Mapping],
-        bearer_type: utils.Bearer,
-        bearer_subaccount: str
+        bearer_type: Bearer,
+        bearer_subaccount: str,
     ):
         """
         Create a split payment on your integration
@@ -34,7 +41,7 @@ class Split(BaseAPI):
             "currency": currency,
             "subaccounts": subaccounts,
             "bearer_type": bearer_type,
-            "bearer_subaccount": bearer_subaccount
+            "bearer_subaccount": bearer_subaccount,
         }
         return self._handle_request("POST", url, payload)
 
@@ -46,7 +53,7 @@ class Split(BaseAPI):
         start_date: Optional[str],
         end_date: Optional[str],
         active: bool = True,
-        pagination=50
+        pagination=50,
     ):
         """
         List/search for the transaction splits available on your integration.
@@ -76,16 +83,17 @@ class Split(BaseAPI):
         id: str,
         name: str,
         active: bool,
-        bearer_type: Optional[utils.Bearer],
-        bearer_subaccount: Optional[str]
+        bearer_type: Optional[Bearer],
+        bearer_subaccount: Optional[str],
     ):
         """
         Update a transaction split details on your integration
         """
         if bearer_subaccount:
-            if bearer_type != utils.Bearer.SUBACCOUNT:
+            if bearer_type != Bearer.SUBACCOUNT:
                 raise InvalidDataError(
-                    "`bearer_subaccount` can only have a value if `bearer_type` is `Bearer.SUBACCOUNT`")
+                    "`bearer_subaccount` can only have a value if `bearer_type` is `Bearer.SUBACCOUNT`"
+                )
 
         payload = {
             "name": name,
@@ -93,7 +101,7 @@ class Split(BaseAPI):
         }
         optional_params = [
             ("bearer_type", bearer_type),
-            ("bearer_subaccount", bearer_subaccount)
+            ("bearer_subaccount", bearer_subaccount),
         ]
         payload = add_to_payload()
         url = self._url(f"/split/{id}/")
@@ -101,14 +109,11 @@ class Split(BaseAPI):
 
     def add_or_update(self, id: str, subaccount: str, share: int):
         """
-        Add a Subaccount to a Transaction Split, or update 
+        Add a Subaccount to a Transaction Split, or update
         the share of an existing Subaccount in a Transaction Split
         """
-        share = utils.validate_amount(share)
-        payload = {
-            "subaccount": subaccount,
-            "share": share
-        }
+        share = validate_amount(share)
+        payload = {"subaccount": subaccount, "share": share}
         url = self._url(f"/split/{id}/subaccount/add")
         return self._handle_request("POST", url, payload)
 
@@ -116,9 +121,7 @@ class Split(BaseAPI):
         """
         Remove a subaccount from a transaction split
         """
-        payload = {
-            "subaccount": subaccount
-        }
+        payload = {"subaccount": subaccount}
         url = self._url(f"/split/{id}/subaccount/remove")
         return self._handle_request("POST", url, payload)
 
@@ -127,10 +130,11 @@ class Split(BaseAPI):
         customer: Optional[int],
         start_date: Optional[str],
         end_date: Optional[str],
-        status: Optional[utils.TransactionStatus],
+        status: Optional[TransactionStatus],
         page: Optional[int],
-        amount: Optional[utils.Currency],
-            pagination=50):
+        amount: Optional[Currency],
+        pagination=50,
+    ):
         """
         List transactions carried out on your integration.
         Gets all your transactions
@@ -147,7 +151,7 @@ class Split(BaseAPI):
             ("status", status),
             ("from", start_date),
             ("to", end_date),
-            ("amount", amount)
+            ("amount", amount),
         ]
         url = prepend_query_params(query_params)
 
@@ -164,19 +168,20 @@ class Split(BaseAPI):
         url = self._url(f"/transaction/{transaction_id}/")
         return self._handle_request("GET", url)
 
-    def charge(self,
-               amount: int,
-               email: str,
-               auth_code: str,
-               reference: Optional[str],
-               currency: Optional[utils.Currency],
-               metadata: Optional[str],
-               channels: Optional[list[utils.Channel]],
-               subaccount: Optional[str],
-               transaction_charge: Optional[int],
-               bearer: Optional[utils.Bearer],
-               queue: bool = False
-               ):
+    def charge(
+        self,
+        amount: int,
+        email: str,
+        auth_code: str,
+        reference: Optional[str],
+        currency: Optional[Currency],
+        metadata: Optional[str],
+        channels: Optional[list[Channel]],
+        subaccount: Optional[str],
+        transaction_charge: Optional[int],
+        bearer: Optional[Bearer],
+        queue: bool = False,
+    ):
         """
         Charges a customer and returns the response
 
@@ -187,14 +192,13 @@ class Split(BaseAPI):
         reference -- optional
         metadata -- a list if json data objects/dicts
         """
-        amount = utils.validate_amount(amount)
+        amount = validate_amount(amount)
 
         if not email:
             raise InvalidDataError("Customer's Email is required to charge")
 
         if not auth_code:
-            raise InvalidDataError(
-                "Customer's Auth code is required to charge")
+            raise InvalidDataError("Customer's Auth code is required to charge")
 
         url = self._url("/transaction/charge_authorization")
         payload = {
@@ -216,23 +220,19 @@ class Split(BaseAPI):
 
         return self._handle_request("POST", url, payload)
 
-    def check_authorization(self,
-                            amount: int,
-                            email: str,
-                            auth_code: str,
-                            currency=Optional[utils.Currency]
-                            ):
+    def check_authorization(
+        self, amount: int, email: str, auth_code: str, currency=Optional[Currency]
+    ):
         """
         Note: This feature is only available to businesses in Nigeria.
         """
-        amount = utils.validate_amount(amount)
+        amount = validate_amount(amount)
 
         if not email:
             raise InvalidDataError("Customer's Email is required to charge")
 
         if not auth_code:
-            raise InvalidDataError(
-                "Customer's Auth code is required to charge")
+            raise InvalidDataError("Customer's Auth code is required to charge")
 
         url = self._url("/transaction/check_authorization")
         payload = {
@@ -255,11 +255,11 @@ class Split(BaseAPI):
         return self._handle_request("GET", url)
 
     def totals(
-            self,
-            page=Optional[int],
-            start_date=Optional[str],
-            end_date=Optional[str],
-            pagination=50
+        self,
+        page=Optional[int],
+        start_date=Optional[str],
+        end_date=Optional[str],
+        pagination=50,
     ):
         """
         Gets transaction totals
@@ -271,25 +271,25 @@ class Split(BaseAPI):
         return self._handle_request("GET", url)
 
     def export(
-            self,
-            page=Optional[int],
-            start_date=Optional[str],
-            end_date=Optional[str],
-            customer=Optional[int],
-            status=Optional[utils.TransactionStatus],
-            currency=Optional[utils.Currency],
-            amount=Optional[int],
-            settled=Optional[bool],
-            settlement=Optional[int],
-            payment_page=Optional[int],
-            pagination=50
+        self,
+        page=Optional[int],
+        start_date=Optional[str],
+        end_date=Optional[str],
+        customer=Optional[int],
+        status=Optional[TransactionStatus],
+        currency=Optional[Currency],
+        amount=Optional[int],
+        settled=Optional[bool],
+        settlement=Optional[int],
+        payment_page=Optional[int],
+        pagination=50,
     ):
         """
-        Exports a list of transactions 
+        Exports a list of transactions
         carried out on your integration.
         """
         if amount:
-            amount = utils.validate_amount(amount)
+            amount = validate_amount(amount)
         url = self._url(f"/transaction/export/?perPage={pagination}")
         query_params = [
             ("page", page),
@@ -305,14 +305,15 @@ class Split(BaseAPI):
         url = prepend_query_params(query_params)
         return self._handle_request("GET", url)
 
-    def partial_debit(self,
-                      auth_code: str,
-                      currency: utils.Currency,
-                      amount: int,
-                      email: str,
-                      reference: Optional[str],
-                      at_least: Optional[int],
-                      ):
+    def partial_debit(
+        self,
+        auth_code: str,
+        currency: Currency,
+        amount: int,
+        email: str,
+        reference: Optional[str],
+        at_least: Optional[int],
+    ):
         """
         Charges a customer and returns the response
 
@@ -323,16 +324,15 @@ class Split(BaseAPI):
         reference -- optional
         metadata -- a list if json data objects/dicts
         """
-        amount = utils.validate_amount(amount)
+        amount = validate_amount(amount)
         if at_least:
-            at_least = utils.validate_amount(at_least)
+            at_least = validate_amount(at_least)
 
         if not email:
             raise InvalidDataError("Customer's Email is required to charge")
 
         if not auth_code:
-            raise InvalidDataError(
-                "Customer's Auth code is required to charge")
+            raise InvalidDataError("Customer's Auth code is required to charge")
 
         url = self._url("/transaction/partial_debit")
         payload = {
@@ -341,10 +341,7 @@ class Split(BaseAPI):
             "amount": amount,
             "email": email,
         }
-        optional_params = [
-            ("reference", reference),
-            ("at_least", at_least)
-        ]
+        optional_params = [("reference", reference), ("at_least", at_least)]
         payload = add_to_payload(optional_params, payload)
 
         return self._handle_request("POST", url, payload)
@@ -357,8 +354,9 @@ class Split(BaseAPI):
         url = self._url("/bank")
         return self._handle_request("GET", url)
 
-    def create_transfer_customer(self, bank_code: str,
-                                 account_number: int, account_name: str):
+    def create_transfer_customer(
+        self, bank_code: str, account_number: int, account_name: str
+    ):
         """
         Create a transfer customer
         """
@@ -372,13 +370,13 @@ class Split(BaseAPI):
         }
         return self._handle_request("POST", url, payload)
 
-    def transfer(self, recipient_code: str,
-                 amount: int, reason: str,
-                 reference: Optional[str]):
+    def transfer(
+        self, recipient_code: str, amount: int, reason: str, reference: Optional[str]
+    ):
         """
         Initiates transfer to a customer
         """
-        amount = utils.validate_amount(amount)
+        amount = validate_amount(amount)
         url = self._url("/transfer")
         payload = {
             "amount": amount,

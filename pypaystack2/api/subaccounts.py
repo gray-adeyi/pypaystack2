@@ -1,13 +1,9 @@
-from token import OP
 from typing import Optional
-from .baseapi import BaseAPI
-from .errors import InvalidDataError
-from .utils import (
+
+from ..baseapi import BaseAPI
+from ..utils import (
     add_to_payload,
     append_query_params,
-    Identification,
-    Country,
-    RiskAction,
 )
 
 

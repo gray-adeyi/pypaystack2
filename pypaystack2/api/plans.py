@@ -1,7 +1,13 @@
 from typing import Optional
-from .baseapi import BaseAPI
-from . import utils
-from .utils import add_to_payload
+
+from ..baseapi import BaseAPI
+from ..utils import (
+    add_to_payload,
+    Interval,
+    Currency,
+    validate_amount,
+    validate_interval,
+)
 
 
 class Plan(BaseAPI):
@@ -15,9 +21,9 @@ class Plan(BaseAPI):
         self,
         name: str,
         amount: int,
-        interval: utils.Interval,
+        interval: Interval,
         description: Optional[str] = None,
-        currency: Optional[utils.Currency] = None,
+        currency: Optional[Currency] = None,
         invoice_limit: Optional[int] = None,
         send_invoices: bool = False,
         send_sms: bool = False,
@@ -32,8 +38,8 @@ class Plan(BaseAPI):
         description -- Plan Description (optional)
 
         """
-        interval = utils.validate_interval(interval)
-        amount = utils.validate_amount(amount)
+        interval = validate_interval(interval)
+        amount = validate_amount(amount)
 
         url = self._url("/plan/")
 
@@ -72,9 +78,9 @@ class Plan(BaseAPI):
         plan_id: str,
         name: str,
         amount: int,
-        interval: utils.Interval,
+        interval: Interval,
         description: Optional[str],
-        currency: Optional[utils.Currency],
+        currency: Optional[Currency],
         invoice_limit: Optional[int],
         send_invoices: bool = False,
         send_sms: bool = False,
@@ -89,9 +95,8 @@ class Plan(BaseAPI):
         interval -- enum pypaystack2.utils.Interval.[HOURLY,DAILY,WEEKLY,MONTHLY,ANNUALLY]
         description -- Plan Description (optional)
         """
-        # TODO: create enum for interval.
-        interval = utils.validate_interval(interval)
-        amount = utils.validate_amount(amount)
+        interval = validate_interval(interval)
+        amount = validate_amount(amount)
 
         url = self._url("/plan/{}/".format(plan_id))
         required_params = {

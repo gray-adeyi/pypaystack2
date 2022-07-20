@@ -1,9 +1,7 @@
-from typing import Mapping, Optional
+from typing import Optional
 
-from pypaystack2.errors import InvalidDataError
-from .baseapi import BaseAPI
-from . import utils
-from .utils import TRType, add_to_payload, append_query_params
+from ..baseapi import BaseAPI
+from ..utils import Currency, add_to_payload, append_query_params, validate_amount
 
 
 class Transfer(BaseAPI):
@@ -18,12 +16,12 @@ class Transfer(BaseAPI):
         amount: int,
         recipient: str,
         reason: Optional[str] = None,
-        currency: Optional[utils.Currency] = None,
+        currency: Optional[Currency] = None,
         reference: Optional[str] = None,
         source="balance",
     ):
         """ """
-        amount = utils.validate_amount(amount)
+        amount = validate_amount(amount)
 
         url = self._url("/transfer")
 
@@ -46,7 +44,7 @@ class Transfer(BaseAPI):
         otp: str,
     ):
         """ """
-        amount = utils.validate_amount(amount)
+        amount = validate_amount(amount)
 
         url = self._url("/transfer/finalize_transfer")
 

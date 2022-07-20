@@ -1,9 +1,15 @@
 from typing import Mapping, Optional
 
 from pypaystack2.errors import InvalidDataError
-from .baseapi import BaseAPI
-from . import utils
-from .utils import TRType, add_to_payload, append_query_params
+from ..baseapi import BaseAPI
+from ..utils import (
+    Currency,
+    TRType,
+    add_to_payload,
+    append_query_params,
+    validate_amount,
+    validate_interval,
+)
 
 
 class TransferReceipt(BaseAPI):
@@ -20,12 +26,12 @@ class TransferReceipt(BaseAPI):
         account_number: str,
         bank_code: Optional[str] = None,
         description: Optional[str] = None,
-        currency: Optional[utils.Currency] = None,
+        currency: Optional[Currency] = None,
         auth_code: Optional[str] = None,
         metadata: Optional[Mapping] = None,
     ):
         """ """
-        # TODO: type is a keyword arg, might replace
+        # FIXME: type is a keyword arg, might replace
         # if it raises issues.
         if type == TRType.NUBAN or type == TRType.BASA:
             if bank_code is None:
@@ -33,8 +39,8 @@ class TransferReceipt(BaseAPI):
                     "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"
                 )
 
-        interval = utils.validate_interval(interval)
-        amount = utils.validate_amount(amount)
+        interval = validate_interval(interval)
+        amount = validate_amount(amount)
 
         url = self._url("/transferrecipient")
 
@@ -64,7 +70,7 @@ class TransferReceipt(BaseAPI):
         auth_code: Optional[str] = None,
         metadata: Optional[Mapping] = None,
         """
-        # TODO: type is a keyword arg, might replace
+        # FIXME: type is a keyword arg, might replace
         # if it raises issues.
         for tr in batch:
             if tr.type == TRType.NUBAN or tr.type == TRType.BASA:
@@ -73,8 +79,8 @@ class TransferReceipt(BaseAPI):
                         "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"
                     )
 
-        interval = utils.validate_interval(interval)
-        amount = utils.validate_amount(amount)
+        interval = validate_interval(interval)
+        amount = validate_amount(amount)
 
         url = self._url("/transferrecipient/bulk")
 

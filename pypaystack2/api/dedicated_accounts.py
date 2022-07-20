@@ -1,15 +1,7 @@
-from optparse import Option
 from typing import Optional
-from .baseapi import BaseAPI
-from .errors import InvalidDataError
-from .utils import (
-    Currency,
-    add_to_payload,
-    append_query_params,
-    Identification,
-    Country,
-    RiskAction,
-)
+
+from ..baseapi import BaseAPI
+from ..utils import Currency, add_to_payload, append_query_params
 
 
 class DedicatedAccount(BaseAPI):

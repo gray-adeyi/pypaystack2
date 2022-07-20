@@ -1,11 +1,7 @@
 from typing import Mapping, Optional
 
-from pkg_resources import split_sections
-
-from pypaystack2.errors import InvalidDataError
-from .baseapi import BaseAPI
-from . import utils
-from .utils import (
+from ..baseapi import BaseAPI
+from ..utils import (
     Currency,
     InvoiceStatus,
     add_to_payload,

@@ -1,9 +1,8 @@
 from typing import Optional
 
-from pypaystack2.errors import InvalidDataError
-from .baseapi import BaseAPI
-from . import utils
-from .utils import Currency, add_to_payload, append_query_params
+
+from ..baseapi import BaseAPI
+from ..utils import add_to_payload, append_query_params
 
 
 class Page(BaseAPI):

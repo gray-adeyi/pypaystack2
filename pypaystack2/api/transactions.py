@@ -1,8 +1,17 @@
-from typing import Mapping, Optional
-from .baseapi import BaseAPI
-from . import utils
-from .utils import add_to_payload, append_query_params
-from .errors import InvalidDataError
+from typing import Optional
+
+from ..baseapi import BaseAPI
+
+from ..utils import (
+    Bearer,
+    Channel,
+    Currency,
+    TransactionStatus,
+    add_to_payload,
+    append_query_params,
+    validate_amount,
+)
+from ..errors import InvalidDataError
 
 
 class Transaction(BaseAPI):
@@ -15,17 +24,17 @@ class Transaction(BaseAPI):
         self,
         amount: int,
         email: str,
-        currency: Optional[utils.Currency] = None,
+        currency: Optional[Currency] = None,
         reference: Optional[str] = None,
         callback_url: Optional[str] = None,
         plan: Optional[str] = None,
         invoice_limit: Optional[int] = None,
         metadata: Optional[str] = None,
-        channels: Optional[list[utils.Channel]] = None,
+        channels: Optional[list[Channel]] = None,
         split_code: Optional[str] = None,
         subaccount: Optional[str] = None,
         transfer_charge: Optional[int] = None,
-        bearer: Optional[utils.Bearer] = None,
+        bearer: Optional[Bearer] = None,
     ):
         """
         Initialize a transaction and returns the response
@@ -38,7 +47,7 @@ class Transaction(BaseAPI):
         channel -- channel type to use
         metadata -- a list if json data objects/dicts
         """
-        amount = utils.validate_amount(amount)
+        amount = validate_amount(amount)
 
         if not email:
             raise InvalidDataError("Customer's Email is required for initialization")
@@ -83,9 +92,9 @@ class Transaction(BaseAPI):
         customer: Optional[int] = None,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
-        status: Optional[utils.TransactionStatus] = None,
+        status: Optional[TransactionStatus] = None,
         page: Optional[int] = None,
-        amount: Optional[utils.Currency] = None,
+        amount: Optional[Currency] = None,
         pagination=50,
     ):
         """
@@ -127,12 +136,12 @@ class Transaction(BaseAPI):
         email: str,
         auth_code: str,
         reference: Optional[str] = None,
-        currency: Optional[utils.Currency] = None,
+        currency: Optional[Currency] = None,
         metadata: Optional[str] = None,
-        channels: Optional[list[utils.Channel]] = None,
+        channels: Optional[list[Channel]] = None,
         subaccount: Optional[str] = None,
         transaction_charge: Optional[int] = None,
-        bearer: Optional[utils.Bearer] = None,
+        bearer: Optional[Bearer] = None,
         queue: bool = False,
     ):
         """
@@ -145,7 +154,7 @@ class Transaction(BaseAPI):
         reference -- optional
         metadata -- a list if json data objects/dicts
         """
-        amount = utils.validate_amount(amount)
+        amount = validate_amount(amount)
 
         if not email:
             raise InvalidDataError("Customer's Email is required to charge")
@@ -178,12 +187,12 @@ class Transaction(BaseAPI):
         amount: int,
         email: str,
         auth_code: str,
-        currency: Optional[utils.Currency] = None,
+        currency: Optional[Currency] = None,
     ):
         """
         Note: This feature is only available to businesses in Nigeria.
         """
-        amount = utils.validate_amount(amount)
+        amount = validate_amount(amount)
 
         if not email:
             raise InvalidDataError("Customer's Email is required to charge")
@@ -229,16 +238,16 @@ class Transaction(BaseAPI):
 
     def export(
         self,
-        page=Optional[int],
-        start_date=Optional[str],
-        end_date=Optional[str],
-        customer=Optional[int],
-        status=Optional[utils.TransactionStatus],
-        currency=Optional[utils.Currency],
-        amount=Optional[int],
-        settled=Optional[bool],
-        settlement=Optional[int],
-        payment_page=Optional[int],
+        page: Optional[int] = None,
+        start_date: Optional[str] = None,
+        end_date: Optional[str] = None,
+        customer: Optional[int] = None,
+        status: Optional[TransactionStatus] = None,
+        currency: Optional[Currency] = None,
+        amount: Optional[int] = None,
+        settled: Optional[bool] = None,
+        settlement: Optional[int] = None,
+        payment_page: Optional[int] = None,
         pagination=50,
     ):
         """
@@ -246,7 +255,7 @@ class Transaction(BaseAPI):
         carried out on your integration.
         """
         if amount:
-            amount = utils.validate_amount(amount)
+            amount = validate_amount(amount)
         url = self._url(f"/transaction/export/?perPage={pagination}")
         query_params = [
             ("page", page),
@@ -265,7 +274,7 @@ class Transaction(BaseAPI):
     def partial_debit(
         self,
         auth_code: str,
-        currency: utils.Currency,
+        currency: Currency,
         amount: int,
         email: str,
         reference: Optional[str] = None,
@@ -281,9 +290,9 @@ class Transaction(BaseAPI):
         reference -- optional
         metadata -- a list if json data objects/dicts
         """
-        amount = utils.validate_amount(amount)
+        amount = validate_amount(amount)
         if at_least:
-            at_least = utils.validate_amount(at_least)
+            at_least = validate_amount(at_least)
 
         if not email:
             raise InvalidDataError("Customer's Email is required to charge")
@@ -337,7 +346,7 @@ class Transaction(BaseAPI):
         """
         Initiates transfer to a customer
         """
-        amount = utils.validate_amount(amount)
+        amount = validate_amount(amount)
         url = self._url("/transfer")
         payload = {
             "amount": amount,

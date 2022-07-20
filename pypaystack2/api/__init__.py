@@ -1,3 +1,6 @@
+"""
+A collection of api wrappers for paystack endpoints
+"""
 from .apple_pay import ApplePay
 from .bulk_charges import BulkCharge
 from .charge import Charge

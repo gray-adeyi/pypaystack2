@@ -1,9 +1,4 @@
-from typing import Mapping, Optional
-
-from pypaystack2.errors import InvalidDataError
-from .baseapi import BaseAPI
-from . import utils
-from .utils import ChargeStatus, TRType, add_to_payload, append_query_params
+from ..baseapi import BaseAPI
 
 
 class ControlPanel(BaseAPI):

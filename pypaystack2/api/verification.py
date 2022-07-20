@@ -1,21 +1,5 @@
-from typing import Mapping, Optional
-
-from pypaystack2.errors import InvalidDataError
-from .baseapi import BaseAPI
-from . import utils
-from .utils import (
-    AccountType,
-    ChargeStatus,
-    Country,
-    Currency,
-    DisputeStatus,
-    DocumentType,
-    Resolution,
-    TRType,
-    add_to_payload,
-    append_query_params,
-    validate_amount,
-)
+from ..baseapi import BaseAPI
+from ..utils import AccountType, Country, DocumentType
 
 
 class Verification(BaseAPI):

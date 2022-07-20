@@ -1,9 +1,7 @@
-from typing import Mapping, Optional
+from typing import Optional
 
-from pypaystack2.errors import InvalidDataError
-from .baseapi import BaseAPI
-from . import utils
-from .utils import ChargeStatus, TRType, add_to_payload, append_query_params
+from ..baseapi import BaseAPI
+from ..utils import ChargeStatus, append_query_params
 
 
 class BulkCharge(BaseAPI):
