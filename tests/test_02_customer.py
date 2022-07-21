@@ -13,36 +13,48 @@ class TestCustomer(TestCase):
         """
         # using random generator for email id to ensure email is unique, thus ensuring success on retests
         user_email = f"{uuid4()}@mail.com"
-        user_details = {"email": user_email,
-                        "first_name": "Test",
-                        "last_name": "Customer",
-                        "phone": "08012345678"}
-        updated_user_details = {
+        user_details = {
             "email": user_email,
+            "first_name": "Test",
+            "last_name": "Customer",
+            "phone": "08012345678",
+        }
+        updated_user_details = {
             "first_name": "Updated",
             "last_name": "Customer",
-            "phone": "080987654321"}
+            "phone": "080987654321",
+        }
 
         def create_customer():
-            (status_code, status, response_msg,
-             created_customer_data) = self.customer.create(**user_details)
+            (
+                status_code,
+                status,
+                response_msg,
+                created_customer_data,
+            ) = self.customer.create(**user_details)
             self.assertEqual(status_code, 200)
             self.assertEqual(status, True)
-            self.assertEqual(response_msg, 'Customer created')
+            self.assertEqual(response_msg, "Customer created")
             # assert if subset
-            self.assertLessEqual(
-                user_details.items(), created_customer_data.items())
+            self.assertLessEqual(user_details.items(), created_customer_data.items())
             return created_customer_data
 
         def update_customer():
-            (status_code, status, response_msg, updated_customer_data) = self.customer.update(
-                user_id=created_customer_data['id'], **updated_user_details)
+            (
+                status_code,
+                status,
+                response_msg,
+                updated_customer_data,
+            ) = self.customer.update(
+                user_id=created_customer_data["id"], **updated_user_details
+            )
             self.assertEqual(status_code, 200)
             self.assertEqual(status, True)
-            self.assertEqual(response_msg, 'Customer updated')
+            self.assertEqual(response_msg, "Customer updated")
             # assert if subset
             self.assertLessEqual(
-                updated_user_details.items(), updated_customer_data.items())
+                updated_user_details.items(), updated_customer_data.items()
+            )
 
         created_customer_data = create_customer()
         update_customer()

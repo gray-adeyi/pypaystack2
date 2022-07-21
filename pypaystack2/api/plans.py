@@ -58,12 +58,12 @@ class Plan(BaseAPI):
         payload = add_to_payload(optional_params, payload)
         return self._handle_request("POST", url, payload)
 
-    def get_plan(self, plan_id: Optional[int], code: Optional[str]):
+    def get_plan(self, id_or_code: str):
         """
         Gets one plan with the given plan id
         Requires: plan_id
         """
-        url = self._url("/plan/{}/".format(plan_id))
+        url = self._url("/plan/{}/".format(id_or_code))
         return self._handle_request("GET", url)
 
     def get_plans(self, pagination=50):
@@ -79,9 +79,9 @@ class Plan(BaseAPI):
         name: str,
         amount: int,
         interval: Interval,
-        description: Optional[str],
-        currency: Optional[Currency],
-        invoice_limit: Optional[int],
+        description: Optional[str] = None,
+        currency: Optional[Currency] = None,
+        invoice_limit: Optional[int] = None,
         send_invoices: bool = False,
         send_sms: bool = False,
     ):

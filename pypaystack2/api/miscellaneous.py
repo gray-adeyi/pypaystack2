@@ -1,10 +1,10 @@
 from typing import Optional
 
 from ..baseapi import BaseAPI
-from . import utils
 from ..utils import (
     BankType,
     Country,
+    Currency,
     append_query_params,
 )
 

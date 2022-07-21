@@ -8,7 +8,7 @@ from ..utils import (
     SplitType,
     TransactionStatus,
     add_to_payload,
-    prepend_query_params,
+    append_query_params,
     validate_amount,
 )
 from ..errors import InvalidDataError
@@ -67,7 +67,7 @@ class Split(BaseAPI):
             ("to", end_date),
             ("active", active),
         ]
-        url = prepend_query_params(query_params)
+        url = append_query_params(query_params)
 
         return self._handle_request("GET", url)
 
@@ -153,7 +153,7 @@ class Split(BaseAPI):
             ("to", end_date),
             ("amount", amount),
         ]
-        url = prepend_query_params(query_params)
+        url = append_query_params(query_params)
 
         return self._handle_request("GET", url)
 
@@ -302,7 +302,7 @@ class Split(BaseAPI):
             ("settlement", settlement),
             ("payment_page", payment_page),
         ]
-        url = prepend_query_params(query_params)
+        url = append_query_params(query_params)
         return self._handle_request("GET", url)
 
     def partial_debit(

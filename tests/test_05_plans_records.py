@@ -11,22 +11,24 @@ class TestPlansRecord(TestCase):
         """
         Integration test for getting all plans and getting single plan details
         """
+
         def retrieve_all_plans():
-            (status_code, status, response_msg,
-             plans_list) = self.plan.getall()
+            (status_code, status, response_msg, plans_list) = self.plan.get_plans()
             self.assertEqual(status_code, 200)
             self.assertEqual(status, True)
-            self.assertEqual(response_msg, 'Plans retrieved')
+            self.assertEqual(response_msg, "Plans retrieved")
             self.assertIsInstance(plans_list, list)
             return plans_list
 
         def retrieve_one_plan():
             one_plan = plans_list[0]
-            (status_code, status, response_msg,
-             plan_data) = self.plan.getone(one_plan['id'])
+            (status_code, status, response_msg, plan_data) = self.plan.get_plan(
+                one_plan["id"]
+            )
             self.assertEqual(status_code, 200)
             self.assertEqual(status, True)
-            self.assertEqual(response_msg, 'Plan retrieved')
+            self.assertEqual(response_msg, "Plan retrieved")
+            print(plan_data)
 
             # TODO: Fix this test.
             # assert if subset

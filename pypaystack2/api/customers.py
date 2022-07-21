@@ -45,7 +45,7 @@ class Customer(BaseAPI):
         payload = add_to_payload(optional_params, payload)
         return self._handle_request("POST", url, payload)
 
-    def getall(
+    def get_customers(
         self,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
@@ -68,25 +68,14 @@ class Customer(BaseAPI):
         url = append_query_params(query_params, url)
         return self._handle_request("GET", url)
 
-    def getone(self, customer_code: str, email: Optional[str] = None):
+    def get_customer(self, email_or_code: str):
         """
         Gets the customer with the given user id
 
         args:
         customer_code -- The customer's code
         """
-        if customer_code is not None and email is not None:
-            raise InvalidDataError(
-                "You can't have both `customer_code` and `email` set. \
-                Set either of the two both fields will be deprecated in \
-                favour of `email_or_code` in the future"
-            )
-        email_or_code = ""
-        if customer_code:
-            email_or_code = customer_code
-        if email:
-            email_or_code = email
-        url = self._url(f"/customer/{email}/")
+        url = self._url(f"/customer/{email_or_code}/")
         return self._handle_request("GET", url)
 
     def update(

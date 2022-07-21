@@ -11,6 +11,7 @@ from .disputes import Dispute
 from .invoices import Invoice
 from .miscellaneous import Miscellaneous
 from .payment_pages import Page
+from .plans import Plan
 from .products import Product
 from .refunds import Refund
 from .settlements import Settlement

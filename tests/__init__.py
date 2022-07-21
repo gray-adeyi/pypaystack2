@@ -1,5 +1,5 @@
 from unittest import TestCase
-from pypaystack2 import Transaction, Plan, Customer, Currency, Interval
+from pypaystack2.api import Transaction, Plan, Customer
 from uuid import uuid4
 from dotenv import load_dotenv
 import os

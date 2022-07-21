@@ -15,9 +15,10 @@ from ..errors import InvalidDataError
 
 
 class Transaction(BaseAPI):
-    """
-    The Transaction API allows you create and manage
-    payments on your integration
+    """Provides a wrapper for paystack Transactions API
+
+    The Transactions API allows you create and manage payments on your integration.
+    https://paystack.com/docs/api/#transaction
     """
 
     def initialize(
@@ -36,17 +37,7 @@ class Transaction(BaseAPI):
         transfer_charge: Optional[int] = None,
         bearer: Optional[Bearer] = None,
     ):
-        """
-        Initialize a transaction and returns the response
-
-        args:
-        email -- Customer's email address
-        amount -- Amount to charge
-        plan -- optional
-        Reference -- optional
-        channel -- channel type to use
-        metadata -- a list if json data objects/dicts
-        """
+        """Initialize a transaction from your backend"""
         amount = validate_amount(amount)
 
         if not email:
@@ -76,18 +67,13 @@ class Transaction(BaseAPI):
         return self._handle_request("POST", url, payload)
 
     def verify(self, reference: str):
-        """
-        Verifies a transaction using the provided reference number
-
-        args:
-        reference -- reference of the transaction to verify
-        """
+        """Confirm the status of a transaction"""
 
         reference = str(reference)
         url = self._url(f"/transaction/verify/{reference}")
         return self._handle_request("GET", url)
 
-    def list_transactions(
+    def get_transactions(
         self,
         customer: Optional[int] = None,
         start_date: Optional[str] = None,
@@ -97,15 +83,7 @@ class Transaction(BaseAPI):
         amount: Optional[Currency] = None,
         pagination=50,
     ):
-        """
-        List transactions carried out on your integration.
-        Gets all your transactions
-
-        args:
-        pagination -- Count of data to return per call
-        from: start date
-        to: end date
-        """
+        """List transactions carried out on your integration."""
         url = self._url(f"/transaction/?perPage={pagination}")
         query_params = [
             ("page", page),
@@ -120,13 +98,7 @@ class Transaction(BaseAPI):
         return self._handle_request("GET", url)
 
     def get_transaction(self, transaction_id: str):
-        """
-        Get details of a transaction carried out on your integration.
-        Gets one customer with the given transaction id
-
-        args:
-        Transaction_id -- transaction we want to get
-        """
+        """Get details of a transaction carried out on your integration."""
         url = self._url(f"/transaction/{transaction_id}/")
         return self._handle_request("GET", url)
 
@@ -144,16 +116,8 @@ class Transaction(BaseAPI):
         bearer: Optional[Bearer] = None,
         queue: bool = False,
     ):
-        """
-        Charges a customer and returns the response
-
-        args:
-        auth_code -- Customer's auth code
-        email -- Customer's email address
-        amount -- Amount to charge
-        reference -- optional
-        metadata -- a list if json data objects/dicts
-        """
+        """All authorizations marked as reusable can be charged with this
+        endpoint whenever you need to receive payments."""
         amount = validate_amount(amount)
 
         if not email:
@@ -189,8 +153,25 @@ class Transaction(BaseAPI):
         auth_code: str,
         currency: Optional[Currency] = None,
     ):
-        """
-        Note: This feature is only available to businesses in Nigeria.
+        """All Mastercard and Visa authorizations can be checked with
+        this endpoint to know if they have funds for the payment you seek.
+
+        This method should be used when you do not know the exact amount
+        to charge a card when rendering a service. It should be used to
+        check if a card has enough funds based on a maximum range value.
+
+        It is well suited:
+             - Ride hailing services
+             - Logistics services
+
+        You shouldn't use this method to check a card for sufficient
+        funds if you are going to charge the user immediately. This is
+        because we hold funds when this endpoint is called which can lead
+        to an insufficient funds error.
+
+        Note
+        ----
+        This feature is only available to businesses in Nigeria.
         """
         amount = validate_amount(amount)
 
@@ -214,9 +195,8 @@ class Transaction(BaseAPI):
         return self._handle_request("POST", url, payload)
 
     def get_timeline(self, id_or_ref: str):
-        """
-        View the timeline of a transaction
-        """
+        """View the timeline of a transaction"""
+
         url = self._url(f"/transaction/timeline/{id_or_ref}")
         return self._handle_request("GET", url)
 
@@ -227,9 +207,8 @@ class Transaction(BaseAPI):
         end_date: Optional[str] = None,
         pagination=50,
     ):
-        """
-        Gets transaction totals
-        """
+        """Total amount received on your account"""
+
         url = self._url(f"/transaction/totals/?perPage={pagination}")
         url = url + f"&page={page}" if page else url
         url = url + f"&from={start_date}" if start_date else url
@@ -250,10 +229,8 @@ class Transaction(BaseAPI):
         payment_page: Optional[int] = None,
         pagination=50,
     ):
-        """
-        Exports a list of transactions
-        carried out on your integration.
-        """
+        """List transactions carried out on your integration."""
+
         if amount:
             amount = validate_amount(amount)
         url = self._url(f"/transaction/export/?perPage={pagination}")
@@ -280,16 +257,7 @@ class Transaction(BaseAPI):
         reference: Optional[str] = None,
         at_least: Optional[int] = None,
     ):
-        """
-        Charges a customer and returns the response
-
-        args:
-        auth_code -- Customer's auth code
-        email -- Customer's email address
-        amount -- Amount to charge
-        reference -- optional
-        metadata -- a list if json data objects/dicts
-        """
+        """Retrieve part of a payment from a customer"""
         amount = validate_amount(amount)
         if at_least:
             at_least = validate_amount(at_least)
@@ -313,6 +281,7 @@ class Transaction(BaseAPI):
         return self._handle_request("POST", url, payload)
 
     def get_transfer_banks(self):
+        # TODO: Deprecate. it's available in Miscellaneous API
         """
         Fetch transfer banks
         """
@@ -323,6 +292,7 @@ class Transaction(BaseAPI):
     def create_transfer_customer(
         self, bank_code: str, account_number: int, account_name: str
     ):
+        # TODO: Deprecate. it's available in TransferReceipt API
         """
         Create a transfer customer
         """
@@ -343,6 +313,7 @@ class Transaction(BaseAPI):
         reason: str,
         reference: Optional[str] = None,
     ):
+        # TODO: Deprecate. it's available in Transfer API
         """
         Initiates transfer to a customer
         """
