@@ -1,6 +1,5 @@
 from functools import reduce
-from lib2to3.pgen2.token import PERCENT
-from typing import Any, Mapping, Optional, Union
+from typing import Any, Optional, Union
 from unittest.mock import DEFAULT
 from .errors import InvalidDataError
 from enum import Enum
@@ -140,6 +139,13 @@ class ChargeStatus(str, Enum):
     FAILED = "failed"
 
 
+class Gateway(str, Enum):
+    """Enum of bank gateways supported by paystack"""
+
+    EMANDATE = "emandate"
+    DIGITALBANKMANDATE = "digitalbankmandate"
+
+
 class AccountType(str, Enum):
     """Enum of Account types supported by paystack"""
 
@@ -245,9 +251,9 @@ def add_to_payload(
     for a request body. It helps to add more parameters to
     a payload if it is not None.
     e.g say you want to send a payload which is currently
-    `{"amount": 20000}` and you want to include an additional
-    data such as `currency` if provided in the `optional_params`
-    to send this `{"amount": 20000,"currency":"ngn"}` if only
+    ``{"amount": 20000}`` and you want to include an additional
+    data such as ``currency`` if provided in the ``optional_params``
+    to send this ``{"amount": 20000,"currency":"ngn"}`` if only
     the currency is available otherwise send the intial payload.
     This functions takes a list of optional parameters
     which is added to the payload is they are available and
@@ -257,8 +263,8 @@ def add_to_payload(
     ----------
     optional_params: list[tuple[str,Any]]
         A list of additional data to be added to the payload if it is
-        available. It follows the format `[("name-on-payload","value")].`
-        e.g `[("currency","ngn"),("amount",2000)]`
+        available. It follows the format ``[("name-on-payload","value")].``
+        e.g ``[("currency","ngn"),("amount",2000)]``
     payload: dict[str,Any]
         A dictionary containing the data to be sent in the request body.
 
@@ -266,7 +272,7 @@ def add_to_payload(
     -------
     dict[str,Any]
         A dictionary of the payload updated with addtional data in the
-        optional_params that are not `None`.
+        optional_params that are not ``None``.
     """
     [
         payload.update({item[0]: item[1]})
@@ -281,16 +287,16 @@ def append_query_params(query_params: list[tuple[str, Any]], url: str) -> str:
 
     This function should only be used with urls that already have a
     query parameter suffixed to it because it makes that assumption
-    that the url supplied is of the state `http://example-url.com?firstQuery=1`
+    that the url supplied is of the state ``http://example-url.com?firstQuery=1``
     and it adds more query parameters delimited by & to the end of the provided
-    url `http://example-url.com?firstQuery=1&otherQuery=2&...`
+    url ``http://example-url.com?firstQuery=1&otherQuery=2&...``
 
     Parameters
     ----------
     query_params: list[tuple[str,Any]]
         A list of other query parameters that should be appended to the url
-        if it is not None. e.g `[("page",2),("pagination",50),("currency",None)]` ->
-        `url&page=2&pagination=50`
+        if it is not None. e.g ``[("page",2),("pagination",50),("currency",None)]`` ->
+        ``url&page=2&pagination=50``
     url: str
         The url to which additional query parameters is added.
 

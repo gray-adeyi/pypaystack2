@@ -7,10 +7,10 @@ from ..utils import (
 
 
 class Settlement(BaseAPI):
-    """
-    The Settlements API allows you gain
-    insights into payouts made by Paystack
-    to your bank account
+    """Provides a wrapper for paystack Settlement API
+
+    The Settlements API allows you gain insights into payouts made by Paystack to your bank account.
+    https://paystack.com/docs/api/#settlement
     """
 
     def get_settlements(

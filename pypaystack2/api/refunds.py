@@ -11,10 +11,10 @@ from ..utils import (
 
 
 class Refund(BaseAPI):
-    """
-    The Refunds API allows you
-    create and manage transaction
-    refunds
+    """Provides a wrapper for paystack Refunds API
+
+    The Refunds API allows you create and manage transaction refunds.
+    https://paystack.com/docs/api/#refund
     """
 
     def create(

@@ -1,6 +1,6 @@
-from typing import Optional
+from typing import Any, Optional
 
-from ..baseapi import BaseAPI
+from ..baseapi import BaseAPI, Response
 from ..errors import InvalidDataError
 from ..utils import (
     add_to_payload,
@@ -12,23 +12,49 @@ from ..utils import (
 
 
 class Customer(BaseAPI):
+    """Provides a wrapper for paystack Customer API
+
+    The Customers API allows you create and manage customers on your integration.
+    https://paystack.com/docs/api/#customer
+    """
+
     def create(
         self,
         email: str,
         first_name: Optional[str] = None,
         last_name: Optional[str] = None,
         phone: Optional[str] = None,
-        metadata: Optional[str] = None,
-    ):
-        """
-        Creates a new paystack customer account
+        metadata: Optional[dict[str, Any]] = None,
+    ) -> Response:
+        """Create a customer on your integration
 
-        args:
-        email -- Customer's email address
-        first_name-- Customer's first name (Optional)
-        last_name-- Customer's last name (Optional)
-        phone -- optional
+        Parameters
+        ----------
+        email: str
+            Customer's email address
+        first_name: Optional[str]
+            Customer's first name
+        last_name: Optional[str]
+            Customer's last name
+        phone: Optional[str]
+            Customer's phone number
+        metadata: Optional[dict[str,Any]]
+            A dictionary that you can attach to the customer. It can be used
+            to store additional information in a structured format.
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
+
+        Note
+        ----
+        The `first_name`, `last_name` and `phone` are optional parameters. However,
+        when creating a customer that would be assigned a Dedicated Virtual
+        Account and your business catgeory falls under Betting, Financial
+        services, and General Service, then these parameters become compulsory.
         """
+
         url = self._url("/customer/")
         payload = {
             "email": email,
@@ -51,14 +77,30 @@ class Customer(BaseAPI):
         end_date: Optional[str] = None,
         page=1,
         pagination: int = 50,
-    ):
-        """
-        Gets all the customers we have at paystack in steps of (default) 50 records per page.
-        We can provide an optional pagination to indicate how many customer records we want to fetch per time
+    ) -> Response:
+        """Fetches customers available on your integration.
 
-        args:
-        pagination -- Count of data to return per call
+        Parameters
+        ----------
+        start_date: Optional[str]
+            A timestamp from which to start listing customers
+            e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
+        end_date: Optional[str]
+            A timestamp at which to stop listing customers
+            e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
+        page: int
+            Specify exactly what page you want to retrieve.
+            If not specify we use a default value of 1.
+        pagination: int
+            Specify how many records you want to retrieve per page.
+            If not specify we use a default value of 50.
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
         """
+
         query_params = [
             ("page", page),
             ("from", start_date),
@@ -68,35 +110,54 @@ class Customer(BaseAPI):
         url = append_query_params(query_params, url)
         return self._handle_request("GET", url)
 
-    def get_customer(self, email_or_code: str):
-        """
-        Gets the customer with the given user id
+    def get_customer(self, email_or_code: str) -> Response:
+        """Get details of a customer on your integration.
 
-        args:
-        customer_code -- The customer's code
+        Parameters
+        ----------
+        email_or_code: str
+            An email or customer code for the customer you want to fetch
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
         """
+
         url = self._url(f"/customer/{email_or_code}/")
         return self._handle_request("GET", url)
 
     def update(
         self,
-        user_id: str,
+        code: str,
         first_name: str,
         last_name: str,
         phone: Optional[str] = None,
-        metadata: Optional[str] = None,
-    ):
-        """
-        Update a customer account given the user id
+        metadata: Optional[dict[str, Any]] = None,
+    ) -> Response:
+        """Update a customer's details on your integration
 
-        args:
-        user_id -- id of the customer
-        email -- Customer's email address
-        first_name-- Customer's first name (Optional)
-        last_name-- Customer's last name (Optional)
-        phone -- optional
+        Parameters
+        ----------
+        code: str
+            Customer's code
+        first_name: str
+            Customer's first name
+        last_name: str
+            Customer's last name
+        phone: Optional[str]
+            Customer's phone number
+        metadata: Optional[dict[str, Any]]
+            A dictionary that you can attach to the customer. It can be used
+            to store additional information in a structured format.
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
         """
-        url = self._url(f"/customer/{user_id}/")
+
+        url = self._url(f"/customer/{code}/")
         payload = {
             "first_name": first_name,
             "last_name": last_name,
@@ -114,7 +175,7 @@ class Customer(BaseAPI):
 
     def validate(
         self,
-        customer_code: str,
+        code: str,
         first_name: str,
         last_name: str,
         identification_type: Identification,
@@ -124,10 +185,38 @@ class Customer(BaseAPI):
         bank_code: Optional[str] = None,
         account_number: Optional[str] = None,
         middle_name: Optional[str] = None,
-    ):
+    ) -> Response:
+        """Validate a customer's identity
+
+        Parameters
+        ----------
+        code: str
+            Customer's code
+        first_name: str
+            Customer's first name
+        last_name: str
+            Customer's last name
+        identification_type: Identification
+            Enum of Identification e.g `Identification.BVN`
+        identification_number: str
+        country: Country
+            Enum of Country e.g `Country.NIGERIA`
+        bvn: str
+            Customer's Bank Verification Number
+        bank_code: Optional[str]
+            You can get the list of Bank Codes by calling the
+            Miscellaneous API `get_banks` method. (required if type is bank_account)
+        account_number: Optional[str]
+            Customer's bank account number. (required if type is bank_account)
+        middle_name: Optional[str]
+            Customer's middle name
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
         """
-        Validate a customer's identity
-        """
+
         if identification_type == Identification.BANK_ACCOUNT:
             if bank_code is None:
                 raise InvalidDataError(
@@ -138,7 +227,7 @@ class Customer(BaseAPI):
                     "`account_number` is required if identification type is `Identification.BANK_ACCOUNT`"
                 )
 
-        url = self._url(f"/customer/{customer_code}/identification")
+        url = self._url(f"/customer/{code}/identification")
         payload = {
             "first_name": first_name,
             "last_name": last_name,
@@ -159,9 +248,21 @@ class Customer(BaseAPI):
         self,
         customer: str,
         risk_action: Optional[RiskAction] = None,
-    ):
-        """
-        Whitelist or blacklist a customer on your integration
+    ) -> Response:
+        """Whitelist or blacklist a customer on your integration
+
+        Parameters
+        ----------
+        customer: str
+            Customer's code, or email address
+        risk_action: Optional[RiskAction]
+            One of the possible risk actions from the
+            RiskAction enum e.g `RiskAction.DEFAULT`
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
         """
 
         url = self._url(f"/customer/set_risk_action")
@@ -175,9 +276,18 @@ class Customer(BaseAPI):
     def deactivate(
         self,
         auth_code: str,
-    ):
-        """
-        Deactivate an authorization when the card needs to be forgotten
+    ) -> Response:
+        """Deactivate an authorization when the card needs to be forgotten
+
+        Parameters
+        ----------
+        auth_code: str
+            Authorization code to be deactivated
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
         """
 
         url = self._url("/customer/deactivate_authorization")

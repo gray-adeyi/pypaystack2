@@ -6,10 +6,10 @@ from ..utils import add_to_payload, append_query_params
 
 
 class Page(BaseAPI):
-    """
-    The Payment Pages API provides
-    a quick and secure way to collect
-    payment for products.
+    """Provides a wrapper for paystack Payment Pages API
+
+    The Payment Pages API provides a quick and secure way to collect payment for products.
+    https://paystack.com/docs/api/#page
     """
 
     def create(

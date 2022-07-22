@@ -13,10 +13,10 @@ from ..utils import (
 
 
 class TransferReceipt(BaseAPI):
-    """
-    The Plans API allows you create
-    and manage installment payment
-    options on your integration
+    """Provides a wrapper for paystack Transfer Receipts API
+
+    The Transfer Recipients API allows you create and manage beneficiaries that you send money to.
+    https://paystack.com/docs/api/#transfer-recipient
     """
 
     def create(

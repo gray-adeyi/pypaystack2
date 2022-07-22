@@ -3,8 +3,14 @@ from ..utils import AccountType, Country, DocumentType
 
 
 class Verification(BaseAPI):
-    """
-    The Verification API allows you perform KYC processes
+    """Provides a wrapper for paystack Verification API
+
+    The Verification API allows you perform KYC processes.
+    https://paystack.com/docs/api/#verification
+
+    Note
+    ----
+    This feature is only available to businesses in Nigeria.
     """
 
     def resolve_account_number(

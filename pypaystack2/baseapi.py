@@ -1,5 +1,6 @@
 import os
-from typing import Any, Dict, NamedTuple
+from typing import Any, Dict, NamedTuple, Union
+from pyparsing import Optional
 import requests
 from requests import Response as RResponse
 import json
@@ -9,11 +10,29 @@ from .errors import *
 # namedtuple Response to extend the
 # capabilities of the tuple sent as
 # response
+ResponseData = Union[dict[str, Any], list[dict[str, Any]]]
+
+
 class Response(NamedTuple):
+    """A namedtuple that models the data gotten from making a request to
+    paystacks API endpoints.
+
+    Attributes
+    ----------
+    status_code: int
+        The response status code
+    status: bool
+        A flag for the response status
+    message: str
+        paystack response message
+    data: Optional[ResponseData]
+        data sent from paystack's server if any.
+    """
+
     status_code: int
     status: str
     message: str
-    data: dict[str, Any]
+    data: ResponseData
 
 
 class BaseAPI(object):

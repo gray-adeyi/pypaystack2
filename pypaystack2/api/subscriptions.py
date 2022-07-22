@@ -5,10 +5,11 @@ from ..utils import add_to_payload, append_query_params
 
 
 class Subscription(BaseAPI):
-    """
-    The Subscriptions API allows
-    you create and manage recurring
-    payment on your integration
+    """Provides a wrapper for paystack Subscriptions API
+
+    The Subscriptions API allows you create and manage recurring
+    payment on your integration.
+    https://paystack.com/docs/api/#subscription
     """
 
     def create(

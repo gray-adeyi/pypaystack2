@@ -11,10 +11,10 @@ from ..utils import (
 
 
 class Plan(BaseAPI):
-    """
-    The Plans API allows you create
-    and manage installment payment
-    options on your integration
+    """Provides a wrapper for paystack Plans API
+
+    The Plans API allows you create and manage installment payment options on your integration.
+    https://paystack.com/docs/api/#plan
     """
 
     def create(

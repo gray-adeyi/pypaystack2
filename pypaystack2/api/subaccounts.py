@@ -8,12 +8,12 @@ from ..utils import (
 
 
 class SubAccount(BaseAPI):
-    """
-    The Subaccounts API allows you create
-    and manage subaccounts on your integration.
-    Subaccounts can be used to split payment
-    between two accounts
-    (your main account and a sub account)
+    """Provides a wrapper for paystack Subaccounts API
+
+    The Subaccounts API allows you create and manage subaccounts on your integration.
+    Subaccounts can be used to split payment between two accounts
+    (your main account and a sub account).
+    https://paystack.com/docs/api/#subaccount
     """
 
     def create(
@@ -48,7 +48,7 @@ class SubAccount(BaseAPI):
         payload = add_to_payload(optional_params, payload)
         return self._handle_request("POST", url, payload)
 
-    def list_subaccounts(self, start_date: str, end_date: str, page=1, pagination=50):
+    def get_subaccounts(self, start_date: str, end_date: str, page=1, pagination=50):
         """
         List subaccounts available on your integration.
         """
@@ -66,7 +66,7 @@ class SubAccount(BaseAPI):
         url = self._url(f"/subaccount/{id_or_code}")
         return self._handle_request("GET", url)
 
-    def update_subaccount(
+    def update(
         self,
         id_or_code: str,
         business_name: str,

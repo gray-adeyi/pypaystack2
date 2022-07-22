@@ -5,10 +5,14 @@ from ..utils import Currency, add_to_payload, append_query_params, validate_amou
 
 
 class Transfer(BaseAPI):
-    """
-    The Transfers API allows you
-    automate sending money on
-    your integration
+    """Provides a wrapper for paystack Transfers API
+
+    The Transfers API allows you automate sending money on your integration
+    https://paystack.com/docs/api/#transfer
+
+    Note
+    ----
+    This feature is only available to businesses in Nigeria and Ghana.
     """
 
     def initiate(

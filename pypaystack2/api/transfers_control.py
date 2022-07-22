@@ -2,10 +2,10 @@ from ..baseapi import BaseAPI
 
 
 class TransferControl(BaseAPI):
-    """
-    The Transfers API allows you
-    automate sending money on
-    your integration
+    """Provides a wrapper for paystack Transfers Control API
+
+    The Transfers Control API allows you manage settings of your transfers.
+    https://paystack.com/docs/api/#transfer-control
     """
 
     def check_balance(self):

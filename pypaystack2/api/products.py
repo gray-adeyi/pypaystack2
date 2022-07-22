@@ -6,9 +6,10 @@ from ..utils import Currency, add_to_payload, append_query_params
 
 
 class Product(BaseAPI):
-    """
-    The Products API allows you create
-    and manage inventories on your integration
+    """Provides a wrapper for paystack Products API
+
+    The Products API allows you create and manage inventories on your integration.
+    https://paystack.com/docs/api/#product
     """
 
     def create(

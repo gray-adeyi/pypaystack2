@@ -30,7 +30,7 @@ class TestApplePay(TestCase):
             self.assertIsInstance(data, None)
 
         def list_domains():
-            (status_code, status, response_msg, domains) = self.apple_pay.list_domains()
+            (status_code, status, response_msg, domains) = self.apple_pay.get_domains()
             self.assertEqual(status_code, 200)
             self.assertEqual(status, True)
             self.assertEqual(response_msg, "Apple Pay registered domains retrieved")
