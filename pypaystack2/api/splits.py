@@ -1,12 +1,10 @@
-from typing import Mapping, Optional
+from typing import Any, Mapping, Optional
 
-from ..baseapi import BaseAPI
+from ..baseapi import BaseAPI, Response
 from ..utils import (
     Bearer,
-    Channel,
     Currency,
     SplitType,
-    TransactionStatus,
     add_to_payload,
     append_query_params,
     validate_amount,
@@ -27,12 +25,33 @@ class Split(BaseAPI):
         name: str,
         type: SplitType,
         currency: Currency,
-        subaccounts: list[Mapping],
+        subaccounts: list[dict[str, Any]],
         bearer_type: Bearer,
         bearer_subaccount: str,
-    ):
-        """
-        Create a split payment on your integration
+    ) -> Response:
+        """Create a split payment on your integration
+
+        Parameters
+        ----------
+        name: str
+            Name of the transaction split
+        type: SplitType
+            The type of transaction split you want to create.
+            Any value from the ``SplitType`` enum
+        currency: Currency
+            Any value from the ``Currency`` enum
+        subaccounts: list[dict[str,Any]]
+            A list of dictionaries containing subaccount code and
+            number of shares: ``[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]``
+        bearer_type: Bearer
+            Any value from the ``Bearer`` enum
+        bearer_subaccount: str
+            Subaccount code
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
         """
 
         url = self._url("/split")
@@ -55,10 +74,34 @@ class Split(BaseAPI):
         end_date: Optional[str],
         active: bool = True,
         pagination=50,
-    ):
+    ) -> Response:
+        """Get/search for the transaction splits available on your integration.
+
+        Parameters
+        ----------
+        name: str
+            The name of the split
+        sort_by: Optional[str]
+            Sort by name, defaults to createdAt date
+        page: Optional[int]
+            Page number to view. If not specify we use a default value of 1.
+        start_date: Optional[str]
+            A timestamp from which to start listing splits
+            e.g. 2019-09-24T00:00:05.000Z, 2019-09-21
+        end_date: Optional[str]
+            A timestamp at which to stop listing splits
+            e.g. 2019-09-24T00:00:05.000Z, 2019-09-21
+        active: bool
+        pagination: int
+            Number of splits per page.
+            If not specify we use a default value of 50.
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
         """
-        List/search for the transaction splits available on your integration.
-        """
+
         url = self._url(f"/split?perPage={pagination}")
         query_params = [
             ("name", name),
@@ -72,9 +115,18 @@ class Split(BaseAPI):
 
         return self._handle_request("GET", url)
 
-    def get_split(self, id: str):
-        """
-        Get details of a split on your integration.
+    def get_split(self, id: str) -> Response:
+        """Get details of a split on your integration.
+
+        Parameters
+        ----------
+        id: str
+            The id of the split
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
         """
         url = self._url(f"/split/{id}/")
         return self._handle_request("GET", url)
@@ -86,10 +138,29 @@ class Split(BaseAPI):
         active: bool,
         bearer_type: Optional[Bearer],
         bearer_subaccount: Optional[str],
-    ):
+    ) -> Response:
+        """Update a transaction split details on your integration
+
+        Parameters
+        ----------
+        id: str
+            Split ID
+        name: str
+            Name of the transaction split
+        active: bool
+        bearer_type: Optional[Bearer]
+            Any value from the Bearer enum
+        bearer_subaccount: Optional[str]
+            Subaccount code of a subaccount in the split group.
+            This should be specified only if the bearer_type
+            is ``Bearer.subaccount``
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
         """
-        Update a transaction split details on your integration
-        """
+
         if bearer_subaccount:
             if bearer_type != Bearer.SUBACCOUNT:
                 raise InvalidDataError(
@@ -108,20 +179,47 @@ class Split(BaseAPI):
         url = self._url(f"/split/{id}/")
         return self._handle_request("PUT", url, payload)
 
-    def add_or_update(self, id: str, subaccount: str, share: int):
+    def add_or_update(self, id: str, subaccount: str, share: int) -> Response:
         """
         Add a Subaccount to a Transaction Split, or update
         the share of an existing Subaccount in a Transaction Split
+
+        Parameters
+        ----------
+         id: str
+            Split Id
+         subaccount: str
+            This is the sub account code
+         share: int
+            This is the transaction share for the subaccount
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
         """
+
         share = validate_amount(share)
         payload = {"subaccount": subaccount, "share": share}
         url = self._url(f"/split/{id}/subaccount/add")
         return self._handle_request("POST", url, payload)
 
     def remove(self, id: str, subaccount: str):
+        """Remove a subaccount from a transaction split
+
+        Parameters
+        ----------
+        id: str
+            Split Id
+        subaccount: str
+            This is the sub account code
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
         """
-        Remove a subaccount from a transaction split
-        """
+
         payload = {"subaccount": subaccount}
         url = self._url(f"/split/{id}/subaccount/remove")
         return self._handle_request("POST", url, payload)

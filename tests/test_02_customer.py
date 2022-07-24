@@ -5,7 +5,7 @@ class TestCustomer(TestCase):
     def setUp(self):
         super(TestCustomer, self).setUp()
         self.assertNotEqual(test_auth_key, None)
-        self.customer = Customer(authorization_key=test_auth_key)
+        self.customer = Customer(auth_key=test_auth_key)
 
     def test_customer_setup_and_update(self):
         """
@@ -46,7 +46,7 @@ class TestCustomer(TestCase):
                 response_msg,
                 updated_customer_data,
             ) = self.customer.update(
-                user_id=created_customer_data["id"], **updated_user_details
+                code=created_customer_data["id"], **updated_user_details
             )
             self.assertEqual(status_code, 200)
             self.assertEqual(status, True)

@@ -5,7 +5,7 @@ class TestTransactionRecords(TestCase):
     def setUp(self):
         super(TestTransactionRecords, self).setUp()
         self.assertNotEqual(test_auth_key, None)
-        self.transaction = Transaction(authorization_key=test_auth_key)
+        self.transaction = Transaction(auth_key=test_auth_key)
 
     def test_transaction_records(self):
         """

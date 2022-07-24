@@ -6,7 +6,7 @@ class TestApplePay(TestCase):
     def setUp(self):
         super(TestApplePay, self).setUp()
         self.assertNotEqual(test_auth_key, None)
-        self.apple_pay = ApplePay(authorization_key=test_auth_key)
+        self.apple_pay = ApplePay(auth_key=test_auth_key)
 
     def test_apple_pay(self):
         """

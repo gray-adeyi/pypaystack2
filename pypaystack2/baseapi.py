@@ -17,7 +17,7 @@ class Response(NamedTuple):
     """A namedtuple that models the data gotten from making a request to
     paystacks API endpoints.
 
-    Attributes
+    Parameters
     ----------
     status_code: int
         The response status code
@@ -35,7 +35,7 @@ class Response(NamedTuple):
     data: ResponseData
 
 
-class BaseAPI(object):
+class BaseAPI:
     """
     Base class for the pypaystack python API wrapper for paystack
     Not to be instantiated directly.
@@ -44,9 +44,18 @@ class BaseAPI(object):
     _CONTENT_TYPE = "application/json"
     _BASE_END_POINT = "https://api.paystack.co"
 
-    def __init__(self, authorization_key: str = None):
-        if authorization_key:
-            self._PAYSTACK_AUTHORIZATION_KEY = authorization_key
+    def __init__(self, auth_key: str = None):
+        """
+        Parameters
+        ----------
+        auth_key:
+            Your paystack authorization key. Required only
+            if it is not provided in your enviromental
+            variables as ``PAYSTACK_AUTHORIZATION_KEY=your_key``
+
+        """
+        if auth_key:
+            self._PAYSTACK_AUTHORIZATION_KEY = auth_key
         else:
             self._PAYSTACK_AUTHORIZATION_KEY = os.getenv(
                 "PAYSTACK_AUTHORIZATION_KEY", None

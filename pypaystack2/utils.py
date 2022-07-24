@@ -139,6 +139,30 @@ class ChargeStatus(str, Enum):
     FAILED = "failed"
 
 
+class PlanStatus(str, Enum):
+    """Enum of plan status supported by paystack"""
+
+    PENDING = "pending"
+    SUCCESS = "success"
+    FAILED = "failed"
+
+
+class Schedule(str, Enum):
+    """Enum of settlement schedules supported by paystack"""
+
+    AUTO = "auto"
+    WEEKLY = "weekly"
+    MONTHLY = "monthly"
+    MANUAL = "manual"
+
+
+class Reason(str, Enum):
+    """Enum of Reset OTP options"""
+
+    RESEND_OTP = "resend_otp"
+    TRANSFER = "transfer"
+
+
 class Gateway(str, Enum):
     """Enum of bank gateways supported by paystack"""
 

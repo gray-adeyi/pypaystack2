@@ -11,6 +11,7 @@ class DedicatedAccount(BaseAPI):
     unique payment accounts of their customers.
     https://paystack.com/docs/api/#dedicated-virtual-account
 
+
     Note
     ----
     This feature is only available to businesses in Nigeria.
@@ -34,7 +35,7 @@ class DedicatedAccount(BaseAPI):
             Customer ID or code
         preferred_bank: Optional[str]
             The bank slug for preferred bank. To get a list of available banks,
-            use the Miscellaneous API `get_providers` method.
+            use the Miscellaneous API ``.get_providers`` method.
         subaccount: Optional[str]
             Subaccount code of the account you want to split the transaction with
         split_code: Optional[str]
@@ -51,13 +52,15 @@ class DedicatedAccount(BaseAPI):
         Response
             A named tuple containing the response gotten from paystack's server.
 
+
         Note
         ----
-        - This feature is only available to businesses in Nigeria.
-        - Paystack currently supports Access Bank and Wema Bank.
-        - To create Dedicated Virtual Accounts using your test secret key,
-        use `test-bank` as the `preferred_bank` You can also make a transfer
+        * This feature is only available to businesses in Nigeria.
+        * Paystack currently supports Access Bank and Wema Bank.
+        * To create Dedicated Virtual Accounts using your test secret key,
+        use ``test-bank`` as the ``preferred_bank`` You can also make a transfer
         to the test virtual accounts using paystack's demo bank app.
+
         https://demobank.paystackintegrations.com/
         """
 
@@ -91,7 +94,7 @@ class DedicatedAccount(BaseAPI):
         active: bool
             Status of the dedicated virtual account
         currency: Currency
-            The currency of the dedicated virtual account. Only `Currency.NGN` is currently allowed
+            The currency of the dedicated virtual account. Only ``Currency.NGN`` is currently allowed
         provider_slug: Optional[str]
             The bank's slug in lowercase, without spaces e.g. wema-bank
         bank_id: Optional[str]
@@ -104,13 +107,15 @@ class DedicatedAccount(BaseAPI):
         Response
             A named tuple containing the response gotten from paystack's server.
 
+
         Note
         ----
-        - This feature is only available to businesses in Nigeria.
-        - Paystack currently supports Access Bank and Wema Bank.
-        - To create Dedicated Virtual Accounts using your test secret key,
-        use `test-bank` as the `preferred_bank` You can also make a transfer
+        * This feature is only available to businesses in Nigeria.
+        * Paystack currently supports Access Bank and Wema Bank.
+        * To create Dedicated Virtual Accounts using your test secret key,
+        use ``test-bank`` as the ``preferred_bank`` You can also make a transfer
         to the test virtual accounts using paystack's demo bank app.
+
         https://demobank.paystackintegrations.com/
         """
 
@@ -137,13 +142,15 @@ class DedicatedAccount(BaseAPI):
         Response
             A named tuple containing the response gotten from paystack's server.
 
+
         Note
         ----
-        - This feature is only available to businesses in Nigeria.
-        - Paystack currently supports Access Bank and Wema Bank.
-        - To create Dedicated Virtual Accounts using your test secret key,
-        use `test-bank` as the `preferred_bank` You can also make a transfer
+        * This feature is only available to businesses in Nigeria.
+        * Paystack currently supports Access Bank and Wema Bank.
+        * To create Dedicated Virtual Accounts using your test secret key,
+        use ``test-bank`` as the ``preferred_bank`` You can also make a transfer
         to the test virtual accounts using paystack's demo bank app.
+
         https://demobank.paystackintegrations.com/
         """
 
@@ -169,13 +176,15 @@ class DedicatedAccount(BaseAPI):
         Response
             A named tuple containing the response gotten from paystack's server.
 
+
         Note
         ----
-        - This feature is only available to businesses in Nigeria.
-        - Paystack currently supports Access Bank and Wema Bank.
-        - To create Dedicated Virtual Accounts using your test secret key,
-        use `test-bank` as the `preferred_bank` You can also make a transfer
+        * This feature is only available to businesses in Nigeria.
+        * Paystack currently supports Access Bank and Wema Bank.
+        * To create Dedicated Virtual Accounts using your test secret key,
+        use ``test-bank`` as the ``preferred_bank`` You can also make a transfer
         to the test virtual accounts using paystack's demo bank app.
+
         https://demobank.paystackintegrations.com/
         """
 
@@ -200,13 +209,15 @@ class DedicatedAccount(BaseAPI):
         Response
             A named tuple containing the response gotten from paystack's server.
 
+
         Note
         ----
-        - This feature is only available to businesses in Nigeria.
-        - Paystack currently supports Access Bank and Wema Bank.
-        - To create Dedicated Virtual Accounts using your test secret key,
-        use `test-bank` as the `preferred_bank` You can also make a transfer
+        * This feature is only available to businesses in Nigeria.
+        * Paystack currently supports Access Bank and Wema Bank.
+        * To create Dedicated Virtual Accounts using your test secret key,
+        use ``test-bank`` as the ``preferred_bank`` You can also make a transfer
         to the test virtual accounts using paystack's demo bank app.
+
         https://demobank.paystackintegrations.com/
         """
 
@@ -232,20 +243,22 @@ class DedicatedAccount(BaseAPI):
             Split code consisting of the lists of accounts you want to split the transaction with
         preferred_bank: Optional[str]
             The bank slug for preferred bank. To get a list of available banks,
-            use the Miscellaneous API `get_providers` method
+            use the Miscellaneous API ``.get_providers`` method
 
         Returns
         -------
         Response
             A named tuple containing the response gotten from paystack's server.
 
+
         Note
         ----
-        - This feature is only available to businesses in Nigeria.
-        - Paystack currently supports Access Bank and Wema Bank.
-        - To create Dedicated Virtual Accounts using your test secret key,
-        use `test-bank` as the `preferred_bank` You can also make a transfer
+        * This feature is only available to businesses in Nigeria.
+        * Paystack currently supports Access Bank and Wema Bank.
+        * To create Dedicated Virtual Accounts using your test secret key,
+        use ``test-bank`` as the ``preferred_bank`` You can also make a transfer
         to the test virtual accounts using paystack's demo bank app.
+
         https://demobank.paystackintegrations.com/
         """
 
@@ -276,13 +289,15 @@ class DedicatedAccount(BaseAPI):
         Response
             A named tuple containing the response gotten from paystack's server.
 
+
         Note
         ----
-        - This feature is only available to businesses in Nigeria.
-        - Paystack currently supports Access Bank and Wema Bank.
-        - To create Dedicated Virtual Accounts using your test secret key,
-        use `test-bank` as the `preferred_bank` You can also make a transfer
+        * This feature is only available to businesses in Nigeria.
+        * Paystack currently supports Access Bank and Wema Bank.
+        * To create Dedicated Virtual Accounts using your test secret key,
+        use ``test-bank`` as the ``preferred_bank`` You can also make a transfer
         to the test virtual accounts using paystack's demo bank app.
+
         https://demobank.paystackintegrations.com/
         """
 
@@ -300,13 +315,15 @@ class DedicatedAccount(BaseAPI):
         Response
             A named tuple containing the response gotten from paystack's server.
 
+
         Note
         ----
-        - This feature is only available to businesses in Nigeria.
-        - Paystack currently supports Access Bank and Wema Bank.
-        - To create Dedicated Virtual Accounts using your test secret key,
-        use `test-bank` as the `preferred_bank` You can also make a transfer
+        * This feature is only available to businesses in Nigeria.
+        * Paystack currently supports Access Bank and Wema Bank.
+        * To create Dedicated Virtual Accounts using your test secret key,
+        use ``test-bank` as the `preferred_bank`` You can also make a transfer
         to the test virtual accounts using paystack's demo bank app.
+
         https://demobank.paystackintegrations.com/
         """
 

@@ -6,7 +6,7 @@ class TestPlan(TestCase):
     def setUp(self):
         super(TestPlan, self).setUp()
         self.assertNotEqual(test_auth_key, None)
-        self.plan = Plan(authorization_key=test_auth_key)
+        self.plan = Plan(auth_key=test_auth_key)
 
     def test_plan_setup_and_update(self):
         """

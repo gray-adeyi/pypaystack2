@@ -5,7 +5,7 @@ class TestCustomerRecords(TestCase):
     def setUp(self):
         super(TestCustomerRecords, self).setUp()
         self.assertNotEqual(test_auth_key, None)
-        self.customer = Customer(authorization_key=test_auth_key)
+        self.customer = Customer(auth_key=test_auth_key)
 
     def test_customers_records(self):
         """

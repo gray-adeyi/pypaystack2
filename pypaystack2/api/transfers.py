@@ -1,6 +1,6 @@
 from typing import Optional
 
-from ..baseapi import BaseAPI
+from ..baseapi import BaseAPI, Response
 from ..utils import Currency, add_to_payload, append_query_params, validate_amount
 
 
@@ -23,8 +23,20 @@ class Transfer(BaseAPI):
         currency: Optional[Currency] = None,
         reference: Optional[str] = None,
         source="balance",
-    ):
-        """ """
+    ) -> Response:
+        """
+        amount: int
+        recipient: str
+        reason: Optional[str]
+        currency: Optional[Currency]
+        reference: Optional[str]
+        source: str
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
+        """
         amount = validate_amount(amount)
 
         url = self._url("/transfer")
@@ -46,8 +58,18 @@ class Transfer(BaseAPI):
         self,
         transfer_code: str,
         otp: str,
-    ):
-        """ """
+    ) -> Response:
+        """
+        Parameters
+        ----------
+        transfer_code: str
+        otp: str
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
+        """
         amount = validate_amount(amount)
 
         url = self._url("/transfer/finalize_transfer")
@@ -58,8 +80,19 @@ class Transfer(BaseAPI):
         }
         return self._handle_request("POST", url, payload)
 
-    def bulk_transfer(self, transfers: list, source="balance"):
-        """ """
+    def bulk_transfer(self, transfers: list, source="balance") -> Response:
+        """
+
+        Parameters
+        ----------
+        transfers: list
+        source: str
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
+        """
 
         url = self._url("/transfer/bulk")
 
@@ -76,8 +109,22 @@ class Transfer(BaseAPI):
         pagination=50,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
-    ):
-        """ """
+    ) -> Response:
+        """
+
+        Parameters
+        ----------
+        customer: str
+        page: int
+        pagination: int
+        start_date: Optional[str]
+        end_date: Optional[str]
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
+        """
         url = self._url(f"/transfer?perPage={pagination}")
         query_params = [
             ("customer", customer),
@@ -91,15 +138,35 @@ class Transfer(BaseAPI):
     def get_transfer(
         self,
         id_or_code: str,
-    ):
-        """ """
+    ) -> Response:
+        """
+
+        Parameters
+        ----------
+        id_or_code: str
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
+        """
         url = self._url(f"/transfer/{id_or_code}")
         return self._handle_request("GET", url)
 
     def verify(
         self,
         reference: str,
-    ):
-        """ """
+    ) -> Response:
+        """
+
+        Parameters
+        ----------
+        reference: str
+
+        Returns
+        -------
+        Response
+            A named tuple containing the response gotten from paystack's server.
+        """
         url = self._url(f"/transfer/verify/{reference}")
         return self._handle_request("GET", url)

@@ -55,7 +55,24 @@ be like
 While both approaches achieve the same goal, ``pypaystack2`` uses ``requests`` under the hood and
 manages the headers and URL routes to endpoints so you can focus more on the actions. with the ``miscellaneous_wrapper``
 in the example above. you can call all endpoints associated with the Miscellaneous API with methods
-provided like ``.get_banks``, ``.get_providers``, ``.get_countries`` and ``.get_states``
+provided like ``.get_banks``, ``.get_providers``, ``.get_countries`` and ``.get_states``.
+
+Pypaystack2 provides wrappers to all of Paystack APIs in its ``pypaystack2.api`` subpackage.
+each of the wrappers are classes named to closely match the Paystack API. so say you want
+to use Paystack's Invoices API, you'd  import the wrapper with ``from pypaystack2.api import Invoice``
+for the Invoices API. All endpoints available on the Invoices API are available as methods
+in the ``Invoice`` wrapper. Say you wanted to create an invoice by sending a
+``POST`` request to Paystack's Invoice API endpoint ``/paymentrequest``, you'll call
+``Invoice`` wrapper's ``.create`` method.
+
+.. code:: python
+
+   from pypaystack2.api import Invoice
+   invoice_wrapper = Invoice()
+   response = invoice_wrapper.create(custmer="CUS_xwaj0txjryg393b",amount=1000) # Creates an invoice with a charge of ₦100
+
+From here you can check out the tutorials section to get more examples and get familiar or surf the
+documentation for wrappers and methods you'll need for your next project. Hurray!
 
 .. toctree::
    :maxdepth: 2
