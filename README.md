@@ -1,6 +1,6 @@
 # PyPaystack2
 
-A fork of [PyPaystack](https://github.com/edwardpopoola/pypaystack). A simple python wrapper for Paystack API.
+A fork of [PyPaystack](https://github.com/edwardpopoola/pypaystack). A simple python wrapper for Paystack API. Checkout [Documentation](https://gray-adeyi.github.io/pypaystack2/)
 
 ## Installation
 
@@ -68,3 +68,4 @@ in the `Invoice` wrapper. Say you wanted to create an invoice by sending a
 
 From here you can check out the tutorials section to get more examples and get familiar or surf the
 documentation for wrappers and methods you'll need for your next project. Hurray!
+[Documentation](https://gray-adeyi.github.io/pypaystack2/)
