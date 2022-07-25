@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pypaystack2.api.invoices &mdash; pypaystack2 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> pypaystack2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pypaystack2</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pypaystack2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>pypaystack2.api.invoices</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pypaystack2.api.invoices</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">..baseapi</span> <span class="kn">import</span> <span class="n">BaseAPI</span><span class="p">,</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Currency</span><span class="p">,</span>
+    <span class="n">InvoiceStatus</span><span class="p">,</span>
+    <span class="n">add_to_payload</span><span class="p">,</span>
+    <span class="n">append_query_params</span><span class="p">,</span>
+    <span class="n">validate_amount</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="Invoice"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.invoices.Invoice">[docs]</a><span class="k">class</span> <span class="nc">Invoice</span><span class="p">(</span><span class="n">BaseAPI</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Provides a wrapper for paystack Invoices API</span>
+
+<span class="sd">    The Invoices API allows you issue out and manage payment requests.</span>
+<span class="sd">    https://paystack.com/docs/api/#invoice</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Invoice.create"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.invoices.Invoice.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">customer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">due_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">line_items</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tax</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">currency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Currency</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">send_notification</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">draft</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">has_invoice</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">invoice_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">split_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Create an invoice for payment on your integration</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        customer: str</span>
+<span class="sd">            Customer id or code</span>
+<span class="sd">        amount: int</span>
+<span class="sd">            Payment request amount. It should be used when line items and</span>
+<span class="sd">            tax values aren&#39;t specified.</span>
+<span class="sd">        due_date: Optional[str]</span>
+<span class="sd">            ISO 8601 representation of request due date</span>
+<span class="sd">        description: Optional[str]</span>
+<span class="sd">            A short description of the payment request</span>
+<span class="sd">        line_items: Optional[list[dict[str,Any]]]</span>
+<span class="sd">            List of line items int the format [{&quot;name&quot;:&quot;item 1&quot;, &quot;amount&quot;:2000, &quot;quantity&quot;: 1}]</span>
+<span class="sd">        tax: Optional[list[dict[str,Any]]]</span>
+<span class="sd">            List of taxes to be charged in the format [{&quot;name&quot;:&quot;VAT&quot;, &quot;amount&quot;:2000}]</span>
+<span class="sd">        currency: Optional[Currency]</span>
+<span class="sd">            Any value from Currency enum. default ``Currency.NGN``</span>
+<span class="sd">        send_notification: Optional[bool]</span>
+<span class="sd">            Indicates whether Paystack sends an email notification to customer. Defaults to ``True``</span>
+<span class="sd">        draft: Optional[bool]</span>
+<span class="sd">            Indicate if request should be saved as draft. Defaults to ``False`` and overrides</span>
+<span class="sd">            send_notification</span>
+<span class="sd">        has_invoice: Optional[bool]</span>
+<span class="sd">            Set to ``True`` to create a draft invoice (adds an auto incrementing invoice number</span>
+<span class="sd">            if none is provided) even if there are no line_items or tax passed</span>
+<span class="sd">        invoice_number: Optional[int]</span>
+<span class="sd">            Numeric value of invoice. Invoice will start from 1 and auto increment from there.</span>
+<span class="sd">            This field is to help override whatever value Paystack decides. Auto increment for</span>
+<span class="sd">            subsequent invoices continue from this point.</span>
+<span class="sd">        split_code: Optional[str]</span>
+<span class="sd">            The split code of the transaction split. e.g. SPL_98WF13Eb3w</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="s2">&quot;/paymentrequest&quot;</span><span class="p">)</span>
+
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;customer&quot;</span><span class="p">:</span> <span class="n">customer</span><span class="p">,</span> <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="n">amount</span><span class="p">}</span>
+        <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;due_date&quot;</span><span class="p">,</span> <span class="n">due_date</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="n">description</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;line_items&quot;</span><span class="p">,</span> <span class="n">line_items</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="n">tax</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;currency&quot;</span><span class="p">,</span> <span class="n">currency</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;send_notification&quot;</span><span class="p">,</span> <span class="n">send_notification</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;draft&quot;</span><span class="p">,</span> <span class="n">draft</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;has_invoice&quot;</span><span class="p">,</span> <span class="n">has_invoice</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;invoice_number&quot;</span><span class="p">,</span> <span class="n">invoice_number</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;split_code&quot;</span><span class="p">,</span> <span class="n">split_code</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">add_to_payload</span><span class="p">(</span><span class="n">optional_params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Invoice.get_invoices"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.invoices.Invoice.get_invoices">[docs]</a>    <span class="k">def</span> <span class="nf">get_invoices</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">customer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">status</span><span class="p">:</span> <span class="n">InvoiceStatus</span><span class="p">,</span>
+        <span class="n">currency</span><span class="p">:</span> <span class="n">Currency</span><span class="p">,</span>
+        <span class="n">include_archive</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">page</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">pagination</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+        <span class="n">start_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches the invoice available on your integration.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        customer: str</span>
+<span class="sd">            Filter by customer ID</span>
+<span class="sd">        status: InvoiceStatus</span>
+<span class="sd">            Filter by invoice status. Any value from enum of ``InvoiceStatus``</span>
+<span class="sd">        currency: Currency</span>
+<span class="sd">            Filter by currency. Any value from enum of ``Currency``</span>
+<span class="sd">        include_archive: bool</span>
+<span class="sd">            Show archived invoices.</span>
+<span class="sd">        page: int</span>
+<span class="sd">            Specify exactly what invoice you want to page. If not specify we use a</span>
+<span class="sd">            default value of 1.</span>
+<span class="sd">        pagination: int</span>
+<span class="sd">            Specify how many records you want to retrieve per page. If not specify</span>
+<span class="sd">            we use a default value of 50.</span>
+<span class="sd">        start_date: Optional[str]</span>
+<span class="sd">            A timestamp from which to start listing invoice</span>
+<span class="sd">            e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</span>
+<span class="sd">        end_date: Optional[str]</span>
+<span class="sd">            A timestamp at which to stop listing invoice</span>
+<span class="sd">            e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/paymentrequest?perPage=</span><span class="si">{</span><span class="n">pagination</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">query_params</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;customer&quot;</span><span class="p">,</span> <span class="n">customer</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;currency&quot;</span><span class="p">,</span> <span class="n">currency</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;include_archive&quot;</span><span class="p">,</span> <span class="n">include_archive</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;page&quot;</span><span class="p">,</span> <span class="n">page</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;start_date&quot;</span><span class="p">,</span> <span class="n">start_date</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;end_date&quot;</span><span class="p">,</span> <span class="n">end_date</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">append_query_params</span><span class="p">(</span><span class="n">query_params</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Invoice.get_invoice"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.invoices.Invoice.get_invoice">[docs]</a>    <span class="k">def</span> <span class="nf">get_invoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_or_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get details of an invoice on your integration.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        id_or_code: str</span>
+<span class="sd">            The invoice ID or code you want to fetch</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/paymentrequest/</span><span class="si">{</span><span class="n">id_or_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Invoice.verify_invoice"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.invoices.Invoice.verify_invoice">[docs]</a>    <span class="k">def</span> <span class="nf">verify_invoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Verify details of an invoice on your integration.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code: str</span>
+<span class="sd">            Invoice code</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/paymentrequest/verify/</span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Invoice.send_notification"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.invoices.Invoice.send_notification">[docs]</a>    <span class="k">def</span> <span class="nf">send_notification</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Send notification of an invoice to your customers</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code: str</span>
+<span class="sd">            Invoice code</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/paymentrequest/notify/</span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Invoice.get_total"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.invoices.Invoice.get_total">[docs]</a>    <span class="k">def</span> <span class="nf">get_total</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get invoice metrics for dashboard</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/paymentrequest/totals&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Invoice.finalize_invoice"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.invoices.Invoice.finalize_invoice">[docs]</a>    <span class="k">def</span> <span class="nf">finalize_invoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Finalize a Draft Invoice</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code: str</span>
+<span class="sd">            Invoice Code</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/paymentrequest/finalize/</span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Invoice.update_invoice"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.invoices.Invoice.update_invoice">[docs]</a>    <span class="k">def</span> <span class="nf">update_invoice</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">id_or_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">customer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">due_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">line_items</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tax</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">currency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Currency</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">send_notification</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">draft</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">invoice_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">split_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update an invoice details on your integration</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        id_or_code: str</span>
+<span class="sd">            Invoice ID or slug</span>
+<span class="sd">        customer: str</span>
+<span class="sd">            Customer id or code</span>
+<span class="sd">        amount: int</span>
+<span class="sd">            Payment request amount. Only useful if line items and tax values are ignored.</span>
+<span class="sd">            method will throw a friendly warning in the response if neither is available.</span>
+<span class="sd">        due_date: Optional[str]</span>
+<span class="sd">            ISO 8601 representation of request due date</span>
+<span class="sd">        description: Optional[str]</span>
+<span class="sd">            A short description of the payment request</span>
+<span class="sd">        line_items: Optional[list[dict[str,Any]]]</span>
+<span class="sd">            List of line items in the format [{&quot;name&quot;:&quot;item 1&quot;, &quot;amount&quot;:2000}]</span>
+<span class="sd">        tax: Optional[list[dict[str,Any]]]</span>
+<span class="sd">            List of taxes to be charged in the format [{&quot;name&quot;:&quot;VAT&quot;, &quot;amount&quot;:2000}]</span>
+<span class="sd">        currency: Optional[Currency]</span>
+<span class="sd">            Specify the currency of the invoice. Any value from the ``Currency`` enum</span>
+<span class="sd">        send_notification: Optional[bool]</span>
+<span class="sd">            Indicates whether Paystack sends an email notification to customer. Defaults to ``True``</span>
+<span class="sd">        draft: Optional[bool]</span>
+<span class="sd">            Indicate if request should be saved as draft. Defaults to false and overrides</span>
+<span class="sd">            send_notification</span>
+<span class="sd">        invoice_number: Optional[int]</span>
+<span class="sd">            Numeric value of invoice. Invoice will start from 1 and auto increment from there.</span>
+<span class="sd">            This field is to help override whatever value Paystack decides. Auto increment for</span>
+<span class="sd">            subsequent invoices continue from this point.</span>
+<span class="sd">        split_code: Optional[str]</span>
+<span class="sd">            The split code of the transaction split. e.g. SPL_98WF13Eb3w</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">amount</span> <span class="o">=</span> <span class="n">validate_amount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/paymentrequest/</span><span class="si">{</span><span class="n">id_or_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;customer&quot;</span><span class="p">:</span> <span class="n">customer</span><span class="p">,</span>
+            <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="n">amount</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;due_date&quot;</span><span class="p">,</span> <span class="n">due_date</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="n">description</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;line_items&quot;</span><span class="p">,</span> <span class="n">line_items</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="n">tax</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;currency&quot;</span><span class="p">,</span> <span class="n">currency</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;send_notification&quot;</span><span class="p">,</span> <span class="n">send_notification</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;draft&quot;</span><span class="p">,</span> <span class="n">draft</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;invoice_number&quot;</span><span class="p">,</span> <span class="n">invoice_number</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;split_code&quot;</span><span class="p">,</span> <span class="n">split_code</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">add_to_payload</span><span class="p">(</span><span class="n">optional_params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Invoice.archive_invoice"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.invoices.Invoice.archive_invoice">[docs]</a>    <span class="k">def</span> <span class="nf">archive_invoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Used to archive an invoice. Invoice will no longer be fetched</span>
+<span class="sd">        on list or returned on verify.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code: str</span>
+<span class="sd">            Invoice ID</span>
+
+<span class="sd">         Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/paymentrequest/archive/</span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Gbenga Adeyi &lt;coyotedevmail@gmail.com&gt;.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
