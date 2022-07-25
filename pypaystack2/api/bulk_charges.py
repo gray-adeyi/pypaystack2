@@ -13,7 +13,7 @@ class BulkCharge(BaseAPI):
 
     def initiate(self, body: list[dict[str, Any]]) -> Response:
         """
-        Send a list of dictionaries with authorization codes and amount
+        Send a list of dictionaries with authorization ``codes`` and ``amount``
         (in kobo if currency is NGN, pesewas, if currency is GHS, and cents,
         if currency is ZAR ) so paystack can process transactions as a batch.
 

@@ -123,8 +123,8 @@ class BaseAPI:
         else:
             body = response.json()
             return Response(
-                response.status_code,
-                body.get("status"),
-                body.get("message"),
-                body.get("errors"),
+                status_code=response.status_code,
+                status=body.get("status"),
+                message=body.get("message"),
+                data=body.get("errors"),
             )

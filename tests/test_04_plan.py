@@ -38,7 +38,7 @@ class TestPlan(TestCase):
 
         def update_plan():
             (status_code, status, response_msg, updated_plan_data) = self.plan.update(
-                plan_id=created_plan_data["id"], **updated_plan_details
+                id_or_code=created_plan_data["id"], **updated_plan_details
             )
             self.assertEqual(status_code, 200)
             self.assertEqual(status, True)

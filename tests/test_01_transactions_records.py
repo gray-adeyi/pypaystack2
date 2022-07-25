@@ -32,7 +32,7 @@ class TestTransactionRecords(TestCase):
                 status,
                 response_msg,
                 transaction_data,
-            ) = self.transaction.get_transaction(transaction_id=one_transaction["id"])
+            ) = self.transaction.get_transaction(id=one_transaction["id"])
             self.assertEqual(status_code, 200)
             self.assertEqual(status, True)
             self.assertEqual(response_msg, "Transaction retrieved")

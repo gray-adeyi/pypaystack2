@@ -20,7 +20,7 @@ class Miscellaneous(BaseAPI):
     def get_banks(
         self,
         country: Country,
-        use_cursor: bool,
+        use_cursor: bool = False,
         next: Optional[str] = None,
         previous: Optional[str] = None,
         gateway: Optional[Gateway] = None,
@@ -76,7 +76,7 @@ class Miscellaneous(BaseAPI):
 
     def get_providers(
         self,
-        pay_with_bank_transfer: bool,
+        pay_with_bank_transfer: bool = False,
     ) -> Response:
         """Get a list of all providers for Dedicated Virtual Account
 
@@ -91,7 +91,6 @@ class Miscellaneous(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        country = Country.get_full(country)
         url = self._url(f"/bank?pay_with_bank_transfer={pay_with_bank_transfer}")
         return self._handle_request("GET", url)
 
