@@ -2,9 +2,16 @@
 name = "pypaystack2"
 version = "1.0.0"
 description = "A fork of PyPaystack. A simple python wrapper for Paystack API."
-authors = ["Gbenga Adeyi <adeyigbenga005@gmail.com>"]
+authors = ["Gbenga Adeyi"]
 readme = "README.md"
 packages = [{include = "pypaystack2"}]
+keywords = ["paystack-python", "pypaystack", "paystack"]
+license = "MIT"
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
 
 [tool.poetry.dependencies]
 python = "^3.7"
