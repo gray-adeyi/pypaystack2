@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pypaystack2.api.customers &mdash; pypaystack2 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> pypaystack2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pypaystack2</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pypaystack2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>pypaystack2.api.customers</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pypaystack2.api.customers</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">..baseapi</span> <span class="kn">import</span> <span class="n">BaseAPI</span><span class="p">,</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">..errors</span> <span class="kn">import</span> <span class="n">InvalidDataError</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">add_to_payload</span><span class="p">,</span>
+    <span class="n">append_query_params</span><span class="p">,</span>
+    <span class="n">Identification</span><span class="p">,</span>
+    <span class="n">Country</span><span class="p">,</span>
+    <span class="n">RiskAction</span><span class="p">,</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="Customer"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.customers.Customer">[docs]</a><span class="k">class</span> <span class="nc">Customer</span><span class="p">(</span><span class="n">BaseAPI</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Provides a wrapper for paystack Customer API</span>
+
+<span class="sd">    The Customers API allows you create and manage customers on your integration.</span>
+<span class="sd">    https://paystack.com/docs/api/#customer</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Customer.create"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.customers.Customer.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">first_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">last_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">phone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Create a customer on your integration</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        email: str</span>
+<span class="sd">            Customer&#39;s email address</span>
+<span class="sd">        first_name: Optional[str]</span>
+<span class="sd">            Customer&#39;s first name</span>
+<span class="sd">        last_name: Optional[str]</span>
+<span class="sd">            Customer&#39;s last name</span>
+<span class="sd">        phone: Optional[str]</span>
+<span class="sd">            Customer&#39;s phone number</span>
+<span class="sd">        metadata: Optional[dict[str,Any]]</span>
+<span class="sd">            A dictionary that you can attach to the customer. It can be used</span>
+<span class="sd">            to store additional information in a structured format.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        The `first_name`, `last_name` and `phone` are optional parameters. However,</span>
+<span class="sd">        when creating a customer that would be assigned a Dedicated Virtual</span>
+<span class="sd">        Account and your business catgeory falls under Betting, Financial</span>
+<span class="sd">        services, and General Service, then these parameters become compulsory.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="s2">&quot;/customer/&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">optional_params</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="s2">&quot;first_name&quot;</span><span class="p">,</span> <span class="n">first_name</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;last_name&quot;</span><span class="p">,</span> <span class="n">last_name</span><span class="p">),</span>
+            <span class="p">(</span>
+                <span class="s2">&quot;phone&quot;</span><span class="p">,</span>
+                <span class="n">phone</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">add_to_payload</span><span class="p">(</span><span class="n">optional_params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Customer.get_customers"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.customers.Customer.get_customers">[docs]</a>    <span class="k">def</span> <span class="nf">get_customers</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">pagination</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches customers available on your integration.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        start_date: Optional[str]</span>
+<span class="sd">            A timestamp from which to start listing customers</span>
+<span class="sd">            e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</span>
+<span class="sd">        end_date: Optional[str]</span>
+<span class="sd">            A timestamp at which to stop listing customers</span>
+<span class="sd">            e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</span>
+<span class="sd">        page: int</span>
+<span class="sd">            Specify exactly what page you want to retrieve.</span>
+<span class="sd">            If not specify we use a default value of 1.</span>
+<span class="sd">        pagination: int</span>
+<span class="sd">            Specify how many records you want to retrieve per page.</span>
+<span class="sd">            If not specify we use a default value of 50.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">query_params</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;page&quot;</span><span class="p">,</span> <span class="n">page</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;from&quot;</span><span class="p">,</span> <span class="n">start_date</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;to&quot;</span><span class="p">,</span> <span class="n">end_date</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/customer/?perPage=</span><span class="si">{</span><span class="n">pagination</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">append_query_params</span><span class="p">(</span><span class="n">query_params</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Customer.get_customer"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.customers.Customer.get_customer">[docs]</a>    <span class="k">def</span> <span class="nf">get_customer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">email_or_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get details of a customer on your integration.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        email_or_code: str</span>
+<span class="sd">            An email or customer code for the customer you want to fetch</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/customer/</span><span class="si">{</span><span class="n">email_or_code</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Customer.update"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.customers.Customer.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">first_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">last_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">phone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Update a customer&#39;s details on your integration</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code: str</span>
+<span class="sd">            Customer&#39;s code</span>
+<span class="sd">        first_name: str</span>
+<span class="sd">            Customer&#39;s first name</span>
+<span class="sd">        last_name: str</span>
+<span class="sd">            Customer&#39;s last name</span>
+<span class="sd">        phone: Optional[str]</span>
+<span class="sd">            Customer&#39;s phone number</span>
+<span class="sd">        metadata: Optional[dict[str, Any]]</span>
+<span class="sd">            A dictionary that you can attach to the customer. It can be used</span>
+<span class="sd">            to store additional information in a structured format.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/customer/</span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;first_name&quot;</span><span class="p">:</span> <span class="n">first_name</span><span class="p">,</span>
+            <span class="s2">&quot;last_name&quot;</span><span class="p">:</span> <span class="n">last_name</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span>
+                <span class="s2">&quot;phone&quot;</span><span class="p">,</span>
+                <span class="n">phone</span><span class="p">,</span>
+            <span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">add_to_payload</span><span class="p">(</span><span class="n">optional_params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Customer.validate"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.customers.Customer.validate">[docs]</a>    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">first_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">last_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">identification_type</span><span class="p">:</span> <span class="n">Identification</span><span class="p">,</span>
+        <span class="n">identification_number</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">country</span><span class="p">:</span> <span class="n">Country</span><span class="p">,</span>
+        <span class="n">bvn</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">bank_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">account_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">middle_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Validate a customer&#39;s identity</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code: str</span>
+<span class="sd">            Customer&#39;s code</span>
+<span class="sd">        first_name: str</span>
+<span class="sd">            Customer&#39;s first name</span>
+<span class="sd">        last_name: str</span>
+<span class="sd">            Customer&#39;s last name</span>
+<span class="sd">        identification_type: Identification</span>
+<span class="sd">            Enum of Identification e.g `Identification.BVN`</span>
+<span class="sd">        identification_number: str</span>
+<span class="sd">        country: Country</span>
+<span class="sd">            Enum of Country e.g `Country.NIGERIA`</span>
+<span class="sd">        bvn: str</span>
+<span class="sd">            Customer&#39;s Bank Verification Number</span>
+<span class="sd">        bank_code: Optional[str]</span>
+<span class="sd">            You can get the list of Bank Codes by calling the</span>
+<span class="sd">            Miscellaneous API `get_banks` method. (required if type is bank_account)</span>
+<span class="sd">        account_number: Optional[str]</span>
+<span class="sd">            Customer&#39;s bank account number. (required if type is bank_account)</span>
+<span class="sd">        middle_name: Optional[str]</span>
+<span class="sd">            Customer&#39;s middle name</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">identification_type</span> <span class="o">==</span> <span class="n">Identification</span><span class="o">.</span><span class="n">BANK_ACCOUNT</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">bank_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+                    <span class="s2">&quot;`bank_code` is required if identification type is `Identification.BANK_ACCOUNT`&quot;</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="n">account_number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+                    <span class="s2">&quot;`account_number` is required if identification type is `Identification.BANK_ACCOUNT`&quot;</span>
+                <span class="p">)</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/customer/</span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">/identification&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;first_name&quot;</span><span class="p">:</span> <span class="n">first_name</span><span class="p">,</span>
+            <span class="s2">&quot;last_name&quot;</span><span class="p">:</span> <span class="n">last_name</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">identification_type</span><span class="p">,</span>
+            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">identification_number</span><span class="p">,</span>
+            <span class="s2">&quot;country&quot;</span><span class="p">:</span> <span class="n">country</span><span class="p">,</span>
+            <span class="s2">&quot;bvn&quot;</span><span class="p">:</span> <span class="n">bvn</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">optional_params</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="s2">&quot;bank_code&quot;</span><span class="p">,</span> <span class="n">bank_code</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;account_number&quot;</span><span class="p">,</span> <span class="n">account_number</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;middle_name&quot;</span><span class="p">,</span> <span class="n">middle_name</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">add_to_payload</span><span class="p">(</span><span class="n">optional_params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Customer.flag"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.customers.Customer.flag">[docs]</a>    <span class="k">def</span> <span class="nf">flag</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">customer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">risk_action</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">RiskAction</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Whitelist or blacklist a customer on your integration</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        customer: str</span>
+<span class="sd">            Customer&#39;s code, or email address</span>
+<span class="sd">        risk_action: Optional[RiskAction]</span>
+<span class="sd">            One of the possible risk actions from the</span>
+<span class="sd">            RiskAction enum e.g `RiskAction.DEFAULT`</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/customer/set_risk_action&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;customer&quot;</span><span class="p">:</span> <span class="n">customer</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">optional_params</span> <span class="o">=</span> <span class="p">((</span><span class="s2">&quot;risk_action&quot;</span><span class="p">,</span> <span class="n">risk_action</span><span class="p">),)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">add_to_payload</span><span class="p">(</span><span class="n">optional_params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Customer.deactivate"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.customers.Customer.deactivate">[docs]</a>    <span class="k">def</span> <span class="nf">deactivate</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">auth_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Deactivate an authorization when the card needs to be forgotten</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        auth_code: str</span>
+<span class="sd">            Authorization code to be deactivated</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="s2">&quot;/customer/deactivate_authorization&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;authorization_code&quot;</span><span class="p">:</span> <span class="n">auth_code</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Gbenga Adeyi &lt;coyotedevmail@gmail.com&gt;.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
