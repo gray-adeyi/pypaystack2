@@ -63,7 +63,8 @@ in the `Invoice` wrapper. Say you wanted to create an invoice by sending a
 ```python
    from pypaystack2.api import Invoice
    invoice_wrapper = Invoice()
-   response = invoice_wrapper.create(custmer="CUS_xwaj0txjryg393b",amount=1000) # Creates an invoice with a charge of ₦100
+   response = invoice_wrapper.create(customer="CUS_xwaj0txjryg393b",amount=10000) # Creates an invoice with a charge of ₦100
+   print(response)
 ```
 
 From here you can check out the tutorials section to get more examples and get familiar or surf the

@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pypaystack2"
-version = "1.0.0"
+version = "1.0.1"
 description = "A fork of PyPaystack. A simple python wrapper for Paystack API."
 authors = ["Gbenga Adeyi"]
 readme = "README.md"

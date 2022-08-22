@@ -1,6 +1,5 @@
 import os
-from typing import Any, Dict, NamedTuple, Union
-from pyparsing import Optional
+from typing import Any, Dict, NamedTuple, Union, Optional
 import requests
 from requests import Response as RResponse
 import json
@@ -15,7 +14,7 @@ ResponseData = Union[dict[str, Any], list[dict[str, Any]]]
 
 class Response(NamedTuple):
     """A namedtuple that models the data gotten from making a request to
-    paystacks API endpoints.
+    paystack's API endpoints.
 
     Parameters
     ----------
@@ -44,13 +43,13 @@ class BaseAPI:
     _CONTENT_TYPE = "application/json"
     _BASE_END_POINT = "https://api.paystack.co"
 
-    def __init__(self, auth_key: str = None):
+    def __init__(self, auth_key: Optional[str] = None):
         """
         Parameters
         ----------
         auth_key:
             Your paystack authorization key. Required only
-            if it is not provided in your enviromental
+            if it is not provided in your environmental
             variables as ``PAYSTACK_AUTHORIZATION_KEY=your_key``
 
         """
@@ -78,7 +77,7 @@ class BaseAPI:
     def _parse_json(self, response_obj: RResponse) -> Response:
         """
         This function takes in every json response sent back by the
-        server and trys to get out the important return variables
+        server and tries to get out the important return variables
 
         Returns a python namedtuple of Response which contains
         status code, status(bool), message, data
@@ -110,7 +109,7 @@ class BaseAPI:
         request = method_map.get(method)
 
         if not request:
-            raise InvalidMethodError("Request method not recognised or implemented")
+            raise InvalidMethodError("Request method not recognized or implemented")
 
         response = request(url, headers=self._headers(), data=payload, verify=True)
         if response.status_code == 404:
