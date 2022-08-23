@@ -38,6 +38,7 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../modules.html">pypaystack2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../paystack-client-turorial.html">Paystack Command line Client</a></li>
 </ul>
 
         </div>
@@ -66,8 +67,7 @@
              
   <h1>Source code for pypaystack2.baseapi</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Union</span>
-<span class="kn">from</span> <span class="nn">pyparsing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">NamedTuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Optional</span>
 <span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">requests</span> <span class="kn">import</span> <span class="n">Response</span> <span class="k">as</span> <span class="n">RResponse</span>
 <span class="kn">import</span> <span class="nn">json</span>
@@ -82,7 +82,7 @@
 
 <div class="viewcode-block" id="Response"><a class="viewcode-back" href="../../pypaystack2.html#pypaystack2.baseapi.Response">[docs]</a><span class="k">class</span> <span class="nc">Response</span><span class="p">(</span><span class="n">NamedTuple</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A namedtuple that models the data gotten from making a request to</span>
-<span class="sd">    paystacks API endpoints.</span>
+<span class="sd">    paystack&#39;s API endpoints.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -111,13 +111,13 @@
     <span class="n">_CONTENT_TYPE</span> <span class="o">=</span> <span class="s2">&quot;application/json&quot;</span>
     <span class="n">_BASE_END_POINT</span> <span class="o">=</span> <span class="s2">&quot;https://api.paystack.co&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auth_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">auth_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
 <span class="sd">        auth_key:</span>
 <span class="sd">            Your paystack authorization key. Required only</span>
-<span class="sd">            if it is not provided in your enviromental</span>
+<span class="sd">            if it is not provided in your environmental</span>
 <span class="sd">            variables as ``PAYSTACK_AUTHORIZATION_KEY=your_key``</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -145,7 +145,7 @@
     <span class="k">def</span> <span class="nf">_parse_json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response_obj</span><span class="p">:</span> <span class="n">RResponse</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        This function takes in every json response sent back by the</span>
-<span class="sd">        server and trys to get out the important return variables</span>
+<span class="sd">        server and tries to get out the important return variables</span>
 
 <span class="sd">        Returns a python namedtuple of Response which contains</span>
 <span class="sd">        status code, status(bool), message, data</span>
@@ -177,7 +177,7 @@
         <span class="n">request</span> <span class="o">=</span> <span class="n">method_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">method</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">request</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">InvalidMethodError</span><span class="p">(</span><span class="s2">&quot;Request method not recognised or implemented&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">InvalidMethodError</span><span class="p">(</span><span class="s2">&quot;Request method not recognized or implemented&quot;</span><span class="p">)</span>
 
         <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_headers</span><span class="p">(),</span> <span class="n">data</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>

@@ -31,7 +31,7 @@ your python project. for example
    from pypaystack2.api import Miscellaneous # assumes you have installed pypaystack2
    from pypaystack2.utils import Country
    miscellaneous_wrapper = Miscellaneous() # assumes that your paystack auth key is in 
-   # your enviromental variables i.e PAYSTACK_AUTHORIZATION_KEY=your_key otherwise instatiate 
+   # your environmental variables i.e PAYSTACK_AUTHORIZATION_KEY=your_key otherwise instantiate 
    # the Miscellaneous API wrapper as it is done below.
    # miscellaneous_wrapper = Miscellaneous(auth_key=your_paystack_auth_key)
    response = miscellaneous_wrapper.get_banks(country=Country.NIGERIA,use_cursor=False) # Requires internet connection.
@@ -69,7 +69,7 @@ in the ``Invoice`` wrapper. Say you wanted to create an invoice by sending a
 
    from pypaystack2.api import Invoice
    invoice_wrapper = Invoice()
-   response = invoice_wrapper.create(custmer="CUS_xwaj0txjryg393b",amount=1000) # Creates an invoice with a charge of ₦100
+   response = invoice_wrapper.create(customer="CUS_xwaj0txjryg393b",amount=1000) # Creates an invoice with a charge of ₦100
 
 From here you can check out the tutorials section to get more examples and get familiar or surf the
 documentation for wrappers and methods you'll need for your next project. Hurray!
@@ -78,7 +78,9 @@ documentation for wrappers and methods you'll need for your next project. Hurray
    :maxdepth: 2
    :caption: Contents:
 
+   paystack-client-turorial
    modules
+   
    
 
 Indices and tables

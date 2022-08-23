@@ -19,7 +19,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="pypaystack2" href="modules.html" /> 
+    <link rel="next" title="Tutorial 1" href="paystack-client-turorial.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -39,6 +39,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="paystack-client-turorial.html">Tutorial 1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">pypaystack2</a></li>
 </ul>
 
@@ -90,7 +91,7 @@ your python project. for example</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pypaystack2.api</span> <span class="kn">import</span> <span class="n">Miscellaneous</span> <span class="c1"># assumes you have installed pypaystack2</span>
 <span class="kn">from</span> <span class="nn">pypaystack2.utils</span> <span class="kn">import</span> <span class="n">Country</span>
 <span class="n">miscellaneous_wrapper</span> <span class="o">=</span> <span class="n">Miscellaneous</span><span class="p">()</span> <span class="c1"># assumes that your paystack auth key is in</span>
-<span class="c1"># your enviromental variables i.e PAYSTACK_AUTHORIZATION_KEY=your_key otherwise instatiate</span>
+<span class="c1"># your environmental variables i.e PAYSTACK_AUTHORIZATION_KEY=your_key otherwise instantiate</span>
 <span class="c1"># the Miscellaneous API wrapper as it is done below.</span>
 <span class="c1"># miscellaneous_wrapper = Miscellaneous(auth_key=your_paystack_auth_key)</span>
 <span class="n">response</span> <span class="o">=</span> <span class="n">miscellaneous_wrapper</span><span class="o">.</span><span class="n">get_banks</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="n">Country</span><span class="o">.</span><span class="n">NIGERIA</span><span class="p">,</span><span class="n">use_cursor</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># Requires internet connection.</span>
@@ -123,7 +124,7 @@ in the <code class="docutils literal notranslate"><span class="pre">Invoice</spa
 <code class="docutils literal notranslate"><span class="pre">Invoice</span></code> wrapper’s <code class="docutils literal notranslate"><span class="pre">.create</span></code> method.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pypaystack2.api</span> <span class="kn">import</span> <span class="n">Invoice</span>
 <span class="n">invoice_wrapper</span> <span class="o">=</span> <span class="n">Invoice</span><span class="p">()</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">invoice_wrapper</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">custmer</span><span class="o">=</span><span class="s2">&quot;CUS_xwaj0txjryg393b&quot;</span><span class="p">,</span><span class="n">amount</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># Creates an invoice with a charge of ₦100</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">invoice_wrapper</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">customer</span><span class="o">=</span><span class="s2">&quot;CUS_xwaj0txjryg393b&quot;</span><span class="p">,</span><span class="n">amount</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># Creates an invoice with a charge of ₦100</span>
 </pre></div>
 </div>
 <p>From here you can check out the tutorials section to get more examples and get familiar or surf the
@@ -131,6 +132,17 @@ documentation for wrappers and methods you’ll need for your next project. Hurr
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="paystack-client-turorial.html">Tutorial 1</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="paystack-client-turorial.html#paystack-command-line-client">Paystack Command line Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paystack-client-turorial.html#project-setup">Project Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paystack-client-turorial.html#environmental-variables">Environmental Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paystack-client-turorial.html#let-the-games-begin">Let the games begin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paystack-client-turorial.html#on-your-marks">On your marks!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paystack-client-turorial.html#what-just-happened">What just happened?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paystack-client-turorial.html#more-commands">More Commands!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paystack-client-turorial.html#where-to-go-from-here">Where to go from here</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="modules.html">pypaystack2</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="pypaystack2.html">pypaystack2 package</a></li>
 </ul>
@@ -152,7 +164,7 @@ documentation for wrappers and methods you’ll need for your next project. Hurr
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="modules.html" class="btn btn-neutral float-right" title="pypaystack2" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="paystack-client-turorial.html" class="btn btn-neutral float-right" title="Tutorial 1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
