@@ -1,6 +1,7 @@
 # PyPaystack2
 
 A fork of [PyPaystack](https://github.com/edwardpopoola/pypaystack). A simple python wrapper for Paystack API. Checkout [Documentation](https://gray-adeyi.github.io/pypaystack2/)
+[![Downloads](https://pepy.tech/badge/pypaystack2)](https://pepy.tech/project/pypaystack2) [![Downloads](https://pepy.tech/badge/pypaystack2/month)](https://pepy.tech/project/pypaystack2) [![Downloads](https://pepy.tech/badge/pypaystack2/week)](https://pepy.tech/project/pypaystack2)
 
 ## Installation
 
