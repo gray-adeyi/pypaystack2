@@ -1,6 +1,5 @@
-from urllib import response
-from . import test_auth_key, Miscellaneous, TestCase
 from pypaystack2.utils import Country
+from . import test_auth_key, Miscellaneous, TestCase
 
 
 class TestMiscellaneous(TestCase):
@@ -22,8 +21,7 @@ class TestMiscellaneous(TestCase):
         self.assertEqual(response.message, "Banks retrieved")
 
     def test_can_get_states(self):
-        response = self.misc.get_states(country=Country.NIGERIA)
-        self.assertEqual(response.message, "")
+        response = self.misc.get_states(country="CA")
+        self.assertEqual(response.message, "States retrieved")
         self.assertTrue(response.status)
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.message, "Banks retrieved")

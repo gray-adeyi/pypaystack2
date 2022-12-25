@@ -1,21 +1,19 @@
 from typing import Mapping, Optional
 
+from pypaystack2.baseapi import BaseAPI, Response
 from pypaystack2.errors import InvalidDataError
-from ..baseapi import BaseAPI, Response
-from ..utils import (
+from pypaystack2.utils import (
     Currency,
     TRType,
     add_to_payload,
     append_query_params,
-    validate_amount,
-    validate_interval,
 )
 
 
-class TransferReceipt(BaseAPI):
+class TransferRecipient(BaseAPI):
     """Provides a wrapper for paystack Transfer Receipts API
 
-    The Transfer Recipients API allows you create and manage beneficiaries that you send money to.
+    The Transfer Recipients API allows you to create and manage beneficiaries that you send money to.
     https://paystack.com/docs/api/#transfer-recipient
 
     Note
@@ -69,9 +67,6 @@ class TransferReceipt(BaseAPI):
                     "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"
                 )
 
-        interval = validate_interval(interval)
-        amount = validate_amount(amount)
-
         url = self._url("/transferrecipient")
 
         payload = {
@@ -124,9 +119,6 @@ class TransferReceipt(BaseAPI):
                     raise InvalidDataError(
                         "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"
                     )
-
-        interval = validate_interval(interval)
-        amount = validate_amount(amount)
 
         url = self._url("/transferrecipient/bulk")
 

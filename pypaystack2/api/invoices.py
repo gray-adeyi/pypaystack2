@@ -1,4 +1,4 @@
-from typing import Any, Mapping, Optional
+from typing import Any, Optional
 
 from ..baseapi import BaseAPI, Response
 from ..utils import (
@@ -13,7 +13,7 @@ from ..utils import (
 class Invoice(BaseAPI):
     """Provides a wrapper for paystack Invoices API
 
-    The Invoices API allows you issue out and manage payment requests.
+    The Invoices API allows you to issue out and manage payment requests.
     https://paystack.com/docs/api/#invoice
     """
 

@@ -5,26 +5,26 @@ class ApplePay(BaseAPI):
     """Provides a wrapper for paystack Apple Pay API
 
     The Apple Pay API allows you register your application's top-level domain or subdomain.
-    https://paystack.com/docs/api/#apple-pay
+    [Visit paystack api doc](https://paystack.com/docs/api/#apple-pay)
     """
 
     def register_domain(self, domain_name: str) -> Response:
         """Register a top-level domain or subdomain
         for your Apple Pay integration.
 
+        Note
+        ----
+        This method can only be called with one domain or subdomain at a time.
+
         Parameters
         ----------
         domain_name: str
-            Domain name to be registered
+            Domain name to be registered.
 
         Returns
         -------
         Response
             A named tuple containing the response gotten from paystack's server.
-
-        Note
-        ----
-        This method can only be called with one domain or subdomain at a time.
         """
 
         url = self._url("/apple-pay/domain")

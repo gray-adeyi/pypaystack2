@@ -1,11 +1,11 @@
-from ..baseapi import BaseAPI, Response
-from ..utils import AccountType, Country, DocumentType
+from pypaystack2.baseapi import BaseAPI, Response
+from pypaystack2.utils import AccountType, Country, DocumentType
 
 
 class Verification(BaseAPI):
     """Provides a wrapper for paystack Verification API
 
-    The Verification API allows you perform KYC processes.
+    The Verification API allows you to perform KYC processes.
     https://paystack.com/docs/api/#verification
 
     Note

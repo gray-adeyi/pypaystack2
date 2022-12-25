@@ -1,9 +1,22 @@
-from functools import reduce
-from typing import Any, Optional, Union
-from unittest.mock import DEFAULT
-from .errors import InvalidDataError
 from enum import Enum
+from functools import reduce
 from operator import add
+from typing import Any, Optional, Union
+
+from .errors import InvalidDataError
+
+
+class TerminalEventType(str, Enum):
+    """Enum of the types of events supported by Terminal API"""
+
+    TRANSACTION = "transaction"
+    INVOICE = "invoice"
+
+
+class TerminalEventAction(str, Enum):
+    PROCESS = "process"
+    VIEW = "view"
+    PRINT = "print"
 
 
 class Currency(str, Enum):
@@ -242,7 +255,7 @@ def validate_interval(interval: str) -> str:
     Parameters
     ----------
     interval:str
-        any of the intervals supported by paystack i.e hourly,daily
+        any of the intervals supported by paystack i.e. hourly,daily
         weekly,monthly,annually
 
     Returns
@@ -274,7 +287,7 @@ def add_to_payload(
     This is a utility is used in the generation of payloads
     for a request body. It helps to add more parameters to
     a payload if it is not None.
-    e.g say you want to send a payload which is currently
+    e.g. say you want to send a payload which is currently
     ``{"amount": 20000}`` and you want to include an additional
     data such as ``currency`` if provided in the ``optional_params``
     to send this ``{"amount": 20000,"currency":"ngn"}`` if only
@@ -307,7 +320,7 @@ def add_to_payload(
 
 
 def append_query_params(query_params: list[tuple[str, Any]], url: str) -> str:
-    """Adds more queries to a url that already has query parameters in its suffix
+    """Adds more queries to url that already has query parameters in its suffix
 
     This function should only be used with urls that already have a
     query parameter suffixed to it because it makes that assumption

@@ -1,7 +1,8 @@
-from typing import Any, Mapping, Optional
+from typing import Any, Optional
 
-from ..baseapi import BaseAPI, Response
-from ..utils import (
+from pypaystack2.baseapi import BaseAPI, Response
+from pypaystack2.errors import InvalidDataError
+from pypaystack2.utils import (
     Bearer,
     Currency,
     SplitType,
@@ -9,7 +10,6 @@ from ..utils import (
     append_query_params,
     validate_amount,
 )
-from ..errors import InvalidDataError
 
 
 class Split(BaseAPI):
@@ -111,7 +111,7 @@ class Split(BaseAPI):
             ("to", end_date),
             ("active", active),
         ]
-        url = append_query_params(query_params)
+        url = append_query_params(query_params, url)
 
         return self._handle_request("GET", url)
 
@@ -175,7 +175,7 @@ class Split(BaseAPI):
             ("bearer_type", bearer_type),
             ("bearer_subaccount", bearer_subaccount),
         ]
-        payload = add_to_payload()
+        payload = add_to_payload(optional_params, payload)
         url = self._url(f"/split/{id}/")
         return self._handle_request("PUT", url, payload)
 
@@ -189,7 +189,7 @@ class Split(BaseAPI):
          id: str
             Split Id
          subaccount: str
-            This is the sub account code
+            This is the subaccount code
          share: int
             This is the transaction share for the subaccount
 

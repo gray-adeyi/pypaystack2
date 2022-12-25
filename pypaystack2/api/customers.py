@@ -14,7 +14,7 @@ from ..utils import (
 class Customer(BaseAPI):
     """Provides a wrapper for paystack Customer API
 
-    The Customers API allows you create and manage customers on your integration.
+    The Customers API allows you to create and manage customers on your integration.
     https://paystack.com/docs/api/#customer
     """
 

@@ -1,10 +1,10 @@
 [tool.poetry]
 name = "pypaystack2"
-version = "1.0.0"
+version = "1.0.2"
 description = "A fork of PyPaystack. A simple python wrapper for Paystack API."
 authors = ["Gbenga Adeyi"]
 readme = "README.md"
-packages = [{include = "pypaystack2"}]
+packages = [{ include = "pypaystack2" }]
 keywords = ["paystack-python", "pypaystack", "paystack"]
 license = "MIT"
 classifiers = [
@@ -16,13 +16,18 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.7"
 requests = "^2.28.0"
+mkdocstrings = {extras = ["python"], version = "^0.19.1"}
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
-black = {version = "^22.6.0", allow-prereleases = true}
-python-dotenv = "^0.20.0"
-Sphinx = "^5.0.2"
-sphinx-rtd-theme = "^1.0.0"
+black = { version = "^22.6.0", allow-prereleases = true }
+
+[tool.poetry.group.dev.dependencies]
+python-dotenv = "^0.21.0"
+mkdocs = "^1.4.2"
+mkdocstrings = "^0.19.1"
+mkdocs-material = "^8.5.11"
+typer = "^0.7.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

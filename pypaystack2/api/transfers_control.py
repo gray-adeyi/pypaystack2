@@ -1,5 +1,5 @@
+from pypaystack2.baseapi import BaseAPI, Response
 from pypaystack2.utils import Reason
-from ..baseapi import BaseAPI, Response
 
 
 class TransferControl(BaseAPI):

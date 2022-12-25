@@ -1,23 +1,25 @@
+import json
 import os
-from typing import Any, Dict, NamedTuple, Union
-from pyparsing import Optional
+from typing import Any, NamedTuple, Union
+
 import requests
 from requests import Response as RResponse
-import json
+
 from pypaystack2 import version
-from .errors import *
+from pypaystack2.errors import InvalidMethodError, MissingAuthKeyError
 
 # namedtuple Response to extend the
 # capabilities of the tuple sent as
 # response
-ResponseData = Union[dict[str, Any], list[dict[str, Any]]]
+ResponseData = Union[dict[str, Any], list[dict[str, Any]], None]
 
 
 class Response(NamedTuple):
-    """A namedtuple that models the data gotten from making a request to
-    paystacks API endpoints.
+    """
+    A namedtuple that models the data gotten from making a request to paystacks API endpoints.
 
-    Parameters
+
+    Attributes
     ----------
     status_code: int
         The response status code
@@ -25,12 +27,12 @@ class Response(NamedTuple):
         A flag for the response status
     message: str
         paystack response message
-    data: Optional[ResponseData]
-        data sent from paystack's server if any.
+    data: ResponseData
+        data sent from paystack's server if any. it can be a dictionary,list or None.
     """
 
     status_code: int
-    status: str
+    status: bool
     message: str
     data: ResponseData
 
@@ -91,7 +93,7 @@ class BaseAPI:
         return Response(response_obj.status_code, status, message, data)
 
     def _handle_request(
-        self, method: str, url: str, data: Dict[str, any] = None
+        self, method: str, url: str, data: Union[dict, list] = None
     ) -> Response:
         """
         Generic function to handle all API url calls

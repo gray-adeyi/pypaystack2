@@ -3,4 +3,4 @@ dist
 .vscode
 .env
 .pytest_cache
-docs/build
+docs.old/build

@@ -1,8 +1,8 @@
 from typing import Optional
 
 
-from ..baseapi import BaseAPI, Response
-from ..utils import add_to_payload, append_query_params
+from pypaystack2.baseapi import BaseAPI, Response
+from pypaystack2.utils import add_to_payload, append_query_params
 
 
 class Page(BaseAPI):

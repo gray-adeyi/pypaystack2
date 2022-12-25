@@ -1,8 +1,7 @@
 from typing import Optional
 
-
-from ..baseapi import BaseAPI, Response
-from ..utils import (
+from pypaystack2.baseapi import BaseAPI, Response
+from pypaystack2.utils import (
     Currency,
     add_to_payload,
     append_query_params,
@@ -13,7 +12,7 @@ from ..utils import (
 class Refund(BaseAPI):
     """Provides a wrapper for paystack Refunds API
 
-    The Refunds API allows you create and manage transaction refunds.
+    The Refunds API allows you to create and manage transaction refunds.
     https://paystack.com/docs/api/#refund
     """
 

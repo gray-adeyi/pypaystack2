@@ -1,8 +1,8 @@
 from typing import Any, Optional
 
-from ..baseapi import BaseAPI, Response
-
-from ..utils import (
+from pypaystack2.baseapi import BaseAPI, Response
+from pypaystack2.errors import InvalidDataError
+from pypaystack2.utils import (
     Bearer,
     Channel,
     Currency,
@@ -11,7 +11,6 @@ from ..utils import (
     append_query_params,
     validate_amount,
 )
-from ..errors import InvalidDataError
 
 
 class Transaction(BaseAPI):
@@ -364,7 +363,7 @@ class Transaction(BaseAPI):
 
         Parameters
         ----------
-        id_or_reference: str
+        id_or_ref: str
             The ID or the reference of the transaction
 
         Returns
@@ -483,7 +482,7 @@ class Transaction(BaseAPI):
             ("settlement", settlement),
             ("payment_page", payment_page),
         ]
-        url = append_query_params(query_params)
+        url = append_query_params(query_params, url)
         return self._handle_request("GET", url)
 
     def partial_debit(
@@ -576,7 +575,6 @@ class Transaction(BaseAPI):
         ----------
         bank_code
         account_number
-        int
         account_name
 
         Returns

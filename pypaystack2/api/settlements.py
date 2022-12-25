@@ -1,7 +1,7 @@
 from typing import Optional
 
-from ..baseapi import BaseAPI, Response
-from ..utils import (
+from pypaystack2.baseapi import BaseAPI, Response
+from pypaystack2.utils import (
     append_query_params,
 )
 

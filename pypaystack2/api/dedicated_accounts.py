@@ -1,7 +1,7 @@
 from typing import Optional
 
-from ..baseapi import BaseAPI, Response
-from ..utils import Currency, add_to_payload, append_query_params
+from pypaystack2.baseapi import BaseAPI, Response
+from pypaystack2.utils import Currency, add_to_payload, append_query_params
 
 
 class DedicatedAccount(BaseAPI):

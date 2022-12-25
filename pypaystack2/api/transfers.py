@@ -1,13 +1,18 @@
 from typing import Optional
 
-from ..baseapi import BaseAPI, Response
-from ..utils import Currency, add_to_payload, append_query_params, validate_amount
+from pypaystack2.baseapi import BaseAPI, Response
+from pypaystack2.utils import (
+    Currency,
+    add_to_payload,
+    append_query_params,
+    validate_amount,
+)
 
 
 class Transfer(BaseAPI):
     """Provides a wrapper for paystack Transfers API
 
-    The Transfers API allows you automate sending money on your integration
+    The Transfers API allows you to automate sending money on your integration
     https://paystack.com/docs/api/#transfer
 
     Note
@@ -70,7 +75,6 @@ class Transfer(BaseAPI):
         Response
             A named tuple containing the response gotten from paystack's server.
         """
-        amount = validate_amount(amount)
 
         url = self._url("/transfer/finalize_transfer")
 

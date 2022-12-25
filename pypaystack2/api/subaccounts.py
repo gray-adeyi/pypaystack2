@@ -1,7 +1,7 @@
 from typing import Any, Optional
 
-from ..baseapi import BaseAPI, Response
-from ..utils import (
+from pypaystack2.baseapi import BaseAPI, Response
+from pypaystack2.utils import (
     Schedule,
     add_to_payload,
     append_query_params,
@@ -11,7 +11,7 @@ from ..utils import (
 class SubAccount(BaseAPI):
     """Provides a wrapper for paystack Subaccounts API
 
-    The Subaccounts API allows you create and manage subaccounts on your integration.
+    The Subaccounts API allows you to create and manage subaccounts on your integration.
     Subaccounts can be used to split payment between two accounts
     (your main account and a sub account).
     https://paystack.com/docs/api/#subaccount
@@ -52,7 +52,7 @@ class SubAccount(BaseAPI):
         primary_contact_phone: Optional[str]
             A phone number to call for this subaccount
         metadata: Optional[list[dict[str,Any]]]
-            Add a custom_fields attribute which has an list of dictionaries if
+            Add a custom_fields attribute which has a list of dictionaries if
             you would like the fields to be added to your transaction when
             displayed on the dashboard.
             Sample: ``{"custom_fields":[{"display_name":"Cart ID",
@@ -177,7 +177,7 @@ class SubAccount(BaseAPI):
             subaccount should only be made when requested.
             Defaults to ``Schedule.AUTO``
         metadata: Optional[dict[str,Any]]
-            Add a custom_fields attribute which has an list of dictionaries if you would
+            Add a custom_fields attribute which has a list of dictionaries if you would
             like the fields to be added to your transaction when displayed on the
             dashboard. Sample: ``{"custom_fields":[{"display_name":"Cart ID",
             "variable_name": "cart_id","value": "8393"}]}``

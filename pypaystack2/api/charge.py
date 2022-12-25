@@ -1,4 +1,4 @@
-from typing import Any, Mapping, Optional
+from typing import Any, Optional
 
 from ..baseapi import BaseAPI, Response
 from ..utils import add_to_payload, validate_amount
@@ -43,13 +43,13 @@ class Charge(BaseAPI):
         metadata: Optional[dict[str, Any]]
             A dictionary of data.
         reference: Optional[str]
-            Unique transaction reference. Only -, .\`, = and alphanumeric characters allowed.
+            Unique transaction reference. Only -, .\\`, = and alphanumeric characters allowed.
         ussd: Optional[dict[str, Any]]
             USSD type to charge (don't send if charging an authorization code, bank or card)
         mobile_money: Optional[dict[str, Any]]
             Mobile details (don't send if charging an authorization code, bank or card)
         device_id: str
-            This is the unique identifier of the device a user uses in making payment. Only -, .\`,
+            This is the unique identifier of the device a user uses in making payment. Only -, .\\`,
             = and alphanumeric characters allowed.
 
         Returns

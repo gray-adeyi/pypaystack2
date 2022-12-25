@@ -7,7 +7,7 @@ from ..utils import ChargeStatus, append_query_params
 class BulkCharge(BaseAPI):
     """Provides a wrapper for paystack Bulk Charge API
 
-    The Bulk Charges API allows you create and manage multiple recurring payments from your customers.
+    The Bulk Charges API allows you to create and manage multiple recurring payments from your customers.
     https://paystack.com/docs/api/#bulk-charge
     """
 

@@ -181,7 +181,7 @@ class Dispute(BaseAPI):
         id: str
             Dispute Id
         upload_filename: str
-            The file name, with its extension, that you want to upload. e.g filename.pdf
+            The file name, with its extension, that you want to upload. e.g. filename.pdf
 
         Returns
         -------
@@ -218,7 +218,7 @@ class Dispute(BaseAPI):
             filename of attachment returned via response from
             upload url(GET /dispute/:id/upload_url)
         evidence: Optional[int]
-            Evidence Id for fraud claims
+            Evidence ID for fraud claims
 
         Returns
         -------

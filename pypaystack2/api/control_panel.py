@@ -1,4 +1,4 @@
-from ..baseapi import BaseAPI, Response
+from pypaystack2.baseapi import BaseAPI, Response
 
 
 class ControlPanel(BaseAPI):

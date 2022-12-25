@@ -1,14 +1,14 @@
 from typing import Optional
 
+from pypaystack2.baseapi import BaseAPI, Response
 from pypaystack2.errors import InvalidDataError
-from ..baseapi import BaseAPI, Response
-from ..utils import Currency, add_to_payload, append_query_params
+from pypaystack2.utils import Currency, add_to_payload, append_query_params
 
 
 class Product(BaseAPI):
     """Provides a wrapper for paystack Products API
 
-    The Products API allows you create and manage inventories on your integration.
+    The Products API allows you to create and manage inventories on your integration.
     https://paystack.com/docs/api/#product
     """
 
