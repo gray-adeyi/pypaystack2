@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pypaystack2 package &mdash; pypaystack2 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="pypaystack2.api package" href="pypaystack2.api.html" />
+    <link rel="prev" title="pypaystack2" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> pypaystack2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">pypaystack2</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">pypaystack2 package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="pypaystack2.api.html">pypaystack2.api package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pypaystack2.baseapi">pypaystack2.baseapi module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pypaystack2.errors">pypaystack2.errors module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pypaystack2.utils">pypaystack2.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pypaystack2.version">pypaystack2.version module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-pypaystack2">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="paystack-client-turorial.html">Paystack Command line Client</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">pypaystack2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">pypaystack2</a> &raquo;</li>
+      <li>pypaystack2 package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/pypaystack2.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pypaystack2-package">
+<h1>pypaystack2 package<a class="headerlink" href="#pypaystack2-package" title="Permalink to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pypaystack2.api.html">pypaystack2.api package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.apple_pay">pypaystack2.api.apple_pay module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.bulk_charges">pypaystack2.api.bulk_charges module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.charge">pypaystack2.api.charge module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.control_panel">pypaystack2.api.control_panel module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.customers">pypaystack2.api.customers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.dedicated_accounts">pypaystack2.api.dedicated_accounts module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.disputes">pypaystack2.api.disputes module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.invoices">pypaystack2.api.invoices module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.miscellaneous">pypaystack2.api.miscellaneous module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.payment_pages">pypaystack2.api.payment_pages module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.plans">pypaystack2.api.plans module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.products">pypaystack2.api.products module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.refunds">pypaystack2.api.refunds module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.settlements">pypaystack2.api.settlements module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.splits">pypaystack2.api.splits module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.subaccounts">pypaystack2.api.subaccounts module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.subscriptions">pypaystack2.api.subscriptions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.transactions">pypaystack2.api.transactions module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.transfer_recipients">pypaystack2.api.transfer_recipients module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.transfers">pypaystack2.api.transfers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.transfers_control">pypaystack2.api.transfers_control module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api.verification">pypaystack2.api.verification module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.api.html#module-pypaystack2.api">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-pypaystack2.baseapi">
+<span id="pypaystack2-baseapi-module"></span><h2>pypaystack2.baseapi module<a class="headerlink" href="#module-pypaystack2.baseapi" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.baseapi.BaseAPI">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.baseapi.</span></span><span class="sig-name descname"><span class="pre">BaseAPI</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">auth_key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/baseapi.html#BaseAPI"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.baseapi.BaseAPI" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for the pypaystack python API wrapper for paystack
+Not to be instantiated directly.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.baseapi.Response">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.baseapi.</span></span><span class="sig-name descname"><span class="pre">Response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">status_code</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/baseapi.html#Response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.baseapi.Response" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">NamedTuple</span></code></p>
+<p>A namedtuple that models the data gotten from making a request to
+paystack’s API endpoints.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>status_code</strong> (<em>int</em>) – The response status code</p></li>
+<li><p><strong>status</strong> (<em>bool</em>) – A flag for the response status</p></li>
+<li><p><strong>message</strong> (<em>str</em>) – paystack response message</p></li>
+<li><p><strong>data</strong> (<em>Optional</em><em>[</em><em>ResponseData</em><em>]</em>) – data sent from paystack’s server if any.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.baseapi.Response.data">
+<span class="sig-name descname"><span class="pre">data</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pypaystack2.baseapi.Response.data" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 3</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.baseapi.Response.message">
+<span class="sig-name descname"><span class="pre">message</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pypaystack2.baseapi.Response.message" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 2</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.baseapi.Response.status">
+<span class="sig-name descname"><span class="pre">status</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="headerlink" href="#pypaystack2.baseapi.Response.status" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.baseapi.Response.status_code">
+<span class="sig-name descname"><span class="pre">status_code</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="headerlink" href="#pypaystack2.baseapi.Response.status_code" title="Permalink to this definition"></a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pypaystack2.errors">
+<span id="pypaystack2-errors-module"></span><h2>pypaystack2.errors module<a class="headerlink" href="#module-pypaystack2.errors" title="Permalink to this heading"></a></h2>
+<dl class="py exception">
+<dt class="sig sig-object py" id="pypaystack2.errors.InvalidDataError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.errors.</span></span><span class="sig-name descname"><span class="pre">InvalidDataError</span></span><a class="reference internal" href="_modules/pypaystack2/errors.html#InvalidDataError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.errors.InvalidDataError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pypaystack2.errors.PyPaystackError" title="pypaystack2.errors.PyPaystackError"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyPaystackError</span></code></a></p>
+<p>Invalid input recognised. Saves unecessary trip to server</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pypaystack2.errors.InvalidMethodError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.errors.</span></span><span class="sig-name descname"><span class="pre">InvalidMethodError</span></span><a class="reference internal" href="_modules/pypaystack2/errors.html#InvalidMethodError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.errors.InvalidMethodError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pypaystack2.errors.PyPaystackError" title="pypaystack2.errors.PyPaystackError"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyPaystackError</span></code></a></p>
+<p>Invalid or unrecoginised/unimplemented HTTP request method</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pypaystack2.errors.MissingAuthKeyError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.errors.</span></span><span class="sig-name descname"><span class="pre">MissingAuthKeyError</span></span><a class="reference internal" href="_modules/pypaystack2/errors.html#MissingAuthKeyError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.errors.MissingAuthKeyError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#pypaystack2.errors.PyPaystackError" title="pypaystack2.errors.PyPaystackError"><code class="xref py py-class docutils literal notranslate"><span class="pre">PyPaystackError</span></code></a></p>
+<p>We can’t find the authentication key</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="pypaystack2.errors.PyPaystackError">
+<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.errors.</span></span><span class="sig-name descname"><span class="pre">PyPaystackError</span></span><a class="reference internal" href="_modules/pypaystack2/errors.html#PyPaystackError"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.errors.PyPaystackError" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Python Paystack Error</p>
+</dd></dl>
+
+</section>
+<section id="module-pypaystack2.utils">
+<span id="pypaystack2-utils-module"></span><h2>pypaystack2.utils module<a class="headerlink" href="#module-pypaystack2.utils" title="Permalink to this heading"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.AccountType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">AccountType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#AccountType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.AccountType" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of Account types supported by paystack</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.AccountType.BUSINESS">
+<span class="sig-name descname"><span class="pre">BUSINESS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'business'</span></em><a class="headerlink" href="#pypaystack2.utils.AccountType.BUSINESS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.AccountType.PERSONAL">
+<span class="sig-name descname"><span class="pre">PERSONAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'personal'</span></em><a class="headerlink" href="#pypaystack2.utils.AccountType.PERSONAL" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.BankType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">BankType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#BankType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.BankType" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of bank types</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.BankType.GHIPPS">
+<span class="sig-name descname"><span class="pre">GHIPPS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ghipps'</span></em><a class="headerlink" href="#pypaystack2.utils.BankType.GHIPPS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.BankType.MOBILE_MONEY">
+<span class="sig-name descname"><span class="pre">MOBILE_MONEY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'mobile_money'</span></em><a class="headerlink" href="#pypaystack2.utils.BankType.MOBILE_MONEY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.Bearer">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">Bearer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#Bearer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.Bearer" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum for who bears paystack charges</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Bearer.ACCOUNT">
+<span class="sig-name descname"><span class="pre">ACCOUNT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'account'</span></em><a class="headerlink" href="#pypaystack2.utils.Bearer.ACCOUNT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Bearer.ALL">
+<span class="sig-name descname"><span class="pre">ALL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'all'</span></em><a class="headerlink" href="#pypaystack2.utils.Bearer.ALL" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Bearer.ALL_PROPOTIONAL">
+<span class="sig-name descname"><span class="pre">ALL_PROPOTIONAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'all-proportional'</span></em><a class="headerlink" href="#pypaystack2.utils.Bearer.ALL_PROPOTIONAL" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Bearer.SUBACCOUNT">
+<span class="sig-name descname"><span class="pre">SUBACCOUNT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'subaccount'</span></em><a class="headerlink" href="#pypaystack2.utils.Bearer.SUBACCOUNT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.Channel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">Channel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#Channel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.Channel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of payment channels supported by paystack</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Channel.BANK">
+<span class="sig-name descname"><span class="pre">BANK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bank'</span></em><a class="headerlink" href="#pypaystack2.utils.Channel.BANK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Channel.BANK_TRANSFER">
+<span class="sig-name descname"><span class="pre">BANK_TRANSFER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bank_transfer'</span></em><a class="headerlink" href="#pypaystack2.utils.Channel.BANK_TRANSFER" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Channel.CARD">
+<span class="sig-name descname"><span class="pre">CARD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'card'</span></em><a class="headerlink" href="#pypaystack2.utils.Channel.CARD" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Channel.MOBILE_MONEY">
+<span class="sig-name descname"><span class="pre">MOBILE_MONEY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'mobile_money'</span></em><a class="headerlink" href="#pypaystack2.utils.Channel.MOBILE_MONEY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Channel.QR">
+<span class="sig-name descname"><span class="pre">QR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'qr'</span></em><a class="headerlink" href="#pypaystack2.utils.Channel.QR" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Channel.USSD">
+<span class="sig-name descname"><span class="pre">USSD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ussd'</span></em><a class="headerlink" href="#pypaystack2.utils.Channel.USSD" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.ChargeStatus">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">ChargeStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#ChargeStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.ChargeStatus" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of charge status supported by paystack</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.ChargeStatus.FAILED">
+<span class="sig-name descname"><span class="pre">FAILED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'failed'</span></em><a class="headerlink" href="#pypaystack2.utils.ChargeStatus.FAILED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.ChargeStatus.PENDING">
+<span class="sig-name descname"><span class="pre">PENDING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'pending'</span></em><a class="headerlink" href="#pypaystack2.utils.ChargeStatus.PENDING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.ChargeStatus.SUCCESS">
+<span class="sig-name descname"><span class="pre">SUCCESS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'success'</span></em><a class="headerlink" href="#pypaystack2.utils.ChargeStatus.SUCCESS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.Country">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">Country</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#Country"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.Country" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of countries supported by paystack</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Country.GHANA">
+<span class="sig-name descname"><span class="pre">GHANA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'gh'</span></em><a class="headerlink" href="#pypaystack2.utils.Country.GHANA" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Country.NIGERIA">
+<span class="sig-name descname"><span class="pre">NIGERIA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ng'</span></em><a class="headerlink" href="#pypaystack2.utils.Country.NIGERIA" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pypaystack2.utils.Country.get_full">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_full</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">val</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pypaystack2/utils.html#Country.get_full"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.Country.get_full" title="Permalink to this definition"></a></dt>
+<dd><p>Returns paystack supported country name in full lowercase</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>val</strong> (<em>str</em>) – The two digit iso name of the country.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The name of the country in lowercase if it is supported by
+paystack or none.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str,optinal</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.Currency">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">Currency</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#Currency"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.Currency" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of currencies supported by paystack.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Currency.GHS">
+<span class="sig-name descname"><span class="pre">GHS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'GHS'</span></em><a class="headerlink" href="#pypaystack2.utils.Currency.GHS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Currency.NGN">
+<span class="sig-name descname"><span class="pre">NGN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'NGN'</span></em><a class="headerlink" href="#pypaystack2.utils.Currency.NGN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Currency.USD">
+<span class="sig-name descname"><span class="pre">USD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'USD'</span></em><a class="headerlink" href="#pypaystack2.utils.Currency.USD" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Currency.ZAR">
+<span class="sig-name descname"><span class="pre">ZAR</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ZAR'</span></em><a class="headerlink" href="#pypaystack2.utils.Currency.ZAR" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.DisputeStatus">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">DisputeStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#DisputeStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.DisputeStatus" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of dispute status supported by paystack</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.DisputeStatus.AWAITING_BANK_FEEDBACK">
+<span class="sig-name descname"><span class="pre">AWAITING_BANK_FEEDBACK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'awaiting-bank-feedback'</span></em><a class="headerlink" href="#pypaystack2.utils.DisputeStatus.AWAITING_BANK_FEEDBACK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.DisputeStatus.AWAITING_MERCHANT_FEEDBACK">
+<span class="sig-name descname"><span class="pre">AWAITING_MERCHANT_FEEDBACK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'awaiting-merchant-feedback'</span></em><a class="headerlink" href="#pypaystack2.utils.DisputeStatus.AWAITING_MERCHANT_FEEDBACK" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.DisputeStatus.PENDING">
+<span class="sig-name descname"><span class="pre">PENDING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'pending'</span></em><a class="headerlink" href="#pypaystack2.utils.DisputeStatus.PENDING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.DisputeStatus.RESOLVED">
+<span class="sig-name descname"><span class="pre">RESOLVED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'resolved'</span></em><a class="headerlink" href="#pypaystack2.utils.DisputeStatus.RESOLVED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.DocumentType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">DocumentType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#DocumentType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.DocumentType" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of Document types supported by paystack</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.DocumentType.BUSINESS_REGISTRATION_NUMBER">
+<span class="sig-name descname"><span class="pre">BUSINESS_REGISTRATION_NUMBER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'businessRegistrationNumber'</span></em><a class="headerlink" href="#pypaystack2.utils.DocumentType.BUSINESS_REGISTRATION_NUMBER" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.DocumentType.IDENTITY_NUMBER">
+<span class="sig-name descname"><span class="pre">IDENTITY_NUMBER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'identityNumber'</span></em><a class="headerlink" href="#pypaystack2.utils.DocumentType.IDENTITY_NUMBER" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.DocumentType.PASSPORT_NUMBER">
+<span class="sig-name descname"><span class="pre">PASSPORT_NUMBER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'passportNumber'</span></em><a class="headerlink" href="#pypaystack2.utils.DocumentType.PASSPORT_NUMBER" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.Gateway">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">Gateway</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#Gateway"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.Gateway" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of bank gateways supported by paystack</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Gateway.DIGITALBANKMANDATE">
+<span class="sig-name descname"><span class="pre">DIGITALBANKMANDATE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'digitalbankmandate'</span></em><a class="headerlink" href="#pypaystack2.utils.Gateway.DIGITALBANKMANDATE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Gateway.EMANDATE">
+<span class="sig-name descname"><span class="pre">EMANDATE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'emandate'</span></em><a class="headerlink" href="#pypaystack2.utils.Gateway.EMANDATE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.Identification">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">Identification</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#Identification"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.Identification" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of Identification methods supported by paystack</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Identification.BANK_ACCOUNT">
+<span class="sig-name descname"><span class="pre">BANK_ACCOUNT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bank_account'</span></em><a class="headerlink" href="#pypaystack2.utils.Identification.BANK_ACCOUNT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Identification.BVN">
+<span class="sig-name descname"><span class="pre">BVN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'bvn'</span></em><a class="headerlink" href="#pypaystack2.utils.Identification.BVN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.Interval">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">Interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#Interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.Interval" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of intervals supported by paystack.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Interval.ANNUALLY">
+<span class="sig-name descname"><span class="pre">ANNUALLY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'annually'</span></em><a class="headerlink" href="#pypaystack2.utils.Interval.ANNUALLY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Interval.DAILY">
+<span class="sig-name descname"><span class="pre">DAILY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'daily'</span></em><a class="headerlink" href="#pypaystack2.utils.Interval.DAILY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Interval.HOURLY">
+<span class="sig-name descname"><span class="pre">HOURLY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'hourly'</span></em><a class="headerlink" href="#pypaystack2.utils.Interval.HOURLY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Interval.MONTHLY">
+<span class="sig-name descname"><span class="pre">MONTHLY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'monthly'</span></em><a class="headerlink" href="#pypaystack2.utils.Interval.MONTHLY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Interval.WEEKLY">
+<span class="sig-name descname"><span class="pre">WEEKLY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'weekly'</span></em><a class="headerlink" href="#pypaystack2.utils.Interval.WEEKLY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.InvoiceStatus">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">InvoiceStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#InvoiceStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.InvoiceStatus" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of invoice status supported by paystack</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.InvoiceStatus.FAILED">
+<span class="sig-name descname"><span class="pre">FAILED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'failed'</span></em><a class="headerlink" href="#pypaystack2.utils.InvoiceStatus.FAILED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.InvoiceStatus.PENDING">
+<span class="sig-name descname"><span class="pre">PENDING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'pending'</span></em><a class="headerlink" href="#pypaystack2.utils.InvoiceStatus.PENDING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.InvoiceStatus.SUCCESS">
+<span class="sig-name descname"><span class="pre">SUCCESS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'success'</span></em><a class="headerlink" href="#pypaystack2.utils.InvoiceStatus.SUCCESS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.PlanStatus">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">PlanStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#PlanStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.PlanStatus" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of plan status supported by paystack</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.PlanStatus.FAILED">
+<span class="sig-name descname"><span class="pre">FAILED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'failed'</span></em><a class="headerlink" href="#pypaystack2.utils.PlanStatus.FAILED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.PlanStatus.PENDING">
+<span class="sig-name descname"><span class="pre">PENDING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'pending'</span></em><a class="headerlink" href="#pypaystack2.utils.PlanStatus.PENDING" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.PlanStatus.SUCCESS">
+<span class="sig-name descname"><span class="pre">SUCCESS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'success'</span></em><a class="headerlink" href="#pypaystack2.utils.PlanStatus.SUCCESS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.Reason">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">Reason</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#Reason"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.Reason" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of Reset OTP options</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Reason.RESEND_OTP">
+<span class="sig-name descname"><span class="pre">RESEND_OTP</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'resend_otp'</span></em><a class="headerlink" href="#pypaystack2.utils.Reason.RESEND_OTP" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Reason.TRANSFER">
+<span class="sig-name descname"><span class="pre">TRANSFER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'transfer'</span></em><a class="headerlink" href="#pypaystack2.utils.Reason.TRANSFER" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.Resolution">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">Resolution</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#Resolution"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.Resolution" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of Resolutions supported by paystack</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Resolution.DECLINED">
+<span class="sig-name descname"><span class="pre">DECLINED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'declined'</span></em><a class="headerlink" href="#pypaystack2.utils.Resolution.DECLINED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Resolution.MERCHANT_ACCEPTED">
+<span class="sig-name descname"><span class="pre">MERCHANT_ACCEPTED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'merchant-accepted'</span></em><a class="headerlink" href="#pypaystack2.utils.Resolution.MERCHANT_ACCEPTED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.RiskAction">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">RiskAction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#RiskAction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.RiskAction" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of RiskActions supported by paystack</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.RiskAction.BLACKLIST">
+<span class="sig-name descname"><span class="pre">BLACKLIST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'deny'</span></em><a class="headerlink" href="#pypaystack2.utils.RiskAction.BLACKLIST" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.RiskAction.DEFAULT">
+<span class="sig-name descname"><span class="pre">DEFAULT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'default'</span></em><a class="headerlink" href="#pypaystack2.utils.RiskAction.DEFAULT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.RiskAction.WHITELIST">
+<span class="sig-name descname"><span class="pre">WHITELIST</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'allow'</span></em><a class="headerlink" href="#pypaystack2.utils.RiskAction.WHITELIST" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.Schedule">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">Schedule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#Schedule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.Schedule" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of settlement schedules supported by paystack</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Schedule.AUTO">
+<span class="sig-name descname"><span class="pre">AUTO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'auto'</span></em><a class="headerlink" href="#pypaystack2.utils.Schedule.AUTO" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Schedule.MANUAL">
+<span class="sig-name descname"><span class="pre">MANUAL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'manual'</span></em><a class="headerlink" href="#pypaystack2.utils.Schedule.MANUAL" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Schedule.MONTHLY">
+<span class="sig-name descname"><span class="pre">MONTHLY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'monthly'</span></em><a class="headerlink" href="#pypaystack2.utils.Schedule.MONTHLY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.Schedule.WEEKLY">
+<span class="sig-name descname"><span class="pre">WEEKLY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'weekly'</span></em><a class="headerlink" href="#pypaystack2.utils.Schedule.WEEKLY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.SplitType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">SplitType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#SplitType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.SplitType" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of split types</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.SplitType.FLAT">
+<span class="sig-name descname"><span class="pre">FLAT</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'flat'</span></em><a class="headerlink" href="#pypaystack2.utils.SplitType.FLAT" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.SplitType.PERCENTAGE">
+<span class="sig-name descname"><span class="pre">PERCENTAGE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'percentage'</span></em><a class="headerlink" href="#pypaystack2.utils.SplitType.PERCENTAGE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.TRType">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">TRType</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#TRType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.TRType" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of Transfer Recipient types</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.TRType.BASA">
+<span class="sig-name descname"><span class="pre">BASA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'basa'</span></em><a class="headerlink" href="#pypaystack2.utils.TRType.BASA" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.TRType.MOBILE_MONEY">
+<span class="sig-name descname"><span class="pre">MOBILE_MONEY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'mobile_money'</span></em><a class="headerlink" href="#pypaystack2.utils.TRType.MOBILE_MONEY" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.TRType.NUBAN">
+<span class="sig-name descname"><span class="pre">NUBAN</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'nuban'</span></em><a class="headerlink" href="#pypaystack2.utils.TRType.NUBAN" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="pypaystack2.utils.TransactionStatus">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">TransactionStatus</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pypaystack2/utils.html#TransactionStatus"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.TransactionStatus" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum of transaction status</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.TransactionStatus.ABANDONED">
+<span class="sig-name descname"><span class="pre">ABANDONED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'abandoned'</span></em><a class="headerlink" href="#pypaystack2.utils.TransactionStatus.ABANDONED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.TransactionStatus.FAILED">
+<span class="sig-name descname"><span class="pre">FAILED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'failed'</span></em><a class="headerlink" href="#pypaystack2.utils.TransactionStatus.FAILED" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="pypaystack2.utils.TransactionStatus.SUCCESS">
+<span class="sig-name descname"><span class="pre">SUCCESS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'success'</span></em><a class="headerlink" href="#pypaystack2.utils.TransactionStatus.SUCCESS" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pypaystack2.utils.add_to_payload">
+<span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">add_to_payload</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">optional_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">payload</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pypaystack2/utils.html#add_to_payload"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.add_to_payload" title="Permalink to this definition"></a></dt>
+<dd><p>Adds more parameters to an existing payload.</p>
+<p>This is a utility is used in the generation of payloads
+for a request body. It helps to add more parameters to
+a payload if it is not None.
+e.g say you want to send a payload which is currently
+<code class="docutils literal notranslate"><span class="pre">{&quot;amount&quot;:</span> <span class="pre">20000}</span></code> and you want to include an additional
+data such as <code class="docutils literal notranslate"><span class="pre">currency</span></code> if provided in the <code class="docutils literal notranslate"><span class="pre">optional_params</span></code>
+to send this <code class="docutils literal notranslate"><span class="pre">{&quot;amount&quot;:</span> <span class="pre">20000,&quot;currency&quot;:&quot;ngn&quot;}</span></code> if only
+the currency is available otherwise send the intial payload.
+This functions takes a list of optional parameters
+which is added to the payload is they are available and
+returns the payload.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>optional_params</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>,</em><em>Any</em><em>]</em><em>]</em>) – A list of additional data to be added to the payload if it is
+available. It follows the format <code class="docutils literal notranslate"><span class="pre">[(&quot;name-on-payload&quot;,&quot;value&quot;)].</span></code>
+e.g <code class="docutils literal notranslate"><span class="pre">[(&quot;currency&quot;,&quot;ngn&quot;),(&quot;amount&quot;,2000)]</span></code></p></li>
+<li><p><strong>payload</strong> (<em>dict</em><em>[</em><em>str</em><em>,</em><em>Any</em><em>]</em>) – A dictionary containing the data to be sent in the request body.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A dictionary of the payload updated with addtional data in the
+optional_params that are not <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict[str,Any]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pypaystack2.utils.append_query_params">
+<span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">append_query_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">query_params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pypaystack2/utils.html#append_query_params"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.append_query_params" title="Permalink to this definition"></a></dt>
+<dd><p>Adds more queries to a url that already has query parameters in its suffix</p>
+<p>This function should only be used with urls that already have a
+query parameter suffixed to it because it makes that assumption
+that the url supplied is of the state <code class="docutils literal notranslate"><span class="pre">http://example-url.com?firstQuery=1</span></code>
+and it adds more query parameters delimited by &amp; to the end of the provided
+url <code class="docutils literal notranslate"><span class="pre">http://example-url.com?firstQuery=1&amp;otherQuery=2&amp;...</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query_params</strong> (<em>list</em><em>[</em><em>tuple</em><em>[</em><em>str</em><em>,</em><em>Any</em><em>]</em><em>]</em>) – A list of other query parameters that should be appended to the url
+if it is not None. e.g <code class="docutils literal notranslate"><span class="pre">[(&quot;page&quot;,2),(&quot;pagination&quot;,50),(&quot;currency&quot;,None)]</span></code> -&gt;
+<code class="docutils literal notranslate"><span class="pre">url&amp;page=2&amp;pagination=50</span></code></p></li>
+<li><p><strong>url</strong> (<em>str</em>) – The url to which additional query parameters is added.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The new url with padded query parameters.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pypaystack2.utils.validate_amount">
+<span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">validate_amount</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">amount</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/pypaystack2/utils.html#validate_amount"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.validate_amount" title="Permalink to this definition"></a></dt>
+<dd><p>Helps to validate money amount.</p>
+<p>Helps to ensure that a valid amount of money
+is supplied as an input, to prevent cases where
+negative or zero value is provided as an amount.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>amount</strong> (<em>int</em><em>,</em><em>float</em>) – The money to be validated.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The money supplied if it is valid.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int,float</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#pypaystack2.errors.InvalidDataError" title="pypaystack2.errors.InvalidDataError"><strong>InvalidDataError</strong></a> – With the cause of the validation error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="pypaystack2.utils.validate_interval">
+<span class="sig-prename descclassname"><span class="pre">pypaystack2.utils.</span></span><span class="sig-name descname"><span class="pre">validate_interval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/pypaystack2/utils.html#validate_interval"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pypaystack2.utils.validate_interval" title="Permalink to this definition"></a></dt>
+<dd><p>Validates that the interval supplied is supported by paystack</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>interval</strong> (<em>str</em>) – any of the intervals supported by paystack i.e hourly,daily
+weekly,monthly,annually</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>returns the interval if it is a valid paystack interval</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference internal" href="#pypaystack2.errors.InvalidDataError" title="pypaystack2.errors.InvalidDataError"><strong>InvalidDataError</strong></a> – to provide feedback that an invalid interval was provided.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pypaystack2.version">
+<span id="pypaystack2-version-module"></span><h2>pypaystack2.version module<a class="headerlink" href="#module-pypaystack2.version" title="Permalink to this heading"></a></h2>
+</section>
+<section id="module-pypaystack2">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-pypaystack2" title="Permalink to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="pypaystack2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pypaystack2.api.html" class="btn btn-neutral float-right" title="pypaystack2.api package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Gbenga Adeyi &lt;coyotedevmail@gmail.com&gt;.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

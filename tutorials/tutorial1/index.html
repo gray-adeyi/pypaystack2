@@ -1,0 +1,899 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+    
+    
+      
+        <title>Paystack Command line Client - Pypaystack2 Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.975780f9.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.2505c338.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#02a6f2">
+        
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#paystack-command-line-client" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Pypaystack2 Documentation" class="md-header__button md-logo" aria-label="Pypaystack2 Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pypaystack2 Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Paystack Command line Client
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/gray-adeyi/pypaystack2" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Pypaystack2 Documentation" class="md-nav__button md-logo" aria-label="Pypaystack2 Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Pypaystack2 Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/gray-adeyi/pypaystack2" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_2">
+          Tutorials
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Table of contents
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Paystack Command line Client
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Paystack Command line Client
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#project-setup" class="md-nav__link">
+    Project Setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environmental-variables" class="md-nav__link">
+    Environmental Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#let-the-games-begin" class="md-nav__link">
+    Let the games begin
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#on-your-marks" class="md-nav__link">
+    On your marks!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-just-happened" class="md-nav__link">
+    What just happened?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#more-commands" class="md-nav__link">
+    More Commands!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-go-from-here" class="md-nav__link">
+    Where to go from here
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../how-to-guides/" class="md-nav__link">
+        How-To Guides
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/" class="md-nav__link">
+        Reference
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/" class="md-nav__link">
+        Explanation
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#project-setup" class="md-nav__link">
+    Project Setup
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environmental-variables" class="md-nav__link">
+    Environmental Variables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#let-the-games-begin" class="md-nav__link">
+    Let the games begin
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#on-your-marks" class="md-nav__link">
+    On your marks!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-just-happened" class="md-nav__link">
+    What just happened?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#more-commands" class="md-nav__link">
+    More Commands!
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#where-to-go-from-here" class="md-nav__link">
+    Where to go from here
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  <a href="https://github.com/gray-adeyi/pypaystack2/edit/master/docs/tutorials/tutorial1.md" title="Edit this page" class="md-content__button md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+<h1 id="paystack-command-line-client">Paystack Command line Client</h1>
+<p>This tutorial aims to expose you to how to use <code>pypaystack2</code> in your python projects for paystack integrations.
+We'll be building a simple command line application that integrates with paystack's services.</p>
+<h2 id="project-setup">Project Setup</h2>
+<p>We'll start by setting up our project. We'll be using <code>pipenv</code> for managing this project's dependencies and
+environment. you're free to use your preferred choice like <code>virtualenv</code>. if you don't have <code>pipenv</code>
+installed yet, you can install it with <code>pip install pipenv</code>. it's important to note that <code>pipenv</code> should be
+installed globally and not within a virtual environment. You're good to proceed if this prerequisite is met.</p>
+<ul>
+<li>Create a directory to house our project.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>mkdir paystack_cli_client <span class="o">&amp;&amp;</span> <span class="nb">cd</span> paystack_cli_client
+</code></pre></div>
+<ul>
+<li>Initialize a virtual environment for the project.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>pipenv shell
+</code></pre></div>
+<ul>
+<li>Install the projects dependencies. We'll be needing <code>pypaystack2</code>, <code>python-dotenv</code>, and <code>typer</code>.
+  <code>pypaystack2</code> package is an API wrapper for paystack's services. <code>python-dotenv</code> helps us manage our
+  environmental variables and <code>typer</code> makes building command line apps in python super simple.</li>
+</ul>
+<div class="highlight"><pre><span></span><code>pipenv install pypaystack2 python-dotenv typer
+</code></pre></div>
+<p>If all work's fine, you're good to proceed.</p>
+<h2 id="environmental-variables">Environmental Variables</h2>
+<p><code>pypaystack2</code> depends on your paystack authorization key that you get from signing up to paystack.
+Paystack provides you with two pairs. A pair of public and secret key for live mode and another set
+for test mode. You can find them in your account settings. Since this is just a tutorial we'll be
+using only the test secret key. create a new file named <code>.env</code> within your project's root directory.
+Now put in your test secret key in the <code>.env</code> file like so.</p>
+<div class="highlight"><pre><span></span><code>PAYSTACK_AUTHORIZATION_KEY = &quot;&lt;your test secret key&gt;&quot;
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Because this is just a tutorial, no extra measure is made to protect this environmental.
+In a more serious project or production code, extra care should be taken to protect it and
+also avoid pushing it to a remote source control.</p>
+</div>
+<h2 id="let-the-games-begin">Let the games begin</h2>
+<p>It's time to start building! create a new file named <code>main.py</code> in your root directory.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># root-dir/main.py</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+</code></pre></div>
+<p>What we have just done is loaded our secret test key within the <code>.env</code> file. You may be
+wondering why do we need that, here's why <code>pypaystack2</code> needs this key to communicate with
+paystack's api. alternatively, you can pass your authorization key into any of the api wrappers
+provided by <code>pypaystack2</code> via their <code>auth_key</code> parameter. Here's a list of all the API wrappers
+currently available as at the time of writing of this tutorial.</p>
+<ul>
+<li>ApplePay</li>
+<li>BulkCharge</li>
+<li>Charge</li>
+<li>ControlPanel</li>
+<li>Customer</li>
+<li>DedicatedAccount</li>
+<li>Dispute</li>
+<li>Invoice</li>
+<li>Miscellaneous</li>
+<li>Page</li>
+<li>Plan</li>
+<li>Product</li>
+<li>Refund</li>
+<li>Settlement</li>
+<li>Split</li>
+<li>SubAccount</li>
+<li>Subscription</li>
+<li>Transaction</li>
+<li>TransferReceipt</li>
+<li>TransferControl</li>
+<li>Transfer</li>
+<li>Verification</li>
+</ul>
+<p>So in a situation where you don't have your <code>PAYSTACK_AUTHORIZATION_KEY</code> as an environmental variable,
+you can pass it into any of the API wrappers. e.g.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># When you don&#39;t have PAYSTACK_AUTHORIZATION_KEY in your environmental variables</span>
+<span class="kn">from</span> <span class="nn">pypaystack2.api</span> <span class="kn">import</span> <span class="n">Transaction</span><span class="p">,</span> <span class="n">Plan</span>
+
+<span class="n">txn_wrapper</span> <span class="o">=</span> <span class="n">Transaction</span><span class="p">(</span><span class="n">auth_key</span><span class="o">=</span><span class="s2">&quot;&lt;your test secret key&gt;&quot;</span><span class="p">)</span>
+<span class="n">plan_wrapper</span> <span class="o">=</span> <span class="n">Plan</span><span class="p">(</span><span class="n">auth_key</span><span class="o">=</span><span class="s2">&quot;&lt;your test secret key&gt;&quot;</span><span class="p">)</span>
+
+<span class="c1"># When you have PAYSTACK_AUTHORIZATION_KEY set in your environmental variables</span>
+<span class="n">txn_wrapper</span> <span class="o">=</span> <span class="n">Transaction</span><span class="p">()</span>
+<span class="n">plan_wrapper</span> <span class="o">=</span> <span class="n">Plan</span><span class="p">()</span>
+</code></pre></div>
+<details class="note" open="open">
+<summary>Note</summary>
+<p>You don't have to provide your authorization key on the instantiation of any of the API wrappers
+as long as you have it set in your environmental variables like this tutorial does.</p>
+</details>
+<h2 id="on-your-marks">On your marks!</h2>
+<p>The first feature we'll be implementing for our <strong>Paystack Command line Client</strong> is the ability to create
+new customers on our paystack integration. so now update your <code>main.py</code> file with the code below.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># root-dir/main.py</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">from</span> <span class="nn">typer</span> <span class="kn">import</span> <span class="n">Typer</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Typer</span><span class="p">()</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">new_customer</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;new customer successfully created!&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">()</span>
+</code></pre></div>
+<p>This is a minimum setup to building cli apps with <code>Typer</code>. Now try this in your project's root directory.</p>
+<div class="highlight"><pre><span></span><code>python main.py --help
+</code></pre></div>
+<p>You should see.</p>
+<div class="highlight"><pre><span></span><code>Usage: main.py <span class="o">[</span>OPTIONS<span class="o">]</span>
+
+Options:
+--install-completion <span class="o">[</span>bash<span class="p">|</span>zsh<span class="p">|</span>fish<span class="p">|</span>powershell<span class="p">|</span>pwsh<span class="o">]</span>
+                                Install completion <span class="k">for</span> the specified
+                                shell.
+--show-completion <span class="o">[</span>bash<span class="p">|</span>zsh<span class="p">|</span>fish<span class="p">|</span>powershell<span class="p">|</span>pwsh<span class="o">]</span>
+                                Show completion <span class="k">for</span> the specified shell,
+                                to copy it or customize the installation.
+--help                          Show this message and exit.
+</code></pre></div>
+<p>You can see that we now have a command line app that's responding to our command in this case <code>--help</code>. Let's
+try out the custom command we just added.</p>
+<div class="highlight"><pre><span></span><code>python main.py
+</code></pre></div>
+<p>You should see</p>
+<div class="highlight"><pre><span></span><code>new customer successfully created!
+</code></pre></div>
+<p>At the moment, no new customer is actually getting created on your paystack integration. let's bring in
+<code>pypaystack2</code> to help us get the job done. For this to work, <code>pypaystack2</code> provides wrappers for the
+restful APIs provided by Paystack. These wrappers are named to closely match the API they wrap and methods
+on these wrappers correspond to endpoints on the Paystack services you're interested in so in this case,
+for us to create a customer on our integration, we need to use the <code>Customer</code> API wrapper which connects
+to Paystack's Customer Services API. More info
+at <a href="https://paystack.com/docs/api/#customer">Paystack's Customer Services API</a></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># root-dir/main.py</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">from</span> <span class="nn">pypaystack2.api</span> <span class="kn">import</span> <span class="n">Customer</span>
+<span class="kn">from</span> <span class="nn">typer</span> <span class="kn">import</span> <span class="n">Typer</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">Typer</span><span class="p">()</span>
+
+<span class="n">customer_wrapper</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">()</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">new_customer</span><span class="p">(</span>
+        <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">first_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">last_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">phone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">customer_wrapper</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> <span class="n">first_name</span><span class="o">=</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="n">last_name</span><span class="p">,</span> <span class="n">phone</span><span class="o">=</span><span class="n">phone</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">()</span>
+</code></pre></div>
+<details class="note" open="open">
+<summary>Note</summary>
+</details>
+<p>All API wrappers are available in <code>pypaystack2.api</code>. e.g. <code>from pypaystack2.api import Split, Transaction</code></p>
+<p>Now if you run the script again.</p>
+<div class="highlight"><pre><span></span><code>python main.py
+</code></pre></div>
+<p>You get error saying you have a missing argument 'EMAIL'</p>
+<div class="highlight"><pre><span></span><code>Usage: main.py <span class="o">[</span>OPTIONS<span class="o">]</span> EMAIL
+Try <span class="s1">&#39;main.py --help&#39;</span> <span class="k">for</span> help.
+
+Error: Missing argument <span class="s1">&#39;EMAIL&#39;</span>.
+</code></pre></div>
+<p>Now let's try out our script with the email of the customer
+we want to create.</p>
+<div class="highlight"><pre><span></span><code>python main.py email@example.com
+</code></pre></div>
+<p>Now if all goes fine. "An Internet connection is required", you should
+get something similar to this</p>
+<div class="highlight"><pre><span></span><code><span class="m">200</span>
+True
+Customer created
+<span class="o">{</span><span class="s1">&#39;transactions&#39;</span>: <span class="o">[]</span>, <span class="s1">&#39;subscriptions&#39;</span>: <span class="o">[]</span>, <span class="s1">&#39;authorizations&#39;</span>: <span class="o">[]</span>, <span class="s1">&#39;first_name&#39;</span>: <span class="s1">&#39;&#39;</span>, <span class="s1">&#39;last_name&#39;</span>: <span class="s1">&#39;&#39;</span>, <span class="s1">&#39;email&#39;</span>: <span class="s1">&#39;email@example.com&#39;</span>, <span class="s1">&#39;phone&#39;</span>: <span class="s1">&#39;&#39;</span>, <span class="s1">&#39;metadata&#39;</span>: None, <span class="s1">&#39;domain&#39;</span>: <span class="s1">&#39;test&#39;</span>, <span class="s1">&#39;customer_code&#39;</span>: <span class="s1">&#39;CUS_kd197ej30zxr34v&#39;</span>, <span class="s1">&#39;risk_action&#39;</span>: <span class="s1">&#39;default&#39;</span>, <span class="s1">&#39;id&#39;</span>: <span class="m">47748473</span>, <span class="s1">&#39;integration&#39;</span>: <span class="m">630606</span>, <span class="s1">&#39;createdAt&#39;</span>: <span class="s1">&#39;2021-06-20T05:16:20.000Z&#39;</span>, <span class="s1">&#39;updatedAt&#39;</span>: <span class="s1">&#39;2021-06-20T05:16:20.000Z&#39;</span>, <span class="s1">&#39;identified&#39;</span>: False, <span class="s1">&#39;identifications&#39;</span>: None<span class="o">}</span>
+</code></pre></div>
+<p><strong>Yay! You've just created a new customer on your integration</strong> You can check out the customer's tab in<br />
+your Paystack account to confirm this.</p>
+<details class="tip" open="open">
+<summary>Tip</summary>
+<p>You can also create new customers with a first name and last name like so.</p>
+<div class="highlight"><pre><span></span><code>python main.py email@example.com --first-name John --last-name Doe
+</code></pre></div>
+</details>
+<h2 id="what-just-happened">What just happened?</h2>
+<p>You have just created a new customer on your integration with the CLI app you just built. But how? If you've followed
+this tutorial to this point you already know what wrappers are, or you can quickly skim through the chapters before to
+get a refresher. The right question should be what is the <code>create</code> method on the <code>Customer</code> wrapper for. You guess
+right if what's on your mind is that it creates the new customer on your integration. So as it was said earlier, all
+wrappers have methods on them that correspond to an endpoint on paystack and all of this methods will return
+a <code>Response</code>
+object based on the response it gets from Paystack. This <code>Response</code> is just a <code>NamedTuple</code> that holds the
+<code>status,status_code,message</code> and <code>data</code>. So this call</p>
+<div class="highlight"><pre><span></span><code><span class="n">response</span> <span class="o">=</span> <span class="n">customer_wrapper</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> <span class="n">first_name</span><span class="o">=</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="n">last_name</span><span class="p">,</span> <span class="n">phone</span><span class="o">=</span><span class="n">phone</span><span class="p">)</span>
+</code></pre></div>
+<p>in our script returns the <code>Response</code> object just described, and you can access each of these attributes with
+<code>response.status</code>, <code>response.status_code</code>, <code>response.message</code>, <code>response.data</code></p>
+<h2 id="more-commands">More Commands!</h2>
+<p>Let's add a few more commands to our <strong>Paystack Command line Client</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># root-dir/main.py</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
+<span class="kn">from</span> <span class="nn">pypaystack2.api</span> <span class="kn">import</span> <span class="n">Customer</span>
+<span class="kn">from</span> <span class="nn">typer</span> <span class="kn">import</span> <span class="n">Typer</span>
+
+<span class="n">load_dotenv</span><span class="p">()</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">Typer</span><span class="p">()</span>
+
+<span class="n">customer_wrapper</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">()</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">new_customer</span><span class="p">(</span>
+        <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">first_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">last_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">phone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">customer_wrapper</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> <span class="n">first_name</span><span class="o">=</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="n">last_name</span><span class="p">,</span> <span class="n">phone</span><span class="o">=</span><span class="n">phone</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">list_customers</span><span class="p">():</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">customer_wrapper</span><span class="o">.</span><span class="n">get_customers</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">get_customer</span><span class="p">(</span><span class="n">ec</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">customer_wrapper</span><span class="o">.</span><span class="n">get_customer</span><span class="p">(</span><span class="n">email_or_code</span><span class="o">=</span><span class="n">ec</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">update_customer</span><span class="p">(</span><span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">last_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">first_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">customer_wrapper</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+        <span class="n">code</span><span class="o">=</span><span class="n">code</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="n">last_name</span><span class="p">,</span> <span class="n">first_name</span><span class="o">=</span><span class="n">first_name</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span><span class="p">()</span>
+</code></pre></div>
+<p>We now have 3 new commands for our cli app. you can check them out with</p>
+<div class="highlight"><pre><span></span><code>python main.py --help
+</code></pre></div>
+<p>Now under the available command you should see get-customer, list-customers, new-customer,
+update-customer</p>
+<div class="highlight"><pre><span></span><code>Usage: main.py <span class="o">[</span>OPTIONS<span class="o">]</span> COMMAND <span class="o">[</span>ARGS<span class="o">]</span>...
+
+    Options:
+    --install-completion <span class="o">[</span>bash<span class="p">|</span>zsh<span class="p">|</span>fish<span class="p">|</span>powershell<span class="p">|</span>pwsh<span class="o">]</span>
+                                    Install completion <span class="k">for</span> the specified
+                                    shell.
+    --show-completion <span class="o">[</span>bash<span class="p">|</span>zsh<span class="p">|</span>fish<span class="p">|</span>powershell<span class="p">|</span>pwsh<span class="o">]</span>
+                                    Show completion <span class="k">for</span> the specified shell,
+                                    to copy it or customize the installation.
+    --help                          Show this message and exit.
+
+    Commands:
+    get-customer
+    list-customers
+    new-customer
+    update-customer
+</code></pre></div>
+<p>You can try out the new command with the following commands</p>
+<h2 id="where-to-go-from-here">Where to go from here</h2>
+<p><strong>It's all in your hands now</strong>. We now have a working cli app, but it does not have all the features
+to make it a fully fledged <strong>Paystack command line client</strong> you can bring in more wrappers and implement
+new commands. It also does not handle all the likely exception that can occur, but then, the purpose of
+the tutorial is to expose you to <code>pypaystack2</code>. Not sure how something works, you can always search the
+documentation. Good luck on your next project!</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Table of contents" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Table of contents
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="../../how-to-guides/" class="md-footer__link md-footer__link--next" aria-label="Next: How-To Guides" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              How-To Guides
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      
+    
+    
+  </body>
+</html>
