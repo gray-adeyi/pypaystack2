@@ -1,0 +1,24 @@
+site_name: Pypaystack2 Documentation
+repo_url: https://github.com/gray-adeyi/pypaystack2
+theme:
+  name: "material"
+  palette:
+    primary: light blue
+
+plugins:
+  - mkdocstrings
+  - search
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+
+nav:
+  - Introduction: index.md
+  - Tutorials:
+      - Table of contents: tutorials/index.md
+      - Paystack Command line Client: tutorials/tutorial1.md
+  - How-To Guides: how-to-guides.md
+  - Reference: reference.md
+  - explanation.md
+
