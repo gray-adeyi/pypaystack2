@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to pypaystack2’s documentation! &mdash; pypaystack2 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Tutorial 1" href="paystack-client-turorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> pypaystack2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="paystack-client-turorial.html">Tutorial 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">pypaystack2</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">pypaystack2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li>Welcome to pypaystack2’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-pypaystack2-s-documentation">
+<h1>Welcome to pypaystack2’s documentation!<a class="headerlink" href="#welcome-to-pypaystack2-s-documentation" title="Permalink to this heading"></a></h1>
+<p>Pypaystack2 is a simple API wrapper for Paystack API Endpoints in python.
+A fork of the initial pypaystack project. Inspired by the initial project,
+It aims to improve on the good works of the initial project which is no
+longer actively maintained. I’m not sure I knew much about python and programming
+in general when the original authors created it in 2016 but in my journey, the
+project has proved useful in several python projects that I’ve written over
+the years. The motivation for building on this package is that it’s awesome,
+but in recent years, the package breaks my django applications when deploying
+to a hosting platform. So this is my attempt to provide a solution. Plus my
+curiosity to feel what it’s like to build and maintain a package. let’s get
+started!</p>
+<section id="what-s-pypaystack2">
+<h2>What’s Pypaystack2<a class="headerlink" href="#what-s-pypaystack2" title="Permalink to this heading"></a></h2>
+<p>So Paystack provides RESTful API endpoints for developers from different platforms
+to integrate their services into their projects. So for python developers, to use
+this endpoints, you might opt for a package like <code class="docutils literal notranslate"><span class="pre">requests</span></code> to handle all the
+API calls which involves a lot of boilerplate. Pypaystack2 abstracts this process
+by handling all this complexities under the hood and exposing simple APIs for
+your python project. for example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pypaystack2.api</span> <span class="kn">import</span> <span class="n">Miscellaneous</span> <span class="c1"># assumes you have installed pypaystack2</span>
+<span class="kn">from</span> <span class="nn">pypaystack2.utils</span> <span class="kn">import</span> <span class="n">Country</span>
+<span class="n">miscellaneous_wrapper</span> <span class="o">=</span> <span class="n">Miscellaneous</span><span class="p">()</span> <span class="c1"># assumes that your paystack auth key is in</span>
+<span class="c1"># your environmental variables i.e PAYSTACK_AUTHORIZATION_KEY=your_key otherwise instantiate</span>
+<span class="c1"># the Miscellaneous API wrapper as it is done below.</span>
+<span class="c1"># miscellaneous_wrapper = Miscellaneous(auth_key=your_paystack_auth_key)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">miscellaneous_wrapper</span><span class="o">.</span><span class="n">get_banks</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="n">Country</span><span class="o">.</span><span class="n">NIGERIA</span><span class="p">,</span><span class="n">use_cursor</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># Requires internet connection.</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With the code snippet above, you have successfully queried Paystack’s Miscellaneous API
+to get a list of banks supported by paystack. A <code class="docutils literal notranslate"><span class="pre">requests</span></code> equivalent of the above will
+be like</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span> <span class="c1"># assumes you have requests installed.</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s2">&quot;Content-Type&quot;</span><span class="p">:</span><span class="s2">&quot;application/json&quot;</span><span class="p">,</span>
+   <span class="s2">&quot;Authorization&quot;</span><span class="p">:</span> <span class="s2">&quot;Bearer &lt;your_auth_key&gt;&quot;</span>
+   <span class="p">}</span>
+<span class="n">paystack_url</span> <span class="o">=</span> <span class="s1">&#39;https://api.paystack.co/bank?perPage=50&amp;country=ng&amp;use_cursor=false&#39;</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">paystack_url</span><span class="p">,</span><span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span> <span class="c1"># requires internet connection</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>While both approaches achieve the same goal, <code class="docutils literal notranslate"><span class="pre">pypaystack2</span></code> uses <code class="docutils literal notranslate"><span class="pre">requests</span></code> under the hood and
+manages the headers and URL routes to endpoints so you can focus more on the actions. with the <code class="docutils literal notranslate"><span class="pre">miscellaneous_wrapper</span></code>
+in the example above. you can call all endpoints associated with the Miscellaneous API with methods
+provided like <code class="docutils literal notranslate"><span class="pre">.get_banks</span></code>, <code class="docutils literal notranslate"><span class="pre">.get_providers</span></code>, <code class="docutils literal notranslate"><span class="pre">.get_countries</span></code> and <code class="docutils literal notranslate"><span class="pre">.get_states</span></code>.</p>
+<p>Pypaystack2 provides wrappers to all of Paystack APIs in its <code class="docutils literal notranslate"><span class="pre">pypaystack2.api</span></code> subpackage.
+each of the wrappers are classes named to closely match the Paystack API. so say you want
+to use Paystack’s Invoices API, you’d  import the wrapper with <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">pypaystack2.api</span> <span class="pre">import</span> <span class="pre">Invoice</span></code>
+for the Invoices API. All endpoints available on the Invoices API are available as methods
+in the <code class="docutils literal notranslate"><span class="pre">Invoice</span></code> wrapper. Say you wanted to create an invoice by sending a
+<code class="docutils literal notranslate"><span class="pre">POST</span></code> request to Paystack’s Invoice API endpoint <code class="docutils literal notranslate"><span class="pre">/paymentrequest</span></code>, you’ll call
+<code class="docutils literal notranslate"><span class="pre">Invoice</span></code> wrapper’s <code class="docutils literal notranslate"><span class="pre">.create</span></code> method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pypaystack2.api</span> <span class="kn">import</span> <span class="n">Invoice</span>
+<span class="n">invoice_wrapper</span> <span class="o">=</span> <span class="n">Invoice</span><span class="p">()</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">invoice_wrapper</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">customer</span><span class="o">=</span><span class="s2">&quot;CUS_xwaj0txjryg393b&quot;</span><span class="p">,</span><span class="n">amount</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># Creates an invoice with a charge of ₦100</span>
+</pre></div>
+</div>
+<p>From here you can check out the tutorials section to get more examples and get familiar or surf the
+documentation for wrappers and methods you’ll need for your next project. Hurray!</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="paystack-client-turorial.html">Tutorial 1</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="paystack-client-turorial.html#paystack-command-line-client">Paystack Command line Client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paystack-client-turorial.html#project-setup">Project Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paystack-client-turorial.html#environmental-variables">Environmental Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paystack-client-turorial.html#let-the-games-begin">Let the games begin</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paystack-client-turorial.html#on-your-marks">On your marks!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paystack-client-turorial.html#what-just-happened">What just happened?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paystack-client-turorial.html#more-commands">More Commands!</a></li>
+<li class="toctree-l2"><a class="reference internal" href="paystack-client-turorial.html#where-to-go-from-here">Where to go from here</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">pypaystack2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pypaystack2.html">pypaystack2 package</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="paystack-client-turorial.html" class="btn btn-neutral float-right" title="Tutorial 1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Gbenga Adeyi &lt;coyotedevmail@gmail.com&gt;.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

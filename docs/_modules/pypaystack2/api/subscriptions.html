@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pypaystack2.api.subscriptions &mdash; pypaystack2 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> pypaystack2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pypaystack2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../paystack-client-turorial.html">Paystack Command line Client</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pypaystack2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>pypaystack2.api.subscriptions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pypaystack2.api.subscriptions</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">..baseapi</span> <span class="kn">import</span> <span class="n">BaseAPI</span><span class="p">,</span> <span class="n">Response</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">add_to_payload</span><span class="p">,</span> <span class="n">append_query_params</span>
+
+
+<div class="viewcode-block" id="Subscription"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.subscriptions.Subscription">[docs]</a><span class="k">class</span> <span class="nc">Subscription</span><span class="p">(</span><span class="n">BaseAPI</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Provides a wrapper for paystack Subscriptions API</span>
+
+<span class="sd">    The Subscriptions API allows you create and manage recurring</span>
+<span class="sd">    payment on your integration.</span>
+<span class="sd">    https://paystack.com/docs/api/#subscription</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Subscription.create"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.subscriptions.Subscription.create">[docs]</a>    <span class="k">def</span> <span class="nf">create</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">customer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">plan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">authorization</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">start_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Create a subscription on your integration</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        customer: str</span>
+<span class="sd">            Customer&#39;s email address or customer code</span>
+<span class="sd">        plan: str</span>
+<span class="sd">            Plan code</span>
+<span class="sd">        authorization: str</span>
+<span class="sd">            If customer has multiple authorizations, you can set</span>
+<span class="sd">            the desired authorization you wish to use for this</span>
+<span class="sd">            subscription here. If this is not supplied, the</span>
+<span class="sd">            customer&#39;s most recent authorization would be used</span>
+<span class="sd">        start_date: Optional[str]</span>
+<span class="sd">            Set the date for the first debit. (ISO 8601 format) e.g. 2017-05-16T00:30:13+01:00</span>
+
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        Email Token</span>
+<span class="sd">            paystack creates an email token on each subscription to allow customers</span>
+<span class="sd">            cancel their subscriptions from within the invoices sent to their mailboxes.</span>
+<span class="sd">            Since they are not authorized, the email tokens are what we use to authenticate</span>
+<span class="sd">            the requests over the API.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="s2">&quot;/subscription&quot;</span><span class="p">)</span>
+
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;customer&quot;</span><span class="p">:</span> <span class="n">customer</span><span class="p">,</span> <span class="s2">&quot;plan&quot;</span><span class="p">:</span> <span class="n">plan</span><span class="p">,</span> <span class="s2">&quot;authorization&quot;</span><span class="p">:</span> <span class="n">authorization</span><span class="p">}</span>
+        <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;start_date&quot;</span><span class="p">,</span> <span class="n">start_date</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">add_to_payload</span><span class="p">(</span><span class="n">optional_params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Subscription.get_subscriptions"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.subscriptions.Subscription.get_subscriptions">[docs]</a>    <span class="k">def</span> <span class="nf">get_subscriptions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">page</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">pagination</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+        <span class="n">customer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">plan</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Fetch subscriptions available on your integration.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        page: int</span>
+<span class="sd">            Specify exactly what page you want to retrieve.</span>
+<span class="sd">            If not specify we use a default value of 1.</span>
+<span class="sd">        pagination: int</span>
+<span class="sd">            Specify how many records you want to retrieve per page.</span>
+<span class="sd">            If not specify we use a default value of 50.</span>
+<span class="sd">        customer: Optional[int]</span>
+<span class="sd">            Filter by Customer ID</span>
+<span class="sd">        plan: Optional[int]</span>
+<span class="sd">            Filter by Plan ID</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/plan/?perPage=&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pagination</span><span class="p">))</span>
+        <span class="n">query_params</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;page&quot;</span><span class="p">,</span> <span class="n">page</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;customer&quot;</span><span class="p">,</span> <span class="n">customer</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;plan&quot;</span><span class="p">,</span> <span class="n">plan</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">append_query_params</span><span class="p">(</span><span class="n">query_params</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Subscription.get_subscription"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.subscriptions.Subscription.get_subscription">[docs]</a>    <span class="k">def</span> <span class="nf">get_subscription</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_or_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Fetch details of a subscription on your integration.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        id_or_code: str</span>
+<span class="sd">            The subscription ``ID`` or ``code`` you want to fetch</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/subscription/</span><span class="si">{</span><span class="n">id_or_code</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Subscription.enable"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.subscriptions.Subscription.enable">[docs]</a>    <span class="k">def</span> <span class="nf">enable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Enable a subscription on your integration</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code: str</span>
+<span class="sd">            Subscription code</span>
+<span class="sd">        token: str</span>
+<span class="sd">            Email token</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="s2">&quot;/subscription/enable&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="n">code</span><span class="p">,</span>
+            <span class="s2">&quot;token&quot;</span><span class="p">:</span> <span class="n">token</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Subscription.disable"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.subscriptions.Subscription.disable">[docs]</a>    <span class="k">def</span> <span class="nf">disable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Disable a subscription on your integration</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code: str</span>
+<span class="sd">            Subscription code</span>
+<span class="sd">        token: str</span>
+<span class="sd">            Email token</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="s2">&quot;/subscription/disable&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="n">code</span><span class="p">,</span>
+            <span class="s2">&quot;token&quot;</span><span class="p">:</span> <span class="n">token</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Subscription.get_update_link"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.subscriptions.Subscription.get_update_link">[docs]</a>    <span class="k">def</span> <span class="nf">get_update_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Generate a link for updating the card on a subscription</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code: str</span>
+<span class="sd">            Subscription code</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/subscription/</span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">/manage/link/&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Subscription.send_update_link"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.subscriptions.Subscription.send_update_link">[docs]</a>    <span class="k">def</span> <span class="nf">send_update_link</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Email a customer a link for updating the card on their subscription</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        code: str</span>
+<span class="sd">            Subscription code</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/subscription/</span><span class="si">{</span><span class="n">code</span><span class="si">}</span><span class="s2">/manage/email/&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;code&quot;</span><span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Gbenga Adeyi &lt;coyotedevmail@gmail.com&gt;.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pypaystack2.api.transactions &mdash; pypaystack2 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> pypaystack2
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">pypaystack2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../paystack-client-turorial.html">Paystack Command line Client</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">pypaystack2</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>pypaystack2.api.transactions</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for pypaystack2.api.transactions</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">..baseapi</span> <span class="kn">import</span> <span class="n">BaseAPI</span><span class="p">,</span> <span class="n">Response</span>
+
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">Bearer</span><span class="p">,</span>
+    <span class="n">Channel</span><span class="p">,</span>
+    <span class="n">Currency</span><span class="p">,</span>
+    <span class="n">TransactionStatus</span><span class="p">,</span>
+    <span class="n">add_to_payload</span><span class="p">,</span>
+    <span class="n">append_query_params</span><span class="p">,</span>
+    <span class="n">validate_amount</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="kn">from</span> <span class="nn">..errors</span> <span class="kn">import</span> <span class="n">InvalidDataError</span>
+
+
+<div class="viewcode-block" id="Transaction"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.transactions.Transaction">[docs]</a><span class="k">class</span> <span class="nc">Transaction</span><span class="p">(</span><span class="n">BaseAPI</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Provides a wrapper for paystack Transactions API</span>
+
+<span class="sd">    The Transactions API allows you create and manage payments on your integration.</span>
+<span class="sd">    https://paystack.com/docs/api/#transaction</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="Transaction.initialize"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.transactions.Transaction.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">currency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Currency</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">reference</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">callback_url</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">plan</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">invoice_limit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">channels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Channel</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">split_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">subaccount</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">transfer_charge</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">bearer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bearer</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Initialize a transaction from your backend</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        amount: int</span>
+<span class="sd">            Amount should be in kobo if currency is ``Currency.NGN``, pesewas,</span>
+<span class="sd">            if currency is ``Currency.GHS``, and cents, if currency is ``Currency.ZAR``</span>
+<span class="sd">        email: str</span>
+<span class="sd">            Customer&#39;s email address</span>
+<span class="sd">        currency: Optional[Currency]</span>
+<span class="sd">            Any value from the ``Currency`` enum.</span>
+<span class="sd">        reference: Optional[str]</span>
+<span class="sd">            Unique transaction reference. Only ``-, ., =`` and alphanumeric characters allowed.</span>
+<span class="sd">        callback_url: Optional[str]</span>
+<span class="sd">            Fully qualified url, e.g. ``https://example.com/`` . Use this to override the callback url</span>
+<span class="sd">            provided on the dashboard for this transaction</span>
+<span class="sd">        plan: Optional[str]</span>
+<span class="sd">            If transaction is to create a subscription to a predefined plan, provide plan code here.</span>
+<span class="sd">            This would invalidate the value provided in ``amount``</span>
+<span class="sd">        invoice_limit: Optional[int]</span>
+<span class="sd">            Number of times to charge customer during subscription to plan</span>
+<span class="sd">        metadata: Optional[dict[str,Any]]</span>
+<span class="sd">            A dictionary of additional info. check out this link</span>
+<span class="sd">            for more information.</span>
+<span class="sd">            https://paystack.com/docs/payments/metadata</span>
+<span class="sd">        channels: Optional[list[Channel]]</span>
+<span class="sd">            A list of ``Channel`` enum values to control what channels you want to make available</span>
+<span class="sd">            to the user to make a payment with</span>
+<span class="sd">        split_code: Optional[str]</span>
+<span class="sd">            The split code of the transaction split.</span>
+<span class="sd">            e.g. SPL_98WF13Eb3w</span>
+<span class="sd">        subaccount: Optional[str]</span>
+<span class="sd">            The code for the subaccount that owns the payment.</span>
+<span class="sd">            e.g. ACCT_8f4s1eq7ml6rlzj</span>
+<span class="sd">        transfer_charge: Optional[int]</span>
+<span class="sd">            An amount used to override the split configuration for a single split payment. If set,</span>
+<span class="sd">            the amount specified goes to the main account regardless of the split configuration.</span>
+<span class="sd">        bearer: Optional[Bearer]</span>
+<span class="sd">            Any value from the ``Bearer`` enum. Who bears Paystack charges?</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        InvalidDataError</span>
+<span class="sd">            When email is not provided.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">amount</span> <span class="o">=</span> <span class="n">validate_amount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">email</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span><span class="s2">&quot;Customer&#39;s Email is required for initialization&quot;</span><span class="p">)</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="s2">&quot;/transaction/initialize&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
+            <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="n">amount</span><span class="p">,</span>
+        <span class="p">}</span>
+
+        <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;currency&quot;</span><span class="p">,</span> <span class="n">currency</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;reference&quot;</span><span class="p">,</span> <span class="n">reference</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;callback_url&quot;</span><span class="p">,</span> <span class="n">callback_url</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;plan&quot;</span><span class="p">,</span> <span class="n">plan</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;invoice_limit&quot;</span><span class="p">,</span> <span class="n">invoice_limit</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;channels&quot;</span><span class="p">,</span> <span class="n">channels</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;split_code&quot;</span><span class="p">,</span> <span class="n">split_code</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;subaccount&quot;</span><span class="p">,</span> <span class="n">subaccount</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;transfer_charge&quot;</span><span class="p">,</span> <span class="n">transfer_charge</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;bearer&quot;</span><span class="p">,</span> <span class="n">bearer</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">add_to_payload</span><span class="p">(</span><span class="n">optional_params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Transaction.verify"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.transactions.Transaction.verify">[docs]</a>    <span class="k">def</span> <span class="nf">verify</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">reference</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Confirm the status of a transaction</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        reference: str</span>
+<span class="sd">            The transaction reference used to intiate the transaction</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">reference</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">reference</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/transaction/verify/</span><span class="si">{</span><span class="n">reference</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Transaction.get_transactions"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.transactions.Transaction.get_transactions">[docs]</a>    <span class="k">def</span> <span class="nf">get_transactions</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">customer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">status</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TransactionStatus</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">page</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">amount</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">pagination</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Fetch transactions carried out on your integration.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        customer: Optional[int]</span>
+<span class="sd">            Specify an ID for the customer whose transactions you want to retrieve</span>
+<span class="sd">        start_date: Optional[str]</span>
+<span class="sd">            A timestamp from which to start listing transaction</span>
+<span class="sd">            e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</span>
+<span class="sd">        end_date: Optional[str]</span>
+<span class="sd">            A timestamp at which to stop listing transaction</span>
+<span class="sd">            e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</span>
+<span class="sd">        status: Optional[TransactionStatus]</span>
+<span class="sd">            Filter transactions by status. any value from the</span>
+<span class="sd">            ``TransactionStatus`` enum</span>
+<span class="sd">        page: Optional[int]</span>
+<span class="sd">            Specify exactly what page you want to retrieve.</span>
+<span class="sd">            If not specify we use a default value of 1.</span>
+<span class="sd">        amount: Optional[int]</span>
+<span class="sd">            Filter transactions by amount. Specify the amount (in kobo if currency is</span>
+<span class="sd">            ``Currency.NGN``, pesewas, if currency is ``Currency.GHS``, and cents, if</span>
+<span class="sd">            currency is ``Currency.ZAR``)</span>
+<span class="sd">        pagination: int</span>
+<span class="sd">            Specify how many records you want to retrieve per page. If not specify we</span>
+<span class="sd">            use a default value of 50.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/transaction/?perPage=</span><span class="si">{</span><span class="n">pagination</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">query_params</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;page&quot;</span><span class="p">,</span> <span class="n">page</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;customer&quot;</span><span class="p">,</span> <span class="n">customer</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;from&quot;</span><span class="p">,</span> <span class="n">start_date</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;to&quot;</span><span class="p">,</span> <span class="n">end_date</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;amount&quot;</span><span class="p">,</span> <span class="n">amount</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">append_query_params</span><span class="p">(</span><span class="n">query_params</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Transaction.get_transaction"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.transactions.Transaction.get_transaction">[docs]</a>    <span class="k">def</span> <span class="nf">get_transaction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get details of a transaction carried out on your integration.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        id: str</span>
+<span class="sd">            An ID for the transaction to fetch</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/transaction/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Transaction.charge"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.transactions.Transaction.charge">[docs]</a>    <span class="k">def</span> <span class="nf">charge</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">auth_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">reference</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">currency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Currency</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">metadata</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">channels</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="n">Channel</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">subaccount</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">transaction_charge</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">bearer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Bearer</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">queue</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        All authorizations marked as reusable can be charged with this</span>
+<span class="sd">        endpoint whenever you need to receive payments.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        amount: int</span>
+<span class="sd">        email: str</span>
+<span class="sd">            Customer&#39;s email address</span>
+<span class="sd">        auth_code: str</span>
+<span class="sd">            Valid authorization code to charge</span>
+<span class="sd">        reference: Optional[str]</span>
+<span class="sd">            Unique transaction reference. Only ``-, ., =`` and alphanumeric</span>
+<span class="sd">            characters allowed.</span>
+<span class="sd">        currency: Optional[Currency]</span>
+<span class="sd">            Currency in which amount should be charged. Any value from the</span>
+<span class="sd">            ``Currency`` enum.</span>
+<span class="sd">        metadata: Optional[dict[str,Any]]</span>
+<span class="sd">            Add a custom_fields attribute which has an array of objects if</span>
+<span class="sd">            you would like the fields to be added to your transaction when</span>
+<span class="sd">            displayed on the dashboard.</span>
+<span class="sd">            Sample: ``{&quot;custom_fields&quot;:[{&quot;display_name&quot;:&quot;Cart ID&quot;,</span>
+<span class="sd">            &quot;variable_name&quot;: &quot;cart_id&quot;,&quot;value&quot;: &quot;8393&quot;}]}``</span>
+<span class="sd">        channels: Optional[list[Channel]]</span>
+<span class="sd">            A list of ``Channel`` enum values to control what channels you want to make available</span>
+<span class="sd">            to the user to make a payment with</span>
+<span class="sd">        subaccount: Optional[str]</span>
+<span class="sd">            The code for the subaccount that owns the payment. e.g. ACCT_8f4s1eq7ml6rlzj</span>
+<span class="sd">        transaction_charge: Optional[int]</span>
+<span class="sd">            A flat fee to charge the subaccount for this transaction (in kobo if currency is NGN,</span>
+<span class="sd">            pesewas, if currency is GHS, and cents, if currency is ZAR). This overrides the split</span>
+<span class="sd">            percentage set when the subaccount was created. Ideally, you will need to use this if</span>
+<span class="sd">            you are splitting in flat rates (since subaccount creation only allows for percentage split).</span>
+<span class="sd">            e.g. 7000 for a 70 naira</span>
+<span class="sd">        bearer: Optional[Bearer]</span>
+<span class="sd">            Who bears Paystack charges? any value from the ``Beaer`` enum</span>
+<span class="sd">        queue: bool</span>
+<span class="sd">            If you are making a scheduled charge call, it is a good idea to queue them so the processing</span>
+<span class="sd">            system does not get overloaded causing transaction processing errors. Set ``queue=True`` to</span>
+<span class="sd">            take advantage of our queued charging.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">amount</span> <span class="o">=</span> <span class="n">validate_amount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">email</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span><span class="s2">&quot;Customer&#39;s Email is required to charge&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">auth_code</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span><span class="s2">&quot;Customer&#39;s Auth code is required to charge&quot;</span><span class="p">)</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="s2">&quot;/transaction/charge_authorization&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;authorization_code&quot;</span><span class="p">:</span> <span class="n">auth_code</span><span class="p">,</span>
+            <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
+            <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="n">amount</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;reference&quot;</span><span class="p">,</span> <span class="n">reference</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;currency&quot;</span><span class="p">,</span> <span class="n">currency</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;metadata&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;channels&quot;</span><span class="p">,</span> <span class="n">channels</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;subaccount&quot;</span><span class="p">,</span> <span class="n">subaccount</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;transaction_charge&quot;</span><span class="p">,</span> <span class="n">transaction_charge</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;bearer&quot;</span><span class="p">,</span> <span class="n">bearer</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;queue&quot;</span><span class="p">,</span> <span class="n">queue</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">add_to_payload</span><span class="p">(</span><span class="n">optional_params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Transaction.check_authorization"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.transactions.Transaction.check_authorization">[docs]</a>    <span class="k">def</span> <span class="nf">check_authorization</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">auth_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">currency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Currency</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;All Mastercard and Visa authorizations can be checked with</span>
+<span class="sd">        this endpoint to know if they have funds for the payment you seek.</span>
+
+<span class="sd">        This method should be used when you do not know the exact amount</span>
+<span class="sd">        to charge a card when rendering a service. It should be used to</span>
+<span class="sd">        check if a card has enough funds based on a maximum range value.</span>
+
+<span class="sd">        It is well suited:</span>
+<span class="sd">            - Ride hailing services</span>
+<span class="sd">            - Logistics services</span>
+
+<span class="sd">        You shouldn&#39;t use this method to check a card for sufficient</span>
+<span class="sd">        funds if you are going to charge the user immediately. This is</span>
+<span class="sd">        because we hold funds when this endpoint is called which can lead</span>
+<span class="sd">        to an insufficient funds error.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        amount: int</span>
+<span class="sd">            Amount should be in kobo if currency is ``Currency.NGN``, pesewas, if currency is</span>
+<span class="sd">            ``Currency.GHS``, and cents, if currency is ``Currency.ZAR``</span>
+<span class="sd">        email: str</span>
+<span class="sd">            Customer&#39;s email address</span>
+<span class="sd">        auth_code: str</span>
+<span class="sd">            Valid authorization code to charge</span>
+<span class="sd">        currency: Optional[Currency]</span>
+<span class="sd">            Currency in which amount should be charged. Any value from the ``Currency`` enum.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        This feature is only available to businesses in Nigeria.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">amount</span> <span class="o">=</span> <span class="n">validate_amount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">email</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span><span class="s2">&quot;Customer&#39;s Email is required to charge&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">auth_code</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span><span class="s2">&quot;Customer&#39;s Auth code is required to charge&quot;</span><span class="p">)</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="s2">&quot;/transaction/check_authorization&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;authorization_code&quot;</span><span class="p">:</span> <span class="n">auth_code</span><span class="p">,</span>
+            <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
+            <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="n">amount</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;currency&quot;</span><span class="p">,</span> <span class="n">currency</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">add_to_payload</span><span class="p">(</span><span class="n">optional_params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Transaction.get_timeline"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.transactions.Transaction.get_timeline">[docs]</a>    <span class="k">def</span> <span class="nf">get_timeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">id_or_ref</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;View the timeline of a transaction</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        id_or_reference: str</span>
+<span class="sd">            The ID or the reference of the transaction</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/transaction/timeline/</span><span class="si">{</span><span class="n">id_or_ref</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Transaction.totals"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.transactions.Transaction.totals">[docs]</a>    <span class="k">def</span> <span class="nf">totals</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">page</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">pagination</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Total amount received on your account</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        page: Optional[int]</span>
+<span class="sd">            Specify exactly what page you want to retrieve.</span>
+<span class="sd">            If not specify we use a default value of 1.</span>
+<span class="sd">        start_date: Optional[str]</span>
+<span class="sd">            A timestamp from which to start listing transaction</span>
+<span class="sd">            e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</span>
+<span class="sd">        end_date: Optional[str]</span>
+<span class="sd">            A timestamp at which to stop listing transaction</span>
+<span class="sd">            e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</span>
+<span class="sd">        pagination: int</span>
+<span class="sd">            Specify how many records you want to retrieve per page.</span>
+<span class="sd">            If not specify we use a default value of 50.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/transaction/totals/?perPage=</span><span class="si">{</span><span class="n">pagination</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;&amp;page=</span><span class="si">{</span><span class="n">page</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">page</span> <span class="k">else</span> <span class="n">url</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;&amp;from=</span><span class="si">{</span><span class="n">start_date</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">start_date</span> <span class="k">else</span> <span class="n">url</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">url</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;&amp;page=</span><span class="si">{</span><span class="n">end_date</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">end_date</span> <span class="k">else</span> <span class="n">url</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Transaction.export"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.transactions.Transaction.export">[docs]</a>    <span class="k">def</span> <span class="nf">export</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">page</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">start_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">end_date</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">customer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">status</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">TransactionStatus</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">currency</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Currency</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">amount</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">settled</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">settlement</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">payment_page</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">pagination</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Fetch transactions carried out on your integration.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        page: Optional[int]</span>
+<span class="sd">            Specify exactly what page you want to retrieve.</span>
+<span class="sd">            If not specify we use a default value of 1.</span>
+<span class="sd">        start_date: Optional[str]</span>
+<span class="sd">            A timestamp from which to start listing transaction</span>
+<span class="sd">            e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</span>
+<span class="sd">        end_date: Optional[str]</span>
+<span class="sd">            A timestamp at which to stop listing transaction</span>
+<span class="sd">            e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</span>
+<span class="sd">        customer: Optional[int]</span>
+<span class="sd">            Specify an ID for the customer whose transactions you</span>
+<span class="sd">            want to retrieve</span>
+<span class="sd">        status: Optional[TransactionStatus]</span>
+<span class="sd">            Filter transactions by status. Any value from the</span>
+<span class="sd">            ``TransactionStatus`` enum</span>
+<span class="sd">        currency: Optional[Currency]</span>
+<span class="sd">            Specify the transaction currency to export. Any value</span>
+<span class="sd">            from the ``Currency`` enum</span>
+<span class="sd">        amount: Optional[int]</span>
+<span class="sd">            Filter transactions by amount. Specify the amount, in</span>
+<span class="sd">            kobo if currency is ``Currency.NGN``, pesewas, if currency</span>
+<span class="sd">            is ``Currency.GHS``, and cents, if currency is ``Currency.ZAR``</span>
+<span class="sd">        settled: Optional[bool]</span>
+<span class="sd">            Set to ``True`` to export only settled transactions. ``False`` for</span>
+<span class="sd">            pending transactions. Leave undefined to export all transactions</span>
+<span class="sd">        settlement: Optional[int]</span>
+<span class="sd">            An ID for the settlement whose transactions we should export</span>
+<span class="sd">        payment_page: Optional[int]</span>
+<span class="sd">            Specify a payment page&#39;s id to export only transactions conducted on said page</span>
+<span class="sd">        pagination: int</span>
+<span class="sd">            Specify how many records you want to retrieve per page.</span>
+<span class="sd">            If not specify we use a default value of 50.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">amount</span><span class="p">:</span>
+            <span class="n">amount</span> <span class="o">=</span> <span class="n">validate_amount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/transaction/export/?perPage=</span><span class="si">{</span><span class="n">pagination</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">query_params</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="s2">&quot;page&quot;</span><span class="p">,</span> <span class="n">page</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;from&quot;</span><span class="p">,</span> <span class="n">start_date</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;to&quot;</span><span class="p">,</span> <span class="n">end_date</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;customer&quot;</span><span class="p">,</span> <span class="n">customer</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;status&quot;</span><span class="p">,</span> <span class="n">status</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;currency&quot;</span><span class="p">,</span> <span class="n">currency</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;settled&quot;</span><span class="p">,</span> <span class="n">settled</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;settlement&quot;</span><span class="p">,</span> <span class="n">settlement</span><span class="p">),</span>
+            <span class="p">(</span><span class="s2">&quot;payment_page&quot;</span><span class="p">,</span> <span class="n">payment_page</span><span class="p">),</span>
+        <span class="p">]</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">append_query_params</span><span class="p">(</span><span class="n">query_params</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Transaction.partial_debit"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.transactions.Transaction.partial_debit">[docs]</a>    <span class="k">def</span> <span class="nf">partial_debit</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">auth_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">currency</span><span class="p">:</span> <span class="n">Currency</span><span class="p">,</span>
+        <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">email</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">reference</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">at_least</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Retrieve part of a payment from a customer</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        auth_code: str</span>
+<span class="sd">            Authorization Code</span>
+<span class="sd">        currency: Currency</span>
+<span class="sd">            Specify the currency you want to debit. Any value</span>
+<span class="sd">            from the ``Currency`` enum.</span>
+<span class="sd">        amount: int</span>
+<span class="sd">            Amount should be in kobo if currency is ``Currency.NGN``, pesewas,</span>
+<span class="sd">            if currency is ``Currency.GHS``, and cents, if currency is ``Currency.ZAR``</span>
+<span class="sd">        email: str</span>
+<span class="sd">            Customer&#39;s email address (attached to the authorization code)</span>
+<span class="sd">        reference: Optional[str]</span>
+<span class="sd">            Unique transaction reference. Only `-, ., =`</span>
+<span class="sd">             and alphanumeric characters allowed.</span>
+<span class="sd">        at_least: Optional[int]</span>
+<span class="sd">            Minimum amount to charge</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        InvalidDataError</span>
+<span class="sd">            - When Customer&#39;s email is not provided.</span>
+<span class="sd">            - When Customer&#39;s auth code is not provided.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">amount</span> <span class="o">=</span> <span class="n">validate_amount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">at_least</span><span class="p">:</span>
+            <span class="n">at_least</span> <span class="o">=</span> <span class="n">validate_amount</span><span class="p">(</span><span class="n">at_least</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">email</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span><span class="s2">&quot;Customer&#39;s Email is required to charge&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">auth_code</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span><span class="s2">&quot;Customer&#39;s Auth code is required to charge&quot;</span><span class="p">)</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="s2">&quot;/transaction/partial_debit&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;authorization_code&quot;</span><span class="p">:</span> <span class="n">auth_code</span><span class="p">,</span>
+            <span class="s2">&quot;currency&quot;</span><span class="p">:</span> <span class="n">currency</span><span class="p">,</span>
+            <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="n">amount</span><span class="p">,</span>
+            <span class="s2">&quot;email&quot;</span><span class="p">:</span> <span class="n">email</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="n">optional_params</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;reference&quot;</span><span class="p">,</span> <span class="n">reference</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;at_least&quot;</span><span class="p">,</span> <span class="n">at_least</span><span class="p">)]</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="n">add_to_payload</span><span class="p">(</span><span class="n">optional_params</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Transaction.get_transfer_banks"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.transactions.Transaction.get_transfer_banks">[docs]</a>    <span class="k">def</span> <span class="nf">get_transfer_banks</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># TODO: Deprecate. it&#39;s available in Miscellaneous API</span>
+        <span class="sd">&quot;&quot;&quot;Fetch transfer banks</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        Deprecation Notice</span>
+<span class="sd">            it&#39;s available in Miscellaneous API wrapper. may be removed in future release</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="s2">&quot;/bank&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Transaction.create_transfer_customer"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.transactions.Transaction.create_transfer_customer">[docs]</a>    <span class="k">def</span> <span class="nf">create_transfer_customer</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">bank_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">account_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">account_name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="c1"># TODO: Deprecate. it&#39;s available in TransferReceipt API</span>
+        <span class="sd">&quot;&quot;&quot;Create a transfer customer</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        bank_code</span>
+<span class="sd">        account_number</span>
+<span class="sd">        int</span>
+<span class="sd">        account_name</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        -----</span>
+<span class="sd">        Deprecation Notice</span>
+<span class="sd">            it&#39;s available in TransferReceipt API wrapper. may be removed in future release</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="s2">&quot;/transferrecipient&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;nuban&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;currency&quot;</span><span class="p">:</span> <span class="s2">&quot;NGN&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;bank_code&quot;</span><span class="p">:</span> <span class="n">bank_code</span><span class="p">,</span>
+            <span class="s2">&quot;account_number&quot;</span><span class="p">:</span> <span class="n">account_number</span><span class="p">,</span>
+            <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">account_name</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Transaction.transfer"><a class="viewcode-back" href="../../../pypaystack2.api.html#pypaystack2.api.transactions.Transaction.transfer">[docs]</a>    <span class="k">def</span> <span class="nf">transfer</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">recipient_code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">amount</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">reason</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">reference</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Response</span><span class="p">:</span>
+        <span class="c1"># TODO: Deprecate. it&#39;s available in Transfer API</span>
+        <span class="sd">&quot;&quot;&quot;Initiates transfer to a customer</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        recipient_code</span>
+<span class="sd">        amount</span>
+<span class="sd">        reason</span>
+<span class="sd">        reference</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        Response</span>
+<span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
+
+<span class="sd">        Note</span>
+<span class="sd">        ----</span>
+<span class="sd">        Deprecation Notice</span>
+<span class="sd">            it&#39;s available in Transfer API wrapper. may be removed in future release</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">amount</span> <span class="o">=</span> <span class="n">validate_amount</span><span class="p">(</span><span class="n">amount</span><span class="p">)</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_url</span><span class="p">(</span><span class="s2">&quot;/transfer&quot;</span><span class="p">)</span>
+        <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;amount&quot;</span><span class="p">:</span> <span class="n">amount</span><span class="p">,</span>
+            <span class="s2">&quot;reason&quot;</span><span class="p">:</span> <span class="n">reason</span><span class="p">,</span>
+            <span class="s2">&quot;recipient&quot;</span><span class="p">:</span> <span class="n">recipient_code</span><span class="p">,</span>
+            <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="s2">&quot;balance&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;currency&quot;</span><span class="p">:</span> <span class="s2">&quot;NGN&quot;</span><span class="p">,</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="n">reference</span><span class="p">:</span>
+            <span class="n">payload</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;reference&quot;</span><span class="p">:</span> <span class="n">reference</span><span class="p">})</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_handle_request</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Gbenga Adeyi &lt;coyotedevmail@gmail.com&gt;.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
