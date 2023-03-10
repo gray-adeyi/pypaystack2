@@ -252,20 +252,6 @@
               
   
   
-  
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
-        Table of contents
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
     
   
   
@@ -375,21 +361,6 @@
     <li class="md-nav__item">
       <a href="../../how-to-guides/" class="md-nav__link">
         How-To Guides
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../reference/" class="md-nav__link">
-        Reference
       </a>
     </li>
   
@@ -516,19 +487,19 @@ installed globally and not within a virtual environment. You're good to proceed 
 <ul>
 <li>Create a directory to house our project.</li>
 </ul>
-<div class="highlight"><pre><span></span><code>mkdir paystack_cli_client <span class="o">&amp;&amp;</span> <span class="nb">cd</span> paystack_cli_client
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>paystack_cli_client<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>paystack_cli_client
 </code></pre></div>
 <ul>
 <li>Initialize a virtual environment for the project.</li>
 </ul>
-<div class="highlight"><pre><span></span><code>pipenv shell
+<div class="highlight"><pre><span></span><code>pipenv<span class="w"> </span>shell
 </code></pre></div>
 <ul>
 <li>Install the projects dependencies. We'll be needing <code>pypaystack2</code>, <code>python-dotenv</code>, and <code>typer</code>.
   <code>pypaystack2</code> package is an API wrapper for paystack's services. <code>python-dotenv</code> helps us manage our
   environmental variables and <code>typer</code> makes building command line apps in python super simple.</li>
 </ul>
-<div class="highlight"><pre><span></span><code>pipenv install pypaystack2 python-dotenv typer
+<div class="highlight"><pre><span></span><code>pipenv<span class="w"> </span>install<span class="w"> </span>pypaystack2<span class="w"> </span>python-dotenv<span class="w"> </span>typer
 </code></pre></div>
 <p>If all work's fine, you're good to proceed.</p>
 <h2 id="environmental-variables">Environmental Variables</h2>
@@ -537,7 +508,7 @@ Paystack provides you with two pairs. A pair of public and secret key for live m
 for test mode. You can find them in your account settings. Since this is just a tutorial we'll be
 using only the test secret key. create a new file named <code>.env</code> within your project's root directory.
 Now put in your test secret key in the <code>.env</code> file like so.</p>
-<div class="highlight"><pre><span></span><code>PAYSTACK_AUTHORIZATION_KEY = &quot;&lt;your test secret key&gt;&quot;
+<div class="highlight"><pre><span></span><code>PAYSTACK_AUTHORIZATION_KEY = &quot;&lt;your paystack test secret key&gt;&quot;
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -575,6 +546,7 @@ currently available as at the time of writing of this tutorial.</p>
 <li>Split</li>
 <li>SubAccount</li>
 <li>Subscription</li>
+<li>Terminal</li>
 <li>Transaction</li>
 <li>TransferReceipt</li>
 <li>TransferControl</li>
@@ -583,15 +555,13 @@ currently available as at the time of writing of this tutorial.</p>
 </ul>
 <p>So in a situation where you don't have your <code>PAYSTACK_AUTHORIZATION_KEY</code> as an environmental variable,
 you can pass it into any of the API wrappers. e.g.</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># When you don&#39;t have PAYSTACK_AUTHORIZATION_KEY in your environmental variables</span>
-<span class="kn">from</span> <span class="nn">pypaystack2.api</span> <span class="kn">import</span> <span class="n">Transaction</span><span class="p">,</span> <span class="n">Plan</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># When you don&#39;t have PAYSTACK_AUTHORIZATION_KEY(paystack secret key) in your environmental variables</span>
+<span class="kn">from</span> <span class="nn">pypaystack2</span> <span class="kn">import</span> <span class="n">Paystack</span>
 
-<span class="n">txn_wrapper</span> <span class="o">=</span> <span class="n">Transaction</span><span class="p">(</span><span class="n">auth_key</span><span class="o">=</span><span class="s2">&quot;&lt;your test secret key&gt;&quot;</span><span class="p">)</span>
-<span class="n">plan_wrapper</span> <span class="o">=</span> <span class="n">Plan</span><span class="p">(</span><span class="n">auth_key</span><span class="o">=</span><span class="s2">&quot;&lt;your test secret key&gt;&quot;</span><span class="p">)</span>
+<span class="n">paystack</span> <span class="o">=</span> <span class="n">Paystack</span><span class="p">(</span><span class="n">auth_key</span><span class="o">=</span><span class="s2">&quot;&lt;your test secret key&gt;&quot;</span><span class="p">)</span>
 
-<span class="c1"># When you have PAYSTACK_AUTHORIZATION_KEY set in your environmental variables</span>
-<span class="n">txn_wrapper</span> <span class="o">=</span> <span class="n">Transaction</span><span class="p">()</span>
-<span class="n">plan_wrapper</span> <span class="o">=</span> <span class="n">Plan</span><span class="p">()</span>
+<span class="c1"># When you have PAYSTACK_AUTHORIZATION_KEY(paystack secret key) set in your environmental variables</span>
+<span class="n">paystack</span> <span class="o">=</span> <span class="n">Paystack</span><span class="p">()</span>
 </code></pre></div>
 <details class="note" open="open">
 <summary>Note</summary>
@@ -619,26 +589,26 @@ new customers on our paystack integration. so now update your <code>main.py</cod
     <span class="n">app</span><span class="p">()</span>
 </code></pre></div>
 <p>This is a minimum setup to building cli apps with <code>Typer</code>. Now try this in your project's root directory.</p>
-<div class="highlight"><pre><span></span><code>python main.py --help
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>main.py<span class="w"> </span>--help
 </code></pre></div>
 <p>You should see.</p>
-<div class="highlight"><pre><span></span><code>Usage: main.py <span class="o">[</span>OPTIONS<span class="o">]</span>
+<div class="highlight"><pre><span></span><code>Usage:<span class="w"> </span>main.py<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span>
 
 Options:
---install-completion <span class="o">[</span>bash<span class="p">|</span>zsh<span class="p">|</span>fish<span class="p">|</span>powershell<span class="p">|</span>pwsh<span class="o">]</span>
-                                Install completion <span class="k">for</span> the specified
-                                shell.
---show-completion <span class="o">[</span>bash<span class="p">|</span>zsh<span class="p">|</span>fish<span class="p">|</span>powershell<span class="p">|</span>pwsh<span class="o">]</span>
-                                Show completion <span class="k">for</span> the specified shell,
-                                to copy it or customize the installation.
---help                          Show this message and exit.
+--install-completion<span class="w"> </span><span class="o">[</span>bash<span class="p">|</span>zsh<span class="p">|</span>fish<span class="p">|</span>powershell<span class="p">|</span>pwsh<span class="o">]</span>
+<span class="w">                                </span>Install<span class="w"> </span>completion<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>specified
+<span class="w">                                </span>shell.
+--show-completion<span class="w"> </span><span class="o">[</span>bash<span class="p">|</span>zsh<span class="p">|</span>fish<span class="p">|</span>powershell<span class="p">|</span>pwsh<span class="o">]</span>
+<span class="w">                                </span>Show<span class="w"> </span>completion<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>specified<span class="w"> </span>shell,
+<span class="w">                                </span>to<span class="w"> </span>copy<span class="w"> </span>it<span class="w"> </span>or<span class="w"> </span>customize<span class="w"> </span>the<span class="w"> </span>installation.
+--help<span class="w">                          </span>Show<span class="w"> </span>this<span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span>exit.
 </code></pre></div>
 <p>You can see that we now have a command line app that's responding to our command in this case <code>--help</code>. Let's
 try out the custom command we just added.</p>
-<div class="highlight"><pre><span></span><code>python main.py
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>main.py
 </code></pre></div>
 <p>You should see</p>
-<div class="highlight"><pre><span></span><code>new customer successfully created!
+<div class="highlight"><pre><span></span><code>new<span class="w"> </span>customer<span class="w"> </span>successfully<span class="w"> </span>created!
 </code></pre></div>
 <p>At the moment, no new customer is actually getting created on your paystack integration. let's bring in
 <code>pypaystack2</code> to help us get the job done. For this to work, <code>pypaystack2</code> provides wrappers for the
@@ -650,13 +620,13 @@ at <a href="https://paystack.com/docs/api/#customer">Paystack's Customer Service
 <div class="highlight"><pre><span></span><code><span class="c1"># root-dir/main.py</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 <span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
-<span class="kn">from</span> <span class="nn">pypaystack2.api</span> <span class="kn">import</span> <span class="n">Customer</span>
+<span class="kn">from</span> <span class="nn">pypaystack2</span> <span class="kn">import</span> <span class="n">Paystack</span>
 <span class="kn">from</span> <span class="nn">typer</span> <span class="kn">import</span> <span class="n">Typer</span>
 
 <span class="n">load_dotenv</span><span class="p">()</span>
 <span class="n">app</span> <span class="o">=</span> <span class="n">Typer</span><span class="p">()</span>
 
-<span class="n">customer_wrapper</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">()</span>
+<span class="n">paystack</span> <span class="o">=</span> <span class="n">Paystack</span><span class="p">()</span>
 
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
@@ -666,7 +636,7 @@ at <a href="https://paystack.com/docs/api/#customer">Paystack's Customer Service
         <span class="n">last_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">phone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">customer_wrapper</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">paystack</span><span class="o">.</span><span class="n">customers</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
         <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> <span class="n">first_name</span><span class="o">=</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="n">last_name</span><span class="p">,</span> <span class="n">phone</span><span class="o">=</span><span class="n">phone</span>
     <span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
@@ -681,33 +651,33 @@ at <a href="https://paystack.com/docs/api/#customer">Paystack's Customer Service
 <details class="note" open="open">
 <summary>Note</summary>
 </details>
-<p>All API wrappers are available in <code>pypaystack2.api</code>. e.g. <code>from pypaystack2.api import Split, Transaction</code></p>
+<p>All API wrappers are available on <code>pypaystack</code>. as attributes e.g. <code>paystack.transactions</code> for the Transactions API</p>
 <p>Now if you run the script again.</p>
-<div class="highlight"><pre><span></span><code>python main.py
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>main.py
 </code></pre></div>
 <p>You get error saying you have a missing argument 'EMAIL'</p>
-<div class="highlight"><pre><span></span><code>Usage: main.py <span class="o">[</span>OPTIONS<span class="o">]</span> EMAIL
-Try <span class="s1">&#39;main.py --help&#39;</span> <span class="k">for</span> help.
+<div class="highlight"><pre><span></span><code>Usage:<span class="w"> </span>main.py<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>EMAIL
+Try<span class="w"> </span><span class="s1">&#39;main.py --help&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>help.
 
-Error: Missing argument <span class="s1">&#39;EMAIL&#39;</span>.
+Error:<span class="w"> </span>Missing<span class="w"> </span>argument<span class="w"> </span><span class="s1">&#39;EMAIL&#39;</span>.
 </code></pre></div>
 <p>Now let's try out our script with the email of the customer
 we want to create.</p>
-<div class="highlight"><pre><span></span><code>python main.py email@example.com
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>main.py<span class="w"> </span>email@example.com
 </code></pre></div>
 <p>Now if all goes fine. "An Internet connection is required", you should
 get something similar to this</p>
 <div class="highlight"><pre><span></span><code><span class="m">200</span>
 True
-Customer created
-<span class="o">{</span><span class="s1">&#39;transactions&#39;</span>: <span class="o">[]</span>, <span class="s1">&#39;subscriptions&#39;</span>: <span class="o">[]</span>, <span class="s1">&#39;authorizations&#39;</span>: <span class="o">[]</span>, <span class="s1">&#39;first_name&#39;</span>: <span class="s1">&#39;&#39;</span>, <span class="s1">&#39;last_name&#39;</span>: <span class="s1">&#39;&#39;</span>, <span class="s1">&#39;email&#39;</span>: <span class="s1">&#39;email@example.com&#39;</span>, <span class="s1">&#39;phone&#39;</span>: <span class="s1">&#39;&#39;</span>, <span class="s1">&#39;metadata&#39;</span>: None, <span class="s1">&#39;domain&#39;</span>: <span class="s1">&#39;test&#39;</span>, <span class="s1">&#39;customer_code&#39;</span>: <span class="s1">&#39;CUS_kd197ej30zxr34v&#39;</span>, <span class="s1">&#39;risk_action&#39;</span>: <span class="s1">&#39;default&#39;</span>, <span class="s1">&#39;id&#39;</span>: <span class="m">47748473</span>, <span class="s1">&#39;integration&#39;</span>: <span class="m">630606</span>, <span class="s1">&#39;createdAt&#39;</span>: <span class="s1">&#39;2021-06-20T05:16:20.000Z&#39;</span>, <span class="s1">&#39;updatedAt&#39;</span>: <span class="s1">&#39;2021-06-20T05:16:20.000Z&#39;</span>, <span class="s1">&#39;identified&#39;</span>: False, <span class="s1">&#39;identifications&#39;</span>: None<span class="o">}</span>
+Customer<span class="w"> </span>created
+<span class="o">{</span><span class="s1">&#39;transactions&#39;</span>:<span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="s1">&#39;subscriptions&#39;</span>:<span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="s1">&#39;authorizations&#39;</span>:<span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="s1">&#39;first_name&#39;</span>:<span class="w"> </span><span class="s1">&#39;&#39;</span>,<span class="w"> </span><span class="s1">&#39;last_name&#39;</span>:<span class="w"> </span><span class="s1">&#39;&#39;</span>,<span class="w"> </span><span class="s1">&#39;email&#39;</span>:<span class="w"> </span><span class="s1">&#39;email@example.com&#39;</span>,<span class="w"> </span><span class="s1">&#39;phone&#39;</span>:<span class="w"> </span><span class="s1">&#39;&#39;</span>,<span class="w"> </span><span class="s1">&#39;metadata&#39;</span>:<span class="w"> </span>None,<span class="w"> </span><span class="s1">&#39;domain&#39;</span>:<span class="w"> </span><span class="s1">&#39;test&#39;</span>,<span class="w"> </span><span class="s1">&#39;customer_code&#39;</span>:<span class="w"> </span><span class="s1">&#39;CUS_kd197ej30zxr34v&#39;</span>,<span class="w"> </span><span class="s1">&#39;risk_action&#39;</span>:<span class="w"> </span><span class="s1">&#39;default&#39;</span>,<span class="w"> </span><span class="s1">&#39;id&#39;</span>:<span class="w"> </span><span class="m">47748473</span>,<span class="w"> </span><span class="s1">&#39;integration&#39;</span>:<span class="w"> </span><span class="m">630606</span>,<span class="w"> </span><span class="s1">&#39;createdAt&#39;</span>:<span class="w"> </span><span class="s1">&#39;2021-06-20T05:16:20.000Z&#39;</span>,<span class="w"> </span><span class="s1">&#39;updatedAt&#39;</span>:<span class="w"> </span><span class="s1">&#39;2021-06-20T05:16:20.000Z&#39;</span>,<span class="w"> </span><span class="s1">&#39;identified&#39;</span>:<span class="w"> </span>False,<span class="w"> </span><span class="s1">&#39;identifications&#39;</span>:<span class="w"> </span>None<span class="o">}</span>
 </code></pre></div>
 <p><strong>Yay! You've just created a new customer on your integration</strong> You can check out the customer's tab in<br />
 your Paystack account to confirm this.</p>
 <details class="tip" open="open">
 <summary>Tip</summary>
 <p>You can also create new customers with a first name and last name like so.</p>
-<div class="highlight"><pre><span></span><code>python main.py email@example.com --first-name John --last-name Doe
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>main.py<span class="w"> </span>email@example.com<span class="w"> </span>--first-name<span class="w"> </span>John<span class="w"> </span>--last-name<span class="w"> </span>Doe
 </code></pre></div>
 </details>
 <h2 id="what-just-happened">What just happened?</h2>
@@ -719,7 +689,7 @@ wrappers have methods on them that correspond to an endpoint on paystack and all
 a <code>Response</code>
 object based on the response it gets from Paystack. This <code>Response</code> is just a <code>NamedTuple</code> that holds the
 <code>status,status_code,message</code> and <code>data</code>. So this call</p>
-<div class="highlight"><pre><span></span><code><span class="n">response</span> <span class="o">=</span> <span class="n">customer_wrapper</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> <span class="n">first_name</span><span class="o">=</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="n">last_name</span><span class="p">,</span> <span class="n">phone</span><span class="o">=</span><span class="n">phone</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><span class="n">response</span> <span class="o">=</span> <span class="n">paystack</span><span class="o">.</span><span class="n">customers</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> <span class="n">first_name</span><span class="o">=</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="n">last_name</span><span class="p">,</span> <span class="n">phone</span><span class="o">=</span><span class="n">phone</span><span class="p">)</span>
 </code></pre></div>
 <p>in our script returns the <code>Response</code> object just described, and you can access each of these attributes with
 <code>response.status</code>, <code>response.status_code</code>, <code>response.message</code>, <code>response.data</code></p>
@@ -728,14 +698,14 @@ object based on the response it gets from Paystack. This <code>Response</code> i
 <div class="highlight"><pre><span></span><code><span class="c1"># root-dir/main.py</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 <span class="kn">from</span> <span class="nn">dotenv</span> <span class="kn">import</span> <span class="n">load_dotenv</span>
-<span class="kn">from</span> <span class="nn">pypaystack2.api</span> <span class="kn">import</span> <span class="n">Customer</span>
+<span class="kn">from</span> <span class="nn">pypaystack2</span> <span class="kn">import</span> <span class="n">Paystack</span>
 <span class="kn">from</span> <span class="nn">typer</span> <span class="kn">import</span> <span class="n">Typer</span>
 
 <span class="n">load_dotenv</span><span class="p">()</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Typer</span><span class="p">()</span>
 
-<span class="n">customer_wrapper</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">()</span>
+<span class="n">paystack</span> <span class="o">=</span> <span class="n">Paystack</span><span class="p">()</span>
 
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
@@ -745,7 +715,7 @@ object based on the response it gets from Paystack. This <code>Response</code> i
         <span class="n">last_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">phone</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">customer_wrapper</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">paystack</span><span class="o">.</span><span class="n">customers</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
         <span class="n">email</span><span class="o">=</span><span class="n">email</span><span class="p">,</span> <span class="n">first_name</span><span class="o">=</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="n">last_name</span><span class="p">,</span> <span class="n">phone</span><span class="o">=</span><span class="n">phone</span>
     <span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
@@ -756,7 +726,7 @@ object based on the response it gets from Paystack. This <code>Response</code> i
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">list_customers</span><span class="p">():</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">customer_wrapper</span><span class="o">.</span><span class="n">get_customers</span><span class="p">()</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">paystack</span><span class="o">.</span><span class="n">customers</span><span class="o">.</span><span class="n">get_customers</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
@@ -765,7 +735,7 @@ object based on the response it gets from Paystack. This <code>Response</code> i
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">get_customer</span><span class="p">(</span><span class="n">ec</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">customer_wrapper</span><span class="o">.</span><span class="n">get_customer</span><span class="p">(</span><span class="n">email_or_code</span><span class="o">=</span><span class="n">ec</span><span class="p">)</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">paystack</span><span class="o">.</span><span class="n">customers</span><span class="o">.</span><span class="n">get_customer</span><span class="p">(</span><span class="n">email_or_code</span><span class="o">=</span><span class="n">ec</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
@@ -774,7 +744,7 @@ object based on the response it gets from Paystack. This <code>Response</code> i
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">update_customer</span><span class="p">(</span><span class="n">code</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">last_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">first_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">customer_wrapper</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">paystack</span><span class="o">.</span><span class="n">customers</span><span class="o">.</span><span class="n">update</span><span class="p">(</span>
         <span class="n">code</span><span class="o">=</span><span class="n">code</span><span class="p">,</span> <span class="n">last_name</span><span class="o">=</span><span class="n">last_name</span><span class="p">,</span> <span class="n">first_name</span><span class="o">=</span><span class="n">first_name</span>
     <span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
@@ -787,26 +757,26 @@ object based on the response it gets from Paystack. This <code>Response</code> i
     <span class="n">app</span><span class="p">()</span>
 </code></pre></div>
 <p>We now have 3 new commands for our cli app. you can check them out with</p>
-<div class="highlight"><pre><span></span><code>python main.py --help
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>main.py<span class="w"> </span>--help
 </code></pre></div>
 <p>Now under the available command you should see get-customer, list-customers, new-customer,
 update-customer</p>
-<div class="highlight"><pre><span></span><code>Usage: main.py <span class="o">[</span>OPTIONS<span class="o">]</span> COMMAND <span class="o">[</span>ARGS<span class="o">]</span>...
+<div class="highlight"><pre><span></span><code>Usage:<span class="w"> </span>main.py<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
 
-    Options:
-    --install-completion <span class="o">[</span>bash<span class="p">|</span>zsh<span class="p">|</span>fish<span class="p">|</span>powershell<span class="p">|</span>pwsh<span class="o">]</span>
-                                    Install completion <span class="k">for</span> the specified
-                                    shell.
-    --show-completion <span class="o">[</span>bash<span class="p">|</span>zsh<span class="p">|</span>fish<span class="p">|</span>powershell<span class="p">|</span>pwsh<span class="o">]</span>
-                                    Show completion <span class="k">for</span> the specified shell,
-                                    to copy it or customize the installation.
-    --help                          Show this message and exit.
+<span class="w">    </span>Options:
+<span class="w">    </span>--install-completion<span class="w"> </span><span class="o">[</span>bash<span class="p">|</span>zsh<span class="p">|</span>fish<span class="p">|</span>powershell<span class="p">|</span>pwsh<span class="o">]</span>
+<span class="w">                                    </span>Install<span class="w"> </span>completion<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>specified
+<span class="w">                                    </span>shell.
+<span class="w">    </span>--show-completion<span class="w"> </span><span class="o">[</span>bash<span class="p">|</span>zsh<span class="p">|</span>fish<span class="p">|</span>powershell<span class="p">|</span>pwsh<span class="o">]</span>
+<span class="w">                                    </span>Show<span class="w"> </span>completion<span class="w"> </span><span class="k">for</span><span class="w"> </span>the<span class="w"> </span>specified<span class="w"> </span>shell,
+<span class="w">                                    </span>to<span class="w"> </span>copy<span class="w"> </span>it<span class="w"> </span>or<span class="w"> </span>customize<span class="w"> </span>the<span class="w"> </span>installation.
+<span class="w">    </span>--help<span class="w">                          </span>Show<span class="w"> </span>this<span class="w"> </span>message<span class="w"> </span>and<span class="w"> </span>exit.
 
-    Commands:
-    get-customer
-    list-customers
-    new-customer
-    update-customer
+<span class="w">    </span>Commands:
+<span class="w">    </span>get-customer
+<span class="w">    </span>list-customers
+<span class="w">    </span>new-customer
+<span class="w">    </span>update-customer
 </code></pre></div>
 <p>You can try out the new command with the following commands</p>
 <h2 id="where-to-go-from-here">Where to go from here</h2>
@@ -835,7 +805,7 @@ documentation. Good luck on your next project!</p>
     <nav class="md-footer__inner md-grid" aria-label="Footer" >
       
         
-        <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Previous: Table of contents" rel="prev">
+        <a href="../.." class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
           </div>
@@ -844,7 +814,7 @@ documentation. Good luck on your next project!</p>
               <span class="md-footer__direction">
                 Previous
               </span>
-              Table of contents
+              Introduction
             </div>
           </div>
         </a>
