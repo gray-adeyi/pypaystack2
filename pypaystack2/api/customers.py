@@ -265,7 +265,7 @@ class Customer(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._url(f"/customer/set_risk_action")
+        url = self._url("/customer/set_risk_action")
         payload = {
             "customer": customer,
         }

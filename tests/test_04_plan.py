@@ -1,5 +1,8 @@
-from . import test_auth_key, Plan, TestCase
+from unittest import TestCase
+
+from pypaystack2.api import Plan
 from pypaystack2.utils import Interval
+from . import test_auth_key
 
 
 class TestPlan(TestCase):

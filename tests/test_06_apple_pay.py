@@ -1,5 +1,7 @@
-from . import test_auth_key, ApplePay, TestCase
-import uuid
+from unittest import TestCase
+
+from pypaystack2.api import ApplePay
+from . import test_auth_key
 
 
 class TestApplePay(TestCase):
@@ -17,7 +19,7 @@ class TestApplePay(TestCase):
             # This test will fail in test mode because of
             # missing .well-known/apple-developer-merchantid-domain-association
             # file in the domain.
-            domain_name = f"example.com"
+            domain_name = "example.com"
             print(domain_name)
             (status_code, status, response_msg, data) = self.apple_pay.register_domain(
                 domain_name=domain_name
@@ -53,5 +55,5 @@ class TestApplePay(TestCase):
             self.assertIsNone(data)
 
         # register_domain()
-        domains = list_domains()
+        list_domains()
         unregister_domain("example.com")

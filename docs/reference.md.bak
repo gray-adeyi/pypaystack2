@@ -22,6 +22,7 @@
 ::: pypaystack2.api.splits
 ::: pypaystack2.api.subaccounts
 ::: pypaystack2.api.subscriptions
+::: pypaystack2.api.terminals
 ::: pypaystack2.api.transactions
 ::: pypaystack2.api.transfer_recipients
 ::: pypaystack2.api.transfers

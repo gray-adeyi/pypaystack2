@@ -1,4 +1,8 @@
-from . import test_auth_key, uuid4, Customer, TestCase
+from unittest import TestCase
+from uuid import uuid4
+
+from pypaystack2.api import Customer
+from . import test_auth_key
 
 
 class TestCustomer(TestCase):

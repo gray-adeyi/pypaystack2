@@ -103,7 +103,7 @@ class Miscellaneous(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._url(f"/country")
+        url = self._url("/country")
         return self._handle_request("GET", url)
 
     def get_states(self, country: Country):

@@ -1,6 +1,8 @@
 from unittest import TestCase
-from . import test_auth_key, BulkCharge
 from uuid import uuid4
+
+from pypaystack2.api import BulkCharge
+from . import test_auth_key
 
 
 class TestBulkCharge(TestCase):

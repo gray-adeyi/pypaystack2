@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#welcome-to-pypaystack2s-documentation" class="md-skip">
+        <a href="#whats-pypaystack2" class="md-skip">
           Skip to content
         </a>
       
@@ -217,8 +217,6 @@
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           Introduction
@@ -234,8 +232,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-  
-    
   
   
     <label class="md-nav__title" for="__toc">
@@ -293,20 +289,6 @@
   
   
     <li class="md-nav__item">
-      <a href="tutorials/" class="md-nav__link">
-        Table of contents
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="tutorials/tutorial1/" class="md-nav__link">
         Paystack Command line Client
       </a>
@@ -344,21 +326,6 @@
   
   
     <li class="md-nav__item">
-      <a href="reference/" class="md-nav__link">
-        Reference
-      </a>
-    </li>
-  
-
-    
-      
-      
-      
-
-  
-  
-  
-    <li class="md-nav__item">
       <a href="explanation/" class="md-nav__link">
         Explanation
       </a>
@@ -382,8 +349,6 @@
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-  
-    
   
   
     <label class="md-nav__title" for="__toc">
@@ -419,18 +384,8 @@
   </a>
 
 
-<h1 id="welcome-to-pypaystack2s-documentation">Welcome to pypaystack2's documentation!</h1>
-<p>Pypaystack2 is a simple API wrapper for Paystack API Endpoints in python.
-A fork of the initial pypaystack project. Inspired by the initial project,
-It aims to improve on the good works of the initial project which is no
-longer actively maintained. I'm not sure if i knew much about python and programming
-in general when the original authors created it in 2016 but in my journey, the
-project has proved useful in several python projects that I've written over
-the years. The motivation for building on this package is that it's awesome,
-but in recent years, the package breaks my django applications when deploying
-to a hosting platform. So this is my attempt to provide a solution. Plus my
-curiosity to feel what it's like to build and maintain a package. let's get
-started!</p>
+  <h1>Introduction</h1>
+
 <h2 id="whats-pypaystack2">What's Pypaystack2</h2>
 <p>So Paystack provides restful API endpoints for developers from different platforms
 to integrate their services into their projects. So for python developers, to use
@@ -438,15 +393,15 @@ these endpoints, you might opt for a package like <code>requests</code> to handl
 API calls which involves a lot of boilerplate. Pypaystack2 abstracts this process
 by handling all these complexities under the hood and exposing simple APIs for
 your python project. for example</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pypaystack2.api</span> <span class="kn">import</span> <span class="n">Miscellaneous</span>  <span class="c1"># assumes you have installed pypaystack2</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pypaystack2</span> <span class="kn">import</span> <span class="n">Paystack</span>  <span class="c1"># assumes you have installed pypaystack2</span>
 <span class="kn">from</span> <span class="nn">pypaystack2.utils</span> <span class="kn">import</span> <span class="n">Country</span>
 
-<span class="n">miscellaneous_api_wrapper</span> <span class="o">=</span> <span class="n">Miscellaneous</span><span class="p">()</span>  <span class="c1"># assumes that your paystack auth key is in </span>
-<span class="c1"># your enviromental variables i.e. PAYSTACK_AUTHORIZATION_KEY=your_key otherwise instatiate </span>
+<span class="n">paystack</span> <span class="o">=</span> <span class="n">Paystack</span><span class="p">()</span>  <span class="c1"># assumes that your paystack auth key is in </span>
+<span class="c1"># your enviromental variables i.e. PAYSTACK_AUTHORIZATION_KEY=&lt;paystack-secret-key&gt; otherwise instatiate </span>
 <span class="c1"># the Miscellaneous API wrapper as it is done below.</span>
-<span class="c1"># miscellaneous_wrapper = Miscellaneous(auth_key=your_paystack_auth_key)</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">miscellaneous_api_wrapper</span><span class="o">.</span><span class="n">get_banks</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="n">Country</span><span class="o">.</span><span class="n">NIGERIA</span><span class="p">,</span>
-                                               <span class="n">use_cursor</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Requires internet connection.</span>
+<span class="c1"># paystack = Paystack(auth_key=&lt;paystack-secret-key&gt;)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">paystack</span><span class="o">.</span><span class="n">miscellaneous</span><span class="o">.</span><span class="n">get_banks</span><span class="p">(</span><span class="n">country</span><span class="o">=</span><span class="n">Country</span><span class="o">.</span><span class="n">NIGERIA</span><span class="p">,</span>
+                                            <span class="n">use_cursor</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># Requires internet connection.</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div>
 <p>With the code snippet above, you have successfully queried Paystack's Miscellaneous API
@@ -473,11 +428,11 @@ for the Invoices API. All endpoints available on the Invoices API are available 
 in the <code>Invoice</code> wrapper. Say you wanted to create an invoice by sending a
 <code>POST</code> request to Paystack's Invoice API endpoint <code>/paymentrequest</code>, you'll call
 <code>Invoice</code> wrapper's <code>.create</code> method.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pypaystack2.api</span> <span class="kn">import</span> <span class="n">Invoice</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pypaystack2</span> <span class="kn">import</span> <span class="n">Paystack</span>
 
-<span class="n">invoice_api_wrapper</span> <span class="o">=</span> <span class="n">Invoice</span><span class="p">()</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">invoice_api_wrapper</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">customer</span><span class="o">=</span><span class="s2">&quot;CUS_xwaj0txjryg393b&quot;</span><span class="p">,</span>
-                                      <span class="n">amount</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Creates an invoice with a charge of ₦100</span>
+<span class="n">paystack</span> <span class="o">=</span> <span class="n">Paystack</span><span class="p">()</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">paystack</span><span class="o">.</span><span class="n">invoices</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">customer</span><span class="o">=</span><span class="s2">&quot;CUS_xwaj0txjryg393b&quot;</span><span class="p">,</span>
+                                    <span class="n">amount</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Creates an invoice with a charge of ₦100</span>
 </code></pre></div>
 <p>From here you can check out the tutorials section to get more examples and get familiar or surf the
 documentation for wrappers and methods you'll need for your next project. Hurray!</p>
@@ -502,13 +457,13 @@ documentation for wrappers and methods you'll need for your next project. Hurray
       
       
         
-        <a href="tutorials/" class="md-footer__link md-footer__link--next" aria-label="Next: Table of contents" rel="next">
+        <a href="tutorials/tutorial1/" class="md-footer__link md-footer__link--next" aria-label="Next: Paystack Command line Client" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Table of contents
+              Paystack Command line Client
             </div>
           </div>
           <div class="md-footer__button md-icon">

@@ -18,14 +18,14 @@ class DedicatedAccount(BaseAPI):
     """
 
     def create(
-        self,
-        customer: str,
-        preferred_bank: Optional[str] = None,
-        subaccount: Optional[str] = None,
-        split_code: Optional[str] = None,
-        first_name: Optional[str] = None,
-        last_name: Optional[str] = None,
-        phone: Optional[str] = None,
+            self,
+            customer: str,
+            preferred_bank: Optional[str] = None,
+            subaccount: Optional[str] = None,
+            split_code: Optional[str] = None,
+            first_name: Optional[str] = None,
+            last_name: Optional[str] = None,
+            phone: Optional[str] = None,
     ) -> Response:
         """Create a dedicated virtual account and assign to a customer
 
@@ -80,12 +80,12 @@ class DedicatedAccount(BaseAPI):
         return self._handle_request("POST", url, payload)
 
     def get_dedicated_accounts(
-        self,
-        active=True,
-        currency=Currency.NGN,
-        provider_slug: Optional[str] = None,
-        bank_id: Optional[str] = None,
-        customer: Optional[str] = None,
+            self,
+            active=True,
+            currency=Currency.NGN,
+            provider_slug: Optional[str] = None,
+            bank_id: Optional[str] = None,
+            customer: Optional[str] = None,
     ) -> Response:
         """Fetches dedicated virtual accounts available on your integration.
 
@@ -158,7 +158,7 @@ class DedicatedAccount(BaseAPI):
         return self._handle_request("GET", url)
 
     def requery(
-        self, account_number: str, provider_slug: str, date: Optional[str]
+            self, account_number: str, provider_slug: str, date: Optional[str]
     ) -> Response:
         """Get details of a dedicated virtual account on your integration.
 
@@ -225,11 +225,11 @@ class DedicatedAccount(BaseAPI):
         return self._handle_request("DELETE", url)
 
     def split(
-        self,
-        customer: str,
-        subaccount: Optional[str] = None,
-        split_code: Optional[str] = None,
-        preferred_bank: Optional[str] = None,
+            self,
+            customer: str,
+            subaccount: Optional[str] = None,
+            split_code: Optional[str] = None,
+            preferred_bank: Optional[str] = None,
     ) -> Response:
         """Split a dedicated virtual account transaction with one or more accounts
 
@@ -262,7 +262,7 @@ class DedicatedAccount(BaseAPI):
         https://demobank.paystackintegrations.com/
         """
 
-        url = self._url(f"/dedicated_account/split")
+        url = self._url("/dedicated_account/split")
         payload = {"customer": customer}
 
         optional_params = [
@@ -301,7 +301,7 @@ class DedicatedAccount(BaseAPI):
         https://demobank.paystackintegrations.com/
         """
 
-        url = self._url(f"/dedicated_account/split")
+        url = self._url("/dedicated_account/split")
         payload = {
             "account_number": account_number,
         }
@@ -327,5 +327,5 @@ class DedicatedAccount(BaseAPI):
         https://demobank.paystackintegrations.com/
         """
 
-        url = self._url(f"/dedicated_account/available_providers")
+        url = self._url("/dedicated_account/available_providers")
         return self._handle_request("GET", url)

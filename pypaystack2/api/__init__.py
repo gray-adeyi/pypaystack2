@@ -23,25 +23,52 @@ Modules exported by this package:
     - `transfers_control`: A module containing implementations for interfacing with Paystack's Transfers Control API
     - `verification`: A module containing implementations for interfacing with Paystack's Verification API
 """
-from .apple_pay import ApplePay
-from .bulk_charges import BulkCharge
-from .charge import Charge
-from .control_panel import ControlPanel
-from .customers import Customer
-from .dedicated_accounts import DedicatedAccount
-from .disputes import Dispute
-from .invoices import Invoice
-from .miscellaneous import Miscellaneous
-from .payment_pages import Page
-from .plans import Plan
-from .products import Product
-from .refunds import Refund
-from .settlements import Settlement
-from .splits import Split
-from .subaccounts import SubAccount
-from .subscriptions import Subscription
-from .transactions import Transaction
-from .transfer_recipients import TransferRecipient
-from .transfers_control import TransferControl
-from .transfers import Transfer
-from .verification import Verification
+
+from pypaystack2.api.apple_pay import ApplePay
+from pypaystack2.api.bulk_charges import BulkCharge
+from pypaystack2.api.charge import Charge
+from pypaystack2.api.control_panel import ControlPanel
+from pypaystack2.api.customers import Customer
+from pypaystack2.api.dedicated_accounts import DedicatedAccount
+from pypaystack2.api.disputes import Dispute
+from pypaystack2.api.invoices import Invoice
+from pypaystack2.api.miscellaneous import Miscellaneous
+from pypaystack2.api.payment_pages import Page
+from pypaystack2.api.plans import Plan
+from pypaystack2.api.products import Product
+from pypaystack2.api.refunds import Refund
+from pypaystack2.api.settlements import Settlement
+from pypaystack2.api.splits import Split
+from pypaystack2.api.subaccounts import SubAccount
+from pypaystack2.api.subscriptions import Subscription
+from pypaystack2.api.terminals import Terminal
+from pypaystack2.api.transactions import Transaction
+from pypaystack2.api.transfer_recipients import TransferRecipient
+from pypaystack2.api.transfers import Transfer
+from pypaystack2.api.transfers_control import TransferControl
+from pypaystack2.api.verification import Verification
+
+# prevent removal of unused import
+ApplePay
+BulkCharge
+Charge
+ControlPanel
+Customer
+DedicatedAccount
+Dispute
+Invoice
+Miscellaneous
+Page
+Plan
+Product
+Refund
+Settlement
+Split
+SubAccount
+Subscription
+Terminal
+Transaction
+TransferRecipient
+Transfer
+TransferControl
+Verification

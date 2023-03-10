@@ -205,7 +205,7 @@ class Invoice(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._url(f"/paymentrequest/totals")
+        url = self._url("/paymentrequest/totals")
         return self._handle_request("GET", url)
 
     def finalize_invoice(self, code: str) -> Response:

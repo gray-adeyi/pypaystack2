@@ -96,7 +96,7 @@ class Page(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._url(f"/page?perPage=" + str(pagination))
+        url = self._url("/page?perPage=" + str(pagination))
         query_params = [
             ("page", page),
             ("start_date", start_date),

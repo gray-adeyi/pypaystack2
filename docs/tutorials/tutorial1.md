@@ -41,7 +41,7 @@ using only the test secret key. create a new file named `.env` within your proje
 Now put in your test secret key in the `.env` file like so.
 
 ```env
-PAYSTACK_AUTHORIZATION_KEY = "<your test secret key>"
+PAYSTACK_AUTHORIZATION_KEY = "<your paystack test secret key>"
 ```
 
 !!! warning
@@ -84,6 +84,7 @@ currently available as at the time of writing of this tutorial.
 - Split
 - SubAccount
 - Subscription
+- Terminal
 - Transaction
 - TransferReceipt
 - TransferControl
@@ -94,15 +95,13 @@ So in a situation where you don't have your `PAYSTACK_AUTHORIZATION_KEY` as an e
 you can pass it into any of the API wrappers. e.g.
 
 ```python
-# When you don't have PAYSTACK_AUTHORIZATION_KEY in your environmental variables
-from pypaystack2.api import Transaction, Plan
+# When you don't have PAYSTACK_AUTHORIZATION_KEY(paystack secret key) in your environmental variables
+from pypaystack2 import Paystack
 
-txn_wrapper = Transaction(auth_key="<your test secret key>")
-plan_wrapper = Plan(auth_key="<your test secret key>")
+paystack = Paystack(auth_key="<your test secret key>")
 
-# When you have PAYSTACK_AUTHORIZATION_KEY set in your environmental variables
-txn_wrapper = Transaction()
-plan_wrapper = Plan()
+# When you have PAYSTACK_AUTHORIZATION_KEY(paystack secret key) set in your environmental variables
+paystack = Paystack()
 ```
 
 ???+ note
@@ -180,13 +179,13 @@ at [Paystack's Customer Services API](https://paystack.com/docs/api/#customer)
 # root-dir/main.py
 from typing import Optional
 from dotenv import load_dotenv
-from pypaystack2.api import Customer
+from pypaystack2 import Paystack
 from typer import Typer
 
 load_dotenv()
 app = Typer()
 
-customer_wrapper = Customer()
+paystack = Paystack()
 
 
 @app.command()
@@ -196,7 +195,7 @@ def new_customer(
         last_name: Optional[str] = None,
         phone: Optional[str] = None,
 ):
-    response = customer_wrapper.create(
+    response = paystack.customers.create(
         email=email, first_name=first_name, last_name=last_name, phone=phone
     )
     print(response.status_code)
@@ -210,7 +209,7 @@ if __name__ == "__main__":
 ```
 
 ???+ note
-All API wrappers are available in `pypaystack2.api`. e.g. `from pypaystack2.api import Split, Transaction`
+All API wrappers are available on `pypaystack`. as attributes e.g. `paystack.transactions` for the Transactions API
 
 Now if you run the script again.
 
@@ -268,7 +267,7 @@ object based on the response it gets from Paystack. This `Response` is just a `N
 `status,status_code,message` and `data`. So this call
 
 ```python
-response = customer_wrapper.create(email=email, first_name=first_name, last_name=last_name, phone=phone)
+response = paystack.customers.create(email=email, first_name=first_name, last_name=last_name, phone=phone)
 ```
 
 in our script returns the `Response` object just described, and you can access each of these attributes with
@@ -282,14 +281,14 @@ Let's add a few more commands to our **Paystack Command line Client**
 # root-dir/main.py
 from typing import Optional
 from dotenv import load_dotenv
-from pypaystack2.api import Customer
+from pypaystack2 import Paystack
 from typer import Typer
 
 load_dotenv()
 
 app = Typer()
 
-customer_wrapper = Customer()
+paystack = Paystack()
 
 
 @app.command()
@@ -299,7 +298,7 @@ def new_customer(
         last_name: Optional[str] = None,
         phone: Optional[str] = None,
 ):
-    response = customer_wrapper.create(
+    response = paystack.customers.create(
         email=email, first_name=first_name, last_name=last_name, phone=phone
     )
     print(response.status_code)
@@ -310,7 +309,7 @@ def new_customer(
 
 @app.command()
 def list_customers():
-    response = customer_wrapper.get_customers()
+    response = paystack.customers.get_customers()
     print(response.status_code)
     print(response.status)
     print(response.message)
@@ -319,7 +318,7 @@ def list_customers():
 
 @app.command()
 def get_customer(ec: str):
-    response = customer_wrapper.get_customer(email_or_code=ec)
+    response = paystack.customers.get_customer(email_or_code=ec)
     print(response.status_code)
     print(response.status)
     print(response.message)
@@ -328,7 +327,7 @@ def get_customer(ec: str):
 
 @app.command()
 def update_customer(code: str, last_name: str, first_name: str):
-    response = customer_wrapper.update(
+    response = paystack.customers.update(
         code=code, last_name=last_name, first_name=first_name
     )
     print(response.status_code)

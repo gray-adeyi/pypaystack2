@@ -186,7 +186,7 @@ class Terminal(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._url(f"/terminal/commission_device")
+        url = self._url("/terminal/commission_device")
 
         payload = {
             "serial_number": serial_number,
@@ -206,7 +206,7 @@ class Terminal(BaseAPI):
         Response
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._url(f"/terminal/decommission_device")
+        url = self._url("/terminal/decommission_device")
 
         payload = {
             "serial_number": serial_number,

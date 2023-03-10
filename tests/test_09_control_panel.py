@@ -1,4 +1,7 @@
-from . import test_auth_key, ControlPanel, TestCase
+from unittest import TestCase
+
+from pypaystack2.api import ControlPanel
+from . import test_auth_key
 
 
 class TestControlPanel(TestCase):

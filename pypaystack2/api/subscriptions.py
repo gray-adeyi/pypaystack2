@@ -87,7 +87,7 @@ class Subscription(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._url(f"/plan/?perPage=" + str(pagination))
+        url = self._url("/plan/?perPage=" + str(pagination))
         query_params = [
             ("page", page),
             ("customer", customer),

@@ -1,4 +1,7 @@
-from . import test_auth_key, Transaction, TestCase
+from unittest import TestCase
+
+from pypaystack2.api import Transaction
+from . import test_auth_key
 
 
 class TestTransactionRecords(TestCase):

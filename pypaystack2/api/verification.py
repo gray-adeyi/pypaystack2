@@ -84,7 +84,7 @@ class Verification(BaseAPI):
             "country_code": country_code,
             "document_type": document_type,
         }
-        url = self._url(f"/bank/validate")
+        url = self._url("/bank/validate")
 
         return self._handle_request("POST", url, payload)
 

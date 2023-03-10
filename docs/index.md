@@ -1,17 +1,3 @@
-# Welcome to pypaystack2's documentation!
-
-Pypaystack2 is a simple API wrapper for Paystack API Endpoints in python.
-A fork of the initial pypaystack project. Inspired by the initial project,
-It aims to improve on the good works of the initial project which is no
-longer actively maintained. I'm not sure if i knew much about python and programming
-in general when the original authors created it in 2016 but in my journey, the
-project has proved useful in several python projects that I've written over
-the years. The motivation for building on this package is that it's awesome,
-but in recent years, the package breaks my django applications when deploying
-to a hosting platform. So this is my attempt to provide a solution. Plus my
-curiosity to feel what it's like to build and maintain a package. let's get
-started!
-
 ## What's Pypaystack2
 
 So Paystack provides restful API endpoints for developers from different platforms
@@ -22,15 +8,15 @@ by handling all these complexities under the hood and exposing simple APIs for
 your python project. for example
 
 ```python
-from pypaystack2.api import Miscellaneous  # assumes you have installed pypaystack2
+from pypaystack2 import Paystack  # assumes you have installed pypaystack2
 from pypaystack2.utils import Country
 
-miscellaneous_api_wrapper = Miscellaneous()  # assumes that your paystack auth key is in 
-# your enviromental variables i.e. PAYSTACK_AUTHORIZATION_KEY=your_key otherwise instatiate 
+paystack = Paystack()  # assumes that your paystack auth key is in 
+# your enviromental variables i.e. PAYSTACK_AUTHORIZATION_KEY=<paystack-secret-key> otherwise instatiate 
 # the Miscellaneous API wrapper as it is done below.
-# miscellaneous_wrapper = Miscellaneous(auth_key=your_paystack_auth_key)
-response = miscellaneous_api_wrapper.get_banks(country=Country.NIGERIA,
-                                               use_cursor=False)  # Requires internet connection.
+# paystack = Paystack(auth_key=<paystack-secret-key>)
+response = paystack.miscellaneous.get_banks(country=Country.NIGERIA,
+                                            use_cursor=False)  # Requires internet connection.
 print(response)
 ```
 
@@ -64,11 +50,11 @@ in the `Invoice` wrapper. Say you wanted to create an invoice by sending a
 `Invoice` wrapper's `.create` method.
 
 ```python
-from pypaystack2.api import Invoice
+from pypaystack2 import Paystack
 
-invoice_api_wrapper = Invoice()
-response = invoice_api_wrapper.create(customer="CUS_xwaj0txjryg393b",
-                                      amount=1000)  # Creates an invoice with a charge of ₦100
+paystack = Paystack()
+response = paystack.invoices.create(customer="CUS_xwaj0txjryg393b",
+                                    amount=1000)  # Creates an invoice with a charge of ₦100
 ```
 
 From here you can check out the tutorials section to get more examples and get familiar or surf the

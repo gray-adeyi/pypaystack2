@@ -13,17 +13,17 @@ class Charge(BaseAPI):
     """
 
     def charge(
-        self,
-        email: str,
-        amount: int,
-        bank: Optional[dict[str, Any]] = None,
-        auth_code: Optional[str] = None,
-        pin: Optional[str] = None,
-        metadata: Optional[dict[str, Any]] = None,
-        reference: Optional[str] = None,
-        ussd: Optional[dict[str, Any]] = None,
-        mobile_money: Optional[dict[str, Any]] = None,
-        device_id: Optional[str] = None,
+            self,
+            email: str,
+            amount: int,
+            bank: Optional[dict[str, Any]] = None,
+            auth_code: Optional[str] = None,
+            pin: Optional[str] = None,
+            metadata: Optional[dict[str, Any]] = None,
+            reference: Optional[str] = None,
+            ussd: Optional[dict[str, Any]] = None,
+            mobile_money: Optional[dict[str, Any]] = None,
+            device_id: Optional[str] = None,
     ) -> Response:
         """Initiate a payment by integrating the payment channel of your choice.
 
@@ -94,7 +94,7 @@ class Charge(BaseAPI):
         url = self._url("/charge/submit_pin")
         return self._handle_request("POST", url, payload)
 
-    def submit_OTP(self, otp: str, reference: str) -> Response:
+    def submit_otp(self, otp: str, reference: str) -> Response:
         """Submit OTP to complete a charge
 
         Parameters
@@ -155,12 +155,12 @@ class Charge(BaseAPI):
         return self._handle_request("POST", url, payload)
 
     def set_address(
-        self,
-        address: str,
-        reference: str,
-        city: str,
-        state: str,
-        zipcode: str,
+            self,
+            address: str,
+            reference: str,
+            city: str,
+            state: str,
+            zipcode: str,
     ) -> Response:
         """Submit address to continue a charge
 

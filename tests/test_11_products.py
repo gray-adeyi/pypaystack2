@@ -1,8 +1,10 @@
 from random import randint
+from unittest import TestCase
 from uuid import uuid4
-import uuid
-from . import test_auth_key, Product, TestCase
+
+from pypaystack2.api import Product
 from pypaystack2.utils import Currency
+from . import test_auth_key
 
 
 class TestProduct(TestCase):

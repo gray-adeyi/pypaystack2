@@ -1,5 +1,8 @@
+from unittest import TestCase
+
+from pypaystack2.api import Miscellaneous
 from pypaystack2.utils import Country
-from . import test_auth_key, Miscellaneous, TestCase
+from . import test_auth_key
 
 
 class TestMiscellaneous(TestCase):
