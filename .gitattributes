@@ -1,3 +1,3 @@
-docs/ linguist-documentation
-docs.old/ linguist-documentation
-site/ linguist-vendored
+docs/* linguist-documentation
+docs.old/* linguist-documentation
+site/* linguist-generated
