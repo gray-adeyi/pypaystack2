@@ -1,4 +1,6 @@
 *.html linguist-vendored
+*.css linguist-vendored
+*.js linguist-vendored
 docs/* linguist-vendored
 docs.old/* linguist-vendored
 site/* linguist-vendored
