@@ -1,9 +1,21 @@
 from enum import Enum
 from functools import reduce
 from operator import add
-from typing import Any, Optional, Union
+from typing import Any, Optional, Union, NamedTuple
 
-from .errors import InvalidDataError
+from pypaystack2.errors import InvalidDataError
+
+
+class HTTPMethod(str, Enum):
+    """An enum of supported http methods"""
+
+    GET = "GET"
+    POST = "POST"
+    PUT = "PUT"
+    PATCH = "PATCH"
+    DELETE = "DELETE"
+    OPTIONS = "OPTIONS"
+    HEAD = "HEAD"
 
 
 class TerminalEventType(str, Enum):
@@ -54,7 +66,7 @@ class Bearer(str, Enum):
 
     ACCOUNT = "account"
     SUBACCOUNT = "subaccount"
-    ALL_PROPOTIONAL = "all-proportional"
+    ALL_PROPORTIONAL = "all-proportional"
     ALL = "all"
 
 
@@ -83,13 +95,10 @@ class Country(str, Enum):
     def get_full(val: str) -> Optional[str]:
         """Returns paystack supported country name in full lowercase
 
-        Parameters
-        ----------
-        val : str
-            The two digit iso name of the country.
-        Returns
-        -------
-        str,optinal
+        Args:
+            val: The two-digit iso name of the country.
+
+        Returns:
             The name of the country in lowercase if it is supported by
             paystack or none.
         """
@@ -220,20 +229,14 @@ def validate_amount(amount: Union[int, float]) -> Union[int, float]:
     is supplied as an input, to prevent cases where
     negative or zero value is provided as an amount.
 
-    Parameters
-    ----------
-    amount: int,float
-        The money to be validated.
+    Args:
+        amount: The money to be validated.
 
-    Returns
-    -------
-    int,float
+    Returns:
         The money supplied if it is valid.
 
-    Raises
-    ------
-    InvalidDataError
-        With the cause of the validation error
+    Raises:
+        InvalidDataError: With the cause of the validation error
     """
 
     if not amount:
@@ -252,21 +255,15 @@ def validate_amount(amount: Union[int, float]) -> Union[int, float]:
 def validate_interval(interval: str) -> str:
     """Validates that the interval supplied is supported by paystack
 
-    Parameters
-    ----------
-    interval:str
-        any of the intervals supported by paystack i.e. hourly,daily
-        weekly,monthly,annually
+    Args:
+        interval: any of the intervals supported by paystack i.e. hourly, daily
+            weekly,monthly,annually
 
-    Returns
-    -------
-    str
-        returns the interval if it is a valid paystack interval
+    Returns:
+        The interval if it is a valid paystack interval
 
-    Raises
-    ------
-    InvalidDataError
-        to provide feedback that an invalid interval was provided.
+    Raises:
+        InvalidDataError: to provide feedback that an invalid interval was provided.
     """
 
     interval = (
@@ -291,25 +288,20 @@ def add_to_payload(
     ``{"amount": 20000}`` and you want to include an additional
     data such as ``currency`` if provided in the ``optional_params``
     to send this ``{"amount": 20000,"currency":"ngn"}`` if only
-    the currency is available otherwise send the intial payload.
+    the currency is available otherwise send the initial payload.
     This functions takes a list of optional parameters
     which is added to the payload is they are available and
     returns the payload.
 
-    Parameters
-    ----------
-    optional_params: list[tuple[str,Any]]
-        A list of additional data to be added to the payload if it is
-        available. It follows the format ``[("name-on-payload","value")].``
-        e.g ``[("currency","ngn"),("amount",2000)]``
-    payload: dict[str,Any]
-        A dictionary containing the data to be sent in the request body.
+    Args:
+        optional_params: A list of additional data to be added to the payload if it is
+            available. It follows the format ``[("name-on-payload","value")].``
+            e.g ``[("currency","ngn"),("amount",2000)]``
+        payload: A dictionary containing the data to be sent in the request body.
 
-    Returns
-    -------
-    dict[str,Any]
-        A dictionary of the payload updated with addtional data in the
-        optional_params that are not ``None``.
+    Returns:
+        A dictionary of the payload updated with additional data in the
+            optional_params that are not `None`.
     """
     [
         payload.update({item[0]: item[1]})
@@ -320,7 +312,7 @@ def add_to_payload(
 
 
 def append_query_params(query_params: list[tuple[str, Any]], url: str) -> str:
-    """Adds more queries to url that already has query parameters in its suffix
+    """Adds more queries to url that already have query parameters in its suffix
 
     This function should only be used with urls that already have a
     query parameter suffixed to it because it makes that assumption
@@ -328,18 +320,13 @@ def append_query_params(query_params: list[tuple[str, Any]], url: str) -> str:
     and it adds more query parameters delimited by & to the end of the provided
     url ``http://example-url.com?firstQuery=1&otherQuery=2&...``
 
-    Parameters
-    ----------
-    query_params: list[tuple[str,Any]]
-        A list of other query parameters that should be appended to the url
-        if it is not None. e.g ``[("page",2),("pagination",50),("currency",None)]`` ->
-        ``url&page=2&pagination=50``
-    url: str
-        The url to which additional query parameters is added.
+    Args:
+        query_params: A list of other query parameters that should be appended to the url
+            if it is not None. e.g ``[("page",2),("pagination",50),("currency",None)]`` ->
+            ``url&page=2&pagination=50``
+        url: The url to which additional query parameters are added.
 
-    Returns
-    -------
-    str
+    Returns:
         The new url with padded query parameters.
     """
     params = [
@@ -348,3 +335,25 @@ def append_query_params(query_params: list[tuple[str, Any]], url: str) -> str:
     if len(params) == 0:
         return url
     return url + reduce(add, params)
+
+
+class Response(NamedTuple):
+    """
+    A namedtuple containing the data gotten from making a request to paystack's API endpoints.
+
+    All wrapper methods returns an instance of `Response` which can be used as a tuple following
+    this format `(status_code, status, message, data)`. Accessing by attributes is also possible
+    say for example `response` is an instance of `Response`, we can access the data in the
+    response like so `response.data`
+
+    Attributes:
+        status_code: The response status code
+        status: A flag for the response status
+        message: Paystack response message
+        data: Data sent from paystack's server if any.
+    """
+
+    status_code: int
+    status: bool
+    message: str
+    data: Optional[Union[dict[str, Any], list[dict[str, Any]]]]
