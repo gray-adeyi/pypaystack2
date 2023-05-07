@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.utils import HTTPMethod, append_query_params, ChargeStatus, Response
@@ -11,7 +11,7 @@ class BulkCharge(BaseAPI):
     https://paystack.com/docs/api/#bulk-charge
     """
 
-    def initiate(self, body: list[dict[str, Any]]) -> Response:
+    def initiate(self, body: list[dict]) -> Response:
         """
         Send a list of dictionaries with authorization ``codes`` and ``amount``
         (in kobo if currency is NGN, pesewas, if currency is GHS, and cents,
@@ -145,7 +145,7 @@ class AsyncBulkCharge(BaseAsyncAPI):
     https://paystack.com/docs/api/#bulk-charge
     """
 
-    async def initiate(self, body: list[dict[str, Any]]) -> Response:
+    async def initiate(self, body: list[dict]) -> Response:
         """
         Send a list of dictionaries with authorization ``codes`` and ``amount``
         (in kobo if currency is NGN, pesewas, if currency is GHS, and cents,

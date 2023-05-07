@@ -6,7 +6,7 @@ Modules and packages exported by this package:
    - `utils`: A module containing useful utilities and enums
    - `errors`: A module containing error types for pypaystack2
 """
-from pypaystack2.api.paystack import Paystack
+from pypaystack2.api.paystack import Paystack, AsyncPaystack
 from pypaystack2.version import (
     __title__,
     __version__,
@@ -17,6 +17,7 @@ from pypaystack2.version import (
 
 # prevent removal of unused import
 Paystack
+AsyncPaystack
 __title__
 __version__
 __author__

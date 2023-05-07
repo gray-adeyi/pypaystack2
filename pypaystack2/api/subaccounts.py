@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.utils import (
@@ -28,7 +28,7 @@ class SubAccount(BaseAPI):
         primary_contact_email: Optional[str] = None,
         primary_contact_name: Optional[str] = None,
         primary_contact_phone: Optional[str] = None,
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: Optional[dict] = None,
     ) -> Response:
         """Create a subacount on your integration.
 
@@ -120,7 +120,7 @@ class SubAccount(BaseAPI):
         primary_contact_name: Optional[str] = None,
         primary_contact_phone: Optional[str] = None,
         settlement_schedule: Optional[Schedule] = None,
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: Optional[dict] = None,
     ) -> Response:
         """Update a subaccount details on your integration.
 
@@ -190,7 +190,7 @@ class AsyncSubAccount(BaseAsyncAPI):
         primary_contact_email: Optional[str] = None,
         primary_contact_name: Optional[str] = None,
         primary_contact_phone: Optional[str] = None,
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: Optional[dict] = None,
     ) -> Response:
         """Create a subacount on your integration.
 
@@ -282,7 +282,7 @@ class AsyncSubAccount(BaseAsyncAPI):
         primary_contact_name: Optional[str] = None,
         primary_contact_phone: Optional[str] = None,
         settlement_schedule: Optional[Schedule] = None,
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: Optional[dict] = None,
     ) -> Response:
         """Update a subaccount details on your integration.
 

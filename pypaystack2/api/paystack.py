@@ -1,50 +1,26 @@
-from pypaystack2.api import (
-    ApplePay,
-    BulkCharge,
-    Charge,
-    ControlPanel,
-    Customer,
-    DedicatedAccount,
-    Dispute,
-    Invoice,
-    Miscellaneous,
-    Page,
-    Plan,
-    Product,
-    Refund,
-    Settlement,
-    Split,
-    SubAccount,
-    Subscription,
-    Transaction,
-    TransferRecipient,
-    Transfer,
-    TransferControl,
-    Verification,
-)
-from pypaystack2.api.apple_pay import AsyncApplePay
-from pypaystack2.api.bulk_charges import AsyncBulkCharge
-from pypaystack2.api.charge import AsyncCharge
-from pypaystack2.api.control_panel import AsyncControlPanel
-from pypaystack2.api.customers import AsyncCustomer
-from pypaystack2.api.dedicated_accounts import AsyncDedicatedAccount
-from pypaystack2.api.disputes import AsyncDispute
-from pypaystack2.api.invoices import AsyncInvoice
-from pypaystack2.api.miscellaneous import AsyncMiscellaneous
-from pypaystack2.api.payment_pages import AsyncPage
-from pypaystack2.api.plans import AsyncPlan
-from pypaystack2.api.products import AsyncProduct
-from pypaystack2.api.refunds import AsyncRefund
-from pypaystack2.api.settlements import AsyncSettlement
-from pypaystack2.api.splits import AsyncSplit
-from pypaystack2.api.subaccounts import AsyncSubAccount
-from pypaystack2.api.subscriptions import AsyncSubscription
+from pypaystack2.api.apple_pay import AsyncApplePay, ApplePay
+from pypaystack2.api.bulk_charges import AsyncBulkCharge, BulkCharge
+from pypaystack2.api.charge import AsyncCharge, Charge
+from pypaystack2.api.control_panel import AsyncControlPanel, ControlPanel
+from pypaystack2.api.customers import AsyncCustomer, Customer
+from pypaystack2.api.dedicated_accounts import AsyncDedicatedAccount, DedicatedAccount
+from pypaystack2.api.disputes import AsyncDispute, Dispute
+from pypaystack2.api.invoices import AsyncInvoice, Invoice
+from pypaystack2.api.miscellaneous import AsyncMiscellaneous, Miscellaneous
+from pypaystack2.api.payment_pages import AsyncPage, Page
+from pypaystack2.api.plans import AsyncPlan, Plan
+from pypaystack2.api.products import AsyncProduct, Product
+from pypaystack2.api.refunds import AsyncRefund, Refund
+from pypaystack2.api.settlements import AsyncSettlement, Settlement
+from pypaystack2.api.splits import AsyncSplit, Split
+from pypaystack2.api.subaccounts import AsyncSubAccount, SubAccount
+from pypaystack2.api.subscriptions import AsyncSubscription, Subscription
 from pypaystack2.api.terminals import Terminal, AsyncTerminal
-from pypaystack2.api.transactions import AsyncTransaction
-from pypaystack2.api.transfer_recipients import AsyncTransferRecipient
-from pypaystack2.api.transfers import AsyncTransfer
-from pypaystack2.api.transfers_control import AsyncTransferControl
-from pypaystack2.api.verification import AsyncVerification
+from pypaystack2.api.transactions import AsyncTransaction, Transaction
+from pypaystack2.api.transfer_recipients import AsyncTransferRecipient, TransferRecipient
+from pypaystack2.api.transfers import AsyncTransfer, Transfer
+from pypaystack2.api.transfers_control import AsyncTransferControl, TransferControl
+from pypaystack2.api.verification import AsyncVerification, Verification
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 
 

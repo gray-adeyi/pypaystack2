@@ -1,4 +1,4 @@
-from typing import Mapping, Optional
+from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.errors import InvalidDataError
@@ -31,7 +31,7 @@ class TransferRecipient(BaseAPI):
         description: Optional[str] = None,
         currency: Optional[Currency] = None,
         auth_code: Optional[str] = None,
-        metadata: Optional[Mapping] = None,
+        metadata: Optional[dict] = None,
     ) -> Response:
         """
         Creates a new recipient. A duplicate account number will lead to the
@@ -214,7 +214,7 @@ class AsyncTransferRecipient(BaseAsyncAPI):
         description: Optional[str] = None,
         currency: Optional[Currency] = None,
         auth_code: Optional[str] = None,
-        metadata: Optional[Mapping] = None,
+        metadata: Optional[dict] = None,
     ) -> Response:
         """
         Creates a new recipient. A duplicate account number will lead to the

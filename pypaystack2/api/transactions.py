@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.errors import InvalidDataError
@@ -30,7 +30,7 @@ class Transaction(BaseAPI):
         callback_url: Optional[str] = None,
         plan: Optional[str] = None,
         invoice_limit: Optional[int] = None,
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: Optional[dict] = None,
         channels: Optional[list[Channel]] = None,
         split_code: Optional[str] = None,
         subaccount: Optional[str] = None,
@@ -171,7 +171,7 @@ class Transaction(BaseAPI):
         auth_code: str,
         reference: Optional[str] = None,
         currency: Optional[Currency] = None,
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: Optional[dict] = None,
         channels: Optional[list[Channel]] = None,
         subaccount: Optional[str] = None,
         transaction_charge: Optional[int] = None,
@@ -544,7 +544,7 @@ class AsyncTransaction(BaseAsyncAPI):
         callback_url: Optional[str] = None,
         plan: Optional[str] = None,
         invoice_limit: Optional[int] = None,
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: Optional[dict] = None,
         channels: Optional[list[Channel]] = None,
         split_code: Optional[str] = None,
         subaccount: Optional[str] = None,
@@ -685,7 +685,7 @@ class AsyncTransaction(BaseAsyncAPI):
         auth_code: str,
         reference: Optional[str] = None,
         currency: Optional[Currency] = None,
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: Optional[dict] = None,
         channels: Optional[list[Channel]] = None,
         subaccount: Optional[str] = None,
         transaction_charge: Optional[int] = None,

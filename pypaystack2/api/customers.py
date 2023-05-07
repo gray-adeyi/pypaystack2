@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.errors import InvalidDataError
@@ -25,7 +25,7 @@ class Customer(BaseAPI):
         first_name: Optional[str] = None,
         last_name: Optional[str] = None,
         phone: Optional[str] = None,
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: Optional[dict] = None,
     ) -> Response:
         """Create a customer on your integration.
 
@@ -108,7 +108,7 @@ class Customer(BaseAPI):
         first_name: str,
         last_name: str,
         phone: Optional[str] = None,
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: Optional[dict] = None,
     ) -> Response:
         """Update a customer's details on your integration
 
@@ -254,7 +254,7 @@ class AsyncCustomer(BaseAsyncAPI):
         first_name: Optional[str] = None,
         last_name: Optional[str] = None,
         phone: Optional[str] = None,
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: Optional[dict] = None,
     ) -> Response:
         """Create a customer on your integration.
 
@@ -337,7 +337,7 @@ class AsyncCustomer(BaseAsyncAPI):
         first_name: str,
         last_name: str,
         phone: Optional[str] = None,
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: Optional[dict] = None,
     ) -> Response:
         """Update a customer's details on your integration
 

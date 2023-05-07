@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.utils import (
@@ -24,8 +24,8 @@ class Invoice(BaseAPI):
         amount: int,
         due_date: Optional[str] = None,
         description: Optional[str] = None,
-        line_items: Optional[list[dict[str, Any]]] = None,
-        tax: Optional[list[dict[str, Any]]] = None,
+        line_items: Optional[list[dict]] = None,
+        tax: Optional[list[dict]] = None,
         currency: Optional[Currency] = None,
         send_notification: Optional[bool] = None,
         draft: Optional[bool] = None,
@@ -184,15 +184,15 @@ class Invoice(BaseAPI):
         amount: int,
         due_date: Optional[str] = None,
         description: Optional[str] = None,
-        line_items: Optional[list[dict[str, Any]]] = None,
-        tax: Optional[list[dict[str, Any]]] = None,
+        line_items: Optional[list[dict]] = None,
+        tax: Optional[list[dict]] = None,
         currency: Optional[Currency] = None,
         send_notification: Optional[bool] = None,
         draft: Optional[bool] = None,
         invoice_number: Optional[int] = None,
         split_code: Optional[str] = None,
     ) -> Response:
-        """Update an invoice details on your integration
+        """Update the invoice details on your integration
 
         Args:
             id_or_code: Invoice ID or slug
@@ -264,8 +264,8 @@ class AsyncInvoice(BaseAsyncAPI):
         amount: int,
         due_date: Optional[str] = None,
         description: Optional[str] = None,
-        line_items: Optional[list[dict[str, Any]]] = None,
-        tax: Optional[list[dict[str, Any]]] = None,
+        line_items: Optional[list[dict]] = None,
+        tax: Optional[list[dict]] = None,
         currency: Optional[Currency] = None,
         send_notification: Optional[bool] = None,
         draft: Optional[bool] = None,
@@ -424,15 +424,15 @@ class AsyncInvoice(BaseAsyncAPI):
         amount: int,
         due_date: Optional[str] = None,
         description: Optional[str] = None,
-        line_items: Optional[list[dict[str, Any]]] = None,
-        tax: Optional[list[dict[str, Any]]] = None,
+        line_items: Optional[list[dict]] = None,
+        tax: Optional[list[dict]] = None,
         currency: Optional[Currency] = None,
         send_notification: Optional[bool] = None,
         draft: Optional[bool] = None,
         invoice_number: Optional[int] = None,
         split_code: Optional[str] = None,
     ) -> Response:
-        """Update an invoice details on your integration
+        """Update the invoice details on your integration
 
         Args:
             id_or_code: Invoice ID or slug

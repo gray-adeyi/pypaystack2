@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.utils import validate_amount, add_to_payload, HTTPMethod, Response
@@ -16,13 +16,13 @@ class Charge(BaseAPI):
         self,
         email: str,
         amount: int,
-        bank: Optional[dict[str, Any]] = None,
+        bank: Optional[dict] = None,
         auth_code: Optional[str] = None,
         pin: Optional[str] = None,
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: Optional[dict] = None,
         reference: Optional[str] = None,
-        ussd: Optional[dict[str, Any]] = None,
-        mobile_money: Optional[dict[str, Any]] = None,
+        ussd: Optional[dict] = None,
+        mobile_money: Optional[dict] = None,
         device_id: Optional[str] = None,
     ) -> Response:
         """Initiate a payment by integrating the payment channel of your choice.
@@ -182,13 +182,13 @@ class AsyncCharge(BaseAsyncAPI):
         self,
         email: str,
         amount: int,
-        bank: Optional[dict[str, Any]] = None,
+        bank: Optional[dict] = None,
         auth_code: Optional[str] = None,
         pin: Optional[str] = None,
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: Optional[dict] = None,
         reference: Optional[str] = None,
-        ussd: Optional[dict[str, Any]] = None,
-        mobile_money: Optional[dict[str, Any]] = None,
+        ussd: Optional[dict] = None,
+        mobile_money: Optional[dict] = None,
         device_id: Optional[str] = None,
     ) -> Response:
         """Initiate a payment by integrating the payment channel of your choice.

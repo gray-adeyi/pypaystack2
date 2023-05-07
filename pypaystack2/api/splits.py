@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.errors import InvalidDataError
@@ -26,7 +26,7 @@ class Split(BaseAPI):
         name: str,
         type: SplitType,
         currency: Currency,
-        subaccounts: list[dict[str, Any]],
+        subaccounts: list[dict],
         bearer_type: Bearer,
         bearer_subaccount: str,
     ) -> Response:
@@ -196,7 +196,7 @@ class AsyncSplit(BaseAsyncAPI):
         name: str,
         type: SplitType,
         currency: Currency,
-        subaccounts: list[dict[str, Any]],
+        subaccounts: list[dict],
         bearer_type: Bearer,
         bearer_subaccount: str,
     ) -> Response:
