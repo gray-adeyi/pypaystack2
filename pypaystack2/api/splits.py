@@ -5,11 +5,12 @@ from pypaystack2.errors import InvalidDataError
 from pypaystack2.utils import (
     Bearer,
     Currency,
-    SplitType,
+    Split,
     add_to_payload,
     append_query_params,
     validate_amount,
-    HTTPMethod, Response,
+    HTTPMethod,
+    Response,
 )
 
 
@@ -24,7 +25,7 @@ class Split(BaseAPI):
     def create(
         self,
         name: str,
-        type: SplitType,
+        type: Split,
         currency: Currency,
         subaccounts: list[dict],
         bearer_type: Bearer,
@@ -99,7 +100,7 @@ class Split(BaseAPI):
         """Get details of a split on your integration.
 
         Args:
-        id: The id of the split
+            id: The id of the split
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -118,20 +119,20 @@ class Split(BaseAPI):
         """Update a transaction split details on your integration
 
         Args:
-        id: Split ID
-        name: Name of the transaction split
-        active: Flag for active
-        bearer_type: Any value from the Bearer enum
-        bearer_subaccount: Subaccount code of a subaccount in the split group.
-            This should be specified only if the bearer_type
-            is ``Bearer.subaccount``
+            id: Split ID
+            name: Name of the transaction split
+            active: Flag for active
+            bearer_type: Any value from the Bearer enum
+            bearer_subaccount: Subaccount code of a subaccount in the split group.
+                This should be specified only if the bearer_type
+                is ``Bearer.subaccount``
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
 
         if bearer_subaccount:
-            if bearer_type != Bearer.SUBACCOUNT:
+            if bearer_type != Bearer.SUB_ACCOUNT:
                 raise InvalidDataError(
                     "`bearer_subaccount` can only have a value if `bearer_type` is `Bearer.SUBACCOUNT`"
                 )
@@ -171,8 +172,8 @@ class Split(BaseAPI):
         """Remove a subaccount from a transaction split
 
         Args:
-        id: Split ID
-        subaccount: This is the subaccount code
+            id: Split ID
+            subaccount: This is the subaccount code
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -194,7 +195,7 @@ class AsyncSplit(BaseAsyncAPI):
     async def create(
         self,
         name: str,
-        type: SplitType,
+        type: Split,
         currency: Currency,
         subaccounts: list[dict],
         bearer_type: Bearer,
@@ -269,7 +270,7 @@ class AsyncSplit(BaseAsyncAPI):
         """Get details of a split on your integration.
 
         Args:
-        id: The id of the split
+            id: The id of the split
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -288,20 +289,20 @@ class AsyncSplit(BaseAsyncAPI):
         """Update a transaction split details on your integration
 
         Args:
-        id: Split ID
-        name: Name of the transaction split
-        active: Flag for active
-        bearer_type: Any value from the Bearer enum
-        bearer_subaccount: Subaccount code of a subaccount in the split group.
-            This should be specified only if the bearer_type
-            is ``Bearer.subaccount``
+            id: Split ID
+            name: Name of the transaction split
+            active: Flag for active
+            bearer_type: Any value from the Bearer enum
+            bearer_subaccount: Subaccount code of a subaccount in the split group.
+                This should be specified only if the bearer_type
+                is ``Bearer.subaccount``
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
 
         if bearer_subaccount:
-            if bearer_type != Bearer.SUBACCOUNT:
+            if bearer_type != Bearer.SUB_ACCOUNT:
                 raise InvalidDataError(
                     "`bearer_subaccount` can only have a value if `bearer_type` is `Bearer.SUBACCOUNT`"
                 )
@@ -341,8 +342,8 @@ class AsyncSplit(BaseAsyncAPI):
         """Remove a subaccount from a transaction split
 
         Args:
-        id: Split ID
-        subaccount: This is the subaccount code
+            id: Split ID
+            subaccount: This is the subaccount code
 
         Returns:
             A named tuple containing the response gotten from paystack's server.

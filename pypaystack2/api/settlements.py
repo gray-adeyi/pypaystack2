@@ -3,7 +3,8 @@ from typing import Optional
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.utils import (
     append_query_params,
-    HTTPMethod, Response,
+    HTTPMethod,
+    Response,
 )
 
 
@@ -16,8 +17,8 @@ class Settlement(BaseAPI):
 
     def get_settlements(
         self,
-        page=1,
-        pagination=50,
+        page: int = 1,
+        pagination: int = 50,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
         subaccount: Optional[str] = None,
@@ -50,9 +51,9 @@ class Settlement(BaseAPI):
 
     def get_settlement_transactions(
         self,
-        id: int,
-        pagination=50,
-        page=1,
+        id: str,
+        pagination: int = 50,
+        page: int = 1,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
     ) -> Response:
@@ -91,8 +92,8 @@ class AsyncSettlement(BaseAsyncAPI):
 
     async def get_settlements(
         self,
-        page=1,
-        pagination=50,
+        page: int = 1,
+        pagination: int = 50,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
         subaccount: Optional[str] = None,
@@ -125,9 +126,9 @@ class AsyncSettlement(BaseAsyncAPI):
 
     async def get_settlement_transactions(
         self,
-        id: int,
-        pagination=50,
-        page=1,
+        id: str,
+        pagination: int = 50,
+        page: int = 1,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
     ) -> Response:

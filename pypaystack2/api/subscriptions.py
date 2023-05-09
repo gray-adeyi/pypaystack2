@@ -53,8 +53,8 @@ class Subscription(BaseAPI):
 
     def get_subscriptions(
         self,
-        page=1,
-        pagination=50,
+        page: int = 1,
+        pagination: int = 50,
         customer: Optional[int] = None,
         plan: Optional[int] = None,
     ) -> Response:
@@ -206,8 +206,8 @@ class AsyncSubscription(BaseAsyncAPI):
 
     async def get_subscriptions(
         self,
-        page=1,
-        pagination=50,
+        page: int = 1,
+        pagination: int = 50,
         customer: Optional[int] = None,
         plan: Optional[int] = None,
     ) -> Response:

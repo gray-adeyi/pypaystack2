@@ -1,11 +1,10 @@
 import os
 from abc import ABC, abstractmethod
-from typing import Union
+from typing import Union, Optional
 
 import httpx
 from httpx import codes
-
-from pypaystack2 import version
+from pypaystack2._metadata import __version__
 from pypaystack2.errors import InvalidMethodError, MissingAuthKeyError
 from pypaystack2.utils import HTTPMethod, Response
 
@@ -36,11 +35,12 @@ class AbstractAPI(ABC):
     def _parse_url(self, endpoint_path: str) -> str:
         return f"{self._BASE_URL}{endpoint_path}"
 
+    @property
     def _headers(self) -> dict[str, str]:
         return {
             "Content-Type": self._CONTENT_TYPE,
             "Authorization": f"Bearer {self._PAYSTACK_AUTHORIZATION_KEY}",
-            "user-agent": f"pyPaystack2-{version.__version__}",
+            "User-Agent": f"PyPaystack2-{__version__}",
         }
 
     def _parse_response(
@@ -64,9 +64,19 @@ class AbstractAPI(ABC):
         )
         return Response(raw_response.status_code, status, message, data)
 
+    def _parse_http_method_kwargs(
+        self, url: str, method: HTTPMethod, data: Optional[Union[dict, list]]
+    ) -> dict:
+        if url == "":
+            raise ValueError("No url provided")
+        http_method_kwargs = {"url": url, "json": data, "headers": self._headers}
+        if method in {HTTPMethod.GET, HTTPMethod.DELETE}:
+            http_method_kwargs.pop("json", None)
+        return http_method_kwargs
+
     @abstractmethod
     def _handle_request(
-        self, method: HTTPMethod, url: str, data: Union[dict, list] = None
+        self, method: HTTPMethod, url: str, data: Optional[Union[dict, list]] = None
     ) -> Response:
         ...
 
@@ -98,12 +108,16 @@ class BaseAPI(AbstractAPI):
 
         http_method = http_methods_map.get(method)
 
+        http_method_kwargs = self._parse_http_method_kwargs(
+            url=url, method=method, data=data
+        )
+
         if not http_method:
             raise InvalidMethodError(
                 "HTTP Request method not recognised or implemented"
             )
 
-        response = http_method(url, headers=self._headers(), json=data)
+        response = http_method(**http_method_kwargs)
         if codes.is_success(response.status_code):
             return self._parse_response(response)
         else:
@@ -123,11 +137,14 @@ class BaseAsyncAPI(AbstractAPI):
         """
         async with httpx.AsyncClient() as client:
             http_method = getattr(client, method.value.lower(), None)
+            http_method_kwargs = self._parse_http_method_kwargs(
+                url=url, method=method, data=data
+            )
             if not http_method:
                 raise InvalidMethodError(
                     "HTTP Request method not recognised or implemented"
                 )
-            response = await http_method(url, headers=self._headers(), json=data)
+            response = await http_method(**http_method_kwargs)
 
         if codes.is_success(response.status_code):
             return self._parse_response(response)

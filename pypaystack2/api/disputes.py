@@ -7,7 +7,8 @@ from pypaystack2.utils import (
     HTTPMethod,
     validate_amount,
     add_to_payload,
-    Resolution, Response,
+    Resolution,
+    Response,
 )
 
 
@@ -71,7 +72,7 @@ class Dispute(BaseAPI):
         """This method retrieves disputes for a particular transaction
 
         Args:
-        id: The transaction ID you want to fetch
+            id: The transaction ID you want to fetch
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -287,7 +288,7 @@ class AsyncDispute(BaseAsyncAPI):
         """This method retrieves disputes for a particular transaction
 
         Args:
-        id: The transaction ID you want to fetch
+            id: The transaction ID you want to fetch
 
         Returns:
             A named tuple containing the response gotten from paystack's server.

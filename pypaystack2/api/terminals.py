@@ -3,10 +3,11 @@ from typing import Optional
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.errors import InvalidDataError
 from pypaystack2.utils import (
-    TerminalEventType,
+    TerminalEvent,
     TerminalEventAction,
     append_query_params,
-    HTTPMethod, Response,
+    HTTPMethod,
+    Response,
 )
 
 
@@ -21,7 +22,7 @@ class Terminal(BaseAPI):
     def send_event(
         self,
         terminal_id: str,
-        type: TerminalEventType,
+        type: TerminalEvent,
         action: TerminalEventAction,
         data: dict,
     ) -> Response:
@@ -43,11 +44,11 @@ class Terminal(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
         supported_actions_mapping = {
-            TerminalEventType.TRANSACTION: {
+            TerminalEvent.TRANSACTION: {
                 TerminalEventAction.PROCESS,
                 TerminalEventAction.PRINT,
             },
-            TerminalEventType.INVOICE: {
+            TerminalEvent.INVOICE: {
                 TerminalEventAction.PROCESS,
                 TerminalEventAction.VIEW,
             },
@@ -121,7 +122,7 @@ class Terminal(BaseAPI):
         """Get the details of a Terminal
 
         Args:
-        terminal_id: The ID of the Terminal the event was sent to.
+            terminal_id: The ID of the Terminal the event was sent to.
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -190,7 +191,7 @@ class AsyncTerminal(BaseAsyncAPI):
     async def send_event(
         self,
         terminal_id: str,
-        type: TerminalEventType,
+        type: TerminalEvent,
         action: TerminalEventAction,
         data: dict,
     ) -> Response:
@@ -212,11 +213,11 @@ class AsyncTerminal(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
         supported_actions_mapping = {
-            TerminalEventType.TRANSACTION: {
+            TerminalEvent.TRANSACTION: {
                 TerminalEventAction.PROCESS,
                 TerminalEventAction.PRINT,
             },
-            TerminalEventType.INVOICE: {
+            TerminalEvent.INVOICE: {
                 TerminalEventAction.PROCESS,
                 TerminalEventAction.VIEW,
             },
@@ -290,7 +291,7 @@ class AsyncTerminal(BaseAsyncAPI):
         """Get the details of a Terminal
 
         Args:
-        terminal_id: The ID of the Terminal the event was sent to.
+            terminal_id: The ID of the Terminal the event was sent to.
 
         Returns:
             A named tuple containing the response gotten from paystack's server.

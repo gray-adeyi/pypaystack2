@@ -1,9 +1,44 @@
+from dataclasses import dataclass
 from enum import Enum
 from functools import reduce
 from operator import add
 from typing import Any, Optional, Union, NamedTuple
 
 from pypaystack2.errors import InvalidDataError
+
+
+@dataclass
+class BulkChargeInstruction:
+    authorization: str
+    amount: int
+    reference: str
+
+    @property
+    def dict(self) -> dict:
+        return {
+            "authorization": self.authorization,
+            "amount": self.amount,
+            "reference": self.reference,
+        }
+
+    @classmethod
+    def from_dict(cls, value: dict) -> "BulkChargeInstruction":
+        return cls(
+            authorization=value["authorization"],
+            amount=value["amount"],
+            reference=value["reference"],
+        )
+
+    @classmethod
+    def from_dict_many(cls, values: list[dict]) -> list["BulkChargeInstruction"]:
+        return [
+            cls(
+                authorization=item["authorization"],
+                amount=item["amount"],
+                reference=item["reference"],
+            )
+            for item in values
+        ]
 
 
 class HTTPMethod(str, Enum):
@@ -18,7 +53,7 @@ class HTTPMethod(str, Enum):
     HEAD = "HEAD"
 
 
-class TerminalEventType(str, Enum):
+class TerminalEvent(str, Enum):
     """Enum of the types of events supported by Terminal API"""
 
     TRANSACTION = "transaction"
@@ -65,7 +100,7 @@ class Bearer(str, Enum):
     """Enum for who bears paystack charges"""
 
     ACCOUNT = "account"
-    SUBACCOUNT = "subaccount"
+    SUB_ACCOUNT = "subaccount"
     ALL_PROPORTIONAL = "all-proportional"
     ALL = "all"
 
@@ -78,7 +113,7 @@ class TransactionStatus(str, Enum):
     ABANDONED = "abandoned"
 
 
-class SplitType(str, Enum):
+class Split(str, Enum):
     """Enum of split types"""
 
     PERCENTAGE = "percentage"
@@ -125,17 +160,15 @@ class Identification(str, Enum):
     BANK_ACCOUNT = "bank_account"
 
 
-class TRType(str, Enum):
+class TransferRecipient(str, Enum):
     """Enum of Transfer Recipient types"""
-
-    # FIXME: Find a better name for this class to reduce confusion.
 
     NUBAN = "nuban"
     MOBILE_MONEY = "mobile_money"
     BASA = "basa"
 
 
-class DocumentType(str, Enum):
+class Document(str, Enum):
     """Enum of Document types supported by paystack"""
 
     IDENTITY_NUMBER = "identityNumber"
@@ -145,24 +178,10 @@ class DocumentType(str, Enum):
 
 # FIXME: Unify status codes with similarities
 # InvoiceStatus and ChargeStatus is redundant
-class InvoiceStatus(str, Enum):
-    """Enum of invoice status supported by paystack"""
-
-    PENDING = "pending"
-    SUCCESS = "success"
-    FAILED = "failed"
 
 
-class ChargeStatus(str, Enum):
-    """Enum of charge status supported by paystack"""
-
-    PENDING = "pending"
-    SUCCESS = "success"
-    FAILED = "failed"
-
-
-class PlanStatus(str, Enum):
-    """Enum of plan status supported by paystack"""
+class Status(str, Enum):
+    """Enum of statuses supported by paystack, used by Invoice, Charge & Plan"""
 
     PENDING = "pending"
     SUCCESS = "success"

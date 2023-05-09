@@ -8,7 +8,8 @@ from pypaystack2.utils import (
     append_query_params,
     Identification,
     Country,
-    RiskAction, Response,
+    RiskAction,
+    Response,
 )
 
 
@@ -228,7 +229,7 @@ class Customer(BaseAPI):
         """Deactivate an authorization when the card needs to be forgotten
 
         Args:
-        auth_code: Authorization code to be deactivated
+            auth_code: Authorization code to be deactivated
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -457,7 +458,7 @@ class AsyncCustomer(BaseAsyncAPI):
         """Deactivate an authorization when the card needs to be forgotten
 
         Args:
-        auth_code: Authorization code to be deactivated
+            auth_code: Authorization code to be deactivated
 
         Returns:
             A named tuple containing the response gotten from paystack's server.

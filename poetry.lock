@@ -64,7 +64,7 @@ name = "cached-property"
 version = "1.5.2"
 description = "A decorator for caching properties in classes."
 category = "dev"
-optional = true
+optional = false
 python-versions = "*"
 files = [
     {file = "cached-property-1.5.2.tar.gz", hash = "sha256:9fa5755838eecbb2d234c3aa390bd80fbd3ac6b6869109bfc1b499f7bd89a130"},
@@ -234,7 +234,7 @@ name = "griffe"
 version = "0.27.3"
 description = "Signatures for entire Python programs. Extract the structure, the frame, the skeleton of your project, to generate API documentation or find breaking changes in your API."
 category = "dev"
-optional = true
+optional = false
 python-versions = ">=3.7"
 files = [
     {file = "griffe-0.27.3-py3-none-any.whl", hash = "sha256:094513b209d4acd4b2680c2415d3af5f8ed925714795380c2a7d070e222e0b27"},
@@ -494,7 +494,7 @@ name = "mkdocs-autorefs"
 version = "0.4.1"
 description = "Automatically link across pages in MkDocs."
 category = "dev"
-optional = true
+optional = false
 python-versions = ">=3.7"
 files = [
     {file = "mkdocs-autorefs-0.4.1.tar.gz", hash = "sha256:70748a7bd025f9ecd6d6feeba8ba63f8e891a1af55f48e366d6d6e78493aba84"},
@@ -540,14 +540,14 @@ files = [
 
 [[package]]
 name = "mkdocstrings"
-version = "0.19.1"
+version = "0.21.2"
 description = "Automatic documentation from sources, for MkDocs."
 category = "dev"
-optional = true
+optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "mkdocstrings-0.19.1-py3-none-any.whl", hash = "sha256:32a38d88f67f65b264184ea71290f9332db750d189dea4200cbbe408d304c261"},
-    {file = "mkdocstrings-0.19.1.tar.gz", hash = "sha256:d1037cacb4b522c1e8c164ed5d00d724a82e49dcee0af80db8fb67b384faeef9"},
+    {file = "mkdocstrings-0.21.2-py3-none-any.whl", hash = "sha256:949ef8da92df9d692ca07be50616459a6b536083a25520fd54b00e8814ce019b"},
+    {file = "mkdocstrings-0.21.2.tar.gz", hash = "sha256:304e56a2e90595708a38a13a278e538a67ad82052dd5c8b71f77a604a4f3d911"},
 ]
 
 [package.dependencies]
@@ -558,6 +558,7 @@ mkdocs = ">=1.2"
 mkdocs-autorefs = ">=0.3.1"
 mkdocstrings-python = {version = ">=0.5.2", optional = true, markers = "extra == \"python\""}
 pymdown-extensions = ">=6.3"
+typing-extensions = {version = ">=4.1", markers = "python_version < \"3.10\""}
 
 [package.extras]
 crystal = ["mkdocstrings-crystal (>=0.3.4)"]
@@ -569,7 +570,7 @@ name = "mkdocstrings-python"
 version = "0.8.3"
 description = "A Python handler for mkdocstrings."
 category = "dev"
-optional = true
+optional = false
 python-versions = ">=3.7"
 files = [
     {file = "mkdocstrings-python-0.8.3.tar.gz", hash = "sha256:9ae473f6dc599339b09eee17e4d2b05d6ac0ec29860f3fc9b7512d940fc61adf"},
@@ -1006,4 +1007,4 @@ testing = ["big-O", "flake8 (<5)", "jaraco.functools", "jaraco.itertools", "more
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.7"
-content-hash = "08a875e0485d668b278f120de50b804a4b1a7de77051c426b761a94a150ca3c5"
+content-hash = "7b158a0da7763f4885bb932d26d59d84f82aaa515e7ae78aeede1ce9ba8f5171"

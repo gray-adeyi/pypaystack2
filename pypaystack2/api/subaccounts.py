@@ -5,7 +5,8 @@ from pypaystack2.utils import (
     Schedule,
     add_to_payload,
     append_query_params,
-    HTTPMethod, Response,
+    HTTPMethod,
+    Response,
 )
 
 
@@ -71,7 +72,7 @@ class SubAccount(BaseAPI):
         return self._handle_request(HTTPMethod.POST, url, payload)
 
     def get_subaccounts(
-        self, start_date: str, end_date: str, page=1, pagination=50
+        self, start_date: str, end_date: str, page: int = 1, pagination: int = 50
     ) -> Response:
         """Fetch subaccounts available on your integration.
 
@@ -233,7 +234,7 @@ class AsyncSubAccount(BaseAsyncAPI):
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
     async def get_subaccounts(
-        self, start_date: str, end_date: str, page=1, pagination=50
+        self, start_date: str, end_date: str, page: int = 1, pagination: int = 50
     ) -> Response:
         """Fetch subaccounts available on your integration.
 

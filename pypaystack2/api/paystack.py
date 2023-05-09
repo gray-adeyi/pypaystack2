@@ -17,7 +17,10 @@ from pypaystack2.api.subaccounts import AsyncSubAccount, SubAccount
 from pypaystack2.api.subscriptions import AsyncSubscription, Subscription
 from pypaystack2.api.terminals import Terminal, AsyncTerminal
 from pypaystack2.api.transactions import AsyncTransaction, Transaction
-from pypaystack2.api.transfer_recipients import AsyncTransferRecipient, TransferRecipient
+from pypaystack2.api.transfer_recipients import (
+    AsyncTransferRecipient,
+    TransferRecipient,
+)
 from pypaystack2.api.transfers import AsyncTransfer, Transfer
 from pypaystack2.api.transfers_control import AsyncTransferControl, TransferControl
 from pypaystack2.api.verification import AsyncVerification, Verification

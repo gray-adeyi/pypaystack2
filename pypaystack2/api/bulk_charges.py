@@ -1,7 +1,13 @@
 from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
-from pypaystack2.utils import HTTPMethod, append_query_params, ChargeStatus, Response
+from pypaystack2.utils import (
+    HTTPMethod,
+    append_query_params,
+    Response,
+    Status,
+    BulkChargeInstruction,
+)
 
 
 class BulkCharge(BaseAPI):
@@ -11,21 +17,21 @@ class BulkCharge(BaseAPI):
     https://paystack.com/docs/api/#bulk-charge
     """
 
-    def initiate(self, body: list[dict]) -> Response:
+    def initiate(self, body: list[BulkChargeInstruction]) -> Response:
         """
         Send a list of dictionaries with authorization ``codes`` and ``amount``
         (in kobo if currency is NGN, pesewas, if currency is GHS, and cents,
         if currency is ZAR ) so paystack can process transactions as a batch.
 
         Args:
-            body: A list of dictionaries with authorization codes and amount.
+            body: A list of BulkChargeInstruction.
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
 
         url = self._parse_url("/bulkcharge")
-        payload = body
+        payload = [item.dict for item in body]
         return self._handle_request(HTTPMethod.POST, url, payload)
 
     def get_batches(
@@ -76,7 +82,7 @@ class BulkCharge(BaseAPI):
     def get_charges_in_batch(
         self,
         id_or_code: str,
-        status: ChargeStatus,
+        status: Status,
         pagination: int = 50,
         page: int = 1,
         start_date: Optional[str] = None,
@@ -85,12 +91,12 @@ class BulkCharge(BaseAPI):
         """
         This method retrieves the charges associated with a specified
         batch code. Pagination parameters are available. You can also
-        filter by status. Charge statuses can be `ChargeStatus.PENDING`,
-        `ChargeStatus.SUCCESS` or `ChargeStatus.FAILED`.
+        filter by status. Charge statuses can be `Status.PENDING`,
+        `Status.SUCCESS` or `Status.FAILED`.
 
         Args:
             id_or_code: An ID or code for the batch whose charges you want to retrieve.
-            status: Any of the values from the ChargeStatus enum.
+            status: Any of the values from the Status enum.
             pagination: Specify how many records you want to retrieve per page.
                 If not specified we use a default value of 50.
             page: Specify exactly what transfer you want to page. If not specified we use a default value of 1.
@@ -145,21 +151,21 @@ class AsyncBulkCharge(BaseAsyncAPI):
     https://paystack.com/docs/api/#bulk-charge
     """
 
-    async def initiate(self, body: list[dict]) -> Response:
+    async def initiate(self, body: list[BulkChargeInstruction]) -> Response:
         """
         Send a list of dictionaries with authorization ``codes`` and ``amount``
         (in kobo if currency is NGN, pesewas, if currency is GHS, and cents,
         if currency is ZAR ) so paystack can process transactions as a batch.
 
         Args:
-            body: A list of dictionaries with authorization codes and amount.
+            body: A list of BulkChargeInstruction.
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
 
         url = self._parse_url("/bulkcharge")
-        payload = body
+        payload = [item.dict for item in body]
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
     async def get_batches(
@@ -210,7 +216,7 @@ class AsyncBulkCharge(BaseAsyncAPI):
     async def get_charges_in_batch(
         self,
         id_or_code: str,
-        status: ChargeStatus,
+        status: Status,
         pagination: int = 50,
         page: int = 1,
         start_date: Optional[str] = None,
@@ -219,12 +225,12 @@ class AsyncBulkCharge(BaseAsyncAPI):
         """
         This method retrieves the charges associated with a specified
         batch code. Pagination parameters are available. You can also
-        filter by status. Charge statuses can be `ChargeStatus.PENDING`,
-        `ChargeStatus.SUCCESS` or `ChargeStatus.FAILED`.
+        filter by status. Charge statuses can be `Status.PENDING`,
+        `Status.SUCCESS` or `Status.FAILED`.
 
         Args:
             id_or_code: An ID or code for the batch whose charges you want to retrieve.
-            status: Any of the values from the ChargeStatus enum.
+            status: Any of the values from the Status enum.
             pagination: Specify how many records you want to retrieve per page.
                 If not specified we use a default value of 50.
             page: Specify exactly what transfer you want to page. If not specified we use a default value of 1.

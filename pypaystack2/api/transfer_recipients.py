@@ -4,10 +4,11 @@ from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.errors import InvalidDataError
 from pypaystack2.utils import (
     Currency,
-    TRType,
+    TransferRecipient,
     add_to_payload,
     append_query_params,
-    HTTPMethod, Response,
+    HTTPMethod,
+    Response,
 )
 
 
@@ -24,7 +25,7 @@ class TransferRecipient(BaseAPI):
 
     def create(
         self,
-        type: TRType,
+        type: TransferRecipient,
         name: str,
         account_number: str,
         bank_code: Optional[str] = None,
@@ -54,7 +55,7 @@ class TransferRecipient(BaseAPI):
         """
         # FIXME: type is a keyword arg, might replace
         # if it raises issues.
-        if type == TRType.NUBAN or type == TRType.BASA:
+        if type == TransferRecipient.NUBAN or type == TransferRecipient.BASA:
             if bank_code is None:
                 raise InvalidDataError(
                     "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"
@@ -80,7 +81,7 @@ class TransferRecipient(BaseAPI):
     def bulk_create(self, batch: list) -> Response:
         # TODO: create a pydantic model
         # for batch using the fields below.
-        # type: TRType,
+        # type: TransferRecipient,
         # name: str,
         # account_number: str,
         # bank_code: Optional[str] = None,
@@ -103,7 +104,7 @@ class TransferRecipient(BaseAPI):
         # FIXME: type is a keyword arg, might replace
         # if it raises issues.
         for tr in batch:
-            if tr.type == TRType.NUBAN or tr.type == TRType.BASA:
+            if tr.type == TransferRecipient.NUBAN or tr.type == TransferRecipient.BASA:
                 if tr.bank_code is None:
                     raise InvalidDataError(
                         "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"
@@ -207,7 +208,7 @@ class AsyncTransferRecipient(BaseAsyncAPI):
 
     async def create(
         self,
-        type: TRType,
+        type: TransferRecipient,
         name: str,
         account_number: str,
         bank_code: Optional[str] = None,
@@ -237,7 +238,7 @@ class AsyncTransferRecipient(BaseAsyncAPI):
         """
         # FIXME: type is a keyword arg, might replace
         # if it raises issues.
-        if type == TRType.NUBAN or type == TRType.BASA:
+        if type == TransferRecipient.NUBAN or type == TransferRecipient.BASA:
             if bank_code is None:
                 raise InvalidDataError(
                     "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"
@@ -263,7 +264,7 @@ class AsyncTransferRecipient(BaseAsyncAPI):
     async def bulk_create(self, batch: list) -> Response:
         # TODO: create a pydantic model
         # for batch using the fields below.
-        # type: TRType,
+        # type: TransferRecipient,
         # name: str,
         # account_number: str,
         # bank_code: Optional[str] = None,
@@ -286,7 +287,7 @@ class AsyncTransferRecipient(BaseAsyncAPI):
         # FIXME: type is a keyword arg, might replace
         # if it raises issues.
         for tr in batch:
-            if tr.type == TRType.NUBAN or tr.type == TRType.BASA:
+            if tr.type == TransferRecipient.NUBAN or tr.type == TransferRecipient.BASA:
                 if tr.bank_code is None:
                     raise InvalidDataError(
                         "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"

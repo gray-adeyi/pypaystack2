@@ -7,13 +7,14 @@ Modules and packages exported by this package:
    - `errors`: A module containing error types for pypaystack2
 """
 from pypaystack2.api.paystack import Paystack, AsyncPaystack
-from pypaystack2.version import (
+from pypaystack2._metadata import (
     __title__,
     __version__,
     __author__,
     __license__,
     __copyright__,
 )
+
 
 # prevent removal of unused import
 Paystack

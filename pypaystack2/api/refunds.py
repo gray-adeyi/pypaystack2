@@ -6,7 +6,8 @@ from pypaystack2.utils import (
     add_to_payload,
     append_query_params,
     validate_amount,
-    HTTPMethod, Response,
+    HTTPMethod,
+    Response,
 )
 
 

@@ -10,7 +10,8 @@ from pypaystack2.utils import (
     add_to_payload,
     append_query_params,
     validate_amount,
-    HTTPMethod, Response,
+    HTTPMethod,
+    Response,
 )
 
 
@@ -116,7 +117,7 @@ class Transaction(BaseAPI):
         status: Optional[TransactionStatus] = None,
         page: Optional[int] = None,
         amount: Optional[int] = None,
-        pagination=50,
+        pagination: int = 50,
     ) -> Response:
         """Fetch transactions carried out on your integration.
 
@@ -630,7 +631,7 @@ class AsyncTransaction(BaseAsyncAPI):
         status: Optional[TransactionStatus] = None,
         page: Optional[int] = None,
         amount: Optional[int] = None,
-        pagination=50,
+        pagination: int = 50,
     ) -> Response:
         """Fetch transactions carried out on your integration.
 

@@ -58,8 +58,8 @@ class Page(BaseAPI):
 
     def get_pages(
         self,
-        page=1,
-        pagination=50,
+        page: int = 1,
+        pagination: int = 50,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
     ) -> Response:
@@ -217,8 +217,8 @@ class AsyncPage(BaseAsyncAPI):
 
     async def get_pages(
         self,
-        page=1,
-        pagination=50,
+        page: int = 1,
+        pagination: int = 50,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
     ) -> Response:

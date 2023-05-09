@@ -1,9 +1,39 @@
-site_name: Pypaystack2 Documentation
-repo_url: https://github.com/gray-adeyi/pypaystack2
+site_name: Pypaystack2
+site_description: A developer friendly wrapper for Paystack API
+site_author: Gbenga Adeyi
+site_url: https://github.com/gray-adeyi/pypaystack2
+
 theme:
   name: "material"
   palette:
-    primary: light blue
+    - media: '(prefers-color-scheme: light)'
+      scheme: paystack
+      toggle:
+        icon: material/lightbulb
+        name: Switch to light mode
+    - media: '(prefers-color-scheme: dark)'
+      scheme: slate
+      primary: blue
+      accent: deep blue
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to dark mode
+  features:
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.copy
+    - content.code.select
+    - navigation.sections
+    - navigation.path
+    - navigation.top
+  icon:
+    repo: fontawesome/brands/github-alt
+  logo: assets/pypaystack2.svg
+  favicon: assets/pypaystack2.svg
+  language: en
+repo_name: gray-adeyi/pypaystack2
+repo_url: https://github.com/gray-adeyi/pypaystack2
 
 plugins:
   - mkdocstrings
@@ -12,12 +42,23 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - tables
+
 
 nav:
-  - Introduction: index.md
+  - PyPaystack2: index.md
   - Tutorials:
       Paystack Command line Client: tutorials/tutorial1.md
   - How-To Guides: how-to-guides.md
-  #  - Reference: reference.md.bak
+  - Reference: reference.md
   - Explanation: explanation.md
 
+extra_css:
+  - stylesheets/extra.css

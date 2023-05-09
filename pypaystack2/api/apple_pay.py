@@ -50,7 +50,11 @@ class ApplePay(BaseAPI):
         payload = {
             "domainName": domain_name,
         }
-        return self._handle_request(HTTPMethod.DELETE, url, payload)
+        # return self._handle_request(HTTPMethod.DELETE, url, payload)
+        raise NotImplementedError(
+            "The package `httpx` which PyPaystack uses to make REST "
+            "API calls does not allow HTTPMethod.DELETE have a body"
+        )
 
 
 class AsyncApplePay(BaseAsyncAPI):
@@ -101,4 +105,8 @@ class AsyncApplePay(BaseAsyncAPI):
         payload = {
             "domainName": domain_name,
         }
-        return await self._handle_request(HTTPMethod.DELETE, url, payload)
+        # return await self._handle_request(HTTPMethod.DELETE, url, payload)
+        raise NotImplementedError(
+            "The package `httpx` which PyPaystack uses to make REST "
+            "API calls does not allow HTTPMethod.DELETE have a body"
+        )

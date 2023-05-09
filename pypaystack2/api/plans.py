@@ -2,14 +2,15 @@ from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.utils import (
-    PlanStatus,
     add_to_payload,
     Interval,
     Currency,
     append_query_params,
     validate_amount,
     validate_interval,
-    HTTPMethod, Response,
+    HTTPMethod,
+    Response,
+    Status,
 )
 
 
@@ -72,9 +73,9 @@ class Plan(BaseAPI):
 
     def get_plans(
         self,
-        page=1,
-        pagination=50,
-        status: Optional[PlanStatus] = None,
+        page: int = 1,
+        pagination: int = 50,
+        status: Optional[Status] = None,
         interval: Optional[Interval] = None,
         amount: Optional[int] = None,
     ) -> Response:
@@ -82,9 +83,9 @@ class Plan(BaseAPI):
 
         Args:
             page: Specifies exactly what page you want to retrieve.
-                If not specified we use a default value of 1.
+                If not specified, we use a default value of 1.
             pagination: Specifies how many records you want to retrieve per page.
-                If not specified we use a default value of 50.
+                If not specified, we use a default value of 50.
             status: Filter list by plans with specified status
             interval: Filter list by plans with specified interval
             amount: Filter list by plans with specified amount ( kobo if currency
@@ -112,7 +113,7 @@ class Plan(BaseAPI):
         """Get details of a plan on your integration.
 
         Args:
-        id_or_code: The plan ``ID`` or ``code`` you want to fetch
+            id_or_code: The plan ``ID`` or ``code`` you want to fetch
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -135,19 +136,19 @@ class Plan(BaseAPI):
         """
 
         Args:
-        id_or_code: Plan's ID or code
-        name: Name of plan
-        amount: Amount should be in kobo if currency is
-            ``Currency.NGN`` and pesewas for ``Currency.GHS``
-        interval: Any value from the ``Interval`` enum.
-        description: A description for this plan.
-        currency: Any value from the ``Currency`` enum.
-        invoice_limit: Number of invoices to raise during subscription to this plan.
-            Can be overridden by specifying an ``invoice_limit`` while subscribing.
-        send_invoices: Set to ``False`` if you don't want invoices
-            to be sent to your customers
-        send_sms: Set to ``False`` if you don't want text messages to
-            be sent to your customers
+            id_or_code: Plan's ID or code
+            name: Name of plan
+            amount: Amount should be in kobo if currency is
+                ``Currency.NGN`` and pesewas for ``Currency.GHS``
+            interval: Any value from the ``Interval`` enum.
+            description: A description for this plan.
+            currency: Any value from the ``Currency`` enum.
+            invoice_limit: Number of invoices to raise during subscription to this plan.
+                Can be overridden by specifying an ``invoice_limit`` while subscribing.
+            send_invoices: Set to ``False`` if you don't want invoices
+                to be sent to your customers
+            send_sms: Set to ``False`` if you don't want text messages to
+                be sent to your customers
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -233,9 +234,9 @@ class AsyncPlan(BaseAsyncAPI):
 
     async def get_plans(
         self,
-        page=1,
-        pagination=50,
-        status: Optional[PlanStatus] = None,
+        page: int = 1,
+        pagination: int = 50,
+        status: Optional[Status] = None,
         interval: Optional[Interval] = None,
         amount: Optional[int] = None,
     ) -> Response:
@@ -273,7 +274,7 @@ class AsyncPlan(BaseAsyncAPI):
         """Get details of a plan on your integration.
 
         Args:
-        id_or_code: The plan ``ID`` or ``code`` you want to fetch
+            id_or_code: The plan ``ID`` or ``code`` you want to fetch
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -296,19 +297,19 @@ class AsyncPlan(BaseAsyncAPI):
         """
 
         Args:
-        id_or_code: Plan's ID or code
-        name: Name of plan
-        amount: Amount should be in kobo if currency is
-            ``Currency.NGN`` and pesewas for ``Currency.GHS``
-        interval: Any value from the ``Interval`` enum.
-        description: A description for this plan.
-        currency: Any value from the ``Currency`` enum.
-        invoice_limit: Number of invoices to raise during subscription to this plan.
-            Can be overridden by specifying an ``invoice_limit`` while subscribing.
-        send_invoices: Set to ``False`` if you don't want invoices
-            to be sent to your customers
-        send_sms: Set to ``False`` if you don't want text messages to
-            be sent to your customers
+            id_or_code: Plan's ID or code
+            name: Name of plan
+            amount: Amount should be in kobo if currency is
+                ``Currency.NGN`` and pesewas for ``Currency.GHS``
+            interval: Any value from the ``Interval`` enum.
+            description: A description for this plan.
+            currency: Any value from the ``Currency`` enum.
+            invoice_limit: Number of invoices to raise during subscription to this plan.
+                Can be overridden by specifying an ``invoice_limit`` while subscribing.
+            send_invoices: Set to ``False`` if you don't want invoices
+                to be sent to your customers
+            send_sms: Set to ``False`` if you don't want text messages to
+                be sent to your customers
 
         Returns:
             A named tuple containing the response gotten from paystack's server.

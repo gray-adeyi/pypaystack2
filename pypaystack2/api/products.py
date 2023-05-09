@@ -2,7 +2,13 @@ from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.errors import InvalidDataError
-from pypaystack2.utils import Currency, add_to_payload, append_query_params, HTTPMethod, Response
+from pypaystack2.utils import (
+    Currency,
+    add_to_payload,
+    append_query_params,
+    HTTPMethod,
+    Response,
+)
 
 
 class Product(BaseAPI):
@@ -62,8 +68,8 @@ class Product(BaseAPI):
 
     def get_products(
         self,
-        page=1,
-        pagination=50,
+        page: int = 1,
+        pagination: int = 50,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
     ) -> Response:
@@ -209,8 +215,8 @@ class AsyncProduct(BaseAsyncAPI):
 
     async def get_products(
         self,
-        page=1,
-        pagination=50,
+        page: int = 1,
+        pagination: int = 50,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
     ) -> Response:

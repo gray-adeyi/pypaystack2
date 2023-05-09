@@ -1,5 +1,5 @@
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
-from pypaystack2.utils import AccountType, Country, DocumentType, HTTPMethod, Response
+from pypaystack2.utils import AccountType, Country, Document, HTTPMethod, Response
 
 
 class Verification(BaseAPI):
@@ -43,7 +43,7 @@ class Verification(BaseAPI):
         account_type: AccountType,
         bank_code: str,
         country_code: Country,
-        document_type: DocumentType,
+        document_type: Document,
     ) -> Response:
         """Confirm the authenticity of a customer's account number before sending money
 
@@ -128,7 +128,7 @@ class AsyncVerification(BaseAsyncAPI):
         account_type: AccountType,
         bank_code: str,
         country_code: Country,
-        document_type: DocumentType,
+        document_type: Document,
     ) -> Response:
         """Confirm the authenticity of a customer's account number before sending money
 

@@ -7,7 +7,8 @@ from pypaystack2.utils import (
     Currency,
     Gateway,
     append_query_params,
-    HTTPMethod, Response,
+    HTTPMethod,
+    Response,
 )
 
 
@@ -27,7 +28,7 @@ class Miscellaneous(BaseAPI):
         gateway: Optional[Gateway] = None,
         type: Optional[BankType] = None,
         currency: Optional[Currency] = None,
-        pagination=50,
+        pagination: int = 50,
     ) -> Response:
         """Get a list of all supported banks and their properties
 
@@ -68,7 +69,7 @@ class Miscellaneous(BaseAPI):
         """Get a list of all providers for Dedicated Virtual Account
 
         Args:
-        pay_with_bank_transfer: A flag to filter for available providers
+            pay_with_bank_transfer: A flag to filter for available providers
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -87,11 +88,11 @@ class Miscellaneous(BaseAPI):
         url = self._parse_url("/country")
         return self._handle_request(HTTPMethod.GET, url)
 
-    def get_states(self, country: Country):
+    def get_states(self, country: Country) -> Response:
         """Get a list of states for a country for address verification.
 
         Args:
-        country: Any value from the country enum.
+            country: Any value from the country enum.
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -117,7 +118,7 @@ class AsyncMiscellaneous(BaseAsyncAPI):
         gateway: Optional[Gateway] = None,
         type: Optional[BankType] = None,
         currency: Optional[Currency] = None,
-        pagination=50,
+        pagination: int = 50,
     ) -> Response:
         """Get a list of all supported banks and their properties
 
@@ -158,7 +159,7 @@ class AsyncMiscellaneous(BaseAsyncAPI):
         """Get a list of all providers for Dedicated Virtual Account
 
         Args:
-        pay_with_bank_transfer: A flag to filter for available providers
+            pay_with_bank_transfer: A flag to filter for available providers
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -177,11 +178,11 @@ class AsyncMiscellaneous(BaseAsyncAPI):
         url = self._parse_url("/country")
         return await self._handle_request(HTTPMethod.GET, url)
 
-    async def get_states(self, country: Country):
+    async def get_states(self, country: Country) -> Response:
         """Get a list of states for a country for address verification.
 
         Args:
-        country: Any value from the country enum.
+            country: Any value from the country enum.
 
         Returns:
             A named tuple containing the response gotten from paystack's server.

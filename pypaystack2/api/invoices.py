@@ -5,9 +5,10 @@ from pypaystack2.utils import (
     Currency,
     HTTPMethod,
     add_to_payload,
-    InvoiceStatus,
     append_query_params,
-    validate_amount, Response,
+    validate_amount,
+    Response,
+    Status,
 )
 
 
@@ -77,11 +78,11 @@ class Invoice(BaseAPI):
     def get_invoices(
         self,
         customer: str,
-        status: InvoiceStatus,
+        status: Status,
         currency: Currency,
-        include_archive=False,
-        page=1,
-        pagination=50,
+        include_archive: bool = False,
+        page: int = 1,
+        pagination: int = 50,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
     ) -> Response:
@@ -89,7 +90,7 @@ class Invoice(BaseAPI):
 
         Args:
             customer: Filter by customer ID
-            status: Filter by invoice status. Any value from enum of ``InvoiceStatus``
+            status: Filter by invoice status. Any value from enum of ``Status``
             currency: Filter by currency. Any value from enum of ``Currency``
             include_archive: Show archived invoices.
             page: Specify exactly what invoice you want to page. If not specify we use a default value of 1.
@@ -241,7 +242,7 @@ class Invoice(BaseAPI):
         on list or returned on verify.
 
         Args:
-        code: Invoice ID
+            code: Invoice ID
 
          Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -317,11 +318,11 @@ class AsyncInvoice(BaseAsyncAPI):
     async def get_invoices(
         self,
         customer: str,
-        status: InvoiceStatus,
+        status: Status,
         currency: Currency,
-        include_archive=False,
-        page=1,
-        pagination=50,
+        include_archive: bool = False,
+        page: int = 1,
+        pagination: int = 50,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
     ) -> Response:
@@ -329,7 +330,7 @@ class AsyncInvoice(BaseAsyncAPI):
 
         Args:
             customer: Filter by customer ID
-            status: Filter by invoice status. Any value from enum of ``InvoiceStatus``
+            status: Filter by invoice status. Any value from enum of ``Status``
             currency: Filter by currency. Any value from enum of ``Currency``
             include_archive: Show archived invoices.
             page: Specify exactly what invoice you want to page. If not specify we use a default value of 1.
@@ -481,7 +482,7 @@ class AsyncInvoice(BaseAsyncAPI):
         on list or returned on verify.
 
         Args:
-        code: Invoice ID
+            code: Invoice ID
 
          Returns:
             A named tuple containing the response gotten from paystack's server.

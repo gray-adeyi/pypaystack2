@@ -1,7 +1,13 @@
 from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
-from pypaystack2.utils import Currency, add_to_payload, append_query_params, HTTPMethod, Response
+from pypaystack2.utils import (
+    Currency,
+    add_to_payload,
+    append_query_params,
+    HTTPMethod,
+    Response,
+)
 
 
 class DedicatedAccount(BaseAPI):
@@ -66,8 +72,8 @@ class DedicatedAccount(BaseAPI):
 
     def get_dedicated_accounts(
         self,
-        active=True,
-        currency=Currency.NGN,
+        active: bool = True,
+        currency: Currency = Currency.NGN,
         provider_slug: Optional[str] = None,
         bank_id: Optional[str] = None,
         customer: Optional[str] = None,
@@ -315,8 +321,8 @@ class AsyncDedicatedAccount(BaseAsyncAPI):
 
     async def get_dedicated_accounts(
         self,
-        active=True,
-        currency=Currency.NGN,
+        active: bool = True,
+        currency: Currency = Currency.NGN,
         provider_slug: Optional[str] = None,
         bank_id: Optional[str] = None,
         customer: Optional[str] = None,

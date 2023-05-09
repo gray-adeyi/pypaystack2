@@ -6,7 +6,8 @@ from pypaystack2.utils import (
     add_to_payload,
     append_query_params,
     validate_amount,
-    HTTPMethod, Response,
+    HTTPMethod,
+    Response,
 )
 
 
@@ -83,12 +84,12 @@ class Transfer(BaseAPI):
         }
         return self._handle_request(HTTPMethod.POST, url, payload)
 
-    def bulk_transfer(self, transfers: list, source="balance") -> Response:
+    def bulk_transfer(self, transfers: list, source: str = "balance") -> Response:
         """Transfer in bulk
 
         Args:
-        transfers: list of transfer instructions
-        source: source of the funds to transfer
+            transfers: list of transfer instructions
+            source: source of the funds to transfer
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -238,12 +239,12 @@ class AsyncTransfer(BaseAsyncAPI):
         }
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
-    async def bulk_transfer(self, transfers: list, source="balance") -> Response:
+    async def bulk_transfer(self, transfers: list, source: str = "balance") -> Response:
         """Transfer in bulk
 
         Args:
-        transfers: list of transfer instructions
-        source: source of the funds to transfer
+            transfers: list of transfer instructions
+            source: source of the funds to transfer
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
