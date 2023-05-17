@@ -7,7 +7,7 @@ from pypaystack2.utils import validate_amount, add_to_payload, HTTPMethod, Respo
 class Charge(BaseAPI):
     """Provides a wrapper for paystack Charge API
 
-    The Charge API allows you to configure payment channel of your choice when initiating a payment.
+    The Charge API allows you to configure a payment channel of your choice when initiating a payment.
     https://paystack.com/docs/api/#charge
 
     """
@@ -24,6 +24,7 @@ class Charge(BaseAPI):
         ussd: Optional[dict] = None,
         mobile_money: Optional[dict] = None,
         device_id: Optional[str] = None,
+        birthday: Optional[str] = None,
     ) -> Response:
         """Initiate a payment by integrating the payment channel of your choice.
 
@@ -40,6 +41,7 @@ class Charge(BaseAPI):
             mobile_money: Mobile details (don't send if charging an authorization code, bank or card)
             device_id: This is the unique identifier of the device a user uses in making payment. Only -, .\\`,
                 = and alphanumeric characters allowed.
+            birthday: Date of birth.
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -56,6 +58,7 @@ class Charge(BaseAPI):
             ("ussd", ussd),
             ("mobile_money", mobile_money),
             ("device_id", device_id),
+            ("birthday", birthday),
         ]
         payload = add_to_payload(optional_params, payload)
         url = self._parse_url("/charge")
@@ -106,18 +109,18 @@ class Charge(BaseAPI):
         url = self._parse_url("/charge/submit_phone")
         return self._handle_request(HTTPMethod.POST, url, payload)
 
-    def submit_birthday(self, date: str, reference: str) -> Response:
+    def submit_birthday(self, birthday: str, reference: str) -> Response:
         """Submit Birthday when requested
 
         Args:
-            date: Birthday submitted by user. ISO Format e.g. 2016-09-21
+            birthday: Birthday submitted by user. ISO Format e.g. 2016-09-21
             reference: Reference for ongoing transaction
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
 
-        payload = {"date": date, "reference": reference}
+        payload = {"birthday": birthday, "reference": reference}
         url = self._parse_url("/charge/submit_birthday")
         return self._handle_request(HTTPMethod.POST, url, payload)
 
@@ -147,7 +150,7 @@ class Charge(BaseAPI):
             "reference": reference,
             "city": city,
             "state": state,
-            "zipcode": zipcode,
+            "zip_code": zipcode,
         }
         url = self._parse_url("/charge/submit_address")
         return self._handle_request(HTTPMethod.POST, url, payload)
@@ -173,7 +176,7 @@ class Charge(BaseAPI):
 class AsyncCharge(BaseAsyncAPI):
     """Provides a wrapper for paystack Charge API
 
-    The Charge API allows you to configure payment channel of your choice when initiating a payment.
+    The Charge API allows you to configure a payment channel of your choice when initiating a payment.
     https://paystack.com/docs/api/#charge
 
     """
@@ -190,6 +193,7 @@ class AsyncCharge(BaseAsyncAPI):
         ussd: Optional[dict] = None,
         mobile_money: Optional[dict] = None,
         device_id: Optional[str] = None,
+        birthday: Optional[str] = None,
     ) -> Response:
         """Initiate a payment by integrating the payment channel of your choice.
 
@@ -222,6 +226,7 @@ class AsyncCharge(BaseAsyncAPI):
             ("ussd", ussd),
             ("mobile_money", mobile_money),
             ("device_id", device_id),
+            ("birthday", birthday),
         ]
         payload = add_to_payload(optional_params, payload)
         url = self._parse_url("/charge")
@@ -272,18 +277,18 @@ class AsyncCharge(BaseAsyncAPI):
         url = self._parse_url("/charge/submit_phone")
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
-    async def submit_birthday(self, date: str, reference: str) -> Response:
+    async def submit_birthday(self, birthday: str, reference: str) -> Response:
         """Submit Birthday when requested
 
         Args:
-            date: Birthday submitted by user. ISO Format e.g. 2016-09-21
+            birthday: Birthday submitted by user. ISO Format e.g. 2016-09-21
             reference: Reference for ongoing transaction
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
 
-        payload = {"date": date, "reference": reference}
+        payload = {"birthday": birthday, "reference": reference}
         url = self._parse_url("/charge/submit_birthday")
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
@@ -313,7 +318,7 @@ class AsyncCharge(BaseAsyncAPI):
             "reference": reference,
             "city": city,
             "state": state,
-            "zipcode": zipcode,
+            "zip_code": zipcode,
         }
         url = self._parse_url("/charge/submit_address")
         return await self._handle_request(HTTPMethod.POST, url, payload)

@@ -16,7 +16,7 @@ class Subscription(BaseAPI):
         self,
         customer: str,
         plan: str,
-        authorization: str,
+        authorization: Optional[str] = None,
         start_date: Optional[str] = None,
     ) -> Response:
         """Create a subscription on your integration
@@ -44,9 +44,10 @@ class Subscription(BaseAPI):
 
         url = self._parse_url("/subscription")
 
-        payload = {"customer": customer, "plan": plan, "authorization": authorization}
+        payload = {"customer": customer, "plan": plan}
         optional_params = [
             ("start_date", start_date),
+            ("authorization", authorization),
         ]
         payload = add_to_payload(optional_params, payload)
         return self._handle_request(HTTPMethod.POST, url, payload)
@@ -72,7 +73,7 @@ class Subscription(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/plan/?perPage=" + str(pagination))
+        url = self._parse_url("/subscription/?perPage=" + str(pagination))
         query_params = [
             ("page", page),
             ("customer", customer),
@@ -169,7 +170,7 @@ class AsyncSubscription(BaseAsyncAPI):
         self,
         customer: str,
         plan: str,
-        authorization: str,
+        authorization: Optional[str] = None,
         start_date: Optional[str] = None,
     ) -> Response:
         """Create a subscription on your integration
@@ -197,9 +198,10 @@ class AsyncSubscription(BaseAsyncAPI):
 
         url = self._parse_url("/subscription")
 
-        payload = {"customer": customer, "plan": plan, "authorization": authorization}
+        payload = {"customer": customer, "plan": plan}
         optional_params = [
             ("start_date", start_date),
+            ("authorization", authorization),
         ]
         payload = add_to_payload(optional_params, payload)
         return await self._handle_request(HTTPMethod.POST, url, payload)
@@ -225,7 +227,7 @@ class AsyncSubscription(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/plan/?perPage=" + str(pagination))
+        url = self._parse_url("/subscription/?perPage=" + str(pagination))
         query_params = [
             ("page", page),
             ("customer", customer),

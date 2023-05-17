@@ -41,6 +41,176 @@ class BulkChargeInstruction:
         ]
 
 
+@dataclass
+class LineItem:
+    name: str
+    amount: int
+    quantity: int
+
+    @property
+    def dict(self) -> dict:
+        return {
+            "name": self.name,
+            "amount": self.amount,
+            "quantity": self.quantity,
+        }
+
+    @classmethod
+    def from_dict(cls, value: dict) -> "LineItem":
+        return cls(
+            name=value["authorization"],
+            amount=value["amount"],
+            quantity=value["quantity"],
+        )
+
+    @classmethod
+    def from_dict_many(cls, values: list[dict]) -> list["LineItem"]:
+        return [
+            cls(
+                name=item["name"],
+                amount=item["amount"],
+                quantity=item["quantity"],
+            )
+            for item in values
+        ]
+
+
+@dataclass
+class Tax:
+    name: str
+    amount: int
+
+    @property
+    def dict(self) -> dict:
+        return {
+            "name": self.name,
+            "amount": self.amount,
+        }
+
+    @classmethod
+    def from_dict(cls, value: dict) -> "Tax":
+        return cls(
+            name=value["authorization"],
+            amount=value["amount"],
+        )
+
+    @classmethod
+    def from_dict_many(cls, values: list[dict]) -> list["Tax"]:
+        return [
+            cls(
+                name=item["name"],
+                amount=item["amount"],
+            )
+            for item in values
+        ]
+
+
+@dataclass
+class SplitAccount:
+    subaccount: str
+    share: Union[int, float]
+
+    @property
+    def dict(self) -> dict:
+        return {
+            "subaccount": self.subaccount,
+            "share": self.share,
+        }
+
+    @classmethod
+    def from_dict(cls, value: dict) -> "SplitAccount":
+        return cls(
+            subaccount=value["subaccount"],
+            share=value["share"],
+        )
+
+    @classmethod
+    def from_dict_many(cls, values: list[dict]) -> list["SplitAccount"]:
+        return [
+            cls(
+                subaccount=item["subaccount"],
+                share=item["share"],
+            )
+            for item in values
+        ]
+
+
+@dataclass
+class Recipient:
+    type: "RecipientType"
+    name: str
+    bank_code: str
+    account_number: str
+
+    @property
+    def dict(self) -> dict:
+        return {
+            "type": self.type,
+            "name": self.name,
+            "bank_code": self.bank_code,
+            "account_number": self.account_number,
+        }
+
+    @classmethod
+    def from_dict(cls, value: dict) -> "Recipient":
+        return cls(
+            type=value["type"],
+            name=value["name"],
+            bank_code=value["bank_code"],
+            account_number=value["account_number"],
+        )
+
+    @classmethod
+    def from_dict_many(cls, values: list[dict]) -> list["Recipient"]:
+        return [
+            cls(
+                type=item["type"],
+                name=item["name"],
+                bank_code=item["bank_code"],
+                account_number=item["account_number"],
+            )
+            for item in values
+        ]
+
+
+@dataclass
+class TransferInstruction:
+    amount: int
+    recipient: str
+    reference: Optional[str]
+    reason: Optional[str]
+
+    @property
+    def dict(self) -> dict:
+        return {
+            "amount": self.amount,
+            "reference": self.reference,
+            "recipient": self.recipient,
+            "reason": self.reason,
+        }
+
+    @classmethod
+    def from_dict(cls, value: dict) -> "TransferInstruction":
+        return cls(
+            amount=value["amount"],
+            reference=value.get("reference"),
+            recipient=value["recipient"],
+            reason=value.get("reason"),
+        )
+
+    @classmethod
+    def from_dict_many(cls, values: list[dict]) -> list["TransferInstruction"]:
+        return [
+            cls(
+                amount=item["amount"],
+                reference=item.get("reference"),
+                recipient=item["recipient"],
+                reason=item.get("reason"),
+            )
+            for item in values
+        ]
+
+
 class HTTPMethod(str, Enum):
     """An enum of supported http methods"""
 
@@ -123,26 +293,23 @@ class Split(str, Enum):
 class Country(str, Enum):
     """Enum of countries supported by paystack"""
 
-    NIGERIA = "ng"
-    GHANA = "gh"
+    NIGERIA = "NG"
+    GHANA = "GH"
+    SOUTH_AFRICA = "ZA"
 
     @staticmethod
-    def get_full(val: str) -> Optional[str]:
+    def get_full(value: str) -> Optional[str]:
         """Returns paystack supported country name in full lowercase
 
         Args:
-            val: The two-digit iso name of the country.
+            value: The two-digit iso name of the country.
 
         Returns:
             The name of the country in lowercase if it is supported by
             paystack or none.
         """
-        val = val.lower()
-        if val == "ng":
-            return "nigeria"
-        elif val == "gh":
-            return "ghana"
-        return None
+        value = value.lower()
+        return {"ng": "nigeria", "gh": "ghana", "za": "south africa"}.get(value)
 
 
 class RiskAction(str, Enum):
@@ -160,7 +327,7 @@ class Identification(str, Enum):
     BANK_ACCOUNT = "bank_account"
 
 
-class TransferRecipient(str, Enum):
+class RecipientType(str, Enum):
     """Enum of Transfer Recipient types"""
 
     NUBAN = "nuban"
@@ -202,6 +369,7 @@ class Reason(str, Enum):
 
     RESEND_OTP = "resend_otp"
     TRANSFER = "transfer"
+    DISABLE_OTP = "disable_otp"
 
 
 class Gateway(str, Enum):

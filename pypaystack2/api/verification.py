@@ -1,3 +1,5 @@
+from typing import Optional
+
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.utils import AccountType, Country, Document, HTTPMethod, Response
 
@@ -44,6 +46,7 @@ class Verification(BaseAPI):
         bank_code: str,
         country_code: Country,
         document_type: Document,
+            document_number: Optional[str] = None
     ) -> Response:
         """Confirm the authenticity of a customer's account number before sending money
 
@@ -52,9 +55,11 @@ class Verification(BaseAPI):
             account_number: Customer's account number
             account_type: bank_code: The bank code of the customer’s bank. You can fetch the bank codes by
                 using Miscellaneous API wrapper ``.get_banks`` method.
+            bank_code: The bank code of the customer’s bank
             country_code: Any value from the ``Country`` enum
             document_type: Customer’s mode of identity. any value from the
                 ``DocumentType`` enum.
+            document_number: Customer’s mode of identity number
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -67,6 +72,7 @@ class Verification(BaseAPI):
             "bank_code": bank_code,
             "country_code": country_code,
             "document_type": document_type,
+            "document_number": document_number,
         }
         url = self._parse_url("/bank/validate")
 
@@ -123,24 +129,26 @@ class AsyncVerification(BaseAsyncAPI):
 
     async def validate_account(
         self,
-        account_name: str,
-        account_number: str,
-        account_type: AccountType,
-        bank_code: str,
-        country_code: Country,
-        document_type: Document,
+            account_name: str,
+            account_number: str,
+            account_type: AccountType,
+            bank_code: str,
+            country_code: Country,
+            document_type: Document,
+            document_number: Optional[str] = None
     ) -> Response:
         """Confirm the authenticity of a customer's account number before sending money
 
         Args:
             account_name: Customer's first and last name registered with their bank
             account_number: Customer's account number
-            account_type: any variant from the `AccountType` enum.
-            bank_code: The bank code of the customer’s bank. You can fetch the bank codes by
+            account_type: bank_code: The bank code of the customer’s bank. You can fetch the bank codes by
                 using Miscellaneous API wrapper ``.get_banks`` method.
+            bank_code: The bank code of the customer’s bank
             country_code: Any value from the ``Country`` enum
             document_type: Customer’s mode of identity. any value from the
                 ``DocumentType`` enum.
+            document_number: Customer’s mode of identity number
 
         Returns:
             A named tuple containing the response gotten from paystack's server.

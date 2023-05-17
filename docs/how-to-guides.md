@@ -23,9 +23,9 @@ Here's a comparison of how a goal is achieved using the old API and the new API
 ### Old API
 
 ```python
-from pypaystack2.api import Invoice, Transaction, Customer
+from pypaystack2.api import PaymentRequest, Transaction, Customer
 
-invoice_api_wrapper = Invoice()  # assumes your PAYSTACK_AUTHORIZATION_KEY is set
+invoice_api_wrapper = PaymentRequest()  # assumes your PAYSTACK_AUTHORIZATION_KEY is set
 invoice_api_response = invoice_api_wrapper.create(customer="CUS_xwaj0txjryg393b",
                                                   amount=1000)  # Creates an invoice with a charge of ₦100
 transaction_api_wrapper = Transaction()

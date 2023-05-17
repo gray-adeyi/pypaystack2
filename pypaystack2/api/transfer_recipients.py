@@ -4,11 +4,12 @@ from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.errors import InvalidDataError
 from pypaystack2.utils import (
     Currency,
-    TransferRecipient,
+    RecipientType,
     add_to_payload,
     append_query_params,
     HTTPMethod,
     Response,
+    Recipient,
 )
 
 
@@ -25,7 +26,7 @@ class TransferRecipient(BaseAPI):
 
     def create(
         self,
-        type: TransferRecipient,
+        type: RecipientType,
         name: str,
         account_number: str,
         bank_code: Optional[str] = None,
@@ -55,7 +56,7 @@ class TransferRecipient(BaseAPI):
         """
         # FIXME: type is a keyword arg, might replace
         # if it raises issues.
-        if type == TransferRecipient.NUBAN or type == TransferRecipient.BASA:
+        if type == RecipientType.NUBAN or type == RecipientType.BASA:
             if bank_code is None:
                 raise InvalidDataError(
                     "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"
@@ -78,10 +79,10 @@ class TransferRecipient(BaseAPI):
         payload = add_to_payload(optional_params, payload)
         return self._handle_request(HTTPMethod.POST, url, payload)
 
-    def bulk_create(self, batch: list) -> Response:
+    def bulk_create(self, batch: list[Recipient]) -> Response:
         # TODO: create a pydantic model
         # for batch using the fields below.
-        # type: TransferRecipient,
+        # type: RecipientType,
         # name: str,
         # account_number: str,
         # bank_code: Optional[str] = None,
@@ -101,14 +102,7 @@ class TransferRecipient(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        # FIXME: type is a keyword arg, might replace
-        # if it raises issues.
-        for tr in batch:
-            if tr.type == TransferRecipient.NUBAN or tr.type == TransferRecipient.BASA:
-                if tr.bank_code is None:
-                    raise InvalidDataError(
-                        "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"
-                    )
+        batch = [item.dict for item in batch]
 
         url = self._parse_url("/transferrecipient/bulk")
 
@@ -117,7 +111,7 @@ class TransferRecipient(BaseAPI):
         }
         return self._handle_request(HTTPMethod.POST, url, payload)
 
-    def get_transfer_receipts(
+    def get_transfer_recipients(
         self,
         page: int = 1,
         pagination: int = 50,
@@ -147,7 +141,7 @@ class TransferRecipient(BaseAPI):
         url = append_query_params(query_params, url)
         return self._handle_request(HTTPMethod.GET, url)
 
-    def get_transfer_receipt(self, id_or_code: str) -> Response:
+    def get_transfer_recipient(self, id_or_code: str) -> Response:
         """Fetch the details of a transfer recipient
 
         Args:
@@ -238,7 +232,7 @@ class AsyncTransferRecipient(BaseAsyncAPI):
         """
         # FIXME: type is a keyword arg, might replace
         # if it raises issues.
-        if type == TransferRecipient.NUBAN or type == TransferRecipient.BASA:
+        if type == RecipientType.NUBAN or type == RecipientType.BASA:
             if bank_code is None:
                 raise InvalidDataError(
                     "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"
@@ -264,7 +258,7 @@ class AsyncTransferRecipient(BaseAsyncAPI):
     async def bulk_create(self, batch: list) -> Response:
         # TODO: create a pydantic model
         # for batch using the fields below.
-        # type: TransferRecipient,
+        # type: RecipientType,
         # name: str,
         # account_number: str,
         # bank_code: Optional[str] = None,
@@ -287,7 +281,7 @@ class AsyncTransferRecipient(BaseAsyncAPI):
         # FIXME: type is a keyword arg, might replace
         # if it raises issues.
         for tr in batch:
-            if tr.type == TransferRecipient.NUBAN or tr.type == TransferRecipient.BASA:
+            if tr.type == RecipientType.NUBAN or tr.type == RecipientType.BASA:
                 if tr.bank_code is None:
                     raise InvalidDataError(
                         "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"

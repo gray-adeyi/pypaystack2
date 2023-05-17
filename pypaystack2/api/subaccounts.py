@@ -25,7 +25,7 @@ class SubAccount(BaseAPI):
         settlement_bank: str,
         account_number: str,
         percentage_charge: float,
-        description: str,
+        description: Optional[str] = None,
         primary_contact_email: Optional[str] = None,
         primary_contact_name: Optional[str] = None,
         primary_contact_phone: Optional[str] = None,

@@ -1,11 +1,11 @@
 from pypaystack2.api.apple_pay import AsyncApplePay, ApplePay
 from pypaystack2.api.bulk_charges import AsyncBulkCharge, BulkCharge
 from pypaystack2.api.charge import AsyncCharge, Charge
-from pypaystack2.api.control_panel import AsyncControlPanel, ControlPanel
+from pypaystack2.api.integration import AsyncIntegration, Integration
 from pypaystack2.api.customers import AsyncCustomer, Customer
 from pypaystack2.api.dedicated_accounts import AsyncDedicatedAccount, DedicatedAccount
 from pypaystack2.api.disputes import AsyncDispute, Dispute
-from pypaystack2.api.invoices import AsyncInvoice, Invoice
+from pypaystack2.api.payment_requests import AsyncPaymentRequest, PaymentRequest
 from pypaystack2.api.miscellaneous import AsyncMiscellaneous, Miscellaneous
 from pypaystack2.api.payment_pages import AsyncPage, Page
 from pypaystack2.api.plans import AsyncPlan, Plan
@@ -19,6 +19,7 @@ from pypaystack2.api.terminals import Terminal, AsyncTerminal
 from pypaystack2.api.transactions import AsyncTransaction, Transaction
 from pypaystack2.api.transfer_recipients import (
     AsyncTransferRecipient,
+    RecipientType,
     TransferRecipient,
 )
 from pypaystack2.api.transfers import AsyncTransfer, Transfer
@@ -40,13 +41,13 @@ class Paystack(BaseAPI):
         self.apple_pay = ApplePay(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.bulk_charges = BulkCharge(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.charge = Charge(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.control_panel = ControlPanel(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
+        self.integration = Integration(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.customers = Customer(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.dedicated_accounts = DedicatedAccount(
             auth_key=self._PAYSTACK_AUTHORIZATION_KEY
         )
         self.disputes = Dispute(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.invoices = Invoice(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
+        self.invoices = PaymentRequest(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.miscellaneous = Miscellaneous(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.payment_pages = Page(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.plans = Plan(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
@@ -81,15 +82,13 @@ class AsyncPaystack(BaseAsyncAPI):
         self.apple_pay = AsyncApplePay(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.bulk_charges = AsyncBulkCharge(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.charge = AsyncCharge(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.control_panel = AsyncControlPanel(
-            auth_key=self._PAYSTACK_AUTHORIZATION_KEY
-        )
+        self.integration = AsyncIntegration(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.customers = AsyncCustomer(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.dedicated_accounts = AsyncDedicatedAccount(
             auth_key=self._PAYSTACK_AUTHORIZATION_KEY
         )
         self.disputes = AsyncDispute(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.invoices = AsyncInvoice(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
+        self.invoices = AsyncPaymentRequest(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.miscellaneous = AsyncMiscellaneous(
             auth_key=self._PAYSTACK_AUTHORIZATION_KEY
         )

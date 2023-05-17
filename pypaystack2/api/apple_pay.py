@@ -14,6 +14,7 @@ class ApplePay(BaseAPI):
 
         This method can only be called with one domain or subdomain at a time.
 
+
         Args:
             domain_name: Domain name to be registered.
 

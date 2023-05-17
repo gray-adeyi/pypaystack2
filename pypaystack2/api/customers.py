@@ -16,7 +16,7 @@ from pypaystack2.utils import (
 class Customer(BaseAPI):
     """Provides a wrapper for paystack Customer API
 
-    The Customers API allows you to create and manage customers on your integration.
+    The Customers API allows you to create and manage customers in your integration.
     https://paystack.com/docs/api/#customer
     """
 
@@ -106,8 +106,8 @@ class Customer(BaseAPI):
     def update(
         self,
         code: str,
-        first_name: str,
-        last_name: str,
+        first_name: Optional[str] = None,
+        last_name: Optional[str] = None,
         phone: Optional[str] = None,
         metadata: Optional[dict] = None,
     ) -> Response:
@@ -126,12 +126,11 @@ class Customer(BaseAPI):
         """
 
         url = self._parse_url(f"/customer/{code}/")
-        payload = {
-            "first_name": first_name,
-            "last_name": last_name,
-        }
+        payload = {}
 
         optional_params = [
+            ("first_name", first_name),
+            ("last_name", last_name),
             ("phone", phone),
             ("metadata", metadata),
         ]
@@ -140,13 +139,13 @@ class Customer(BaseAPI):
 
     def validate(
         self,
-        code: str,
+        email_or_code: str,
         first_name: str,
         last_name: str,
         identification_type: Identification,
-        identification_number: str,
         country: Country,
         bvn: str,
+        identification_number: Optional[str] = None,
         bank_code: Optional[str] = None,
         account_number: Optional[str] = None,
         middle_name: Optional[str] = None,
@@ -154,7 +153,7 @@ class Customer(BaseAPI):
         """Validate a customer's identity
 
         Args:
-            code: Customer's code
+            email_or_code: Customer's email or code
             first_name: Customer's first name
             last_name: Customer's last name
             identification_type: Enum of Identification e.g `Identification.BVN`
@@ -180,12 +179,11 @@ class Customer(BaseAPI):
                     "`account_number` is required if identification type is `Identification.BANK_ACCOUNT`"
                 )
 
-        url = self._parse_url(f"/customer/{code}/identification")
+        url = self._parse_url(f"/customer/{email_or_code}/identification")
         payload = {
             "first_name": first_name,
             "last_name": last_name,
             "type": identification_type,
-            "value": identification_number,
             "country": country,
             "bvn": bvn,
         }
@@ -193,6 +191,7 @@ class Customer(BaseAPI):
             ("bank_code", bank_code),
             ("account_number", account_number),
             ("middle_name", middle_name),
+            ("value", identification_number),
         ]
         payload = add_to_payload(optional_params, payload)
         return self._handle_request(HTTPMethod.POST, url, payload)
@@ -245,7 +244,7 @@ class Customer(BaseAPI):
 class AsyncCustomer(BaseAsyncAPI):
     """Provides a wrapper for paystack Customer API
 
-    The Customers API allows you to create and manage customers on your integration.
+    The Customers API allows you to create and manage customers in your integration.
     https://paystack.com/docs/api/#customer
     """
 
@@ -335,8 +334,8 @@ class AsyncCustomer(BaseAsyncAPI):
     async def update(
         self,
         code: str,
-        first_name: str,
-        last_name: str,
+        first_name: Optional[str] = None,
+        last_name: Optional[str] = None,
         phone: Optional[str] = None,
         metadata: Optional[dict] = None,
     ) -> Response:
@@ -355,12 +354,11 @@ class AsyncCustomer(BaseAsyncAPI):
         """
 
         url = self._parse_url(f"/customer/{code}/")
-        payload = {
-            "first_name": first_name,
-            "last_name": last_name,
-        }
+        payload = {}
 
         optional_params = [
+            ("first_name", first_name),
+            ("last_name", last_name),
             ("phone", phone),
             ("metadata", metadata),
         ]
@@ -369,13 +367,13 @@ class AsyncCustomer(BaseAsyncAPI):
 
     async def validate(
         self,
-        code: str,
+        email_or_code: str,
         first_name: str,
         last_name: str,
         identification_type: Identification,
-        identification_number: str,
         country: Country,
         bvn: str,
+        identification_number: Optional[str] = None,
         bank_code: Optional[str] = None,
         account_number: Optional[str] = None,
         middle_name: Optional[str] = None,
@@ -383,7 +381,7 @@ class AsyncCustomer(BaseAsyncAPI):
         """Validate a customer's identity
 
         Args:
-            code: Customer's code
+            email_or_code: Customer's email or code
             first_name: Customer's first name
             last_name: Customer's last name
             identification_type: Enum of Identification e.g `Identification.BVN`
@@ -409,12 +407,11 @@ class AsyncCustomer(BaseAsyncAPI):
                     "`account_number` is required if identification type is `Identification.BANK_ACCOUNT`"
                 )
 
-        url = self._parse_url(f"/customer/{code}/identification")
+        url = self._parse_url(f"/customer/{email_or_code}/identification")
         payload = {
             "first_name": first_name,
             "last_name": last_name,
             "type": identification_type,
-            "value": identification_number,
             "country": country,
             "bvn": bvn,
         }
@@ -422,6 +419,7 @@ class AsyncCustomer(BaseAsyncAPI):
             ("bank_code", bank_code),
             ("account_number", account_number),
             ("middle_name", middle_name),
+            ("value", identification_number),
         ]
         payload = add_to_payload(optional_params, payload)
         return await self._handle_request(HTTPMethod.POST, url, payload)

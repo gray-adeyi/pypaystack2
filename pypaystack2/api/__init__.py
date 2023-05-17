@@ -27,11 +27,11 @@ Modules exported by this package:
 from pypaystack2.api.apple_pay import ApplePay
 from pypaystack2.api.bulk_charges import BulkCharge
 from pypaystack2.api.charge import Charge
-from pypaystack2.api.control_panel import ControlPanel
+from pypaystack2.api.integration import Integration
 from pypaystack2.api.customers import Customer
 from pypaystack2.api.dedicated_accounts import DedicatedAccount
 from pypaystack2.api.disputes import Dispute
-from pypaystack2.api.invoices import Invoice
+from pypaystack2.api.payment_requests import PaymentRequest
 from pypaystack2.api.miscellaneous import Miscellaneous
 from pypaystack2.api.payment_pages import Page
 from pypaystack2.api.plans import Plan
@@ -43,7 +43,7 @@ from pypaystack2.api.subaccounts import SubAccount
 from pypaystack2.api.subscriptions import Subscription
 from pypaystack2.api.terminals import Terminal
 from pypaystack2.api.transactions import Transaction
-from pypaystack2.api.transfer_recipients import TransferRecipient
+from pypaystack2.api.transfer_recipients import RecipientType
 from pypaystack2.api.transfers import Transfer
 from pypaystack2.api.transfers_control import TransferControl
 from pypaystack2.api.verification import Verification
@@ -52,11 +52,11 @@ from pypaystack2.api.verification import Verification
 ApplePay
 BulkCharge
 Charge
-ControlPanel
+Integration
 Customer
 DedicatedAccount
 Dispute
-Invoice
+PaymentRequest
 Miscellaneous
 Page
 Plan
@@ -68,7 +68,7 @@ SubAccount
 Subscription
 Terminal
 Transaction
-TransferRecipient
+RecipientType
 Transfer
 TransferControl
 Verification

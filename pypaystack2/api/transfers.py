@@ -8,6 +8,7 @@ from pypaystack2.utils import (
     validate_amount,
     HTTPMethod,
     Response,
+    TransferInstruction,
 )
 
 
@@ -84,7 +85,9 @@ class Transfer(BaseAPI):
         }
         return self._handle_request(HTTPMethod.POST, url, payload)
 
-    def bulk_transfer(self, transfers: list, source: str = "balance") -> Response:
+    def bulk_transfer(
+        self, transfers: list[TransferInstruction], source: str = "balance"
+    ) -> Response:
         """Transfer in bulk
 
         Args:
@@ -98,16 +101,16 @@ class Transfer(BaseAPI):
         url = self._parse_url("/transfer/bulk")
 
         payload = {
-            "transfers": transfers,
+            "transfers": [tx.dict for tx in transfers],
             "source": source,
         }
         return self._handle_request(HTTPMethod.POST, url, payload)
 
     def get_transfers(
         self,
-        customer: str,
         page: int = 1,
         pagination: int = 50,
+        customer: Optional[str] = None,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
     ) -> Response:
@@ -239,7 +242,9 @@ class AsyncTransfer(BaseAsyncAPI):
         }
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
-    async def bulk_transfer(self, transfers: list, source: str = "balance") -> Response:
+    async def bulk_transfer(
+        self, transfers: list[TransferInstruction], source: str = "balance"
+    ) -> Response:
         """Transfer in bulk
 
         Args:
@@ -253,16 +258,16 @@ class AsyncTransfer(BaseAsyncAPI):
         url = self._parse_url("/transfer/bulk")
 
         payload = {
-            "transfers": transfers,
+            "transfers": [tx.dict for tx in transfers],
             "source": source,
         }
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
     async def get_transfers(
         self,
-        customer: str,
         page: int = 1,
         pagination: int = 50,
+        customer: Optional[str] = None,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
     ) -> Response:

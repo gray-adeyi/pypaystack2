@@ -58,8 +58,8 @@ class Refund(BaseAPI):
 
     def get_refunds(
         self,
-        reference: str,
-        currency: Currency,
+        reference: Optional[str] = None,
+        currency: Optional[Currency] = None,
         pagination: int = 50,
         page: int = 1,
         start_date: Optional[str] = None,
@@ -153,8 +153,8 @@ class AsyncRefund(BaseAsyncAPI):
 
     async def get_refunds(
         self,
-        reference: str,
-        currency: Currency,
+        reference: Optional[str] = None,
+        currency: Optional[Currency] = None,
         pagination: int = 50,
         page: int = 1,
         start_date: Optional[str] = None,

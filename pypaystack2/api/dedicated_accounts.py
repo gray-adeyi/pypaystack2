@@ -43,7 +43,7 @@ class DedicatedAccount(BaseAPI):
 
         Args:
             customer: Customer ID or code
-            preferred_bank: The bank slug for preferred bank. To get a list of available banks, use the
+            preferred_bank: The bank slug for a preferred bank. To get a list of available banks, use the
                 Miscellaneous API ``.get_providers`` method.
             subaccount: Subaccount code of the account you want to split the transaction with
             split_code: Split code consisting of the lists of accounts you want to split the transaction with
@@ -91,7 +91,7 @@ class DedicatedAccount(BaseAPI):
             active: Status of the dedicated virtual account
             currency: The currency of the dedicated virtual account. Only ``Currency.NGN`` is currently allowed
             provider_slug: The bank's slug in lowercase, without spaces e.g. wema-bank
-            bank_id: The bank's ID e.g. 035
+            bank_id: The bank's ID e.g., 035
             customer: The customer's ID
 
         Returns:
@@ -197,7 +197,7 @@ class DedicatedAccount(BaseAPI):
             customer: Customer ID or code
             subaccount: Subaccount code of the account you want to split the transaction with
             split_code: Split code consisting of the lists of accounts you want to split the transaction with
-            preferred_bank: The bank slug for preferred bank. To get a list of available banks,
+            preferred_bank: The bank slug for a preferred bank. To get a list of available banks,
                 use the Miscellaneous API ``.get_providers`` method
 
         Returns:

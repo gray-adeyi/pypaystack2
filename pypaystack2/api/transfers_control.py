@@ -24,7 +24,8 @@ class TransferControl(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url("balance/ledger")
+        url = self._parse_url("/balance/ledger")
+        print(url)
         return self._handle_request(HTTPMethod.GET, url)
 
     def resend_otp(self, transfer_code: str, reason: Reason) -> Response:

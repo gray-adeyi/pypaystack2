@@ -2,10 +2,10 @@ from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.utils import HTTPMethod, Response
 
 
-class ControlPanel(BaseAPI):
-    """Provides a wrapper for paystack Control Panel API
+class Integration(BaseAPI):
+    """Provides a wrapper for paystack Integration API
 
-    The Control Panel API allows you manage some settings on your integration.
+    The Integration API allows you to manage some settings on your integration.
     https://paystack.com/docs/api/#control-panel
     """
 
@@ -34,10 +34,10 @@ class ControlPanel(BaseAPI):
         return self._handle_request(HTTPMethod.PUT, url, payload)
 
 
-class AsyncControlPanel(BaseAsyncAPI):
-    """Provides a wrapper for paystack Control Panel API
+class AsyncIntegration(BaseAsyncAPI):
+    """Provides a wrapper for paystack Integration API
 
-    The Control Panel API allows you manage some settings on your integration.
+    The Integration API allows you to manage some settings on your integration.
     https://paystack.com/docs/api/#control-panel
     """
 

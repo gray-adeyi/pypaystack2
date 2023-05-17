@@ -11,6 +11,7 @@ from pypaystack2.utils import (
     validate_amount,
     HTTPMethod,
     Response,
+    SplitAccount,
 )
 
 
@@ -27,7 +28,7 @@ class Split(BaseAPI):
         name: str,
         type: Split,
         currency: Currency,
-        subaccounts: list[dict],
+        subaccounts: list[SplitAccount],
         bearer_type: Bearer,
         bearer_subaccount: str,
     ) -> Response:
@@ -46,6 +47,7 @@ class Split(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
+        subaccounts = [account.dict for account in subaccounts]
 
         url = self._parse_url("/split")
         payload = {
@@ -197,7 +199,7 @@ class AsyncSplit(BaseAsyncAPI):
         name: str,
         type: Split,
         currency: Currency,
-        subaccounts: list[dict],
+        subaccounts: list[SplitAccount],
         bearer_type: Bearer,
         bearer_subaccount: str,
     ) -> Response:
@@ -216,6 +218,7 @@ class AsyncSplit(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
+        subaccounts = [account.dict for account in subaccounts]
 
         url = self._parse_url("/split")
         payload = {

@@ -8,11 +8,11 @@
 ::: pypaystack2.api.apple_pay
 ::: pypaystack2.api.bulk_charges
 ::: pypaystack2.api.charge
-::: pypaystack2.api.control_panel
+::: pypaystack2.api.integration
 ::: pypaystack2.api.customers
 ::: pypaystack2.api.dedicated_accounts
 ::: pypaystack2.api.disputes
-::: pypaystack2.api.invoices
+::: pypaystack2.api.payment_requests
 ::: pypaystack2.api.miscellaneous
 ::: pypaystack2.api.payment_pages
 ::: pypaystack2.api.plans
