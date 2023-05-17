@@ -55,9 +55,33 @@ markdown_extensions:
 nav:
   - PyPaystack2: index.md
   - Tutorials:
-      Paystack Command line Client: tutorials/tutorial1.md
+      - Paystack Command line Client: tutorials/tutorial1.md
   - How-To Guides: how-to-guides.md
-  - Reference: reference.md
+  - Reference:
+      - Introduction: reference/index.md
+      - reference/apple_pay.md
+      - reference/bulk_charges.md
+      - reference/charge.md
+      - reference/customer.md
+      - reference/dedicated_accounts.md
+      - reference/disputes.md
+      - reference/integration.md
+      - reference/miscellaneous.md
+      - reference/payment_pages.md
+      - reference/payment_requests.md
+      - reference/plans.md
+      - reference/products.md
+      - reference/refunds.md
+      - reference/settlements.md
+      - reference/splits.md
+      - reference/subaccounts.md
+      - reference/subscriptions.md
+      - reference/terminals.md
+      - reference/transactions.md
+      - reference/transfer_recipients.md
+      - reference/transfers.md
+      - reference/transfers_control.md
+      - reference/verification.md
   - Explanation: explanation.md
 
 extra_css:

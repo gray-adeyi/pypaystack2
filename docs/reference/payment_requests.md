@@ -1,0 +1,1 @@
+::: pypaystack2.api.payment_requests
