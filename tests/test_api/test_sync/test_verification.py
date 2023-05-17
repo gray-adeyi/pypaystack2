@@ -38,15 +38,14 @@ class VerificationTestCase(TestCase):
             country_code=Country.SOUTH_AFRICA,
             bank_code="632005",
             document_type=Document.IDENTITY_NUMBER,
-            document_number="1234567890123"
-
+            document_number="1234567890123",
         )
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
-        self.assertEqual(response.message, 'Personal Account Verification attempted')
+        self.assertEqual(response.message, "Personal Account Verification attempted")
 
     def test_can_resolve_card_bin(self):
         response = self.wrapper.resolve_card_bin(bin="539983")
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
-        self.assertEqual(response.message, 'Bin resolved')
+        self.assertEqual(response.message, "Bin resolved")

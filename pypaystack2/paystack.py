@@ -47,7 +47,9 @@ class Paystack(BaseAPI):
             auth_key=self._PAYSTACK_AUTHORIZATION_KEY
         )
         self.disputes = Dispute(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.invoices = PaymentRequest(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
+        self.payment_requests = PaymentRequest(
+            auth_key=self._PAYSTACK_AUTHORIZATION_KEY
+        )
         self.miscellaneous = Miscellaneous(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.payment_pages = Page(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.plans = Plan(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
@@ -88,7 +90,9 @@ class AsyncPaystack(BaseAsyncAPI):
             auth_key=self._PAYSTACK_AUTHORIZATION_KEY
         )
         self.disputes = AsyncDispute(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.invoices = AsyncPaymentRequest(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
+        self.payment_requests = AsyncPaymentRequest(
+            auth_key=self._PAYSTACK_AUTHORIZATION_KEY
+        )
         self.miscellaneous = AsyncMiscellaneous(
             auth_key=self._PAYSTACK_AUTHORIZATION_KEY
         )

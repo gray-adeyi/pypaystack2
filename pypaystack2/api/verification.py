@@ -46,7 +46,7 @@ class Verification(BaseAPI):
         bank_code: str,
         country_code: Country,
         document_type: Document,
-            document_number: Optional[str] = None
+        document_number: Optional[str] = None,
     ) -> Response:
         """Confirm the authenticity of a customer's account number before sending money
 
@@ -129,13 +129,13 @@ class AsyncVerification(BaseAsyncAPI):
 
     async def validate_account(
         self,
-            account_name: str,
-            account_number: str,
-            account_type: AccountType,
-            bank_code: str,
-            country_code: Country,
-            document_type: Document,
-            document_number: Optional[str] = None
+        account_name: str,
+        account_number: str,
+        account_type: AccountType,
+        bank_code: str,
+        country_code: Country,
+        document_type: Document,
+        document_number: Optional[str] = None,
     ) -> Response:
         """Confirm the authenticity of a customer's account number before sending money
 

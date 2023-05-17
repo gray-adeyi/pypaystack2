@@ -6,7 +6,7 @@ We'll be building a simple command line application that integrates with paystac
 ## Project Setup
 
 We'll start by setting up our project. We'll be using `pipenv` for managing this project's dependencies and
-environment. you're free to use your preferred choice like `virtualenv`. if you don't have `pipenv`
+environment. you're free to use your preferred choice like `virtualenv`, `hatch` or `poetry`. if you don't have `pipenv`
 installed yet, you can install it with `pip install pipenv`. it's important to note that `pipenv` should be
 installed globally and not within a virtual environment. You're good to proceed if this prerequisite is met.
 
@@ -24,7 +24,7 @@ pipenv shell
 
 - Install the projects dependencies. We'll be needing `pypaystack2`, `python-dotenv`, and `typer`.
   `pypaystack2` package is an API wrapper for paystack's services. `python-dotenv` helps us manage our
-  environmental variables and `typer` makes building command line apps in python super simple.
+  environmental variables and [typer](https://typer.tiangolo.com/) makes building command line apps in python super simple.
 
 ```bash
 pipenv install pypaystack2 python-dotenv typer
@@ -35,8 +35,8 @@ If all work's fine, you're good to proceed.
 ## Environmental Variables
 
 `pypaystack2` depends on your paystack authorization key that you get from signing up to paystack.
-Paystack provides you with two pairs. A pair of public and secret key for live mode and another set
-for test mode. You can find them in your account settings. Since this is just a tutorial we'll be
+Paystack provides you with two pairs. A pair of public and secret keys for live mode and another set
+for test mode. You can find them in your account settings. Since this is just a tutorial, we'll be
 using only the test secret key. create a new file named `.env` within your project's root directory.
 Now put in your test secret key in the `.env` file like so.
 
@@ -67,29 +67,33 @@ paystack's api. alternatively, you can pass your authorization key into any of t
 provided by `pypaystack2` via their `auth_key` parameter. Here's a list of all the API wrappers
 currently available as at the time of writing of this tutorial.
 
-- ApplePay
-- BulkCharge
-- Charge
-- ControlPanel
-- Customer
-- DedicatedAccount
-- Dispute
-- Invoice
-- Miscellaneous
-- Page
-- Plan
-- Product
-- Refund
-- Settlement
-- Split
-- SubAccount
-- Subscription
-- Terminal
-- Transaction
-- TransferReceipt
-- TransferControl
-- Transfer
-- Verification
+!!! note
+
+    As of version `1.1.3`, `pypaystack2` provided `Paystack` class which had all the available api
+    wrappers bounded to it. version `2.0.0` also added `AsyncPaystack` to provide the asynchronous
+    equivalent. So instead off importing individual wrappers you only have to import the `Paystack`
+    or `AsyncPaystack` class.
+
+    Example:
+      The old way of doing things
+      ```python
+      from pypaystack2.uitls import Country
+      from pypaystack2.api import Miscellaneous
+      
+      miscellaneous_wrapper = Miscellaneous(auth_key="<paystack secret key>")
+      response = miscellaneous_wrapper.get_banks(country=Country.NIGERIA)
+      print(response)
+      ```
+
+    The new way
+    ```python
+    from pypaystack2 import Paystack, Country
+
+    paystack = Paystack(auth_key="<paystack secret key>")
+    response = paystack.miscellaneous.get_banks(country=Country.NIGERIA)
+    print(response)
+    ```
+
 
 So in a situation where you don't have your `PAYSTACK_AUTHORIZATION_KEY` as an environmental variable,
 you can pass it into any of the API wrappers. e.g.
@@ -104,7 +108,7 @@ paystack = Paystack(auth_key="<your test secret key>")
 paystack = Paystack()
 ```
 
-???+ note
+!!! note
 
     You don't have to provide your authorization key on the instantiation of any of the API wrappers
     as long as you have it set in your environmental variables like this tutorial does.
@@ -173,7 +177,7 @@ restful APIs provided by Paystack. These wrappers are named to closely match the
 on these wrappers correspond to endpoints on the Paystack services you're interested in so in this case,
 for us to create a customer on our integration, we need to use the `Customer` API wrapper which connects
 to Paystack's Customer Services API. More info
-at [Paystack's Customer Services API](https://paystack.com/docs/api/#customer)
+at [Paystack's Customer Services API](https://paystack.com/docs/api/customer/)
 
 ```python
 # root-dir/main.py
@@ -208,8 +212,8 @@ if __name__ == "__main__":
     app()
 ```
 
-???+ note
-All API wrappers are available on `pypaystack`. as attributes e.g. `paystack.transactions` for the Transactions API
+!!! note
+    All API wrappers are available on `pypaystack`. as attributes e.g. `paystack.transactions` for the Transactions API
 
 Now if you run the script again.
 
@@ -247,7 +251,7 @@ Customer created
 **Yay! You've just created a new customer on your integration** You can check out the customer's tab in  
 your Paystack account to confirm this.
 
-???+ tip
+!!! tip
 
     You can also create new customers with a first name and last name like so.
 
@@ -258,10 +262,10 @@ your Paystack account to confirm this.
 ## What just happened?
 
 You have just created a new customer on your integration with the CLI app you just built. But how? If you've followed
-this tutorial to this point you already know what wrappers are, or you can quickly skim through the chapters before to
+this tutorial to this point, you already know what wrappers are, or you can quickly skim through the chapters before to
 get a refresher. The right question should be what is the `create` method on the `Customer` wrapper for. You guess
-right if what's on your mind is that it creates the new customer on your integration. So as it was said earlier, all
-wrappers have methods on them that correspond to an endpoint on paystack and all of this methods will return
+right if what's on your mind is that it creates a new customer on your integration. So as it was said earlier, all
+wrappers have methods on them that correspond to an endpoint on paystack and all of these methods will return
 a `Response`
 object based on the response it gets from Paystack. This `Response` is just a `NamedTuple` that holds the
 `status,status_code,message` and `data`. So this call
