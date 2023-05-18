@@ -5,7 +5,7 @@ from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.utils import add_to_payload, append_query_params, HTTPMethod, Response
 
 
-class Page(BaseAPI):
+class PaymentPage(BaseAPI):
     """Provides a wrapper for paystack Payment Pages API
 
     The Payment Pages API provides a quick and secure way to collect payment for products.
@@ -164,7 +164,7 @@ class Page(BaseAPI):
         return self._handle_request(HTTPMethod.POST, url, payload)
 
 
-class AsyncPage(BaseAsyncAPI):
+class AsyncPaymentPage(BaseAsyncAPI):
     """Provides a wrapper for paystack Payment Pages API
 
     The Payment Pages API provides a quick and secure way to collect payment for products.

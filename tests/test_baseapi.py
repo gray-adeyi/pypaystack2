@@ -81,7 +81,7 @@ class BaseAPITestCase(MockedAPITestCase):
                 method=HTTPMethod.POST,
                 data={"isValid": True},
             ),
-            {"headers": headers, "url": url, "data": {"isValid": True}},
+            {"headers": headers, "url": url, "json": {"isValid": True}},
         )
 
     def test__handle_request(self):

@@ -33,12 +33,12 @@ from pypaystack2.api.dedicated_accounts import DedicatedAccount
 from pypaystack2.api.disputes import Dispute
 from pypaystack2.api.payment_requests import PaymentRequest
 from pypaystack2.api.miscellaneous import Miscellaneous
-from pypaystack2.api.payment_pages import Page
+from pypaystack2.api.payment_pages import PaymentPage
 from pypaystack2.api.plans import Plan
 from pypaystack2.api.products import Product
 from pypaystack2.api.refunds import Refund
 from pypaystack2.api.settlements import Settlement
-from pypaystack2.api.splits import Split
+from pypaystack2.api.splits import TransactionSplit
 from pypaystack2.api.subaccounts import SubAccount
 from pypaystack2.api.subscriptions import Subscription
 from pypaystack2.api.terminals import Terminal
@@ -58,12 +58,12 @@ DedicatedAccount
 Dispute
 PaymentRequest
 Miscellaneous
-Page
+PaymentPage
 Plan
 Product
 Refund
 Settlement
-Split
+TransactionSplit
 SubAccount
 Subscription
 Terminal

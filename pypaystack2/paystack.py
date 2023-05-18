@@ -7,12 +7,12 @@ from pypaystack2.api.dedicated_accounts import AsyncDedicatedAccount, DedicatedA
 from pypaystack2.api.disputes import AsyncDispute, Dispute
 from pypaystack2.api.payment_requests import AsyncPaymentRequest, PaymentRequest
 from pypaystack2.api.miscellaneous import AsyncMiscellaneous, Miscellaneous
-from pypaystack2.api.payment_pages import AsyncPage, Page
+from pypaystack2.api.payment_pages import AsyncPaymentPage, PaymentPage
 from pypaystack2.api.plans import AsyncPlan, Plan
 from pypaystack2.api.products import AsyncProduct, Product
 from pypaystack2.api.refunds import AsyncRefund, Refund
 from pypaystack2.api.settlements import AsyncSettlement, Settlement
-from pypaystack2.api.splits import AsyncSplit, Split
+from pypaystack2.api.splits import AsyncTransactionSplit, TransactionSplit
 from pypaystack2.api.subaccounts import AsyncSubAccount, SubAccount
 from pypaystack2.api.subscriptions import AsyncSubscription, Subscription
 from pypaystack2.api.terminals import Terminal, AsyncTerminal
@@ -51,12 +51,12 @@ class Paystack(BaseAPI):
             auth_key=self._PAYSTACK_AUTHORIZATION_KEY
         )
         self.miscellaneous = Miscellaneous(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.payment_pages = Page(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
+        self.payment_pages = PaymentPage(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.plans = Plan(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.products = Product(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.refunds = Refund(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.settlements = Settlement(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.splits = Split(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
+        self.splits = TransactionSplit(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.subaccounts = SubAccount(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.subscriptions = Subscription(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.terminals = Terminal(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
@@ -96,12 +96,12 @@ class AsyncPaystack(BaseAsyncAPI):
         self.miscellaneous = AsyncMiscellaneous(
             auth_key=self._PAYSTACK_AUTHORIZATION_KEY
         )
-        self.payment_pages = AsyncPage(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
+        self.payment_pages = AsyncPaymentPage(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.plans = AsyncPlan(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.products = AsyncProduct(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.refunds = AsyncRefund(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.settlements = AsyncSettlement(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.splits = AsyncSplit(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
+        self.splits = AsyncTransactionSplit(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.subaccounts = AsyncSubAccount(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
         self.subscriptions = AsyncSubscription(
             auth_key=self._PAYSTACK_AUTHORIZATION_KEY

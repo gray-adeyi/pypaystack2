@@ -16,7 +16,6 @@ class MockedAsyncSettlementTestCase(MockedAsyncAPITestCase):
 
     async def test_can_get_settlements(self):
         response = await self.wrapper.get_settlements()
-        print(response)
         self.assertEqual(response.status_code, httpx.codes.OK)
 
     async def test_can_get_settlement_transactions(self):
@@ -33,7 +32,6 @@ class AsyncSettlementTestCase(IsolatedAsyncioTestCase):
 
     async def test_can_get_settlements(self):
         response = await self.wrapper.get_settlements()
-        print(response)
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Settlements retrieved")

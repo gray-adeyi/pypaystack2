@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "pypaystack2"
 version = "2.0.0"
-description = "A developer friendly [Paystack](https://paystack.com/) API wrapper."
+description = "A developer-friendly API wrapper."
 authors = ["Gbenga Adeyi <adeyigbenga005@gmail.com>"]
 readme = "README.md"
 packages = [{ include = "pypaystack2" }]
-keywords = ["paystack-python", "pypaystack", "paystack"]
+keywords = ["paystack-python", "pypaystack", "paystack", "paystackapi"]
 license = "MIT"
 classifiers = [
     "License :: OSI Approved :: MIT License",

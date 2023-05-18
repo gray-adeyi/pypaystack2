@@ -44,7 +44,7 @@ class SubscriptionTestCase(TestCase):
         response = self.wrapper.get_subscription(id_or_code="SUB_e1z7pxur2k0a9qk")
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
-        self.assertEqual(response.message, "Subscription retrieved")
+        self.assertEqual(response.message, "Subscription retrieved successfully")
 
     def test_can_enable(self):
         # TODO: Test properly

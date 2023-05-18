@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from dotenv import load_dotenv
 
-from pypaystack2.api import Split
+from pypaystack2.api import TransactionSplit
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
 
@@ -11,14 +11,14 @@ class MockedSplitTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = Split()
+        cls.wrapper = TransactionSplit()
 
 
 class SplitTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = Split()
+        cls.wrapper = TransactionSplit()
 
     def test_can_create(self):
         ...

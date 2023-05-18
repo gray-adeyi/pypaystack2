@@ -15,7 +15,7 @@ from pypaystack2.utils import (
 )
 
 
-class Split(BaseAPI):
+class TransactionSplit(BaseAPI):
     """Provides a wrapper for paystack Transaction Splits API
 
     The Transaction Splits API enables merchants split the settlement for a transaction
@@ -186,7 +186,7 @@ class Split(BaseAPI):
         return self._handle_request(HTTPMethod.POST, url, payload)
 
 
-class AsyncSplit(BaseAsyncAPI):
+class AsyncTransactionSplit(BaseAsyncAPI):
     """Provides a wrapper for paystack Transaction Splits API
 
     The Transaction Splits API enables merchants split the settlement for a transaction
@@ -197,7 +197,7 @@ class AsyncSplit(BaseAsyncAPI):
     async def create(
         self,
         name: str,
-        type: Split,
+        type: TransactionSplit,
         currency: Currency,
         subaccounts: list[SplitAccount],
         bearer_type: Bearer,

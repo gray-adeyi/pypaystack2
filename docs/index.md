@@ -12,8 +12,8 @@ The key features are:
 
 * **Type hints**: All methods provided by PyPaystack2 are type annotated, so you can easily infer. This improves the
   development experience.
-* **Async support**: PyPaystack2 allow you to also make calls to Paystack API using `async/await` which is super great
-  for example if your project is in [FastAPI](https://fastapi.tiangolo.com/) where every chance of a performance 
+* **Async support**: PyPaystack2 allow you to also make calls to Paystack API using `async/await` which is super great,
+  for example, if your project is in [FastAPI](https://fastapi.tiangolo.com/) where every chance of a performance 
   improvement adds up.
 
 ## Requirements

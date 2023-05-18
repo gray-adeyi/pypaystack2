@@ -16,7 +16,6 @@ class MockedSettlementTestCase(MockedAPITestCase):
 
     def test_can_get_settlements(self):
         response = self.wrapper.get_settlements()
-        print(response)
         self.assertEqual(response.status_code, httpx.codes.OK)
 
     def test_can_get_settlement_transactions(self):

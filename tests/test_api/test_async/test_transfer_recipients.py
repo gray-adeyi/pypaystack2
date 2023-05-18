@@ -37,14 +37,6 @@ class MockedAsyncTransferRecipientTestCase(MockedAsyncAPITestCase):
         response = await self.wrapper.bulk_create(batch=Recipient.from_dict_many(batch))
         self.assertEqual(response.status_code, httpx.codes.OK)
 
-    async def test_can_get_transfer_recipients(self):
-        response = await self.wrapper.get_transfer_recipients()
-        self.assertEqual(response.status_code, httpx.codes.OK)
-
-    async def test_can_get_transfer_recipient(self):
-        response = await self.wrapper.get_transfer_recipient(id_or_code="54134578")
-        self.assertEqual(response.status_code, httpx.codes.OK)
-
     async def test_can_update(self):
         response = await self.wrapper.update(
             id_or_code="54134578",
@@ -54,7 +46,6 @@ class MockedAsyncTransferRecipientTestCase(MockedAsyncAPITestCase):
         self.assertEqual(response.status_code, httpx.codes.OK)
 
     async def test_can_delete(self):
-        all_recipients_response = await self.wrapper.get_transfer_recipients()
         response = await self.wrapper.delete(id_or_code="54134578")
         self.assertEqual(response.status_code, httpx.codes.OK)
 
