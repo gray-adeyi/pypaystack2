@@ -6,14 +6,20 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
+        <meta name="description" content="A developer friendly wrapper for Paystack API">
       
       
-      <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+        <meta name="author" content="Gbenga Adeyi">
+      
+      
+        <link rel="canonical" href="https://github.com/gray-adeyi/pypaystack2/how-to-guides/">
+      
+      <link rel="icon" href="../assets/pypaystack2.svg">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.5.10">
     
     
       
-        <title>How-To Guides - Pypaystack2 Documentation</title>
+        <title>How-To Guides - Pypaystack2</title>
       
     
     
@@ -21,10 +27,6 @@
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
-        
-          
-          
-          <meta name="theme-color" content="#02a6f2">
         
       
       
@@ -43,6 +45,8 @@
     
       <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
     <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -55,12 +59,16 @@
   
     
     
+      
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="light-blue" data-md-color-accent="">
+    
+    <body dir="ltr" data-md-color-scheme="paystack" data-md-color-primary="" data-md-color-accent="">
   
     
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -82,10 +90,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Pypaystack2 Documentation" class="md-header__button md-logo" aria-label="Pypaystack2 Documentation" data-md-component="logo">
+    <a href=".." title="Pypaystack2" class="md-header__button md-logo" aria-label="Pypaystack2" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <img src="../assets/pypaystack2.svg" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -95,7 +102,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Pypaystack2 Documentation
+            Pypaystack2
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -107,6 +114,30 @@
         </div>
       </div>
     </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="paystack" data-md-color-primary="" data-md-color-accent=""  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7M9 21a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-1H9v1Z"/></svg>
+            </label>
+          
+        
+          
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="deep-blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7M9 21v-1h6v1a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1m3-17a5 5 0 0 0-5 5c0 2.05 1.23 3.81 3 4.58V16h4v-2.42c1.77-.77 3-2.53 3-4.58a5 5 0 0 0-5-5Z"/></svg>
+            </label>
+          
+        
+      </form>
     
     
     
@@ -129,6 +160,8 @@
         </button>
       </nav>
       
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -148,10 +181,10 @@
         <a href="https://github.com/gray-adeyi/pypaystack2" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
   </div>
   <div class="md-source__repository">
-    GitHub
+    gray-adeyi/pypaystack2
   </div>
 </a>
       </div>
@@ -180,23 +213,22 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Pypaystack2 Documentation" class="md-nav__button md-logo" aria-label="Pypaystack2 Documentation" data-md-component="logo">
+    <a href=".." title="Pypaystack2" class="md-nav__button md-logo" aria-label="Pypaystack2" data-md-component="logo">
       
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+  <img src="../assets/pypaystack2.svg" alt="logo">
 
     </a>
-    Pypaystack2 Documentation
+    Pypaystack2
   </label>
   
     <div class="md-nav__source">
       <a href="https://github.com/gray-adeyi/pypaystack2" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
   </div>
   <div class="md-source__repository">
-    GitHub
+    gray-adeyi/pypaystack2
   </div>
 </a>
     </div>
@@ -212,7 +244,7 @@
   
     <li class="md-nav__item">
       <a href=".." class="md-nav__link">
-        Introduction
+        PyPaystack2
       </a>
     </li>
   
@@ -226,7 +258,9 @@
   
   
     
-    <li class="md-nav__item md-nav__item--nested">
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
       
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
@@ -332,6 +366,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#bindings-on-the-asyncpaystack-object" class="md-nav__link">
+    Bindings on the AsyncPaystack object
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -341,6 +382,378 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+      
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/apple_pay/" class="md-nav__link">
+        Apple pay
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/bulk_charges/" class="md-nav__link">
+        Bulk charges
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/charge/" class="md-nav__link">
+        Charge
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/customer/" class="md-nav__link">
+        Customer
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/dedicated_accounts/" class="md-nav__link">
+        Dedicated accounts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/disputes/" class="md-nav__link">
+        Disputes
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/integration/" class="md-nav__link">
+        Integration
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/miscellaneous/" class="md-nav__link">
+        Miscellaneous
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/payment_pages/" class="md-nav__link">
+        Payment pages
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/payment_requests/" class="md-nav__link">
+        Payment requests
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/plans/" class="md-nav__link">
+        Plans
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/products/" class="md-nav__link">
+        Products
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/refunds/" class="md-nav__link">
+        Refunds
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/settlements/" class="md-nav__link">
+        Settlements
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/splits/" class="md-nav__link">
+        Splits
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/subaccounts/" class="md-nav__link">
+        Subaccounts
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/subscriptions/" class="md-nav__link">
+        Subscriptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/terminals/" class="md-nav__link">
+        Terminals
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/transactions/" class="md-nav__link">
+        Transactions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/transfer_recipients/" class="md-nav__link">
+        Transfer recipients
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/transfers/" class="md-nav__link">
+        Transfers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/transfers_control/" class="md-nav__link">
+        Transfers control
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/verification/" class="md-nav__link">
+        Verification
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
     </li>
   
 
@@ -413,6 +826,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#bindings-on-the-asyncpaystack-object" class="md-nav__link">
+    Bindings on the AsyncPaystack object
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -444,62 +864,254 @@
 <p>In previous versions of <code>pypaystack2</code>, it is required to import all the various API
 wrappers required to achieve a goal. e.g. say you want to work with the transactions
 API wrapper and the customer API wrapper, the code below demonstrates how it's achieved</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pypaystack2.api</span> <span class="kn">import</span> <span class="n">Transaction</span><span class="p">,</span> <span class="n">Customer</span>
-</code></pre></div>
-<p>Besides having to import these different wrappers, you'll also have to instantiate them
-which is just bad. While this kind of import will continue to be supported, I've added
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span> <span class="nn">pypaystack2.api</span> <span class="kn">import</span> <span class="n">Transaction</span><span class="p">,</span> <span class="n">Customer</span>
+</span></code></pre></div>
+<p>Besides having to import these different wrappers, you'll also have to instantiate them, 
+individually. While this kind of import will continue to be supported, I've added
 a new <code>Paystack</code> class which has all the wrappers bound to it. So now the preferred
 way to use <code>pypaystack2</code> is demonstrated below</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pypaystack2</span> <span class="kn">import</span> <span class="n">Paystack</span>
-<span class="c1"># This is all that is required (except cases where enums in the utils are required).</span>
-</code></pre></div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span> <span class="nn">pypaystack2</span> <span class="kn">import</span> <span class="n">Paystack</span>
+</span></code></pre></div>
 <p>Here's a comparison of how a goal is achieved using the old API and the new API</p>
 <h3 id="old-api">Old API</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pypaystack2.api</span> <span class="kn">import</span> <span class="n">Invoice</span><span class="p">,</span> <span class="n">Transaction</span><span class="p">,</span> <span class="n">Customer</span>
-
-<span class="n">invoice_api_wrapper</span> <span class="o">=</span> <span class="n">Invoice</span><span class="p">()</span>  <span class="c1"># assumes your PAYSTACK_AUTHORIZATION_KEY is set</span>
-<span class="n">invoice_api_response</span> <span class="o">=</span> <span class="n">invoice_api_wrapper</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">customer</span><span class="o">=</span><span class="s2">&quot;CUS_xwaj0txjryg393b&quot;</span><span class="p">,</span>
-                                                  <span class="n">amount</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Creates an invoice with a charge of ₦100</span>
-<span class="n">transaction_api_wrapper</span> <span class="o">=</span> <span class="n">Transaction</span><span class="p">()</span>
-<span class="n">transaction_api_response</span> <span class="o">=</span> <span class="n">transaction_api_wrapper</span><span class="o">.</span><span class="n">get_transactions</span><span class="p">()</span>
-<span class="n">customer_api_wrapper</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">()</span>
-<span class="n">customer_api_response</span> <span class="o">=</span> <span class="n">customer_api_wrapper</span><span class="o">.</span><span class="n">get_customers</span><span class="p">()</span>
-</code></pre></div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">pypaystack2.api</span> <span class="kn">import</span> <span class="n">PaymentRequest</span><span class="p">,</span> <span class="n">Transaction</span><span class="p">,</span> <span class="n">Customer</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">invoice_api_wrapper</span> <span class="o">=</span> <span class="n">PaymentRequest</span><span class="p">()</span>  <span class="c1"># assumes your PAYSTACK_AUTHORIZATION_KEY is set</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">invoice_api_response</span> <span class="o">=</span> <span class="n">invoice_api_wrapper</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">customer</span><span class="o">=</span><span class="s2">&quot;CUS_xwaj0txjryg393b&quot;</span><span class="p">,</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>                                                  <span class="n">amount</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Creates an invoice with a charge of ₦100</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">transaction_api_wrapper</span> <span class="o">=</span> <span class="n">Transaction</span><span class="p">()</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">transaction_api_response</span> <span class="o">=</span> <span class="n">transaction_api_wrapper</span><span class="o">.</span><span class="n">get_transactions</span><span class="p">()</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">customer_api_wrapper</span> <span class="o">=</span> <span class="n">Customer</span><span class="p">()</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="n">customer_api_response</span> <span class="o">=</span> <span class="n">customer_api_wrapper</span><span class="o">.</span><span class="n">get_customers</span><span class="p">()</span>
+</span></code></pre></div>
 <h3 id="new-api">New API</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pypaystack2</span> <span class="kn">import</span> <span class="n">Paystack</span>
-
-<span class="n">paystack_api</span> <span class="o">=</span> <span class="n">Paystack</span><span class="p">()</span>  <span class="c1"># assumes your PAYSTACK_AUTHORIZATION_KEY is set</span>
-<span class="n">invoice_api_response</span> <span class="o">=</span> <span class="n">paystack_api</span><span class="o">.</span><span class="n">invoices</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">customer</span><span class="o">=</span><span class="s2">&quot;CUS_xwaj0txjryg393b&quot;</span><span class="p">,</span>
-                                                    <span class="n">amount</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Creates an invoice with a charge of ₦100</span>
-<span class="n">transaction_api_response</span> <span class="o">=</span> <span class="n">paystack_api</span><span class="o">.</span><span class="n">transactions</span><span class="o">.</span><span class="n">get_transactions</span><span class="p">()</span>
-<span class="n">customer_api_response</span> <span class="o">=</span> <span class="n">paystack_api</span><span class="o">.</span><span class="n">transactions</span><span class="o">.</span><span class="n">get_transactions</span><span class="p">()</span>
-</code></pre></div>
+<p><div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span> <span class="nn">pypaystack2</span> <span class="kn">import</span> <span class="n">Paystack</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">paystack_api</span> <span class="o">=</span> <span class="n">Paystack</span><span class="p">()</span>  <span class="c1"># assumes your PAYSTACK_AUTHORIZATION_KEY is set</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">payment_requests_api_response</span> <span class="o">=</span> <span class="n">paystack_api</span><span class="o">.</span><span class="n">payment_requests</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">customer</span><span class="o">=</span><span class="s2">&quot;CUS_xwaj0txjryg393b&quot;</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>                                                            <span class="n">amount</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Creates an invoice with a charge of ₦100</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">transaction_api_response</span> <span class="o">=</span> <span class="n">paystack_api</span><span class="o">.</span><span class="n">transactions</span><span class="o">.</span><span class="n">get_transactions</span><span class="p">()</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="n">customer_api_response</span> <span class="o">=</span> <span class="n">paystack_api</span><span class="o">.</span><span class="n">transactions</span><span class="o">.</span><span class="n">get_transactions</span><span class="p">()</span>
+</span></code></pre></div>
+For <code>async/await</code>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span> <span class="nn">pypaystack2</span> <span class="kn">import</span> <span class="n">AsyncPaystack</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">paystack_api</span> <span class="o">=</span> <span class="n">AsyncPaystack</span><span class="p">()</span>  <span class="c1"># assumes your PAYSTACK_AUTHORIZATION_KEY is set</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">payment_requests_api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">paystack_api</span><span class="o">.</span><span class="n">payment_requests</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">customer</span><span class="o">=</span><span class="s2">&quot;CUS_xwaj0txjryg393b&quot;</span><span class="p">,</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>                                                            <span class="n">amount</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># Creates an invoice with a charge of ₦100</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="n">transaction_api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">paystack_api</span><span class="o">.</span><span class="n">transactions</span><span class="o">.</span><span class="n">get_transactions</span><span class="p">()</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">customer_api_response</span> <span class="o">=</span> <span class="k">await</span> <span class="n">paystack_api</span><span class="o">.</span><span class="n">transactions</span><span class="o">.</span><span class="n">get_transactions</span><span class="p">()</span>
+</span></code></pre></div></p>
+<div class="admonition note">
+<p class="admonition-title">Note<p>For the async equivalent to work start your interpreter in async mode with <code>python -m asyncio</code>
+You should get a prompt similar to this.
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">asyncio</span> <span class="n">REPL</span> <span class="mf">3.9.15</span> <span class="p">(</span><span class="n">main</span><span class="p">,</span> <span class="n">May</span> <span class="mi">14</span> <span class="mi">2023</span><span class="p">,</span> <span class="mi">15</span><span class="p">:</span><span class="mi">13</span><span class="p">:</span><span class="mi">34</span><span class="p">)</span> 
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="p">[</span><span class="n">GCC</span> <span class="mf">12.2.1</span> <span class="mi">20230201</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">Use</span> <span class="s2">&quot;await&quot;</span> <span class="n">directly</span> <span class="n">instead</span> <span class="n">of</span> <span class="s2">&quot;asyncio.run()&quot;</span><span class="o">.</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">Type</span> <span class="s2">&quot;help&quot;</span><span class="p">,</span> <span class="s2">&quot;copyright&quot;</span><span class="p">,</span> <span class="s2">&quot;credits&quot;</span> <span class="ow">or</span> <span class="s2">&quot;license&quot;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="kn">import</span> <span class="nn">asyncio</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="o">&gt;&gt;&gt;</span>
+</span></code></pre></div></p>
+</p>
+</div>
 <h3 id="bindings-on-the-paystack-object">Bindings on the Paystack object</h3>
-<ul>
-<li><code>Paystack.apple_pay</code> maps to the <code>ApplePay</code> wrapper in <code>pypaystack2.api.ApplePay</code></li>
-<li><code>Paystack.bulk_charges</code> maps to the <code>BulkCharge</code> wrapper in <code>pypaystack2.api.BulkCharge</code></li>
-<li><code>Paystack.charge</code> maps to the <code>Charge</code> wrapper in <code>pypaystack2.api.Charge</code></li>
-<li><code>Paystack.control_panel</code> maps to the <code>ControlPanel</code> wrapper in <code>pypaystack2.api.ControlPanel</code></li>
-<li><code>Paystack.customers</code> maps to the <code>Customer</code> wrapper in <code>pypaystack2.api.Customer</code></li>
-<li><code>Paystack.dedicated_accounts</code> maps to the <code>DedicatedAccount</code> wrapper in <code>pypaystack2.api.DedicatedAccount</code></li>
-<li><code>Paystack.disputes</code> maps to the <code>Dispute</code> wrapper in <code>pypaystack2.api.Dispute</code></li>
-<li><code>Paystack.invoices</code> maps to the <code>Invoice</code> wrapper in <code>pypaystack2.api.Invoice</code></li>
-<li><code>Paystack.miscellaneous</code> maps to the <code>Miscellaneous</code> wrapper in <code>pypaystack2.api.Miscellaneous</code></li>
-<li><code>Paystack.payment_pages</code> maps to the <code>Page</code> wrapper in <code>pypaystack2.api.Page</code></li>
-<li><code>Paystack.plans</code> maps to the <code>Plan</code> wrapper in <code>pypaystack2.api.Plan</code></li>
-<li><code>Paystack.products</code> maps to the <code>Product</code> wrapper in <code>pypaystack2.api.Product</code></li>
-<li><code>Paystack.refunds</code> maps to the <code>Refund</code> wrapper in <code>pypaystack2.api.Refund</code></li>
-<li><code>Paystack.settlements</code> maps to the <code>Settlement</code> wrapper in <code>pypaystack2.api.Settlement</code></li>
-<li><code>Paystack.splits</code> maps to the <code>Split</code> wrapper in <code>pypaystack2.api.Split</code></li>
-<li><code>Paystack.subaccounts</code> maps to the <code>SubAccount</code> wrapper in <code>pypaystack2.api.SubAccount</code></li>
-<li><code>Paystack.subscriptions</code> maps to the <code>Subscription</code> wrapper in <code>pypaystack2.api.Subscription</code></li>
-<li><code>Paystack.terminals</code> maps to the <code>Terminal</code> wrapper in <code>pypaystack2.api.Terminal</code></li>
-<li><code>Paystack.transactions</code> maps to the <code>Transaction</code> wrapper in <code>pypaystack2.api.Transactions</code></li>
-<li><code>Paystack.transfer_recipients</code> maps to the <code>TransferRecipient</code> wrapper in <code>pypaystack2.api.TransferRecipient</code></li>
-<li><code>Paystack.transfer</code> maps to the <code>Transfer</code> wrapper in <code>pypaystack2.api.Transfer</code></li>
-<li><code>Paystack.tranfer_control</code> maps to the <code>TransferControl</code> wrapper in <code>pypaystack2.api.TransferControl</code></li>
-<li><code>Paystack.verificaton</code> maps to the <code>Verification</code> wrapper in <code>pypaystack2.api.Verification</code></li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>API wrapper</th>
+<th>binding name on <code>Paystack</code> class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ApplePay</code></td>
+<td><code>apple_pay</code></td>
+</tr>
+<tr>
+<td><code>BulkCharge</code></td>
+<td><code>bulk_charges</code></td>
+</tr>
+<tr>
+<td><code>Charge</code></td>
+<td><code>charge</code></td>
+</tr>
+<tr>
+<td><code>Integration</code></td>
+<td><code>integration</code></td>
+</tr>
+<tr>
+<td><code>Customer</code></td>
+<td><code>customer</code></td>
+</tr>
+<tr>
+<td><code>DedicatedAccount</code></td>
+<td><code>dedicated_account</code></td>
+</tr>
+<tr>
+<td><code>Dispute</code></td>
+<td><code>disputes</code></td>
+</tr>
+<tr>
+<td><code>PaymentRequest</code></td>
+<td><code>payment_requests</code></td>
+</tr>
+<tr>
+<td><code>Miscellaneous</code></td>
+<td><code>miscellaneous</code></td>
+</tr>
+<tr>
+<td><code>Page</code></td>
+<td><code>payment_pages</code></td>
+</tr>
+<tr>
+<td><code>Product</code></td>
+<td><code>products</code></td>
+</tr>
+<tr>
+<td><code>Refund</code></td>
+<td><code>refunds</code></td>
+</tr>
+<tr>
+<td><code>Settlement</code></td>
+<td><code>settlements</code></td>
+</tr>
+<tr>
+<td><code>Split</code></td>
+<td><code>split</code></td>
+</tr>
+<tr>
+<td><code>SubAccount</code></td>
+<td><code>subaccount</code></td>
+</tr>
+<tr>
+<td><code>Subscription</code></td>
+<td><code>subscriptions</code></td>
+</tr>
+<tr>
+<td><code>Terminal</code></td>
+<td><code>terminals</code></td>
+</tr>
+<tr>
+<td><code>Transaction</code></td>
+<td><code>transactions</code></td>
+</tr>
+<tr>
+<td><code>TransferRecipient</code></td>
+<td><code>transfer_recipients</code></td>
+</tr>
+<tr>
+<td><code>Transfer</code></td>
+<td><code>transfers</code></td>
+</tr>
+<tr>
+<td><code>TransferControl</code></td>
+<td><code>transfer_control</code></td>
+</tr>
+<tr>
+<td><code>Verification</code></td>
+<td><code>verification</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="bindings-on-the-asyncpaystack-object">Bindings on the AsyncPaystack object</h3>
+<table>
+<thead>
+<tr>
+<th>API wrapper</th>
+<th>binding name on <code>Paystack</code> class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>AsyncApplePay</code></td>
+<td><code>apple_pay</code></td>
+</tr>
+<tr>
+<td><code>AsyncBulkCharge</code></td>
+<td><code>bulk_charges</code></td>
+</tr>
+<tr>
+<td><code>AsyncCharge</code></td>
+<td><code>charge</code></td>
+</tr>
+<tr>
+<td><code>AsyncIntegration</code></td>
+<td><code>integration</code></td>
+</tr>
+<tr>
+<td><code>AsyncCustomer</code></td>
+<td><code>customer</code></td>
+</tr>
+<tr>
+<td><code>AsyncDedicatedAccount</code></td>
+<td><code>dedicated_account</code></td>
+</tr>
+<tr>
+<td><code>AsyncDispute</code></td>
+<td><code>disputes</code></td>
+</tr>
+<tr>
+<td><code>AsyncPaymentRequest</code></td>
+<td><code>payment_requests</code></td>
+</tr>
+<tr>
+<td><code>AsyncMiscellaneous</code></td>
+<td><code>miscellaneous</code></td>
+</tr>
+<tr>
+<td><code>AsyncPage</code></td>
+<td><code>payment_pages</code></td>
+</tr>
+<tr>
+<td><code>AsyncProduct</code></td>
+<td><code>products</code></td>
+</tr>
+<tr>
+<td><code>AsyncRefund</code></td>
+<td><code>refunds</code></td>
+</tr>
+<tr>
+<td><code>AsyncSettlement</code></td>
+<td><code>settlements</code></td>
+</tr>
+<tr>
+<td><code>AsyncSplit</code></td>
+<td><code>split</code></td>
+</tr>
+<tr>
+<td><code>AsyncSubAccount</code></td>
+<td><code>subaccount</code></td>
+</tr>
+<tr>
+<td><code>AsyncSubscription</code></td>
+<td><code>subscriptions</code></td>
+</tr>
+<tr>
+<td><code>AsyncTerminal</code></td>
+<td><code>terminals</code></td>
+</tr>
+<tr>
+<td><code>AsyncTransaction</code></td>
+<td><code>transactions</code></td>
+</tr>
+<tr>
+<td><code>AsyncTransferRecipient</code></td>
+<td><code>transfer_recipients</code></td>
+</tr>
+<tr>
+<td><code>AsyncTransfer</code></td>
+<td><code>transfers</code></td>
+</tr>
+<tr>
+<td><code>AsyncTransferControl</code></td>
+<td><code>transfer_control</code></td>
+</tr>
+<tr>
+<td><code>AsyncVerification</code></td>
+<td><code>verification</code></td>
+</tr>
+</tbody>
+</table>
 
 
 
@@ -510,7 +1122,14 @@ way to use <code>pypaystack2</code> is demonstrated below</p>
             </div>
           
           
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
         </div>
+        
+          <a href="#" class="md-top md-icon" data-md-component="top" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+            Back to top
+          </a>
         
       </main>
       
@@ -536,13 +1155,13 @@ way to use <code>pypaystack2</code> is demonstrated below</p>
       
       
         
-        <a href="../explanation/" class="md-footer__link md-footer__link--next" aria-label="Next: Explanation" rel="next">
+        <a href="../reference/" class="md-footer__link md-footer__link--next" aria-label="Next: Introduction" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              Explanation
+              Introduction
             </div>
           </div>
           <div class="md-footer__button md-icon">
@@ -573,7 +1192,7 @@ way to use <code>pypaystack2</code> is demonstrated below</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight", "content.tabs.link", "content.code.copy", "content.code.select", "navigation.sections", "navigation.path", "navigation.top"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
       <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
