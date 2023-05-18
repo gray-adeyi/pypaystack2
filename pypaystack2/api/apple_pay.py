@@ -6,7 +6,7 @@ class ApplePay(BaseAPI):
     """Provides a wrapper for paystack Apple Pay API
 
     The Apple Pay API allows you register your application's top-level domain or subdomain.
-    [Visit paystack api doc](https://paystack.com/docs/api/#apple-pay)
+    [Visit paystack api doc](https://paystack.com/docs/api/apple-pay/)
     """
 
     def register_domain(self, domain_name: str) -> Response:
@@ -62,7 +62,7 @@ class AsyncApplePay(BaseAsyncAPI):
     """Provides a wrapper for paystack Apple Pay API
 
     The Apple Pay API allows you register your application's top-level domain or subdomain.
-    [Visit paystack api doc](https://paystack.com/docs/api/#apple-pay)
+    [Visit paystack api doc](https://paystack.com/docs/api/apple-pay/)
     """
 
     async def register_domain(self, domain_name: str) -> Response:

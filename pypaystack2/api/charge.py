@@ -8,7 +8,7 @@ class Charge(BaseAPI):
     """Provides a wrapper for paystack Charge API
 
     The Charge API allows you to configure a payment channel of your choice when initiating a payment.
-    https://paystack.com/docs/api/#charge
+    [https://paystack.com/docs/api/charge/](https://paystack.com/docs/api/charge/)
 
     """
 
@@ -177,7 +177,7 @@ class AsyncCharge(BaseAsyncAPI):
     """Provides a wrapper for paystack Charge API
 
     The Charge API allows you to configure a payment channel of your choice when initiating a payment.
-    https://paystack.com/docs/api/#charge
+    [https://paystack.com/docs/api/charge/](https://paystack.com/docs/api/charge/)
 
     """
 

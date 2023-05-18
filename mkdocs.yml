@@ -56,7 +56,7 @@ nav:
   - PyPaystack2: index.md
   - Tutorials:
       - Paystack Command line Client: tutorials/tutorial1.md
-  - How-To Guides: how-to-guides.md
+  - "How-To Guides": how-to-guides.md
   - Reference:
       - Introduction: reference/index.md
       - reference/apple_pay.md
