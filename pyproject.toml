@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "pypaystack2"
-version = "1.1.3"
-description = "A developer friendly [Paystack](https://paystack.com/) API wrapper."
+version = "2.0.0"
+description = "A developer-friendly API wrapper."
 authors = ["Gbenga Adeyi <adeyigbenga005@gmail.com>"]
 readme = "README.md"
 packages = [{ include = "pypaystack2" }]
-keywords = ["paystack-python", "pypaystack", "paystack"]
+keywords = ["paystack-python", "pypaystack", "paystack", "paystackapi"]
 license = "MIT"
 classifiers = [
     "License :: OSI Approved :: MIT License",
@@ -15,16 +15,17 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.7"
-requests = "^2.28.2"
+httpx = "^0.24.0"
 
 [tool.poetry.group.dev.dependencies]
 python-dotenv = "^0.21.0"
 mkdocs = "^1.4.2"
 mkdocs-material = "^8.5.11"
 typer = "^0.7.0"
-mkdocstrings = { version = "^0.19.1", extras = ["python"], optional = true }
+mkdocstrings = {extras = ["python"], version = "^0.21.2"}
 pytest = "^7.2.0"
 black = "^22.12.0"
+tomli = "^2.0.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

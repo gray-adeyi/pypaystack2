@@ -1,3 +1,0 @@
-Pypaystack2 Tutorial
-====================
-Do am if it easy.

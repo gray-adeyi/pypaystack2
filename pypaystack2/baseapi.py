@@ -1,60 +1,25 @@
-import json
 import os
-from typing import Any, NamedTuple, Union
+from abc import ABC, abstractmethod
+from typing import Union, Optional
 
-import requests
-from requests import Response as RResponse
-
-from pypaystack2 import version
+import httpx
+from httpx import codes
+from pypaystack2._metadata import __version__
 from pypaystack2.errors import InvalidMethodError, MissingAuthKeyError
-
-# namedtuple Response to extend the
-# capabilities of the tuple sent as
-# response
-ResponseData = Union[dict[str, Any], list[dict[str, Any]], None]
+from pypaystack2.utils import HTTPMethod, Response
 
 
-class Response(NamedTuple):
-    """
-    A namedtuple that models the data gotten from making a request to paystacks API endpoints.
-
-
-    Attributes
-    ----------
-    status_code: int
-        The response status code
-    status: bool
-        A flag for the response status
-    message: str
-        paystack response message
-    data: ResponseData
-        data sent from paystack's server if any. it can be a dictionary,list or None.
-    """
-
-    status_code: int
-    status: bool
-    message: str
-    data: ResponseData
-
-
-class BaseAPI:
-    """
-    Base class for the pypaystack python API wrapper for paystack
-    Not to be instantiated directly.
-    """
-
+class AbstractAPI(ABC):
     _CONTENT_TYPE = "application/json"
-    _BASE_END_POINT = "https://api.paystack.co"
+    _BASE_URL = "https://api.paystack.co"
 
     def __init__(self, auth_key: str = None):
         """
-        Parameters
-        ----------
-        auth_key:
-            Your paystack authorization key. Required only
-            if it is not provided in your enviromental
-            variables as ``PAYSTACK_AUTHORIZATION_KEY=your_key``
-
+        Args:
+            auth_key:
+                Your paystack authorization key. Required only
+                if it is not provided in your environmental
+                variables as ``PAYSTACK_AUTHORIZATION_KEY=your_key``
         """
         if auth_key:
             self._PAYSTACK_AUTHORIZATION_KEY = auth_key
@@ -67,66 +32,121 @@ class BaseAPI:
                 "Missing Authorization key argument or env variable"
             )
 
-    def _url(self, path: str) -> str:
-        return self._BASE_END_POINT + path
+    def _parse_url(self, endpoint_path: str) -> str:
+        return f"{self._BASE_URL}{endpoint_path}"
 
+    @property
     def _headers(self) -> dict[str, str]:
         return {
             "Content-Type": self._CONTENT_TYPE,
-            "Authorization": "Bearer " + self._PAYSTACK_AUTHORIZATION_KEY,
-            "user-agent": f"pyPaystack2-{version.__version__}",
+            "Authorization": f"Bearer {self._PAYSTACK_AUTHORIZATION_KEY}",
+            "User-Agent": f"PyPaystack2-{__version__}",
         }
 
-    def _parse_json(self, response_obj: RResponse) -> Response:
-        """
-        This function takes in every json response sent back by the
-        server and trys to get out the important return variables
-
-        Returns a python namedtuple of Response which contains
-        status code, status(bool), message, data
-        """
-        parsed_response = response_obj.json()
-
-        status = parsed_response.get("status", None)
-        message = parsed_response.get("message", None)
-        data = parsed_response.get("data", None)
-        return Response(response_obj.status_code, status, message, data)
-
-    def _handle_request(
-        self, method: str, url: str, data: Union[dict, list] = None
+    def _parse_response(
+        self, raw_response: httpx.Response, as_error: bool = False
     ) -> Response:
         """
-        Generic function to handle all API url calls
+        Parses an `httpx.Response` into a `Response`.
 
-        Returns a python namedtuple of Response which contains
-        status code, status(bool), message, data
+        Returns:
+            A python namedtuple of Response which contains
+            status code, status(bool), message, data
         """
-        method_map = {
-            "GET": requests.get,
-            "POST": requests.post,
-            "PUT": requests.put,
-            "DELETE": requests.delete,
+        response_body = raw_response.json()
+
+        status = response_body.get("status", None)
+        message = response_body.get("message", None)
+        data = (
+            response_body.get("data", None)
+            if not as_error
+            else response_body.get("errors")
+        )
+        return Response(raw_response.status_code, status, message, data)
+
+    def _parse_http_method_kwargs(
+        self, url: str, method: HTTPMethod, data: Optional[Union[dict, list]]
+    ) -> dict:
+        if url == "":
+            raise ValueError("No url provided")
+        http_method_kwargs = {"url": url, "json": data, "headers": self._headers}
+        if method in {HTTPMethod.GET, HTTPMethod.DELETE}:
+            http_method_kwargs.pop("json", None)
+        return http_method_kwargs
+
+    @abstractmethod
+    def _handle_request(
+        self, method: HTTPMethod, url: str, data: Optional[Union[dict, list]] = None
+    ) -> Response:
+        ...
+
+
+class BaseAPI(AbstractAPI):
+    """
+    Base class for the pypaystack API wrappers.
+    """
+
+    def _handle_request(
+        self, method: HTTPMethod, url: str, data: Union[dict, list] = None
+    ) -> Response:
+        """
+        Makes request to paystack servers.
+
+        Returns:
+            Returns a python namedtuple of Response which contains
+            status code, status(bool), message, data
+        """
+        http_methods_map = {
+            HTTPMethod.GET: httpx.get,
+            HTTPMethod.POST: httpx.post,
+            HTTPMethod.PUT: httpx.put,
+            HTTPMethod.PATCH: httpx.patch,
+            HTTPMethod.DELETE: httpx.delete,
+            HTTPMethod.OPTIONS: httpx.options,
+            HTTPMethod.HEAD: httpx.head,
         }
 
-        payload = json.dumps(data) if data else data
-        request = method_map.get(method)
+        http_method = http_methods_map.get(method)
 
-        if not request:
-            raise InvalidMethodError("Request method not recognised or implemented")
+        http_method_kwargs = self._parse_http_method_kwargs(
+            url=url, method=method, data=data
+        )
 
-        response = request(url, headers=self._headers(), data=payload, verify=True)
-        if response.status_code == 404:
-            return Response(
-                response.status_code, False, "The object request cannot be found", None
+        if not http_method:
+            raise InvalidMethodError(
+                "HTTP Request method not recognised or implemented"
             )
 
-        if response.status_code in [200, 201]:
-            return self._parse_json(response)
+        response = http_method(**http_method_kwargs)
+        if codes.is_success(response.status_code):
+            return self._parse_response(response)
         else:
-            body = response.json()
-            return Response(
-                status_code=response.status_code,
-                status=body.get("status"),
-                message=body.get("message"),
-                data=body.get("errors"),
+            return self._parse_response(response, as_error=True)
+
+
+class BaseAsyncAPI(AbstractAPI):
+    async def _handle_request(
+        self, method: HTTPMethod, url: str, data: Union[dict, list] = None
+    ) -> Response:
+        """
+        Makes request to paystack servers.
+
+        Returns:
+            Returns a python namedtuple of Response which contains
+            status code, status(bool), message, data
+        """
+        async with httpx.AsyncClient() as client:
+            http_method = getattr(client, method.value.lower(), None)
+            http_method_kwargs = self._parse_http_method_kwargs(
+                url=url, method=method, data=data
             )
+            if not http_method:
+                raise InvalidMethodError(
+                    "HTTP Request method not recognised or implemented"
+                )
+            response = await http_method(**http_method_kwargs)
+
+        if codes.is_success(response.status_code):
+            return self._parse_response(response)
+        else:
+            return self._parse_response(response, as_error=True)

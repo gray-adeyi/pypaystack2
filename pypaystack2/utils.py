@@ -1,12 +1,229 @@
+from dataclasses import dataclass
 from enum import Enum
 from functools import reduce
 from operator import add
-from typing import Any, Optional, Union
+from typing import Any, Optional, Union, NamedTuple
 
-from .errors import InvalidDataError
+from pypaystack2.errors import InvalidDataError
 
 
-class TerminalEventType(str, Enum):
+@dataclass
+class BulkChargeInstruction:
+    authorization: str
+    amount: int
+    reference: str
+
+    @property
+    def dict(self) -> dict:
+        return {
+            "authorization": self.authorization,
+            "amount": self.amount,
+            "reference": self.reference,
+        }
+
+    @classmethod
+    def from_dict(cls, value: dict) -> "BulkChargeInstruction":
+        return cls(
+            authorization=value["authorization"],
+            amount=value["amount"],
+            reference=value["reference"],
+        )
+
+    @classmethod
+    def from_dict_many(cls, values: list[dict]) -> list["BulkChargeInstruction"]:
+        return [
+            cls(
+                authorization=item["authorization"],
+                amount=item["amount"],
+                reference=item["reference"],
+            )
+            for item in values
+        ]
+
+
+@dataclass
+class LineItem:
+    name: str
+    amount: int
+    quantity: int
+
+    @property
+    def dict(self) -> dict:
+        return {
+            "name": self.name,
+            "amount": self.amount,
+            "quantity": self.quantity,
+        }
+
+    @classmethod
+    def from_dict(cls, value: dict) -> "LineItem":
+        return cls(
+            name=value["authorization"],
+            amount=value["amount"],
+            quantity=value["quantity"],
+        )
+
+    @classmethod
+    def from_dict_many(cls, values: list[dict]) -> list["LineItem"]:
+        return [
+            cls(
+                name=item["name"],
+                amount=item["amount"],
+                quantity=item["quantity"],
+            )
+            for item in values
+        ]
+
+
+@dataclass
+class Tax:
+    name: str
+    amount: int
+
+    @property
+    def dict(self) -> dict:
+        return {
+            "name": self.name,
+            "amount": self.amount,
+        }
+
+    @classmethod
+    def from_dict(cls, value: dict) -> "Tax":
+        return cls(
+            name=value["authorization"],
+            amount=value["amount"],
+        )
+
+    @classmethod
+    def from_dict_many(cls, values: list[dict]) -> list["Tax"]:
+        return [
+            cls(
+                name=item["name"],
+                amount=item["amount"],
+            )
+            for item in values
+        ]
+
+
+@dataclass
+class SplitAccount:
+    subaccount: str
+    share: Union[int, float]
+
+    @property
+    def dict(self) -> dict:
+        return {
+            "subaccount": self.subaccount,
+            "share": self.share,
+        }
+
+    @classmethod
+    def from_dict(cls, value: dict) -> "SplitAccount":
+        return cls(
+            subaccount=value["subaccount"],
+            share=value["share"],
+        )
+
+    @classmethod
+    def from_dict_many(cls, values: list[dict]) -> list["SplitAccount"]:
+        return [
+            cls(
+                subaccount=item["subaccount"],
+                share=item["share"],
+            )
+            for item in values
+        ]
+
+
+@dataclass
+class Recipient:
+    type: "RecipientType"
+    name: str
+    bank_code: str
+    account_number: str
+
+    @property
+    def dict(self) -> dict:
+        return {
+            "type": self.type,
+            "name": self.name,
+            "bank_code": self.bank_code,
+            "account_number": self.account_number,
+        }
+
+    @classmethod
+    def from_dict(cls, value: dict) -> "Recipient":
+        return cls(
+            type=value["type"],
+            name=value["name"],
+            bank_code=value["bank_code"],
+            account_number=value["account_number"],
+        )
+
+    @classmethod
+    def from_dict_many(cls, values: list[dict]) -> list["Recipient"]:
+        return [
+            cls(
+                type=item["type"],
+                name=item["name"],
+                bank_code=item["bank_code"],
+                account_number=item["account_number"],
+            )
+            for item in values
+        ]
+
+
+@dataclass
+class TransferInstruction:
+    amount: int
+    recipient: str
+    reference: Optional[str]
+    reason: Optional[str]
+
+    @property
+    def dict(self) -> dict:
+        return {
+            "amount": self.amount,
+            "reference": self.reference,
+            "recipient": self.recipient,
+            "reason": self.reason,
+        }
+
+    @classmethod
+    def from_dict(cls, value: dict) -> "TransferInstruction":
+        return cls(
+            amount=value["amount"],
+            reference=value.get("reference"),
+            recipient=value["recipient"],
+            reason=value.get("reason"),
+        )
+
+    @classmethod
+    def from_dict_many(cls, values: list[dict]) -> list["TransferInstruction"]:
+        return [
+            cls(
+                amount=item["amount"],
+                reference=item.get("reference"),
+                recipient=item["recipient"],
+                reason=item.get("reason"),
+            )
+            for item in values
+        ]
+
+
+class HTTPMethod(str, Enum):
+    """An enum of supported http methods"""
+
+    GET = "GET"
+    POST = "POST"
+    PUT = "PUT"
+    PATCH = "PATCH"
+    DELETE = "DELETE"
+    OPTIONS = "OPTIONS"
+    HEAD = "HEAD"
+
+
+class TerminalEvent(str, Enum):
     """Enum of the types of events supported by Terminal API"""
 
     TRANSACTION = "transaction"
@@ -53,8 +270,8 @@ class Bearer(str, Enum):
     """Enum for who bears paystack charges"""
 
     ACCOUNT = "account"
-    SUBACCOUNT = "subaccount"
-    ALL_PROPOTIONAL = "all-proportional"
+    SUB_ACCOUNT = "subaccount"
+    ALL_PROPORTIONAL = "all-proportional"
     ALL = "all"
 
 
@@ -66,7 +283,7 @@ class TransactionStatus(str, Enum):
     ABANDONED = "abandoned"
 
 
-class SplitType(str, Enum):
+class Split(str, Enum):
     """Enum of split types"""
 
     PERCENTAGE = "percentage"
@@ -76,29 +293,23 @@ class SplitType(str, Enum):
 class Country(str, Enum):
     """Enum of countries supported by paystack"""
 
-    NIGERIA = "ng"
-    GHANA = "gh"
+    NIGERIA = "NG"
+    GHANA = "GH"
+    SOUTH_AFRICA = "ZA"
 
     @staticmethod
-    def get_full(val: str) -> Optional[str]:
+    def get_full(value: str) -> Optional[str]:
         """Returns paystack supported country name in full lowercase
 
-        Parameters
-        ----------
-        val : str
-            The two digit iso name of the country.
-        Returns
-        -------
-        str,optinal
+        Args:
+            value: The two-digit iso name of the country.
+
+        Returns:
             The name of the country in lowercase if it is supported by
             paystack or none.
         """
-        val = val.lower()
-        if val == "ng":
-            return "nigeria"
-        elif val == "gh":
-            return "ghana"
-        return None
+        value = value.lower()
+        return {"ng": "nigeria", "gh": "ghana", "za": "south africa"}.get(value)
 
 
 class RiskAction(str, Enum):
@@ -116,17 +327,15 @@ class Identification(str, Enum):
     BANK_ACCOUNT = "bank_account"
 
 
-class TRType(str, Enum):
+class RecipientType(str, Enum):
     """Enum of Transfer Recipient types"""
-
-    # FIXME: Find a better name for this class to reduce confusion.
 
     NUBAN = "nuban"
     MOBILE_MONEY = "mobile_money"
     BASA = "basa"
 
 
-class DocumentType(str, Enum):
+class Document(str, Enum):
     """Enum of Document types supported by paystack"""
 
     IDENTITY_NUMBER = "identityNumber"
@@ -136,24 +345,10 @@ class DocumentType(str, Enum):
 
 # FIXME: Unify status codes with similarities
 # InvoiceStatus and ChargeStatus is redundant
-class InvoiceStatus(str, Enum):
-    """Enum of invoice status supported by paystack"""
-
-    PENDING = "pending"
-    SUCCESS = "success"
-    FAILED = "failed"
 
 
-class ChargeStatus(str, Enum):
-    """Enum of charge status supported by paystack"""
-
-    PENDING = "pending"
-    SUCCESS = "success"
-    FAILED = "failed"
-
-
-class PlanStatus(str, Enum):
-    """Enum of plan status supported by paystack"""
+class Status(str, Enum):
+    """Enum of statuses supported by paystack, used by Invoice, Charge & Plan"""
 
     PENDING = "pending"
     SUCCESS = "success"
@@ -174,6 +369,7 @@ class Reason(str, Enum):
 
     RESEND_OTP = "resend_otp"
     TRANSFER = "transfer"
+    DISABLE_OTP = "disable_otp"
 
 
 class Gateway(str, Enum):
@@ -220,20 +416,14 @@ def validate_amount(amount: Union[int, float]) -> Union[int, float]:
     is supplied as an input, to prevent cases where
     negative or zero value is provided as an amount.
 
-    Parameters
-    ----------
-    amount: int,float
-        The money to be validated.
+    Args:
+        amount: The money to be validated.
 
-    Returns
-    -------
-    int,float
+    Returns:
         The money supplied if it is valid.
 
-    Raises
-    ------
-    InvalidDataError
-        With the cause of the validation error
+    Raises:
+        InvalidDataError: With the cause of the validation error
     """
 
     if not amount:
@@ -252,21 +442,15 @@ def validate_amount(amount: Union[int, float]) -> Union[int, float]:
 def validate_interval(interval: str) -> str:
     """Validates that the interval supplied is supported by paystack
 
-    Parameters
-    ----------
-    interval:str
-        any of the intervals supported by paystack i.e. hourly,daily
-        weekly,monthly,annually
+    Args:
+        interval: any of the intervals supported by paystack i.e. hourly, daily
+            weekly,monthly,annually
 
-    Returns
-    -------
-    str
-        returns the interval if it is a valid paystack interval
+    Returns:
+        The interval if it is a valid paystack interval
 
-    Raises
-    ------
-    InvalidDataError
-        to provide feedback that an invalid interval was provided.
+    Raises:
+        InvalidDataError: to provide feedback that an invalid interval was provided.
     """
 
     interval = (
@@ -291,25 +475,20 @@ def add_to_payload(
     ``{"amount": 20000}`` and you want to include an additional
     data such as ``currency`` if provided in the ``optional_params``
     to send this ``{"amount": 20000,"currency":"ngn"}`` if only
-    the currency is available otherwise send the intial payload.
+    the currency is available otherwise send the initial payload.
     This functions takes a list of optional parameters
     which is added to the payload is they are available and
     returns the payload.
 
-    Parameters
-    ----------
-    optional_params: list[tuple[str,Any]]
-        A list of additional data to be added to the payload if it is
-        available. It follows the format ``[("name-on-payload","value")].``
-        e.g ``[("currency","ngn"),("amount",2000)]``
-    payload: dict[str,Any]
-        A dictionary containing the data to be sent in the request body.
+    Args:
+        optional_params: A list of additional data to be added to the payload if it is
+            available. It follows the format ``[("name-on-payload","value")].``
+            e.g ``[("currency","ngn"),("amount",2000)]``
+        payload: A dictionary containing the data to be sent in the request body.
 
-    Returns
-    -------
-    dict[str,Any]
-        A dictionary of the payload updated with addtional data in the
-        optional_params that are not ``None``.
+    Returns:
+        A dictionary of the payload updated with additional data in the
+            optional_params that are not `None`.
     """
     [
         payload.update({item[0]: item[1]})
@@ -320,7 +499,7 @@ def add_to_payload(
 
 
 def append_query_params(query_params: list[tuple[str, Any]], url: str) -> str:
-    """Adds more queries to url that already has query parameters in its suffix
+    """Adds more queries to url that already have query parameters in its suffix
 
     This function should only be used with urls that already have a
     query parameter suffixed to it because it makes that assumption
@@ -328,18 +507,13 @@ def append_query_params(query_params: list[tuple[str, Any]], url: str) -> str:
     and it adds more query parameters delimited by & to the end of the provided
     url ``http://example-url.com?firstQuery=1&otherQuery=2&...``
 
-    Parameters
-    ----------
-    query_params: list[tuple[str,Any]]
-        A list of other query parameters that should be appended to the url
-        if it is not None. e.g ``[("page",2),("pagination",50),("currency",None)]`` ->
-        ``url&page=2&pagination=50``
-    url: str
-        The url to which additional query parameters is added.
+    Args:
+        query_params: A list of other query parameters that should be appended to the url
+            if it is not None. e.g ``[("page",2),("pagination",50),("currency",None)]`` ->
+            ``url&page=2&pagination=50``
+        url: The url to which additional query parameters are added.
 
-    Returns
-    -------
-    str
+    Returns:
         The new url with padded query parameters.
     """
     params = [
@@ -348,3 +522,25 @@ def append_query_params(query_params: list[tuple[str, Any]], url: str) -> str:
     if len(params) == 0:
         return url
     return url + reduce(add, params)
+
+
+class Response(NamedTuple):
+    """
+    A namedtuple containing the data gotten from making a request to paystack's API endpoints.
+
+    All wrapper methods returns an instance of `Response` which can be used as a tuple following
+    this format `(status_code, status, message, data)`. Accessing by attributes is also possible
+    say for example `response` is an instance of `Response`, we can access the data in the
+    response like so `response.data`
+
+    Attributes:
+        status_code: The response status code
+        status: A flag for the response status
+        message: Paystack response message
+        data: Data sent from paystack's server if any.
+    """
+
+    status_code: int
+    status: bool
+    message: str
+    data: Optional[Union[dict[str, Any], list[dict[str, Any]]]]
