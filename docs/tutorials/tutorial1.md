@@ -377,7 +377,7 @@ You can try out the new command with the following commands
 ## Where to go from here
 
 **It's all in your hands now**. We now have a working cli app, but it does not have all the features
-to make it a fully fledged **Paystack command line client** you can bring in more wrappers and implement
-new commands. It also does not handle all the likely exception that can occur, but then, the purpose of
+to make it a fully fledged **Paystack command line client** you can implement
+more commands. It also does not handle all the likely exception that can occur, but then, the purpose of
 the tutorial is to expose you to `pypaystack2`. Not sure how something works, you can always search the
 documentation. Good luck on your next project!

@@ -45,9 +45,9 @@ Customer retrieved
 >>> 
 
 ```
-All you need to interact with Paystack's API in your python project is the `Paystack class` it has [attributes]()
+All you need to interact with Paystack's API in your python project is the `Paystack class` it has [attributes](how-to-guides.md#bindings-on-the-paystack-object)
 bounded to it that provides methods you can call in your code to make API calls to Paystack. Every method call on the wrapper
-has the same return type, which is a [Response](). A namedtuple containing the data from making the actual call to Paystack servers
+has the same return type, which is a [Response](reference/index.md#pypaystack2.utils.Response). A namedtuple containing the data from making the actual call to Paystack servers
 
 ## Async Now!
 PyPaystack2 now supports asynchronous wrappers to Paystack's API. `AsyncPaystack` is an asynchronous mirror equivalent
