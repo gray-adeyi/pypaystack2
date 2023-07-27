@@ -2,7 +2,7 @@ from _operator import add
 from functools import reduce
 from typing import Union, Any
 
-from pypaystack2.errors import InvalidDataError
+from pypaystack2.exceptions import InvalidDataException
 
 
 def validate_amount(amount: Union[int, float]) -> Union[int, float]:
@@ -23,16 +23,16 @@ def validate_amount(amount: Union[int, float]) -> Union[int, float]:
     """
 
     if not amount:
-        raise InvalidDataError("Amount to be charged is required")
+        raise InvalidDataException("Amount to be charged is required")
 
     if isinstance(amount, int) or isinstance(
         amount, float
     ):  # Save the sever some headaches
         if amount < 0:
-            raise InvalidDataError("Negative amount is not allowed")
+            raise InvalidDataException("Negative amount is not allowed")
         return amount
     else:
-        raise InvalidDataError("Amount should be a number")
+        raise InvalidDataException("Amount should be a number")
 
 
 def validate_interval(interval: str) -> str:
@@ -55,7 +55,7 @@ def validate_interval(interval: str) -> str:
         else None
     )
     if not interval:
-        raise InvalidDataError("Please provide a valid plan interval")
+        raise InvalidDataException("Please provide a valid plan interval")
     return interval
 
 

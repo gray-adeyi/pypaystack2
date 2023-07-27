@@ -1,7 +1,7 @@
 from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
-from pypaystack2.errors import InvalidDataError
+from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.utils import (
     TerminalEvent,
     TerminalEventAction,
@@ -53,7 +53,7 @@ class Terminal(BaseAPI):
             },
         }
         if action not in supported_actions_mapping[type]:
-            raise InvalidDataError(
+            raise InvalidDataException(
                 f"Terminal Event: {type} does not support Terminal Event Action: {action}"
             )
 
@@ -222,7 +222,7 @@ class AsyncTerminal(BaseAsyncAPI):
             },
         }
         if action not in supported_actions_mapping[type]:
-            raise InvalidDataError(
+            raise InvalidDataException(
                 f"Terminal Event: {type} does not support Terminal Event Action: {action}"
             )
 

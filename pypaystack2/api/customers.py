@@ -1,7 +1,7 @@
 from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
-from pypaystack2.errors import InvalidDataError
+from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.utils import (
     add_to_payload,
     HTTPMethod,
@@ -171,11 +171,11 @@ class Customer(BaseAPI):
 
         if identification_type == Identification.BANK_ACCOUNT:
             if bank_code is None:
-                raise InvalidDataError(
+                raise InvalidDataException(
                     "`bank_code` is required if identification type is `Identification.BANK_ACCOUNT`"
                 )
             if account_number is None:
-                raise InvalidDataError(
+                raise InvalidDataException(
                     "`account_number` is required if identification type is `Identification.BANK_ACCOUNT`"
                 )
 
@@ -399,11 +399,11 @@ class AsyncCustomer(BaseAsyncAPI):
 
         if identification_type == Identification.BANK_ACCOUNT:
             if bank_code is None:
-                raise InvalidDataError(
+                raise InvalidDataException(
                     "`bank_code` is required if identification type is `Identification.BANK_ACCOUNT`"
                 )
             if account_number is None:
-                raise InvalidDataError(
+                raise InvalidDataException(
                     "`account_number` is required if identification type is `Identification.BANK_ACCOUNT`"
                 )
 

@@ -4,8 +4,9 @@ from typing import Union, Optional
 
 import httpx
 from httpx import codes
+
 from pypaystack2._metadata import __version__
-from pypaystack2.errors import InvalidMethodError, MissingAuthKeyError
+from pypaystack2.exceptions import InvalidMethodException, MissingAuthKeyException
 from pypaystack2.utils import HTTPMethod, Response
 
 
@@ -28,7 +29,7 @@ class AbstractAPI(ABC):
                 "PAYSTACK_AUTHORIZATION_KEY", None
             )
         if not self._PAYSTACK_AUTHORIZATION_KEY:
-            raise MissingAuthKeyError(
+            raise MissingAuthKeyException(
                 "Missing Authorization key argument or env variable"
             )
 
@@ -113,7 +114,7 @@ class BaseAPI(AbstractAPI):
         )
 
         if not http_method:
-            raise InvalidMethodError(
+            raise InvalidMethodException(
                 "HTTP Request method not recognised or implemented"
             )
 
@@ -141,7 +142,7 @@ class BaseAsyncAPI(AbstractAPI):
                 url=url, method=method, data=data
             )
             if not http_method:
-                raise InvalidMethodError(
+                raise InvalidMethodException(
                     "HTTP Request method not recognised or implemented"
                 )
             response = await http_method(**http_method_kwargs)
