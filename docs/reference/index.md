@@ -3,12 +3,15 @@
 ::: pypaystack2
 
 ## `pypaystack2.paytack`
+
 ::: pypaystack2.paystack
 
 ## `pypaystack2.api`
+
 ::: pypaystack2.api
 
 ## wrappers within `pypaystack2.api`
+
 - [ApplePay & AsyncApplePay](./apple_pay.md)
 - [BulkCharge & AsyncBulkCharge](./bulk_charges.md)
 - [Charge & AsyncCharge](./charge.md)
@@ -34,7 +37,9 @@
 - [Verification & AsyncVerification](./verification.md)
 
 ## `pypaystack2.utils`
+
 ::: pypaystack2.utils
 
-## `pypaystack2.errors`
-::: pypaystack2.errors
+## `pypaystack2.exceptions`
+
+::: pypaystack2.exceptions

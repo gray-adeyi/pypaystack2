@@ -1,7 +1,7 @@
 from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
-from pypaystack2.errors import InvalidDataError
+from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.utils import (
     Bearer,
     Channel,
@@ -70,7 +70,9 @@ class Transaction(BaseAPI):
         amount = validate_amount(amount)
 
         if not email:
-            raise InvalidDataError("Customer's Email is required for initialization")
+            raise InvalidDataException(
+                "Customer's Email is required for initialization"
+            )
 
         url = self._parse_url("/transaction/initialize")
         payload = {
@@ -216,10 +218,10 @@ class Transaction(BaseAPI):
         amount = validate_amount(amount)
 
         if not email:
-            raise InvalidDataError("Customer's Email is required to charge")
+            raise InvalidDataException("Customer's Email is required to charge")
 
         if not auth_code:
-            raise InvalidDataError("Customer's Auth code is required to charge")
+            raise InvalidDataException("Customer's Auth code is required to charge")
 
         url = self._parse_url("/transaction/charge_authorization")
         payload = {
@@ -374,10 +376,10 @@ class Transaction(BaseAPI):
             at_least = validate_amount(at_least)
 
         if not email:
-            raise InvalidDataError("Customer's Email is required to charge")
+            raise InvalidDataException("Customer's Email is required to charge")
 
         if not auth_code:
-            raise InvalidDataError("Customer's Auth code is required to charge")
+            raise InvalidDataException("Customer's Auth code is required to charge")
 
         url = self._parse_url("/transaction/partial_debit")
         payload = {
@@ -447,7 +449,9 @@ class AsyncTransaction(BaseAsyncAPI):
         amount = validate_amount(amount)
 
         if not email:
-            raise InvalidDataError("Customer's Email is required for initialization")
+            raise InvalidDataException(
+                "Customer's Email is required for initialization"
+            )
 
         url = self._parse_url("/transaction/initialize")
         payload = {
@@ -593,10 +597,10 @@ class AsyncTransaction(BaseAsyncAPI):
         amount = validate_amount(amount)
 
         if not email:
-            raise InvalidDataError("Customer's Email is required to charge")
+            raise InvalidDataException("Customer's Email is required to charge")
 
         if not auth_code:
-            raise InvalidDataError("Customer's Auth code is required to charge")
+            raise InvalidDataException("Customer's Auth code is required to charge")
 
         url = self._parse_url("/transaction/charge_authorization")
         payload = {
@@ -751,10 +755,10 @@ class AsyncTransaction(BaseAsyncAPI):
             at_least = validate_amount(at_least)
 
         if not email:
-            raise InvalidDataError("Customer's Email is required to charge")
+            raise InvalidDataException("Customer's Email is required to charge")
 
         if not auth_code:
-            raise InvalidDataError("Customer's Auth code is required to charge")
+            raise InvalidDataException("Customer's Auth code is required to charge")
 
         url = self._parse_url("/transaction/partial_debit")
         payload = {

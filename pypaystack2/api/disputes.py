@@ -15,7 +15,7 @@ from pypaystack2.utils import (
 class Dispute(BaseAPI):
     """Provides a wrapper for paystack Disputes API
 
-    The Disputes API allows you manage transaction disputes on your integration.
+    The Disputes API allows you to manage transaction disputes on your integration.
     https://paystack.com/docs/api/#dispute
     """
 

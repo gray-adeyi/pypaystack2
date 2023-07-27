@@ -1,7 +1,7 @@
 from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
-from pypaystack2.errors import InvalidDataError
+from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.utils import (
     Currency,
     add_to_payload,
@@ -47,7 +47,7 @@ class Product(BaseAPI):
         """
 
         if unlimited is True and quantity is not None:
-            raise InvalidDataError(
+            raise InvalidDataException(
                 "You can't have unlimited set to True and have a quantity value."
             )
 
@@ -140,7 +140,7 @@ class Product(BaseAPI):
         """
 
         if unlimited is True and quantity is not None:
-            raise InvalidDataError(
+            raise InvalidDataException(
                 "You can't have unlimited set to True and quantity have a value."
             )
         url = self._parse_url(f"/product/{id}")
@@ -194,7 +194,7 @@ class AsyncProduct(BaseAsyncAPI):
         """
 
         if unlimited is True and quantity is not None:
-            raise InvalidDataError(
+            raise InvalidDataException(
                 "You can't have unlimited set to True and have a quantity value."
             )
 
@@ -287,7 +287,7 @@ class AsyncProduct(BaseAsyncAPI):
         """
 
         if unlimited is True and quantity is not None:
-            raise InvalidDataError(
+            raise InvalidDataException(
                 "You can't have unlimited set to True and quantity have a value."
             )
         url = self._parse_url(f"/product/{id}")

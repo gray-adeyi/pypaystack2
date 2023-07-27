@@ -1,6 +1,5 @@
 from typing import Optional
 
-
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.utils import add_to_payload, append_query_params, HTTPMethod, Response
 
@@ -67,9 +66,9 @@ class PaymentPage(BaseAPI):
 
         Args:
             page: Specifies exactly what page you want to retrieve.
-                If not specified we use a default value of 1.
+                If not specified, we use a default value of 1.
             pagination: Specifies how many records you want to retrieve per page.
-                If not specified we use a default value of 50.
+                If not specified, we use a default value of 50.
             start_date: A timestamp from which to start listing page e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
             end_date: A timestamp at which to stop listing page e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
 

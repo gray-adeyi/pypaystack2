@@ -1,7 +1,7 @@
 from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
-from pypaystack2.errors import InvalidDataError
+from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.utils import (
     Bearer,
     Currency,
@@ -135,7 +135,7 @@ class TransactionSplit(BaseAPI):
 
         if bearer_subaccount:
             if bearer_type != Bearer.SUB_ACCOUNT:
-                raise InvalidDataError(
+                raise InvalidDataException(
                     "`bearer_subaccount` can only have a value if `bearer_type` is `Bearer.SUBACCOUNT`"
                 )
 
@@ -306,7 +306,7 @@ class AsyncTransactionSplit(BaseAsyncAPI):
 
         if bearer_subaccount:
             if bearer_type != Bearer.SUB_ACCOUNT:
-                raise InvalidDataError(
+                raise InvalidDataException(
                     "`bearer_subaccount` can only have a value if `bearer_type` is `Bearer.SUBACCOUNT`"
                 )
 

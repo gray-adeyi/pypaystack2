@@ -1,7 +1,7 @@
 from typing import Optional
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
-from pypaystack2.errors import InvalidDataError
+from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.utils import (
     Currency,
     RecipientType,
@@ -58,7 +58,7 @@ class TransferRecipient(BaseAPI):
         # if it raises issues.
         if type == RecipientType.NUBAN or type == RecipientType.BASA:
             if bank_code is None:
-                raise InvalidDataError(
+                raise InvalidDataException(
                     "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"
                 )
 
@@ -234,7 +234,7 @@ class AsyncTransferRecipient(BaseAsyncAPI):
         # if it raises issues.
         if type == RecipientType.NUBAN or type == RecipientType.BASA:
             if bank_code is None:
-                raise InvalidDataError(
+                raise InvalidDataException(
                     "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"
                 )
 

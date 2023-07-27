@@ -1,11 +1,11 @@
 import os
-from unittest import TestCase
 
 import httpx
 from dotenv import load_dotenv
+
 from pypaystack2 import __version__
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
-from pypaystack2.errors import MissingAuthKeyError
+from pypaystack2.exceptions import MissingAuthKeyException
 from pypaystack2.utils import Response, HTTPMethod
 from tests.test_api.mocked_api_testcase import MockedAPITestCase, MockedAsyncAPITestCase
 
@@ -13,7 +13,7 @@ from tests.test_api.mocked_api_testcase import MockedAPITestCase, MockedAsyncAPI
 class BaseAPITestCase(MockedAPITestCase):
     def test_raises_exception_for_missing_key(self):
         os.environ.pop("PAYSTACK_AUTHORIZATION_KEY", None)
-        with self.assertRaises(MissingAuthKeyError):
+        with self.assertRaises(MissingAuthKeyException):
             BaseAPI()
 
     def test__parse_url(self):
