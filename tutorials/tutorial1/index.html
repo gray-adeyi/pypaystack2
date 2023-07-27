@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://github.com/gray-adeyi/pypaystack2/tutorials/tutorial1/">
       
       <link rel="icon" href="../../assets/pypaystack2.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-8.5.10">
     
     
       
@@ -903,7 +903,8 @@ installed globally and not within a virtual environment. You're good to proceed 
 <ul>
 <li>Install the projects dependencies. We'll be needing <code>pypaystack2</code>, <code>python-dotenv</code>, and <code>typer</code>.
   <code>pypaystack2</code> package is an API wrapper for paystack's services. <code>python-dotenv</code> helps us manage our
-  environmental variables and <a href="https://typer.tiangolo.com/">typer</a> makes building command line apps in python super simple.</li>
+  environmental variables and <a href="https://typer.tiangolo.com/">typer</a> makes building command line apps in python super
+  simple.</li>
 </ul>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>pipenv<span class="w"> </span>install<span class="w"> </span>pypaystack2<span class="w"> </span>python-dotenv<span class="w"> </span>typer
 </span></code></pre></div>
@@ -1054,8 +1055,8 @@ at <a href="https://paystack.com/docs/api/customer/">Paystack's Customer Service
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>All API wrappers are available on <code>pypaystack</code>. as attributes e.g. <code>paystack.transactions</code> for the Transactions API</p>
 </div>
+<p>All API wrappers are available on <code>pypaystack</code>. as attributes e.g. <code>paystack.transactions</code> for the Transactions API</p>
 <p>Now if you run the script again.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>python<span class="w"> </span>main.py
 </span></code></pre></div>
@@ -1187,8 +1188,9 @@ update-customer</p>
 <p><strong>It's all in your hands now</strong>. We now have a working cli app, but it does not have all the features
 to make it a fully fledged <strong>Paystack command line client</strong> you can implement
 more commands. It also does not handle all the likely exception that can occur, but then, the purpose of
-the tutorial is to expose you to <code>pypaystack2</code>. Not sure how something works, you can always search the
-documentation. Good luck on your next project!</p>
+the tutorial is to expose you to <code>pypaystack2</code>.You can check out the fully built
+<a href="https://pypi.org/project/paystack-cli/">paystack-cli</a> which can be quite useful for development purposes. Not sure how
+something works, you can always search the documentation. Good luck on your next project!</p>
 
 
 

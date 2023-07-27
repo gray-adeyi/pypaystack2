@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://github.com/gray-adeyi/pypaystack2/reference/customer/">
       
       <link rel="icon" href="../../assets/pypaystack2.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-8.5.10">
     
     
       
@@ -1465,11 +1465,11 @@ https://paystack.com/docs/api/#customer</p>
 </span><span id="__span-0-399"><a id="__codelineno-0-399" name="__codelineno-0-399"></a>
 </span><span id="__span-0-400"><a id="__codelineno-0-400" name="__codelineno-0-400"></a>        <span class="k">if</span> <span class="n">identification_type</span> <span class="o">==</span> <span class="n">Identification</span><span class="o">.</span><span class="n">BANK_ACCOUNT</span><span class="p">:</span>
 </span><span id="__span-0-401"><a id="__codelineno-0-401" name="__codelineno-0-401"></a>            <span class="k">if</span> <span class="n">bank_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-402"><a id="__codelineno-0-402" name="__codelineno-0-402"></a>                <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-402"><a id="__codelineno-0-402" name="__codelineno-0-402"></a>                <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-403"><a id="__codelineno-0-403" name="__codelineno-0-403"></a>                    <span class="s2">&quot;`bank_code` is required if identification type is `Identification.BANK_ACCOUNT`&quot;</span>
 </span><span id="__span-0-404"><a id="__codelineno-0-404" name="__codelineno-0-404"></a>                <span class="p">)</span>
 </span><span id="__span-0-405"><a id="__codelineno-0-405" name="__codelineno-0-405"></a>            <span class="k">if</span> <span class="n">account_number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-406"><a id="__codelineno-0-406" name="__codelineno-0-406"></a>                <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-406"><a id="__codelineno-0-406" name="__codelineno-0-406"></a>                <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-407"><a id="__codelineno-0-407" name="__codelineno-0-407"></a>                    <span class="s2">&quot;`account_number` is required if identification type is `Identification.BANK_ACCOUNT`&quot;</span>
 </span><span id="__span-0-408"><a id="__codelineno-0-408" name="__codelineno-0-408"></a>                <span class="p">)</span>
 </span><span id="__span-0-409"><a id="__codelineno-0-409" name="__codelineno-0-409"></a>
@@ -1589,7 +1589,11 @@ services, and General Service, then these parameters become compulsory.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's email address</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's email address</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1599,7 +1603,11 @@ services, and General Service, then these parameters become compulsory.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer's first name</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's first name</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1609,7 +1617,11 @@ services, and General Service, then these parameters become compulsory.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer's last name</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's last name</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1619,7 +1631,11 @@ services, and General Service, then these parameters become compulsory.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer's phone number</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's phone number</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1629,8 +1645,12 @@ services, and General Service, then these parameters become compulsory.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[dict]</code>
           </td>
-          <td><p>A dictionary that you can attach to the customer. It can be used
-to store additional information in a structured format.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A dictionary that you can attach to the customer. It can be used
+to store additional information in a structured format.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1649,9 +1669,13 @@ to store additional information in a structured format.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1777,7 +1801,11 @@ to store additional information in a structured format.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Authorization code to be deactivated</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Authorization code to be deactivated</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1796,9 +1824,13 @@ to store additional information in a structured format.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1880,7 +1912,11 @@ to store additional information in a structured format.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's code, or email address</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's code, or email address</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1888,9 +1924,13 @@ to store additional information in a structured format.</p></td>
         <tr>
           <td><code>risk_action</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.RiskAction" href="../#pypaystack2.utils.RiskAction">RiskAction</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.RiskAction">RiskAction</span>]</code>
           </td>
-          <td><p>One of the possible risk actions from the RiskAction enum e.g <code>RiskAction.DEFAULT</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>One of the possible risk actions from the RiskAction enum e.g <code>RiskAction.DEFAULT</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1909,9 +1949,13 @@ to store additional information in a structured format.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2005,7 +2049,11 @@ to store additional information in a structured format.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>An email or customer code for the customer you want to fetch</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An email or customer code for the customer you want to fetch</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2024,9 +2072,13 @@ to store additional information in a structured format.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2096,7 +2148,11 @@ to store additional information in a structured format.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp from which to start listing customers e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing customers e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2106,7 +2162,11 @@ to store additional information in a structured format.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp at which to stop listing customers e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp at which to stop listing customers e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2116,7 +2176,11 @@ to store additional information in a structured format.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -2126,8 +2190,12 @@ to store additional information in a structured format.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies how many records you want to retrieve per page.
-If not specified we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies how many records you want to retrieve per page.
+If not specified we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -2146,9 +2214,13 @@ If not specified we use a default value of 50.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2250,7 +2322,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2260,7 +2336,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer's first name</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's first name</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2270,7 +2350,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer's last name</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's last name</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2280,7 +2364,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer's phone number</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's phone number</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2290,8 +2378,12 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[dict]</code>
           </td>
-          <td><p>A dictionary that you can attach to the customer. It can be used to store additional
-information in a structured format.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A dictionary that you can attach to the customer. It can be used to store additional
+information in a structured format.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2310,9 +2402,13 @@ information in a structured format.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2424,7 +2520,11 @@ information in a structured format.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's email or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's email or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2434,7 +2534,11 @@ information in a structured format.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's first name</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's first name</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2444,7 +2548,11 @@ information in a structured format.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's last name</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's last name</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2452,9 +2560,13 @@ information in a structured format.</p></td>
         <tr>
           <td><code>identification_type</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Identification" href="../#pypaystack2.utils.Identification">Identification</a></code>
+                <code><span title="pypaystack2.utils.Identification">Identification</span></code>
           </td>
-          <td><p>Enum of Identification e.g <code>Identification.BVN</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Enum of Identification e.g <code>Identification.BVN</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2464,7 +2576,11 @@ information in a structured format.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>An identification number based on the <code>identification_type</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An identification number based on the <code>identification_type</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2472,9 +2588,13 @@ information in a structured format.</p></td>
         <tr>
           <td><code>country</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Country" href="../#pypaystack2.utils.Country">Country</a></code>
+                <code><span title="pypaystack2.utils.Country">Country</span></code>
           </td>
-          <td><p>Customer's Country e.g <code>Country.NIGERIA</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's Country e.g <code>Country.NIGERIA</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2484,7 +2604,11 @@ information in a structured format.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's Bank Verification Number</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's Bank Verification Number</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2494,8 +2618,12 @@ information in a structured format.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>You can get the list of Bank Codes by calling the
-Miscellaneous API <code>get_banks</code> method. (required if type is bank_account)</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>You can get the list of Bank Codes by calling the
+Miscellaneous API <code>get_banks</code> method. (required if type is bank_account)</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2505,7 +2633,11 @@ Miscellaneous API <code>get_banks</code> method. (required if type is bank_accou
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer's bank account number. (required if type is bank_account)</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's bank account number. (required if type is bank_account)</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2515,7 +2647,11 @@ Miscellaneous API <code>get_banks</code> method. (required if type is bank_accou
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer's middle name</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's middle name</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2534,9 +2670,13 @@ Miscellaneous API <code>get_banks</code> method. (required if type is bank_accou
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2634,11 +2774,11 @@ Miscellaneous API <code>get_banks</code> method. (required if type is bank_accou
 </span><span id="__span-0-399"><a id="__codelineno-0-399" name="__codelineno-0-399"></a>
 </span><span id="__span-0-400"><a id="__codelineno-0-400" name="__codelineno-0-400"></a>    <span class="k">if</span> <span class="n">identification_type</span> <span class="o">==</span> <span class="n">Identification</span><span class="o">.</span><span class="n">BANK_ACCOUNT</span><span class="p">:</span>
 </span><span id="__span-0-401"><a id="__codelineno-0-401" name="__codelineno-0-401"></a>        <span class="k">if</span> <span class="n">bank_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-402"><a id="__codelineno-0-402" name="__codelineno-0-402"></a>            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-402"><a id="__codelineno-0-402" name="__codelineno-0-402"></a>            <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-403"><a id="__codelineno-0-403" name="__codelineno-0-403"></a>                <span class="s2">&quot;`bank_code` is required if identification type is `Identification.BANK_ACCOUNT`&quot;</span>
 </span><span id="__span-0-404"><a id="__codelineno-0-404" name="__codelineno-0-404"></a>            <span class="p">)</span>
 </span><span id="__span-0-405"><a id="__codelineno-0-405" name="__codelineno-0-405"></a>        <span class="k">if</span> <span class="n">account_number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-406"><a id="__codelineno-0-406" name="__codelineno-0-406"></a>            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-406"><a id="__codelineno-0-406" name="__codelineno-0-406"></a>            <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-407"><a id="__codelineno-0-407" name="__codelineno-0-407"></a>                <span class="s2">&quot;`account_number` is required if identification type is `Identification.BANK_ACCOUNT`&quot;</span>
 </span><span id="__span-0-408"><a id="__codelineno-0-408" name="__codelineno-0-408"></a>            <span class="p">)</span>
 </span><span id="__span-0-409"><a id="__codelineno-0-409" name="__codelineno-0-409"></a>
@@ -2978,11 +3118,11 @@ https://paystack.com/docs/api/#customer</p>
 </span><span id="__span-0-71"><a id="__codelineno-0-71" name="__codelineno-0-71"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetches customers available on your integration.</span>
 </span><span id="__span-0-72"><a id="__codelineno-0-72" name="__codelineno-0-72"></a>
 </span><span id="__span-0-73"><a id="__codelineno-0-73" name="__codelineno-0-73"></a><span class="sd">        Args:</span>
-</span><span id="__span-0-74"><a id="__codelineno-0-74" name="__codelineno-0-74"></a><span class="sd">            start_date: A timestamp from which to start listing customers e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</span>
-</span><span id="__span-0-75"><a id="__codelineno-0-75" name="__codelineno-0-75"></a><span class="sd">            end_date: A timestamp at which to stop listing customers e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</span>
+</span><span id="__span-0-74"><a id="__codelineno-0-74" name="__codelineno-0-74"></a><span class="sd">            start_date: A timestamp from which to start listing customers e.g., 2016-09-24T00:00:05.000Z, 2016-09-21</span>
+</span><span id="__span-0-75"><a id="__codelineno-0-75" name="__codelineno-0-75"></a><span class="sd">            end_date: A timestamp at which to stop listing customers e.g., 2016-09-24T00:00:05.000Z, 2016-09-21</span>
 </span><span id="__span-0-76"><a id="__codelineno-0-76" name="__codelineno-0-76"></a><span class="sd">            page: Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.</span>
 </span><span id="__span-0-77"><a id="__codelineno-0-77" name="__codelineno-0-77"></a><span class="sd">            pagination: Specifies how many records you want to retrieve per page.</span>
-</span><span id="__span-0-78"><a id="__codelineno-0-78" name="__codelineno-0-78"></a><span class="sd">                If not specified we use a default value of 50.</span>
+</span><span id="__span-0-78"><a id="__codelineno-0-78" name="__codelineno-0-78"></a><span class="sd">                If not specified, we use a default value of 50.</span>
 </span><span id="__span-0-79"><a id="__codelineno-0-79" name="__codelineno-0-79"></a>
 </span><span id="__span-0-80"><a id="__codelineno-0-80" name="__codelineno-0-80"></a><span class="sd">        Returns:</span>
 </span><span id="__span-0-81"><a id="__codelineno-0-81" name="__codelineno-0-81"></a><span class="sd">            A named tuple containing the response gotten from paystack&#39;s server.</span>
@@ -3078,11 +3218,11 @@ https://paystack.com/docs/api/#customer</p>
 </span><span id="__span-0-171"><a id="__codelineno-0-171" name="__codelineno-0-171"></a>
 </span><span id="__span-0-172"><a id="__codelineno-0-172" name="__codelineno-0-172"></a>        <span class="k">if</span> <span class="n">identification_type</span> <span class="o">==</span> <span class="n">Identification</span><span class="o">.</span><span class="n">BANK_ACCOUNT</span><span class="p">:</span>
 </span><span id="__span-0-173"><a id="__codelineno-0-173" name="__codelineno-0-173"></a>            <span class="k">if</span> <span class="n">bank_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-174"><a id="__codelineno-0-174" name="__codelineno-0-174"></a>                <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-174"><a id="__codelineno-0-174" name="__codelineno-0-174"></a>                <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-175"><a id="__codelineno-0-175" name="__codelineno-0-175"></a>                    <span class="s2">&quot;`bank_code` is required if identification type is `Identification.BANK_ACCOUNT`&quot;</span>
 </span><span id="__span-0-176"><a id="__codelineno-0-176" name="__codelineno-0-176"></a>                <span class="p">)</span>
 </span><span id="__span-0-177"><a id="__codelineno-0-177" name="__codelineno-0-177"></a>            <span class="k">if</span> <span class="n">account_number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-178"><a id="__codelineno-0-178" name="__codelineno-0-178"></a>                <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-178"><a id="__codelineno-0-178" name="__codelineno-0-178"></a>                <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-179"><a id="__codelineno-0-179" name="__codelineno-0-179"></a>                    <span class="s2">&quot;`account_number` is required if identification type is `Identification.BANK_ACCOUNT`&quot;</span>
 </span><span id="__span-0-180"><a id="__codelineno-0-180" name="__codelineno-0-180"></a>                <span class="p">)</span>
 </span><span id="__span-0-181"><a id="__codelineno-0-181" name="__codelineno-0-181"></a>
@@ -3198,7 +3338,11 @@ services, and General Service, then these parameters become compulsory.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's email address</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's email address</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3208,7 +3352,11 @@ services, and General Service, then these parameters become compulsory.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer's first name</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's first name</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3218,7 +3366,11 @@ services, and General Service, then these parameters become compulsory.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer's last name</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's last name</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3228,7 +3380,11 @@ services, and General Service, then these parameters become compulsory.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer's phone number</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's phone number</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3238,8 +3394,12 @@ services, and General Service, then these parameters become compulsory.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[dict]</code>
           </td>
-          <td><p>A dictionary that you can attach to the customer. It can be used
-to store additional information in a structured format.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A dictionary that you can attach to the customer. It can be used
+to store additional information in a structured format.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3258,9 +3418,13 @@ to store additional information in a structured format.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3382,7 +3546,11 @@ to store additional information in a structured format.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Authorization code to be deactivated</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Authorization code to be deactivated</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3401,9 +3569,13 @@ to store additional information in a structured format.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3481,7 +3653,11 @@ to store additional information in a structured format.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's code, or email address</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's code, or email address</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3489,9 +3665,13 @@ to store additional information in a structured format.</p></td>
         <tr>
           <td><code>risk_action</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.RiskAction" href="../#pypaystack2.utils.RiskAction">RiskAction</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.RiskAction">RiskAction</span>]</code>
           </td>
-          <td><p>One of the possible risk actions from the RiskAction enum e.g <code>RiskAction.DEFAULT</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>One of the possible risk actions from the RiskAction enum e.g <code>RiskAction.DEFAULT</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3510,9 +3690,13 @@ to store additional information in a structured format.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3602,7 +3786,11 @@ to store additional information in a structured format.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>An email or customer code for the customer you want to fetch</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An email or customer code for the customer you want to fetch</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3621,9 +3809,13 @@ to store additional information in a structured format.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3689,7 +3881,11 @@ to store additional information in a structured format.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp from which to start listing customers e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing customers e.g., 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3699,7 +3895,11 @@ to store additional information in a structured format.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp at which to stop listing customers e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp at which to stop listing customers e.g., 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3709,7 +3909,11 @@ to store additional information in a structured format.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -3719,8 +3923,12 @@ to store additional information in a structured format.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies how many records you want to retrieve per page.
-If not specified we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies how many records you want to retrieve per page.
+If not specified, we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -3739,9 +3947,13 @@ If not specified we use a default value of 50.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3785,11 +3997,11 @@ If not specified we use a default value of 50.</p></td>
 </span><span id="__span-0-71"><a id="__codelineno-0-71" name="__codelineno-0-71"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Fetches customers available on your integration.</span>
 </span><span id="__span-0-72"><a id="__codelineno-0-72" name="__codelineno-0-72"></a>
 </span><span id="__span-0-73"><a id="__codelineno-0-73" name="__codelineno-0-73"></a><span class="sd">    Args:</span>
-</span><span id="__span-0-74"><a id="__codelineno-0-74" name="__codelineno-0-74"></a><span class="sd">        start_date: A timestamp from which to start listing customers e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</span>
-</span><span id="__span-0-75"><a id="__codelineno-0-75" name="__codelineno-0-75"></a><span class="sd">        end_date: A timestamp at which to stop listing customers e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</span>
+</span><span id="__span-0-74"><a id="__codelineno-0-74" name="__codelineno-0-74"></a><span class="sd">        start_date: A timestamp from which to start listing customers e.g., 2016-09-24T00:00:05.000Z, 2016-09-21</span>
+</span><span id="__span-0-75"><a id="__codelineno-0-75" name="__codelineno-0-75"></a><span class="sd">        end_date: A timestamp at which to stop listing customers e.g., 2016-09-24T00:00:05.000Z, 2016-09-21</span>
 </span><span id="__span-0-76"><a id="__codelineno-0-76" name="__codelineno-0-76"></a><span class="sd">        page: Specify exactly what page you want to retrieve. If not specified, we use a default value of 1.</span>
 </span><span id="__span-0-77"><a id="__codelineno-0-77" name="__codelineno-0-77"></a><span class="sd">        pagination: Specifies how many records you want to retrieve per page.</span>
-</span><span id="__span-0-78"><a id="__codelineno-0-78" name="__codelineno-0-78"></a><span class="sd">            If not specified we use a default value of 50.</span>
+</span><span id="__span-0-78"><a id="__codelineno-0-78" name="__codelineno-0-78"></a><span class="sd">            If not specified, we use a default value of 50.</span>
 </span><span id="__span-0-79"><a id="__codelineno-0-79" name="__codelineno-0-79"></a>
 </span><span id="__span-0-80"><a id="__codelineno-0-80" name="__codelineno-0-80"></a><span class="sd">    Returns:</span>
 </span><span id="__span-0-81"><a id="__codelineno-0-81" name="__codelineno-0-81"></a><span class="sd">        A named tuple containing the response gotten from paystack&#39;s server.</span>
@@ -3839,7 +4051,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3849,7 +4065,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer's first name</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's first name</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3859,7 +4079,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer's last name</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's last name</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3869,7 +4093,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer's phone number</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's phone number</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3879,8 +4107,12 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[dict]</code>
           </td>
-          <td><p>A dictionary that you can attach to the customer. It can be used to store additional
-information in a structured format.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A dictionary that you can attach to the customer. It can be used to store additional
+information in a structured format.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3899,9 +4131,13 @@ information in a structured format.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -4009,7 +4245,11 @@ information in a structured format.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's email or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's email or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4019,7 +4259,11 @@ information in a structured format.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's first name</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's first name</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4029,7 +4273,11 @@ information in a structured format.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's last name</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's last name</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4037,9 +4285,13 @@ information in a structured format.</p></td>
         <tr>
           <td><code>identification_type</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Identification" href="../#pypaystack2.utils.Identification">Identification</a></code>
+                <code><span title="pypaystack2.utils.Identification">Identification</span></code>
           </td>
-          <td><p>Enum of Identification e.g <code>Identification.BVN</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Enum of Identification e.g <code>Identification.BVN</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4049,7 +4301,11 @@ information in a structured format.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>An identification number based on the <code>identification_type</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An identification number based on the <code>identification_type</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4057,9 +4313,13 @@ information in a structured format.</p></td>
         <tr>
           <td><code>country</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Country" href="../#pypaystack2.utils.Country">Country</a></code>
+                <code><span title="pypaystack2.utils.Country">Country</span></code>
           </td>
-          <td><p>Customer's Country e.g <code>Country.NIGERIA</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's Country e.g <code>Country.NIGERIA</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4069,7 +4329,11 @@ information in a structured format.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's Bank Verification Number</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's Bank Verification Number</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4079,8 +4343,12 @@ information in a structured format.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>You can get the list of Bank Codes by calling the
-Miscellaneous API <code>get_banks</code> method. (required if type is bank_account)</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>You can get the list of Bank Codes by calling the
+Miscellaneous API <code>get_banks</code> method. (required if type is bank_account)</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4090,7 +4358,11 @@ Miscellaneous API <code>get_banks</code> method. (required if type is bank_accou
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer's bank account number. (required if type is bank_account)</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's bank account number. (required if type is bank_account)</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4100,7 +4372,11 @@ Miscellaneous API <code>get_banks</code> method. (required if type is bank_accou
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer's middle name</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's middle name</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4119,9 +4395,13 @@ Miscellaneous API <code>get_banks</code> method. (required if type is bank_accou
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -4219,11 +4499,11 @@ Miscellaneous API <code>get_banks</code> method. (required if type is bank_accou
 </span><span id="__span-0-171"><a id="__codelineno-0-171" name="__codelineno-0-171"></a>
 </span><span id="__span-0-172"><a id="__codelineno-0-172" name="__codelineno-0-172"></a>    <span class="k">if</span> <span class="n">identification_type</span> <span class="o">==</span> <span class="n">Identification</span><span class="o">.</span><span class="n">BANK_ACCOUNT</span><span class="p">:</span>
 </span><span id="__span-0-173"><a id="__codelineno-0-173" name="__codelineno-0-173"></a>        <span class="k">if</span> <span class="n">bank_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-174"><a id="__codelineno-0-174" name="__codelineno-0-174"></a>            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-174"><a id="__codelineno-0-174" name="__codelineno-0-174"></a>            <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-175"><a id="__codelineno-0-175" name="__codelineno-0-175"></a>                <span class="s2">&quot;`bank_code` is required if identification type is `Identification.BANK_ACCOUNT`&quot;</span>
 </span><span id="__span-0-176"><a id="__codelineno-0-176" name="__codelineno-0-176"></a>            <span class="p">)</span>
 </span><span id="__span-0-177"><a id="__codelineno-0-177" name="__codelineno-0-177"></a>        <span class="k">if</span> <span class="n">account_number</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-178"><a id="__codelineno-0-178" name="__codelineno-0-178"></a>            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-178"><a id="__codelineno-0-178" name="__codelineno-0-178"></a>            <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-179"><a id="__codelineno-0-179" name="__codelineno-0-179"></a>                <span class="s2">&quot;`account_number` is required if identification type is `Identification.BANK_ACCOUNT`&quot;</span>
 </span><span id="__span-0-180"><a id="__codelineno-0-180" name="__codelineno-0-180"></a>            <span class="p">)</span>
 </span><span id="__span-0-181"><a id="__codelineno-0-181" name="__codelineno-0-181"></a>

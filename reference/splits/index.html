@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://github.com/gray-adeyi/pypaystack2/reference/splits/">
       
       <link rel="icon" href="../../assets/pypaystack2.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-8.5.10">
     
     
       
@@ -1343,7 +1343,7 @@ https://paystack.com/docs/api/#split</p>
 </span><span id="__span-0-306"><a id="__codelineno-0-306" name="__codelineno-0-306"></a>
 </span><span id="__span-0-307"><a id="__codelineno-0-307" name="__codelineno-0-307"></a>        <span class="k">if</span> <span class="n">bearer_subaccount</span><span class="p">:</span>
 </span><span id="__span-0-308"><a id="__codelineno-0-308" name="__codelineno-0-308"></a>            <span class="k">if</span> <span class="n">bearer_type</span> <span class="o">!=</span> <span class="n">Bearer</span><span class="o">.</span><span class="n">SUB_ACCOUNT</span><span class="p">:</span>
-</span><span id="__span-0-309"><a id="__codelineno-0-309" name="__codelineno-0-309"></a>                <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-309"><a id="__codelineno-0-309" name="__codelineno-0-309"></a>                <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-310"><a id="__codelineno-0-310" name="__codelineno-0-310"></a>                    <span class="s2">&quot;`bearer_subaccount` can only have a value if `bearer_type` is `Bearer.SUBACCOUNT`&quot;</span>
 </span><span id="__span-0-311"><a id="__codelineno-0-311" name="__codelineno-0-311"></a>                <span class="p">)</span>
 </span><span id="__span-0-312"><a id="__codelineno-0-312" name="__codelineno-0-312"></a>
@@ -1442,7 +1442,11 @@ the share of an existing Subaccount in a Transaction Split</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Split ID</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Split ID</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1452,7 +1456,11 @@ the share of an existing Subaccount in a Transaction Split</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>This is the subaccount code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>This is the subaccount code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1462,7 +1470,11 @@ the share of an existing Subaccount in a Transaction Split</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>This is the transaction share for the subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>This is the transaction share for the subaccount</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1481,9 +1493,13 @@ the share of an existing Subaccount in a Transaction Split</p>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1565,7 +1581,11 @@ the share of an existing Subaccount in a Transaction Split</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Name of the transaction split</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Name of the transaction split</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1575,8 +1595,12 @@ the share of an existing Subaccount in a Transaction Split</p>
           <td>
                 <code><a class="autorefs autorefs-internal" title="pypaystack2.api.splits.TransactionSplit" href="#pypaystack2.api.splits.TransactionSplit">TransactionSplit</a></code>
           </td>
-          <td><p>The type of transaction split you want to create.
-Any value from the <code>SplitType</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The type of transaction split you want to create.
+Any value from the <code>SplitType</code> enum</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1584,9 +1608,13 @@ Any value from the <code>SplitType</code> enum</p></td>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a></code>
+                <code><span title="pypaystack2.utils.Currency">Currency</span></code>
           </td>
-          <td><p>Any value from the <code>Currency</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Currency</code> enum</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1596,8 +1624,12 @@ Any value from the <code>SplitType</code> enum</p></td>
           <td>
                 <code>list[<span title="pypaystack2.utils.SplitAccount">SplitAccount</span>]</code>
           </td>
-          <td><p>A list of dictionaries containing subaccount code and
-number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A list of dictionaries containing subaccount code and
+number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1605,9 +1637,13 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
         <tr>
           <td><code>bearer_type</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Bearer" href="../#pypaystack2.utils.Bearer">Bearer</a></code>
+                <code><span title="pypaystack2.utils.Bearer">Bearer</span></code>
           </td>
-          <td><p>Any value from the <code>Bearer</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Bearer</code> enum</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1617,7 +1653,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>str</code>
           </td>
-          <td><p>Subaccount code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Subaccount code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1636,9 +1676,13 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1756,7 +1800,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>str</code>
           </td>
-          <td><p>The id of the split</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The id of the split</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1775,9 +1823,13 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1845,7 +1897,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>str</code>
           </td>
-          <td><p>The name of the split</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The name of the split</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1855,7 +1911,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Sort by name, defaults to createdAt date</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Sort by name, defaults to createdAt date</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1865,7 +1925,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Page number to view. If not specify we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Page number to view. If not specify we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1875,7 +1939,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp from which to start listing splits e.g. 2019-09-24T00:00:05.000Z, 2019-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing splits e.g. 2019-09-24T00:00:05.000Z, 2019-09-21</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1885,7 +1953,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp at which to stop listing splits e.g. 2019-09-24T00:00:05.000Z, 2019-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp at which to stop listing splits e.g. 2019-09-24T00:00:05.000Z, 2019-09-21</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1895,7 +1967,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Flag to filter by active</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Flag to filter by active</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1905,7 +1981,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>int</code>
           </td>
-          <td><p>Number of splits per page. If not specified we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of splits per page. If not specified we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -1924,9 +2004,13 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2046,7 +2130,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>str</code>
           </td>
-          <td><p>Split ID</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Split ID</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2056,7 +2144,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>str</code>
           </td>
-          <td><p>This is the subaccount code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>This is the subaccount code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2075,9 +2167,13 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2151,7 +2247,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>str</code>
           </td>
-          <td><p>Split ID</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Split ID</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2161,7 +2261,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>str</code>
           </td>
-          <td><p>Name of the transaction split</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Name of the transaction split</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2171,7 +2275,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Flag for active</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Flag for active</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2179,9 +2287,13 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
         <tr>
           <td><code>bearer_type</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Bearer" href="../#pypaystack2.utils.Bearer">Bearer</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Bearer">Bearer</span>]</code>
           </td>
-          <td><p>Any value from the Bearer enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the Bearer enum</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2191,9 +2303,13 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Subaccount code of a subaccount in the split group.
+          <td>
+            <div class="doc-md-description">
+              <p>Subaccount code of a subaccount in the split group.
 This should be specified only if the bearer_type
-is <code>Bearer.subaccount</code></p></td>
+is <code>Bearer.subaccount</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2212,9 +2328,13 @@ is <code>Bearer.subaccount</code></p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2285,7 +2405,7 @@ is <code>Bearer.subaccount</code></p></td>
 </span><span id="__span-0-306"><a id="__codelineno-0-306" name="__codelineno-0-306"></a>
 </span><span id="__span-0-307"><a id="__codelineno-0-307" name="__codelineno-0-307"></a>    <span class="k">if</span> <span class="n">bearer_subaccount</span><span class="p">:</span>
 </span><span id="__span-0-308"><a id="__codelineno-0-308" name="__codelineno-0-308"></a>        <span class="k">if</span> <span class="n">bearer_type</span> <span class="o">!=</span> <span class="n">Bearer</span><span class="o">.</span><span class="n">SUB_ACCOUNT</span><span class="p">:</span>
-</span><span id="__span-0-309"><a id="__codelineno-0-309" name="__codelineno-0-309"></a>            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-309"><a id="__codelineno-0-309" name="__codelineno-0-309"></a>            <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-310"><a id="__codelineno-0-310" name="__codelineno-0-310"></a>                <span class="s2">&quot;`bearer_subaccount` can only have a value if `bearer_type` is `Bearer.SUBACCOUNT`&quot;</span>
 </span><span id="__span-0-311"><a id="__codelineno-0-311" name="__codelineno-0-311"></a>            <span class="p">)</span>
 </span><span id="__span-0-312"><a id="__codelineno-0-312" name="__codelineno-0-312"></a>
@@ -2626,7 +2746,7 @@ https://paystack.com/docs/api/#split</p>
 </span><span id="__span-0-135"><a id="__codelineno-0-135" name="__codelineno-0-135"></a>
 </span><span id="__span-0-136"><a id="__codelineno-0-136" name="__codelineno-0-136"></a>        <span class="k">if</span> <span class="n">bearer_subaccount</span><span class="p">:</span>
 </span><span id="__span-0-137"><a id="__codelineno-0-137" name="__codelineno-0-137"></a>            <span class="k">if</span> <span class="n">bearer_type</span> <span class="o">!=</span> <span class="n">Bearer</span><span class="o">.</span><span class="n">SUB_ACCOUNT</span><span class="p">:</span>
-</span><span id="__span-0-138"><a id="__codelineno-0-138" name="__codelineno-0-138"></a>                <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-138"><a id="__codelineno-0-138" name="__codelineno-0-138"></a>                <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-139"><a id="__codelineno-0-139" name="__codelineno-0-139"></a>                    <span class="s2">&quot;`bearer_subaccount` can only have a value if `bearer_type` is `Bearer.SUBACCOUNT`&quot;</span>
 </span><span id="__span-0-140"><a id="__codelineno-0-140" name="__codelineno-0-140"></a>                <span class="p">)</span>
 </span><span id="__span-0-141"><a id="__codelineno-0-141" name="__codelineno-0-141"></a>
@@ -2721,7 +2841,11 @@ the share of an existing Subaccount in a Transaction Split</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Split ID</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Split ID</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2731,7 +2855,11 @@ the share of an existing Subaccount in a Transaction Split</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>This is the subaccount code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>This is the subaccount code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2741,7 +2869,11 @@ the share of an existing Subaccount in a Transaction Split</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>This is the transaction share for the subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>This is the transaction share for the subaccount</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2760,9 +2892,13 @@ the share of an existing Subaccount in a Transaction Split</p>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2840,7 +2976,11 @@ the share of an existing Subaccount in a Transaction Split</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Name of the transaction split</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Name of the transaction split</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2848,10 +2988,14 @@ the share of an existing Subaccount in a Transaction Split</p>
         <tr>
           <td><code>type</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Split" href="../#pypaystack2.utils.Split">Split</a></code>
+                <code><span title="pypaystack2.utils.Split">Split</span></code>
           </td>
-          <td><p>The type of transaction split you want to create.
-Any value from the <code>SplitType</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The type of transaction split you want to create.
+Any value from the <code>SplitType</code> enum</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2859,9 +3003,13 @@ Any value from the <code>SplitType</code> enum</p></td>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a></code>
+                <code><span title="pypaystack2.utils.Currency">Currency</span></code>
           </td>
-          <td><p>Any value from the <code>Currency</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Currency</code> enum</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2871,8 +3019,12 @@ Any value from the <code>SplitType</code> enum</p></td>
           <td>
                 <code>list[<span title="pypaystack2.utils.SplitAccount">SplitAccount</span>]</code>
           </td>
-          <td><p>A list of dictionaries containing subaccount code and
-number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A list of dictionaries containing subaccount code and
+number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2880,9 +3032,13 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
         <tr>
           <td><code>bearer_type</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Bearer" href="../#pypaystack2.utils.Bearer">Bearer</a></code>
+                <code><span title="pypaystack2.utils.Bearer">Bearer</span></code>
           </td>
-          <td><p>Any value from the <code>Bearer</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Bearer</code> enum</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2892,7 +3048,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>str</code>
           </td>
-          <td><p>Subaccount code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Subaccount code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2911,9 +3071,13 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3027,7 +3191,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>str</code>
           </td>
-          <td><p>The id of the split</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The id of the split</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3046,9 +3214,13 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3112,7 +3284,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>str</code>
           </td>
-          <td><p>The name of the split</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The name of the split</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3122,7 +3298,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Sort by name, defaults to createdAt date</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Sort by name, defaults to createdAt date</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3132,7 +3312,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Page number to view. If not specify we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Page number to view. If not specify we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3142,7 +3326,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp from which to start listing splits e.g. 2019-09-24T00:00:05.000Z, 2019-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing splits e.g. 2019-09-24T00:00:05.000Z, 2019-09-21</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3152,7 +3340,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp at which to stop listing splits e.g. 2019-09-24T00:00:05.000Z, 2019-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp at which to stop listing splits e.g. 2019-09-24T00:00:05.000Z, 2019-09-21</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3162,7 +3354,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Flag to filter by active</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Flag to filter by active</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -3172,7 +3368,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>int</code>
           </td>
-          <td><p>Number of splits per page. If not specified we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of splits per page. If not specified we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -3191,9 +3391,13 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3309,7 +3513,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>str</code>
           </td>
-          <td><p>Split ID</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Split ID</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3319,7 +3527,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>str</code>
           </td>
-          <td><p>This is the subaccount code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>This is the subaccount code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3338,9 +3550,13 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3410,7 +3626,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>str</code>
           </td>
-          <td><p>Split ID</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Split ID</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3420,7 +3640,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>str</code>
           </td>
-          <td><p>Name of the transaction split</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Name of the transaction split</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3430,7 +3654,11 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Flag for active</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Flag for active</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3438,9 +3666,13 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
         <tr>
           <td><code>bearer_type</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Bearer" href="../#pypaystack2.utils.Bearer">Bearer</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Bearer">Bearer</span>]</code>
           </td>
-          <td><p>Any value from the Bearer enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the Bearer enum</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3450,9 +3682,13 @@ number of shares: <code>[{subaccount: 'ACT_xxxxxxxxxx', share: xxx},{...}]</code
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Subaccount code of a subaccount in the split group.
+          <td>
+            <div class="doc-md-description">
+              <p>Subaccount code of a subaccount in the split group.
 This should be specified only if the bearer_type
-is <code>Bearer.subaccount</code></p></td>
+is <code>Bearer.subaccount</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3471,9 +3707,13 @@ is <code>Bearer.subaccount</code></p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3544,7 +3784,7 @@ is <code>Bearer.subaccount</code></p></td>
 </span><span id="__span-0-135"><a id="__codelineno-0-135" name="__codelineno-0-135"></a>
 </span><span id="__span-0-136"><a id="__codelineno-0-136" name="__codelineno-0-136"></a>    <span class="k">if</span> <span class="n">bearer_subaccount</span><span class="p">:</span>
 </span><span id="__span-0-137"><a id="__codelineno-0-137" name="__codelineno-0-137"></a>        <span class="k">if</span> <span class="n">bearer_type</span> <span class="o">!=</span> <span class="n">Bearer</span><span class="o">.</span><span class="n">SUB_ACCOUNT</span><span class="p">:</span>
-</span><span id="__span-0-138"><a id="__codelineno-0-138" name="__codelineno-0-138"></a>            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-138"><a id="__codelineno-0-138" name="__codelineno-0-138"></a>            <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-139"><a id="__codelineno-0-139" name="__codelineno-0-139"></a>                <span class="s2">&quot;`bearer_subaccount` can only have a value if `bearer_type` is `Bearer.SUBACCOUNT`&quot;</span>
 </span><span id="__span-0-140"><a id="__codelineno-0-140" name="__codelineno-0-140"></a>            <span class="p">)</span>
 </span><span id="__span-0-141"><a id="__codelineno-0-141" name="__codelineno-0-141"></a>

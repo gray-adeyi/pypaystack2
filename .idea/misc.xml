@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Black">
+    <option name="enabledOnReformat" value="true" />
+    <option name="enabledOnSave" value="true" />
+    <option name="sdkUUID" value="1866d891-4cab-4729-a51d-f4d3705045a5" />
+  </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Poetry (pypaystack2)" project-jdk-type="Python SDK" />
+</project>

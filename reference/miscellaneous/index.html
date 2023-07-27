@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://github.com/gray-adeyi/pypaystack2/reference/miscellaneous/">
       
       <link rel="icon" href="../../assets/pypaystack2.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-8.5.10">
     
     
       
@@ -1220,9 +1220,13 @@ https://paystack.com/docs/api/#miscellaneous</p>
         <tr>
           <td><code>country</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Country" href="../#pypaystack2.utils.Country">Country</a></code>
+                <code><span title="pypaystack2.utils.Country">Country</span></code>
           </td>
-          <td><p>The country from which to obtain the list of supported banks. any value from the <code>Country</code> enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The country from which to obtain the list of supported banks. any value from the <code>Country</code> enum.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1232,7 +1236,11 @@ https://paystack.com/docs/api/#miscellaneous</p>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Flag to enable cursor pagination.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Flag to enable cursor pagination.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1242,7 +1250,11 @@ https://paystack.com/docs/api/#miscellaneous</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A cursor that indicates your place in the list. It can be used to fetch the next page of the list</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A cursor that indicates your place in the list. It can be used to fetch the next page of the list</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1252,8 +1264,12 @@ https://paystack.com/docs/api/#miscellaneous</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A cursor that indicates your place in the list. It should be used
-to fetch the previous page of the list after an intial next request</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A cursor that indicates your place in the list. It should be used
+to fetch the previous page of the list after an intial next request</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1261,9 +1277,13 @@ to fetch the previous page of the list after an intial next request</p></td>
         <tr>
           <td><code>gateway</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Gateway" href="../#pypaystack2.utils.Gateway">Gateway</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Gateway">Gateway</span>]</code>
           </td>
-          <td><p>The gateway type of the bank. Any value from the <code>Gateway</code> enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The gateway type of the bank. Any value from the <code>Gateway</code> enum.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1271,10 +1291,14 @@ to fetch the previous page of the list after an intial next request</p></td>
         <tr>
           <td><code>type</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.BankType" href="../#pypaystack2.utils.BankType">BankType</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.BankType">BankType</span>]</code>
           </td>
-          <td><p>Type of financial channel. For Ghanaian channels, please use either
-mobile_money for mobile money channels OR ghipps for bank channels</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Type of financial channel. For Ghanaian channels, please use either
+mobile_money for mobile money channels OR ghipps for bank channels</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1282,9 +1306,13 @@ mobile_money for mobile money channels OR ghipps for bank channels</p></td>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>Any value from the Currency enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the Currency enum.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1294,7 +1322,11 @@ mobile_money for mobile money channels OR ghipps for bank channels</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>The number of objects to return per page. Defaults to 50, and limited to 100 records per page.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The number of objects to return per page. Defaults to 50, and limited to 100 records per page.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -1313,9 +1345,13 @@ mobile_money for mobile money channels OR ghipps for bank channels</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1440,9 +1476,13 @@ mobile_money for mobile money channels OR ghipps for bank channels</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1506,7 +1546,11 @@ mobile_money for mobile money channels OR ghipps for bank channels</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>A flag to filter for available providers</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A flag to filter for available providers</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1525,9 +1569,13 @@ mobile_money for mobile money channels OR ghipps for bank channels</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1601,9 +1649,13 @@ mobile_money for mobile money channels OR ghipps for bank channels</p></td>
         <tr>
           <td><code>country</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Country" href="../#pypaystack2.utils.Country">Country</a></code>
+                <code><span title="pypaystack2.utils.Country">Country</span></code>
           </td>
-          <td><p>Any value from the country enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the country enum.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1622,9 +1674,13 @@ mobile_money for mobile money channels OR ghipps for bank channels</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1909,9 +1965,13 @@ https://paystack.com/docs/api/#miscellaneous</p>
         <tr>
           <td><code>country</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Country" href="../#pypaystack2.utils.Country">Country</a></code>
+                <code><span title="pypaystack2.utils.Country">Country</span></code>
           </td>
-          <td><p>The country from which to obtain the list of supported banks. any value from the <code>Country</code> enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The country from which to obtain the list of supported banks. any value from the <code>Country</code> enum.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1921,7 +1981,11 @@ https://paystack.com/docs/api/#miscellaneous</p>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Flag to enable cursor pagination.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Flag to enable cursor pagination.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1931,7 +1995,11 @@ https://paystack.com/docs/api/#miscellaneous</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A cursor that indicates your place in the list. It can be used to fetch the next page of the list</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A cursor that indicates your place in the list. It can be used to fetch the next page of the list</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1941,8 +2009,12 @@ https://paystack.com/docs/api/#miscellaneous</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A cursor that indicates your place in the list. It should be used
-to fetch the previous page of the list after an intial next request</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A cursor that indicates your place in the list. It should be used
+to fetch the previous page of the list after an intial next request</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1950,9 +2022,13 @@ to fetch the previous page of the list after an intial next request</p></td>
         <tr>
           <td><code>gateway</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Gateway" href="../#pypaystack2.utils.Gateway">Gateway</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Gateway">Gateway</span>]</code>
           </td>
-          <td><p>The gateway type of the bank. Any value from the <code>Gateway</code> enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The gateway type of the bank. Any value from the <code>Gateway</code> enum.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1960,10 +2036,14 @@ to fetch the previous page of the list after an intial next request</p></td>
         <tr>
           <td><code>type</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.BankType" href="../#pypaystack2.utils.BankType">BankType</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.BankType">BankType</span>]</code>
           </td>
-          <td><p>Type of financial channel. For Ghanaian channels, please use either
-mobile_money for mobile money channels OR ghipps for bank channels</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Type of financial channel. For Ghanaian channels, please use either
+mobile_money for mobile money channels OR ghipps for bank channels</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1971,9 +2051,13 @@ mobile_money for mobile money channels OR ghipps for bank channels</p></td>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>Any value from the Currency enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the Currency enum.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1983,7 +2067,11 @@ mobile_money for mobile money channels OR ghipps for bank channels</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>The number of objects to return per page. Defaults to 50, and limited to 100 records per page.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The number of objects to return per page. Defaults to 50, and limited to 100 records per page.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -2002,9 +2090,13 @@ mobile_money for mobile money channels OR ghipps for bank channels</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2125,9 +2217,13 @@ mobile_money for mobile money channels OR ghipps for bank channels</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2187,7 +2283,11 @@ mobile_money for mobile money channels OR ghipps for bank channels</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>A flag to filter for available providers</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A flag to filter for available providers</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -2206,9 +2306,13 @@ mobile_money for mobile money channels OR ghipps for bank channels</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2278,9 +2382,13 @@ mobile_money for mobile money channels OR ghipps for bank channels</p></td>
         <tr>
           <td><code>country</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Country" href="../#pypaystack2.utils.Country">Country</a></code>
+                <code><span title="pypaystack2.utils.Country">Country</span></code>
           </td>
-          <td><p>Any value from the country enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the country enum.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2299,9 +2407,13 @@ mobile_money for mobile money channels OR ghipps for bank channels</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>

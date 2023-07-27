@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://github.com/gray-adeyi/pypaystack2/reference/subaccounts/">
       
       <link rel="icon" href="../../assets/pypaystack2.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-8.5.10">
     
     
       
@@ -1368,7 +1368,11 @@ https://paystack.com/docs/api/#subaccount</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Name of business for subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Name of business for subaccount</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1378,9 +1382,13 @@ https://paystack.com/docs/api/#subaccount</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Bank Code for the bank. You can get the
+          <td>
+            <div class="doc-md-description">
+              <p>Bank Code for the bank. You can get the
 list of Bank Codes by calling the <code>.get_banks</code>
-method from the Miscellaneous API wrapper</p></td>
+method from the Miscellaneous API wrapper</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1390,7 +1398,11 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Bank Account Number</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Bank Account Number</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1400,7 +1412,11 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code>float</code>
           </td>
-          <td><p>The default percentage charged when receiving on behalf of this subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The default percentage charged when receiving on behalf of this subaccount</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1410,7 +1426,11 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>A description for this subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A description for this subaccount</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1420,7 +1440,11 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A contact email for the subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A contact email for the subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1430,7 +1454,11 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A name for the contact person for this subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A name for the contact person for this subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1440,7 +1468,11 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A phone number to call for this subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A phone number to call for this subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1450,11 +1482,15 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[dict]</code>
           </td>
-          <td><p>Add a custom_fields attribute which has a list of dictionaries if
+          <td>
+            <div class="doc-md-description">
+              <p>Add a custom_fields attribute which has a list of dictionaries if
 you would like the fields to be added to your transaction when
 displayed on the dashboard.
 Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
-"variable_name": "cart_id","value": "8393"}]}</code></p></td>
+"variable_name": "cart_id","value": "8393"}]}</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1473,9 +1509,13 @@ Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1623,7 +1663,11 @@ Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
           <td>
                 <code>str</code>
           </td>
-          <td><p>The subaccount <code>ID</code> or <code>code</code> you want to fetch</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The subaccount <code>ID</code> or <code>code</code> you want to fetch</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1642,9 +1686,13 @@ Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1714,7 +1762,11 @@ Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
           <td>
                 <code>str</code>
           </td>
-          <td><p>A timestamp from which to start listing subaccounts e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing subaccounts e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1724,7 +1776,11 @@ Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
           <td>
                 <code>str</code>
           </td>
-          <td><p>A timestamp at which to stop listing subaccounts e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp at which to stop listing subaccounts e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1734,7 +1790,11 @@ Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies exactly what page you want to retrieve. If not specified we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies exactly what page you want to retrieve. If not specified we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -1744,8 +1804,12 @@ Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies how many records you want to retrieve per page.
-If not specified we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies how many records you want to retrieve per page.
+If not specified we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -1764,9 +1828,13 @@ If not specified we use a default value of 50.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1858,7 +1926,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Subaccount's ID or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Subaccount's ID or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1868,7 +1940,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Name of business for subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Name of business for subaccount</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1878,9 +1954,13 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Bank Code for the bank. You can get the
+          <td>
+            <div class="doc-md-description">
+              <p>Bank Code for the bank. You can get the
 list of Bank Codes by calling the <code>.get_banks</code>
-method from the Miscellaneous API wrapper</p></td>
+method from the Miscellaneous API wrapper</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1890,7 +1970,11 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Bank Account Number</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Bank Account Number</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1900,7 +1984,11 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Activate or deactivate a subaccount.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Activate or deactivate a subaccount.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1910,8 +1998,12 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[float]</code>
           </td>
-          <td><p>The default percentage charged when
-receiving on behalf of this subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The default percentage charged when
+receiving on behalf of this subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1921,7 +2013,11 @@ receiving on behalf of this subaccount</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A description for this subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A description for this subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1931,7 +2027,11 @@ receiving on behalf of this subaccount</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A contact email for the subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A contact email for the subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1941,7 +2041,11 @@ receiving on behalf of this subaccount</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A name for the contact person for this subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A name for the contact person for this subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1951,7 +2055,11 @@ receiving on behalf of this subaccount</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A phone number to call for this subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A phone number to call for this subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1959,11 +2067,15 @@ receiving on behalf of this subaccount</p></td>
         <tr>
           <td><code>settlement_schedule</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Schedule" href="../#pypaystack2.utils.Schedule">Schedule</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Schedule">Schedule</span>]</code>
           </td>
-          <td><p><code>Schedule.AUTO</code> means payout is T+1 and manual means payout to the
+          <td>
+            <div class="doc-md-description">
+              <p><code>Schedule.AUTO</code> means payout is T+1 and manual means payout to the
 subaccount should only be made when requested.
-Defaults to <code>Schedule.AUTO</code></p></td>
+Defaults to <code>Schedule.AUTO</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1973,10 +2085,14 @@ Defaults to <code>Schedule.AUTO</code></p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[dict]</code>
           </td>
-          <td><p>Add a custom_fields attribute which has a list of dictionaries if you would
+          <td>
+            <div class="doc-md-description">
+              <p>Add a custom_fields attribute which has a list of dictionaries if you would
 like the fields to be added to your transaction when displayed on the
 dashboard. Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
-"variable_name": "cart_id","value": "8393"}]}</code></p></td>
+"variable_name": "cart_id","value": "8393"}]}</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1995,9 +2111,13 @@ dashboard. Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2530,7 +2650,11 @@ https://paystack.com/docs/api/#subaccount</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Name of business for subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Name of business for subaccount</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2540,9 +2664,13 @@ https://paystack.com/docs/api/#subaccount</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Bank Code for the bank. You can get the
+          <td>
+            <div class="doc-md-description">
+              <p>Bank Code for the bank. You can get the
 list of Bank Codes by calling the <code>.get_banks</code>
-method from the Miscellaneous API wrapper</p></td>
+method from the Miscellaneous API wrapper</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2552,7 +2680,11 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Bank Account Number</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Bank Account Number</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2562,7 +2694,11 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code>float</code>
           </td>
-          <td><p>The default percentage charged when receiving on behalf of this subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The default percentage charged when receiving on behalf of this subaccount</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2572,7 +2708,11 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A description for this subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A description for this subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2582,7 +2722,11 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A contact email for the subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A contact email for the subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2592,7 +2736,11 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A name for the contact person for this subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A name for the contact person for this subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2602,7 +2750,11 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A phone number to call for this subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A phone number to call for this subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2612,11 +2764,15 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[dict]</code>
           </td>
-          <td><p>Add a custom_fields attribute which has a list of dictionaries if
+          <td>
+            <div class="doc-md-description">
+              <p>Add a custom_fields attribute which has a list of dictionaries if
 you would like the fields to be added to your transaction when
 displayed on the dashboard.
 Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
-"variable_name": "cart_id","value": "8393"}]}</code></p></td>
+"variable_name": "cart_id","value": "8393"}]}</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2635,9 +2791,13 @@ Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2781,7 +2941,11 @@ Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
           <td>
                 <code>str</code>
           </td>
-          <td><p>The subaccount <code>ID</code> or <code>code</code> you want to fetch</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The subaccount <code>ID</code> or <code>code</code> you want to fetch</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2800,9 +2964,13 @@ Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2868,7 +3036,11 @@ Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
           <td>
                 <code>str</code>
           </td>
-          <td><p>A timestamp from which to start listing subaccounts e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing subaccounts e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2878,7 +3050,11 @@ Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
           <td>
                 <code>str</code>
           </td>
-          <td><p>A timestamp at which to stop listing subaccounts e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp at which to stop listing subaccounts e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2888,7 +3064,11 @@ Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies exactly what page you want to retrieve. If not specified we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies exactly what page you want to retrieve. If not specified we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -2898,8 +3078,12 @@ Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies how many records you want to retrieve per page.
-If not specified we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies how many records you want to retrieve per page.
+If not specified we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -2918,9 +3102,13 @@ If not specified we use a default value of 50.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3008,7 +3196,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Subaccount's ID or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Subaccount's ID or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3018,7 +3210,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Name of business for subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Name of business for subaccount</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3028,9 +3224,13 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Bank Code for the bank. You can get the
+          <td>
+            <div class="doc-md-description">
+              <p>Bank Code for the bank. You can get the
 list of Bank Codes by calling the <code>.get_banks</code>
-method from the Miscellaneous API wrapper</p></td>
+method from the Miscellaneous API wrapper</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3040,7 +3240,11 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Bank Account Number</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Bank Account Number</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3050,7 +3254,11 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Activate or deactivate a subaccount.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Activate or deactivate a subaccount.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3060,8 +3268,12 @@ method from the Miscellaneous API wrapper</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[float]</code>
           </td>
-          <td><p>The default percentage charged when
-receiving on behalf of this subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The default percentage charged when
+receiving on behalf of this subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3071,7 +3283,11 @@ receiving on behalf of this subaccount</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A description for this subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A description for this subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3081,7 +3297,11 @@ receiving on behalf of this subaccount</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A contact email for the subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A contact email for the subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3091,7 +3311,11 @@ receiving on behalf of this subaccount</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A name for the contact person for this subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A name for the contact person for this subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3101,7 +3325,11 @@ receiving on behalf of this subaccount</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A phone number to call for this subaccount</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A phone number to call for this subaccount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3109,11 +3337,15 @@ receiving on behalf of this subaccount</p></td>
         <tr>
           <td><code>settlement_schedule</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Schedule" href="../#pypaystack2.utils.Schedule">Schedule</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Schedule">Schedule</span>]</code>
           </td>
-          <td><p><code>Schedule.AUTO</code> means payout is T+1 and manual means payout to the
+          <td>
+            <div class="doc-md-description">
+              <p><code>Schedule.AUTO</code> means payout is T+1 and manual means payout to the
 subaccount should only be made when requested.
-Defaults to <code>Schedule.AUTO</code></p></td>
+Defaults to <code>Schedule.AUTO</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3123,10 +3355,14 @@ Defaults to <code>Schedule.AUTO</code></p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[dict]</code>
           </td>
-          <td><p>Add a custom_fields attribute which has a list of dictionaries if you would
+          <td>
+            <div class="doc-md-description">
+              <p>Add a custom_fields attribute which has a list of dictionaries if you would
 like the fields to be added to your transaction when displayed on the
 dashboard. Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
-"variable_name": "cart_id","value": "8393"}]}</code></p></td>
+"variable_name": "cart_id","value": "8393"}]}</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3145,9 +3381,13 @@ dashboard. Sample: <code>{"custom_fields":[{"display_name":"Cart ID",
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>

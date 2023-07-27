@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://github.com/gray-adeyi/pypaystack2/reference/plans/">
       
       <link rel="icon" href="../../assets/pypaystack2.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-8.5.10">
     
     
       
@@ -1364,7 +1364,11 @@ https://paystack.com/docs/api/#plan</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Name of plan</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Name of plan</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1374,8 +1378,12 @@ https://paystack.com/docs/api/#plan</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Amount should be in kobo if currency is <code>Currency.NGN</code>, pesewas,
-if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Currency.ZAR</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Amount should be in kobo if currency is <code>Currency.NGN</code>, pesewas,
+if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Currency.ZAR</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1383,9 +1391,13 @@ if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Curren
         <tr>
           <td><code>interval</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Interval" href="../#pypaystack2.utils.Interval">Interval</a></code>
+                <code><span title="pypaystack2.utils.Interval">Interval</span></code>
           </td>
-          <td><p>Any value from the <code>Interval</code> enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Interval</code> enum.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1395,7 +1407,11 @@ if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Curren
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A description for this plan</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A description for this plan</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1403,10 +1419,14 @@ if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Curren
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>Currency in which amount is set. Any of the value from
-the <code>Currency</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Currency in which amount is set. Any of the value from
+the <code>Currency</code> enum</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1416,8 +1436,12 @@ the <code>Currency</code> enum</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of invoices to raise during subscription to this plan.
-Can be overridden by specifying an <code>invoice_limit</code> while subscribing</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of invoices to raise during subscription to this plan.
+Can be overridden by specifying an <code>invoice_limit</code> while subscribing</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1427,7 +1451,11 @@ Can be overridden by specifying an <code>invoice_limit</code> while subscribing<
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Set to <code>False</code> if you don't want invoices to be sent to your customers</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Set to <code>False</code> if you don't want invoices to be sent to your customers</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1437,7 +1465,11 @@ Can be overridden by specifying an <code>invoice_limit</code> while subscribing<
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Set to <code>False</code> if you don't want text messages to be sent to your customers</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Set to <code>False</code> if you don't want text messages to be sent to your customers</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1456,9 +1488,13 @@ Can be overridden by specifying an <code>invoice_limit</code> while subscribing<
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1602,7 +1638,11 @@ Can be overridden by specifying an <code>invoice_limit</code> while subscribing<
           <td>
                 <code>str</code>
           </td>
-          <td><p>The plan <code>ID</code> or <code>code</code> you want to fetch</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The plan <code>ID</code> or <code>code</code> you want to fetch</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1621,9 +1661,13 @@ Can be overridden by specifying an <code>invoice_limit</code> while subscribing<
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1691,8 +1735,12 @@ Can be overridden by specifying an <code>invoice_limit</code> while subscribing<
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies exactly what page you want to retrieve.
-If not specified we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies exactly what page you want to retrieve.
+If not specified we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -1702,8 +1750,12 @@ If not specified we use a default value of 1.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies how many records you want to retrieve per page.
-If not specified we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies how many records you want to retrieve per page.
+If not specified we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -1711,9 +1763,13 @@ If not specified we use a default value of 50.</p></td>
         <tr>
           <td><code>status</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Status" href="../#pypaystack2.utils.Status">Status</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Status">Status</span>]</code>
           </td>
-          <td><p>Filter list by plans with specified status</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Filter list by plans with specified status</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1721,9 +1777,13 @@ If not specified we use a default value of 50.</p></td>
         <tr>
           <td><code>interval</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Interval" href="../#pypaystack2.utils.Interval">Interval</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Interval">Interval</span>]</code>
           </td>
-          <td><p>Filter list by plans with specified interval</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Filter list by plans with specified interval</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1733,9 +1793,13 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Filter list by plans with specified amount ( kobo if currency
+          <td>
+            <div class="doc-md-description">
+              <p>Filter list by plans with specified amount ( kobo if currency
 is <code>Currency.NGN</code>, pesewas, if currency is <code>Currency.GHS</code>,
-and cents, if currency is <code>Currency.ZAR</code>)</p></td>
+and cents, if currency is <code>Currency.ZAR</code>)</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1754,9 +1818,13 @@ and cents, if currency is <code>Currency.ZAR</code>)</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1875,7 +1943,11 @@ and cents, if currency is <code>Currency.ZAR</code>)</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Plan's ID or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Plan's ID or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1885,7 +1957,11 @@ and cents, if currency is <code>Currency.ZAR</code>)</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Name of plan</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Name of plan</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1895,8 +1971,12 @@ and cents, if currency is <code>Currency.ZAR</code>)</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Amount should be in kobo if currency is
-<code>Currency.NGN</code> and pesewas for <code>Currency.GHS</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Amount should be in kobo if currency is
+<code>Currency.NGN</code> and pesewas for <code>Currency.GHS</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1904,9 +1984,13 @@ and cents, if currency is <code>Currency.ZAR</code>)</p></td>
         <tr>
           <td><code>interval</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Interval" href="../#pypaystack2.utils.Interval">Interval</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Interval">Interval</span>]</code>
           </td>
-          <td><p>Any value from the <code>Interval</code> enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Interval</code> enum.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1916,7 +2000,11 @@ and cents, if currency is <code>Currency.ZAR</code>)</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A description for this plan.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A description for this plan.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1924,9 +2012,13 @@ and cents, if currency is <code>Currency.ZAR</code>)</p></td>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>Any value from the <code>Currency</code> enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Currency</code> enum.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1936,8 +2028,12 @@ and cents, if currency is <code>Currency.ZAR</code>)</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of invoices to raise during subscription to this plan.
-Can be overridden by specifying an <code>invoice_limit</code> while subscribing.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of invoices to raise during subscription to this plan.
+Can be overridden by specifying an <code>invoice_limit</code> while subscribing.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1947,8 +2043,12 @@ Can be overridden by specifying an <code>invoice_limit</code> while subscribing.
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Set to <code>False</code> if you don't want invoices
-to be sent to your customers</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Set to <code>False</code> if you don't want invoices
+to be sent to your customers</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1958,8 +2058,12 @@ to be sent to your customers</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Set to <code>False</code> if you don't want text messages to
-be sent to your customers</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Set to <code>False</code> if you don't want text messages to
+be sent to your customers</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1978,9 +2082,13 @@ be sent to your customers</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2489,7 +2597,11 @@ https://paystack.com/docs/api/#plan</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Name of plan</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Name of plan</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2499,8 +2611,12 @@ https://paystack.com/docs/api/#plan</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Amount should be in kobo if currency is <code>Currency.NGN</code>, pesewas,
-if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Currency.ZAR</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Amount should be in kobo if currency is <code>Currency.NGN</code>, pesewas,
+if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Currency.ZAR</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2508,9 +2624,13 @@ if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Curren
         <tr>
           <td><code>interval</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Interval" href="../#pypaystack2.utils.Interval">Interval</a></code>
+                <code><span title="pypaystack2.utils.Interval">Interval</span></code>
           </td>
-          <td><p>Any value from the <code>Interval</code> enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Interval</code> enum.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2520,7 +2640,11 @@ if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Curren
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A description for this plan</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A description for this plan</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2528,10 +2652,14 @@ if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Curren
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>Currency in which amount is set. Any of the value from
-the <code>Currency</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Currency in which amount is set. Any of the value from
+the <code>Currency</code> enum</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2541,8 +2669,12 @@ the <code>Currency</code> enum</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of invoices to raise during subscription to this plan.
-Can be overridden by specifying an <code>invoice_limit</code> while subscribing</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of invoices to raise during subscription to this plan.
+Can be overridden by specifying an <code>invoice_limit</code> while subscribing</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2552,7 +2684,11 @@ Can be overridden by specifying an <code>invoice_limit</code> while subscribing<
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Set to <code>False</code> if you don't want invoices to be sent to your customers</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Set to <code>False</code> if you don't want invoices to be sent to your customers</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -2562,7 +2698,11 @@ Can be overridden by specifying an <code>invoice_limit</code> while subscribing<
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Set to <code>False</code> if you don't want text messages to be sent to your customers</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Set to <code>False</code> if you don't want text messages to be sent to your customers</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -2581,9 +2721,13 @@ Can be overridden by specifying an <code>invoice_limit</code> while subscribing<
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2723,7 +2867,11 @@ Can be overridden by specifying an <code>invoice_limit</code> while subscribing<
           <td>
                 <code>str</code>
           </td>
-          <td><p>The plan <code>ID</code> or <code>code</code> you want to fetch</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The plan <code>ID</code> or <code>code</code> you want to fetch</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2742,9 +2890,13 @@ Can be overridden by specifying an <code>invoice_limit</code> while subscribing<
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2808,8 +2960,12 @@ Can be overridden by specifying an <code>invoice_limit</code> while subscribing<
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies exactly what page you want to retrieve.
-If not specified, we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies exactly what page you want to retrieve.
+If not specified, we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -2819,8 +2975,12 @@ If not specified, we use a default value of 1.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies how many records you want to retrieve per page.
-If not specified, we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies how many records you want to retrieve per page.
+If not specified, we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -2828,9 +2988,13 @@ If not specified, we use a default value of 50.</p></td>
         <tr>
           <td><code>status</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Status" href="../#pypaystack2.utils.Status">Status</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Status">Status</span>]</code>
           </td>
-          <td><p>Filter list by plans with specified status</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Filter list by plans with specified status</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2838,9 +3002,13 @@ If not specified, we use a default value of 50.</p></td>
         <tr>
           <td><code>interval</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Interval" href="../#pypaystack2.utils.Interval">Interval</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Interval">Interval</span>]</code>
           </td>
-          <td><p>Filter list by plans with specified interval</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Filter list by plans with specified interval</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2850,9 +3018,13 @@ If not specified, we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Filter list by plans with specified amount ( kobo if currency
+          <td>
+            <div class="doc-md-description">
+              <p>Filter list by plans with specified amount ( kobo if currency
 is <code>Currency.NGN</code>, pesewas, if currency is <code>Currency.GHS</code>,
-and cents, if currency is <code>Currency.ZAR</code>)</p></td>
+and cents, if currency is <code>Currency.ZAR</code>)</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2871,9 +3043,13 @@ and cents, if currency is <code>Currency.ZAR</code>)</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2988,7 +3164,11 @@ and cents, if currency is <code>Currency.ZAR</code>)</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Plan's ID or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Plan's ID or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2998,7 +3178,11 @@ and cents, if currency is <code>Currency.ZAR</code>)</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Name of plan</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Name of plan</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3008,8 +3192,12 @@ and cents, if currency is <code>Currency.ZAR</code>)</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Amount should be in kobo if currency is
-<code>Currency.NGN</code> and pesewas for <code>Currency.GHS</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Amount should be in kobo if currency is
+<code>Currency.NGN</code> and pesewas for <code>Currency.GHS</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3017,9 +3205,13 @@ and cents, if currency is <code>Currency.ZAR</code>)</p></td>
         <tr>
           <td><code>interval</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Interval" href="../#pypaystack2.utils.Interval">Interval</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Interval">Interval</span>]</code>
           </td>
-          <td><p>Any value from the <code>Interval</code> enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Interval</code> enum.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3029,7 +3221,11 @@ and cents, if currency is <code>Currency.ZAR</code>)</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A description for this plan.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A description for this plan.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3037,9 +3233,13 @@ and cents, if currency is <code>Currency.ZAR</code>)</p></td>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>Any value from the <code>Currency</code> enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Currency</code> enum.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3049,8 +3249,12 @@ and cents, if currency is <code>Currency.ZAR</code>)</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of invoices to raise during subscription to this plan.
-Can be overridden by specifying an <code>invoice_limit</code> while subscribing.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of invoices to raise during subscription to this plan.
+Can be overridden by specifying an <code>invoice_limit</code> while subscribing.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3060,8 +3264,12 @@ Can be overridden by specifying an <code>invoice_limit</code> while subscribing.
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Set to <code>False</code> if you don't want invoices
-to be sent to your customers</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Set to <code>False</code> if you don't want invoices
+to be sent to your customers</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -3071,8 +3279,12 @@ to be sent to your customers</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Set to <code>False</code> if you don't want text messages to
-be sent to your customers</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Set to <code>False</code> if you don't want text messages to
+be sent to your customers</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -3091,9 +3303,13 @@ be sent to your customers</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>

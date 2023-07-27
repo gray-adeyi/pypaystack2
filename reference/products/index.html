@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://github.com/gray-adeyi/pypaystack2/reference/products/">
       
       <link rel="icon" href="../../assets/pypaystack2.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-8.5.10">
     
     
       
@@ -1178,7 +1178,7 @@ https://paystack.com/docs/api/#product</p>
 </span><span id="__span-0-194"><a id="__codelineno-0-194" name="__codelineno-0-194"></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="__span-0-195"><a id="__codelineno-0-195" name="__codelineno-0-195"></a>
 </span><span id="__span-0-196"><a id="__codelineno-0-196" name="__codelineno-0-196"></a>        <span class="k">if</span> <span class="n">unlimited</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">quantity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-197"><a id="__codelineno-0-197" name="__codelineno-0-197"></a>            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-197"><a id="__codelineno-0-197" name="__codelineno-0-197"></a>            <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-198"><a id="__codelineno-0-198" name="__codelineno-0-198"></a>                <span class="s2">&quot;You can&#39;t have unlimited set to True and have a quantity value.&quot;</span>
 </span><span id="__span-0-199"><a id="__codelineno-0-199" name="__codelineno-0-199"></a>            <span class="p">)</span>
 </span><span id="__span-0-200"><a id="__codelineno-0-200" name="__codelineno-0-200"></a>
@@ -1271,7 +1271,7 @@ https://paystack.com/docs/api/#product</p>
 </span><span id="__span-0-287"><a id="__codelineno-0-287" name="__codelineno-0-287"></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="__span-0-288"><a id="__codelineno-0-288" name="__codelineno-0-288"></a>
 </span><span id="__span-0-289"><a id="__codelineno-0-289" name="__codelineno-0-289"></a>        <span class="k">if</span> <span class="n">unlimited</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">quantity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-290"><a id="__codelineno-0-290" name="__codelineno-0-290"></a>            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-290"><a id="__codelineno-0-290" name="__codelineno-0-290"></a>            <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-291"><a id="__codelineno-0-291" name="__codelineno-0-291"></a>                <span class="s2">&quot;You can&#39;t have unlimited set to True and quantity have a value.&quot;</span>
 </span><span id="__span-0-292"><a id="__codelineno-0-292" name="__codelineno-0-292"></a>            <span class="p">)</span>
 </span><span id="__span-0-293"><a id="__codelineno-0-293" name="__codelineno-0-293"></a>        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/product/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -1336,7 +1336,11 @@ https://paystack.com/docs/api/#product</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Name of product</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Name of product</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1346,7 +1350,11 @@ https://paystack.com/docs/api/#product</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>A description for this product</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A description for this product</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1356,8 +1364,12 @@ https://paystack.com/docs/api/#product</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Price should be in kobo if currency is <code>Currency.NGN</code>, pesewas,
-if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Currency.ZAR</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Price should be in kobo if currency is <code>Currency.NGN</code>, pesewas,
+if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Currency.ZAR</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1365,9 +1377,13 @@ if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Curren
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a></code>
+                <code><span title="pypaystack2.utils.Currency">Currency</span></code>
           </td>
-          <td><p>Any value from the <code>Currency</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Currency</code> enum</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1377,8 +1393,12 @@ if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Curren
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Set to <code>True</code> if the product has unlimited stock.
-Leave as <code>False</code> if the product has limited stock</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Set to <code>True</code> if the product has unlimited stock.
+Leave as <code>False</code> if the product has limited stock</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1388,7 +1408,11 @@ Leave as <code>False</code> if the product has limited stock</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of products in stock. Use if unlimited is <code>False</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of products in stock. Use if unlimited is <code>False</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1407,9 +1431,13 @@ Leave as <code>False</code> if the product has limited stock</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1425,9 +1453,13 @@ Leave as <code>False</code> if the product has limited stock</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.errors.InvalidDataError" href="../#pypaystack2.errors.InvalidDataError">InvalidDataError</a></code>
+                <code>InvalidDataError</code>
           </td>
-          <td><p>When unlimited is set to True and quantity has a value.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>When unlimited is set to True and quantity has a value.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1509,7 +1541,7 @@ Leave as <code>False</code> if the product has limited stock</p></td>
 </span><span id="__span-0-194"><a id="__codelineno-0-194" name="__codelineno-0-194"></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="__span-0-195"><a id="__codelineno-0-195" name="__codelineno-0-195"></a>
 </span><span id="__span-0-196"><a id="__codelineno-0-196" name="__codelineno-0-196"></a>    <span class="k">if</span> <span class="n">unlimited</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">quantity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-197"><a id="__codelineno-0-197" name="__codelineno-0-197"></a>        <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-197"><a id="__codelineno-0-197" name="__codelineno-0-197"></a>        <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-198"><a id="__codelineno-0-198" name="__codelineno-0-198"></a>            <span class="s2">&quot;You can&#39;t have unlimited set to True and have a quantity value.&quot;</span>
 </span><span id="__span-0-199"><a id="__codelineno-0-199" name="__codelineno-0-199"></a>        <span class="p">)</span>
 </span><span id="__span-0-200"><a id="__codelineno-0-200" name="__codelineno-0-200"></a>
@@ -1567,7 +1599,11 @@ Leave as <code>False</code> if the product has limited stock</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>The product <code>ID</code> you want to fetch</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The product <code>ID</code> you want to fetch</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1586,9 +1622,13 @@ Leave as <code>False</code> if the product has limited stock</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1658,8 +1698,12 @@ Leave as <code>False</code> if the product has limited stock</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies exactly what page you want to retrieve.
-If not specified we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies exactly what page you want to retrieve.
+If not specified we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -1669,8 +1713,12 @@ If not specified we use a default value of 1.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies how many records you want to retrieve per page.
-If not specified we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies how many records you want to retrieve per page.
+If not specified we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -1680,7 +1728,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp from which to start listing product e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing product e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1690,7 +1742,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>timestamp at which to stop listing product e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>timestamp at which to stop listing product e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1709,9 +1765,13 @@ If not specified we use a default value of 50.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1815,7 +1875,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Product ID</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Product ID</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1825,7 +1889,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Name of product</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Name of product</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1835,7 +1903,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>A description for this product</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A description for this product</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1845,8 +1917,12 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Price should be in kobo if currency is <code>Currency.NGN</code>, pesewas,
-if currency is GHS, and cents, if currency is <code>Currency.ZAR</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Price should be in kobo if currency is <code>Currency.NGN</code>, pesewas,
+if currency is GHS, and cents, if currency is <code>Currency.ZAR</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1854,9 +1930,13 @@ if currency is GHS, and cents, if currency is <code>Currency.ZAR</code></p></td>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a></code>
+                <code><span title="pypaystack2.utils.Currency">Currency</span></code>
           </td>
-          <td><p>Any value from the <code>Currency</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Currency</code> enum</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1866,8 +1946,12 @@ if currency is GHS, and cents, if currency is <code>Currency.ZAR</code></p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Set to <code>True</code> if the product has unlimited stock.
-Leave as <code>False</code> if the product has limited stock</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Set to <code>True</code> if the product has unlimited stock.
+Leave as <code>False</code> if the product has limited stock</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1877,7 +1961,11 @@ Leave as <code>False</code> if the product has limited stock</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of products in stock. Use if unlimited is <code>False</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of products in stock. Use if unlimited is <code>False</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1896,9 +1984,13 @@ Leave as <code>False</code> if the product has limited stock</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1914,9 +2006,13 @@ Leave as <code>False</code> if the product has limited stock</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.errors.InvalidDataError" href="../#pypaystack2.errors.InvalidDataError">InvalidDataError</a></code>
+                <code>InvalidDataError</code>
           </td>
-          <td><p>When unlimited is set to True and quantity has a value.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>When unlimited is set to True and quantity has a value.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2000,7 +2096,7 @@ Leave as <code>False</code> if the product has limited stock</p></td>
 </span><span id="__span-0-287"><a id="__codelineno-0-287" name="__codelineno-0-287"></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="__span-0-288"><a id="__codelineno-0-288" name="__codelineno-0-288"></a>
 </span><span id="__span-0-289"><a id="__codelineno-0-289" name="__codelineno-0-289"></a>    <span class="k">if</span> <span class="n">unlimited</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">quantity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-290"><a id="__codelineno-0-290" name="__codelineno-0-290"></a>        <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-290"><a id="__codelineno-0-290" name="__codelineno-0-290"></a>        <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-291"><a id="__codelineno-0-291" name="__codelineno-0-291"></a>            <span class="s2">&quot;You can&#39;t have unlimited set to True and quantity have a value.&quot;</span>
 </span><span id="__span-0-292"><a id="__codelineno-0-292" name="__codelineno-0-292"></a>        <span class="p">)</span>
 </span><span id="__span-0-293"><a id="__codelineno-0-293" name="__codelineno-0-293"></a>    <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/product/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -2233,7 +2329,7 @@ https://paystack.com/docs/api/#product</p>
 </span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47"></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48"></a>
 </span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49"></a>        <span class="k">if</span> <span class="n">unlimited</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">quantity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50"></a>            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50"></a>            <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51"></a>                <span class="s2">&quot;You can&#39;t have unlimited set to True and have a quantity value.&quot;</span>
 </span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52"></a>            <span class="p">)</span>
 </span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53"></a>
@@ -2326,7 +2422,7 @@ https://paystack.com/docs/api/#product</p>
 </span><span id="__span-0-140"><a id="__codelineno-0-140" name="__codelineno-0-140"></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="__span-0-141"><a id="__codelineno-0-141" name="__codelineno-0-141"></a>
 </span><span id="__span-0-142"><a id="__codelineno-0-142" name="__codelineno-0-142"></a>        <span class="k">if</span> <span class="n">unlimited</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">quantity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-143"><a id="__codelineno-0-143" name="__codelineno-0-143"></a>            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-143"><a id="__codelineno-0-143" name="__codelineno-0-143"></a>            <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-144"><a id="__codelineno-0-144" name="__codelineno-0-144"></a>                <span class="s2">&quot;You can&#39;t have unlimited set to True and quantity have a value.&quot;</span>
 </span><span id="__span-0-145"><a id="__codelineno-0-145" name="__codelineno-0-145"></a>            <span class="p">)</span>
 </span><span id="__span-0-146"><a id="__codelineno-0-146" name="__codelineno-0-146"></a>        <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/product/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -2387,7 +2483,11 @@ https://paystack.com/docs/api/#product</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Name of product</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Name of product</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2397,7 +2497,11 @@ https://paystack.com/docs/api/#product</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>A description for this product</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A description for this product</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2407,8 +2511,12 @@ https://paystack.com/docs/api/#product</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Price should be in kobo if currency is <code>Currency.NGN</code>, pesewas,
-if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Currency.ZAR</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Price should be in kobo if currency is <code>Currency.NGN</code>, pesewas,
+if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Currency.ZAR</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2416,9 +2524,13 @@ if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Curren
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a></code>
+                <code><span title="pypaystack2.utils.Currency">Currency</span></code>
           </td>
-          <td><p>Any value from the <code>Currency</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Currency</code> enum</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2428,8 +2540,12 @@ if currency is <code>Currency.GHS</code>, and cents, if currency is <code>Curren
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Set to <code>True</code> if the product has unlimited stock.
-Leave as <code>False</code> if the product has limited stock</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Set to <code>True</code> if the product has unlimited stock.
+Leave as <code>False</code> if the product has limited stock</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2439,7 +2555,11 @@ Leave as <code>False</code> if the product has limited stock</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of products in stock. Use if unlimited is <code>False</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of products in stock. Use if unlimited is <code>False</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2458,9 +2578,13 @@ Leave as <code>False</code> if the product has limited stock</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2476,9 +2600,13 @@ Leave as <code>False</code> if the product has limited stock</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.errors.InvalidDataError" href="../#pypaystack2.errors.InvalidDataError">InvalidDataError</a></code>
+                <code>InvalidDataError</code>
           </td>
-          <td><p>When unlimited is set to True and quantity has a value.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>When unlimited is set to True and quantity has a value.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2560,7 +2688,7 @@ Leave as <code>False</code> if the product has limited stock</p></td>
 </span><span id="__span-0-47"><a id="__codelineno-0-47" name="__codelineno-0-47"></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="__span-0-48"><a id="__codelineno-0-48" name="__codelineno-0-48"></a>
 </span><span id="__span-0-49"><a id="__codelineno-0-49" name="__codelineno-0-49"></a>    <span class="k">if</span> <span class="n">unlimited</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">quantity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50"></a>        <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-50"><a id="__codelineno-0-50" name="__codelineno-0-50"></a>        <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-51"><a id="__codelineno-0-51" name="__codelineno-0-51"></a>            <span class="s2">&quot;You can&#39;t have unlimited set to True and have a quantity value.&quot;</span>
 </span><span id="__span-0-52"><a id="__codelineno-0-52" name="__codelineno-0-52"></a>        <span class="p">)</span>
 </span><span id="__span-0-53"><a id="__codelineno-0-53" name="__codelineno-0-53"></a>
@@ -2614,7 +2742,11 @@ Leave as <code>False</code> if the product has limited stock</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>The product <code>ID</code> you want to fetch</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The product <code>ID</code> you want to fetch</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2633,9 +2765,13 @@ Leave as <code>False</code> if the product has limited stock</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2701,8 +2837,12 @@ Leave as <code>False</code> if the product has limited stock</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies exactly what page you want to retrieve.
-If not specified we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies exactly what page you want to retrieve.
+If not specified we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -2712,8 +2852,12 @@ If not specified we use a default value of 1.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies how many records you want to retrieve per page.
-If not specified we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies how many records you want to retrieve per page.
+If not specified we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -2723,7 +2867,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp from which to start listing product e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing product e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2733,7 +2881,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>timestamp at which to stop listing product e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>timestamp at which to stop listing product e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2752,9 +2904,13 @@ If not specified we use a default value of 50.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2854,7 +3010,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Product ID</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Product ID</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2864,7 +3024,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Name of product</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Name of product</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2874,7 +3038,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>A description for this product</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A description for this product</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2884,8 +3052,12 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Price should be in kobo if currency is <code>Currency.NGN</code>, pesewas,
-if currency is GHS, and cents, if currency is <code>Currency.ZAR</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Price should be in kobo if currency is <code>Currency.NGN</code>, pesewas,
+if currency is GHS, and cents, if currency is <code>Currency.ZAR</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2893,9 +3065,13 @@ if currency is GHS, and cents, if currency is <code>Currency.ZAR</code></p></td>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a></code>
+                <code><span title="pypaystack2.utils.Currency">Currency</span></code>
           </td>
-          <td><p>Any value from the <code>Currency</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Currency</code> enum</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2905,8 +3081,12 @@ if currency is GHS, and cents, if currency is <code>Currency.ZAR</code></p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Set to <code>True</code> if the product has unlimited stock.
-Leave as <code>False</code> if the product has limited stock</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Set to <code>True</code> if the product has unlimited stock.
+Leave as <code>False</code> if the product has limited stock</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2916,7 +3096,11 @@ Leave as <code>False</code> if the product has limited stock</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of products in stock. Use if unlimited is <code>False</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of products in stock. Use if unlimited is <code>False</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2935,9 +3119,13 @@ Leave as <code>False</code> if the product has limited stock</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2953,9 +3141,13 @@ Leave as <code>False</code> if the product has limited stock</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.errors.InvalidDataError" href="../#pypaystack2.errors.InvalidDataError">InvalidDataError</a></code>
+                <code>InvalidDataError</code>
           </td>
-          <td><p>When unlimited is set to True and quantity has a value.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>When unlimited is set to True and quantity has a value.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3039,7 +3231,7 @@ Leave as <code>False</code> if the product has limited stock</p></td>
 </span><span id="__span-0-140"><a id="__codelineno-0-140" name="__codelineno-0-140"></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="__span-0-141"><a id="__codelineno-0-141" name="__codelineno-0-141"></a>
 </span><span id="__span-0-142"><a id="__codelineno-0-142" name="__codelineno-0-142"></a>    <span class="k">if</span> <span class="n">unlimited</span> <span class="ow">is</span> <span class="kc">True</span> <span class="ow">and</span> <span class="n">quantity</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-143"><a id="__codelineno-0-143" name="__codelineno-0-143"></a>        <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-143"><a id="__codelineno-0-143" name="__codelineno-0-143"></a>        <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-144"><a id="__codelineno-0-144" name="__codelineno-0-144"></a>            <span class="s2">&quot;You can&#39;t have unlimited set to True and quantity have a value.&quot;</span>
 </span><span id="__span-0-145"><a id="__codelineno-0-145" name="__codelineno-0-145"></a>        <span class="p">)</span>
 </span><span id="__span-0-146"><a id="__codelineno-0-146" name="__codelineno-0-146"></a>    <span class="n">url</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_url</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;/product/</span><span class="si">{</span><span class="nb">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>

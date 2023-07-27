@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://github.com/gray-adeyi/pypaystack2/reference/verification/">
       
       <link rel="icon" href="../../assets/pypaystack2.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-8.5.10">
     
     
       
@@ -1199,7 +1199,11 @@ https://paystack.com/docs/api/#verification</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Account Number</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Account Number</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1209,8 +1213,12 @@ https://paystack.com/docs/api/#verification</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>You can get the list of bank codes by calling the
-Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>You can get the list of bank codes by calling the
+Miscellaneous API wrapper <code>.get_banks</code> method.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1229,9 +1237,13 @@ Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1323,7 +1335,11 @@ Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>First 6 characters of card</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>First 6 characters of card</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1342,9 +1358,13 @@ Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1416,7 +1436,11 @@ Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's first and last name registered with their bank</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's first and last name registered with their bank</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1426,7 +1450,11 @@ Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's account number</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's account number</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1434,10 +1462,14 @@ Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
         <tr>
           <td><code>account_type</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.AccountType" href="../#pypaystack2.utils.AccountType">AccountType</a></code>
+                <code><span title="pypaystack2.utils.AccountType">AccountType</span></code>
           </td>
-          <td><p>bank_code: The bank code of the customer’s bank. You can fetch the bank codes by
-using Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>bank_code: The bank code of the customer’s bank. You can fetch the bank codes by
+using Miscellaneous API wrapper <code>.get_banks</code> method.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1447,7 +1479,11 @@ using Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>The bank code of the customer’s bank</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The bank code of the customer’s bank</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1455,9 +1491,13 @@ using Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
         <tr>
           <td><code>country_code</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Country" href="../#pypaystack2.utils.Country">Country</a></code>
+                <code><span title="pypaystack2.utils.Country">Country</span></code>
           </td>
-          <td><p>Any value from the <code>Country</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Country</code> enum</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1465,10 +1505,14 @@ using Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
         <tr>
           <td><code>document_type</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Document" href="../#pypaystack2.utils.Document">Document</a></code>
+                <code><span title="pypaystack2.utils.Document">Document</span></code>
           </td>
-          <td><p>Customer’s mode of identity. any value from the
-<code>DocumentType</code> enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer’s mode of identity. any value from the
+<code>DocumentType</code> enum.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1478,7 +1522,11 @@ using Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer’s mode of identity number</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer’s mode of identity number</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1497,9 +1545,13 @@ using Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1845,7 +1897,11 @@ https://paystack.com/docs/api/#verification</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Account Number</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Account Number</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1855,8 +1911,12 @@ https://paystack.com/docs/api/#verification</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>You can get the list of bank codes by calling the
-Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>You can get the list of bank codes by calling the
+Miscellaneous API wrapper <code>.get_banks</code> method.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1875,9 +1935,13 @@ Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1965,7 +2029,11 @@ Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>First 6 characters of card</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>First 6 characters of card</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1984,9 +2052,13 @@ Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2054,7 +2126,11 @@ Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's first and last name registered with their bank</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's first and last name registered with their bank</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2064,7 +2140,11 @@ Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer's account number</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer's account number</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2072,10 +2152,14 @@ Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
         <tr>
           <td><code>account_type</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.AccountType" href="../#pypaystack2.utils.AccountType">AccountType</a></code>
+                <code><span title="pypaystack2.utils.AccountType">AccountType</span></code>
           </td>
-          <td><p>bank_code: The bank code of the customer’s bank. You can fetch the bank codes by
-using Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>bank_code: The bank code of the customer’s bank. You can fetch the bank codes by
+using Miscellaneous API wrapper <code>.get_banks</code> method.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2085,7 +2169,11 @@ using Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>The bank code of the customer’s bank</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The bank code of the customer’s bank</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2093,9 +2181,13 @@ using Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
         <tr>
           <td><code>country_code</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Country" href="../#pypaystack2.utils.Country">Country</a></code>
+                <code><span title="pypaystack2.utils.Country">Country</span></code>
           </td>
-          <td><p>Any value from the <code>Country</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Country</code> enum</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2103,10 +2195,14 @@ using Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
         <tr>
           <td><code>document_type</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Document" href="../#pypaystack2.utils.Document">Document</a></code>
+                <code><span title="pypaystack2.utils.Document">Document</span></code>
           </td>
-          <td><p>Customer’s mode of identity. any value from the
-<code>DocumentType</code> enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer’s mode of identity. any value from the
+<code>DocumentType</code> enum.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2116,7 +2212,11 @@ using Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer’s mode of identity number</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer’s mode of identity number</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2135,9 +2235,13 @@ using Miscellaneous API wrapper <code>.get_banks</code> method.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>

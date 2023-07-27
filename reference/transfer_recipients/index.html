@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://github.com/gray-adeyi/pypaystack2/reference/transfer_recipients/">
       
       <link rel="icon" href="../../assets/pypaystack2.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-8.5.10">
     
     
       
@@ -1280,7 +1280,7 @@ https://paystack.com/docs/api/#transfer-recipient</p>
 </span><span id="__span-0-234"><a id="__codelineno-0-234" name="__codelineno-0-234"></a>        <span class="c1"># if it raises issues.</span>
 </span><span id="__span-0-235"><a id="__codelineno-0-235" name="__codelineno-0-235"></a>        <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="n">RecipientType</span><span class="o">.</span><span class="n">NUBAN</span> <span class="ow">or</span> <span class="nb">type</span> <span class="o">==</span> <span class="n">RecipientType</span><span class="o">.</span><span class="n">BASA</span><span class="p">:</span>
 </span><span id="__span-0-236"><a id="__codelineno-0-236" name="__codelineno-0-236"></a>            <span class="k">if</span> <span class="n">bank_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-237"><a id="__codelineno-0-237" name="__codelineno-0-237"></a>                <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-237"><a id="__codelineno-0-237" name="__codelineno-0-237"></a>                <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-238"><a id="__codelineno-0-238" name="__codelineno-0-238"></a>                    <span class="s2">&quot;`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`&quot;</span>
 </span><span id="__span-0-239"><a id="__codelineno-0-239" name="__codelineno-0-239"></a>                <span class="p">)</span>
 </span><span id="__span-0-240"><a id="__codelineno-0-240" name="__codelineno-0-240"></a>
@@ -1463,9 +1463,13 @@ number will lead to the retrieval of the existing record.</p>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1580,7 +1584,11 @@ retrieval of the existing record.</p>
           <td>
                 <code><a class="autorefs autorefs-internal" title="pypaystack2.api.transfer_recipients.TransferRecipient" href="#pypaystack2.api.transfer_recipients.TransferRecipient">TransferRecipient</a></code>
           </td>
-          <td><p>Recipient Type. any value from the <code>TRType</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Recipient Type. any value from the <code>TRType</code> enum</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1590,7 +1598,11 @@ retrieval of the existing record.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>A name for the recipient</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A name for the recipient</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1600,7 +1612,11 @@ retrieval of the existing record.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Required if <code>type</code> is <code>TRType.NUBAN</code> or <code>TRType.BASA</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Required if <code>type</code> is <code>TRType.NUBAN</code> or <code>TRType.BASA</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1610,9 +1626,13 @@ retrieval of the existing record.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Required if <code>type</code> is <code>TRType.NUBAN</code> or <code>TRType.BASA</code>.
+          <td>
+            <div class="doc-md-description">
+              <p>Required if <code>type</code> is <code>TRType.NUBAN</code> or <code>TRType.BASA</code>.
 You can get the list of Bank Codes by calling the <code>.get_banks</code>
-method from the Miscellaneous API wrapper.</p></td>
+method from the Miscellaneous API wrapper.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1622,7 +1642,11 @@ method from the Miscellaneous API wrapper.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>description</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>description</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1630,9 +1654,13 @@ method from the Miscellaneous API wrapper.</p></td>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>currency</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>currency</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1642,7 +1670,11 @@ method from the Miscellaneous API wrapper.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>auth code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>auth code</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1652,7 +1684,11 @@ method from the Miscellaneous API wrapper.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[dict]</code>
           </td>
-          <td><p>metadata</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>metadata</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1671,9 +1707,13 @@ method from the Miscellaneous API wrapper.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1767,7 +1807,7 @@ method from the Miscellaneous API wrapper.</p></td>
 </span><span id="__span-0-234"><a id="__codelineno-0-234" name="__codelineno-0-234"></a>    <span class="c1"># if it raises issues.</span>
 </span><span id="__span-0-235"><a id="__codelineno-0-235" name="__codelineno-0-235"></a>    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="n">RecipientType</span><span class="o">.</span><span class="n">NUBAN</span> <span class="ow">or</span> <span class="nb">type</span> <span class="o">==</span> <span class="n">RecipientType</span><span class="o">.</span><span class="n">BASA</span><span class="p">:</span>
 </span><span id="__span-0-236"><a id="__codelineno-0-236" name="__codelineno-0-236"></a>        <span class="k">if</span> <span class="n">bank_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-237"><a id="__codelineno-0-237" name="__codelineno-0-237"></a>            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-237"><a id="__codelineno-0-237" name="__codelineno-0-237"></a>            <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-238"><a id="__codelineno-0-238" name="__codelineno-0-238"></a>                <span class="s2">&quot;`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`&quot;</span>
 </span><span id="__span-0-239"><a id="__codelineno-0-239" name="__codelineno-0-239"></a>            <span class="p">)</span>
 </span><span id="__span-0-240"><a id="__codelineno-0-240" name="__codelineno-0-240"></a>
@@ -1827,7 +1867,11 @@ method from the Miscellaneous API wrapper.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>An ID or code for the recipient who you want to delete.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An ID or code for the recipient who you want to delete.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1846,9 +1890,13 @@ method from the Miscellaneous API wrapper.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1918,7 +1966,11 @@ method from the Miscellaneous API wrapper.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>An ID or code for the recipient whose details you want to receive.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An ID or code for the recipient whose details you want to receive.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1937,9 +1989,13 @@ method from the Miscellaneous API wrapper.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2007,8 +2063,12 @@ method from the Miscellaneous API wrapper.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies exactly what page you want to retrieve.
-If not specified, we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies exactly what page you want to retrieve.
+If not specified, we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -2018,8 +2078,12 @@ If not specified, we use a default value of 1.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies how many records you want to retrieve per page.
-If not specified, we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies how many records you want to retrieve per page.
+If not specified, we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -2029,8 +2093,12 @@ If not specified, we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp from which to start listing transfer recipients
-e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing transfer recipients
+e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2040,7 +2108,11 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp at which to stop listing transfer recipients e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp at which to stop listing transfer recipients e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2059,9 +2131,13 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2166,7 +2242,11 @@ to the retrieval of the existing record.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Transfer Recipient's ID or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Transfer Recipient's ID or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2176,7 +2256,11 @@ to the retrieval of the existing record.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>A name for the recipient</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A name for the recipient</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2186,7 +2270,11 @@ to the retrieval of the existing record.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Email address of the recipient</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Email address of the recipient</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2205,9 +2293,13 @@ to the retrieval of the existing record.</p>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2515,7 +2607,7 @@ https://paystack.com/docs/api/#transfer-recipient</p>
 </span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58"></a>        <span class="c1"># if it raises issues.</span>
 </span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59"></a>        <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="n">RecipientType</span><span class="o">.</span><span class="n">NUBAN</span> <span class="ow">or</span> <span class="nb">type</span> <span class="o">==</span> <span class="n">RecipientType</span><span class="o">.</span><span class="n">BASA</span><span class="p">:</span>
 </span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60"></a>            <span class="k">if</span> <span class="n">bank_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61"></a>                <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61"></a>                <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-62"><a id="__codelineno-0-62" name="__codelineno-0-62"></a>                    <span class="s2">&quot;`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`&quot;</span>
 </span><span id="__span-0-63"><a id="__codelineno-0-63" name="__codelineno-0-63"></a>                <span class="p">)</span>
 </span><span id="__span-0-64"><a id="__codelineno-0-64" name="__codelineno-0-64"></a>
@@ -2691,9 +2783,13 @@ number will lead to the retrieval of the existing record.</p>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2796,9 +2892,13 @@ retrieval of the existing record.</p>
         <tr>
           <td><code>type</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.RecipientType" href="../#pypaystack2.utils.RecipientType">RecipientType</a></code>
+                <code><span title="pypaystack2.utils.RecipientType">RecipientType</span></code>
           </td>
-          <td><p>Recipient Type. any value from the <code>TRType</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Recipient Type. any value from the <code>TRType</code> enum</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2808,7 +2908,11 @@ retrieval of the existing record.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>A name for the recipient</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A name for the recipient</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2818,7 +2922,11 @@ retrieval of the existing record.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Required if <code>type</code> is <code>TRType.NUBAN</code> or <code>TRType.BASA</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Required if <code>type</code> is <code>TRType.NUBAN</code> or <code>TRType.BASA</code></p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2828,9 +2936,13 @@ retrieval of the existing record.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Required if <code>type</code> is <code>TRType.NUBAN</code> or <code>TRType.BASA</code>.
+          <td>
+            <div class="doc-md-description">
+              <p>Required if <code>type</code> is <code>TRType.NUBAN</code> or <code>TRType.BASA</code>.
 You can get the list of Bank Codes by calling the <code>.get_banks</code>
-method from the Miscellaneous API wrapper.</p></td>
+method from the Miscellaneous API wrapper.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2840,7 +2952,11 @@ method from the Miscellaneous API wrapper.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>description</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>description</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2848,9 +2964,13 @@ method from the Miscellaneous API wrapper.</p></td>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>currency</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>currency</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2860,7 +2980,11 @@ method from the Miscellaneous API wrapper.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>auth code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>auth code</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2870,7 +2994,11 @@ method from the Miscellaneous API wrapper.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[dict]</code>
           </td>
-          <td><p>metadata</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>metadata</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2889,9 +3017,13 @@ method from the Miscellaneous API wrapper.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2985,7 +3117,7 @@ method from the Miscellaneous API wrapper.</p></td>
 </span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58"></a>    <span class="c1"># if it raises issues.</span>
 </span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59"></a>    <span class="k">if</span> <span class="nb">type</span> <span class="o">==</span> <span class="n">RecipientType</span><span class="o">.</span><span class="n">NUBAN</span> <span class="ow">or</span> <span class="nb">type</span> <span class="o">==</span> <span class="n">RecipientType</span><span class="o">.</span><span class="n">BASA</span><span class="p">:</span>
 </span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60"></a>        <span class="k">if</span> <span class="n">bank_code</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61"></a>            <span class="k">raise</span> <span class="n">InvalidDataError</span><span class="p">(</span>
+</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61"></a>            <span class="k">raise</span> <span class="n">InvalidDataException</span><span class="p">(</span>
 </span><span id="__span-0-62"><a id="__codelineno-0-62" name="__codelineno-0-62"></a>                <span class="s2">&quot;`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`&quot;</span>
 </span><span id="__span-0-63"><a id="__codelineno-0-63" name="__codelineno-0-63"></a>            <span class="p">)</span>
 </span><span id="__span-0-64"><a id="__codelineno-0-64" name="__codelineno-0-64"></a>
@@ -3041,7 +3173,11 @@ method from the Miscellaneous API wrapper.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>An ID or code for the recipient who you want to delete.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An ID or code for the recipient who you want to delete.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3060,9 +3196,13 @@ method from the Miscellaneous API wrapper.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3128,7 +3268,11 @@ method from the Miscellaneous API wrapper.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>An ID or code for the recipient whose details you want to receive.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An ID or code for the recipient whose details you want to receive.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3147,9 +3291,13 @@ method from the Miscellaneous API wrapper.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3213,8 +3361,12 @@ method from the Miscellaneous API wrapper.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies exactly what page you want to retrieve.
-If not specified, we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies exactly what page you want to retrieve.
+If not specified, we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -3224,8 +3376,12 @@ If not specified, we use a default value of 1.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies how many records you want to retrieve per page.
-If not specified, we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies how many records you want to retrieve per page.
+If not specified, we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -3235,8 +3391,12 @@ If not specified, we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp from which to start listing transfer recipients
-e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing transfer recipients
+e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3246,7 +3406,11 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp at which to stop listing transfer recipients e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp at which to stop listing transfer recipients e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3265,9 +3429,13 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3368,7 +3536,11 @@ to the retrieval of the existing record.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Transfer Recipient's ID or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Transfer Recipient's ID or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3378,7 +3550,11 @@ to the retrieval of the existing record.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>A name for the recipient</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A name for the recipient</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3388,7 +3564,11 @@ to the retrieval of the existing record.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Email address of the recipient</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Email address of the recipient</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3407,9 +3587,13 @@ to the retrieval of the existing record.</p>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>

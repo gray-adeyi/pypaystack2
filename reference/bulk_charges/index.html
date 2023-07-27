@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://github.com/gray-adeyi/pypaystack2/reference/bulk_charges/">
       
       <link rel="icon" href="../../assets/pypaystack2.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-8.5.10">
     
     
       
@@ -1368,7 +1368,11 @@ and pending_charges attributes in the Response.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>An ID or code for the charge whose batches you want to retrieve.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An ID or code for the charge whose batches you want to retrieve.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1387,9 +1391,13 @@ and pending_charges attributes in the Response.</p>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1465,7 +1473,11 @@ and pending_charges attributes in the Response.</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specify exactly what transfer you want to page. If not specified, we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specify exactly what transfer you want to page. If not specified, we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -1475,8 +1487,12 @@ and pending_charges attributes in the Response.</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specify how many records you want to retrieve per page.
-If not specified we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specify how many records you want to retrieve per page.
+If not specified we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -1486,7 +1502,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp from which to start listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1496,7 +1516,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp at which to stop listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp at which to stop listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1515,9 +1539,13 @@ If not specified we use a default value of 50.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1622,7 +1650,11 @@ filter by status. Charge statuses can be <code>Status.PENDING</code>,
           <td>
                 <code>str</code>
           </td>
-          <td><p>An ID or code for the batch whose charges you want to retrieve.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An ID or code for the batch whose charges you want to retrieve.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1630,9 +1662,13 @@ filter by status. Charge statuses can be <code>Status.PENDING</code>,
         <tr>
           <td><code>status</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Status" href="../#pypaystack2.utils.Status">Status</a></code>
+                <code><span title="pypaystack2.utils.Status">Status</span></code>
           </td>
-          <td><p>Any of the values from the Status enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any of the values from the Status enum.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1642,8 +1678,12 @@ filter by status. Charge statuses can be <code>Status.PENDING</code>,
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specify how many records you want to retrieve per page.
-If not specified we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specify how many records you want to retrieve per page.
+If not specified we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -1653,7 +1693,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specify exactly what transfer you want to page. If not specified we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specify exactly what transfer you want to page. If not specified we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -1663,7 +1707,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp from which to start listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1673,7 +1721,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp at which to stop listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp at which to stop listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1692,9 +1744,13 @@ If not specified we use a default value of 50.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1816,7 +1872,11 @@ if currency is ZAR ) so paystack can process transactions as a batch.</p>
           <td>
                 <code>list[<span title="pypaystack2.utils.BulkChargeInstruction">BulkChargeInstruction</span>]</code>
           </td>
-          <td><p>A list of BulkChargeInstruction.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A list of BulkChargeInstruction.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1835,9 +1895,13 @@ if currency is ZAR ) so paystack can process transactions as a batch.</p>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1915,7 +1979,11 @@ if currency is ZAR ) so paystack can process transactions as a batch.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>The batch code for the bulk charge you want to pause.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The batch code for the bulk charge you want to pause.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1934,9 +2002,13 @@ if currency is ZAR ) so paystack can process transactions as a batch.</p>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2006,7 +2078,11 @@ if currency is ZAR ) so paystack can process transactions as a batch.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>The batch code for the bulk charge you want to resume.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The batch code for the bulk charge you want to resume.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2025,9 +2101,13 @@ if currency is ZAR ) so paystack can process transactions as a batch.</p>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2404,7 +2484,11 @@ and pending_charges attributes in the Response.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>An ID or code for the charge whose batches you want to retrieve.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An ID or code for the charge whose batches you want to retrieve.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2423,9 +2507,13 @@ and pending_charges attributes in the Response.</p>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2497,7 +2585,11 @@ and pending_charges attributes in the Response.</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specify exactly what transfer you want to page. If not specified, we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specify exactly what transfer you want to page. If not specified, we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -2507,8 +2599,12 @@ and pending_charges attributes in the Response.</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specify how many records you want to retrieve per page.
-If not specified we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specify how many records you want to retrieve per page.
+If not specified we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -2518,7 +2614,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp from which to start listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2528,7 +2628,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp at which to stop listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp at which to stop listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2547,9 +2651,13 @@ If not specified we use a default value of 50.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2650,7 +2758,11 @@ filter by status. Charge statuses can be <code>Status.PENDING</code>,
           <td>
                 <code>str</code>
           </td>
-          <td><p>An ID or code for the batch whose charges you want to retrieve.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>An ID or code for the batch whose charges you want to retrieve.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2658,9 +2770,13 @@ filter by status. Charge statuses can be <code>Status.PENDING</code>,
         <tr>
           <td><code>status</code></td>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Status" href="../#pypaystack2.utils.Status">Status</a></code>
+                <code><span title="pypaystack2.utils.Status">Status</span></code>
           </td>
-          <td><p>Any of the values from the Status enum.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any of the values from the Status enum.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2670,8 +2786,12 @@ filter by status. Charge statuses can be <code>Status.PENDING</code>,
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specify how many records you want to retrieve per page.
-If not specified we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specify how many records you want to retrieve per page.
+If not specified we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -2681,7 +2801,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specify exactly what transfer you want to page. If not specified we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specify exactly what transfer you want to page. If not specified we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -2691,7 +2815,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp from which to start listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2701,7 +2829,11 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp at which to stop listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp at which to stop listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2720,9 +2852,13 @@ If not specified we use a default value of 50.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2840,7 +2976,11 @@ if currency is ZAR ) so paystack can process transactions as a batch.</p>
           <td>
                 <code>list[<span title="pypaystack2.utils.BulkChargeInstruction">BulkChargeInstruction</span>]</code>
           </td>
-          <td><p>A list of BulkChargeInstruction.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A list of BulkChargeInstruction.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2859,9 +2999,13 @@ if currency is ZAR ) so paystack can process transactions as a batch.</p>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2935,7 +3079,11 @@ if currency is ZAR ) so paystack can process transactions as a batch.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>The batch code for the bulk charge you want to pause.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The batch code for the bulk charge you want to pause.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2954,9 +3102,13 @@ if currency is ZAR ) so paystack can process transactions as a batch.</p>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3022,7 +3174,11 @@ if currency is ZAR ) so paystack can process transactions as a batch.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>The batch code for the bulk charge you want to resume.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The batch code for the bulk charge you want to resume.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3041,9 +3197,13 @@ if currency is ZAR ) so paystack can process transactions as a batch.</p>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>

@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://github.com/gray-adeyi/pypaystack2/reference/refunds/">
       
       <link rel="icon" href="../../assets/pypaystack2.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-8.5.10">
     
     
       
@@ -1204,7 +1204,11 @@ https://paystack.com/docs/api/#refund</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Transaction reference or id</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Transaction reference or id</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1214,11 +1218,15 @@ https://paystack.com/docs/api/#refund</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Amount ( in kobo if currency is NGN, pesewas, if currency is
+          <td>
+            <div class="doc-md-description">
+              <p>Amount ( in kobo if currency is NGN, pesewas, if currency is
 GHS, and cents, if currency is ZAR ) to be refunded to the
 customer. Amount is optional(defaults to original
 transaction amount) and cannot be more than the original
-transaction amount</p></td>
+transaction amount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1226,9 +1234,13 @@ transaction amount</p></td>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>Any value from the <code>Currency</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Currency</code> enum</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1238,7 +1250,11 @@ transaction amount</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer reason</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer reason</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1248,7 +1264,11 @@ transaction amount</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Merchant reason</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Merchant reason</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1267,9 +1287,13 @@ transaction amount</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1389,7 +1413,11 @@ transaction amount</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Identifier for transaction to be refunded</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Identifier for transaction to be refunded</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1408,9 +1436,13 @@ transaction amount</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1480,7 +1512,11 @@ transaction amount</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Identifier for transaction to be refunded</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Identifier for transaction to be refunded</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1488,9 +1524,13 @@ transaction amount</p></td>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>Any value from the <code>Currency</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Currency</code> enum</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1500,8 +1540,12 @@ transaction amount</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies how many records you want to retrieve per page.
-If not specified we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies how many records you want to retrieve per page.
+If not specified we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -1511,8 +1555,12 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies exactly what refund you want to page.
-If not specified we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies exactly what refund you want to page.
+If not specified we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -1522,7 +1570,11 @@ If not specified we use a default value of 1.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp from which to start listing refund e.g. 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing refund e.g. 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1532,7 +1584,11 @@ If not specified we use a default value of 1.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp at which to stop listing refund e.g. 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp at which to stop listing refund e.g. 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1551,9 +1607,13 @@ If not specified we use a default value of 1.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1896,7 +1956,11 @@ https://paystack.com/docs/api/#refund</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Transaction reference or id</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Transaction reference or id</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1906,11 +1970,15 @@ https://paystack.com/docs/api/#refund</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Amount ( in kobo if currency is NGN, pesewas, if currency is
+          <td>
+            <div class="doc-md-description">
+              <p>Amount ( in kobo if currency is NGN, pesewas, if currency is
 GHS, and cents, if currency is ZAR ) to be refunded to the
 customer. Amount is optional(defaults to original
 transaction amount) and cannot be more than the original
-transaction amount</p></td>
+transaction amount</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1918,9 +1986,13 @@ transaction amount</p></td>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>Any value from the <code>Currency</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Currency</code> enum</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1930,7 +2002,11 @@ transaction amount</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Customer reason</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer reason</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1940,7 +2016,11 @@ transaction amount</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Merchant reason</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Merchant reason</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1959,9 +2039,13 @@ transaction amount</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2077,7 +2161,11 @@ transaction amount</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Identifier for transaction to be refunded</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Identifier for transaction to be refunded</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2096,9 +2184,13 @@ transaction amount</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2164,7 +2256,11 @@ transaction amount</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Identifier for transaction to be refunded</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Identifier for transaction to be refunded</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2172,9 +2268,13 @@ transaction amount</p></td>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>Any value from the <code>Currency</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from the <code>Currency</code> enum</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2184,8 +2284,12 @@ transaction amount</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies how many records you want to retrieve per page.
-If not specified we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies how many records you want to retrieve per page.
+If not specified we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -2195,8 +2299,12 @@ If not specified we use a default value of 50.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies exactly what refund you want to page.
-If not specified we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies exactly what refund you want to page.
+If not specified we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -2206,7 +2314,11 @@ If not specified we use a default value of 1.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp from which to start listing refund e.g. 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing refund e.g. 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2216,7 +2328,11 @@ If not specified we use a default value of 1.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp at which to stop listing refund e.g. 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp at which to stop listing refund e.g. 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2235,9 +2351,13 @@ If not specified we use a default value of 1.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>

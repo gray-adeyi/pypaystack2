@@ -4,7 +4,42 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="56200bf3-e557-48d4-9cde-bf80637975be" name="Changes" comment="Add Paystack api" />
+    <list default="true" id="56200bf3-e557-48d4-9cde-bf80637975be" name="Changes" comment="Fix error in docs">
+      <change beforePath="$PROJECT_DIR$/404.html" beforeDir="false" afterPath="$PROJECT_DIR$/404.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/_mkdocstrings.css" beforeDir="false" afterPath="$PROJECT_DIR$/assets/_mkdocstrings.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/explanation/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/explanation/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/how-to-guides/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/how-to-guides/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/objects.inv" beforeDir="false" afterPath="$PROJECT_DIR$/objects.inv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/apple_pay/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/apple_pay/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/bulk_charges/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/bulk_charges/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/charge/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/charge/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/customer/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/customer/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/dedicated_accounts/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/dedicated_accounts/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/disputes/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/disputes/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/integration/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/integration/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/miscellaneous/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/miscellaneous/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/payment_pages/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/payment_pages/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/payment_requests/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/payment_requests/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/plans/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/plans/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/products/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/products/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/refunds/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/refunds/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/settlements/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/settlements/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/splits/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/splits/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/subaccounts/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/subaccounts/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/subscriptions/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/subscriptions/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/terminals/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/terminals/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/transactions/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/transactions/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/transfer_recipients/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/transfer_recipients/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/transfers/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/transfers/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/transfers_control/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/transfers_control/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reference/verification/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/reference/verification/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search/search_index.json" beforeDir="false" afterPath="$PROJECT_DIR$/search/search_index.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sitemap.xml" beforeDir="false" afterPath="$PROJECT_DIR$/sitemap.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sitemap.xml.gz" beforeDir="false" afterPath="$PROJECT_DIR$/sitemap.xml.gz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutorials/tutorial1/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tutorials/tutorial1/index.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,6 +66,9 @@
       </UrlAndAccount>
     </option>
   </component>
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="534zjsmm" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -42,19 +80,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;actions.on.save&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "gh-pages",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "actions.on.save"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/docs/tutorials" />
@@ -126,6 +165,7 @@
     <MESSAGE value="Update version" />
     <MESSAGE value="Add Terminal api" />
     <MESSAGE value="Add Paystack api" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Paystack api" />
+    <MESSAGE value="Fix error in docs" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix error in docs" />
   </component>
 </project>

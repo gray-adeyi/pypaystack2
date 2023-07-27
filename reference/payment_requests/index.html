@@ -15,7 +15,7 @@
         <link rel="canonical" href="https://github.com/gray-adeyi/pypaystack2/reference/payment_requests/">
       
       <link rel="icon" href="../../assets/pypaystack2.svg">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-8.5.10">
     
     
       
@@ -1670,7 +1670,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Payment Request id or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Payment Request id or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1745,7 +1749,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer id or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer id or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1755,7 +1763,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Payment request amount. It should be used when line items and tax values aren't specified.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Payment request amount. It should be used when line items and tax values aren't specified.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1765,7 +1777,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>ISO 8601 representation of request due date</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>ISO 8601 representation of request due date</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1775,7 +1791,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A short description of the payment request</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A short description of the payment request</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1785,7 +1805,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[list[<span title="pypaystack2.utils.LineItem">LineItem</span>]]</code>
           </td>
-          <td><p>List of line items int the format [{"name":"item 1", "amount":2000, "quantity": 1}]</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>List of line items int the format [{"name":"item 1", "amount":2000, "quantity": 1}]</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1795,7 +1819,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[list[<span title="pypaystack2.utils.Tax">Tax</span>]]</code>
           </td>
-          <td><p>List of taxes to be charged in the format [{"name":"VAT", "amount":2000}]</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>List of taxes to be charged in the format [{"name":"VAT", "amount":2000}]</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1803,9 +1831,13 @@ https://paystack.com/docs/api/payment-request/</p>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>Any value from Currency enum. default <code>Currency.NGN</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from Currency enum. default <code>Currency.NGN</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1815,7 +1847,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Indicates whether Paystack sends an email notification to customer. Defaults to <code>True</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Indicates whether Paystack sends an email notification to customer. Defaults to <code>True</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1825,7 +1861,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Indicate if request should be saved as draft. Defaults to <code>False</code> and overrides send_notification</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Indicate if request should be saved as draft. Defaults to <code>False</code> and overrides send_notification</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1835,8 +1875,12 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Set to <code>True</code> to create a draft invoice (adds an auto incrementing invoice number
-if none is provided) even if there are no line_items or tax passed</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Set to <code>True</code> to create a draft invoice (adds an auto incrementing invoice number
+if none is provided) even if there are no line_items or tax passed</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1846,9 +1890,13 @@ if none is provided) even if there are no line_items or tax passed</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Numeric value of invoice. Invoice will start from 1 and auto increment from there.
+          <td>
+            <div class="doc-md-description">
+              <p>Numeric value of invoice. Invoice will start from 1 and auto increment from there.
 This field is to help override whatever value Paystack decides. Auto increment for
-subsequent invoices continue from this point.</p></td>
+subsequent invoices continue from this point.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1858,7 +1906,11 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>The split code of the transaction split. e.g. SPL_98WF13Eb3w</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The split code of the transaction split. e.g. SPL_98WF13Eb3w</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1877,9 +1929,13 @@ subsequent invoices continue from this point.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2043,7 +2099,11 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Payment Request id or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Payment Request id or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2062,9 +2122,13 @@ subsequent invoices continue from this point.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2134,7 +2198,11 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Payment Request id or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Payment Request id or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2153,9 +2221,13 @@ subsequent invoices continue from this point.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2225,7 +2297,11 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Filter by customer ID</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Filter by customer ID</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2233,9 +2309,13 @@ subsequent invoices continue from this point.</p></td>
         <tr>
           <td><code>status</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Status" href="../#pypaystack2.utils.Status">Status</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Status">Status</span>]</code>
           </td>
-          <td><p>Filter by payment request status. Any value from enum of <code>Status</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Filter by payment request status. Any value from enum of <code>Status</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2243,9 +2323,13 @@ subsequent invoices continue from this point.</p></td>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>Filter by currency. Any value from enum of <code>Currency</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Filter by currency. Any value from enum of <code>Currency</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2255,7 +2339,11 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Show archived payment requests.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Show archived payment requests.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -2265,7 +2353,11 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specify exactly what payment request you want to page. If not specify we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specify exactly what payment request you want to page. If not specify we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -2275,8 +2367,12 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies how many records you want to retrieve per page. If not specified
-we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies how many records you want to retrieve per page. If not specified
+we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -2286,8 +2382,12 @@ we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp from which to start listing payment request
-e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing payment request
+e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2297,7 +2397,11 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp at which to stop listing payment request e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp at which to stop listing payment request e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2316,9 +2420,13 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2441,9 +2549,13 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2507,7 +2619,11 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Payment Request id or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Payment Request id or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2526,9 +2642,13 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2598,7 +2718,11 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Payment Request id or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Payment Request id or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2608,7 +2732,11 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer id or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer id or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2618,8 +2746,12 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Payment request amount. Only useful if line items and tax values are ignored.
-method will throw a friendly warning in the response if neither is available.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Payment request amount. Only useful if line items and tax values are ignored.
+method will throw a friendly warning in the response if neither is available.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2629,7 +2761,11 @@ method will throw a friendly warning in the response if neither is available.</p
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>ISO 8601 representation of request due date</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>ISO 8601 representation of request due date</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2639,7 +2775,11 @@ method will throw a friendly warning in the response if neither is available.</p
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A short description of the payment request</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A short description of the payment request</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2649,7 +2789,11 @@ method will throw a friendly warning in the response if neither is available.</p
           <td>
                 <code><span title="typing.Optional">Optional</span>[list[dict]]</code>
           </td>
-          <td><p>List of line items in the format [{"name":"item 1", "amount":2000}]</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>List of line items in the format [{"name":"item 1", "amount":2000}]</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2659,7 +2803,11 @@ method will throw a friendly warning in the response if neither is available.</p
           <td>
                 <code><span title="typing.Optional">Optional</span>[list[dict]]</code>
           </td>
-          <td><p>List of taxes to be charged in the format [{"name":"VAT", "amount":2000}]</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>List of taxes to be charged in the format [{"name":"VAT", "amount":2000}]</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2667,9 +2815,13 @@ method will throw a friendly warning in the response if neither is available.</p
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>Specify the currency of the payment request. Any value from the <code>Currency</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specify the currency of the payment request. Any value from the <code>Currency</code> enum</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2679,7 +2831,11 @@ method will throw a friendly warning in the response if neither is available.</p
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Indicates whether Paystack sends an email notification to customer. Defaults to <code>True</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Indicates whether Paystack sends an email notification to customer. Defaults to <code>True</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2689,7 +2845,11 @@ method will throw a friendly warning in the response if neither is available.</p
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Indicate if request should be saved as draft. Defaults to false and overrides send_notification</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Indicate if request should be saved as draft. Defaults to false and overrides send_notification</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2699,9 +2859,13 @@ method will throw a friendly warning in the response if neither is available.</p
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Numeric value of invoice. Invoice will start from 1 and auto increment from there.
+          <td>
+            <div class="doc-md-description">
+              <p>Numeric value of invoice. Invoice will start from 1 and auto increment from there.
 This field is to help override whatever value Paystack decides. Auto increment for
-subsequent invoices continue from this point.</p></td>
+subsequent invoices continue from this point.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2711,7 +2875,11 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>The split code of the transaction split. e.g. SPL_98WF13Eb3w</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The split code of the transaction split. e.g. SPL_98WF13Eb3w</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2730,9 +2898,13 @@ subsequent invoices continue from this point.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2894,7 +3066,11 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Payment Request id or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Payment Request id or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2913,9 +3089,13 @@ subsequent invoices continue from this point.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3512,7 +3692,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Payment Request id or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Payment Request id or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3583,7 +3767,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer id or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer id or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3593,7 +3781,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Payment request amount. It should be used when line items and tax values aren't specified.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Payment request amount. It should be used when line items and tax values aren't specified.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3603,7 +3795,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>ISO 8601 representation of request due date</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>ISO 8601 representation of request due date</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3613,7 +3809,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A short description of the payment request</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A short description of the payment request</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3623,7 +3823,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[list[<span title="pypaystack2.utils.LineItem">LineItem</span>]]</code>
           </td>
-          <td><p>List of line items int the format [{"name":"item 1", "amount":2000, "quantity": 1}]</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>List of line items int the format [{"name":"item 1", "amount":2000, "quantity": 1}]</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3633,7 +3837,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[list[<span title="pypaystack2.utils.Tax">Tax</span>]]</code>
           </td>
-          <td><p>List of taxes to be charged in the format [{"name":"VAT", "amount":2000}]</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>List of taxes to be charged in the format [{"name":"VAT", "amount":2000}]</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3641,9 +3849,13 @@ https://paystack.com/docs/api/payment-request/</p>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>Any value from Currency enum. default <code>Currency.NGN</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any value from Currency enum. default <code>Currency.NGN</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3653,7 +3865,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Indicates whether Paystack sends an email notification to customer. Defaults to <code>True</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Indicates whether Paystack sends an email notification to customer. Defaults to <code>True</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3663,7 +3879,11 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Indicate if request should be saved as draft. Defaults to <code>False</code> and overrides send_notification</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Indicate if request should be saved as draft. Defaults to <code>False</code> and overrides send_notification</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3673,8 +3893,12 @@ https://paystack.com/docs/api/payment-request/</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Set to <code>True</code> to create a draft invoice (adds an auto-incrementing invoice number
-if none is provided) even if there are no line_items or tax passed</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Set to <code>True</code> to create a draft invoice (adds an auto-incrementing invoice number
+if none is provided) even if there are no line_items or tax passed</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3684,9 +3908,13 @@ if none is provided) even if there are no line_items or tax passed</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Numeric value of invoice. Invoice will start from 1 and auto increment from there.
+          <td>
+            <div class="doc-md-description">
+              <p>Numeric value of invoice. Invoice will start from 1 and auto increment from there.
 This field is to help override whatever value Paystack decides. Auto increment for
-subsequent invoices continue from this point.</p></td>
+subsequent invoices continue from this point.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3696,7 +3924,11 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>The split code of the transaction split. e.g. SPL_98WF13Eb3w</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The split code of the transaction split. e.g. SPL_98WF13Eb3w</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3715,9 +3947,13 @@ subsequent invoices continue from this point.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3879,7 +4115,11 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Payment Request id or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Payment Request id or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3898,9 +4138,13 @@ subsequent invoices continue from this point.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3966,7 +4210,11 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>The payment request ID or code you want to fetch</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The payment request ID or code you want to fetch</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3985,9 +4233,13 @@ subsequent invoices continue from this point.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -4053,7 +4305,11 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Filter by customer ID</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Filter by customer ID</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4061,9 +4317,13 @@ subsequent invoices continue from this point.</p></td>
         <tr>
           <td><code>status</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Status" href="../#pypaystack2.utils.Status">Status</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Status">Status</span>]</code>
           </td>
-          <td><p>Filter by payment request status. Any value from enum of <code>Status</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Filter by payment request status. Any value from enum of <code>Status</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4071,9 +4331,13 @@ subsequent invoices continue from this point.</p></td>
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>Filter by currency. Any value from enum of <code>Currency</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Filter by currency. Any value from enum of <code>Currency</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4083,7 +4347,11 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Show archived payment requests.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Show archived payment requests.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -4093,7 +4361,11 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specify exactly what payment request you want to page. If not specified, we use a default value of 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specify exactly what payment request you want to page. If not specified, we use a default value of 1.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -4103,8 +4375,12 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Specifies how many records you want to retrieve per page. If not specified,
-we use a default value of 50.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specifies how many records you want to retrieve per page. If not specified,
+we use a default value of 50.</p>
+            </div>
+          </td>
           <td>
                 <code>50</code>
           </td>
@@ -4114,8 +4390,12 @@ we use a default value of 50.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp from which to start listing payment requests
-e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp from which to start listing payment requests
+e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4125,7 +4405,11 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A timestamp at which to stop listing payment requests e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A timestamp at which to stop listing payment requests e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4144,9 +4428,13 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -4265,9 +4553,13 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -4327,7 +4619,11 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Payment Request id or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Payment Request id or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4346,9 +4642,13 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -4414,7 +4714,11 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Payment Request id or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Payment Request id or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4424,7 +4728,11 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Customer id or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Customer id or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4434,8 +4742,12 @@ e.g. 2016-09-24T00:00:05.000Z, 2016-09-21</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Payment request amount. Only useful if line items and tax values are ignored.
-method will throw a friendly warning in the response if neither is available.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Payment request amount. Only useful if line items and tax values are ignored.
+method will throw a friendly warning in the response if neither is available.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4445,7 +4757,11 @@ method will throw a friendly warning in the response if neither is available.</p
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>ISO 8601 representation of request due date</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>ISO 8601 representation of request due date</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4455,7 +4771,11 @@ method will throw a friendly warning in the response if neither is available.</p
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A short description of the payment request</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A short description of the payment request</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4465,7 +4785,11 @@ method will throw a friendly warning in the response if neither is available.</p
           <td>
                 <code><span title="typing.Optional">Optional</span>[list[dict]]</code>
           </td>
-          <td><p>List of line items in the format [{"name":"item 1", "amount":2000}]</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>List of line items in the format [{"name":"item 1", "amount":2000}]</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4475,7 +4799,11 @@ method will throw a friendly warning in the response if neither is available.</p
           <td>
                 <code><span title="typing.Optional">Optional</span>[list[dict]]</code>
           </td>
-          <td><p>List of taxes to be charged in the format [{"name":"VAT", "amount":2000}]</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>List of taxes to be charged in the format [{"name":"VAT", "amount":2000}]</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4483,9 +4811,13 @@ method will throw a friendly warning in the response if neither is available.</p
         <tr>
           <td><code>currency</code></td>
           <td>
-                <code><span title="typing.Optional">Optional</span>[<a class="autorefs autorefs-internal" title="pypaystack2.utils.Currency" href="../#pypaystack2.utils.Currency">Currency</a>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="pypaystack2.utils.Currency">Currency</span>]</code>
           </td>
-          <td><p>Specify the currency of the Payment Request id or code. Any value from the <code>Currency</code> enum</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Specify the currency of the Payment Request id or code. Any value from the <code>Currency</code> enum</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4495,7 +4827,11 @@ method will throw a friendly warning in the response if neither is available.</p
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Indicates whether Paystack sends an email notification to customer. Defaults to <code>True</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Indicates whether Paystack sends an email notification to customer. Defaults to <code>True</code></p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4505,7 +4841,11 @@ method will throw a friendly warning in the response if neither is available.</p
           <td>
                 <code><span title="typing.Optional">Optional</span>[bool]</code>
           </td>
-          <td><p>Indicate if request should be saved as draft. Defaults to false and overrides send_notification</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Indicate if request should be saved as draft. Defaults to false and overrides send_notification</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4515,9 +4855,13 @@ method will throw a friendly warning in the response if neither is available.</p
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Numeric value of invoice. Invoice will start from 1 and auto increment from there.
+          <td>
+            <div class="doc-md-description">
+              <p>Numeric value of invoice. Invoice will start from 1 and auto increment from there.
 This field is to help override whatever value Paystack decides. Auto increment for
-subsequent invoices continue from this point.</p></td>
+subsequent invoices continue from this point.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4527,7 +4871,11 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>The split code of the transaction split. e.g. SPL_98WF13Eb3w</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The split code of the transaction split. e.g. SPL_98WF13Eb3w</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -4546,9 +4894,13 @@ subsequent invoices continue from this point.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -4706,7 +5058,11 @@ subsequent invoices continue from this point.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Payment Request id or code</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Payment Request id or code</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -4725,9 +5081,13 @@ subsequent invoices continue from this point.</p></td>
     <tbody>
         <tr>
           <td>
-                <code><a class="autorefs autorefs-internal" title="pypaystack2.utils.Response" href="../#pypaystack2.utils.Response">Response</a></code>
+                <code><span title="pypaystack2.utils.Response">Response</span></code>
           </td>
-          <td><p>A named tuple containing the response gotten from paystack's server.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A named tuple containing the response gotten from paystack's server.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
