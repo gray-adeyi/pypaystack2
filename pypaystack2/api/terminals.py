@@ -14,9 +14,8 @@ from pypaystack2.utils import (
 class Terminal(BaseAPI):
     """Provides a wrapper for paystack Terminal API
 
-    The Terminal API allows you to create and manage recurring
-    payment on your integration.
-    https://paystack.com/docs/api/#terminal
+    The Terminal API allows you to build delightful in-person payment experiences.
+    https://paystack.com/docs/api/terminal/
     """
 
     def send_event(
@@ -130,7 +129,7 @@ class Terminal(BaseAPI):
         url = self._parse_url(f"/terminal/{terminal_id}/")
         return self._handle_request(HTTPMethod.GET, url)
 
-    def updated_terminal(self, terminal_id: str, name: str, address: str) -> Response:
+    def update_terminal(self, terminal_id: str, name: str, address: str) -> Response:
         """Update the details of a Terminal
 
         Args:
@@ -299,7 +298,7 @@ class AsyncTerminal(BaseAsyncAPI):
         url = self._parse_url(f"/terminal/{terminal_id}/")
         return await self._handle_request(HTTPMethod.GET, url)
 
-    async def updated_terminal(
+    async def update_terminal(
         self, terminal_id: str, name: str, address: str
     ) -> Response:
         """Update the details of a Terminal
