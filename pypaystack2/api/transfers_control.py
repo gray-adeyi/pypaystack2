@@ -5,7 +5,7 @@ from pypaystack2.utils import Reason, HTTPMethod, Response
 class TransferControl(BaseAPI):
     """Provides a wrapper for paystack Transfers Control API
 
-    The Transfers Control API allows you to manage settings of your transfers.
+    The Transfer Control API allows you to manage settings of your transfers.
     https://paystack.com/docs/api/#transfer-control
     """
 

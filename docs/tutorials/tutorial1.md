@@ -24,7 +24,8 @@ pipenv shell
 
 - Install the projects dependencies. We'll be needing `pypaystack2`, `python-dotenv`, and `typer`.
   `pypaystack2` package is an API wrapper for paystack's services. `python-dotenv` helps us manage our
-  environmental variables and [typer](https://typer.tiangolo.com/) makes building command line apps in python super simple.
+  environmental variables and [typer](https://typer.tiangolo.com/) makes building command line apps in python super
+  simple.
 
 ```bash
 pipenv install pypaystack2 python-dotenv typer
@@ -93,7 +94,6 @@ currently available as at the time of writing of this tutorial.
     response = paystack.miscellaneous.get_banks(country=Country.NIGERIA)
     print(response)
     ```
-
 
 So in a situation where you don't have your `PAYSTACK_AUTHORIZATION_KEY` as an environmental variable,
 you can pass it into any of the API wrappers. e.g.
@@ -213,7 +213,7 @@ if __name__ == "__main__":
 ```
 
 !!! note
-    All API wrappers are available on `pypaystack`. as attributes e.g. `paystack.transactions` for the Transactions API
+All API wrappers are available on `pypaystack`. as attributes e.g. `paystack.transactions` for the Transactions API
 
 Now if you run the script again.
 
@@ -379,5 +379,6 @@ You can try out the new command with the following commands
 **It's all in your hands now**. We now have a working cli app, but it does not have all the features
 to make it a fully fledged **Paystack command line client** you can implement
 more commands. It also does not handle all the likely exception that can occur, but then, the purpose of
-the tutorial is to expose you to `pypaystack2`. Not sure how something works, you can always search the
-documentation. Good luck on your next project!
+the tutorial is to expose you to `pypaystack2`.You can check out the fully built
+[paystack-cli](https://pypi.org/project/paystack-cli/) which can be quite useful for development purposes. Not sure how
+something works, you can always search the documentation. Good luck on your next project!

@@ -210,6 +210,7 @@ class AsyncCharge(BaseAsyncAPI):
             mobile_money: Mobile details (don't send if charging an authorization code, bank or card)
             device_id: This is the unique identifier of the device a user uses in making payment. Only -, .\\`,
                 = and alphanumeric characters allowed.
+            birthday: The birthdate of the customer.
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
