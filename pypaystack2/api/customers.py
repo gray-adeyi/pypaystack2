@@ -17,7 +17,7 @@ class Customer(BaseAPI):
     """Provides a wrapper for paystack Customer API
 
     The Customers API allows you to create and manage customers in your integration.
-    https://paystack.com/docs/api/#customer
+    https://paystack.com/docs/api/customer/
     """
 
     def create(
@@ -245,7 +245,7 @@ class AsyncCustomer(BaseAsyncAPI):
     """Provides a wrapper for paystack Customer API
 
     The Customers API allows you to create and manage customers in your integration.
-    https://paystack.com/docs/api/#customer
+    https://paystack.com/docs/api/customer/
     """
 
     async def create(

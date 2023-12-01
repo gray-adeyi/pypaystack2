@@ -19,7 +19,7 @@ class Transaction(BaseAPI):
     """Provides a wrapper for paystack Transactions API
 
     The Transactions API allows you to create and manage payments on your integration.
-    https://paystack.com/docs/api/#transaction
+    see https://paystack.com/docs/api/transaction/
     """
 
     def initialize(
@@ -398,7 +398,7 @@ class AsyncTransaction(BaseAsyncAPI):
     """Provides a wrapper for paystack Transactions API
 
     The Transactions API allows you to create and manage payments on your integration.
-    https://paystack.com/docs/api/#transaction
+    https://paystack.com/docs/api/transaction/
     """
 
     async def initialize(

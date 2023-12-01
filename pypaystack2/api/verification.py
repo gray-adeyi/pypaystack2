@@ -8,7 +8,7 @@ class Verification(BaseAPI):
     """Provides a wrapper for paystack Verification API
 
     The Verification API allows you to perform KYC processes.
-    https://paystack.com/docs/api/#verification
+    https://paystack.com/docs/api/verification/
 
     Note:
         This feature is only available to businesses in Nigeria.
@@ -97,7 +97,7 @@ class AsyncVerification(BaseAsyncAPI):
     """Provides a wrapper for paystack Verification API
 
     The Verification API allows you to perform KYC processes.
-    https://paystack.com/docs/api/#verification
+    https://paystack.com/docs/api/verification/
 
     Note:
         This feature is only available to businesses in Nigeria.

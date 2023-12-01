@@ -16,7 +16,6 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.9"
 httpx = "^0.25.2"
-
 [tool.poetry.group.dev.dependencies]
 python-dotenv = "^0.21.0"
 mkdocs = "^1.4.2"

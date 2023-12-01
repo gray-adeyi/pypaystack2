@@ -15,7 +15,7 @@ class Refund(BaseAPI):
     """Provides a wrapper for paystack Refunds API
 
     The Refunds API allows you to create and manage transaction refunds.
-    https://paystack.com/docs/api/#refund
+    https://paystack.com/docs/api/refund/
     """
 
     def create(
@@ -110,7 +110,7 @@ class AsyncRefund(BaseAsyncAPI):
     """Provides a wrapper for paystack Refunds API
 
     The Refunds API allows you to create and manage transaction refunds.
-    https://paystack.com/docs/api/#refund
+    https://paystack.com/docs/api/refund/
     """
 
     async def create(

@@ -15,7 +15,7 @@ class Product(BaseAPI):
     """Provides a wrapper for paystack Products API
 
     The Products API allows you to create and manage inventories on your integration.
-    https://paystack.com/docs/api/#product
+    https://paystack.com/docs/api/product/
     """
 
     def create(
@@ -162,7 +162,7 @@ class AsyncProduct(BaseAsyncAPI):
     """Provides a wrapper for paystack Products API
 
     The Products API allows you to create and manage inventories on your integration.
-    https://paystack.com/docs/api/#product
+    https://paystack.com/docs/api/product/
     """
 
     async def create(

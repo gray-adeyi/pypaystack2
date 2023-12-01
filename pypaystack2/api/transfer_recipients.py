@@ -17,7 +17,7 @@ class TransferRecipient(BaseAPI):
     """Provides a wrapper for paystack Transfer Receipts API
 
     The Transfer Recipients API allows you to create and manage beneficiaries that you send money to.
-    https://paystack.com/docs/api/#transfer-recipient
+    https://paystack.com/docs/api/transfer-recipient/
 
     Note:
         Feature Availability
@@ -193,7 +193,7 @@ class AsyncTransferRecipient(BaseAsyncAPI):
     """Provides a wrapper for paystack Transfer Receipts API
 
     The Transfer Recipients API allows you to create and manage beneficiaries that you send money to.
-    https://paystack.com/docs/api/#transfer-recipient
+    https://paystack.com/docs/api/transfer-recipient/
 
     Note:
         Feature Availability

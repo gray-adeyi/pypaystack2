@@ -160,7 +160,7 @@ class Terminal(BaseAPI):
         payload = {
             "serial_number": serial_number,
         }
-        return self._handle_request("POST", url, payload)
+        return self._handle_request(HTTPMethod.POST, url, payload)
 
     def decommission_terminal(self, serial_number: str) -> Response:
         """Unlink your debug device from your integration
@@ -184,7 +184,7 @@ class AsyncTerminal(BaseAsyncAPI):
 
     The Terminal API allows you to create and manage recurring
     payment on your integration.
-    https://paystack.com/docs/api/#terminal
+    https://paystack.com/docs/api/terminal/
     """
 
     async def send_event(

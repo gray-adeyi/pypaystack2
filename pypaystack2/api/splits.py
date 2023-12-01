@@ -20,7 +20,7 @@ class TransactionSplit(BaseAPI):
 
     The Transaction Splits API enables merchants split the settlement for a transaction
     across their payout account, and one or more Subaccounts.
-    https://paystack.com/docs/api/#split
+    https://paystack.com/docs/api/split/
     """
 
     def create(
@@ -191,7 +191,7 @@ class AsyncTransactionSplit(BaseAsyncAPI):
 
     The Transaction Splits API enables merchants split the settlement for a transaction
     across their payout account, and one or more Subaccounts.
-    https://paystack.com/docs/api/#split
+    https://paystack.com/docs/api/split/
     """
 
     async def create(

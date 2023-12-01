@@ -9,7 +9,7 @@ class Subscription(BaseAPI):
 
     The Subscriptions API allows you to create and manage recurring
     payment on your integration.
-    https://paystack.com/docs/api/#subscription
+    https://paystack.com/docs/api/subscription/
     """
 
     def create(
@@ -57,7 +57,7 @@ class Subscription(BaseAPI):
         page: int = 1,
         pagination: int = 50,
         customer: Optional[int] = None,
-        plan: Optional[int] = None,
+        plan: Optional[str] = None,
     ) -> Response:
         """Fetch subscriptions available on your integration.
 
@@ -163,7 +163,7 @@ class AsyncSubscription(BaseAsyncAPI):
 
     The Subscriptions API allows you to create and manage recurring
     payment on your integration.
-    https://paystack.com/docs/api/#subscription
+    https://paystack.com/docs/api/subscription/
     """
 
     async def create(
@@ -211,7 +211,7 @@ class AsyncSubscription(BaseAsyncAPI):
         page: int = 1,
         pagination: int = 50,
         customer: Optional[int] = None,
-        plan: Optional[int] = None,
+        plan: Optional[str] = None,
     ) -> Response:
         """Fetch subscriptions available on your integration.
 
