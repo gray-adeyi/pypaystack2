@@ -19,7 +19,6 @@ from pypaystack2.api.terminals import Terminal, AsyncTerminal
 from pypaystack2.api.transactions import AsyncTransaction, Transaction
 from pypaystack2.api.transfer_recipients import (
     AsyncTransferRecipient,
-    RecipientType,
     TransferRecipient,
 )
 from pypaystack2.api.transfers import AsyncTransfer, Transfer

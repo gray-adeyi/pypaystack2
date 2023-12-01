@@ -1,11 +1,11 @@
-from unittest import TestCase, IsolatedAsyncioTestCase
+from unittest import IsolatedAsyncioTestCase
 
 import httpx
 from dotenv import load_dotenv
 
 from pypaystack2.api.transfer_recipients import AsyncTransferRecipient
 from pypaystack2.utils import RecipientType, Currency, Recipient
-from tests.test_api.mocked_api_testcase import MockedAPITestCase, MockedAsyncAPITestCase
+from tests.test_api.mocked_api_testcase import MockedAsyncAPITestCase
 
 
 class MockedAsyncTransferRecipientTestCase(MockedAsyncAPITestCase):

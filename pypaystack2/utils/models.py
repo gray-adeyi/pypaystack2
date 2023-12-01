@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from typing import Any, Optional, Union, NamedTuple
 
+from pypaystack2.utils.enums import RecipientType
+
 
 @dataclass
 class BulkChargeInstruction:
@@ -207,7 +209,7 @@ class Recipient:
         account_number: The account number of recipient.
     """
 
-    type: "RecipientType"
+    type: RecipientType
     name: str
     bank_code: str
     account_number: str

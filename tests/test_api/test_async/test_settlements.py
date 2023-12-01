@@ -4,7 +4,7 @@ import httpx
 from dotenv import load_dotenv
 
 from pypaystack2.api.settlements import AsyncSettlement
-from tests.test_api.mocked_api_testcase import MockedAPITestCase, MockedAsyncAPITestCase
+from tests.test_api.mocked_api_testcase import MockedAsyncAPITestCase
 
 
 class MockedAsyncSettlementTestCase(MockedAsyncAPITestCase):
