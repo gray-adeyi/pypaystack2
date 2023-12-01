@@ -6,7 +6,7 @@ class Integration(BaseAPI):
     """Provides a wrapper for paystack Integration API
 
     The Integration API allows you to manage some settings on your integration.
-    https://paystack.com/docs/api/#control-panel
+    https://paystack.com/docs/api/integration/
     """
 
     def get_payment_session_timeout(self) -> Response:
@@ -38,7 +38,7 @@ class AsyncIntegration(BaseAsyncAPI):
     """Provides a wrapper for paystack Integration API
 
     The Integration API allows you to manage some settings on your integration.
-    https://paystack.com/docs/api/#control-panel
+    https://paystack.com/docs/api/integration/
     """
 
     async def get_payment_session_timeout(self) -> Response:

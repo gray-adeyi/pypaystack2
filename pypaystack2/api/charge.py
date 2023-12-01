@@ -8,7 +8,7 @@ class Charge(BaseAPI):
     """Provides a wrapper for paystack Charge API
 
     The Charge API allows you to configure a payment channel of your choice when initiating a payment.
-    [https://paystack.com/docs/api/charge/](https://paystack.com/docs/api/charge/)
+    https://paystack.com/docs/api/charge/
 
     """
 
@@ -17,6 +17,7 @@ class Charge(BaseAPI):
         email: str,
         amount: int,
         bank: Optional[dict] = None,
+        bank_transfer: Optional[dict] = None,
         auth_code: Optional[str] = None,
         pin: Optional[str] = None,
         metadata: Optional[dict] = None,
@@ -24,7 +25,6 @@ class Charge(BaseAPI):
         ussd: Optional[dict] = None,
         mobile_money: Optional[dict] = None,
         device_id: Optional[str] = None,
-        birthday: Optional[str] = None,
     ) -> Response:
         """Initiate a payment by integrating the payment channel of your choice.
 
@@ -33,6 +33,8 @@ class Charge(BaseAPI):
             amount: Amount should be in kobo if currency is NGN, pesewas, if currency is GHS,
                 and cents, if currency is ZAR
             bank: Bank account to charge (don't send if charging an authorization code)
+            bank_transfer: Takes the settings for the Pay with Transfer (PwT) channel. Pass in the
+                account_expires_at param to set the expiry time.
             auth_code: An authorization code to charge (don't send if charging a bank account)
             pin: 4-digit PIN (send with a non-reusable authorization code)
             metadata: A dictionary of data.
@@ -41,7 +43,6 @@ class Charge(BaseAPI):
             mobile_money: Mobile details (don't send if charging an authorization code, bank or card)
             device_id: This is the unique identifier of the device a user uses in making payment. Only -, .\\`,
                 = and alphanumeric characters allowed.
-            birthday: Date of birth.
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -51,6 +52,7 @@ class Charge(BaseAPI):
         payload = {"email": email, "amount": amount}
         optional_params = [
             ("bank", bank),
+            ("bank_transfer", bank_transfer),
             ("authorization_code", auth_code),
             ("pin", pin),
             ("metadata", metadata),
@@ -58,7 +60,6 @@ class Charge(BaseAPI):
             ("ussd", ussd),
             ("mobile_money", mobile_money),
             ("device_id", device_id),
-            ("birthday", birthday),
         ]
         payload = add_to_payload(optional_params, payload)
         url = self._parse_url("/charge")
@@ -177,7 +178,7 @@ class AsyncCharge(BaseAsyncAPI):
     """Provides a wrapper for paystack Charge API
 
     The Charge API allows you to configure a payment channel of your choice when initiating a payment.
-    [https://paystack.com/docs/api/charge/](https://paystack.com/docs/api/charge/)
+    https://paystack.com/docs/api/charge/
 
     """
 
@@ -186,6 +187,7 @@ class AsyncCharge(BaseAsyncAPI):
         email: str,
         amount: int,
         bank: Optional[dict] = None,
+        bank_transfer: Optional[dict] = None,
         auth_code: Optional[str] = None,
         pin: Optional[str] = None,
         metadata: Optional[dict] = None,
@@ -193,7 +195,6 @@ class AsyncCharge(BaseAsyncAPI):
         ussd: Optional[dict] = None,
         mobile_money: Optional[dict] = None,
         device_id: Optional[str] = None,
-        birthday: Optional[str] = None,
     ) -> Response:
         """Initiate a payment by integrating the payment channel of your choice.
 
@@ -202,6 +203,8 @@ class AsyncCharge(BaseAsyncAPI):
             amount: Amount should be in kobo if currency is NGN, pesewas, if currency is GHS,
                 and cents, if currency is ZAR
             bank: Bank account to charge (don't send if charging an authorization code)
+            bank_transfer: Takes the settings for the Pay with Transfer (PwT) channel. Pass in the
+                account_expires_at param to set the expiry time.
             auth_code: An authorization code to charge (don't send if charging a bank account)
             pin: 4-digit PIN (send with a non-reusable authorization code)
             metadata: A dictionary of data.
@@ -210,7 +213,6 @@ class AsyncCharge(BaseAsyncAPI):
             mobile_money: Mobile details (don't send if charging an authorization code, bank or card)
             device_id: This is the unique identifier of the device a user uses in making payment. Only -, .\\`,
                 = and alphanumeric characters allowed.
-            birthday: The birthdate of the customer.
 
         Returns:
             A named tuple containing the response gotten from paystack's server.
@@ -220,6 +222,7 @@ class AsyncCharge(BaseAsyncAPI):
         payload = {"email": email, "amount": amount}
         optional_params = [
             ("bank", bank),
+            ("bank_transfer", bank_transfer),
             ("authorization_code", auth_code),
             ("pin", pin),
             ("metadata", metadata),
@@ -227,7 +230,6 @@ class AsyncCharge(BaseAsyncAPI):
             ("ussd", ussd),
             ("mobile_money", mobile_money),
             ("device_id", device_id),
-            ("birthday", birthday),
         ]
         payload = add_to_payload(optional_params, payload)
         url = self._parse_url("/charge")

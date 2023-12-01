@@ -4,7 +4,7 @@ import httpx
 from dotenv import load_dotenv
 
 from pypaystack2.api import Transfer
-from pypaystack2.utils import Recipient, TransferInstruction
+from pypaystack2.utils import TransferInstruction
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
 

@@ -16,7 +16,7 @@ class Transfer(BaseAPI):
     """Provides a wrapper for paystack Transfers API
 
     The Transfers API allows you to automate sending money on your integration
-    https://paystack.com/docs/api/#transfer
+    https://paystack.com/docs/api/transfer/
 
     Note
     ----
@@ -173,7 +173,7 @@ class AsyncTransfer(BaseAsyncAPI):
     """Provides a wrapper for paystack Transfers API
 
     The Transfers API allows you to automate sending money on your integration
-    https://paystack.com/docs/api/#transfer
+    https://paystack.com/docs/api/transfer/
 
     Note
     ----

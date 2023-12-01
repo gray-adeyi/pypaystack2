@@ -46,6 +46,8 @@ class Interval(str, Enum):
     DAILY = "daily"
     WEEKLY = "weekly"
     MONTHLY = "monthly"
+    QUARTERLY = "quarterly"
+    BIANNUALLY = "biannually"
     ANNUALLY = "annually"
 
 

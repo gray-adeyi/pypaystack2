@@ -16,7 +16,7 @@ class Dispute(BaseAPI):
     """Provides a wrapper for paystack Disputes API
 
     The Disputes API allows you to manage transaction disputes on your integration.
-    https://paystack.com/docs/api/#dispute
+    https://paystack.com/docs/api/dispute/
     """
 
     def get_disputes(
@@ -232,7 +232,7 @@ class AsyncDispute(BaseAsyncAPI):
     """Provides a wrapper for paystack Disputes API
 
     The Disputes API allows you manage transaction disputes on your integration.
-    https://paystack.com/docs/api/#dispute
+    https://paystack.com/docs/api/dispute/
     """
 
     async def get_disputes(

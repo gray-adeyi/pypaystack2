@@ -8,7 +8,7 @@ class PaymentPage(BaseAPI):
     """Provides a wrapper for paystack Payment Pages API
 
     The Payment Pages API provides a quick and secure way to collect payment for products.
-    https://paystack.com/docs/api/#page
+    https://paystack.com/docs/api/page/
     """
 
     def create(
@@ -16,6 +16,7 @@ class PaymentPage(BaseAPI):
         name: str,
         description: Optional[str] = None,
         amount: Optional[int] = None,
+        split_code: Optional[str] = None,
         slug: Optional[str] = None,
         metadata: Optional[str] = None,
         redirect_url: Optional[str] = None,
@@ -28,6 +29,7 @@ class PaymentPage(BaseAPI):
             description: A description for this page
             amount: Amount should be in kobo if currency is ``Currency.NGN``, pesewas, if
                 currency is ``Currency.GHS``, and cents, if currency is ``Currency.ZAR``
+            split_code: The split code of the transaction split. e.g. SPL_98WF13Eb3w
             slug: URL slug you would like to be associated with this page.
                 Page will be accessible at ``https://paystack.com/pay/[slug]``
             metadata: Extra data to configure the payment page including subaccount,
@@ -47,6 +49,7 @@ class PaymentPage(BaseAPI):
         optional_params = [
             ("description", description),
             ("amount", amount),
+            ("split_code", split_code),
             ("slug", slug),
             ("metadata", metadata),
             ("redirect_url", redirect_url),
@@ -103,7 +106,7 @@ class PaymentPage(BaseAPI):
         id_or_slug: str,
         name: str,
         description: str,
-        amount: int,
+        amount: Optional[int] = None,
         active: Optional[bool] = None,
     ) -> Response:
         """Get details of a payment page on your integration.
@@ -167,7 +170,7 @@ class AsyncPaymentPage(BaseAsyncAPI):
     """Provides a wrapper for paystack Payment Pages API
 
     The Payment Pages API provides a quick and secure way to collect payment for products.
-    https://paystack.com/docs/api/#page
+    https://paystack.com/docs/api/page/
     """
 
     async def create(
@@ -175,6 +178,7 @@ class AsyncPaymentPage(BaseAsyncAPI):
         name: str,
         description: Optional[str] = None,
         amount: Optional[int] = None,
+        split_code: Optional[str] = None,
         slug: Optional[str] = None,
         metadata: Optional[str] = None,
         redirect_url: Optional[str] = None,
@@ -187,6 +191,7 @@ class AsyncPaymentPage(BaseAsyncAPI):
             description: A description for this page
             amount: Amount should be in kobo if currency is ``Currency.NGN``, pesewas, if
                 currency is ``Currency.GHS``, and cents, if currency is ``Currency.ZAR``
+            split_code: The split code of the transaction split. e.g. SPL_98WF13Eb3w
             slug: URL slug you would like to be associated with this page.
                 Page will be accessible at ``https://paystack.com/pay/[slug]``
             metadata: Extra data to configure the payment page including subaccount,
@@ -206,6 +211,7 @@ class AsyncPaymentPage(BaseAsyncAPI):
         optional_params = [
             ("description", description),
             ("amount", amount),
+            ("split_code", split_code),
             ("slug", slug),
             ("metadata", metadata),
             ("redirect_url", redirect_url),
@@ -262,7 +268,7 @@ class AsyncPaymentPage(BaseAsyncAPI):
         id_or_slug: str,
         name: str,
         description: str,
-        amount: int,
+        amount: Optional[int] = None,
         active: Optional[bool] = None,
     ) -> Response:
         """Get details of a payment page on your integration.

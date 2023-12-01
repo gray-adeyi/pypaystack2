@@ -1,4 +1,4 @@
-from unittest import TestCase, IsolatedAsyncioTestCase
+from unittest import IsolatedAsyncioTestCase
 
 import httpx
 from dotenv import load_dotenv

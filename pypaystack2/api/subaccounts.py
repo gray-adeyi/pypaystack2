@@ -16,7 +16,7 @@ class SubAccount(BaseAPI):
     The Subaccounts API allows you to create and manage subaccounts on your integration.
     Subaccounts can be used to split payment between two accounts
     (your main account and a sub account).
-    https://paystack.com/docs/api/#subaccount
+    https://paystack.com/docs/api/subaccount/
     """
 
     def create(
@@ -178,7 +178,7 @@ class AsyncSubAccount(BaseAsyncAPI):
     The Subaccounts API allows you to create and manage subaccounts on your integration.
     Subaccounts can be used to split payment between two accounts
     (your main account and a sub account).
-    https://paystack.com/docs/api/#subaccount
+    https://paystack.com/docs/api/subaccount/
     """
 
     async def create(

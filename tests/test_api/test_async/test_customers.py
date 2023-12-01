@@ -1,4 +1,4 @@
-from unittest import TestCase, IsolatedAsyncioTestCase
+from unittest import IsolatedAsyncioTestCase
 from uuid import uuid4
 
 import httpx

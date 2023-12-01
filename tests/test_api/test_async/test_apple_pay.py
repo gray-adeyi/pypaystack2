@@ -39,7 +39,10 @@ class AsyncApplePayTestCase(IsolatedAsyncioTestCase):
         expected_response = Response(
             status_code=400,
             status=False,
-            message="Domain could not be registered on Apple Pay. Please verify that the correct file is hosted at https://example.com/.well-known/apple-developer-merchantid-domain-association",
+            message=(
+                "Domain could not be registered on Apple Pay. Please verify that the correct file is "
+                "hosted at https://example.com/.well-known/apple-developer-merchantid-domain-association"
+            ),
             data=None,
         )
         self.assertEqual(response, expected_response)

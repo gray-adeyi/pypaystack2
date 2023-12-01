@@ -6,7 +6,7 @@ class TransferControl(BaseAPI):
     """Provides a wrapper for paystack Transfers Control API
 
     The Transfer Control API allows you to manage settings of your transfers.
-    https://paystack.com/docs/api/#transfer-control
+    https://paystack.com/docs/api/transfer-control/
     """
 
     def check_balance(self) -> Response:
@@ -101,7 +101,7 @@ class AsyncTransferControl(BaseAsyncAPI):
     """Provides a wrapper for paystack Transfers Control API
 
     The Transfer Control API allows you to manage settings of your transfers.
-    https://paystack.com/docs/api/#transfer-control
+    https://paystack.com/docs/api/transfer-control/
     """
 
     async def check_balance(self) -> Response:

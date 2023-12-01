@@ -20,7 +20,6 @@ class MockedChargeTestCase(MockedAPITestCase):
             email="coyotedevmail@gmail.com",
             amount=1000,
             bank=bank_data,
-            birthday="1999-04-29",
         )
         self.assertEqual(response.status_code, httpx.codes.OK)
 
@@ -75,7 +74,6 @@ class ChargeTestCase(TestCase):
             email="coyotedevmail@gmail.com",
             amount=1000,
             bank=bank_data,
-            birthday="1999-04-29",
         )
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)

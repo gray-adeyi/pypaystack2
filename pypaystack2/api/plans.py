@@ -18,7 +18,7 @@ class Plan(BaseAPI):
     """Provides a wrapper for paystack Plans API
 
     The Plans API allows you to create and manage installment payment options on your integration.
-    https://paystack.com/docs/api/#plan
+    https://paystack.com/docs/api/plan/
     """
 
     def create(
@@ -179,7 +179,7 @@ class AsyncPlan(BaseAsyncAPI):
     """Provides a wrapper for paystack Plans API
 
     The Plans API allows you to create and manage installment payment options on your integration.
-    https://paystack.com/docs/api/#plan
+    https://paystack.com/docs/api/plan/
     """
 
     async def create(

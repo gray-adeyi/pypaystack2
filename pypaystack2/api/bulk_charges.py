@@ -14,7 +14,7 @@ class BulkCharge(BaseAPI):
     """Provides a wrapper for paystack Bulk Charge API
 
     The Bulk Charges API allows you to create and manage multiple recurring payments from your customers.
-    [https://paystack.com/docs/api/bulk-charge/](https://paystack.com/docs/api/bulk-charge/)
+    https://paystack.com/docs/api/bulk-charge/
     """
 
     def initiate(self, body: list[BulkChargeInstruction]) -> Response:
@@ -148,7 +148,7 @@ class AsyncBulkCharge(BaseAsyncAPI):
     """Provides a wrapper for paystack Bulk Charge API
 
     The Bulk Charges API allows you to create and manage multiple recurring payments from your customers.
-    [https://paystack.com/docs/api/bulk-charge/](https://paystack.com/docs/api/bulk-charge/)
+    https://paystack.com/docs/api/bulk-charge/
     """
 
     async def initiate(self, body: list[BulkChargeInstruction]) -> Response:

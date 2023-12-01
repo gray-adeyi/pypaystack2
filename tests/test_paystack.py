@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from dotenv import load_dotenv
 
-from pypaystack2 import Paystack, Split, AsyncPaystack
+from pypaystack2 import Paystack, AsyncPaystack
 from pypaystack2.api import (
     PaymentPage,
     ApplePay,

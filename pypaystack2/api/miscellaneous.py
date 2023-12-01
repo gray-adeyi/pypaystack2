@@ -16,7 +16,7 @@ class Miscellaneous(BaseAPI):
     """Provides a wrapper for paystack Miscellaneous API
 
     The Miscellaneous API are supporting APIs that can be used to provide more details to other APIs.
-    https://paystack.com/docs/api/#miscellaneous
+    https://paystack.com/docs/api/miscellaneous/
     """
 
     def get_banks(
@@ -28,6 +28,8 @@ class Miscellaneous(BaseAPI):
         gateway: Optional[Gateway] = None,
         type: Optional[BankType] = None,
         currency: Optional[Currency] = None,
+        pay_with_bank_transfer: Optional[bool] = None,
+        pay_with_bank: Optional[bool] = None,
         pagination: int = 50,
     ) -> Response:
         """Get a list of all supported banks and their properties
@@ -42,6 +44,9 @@ class Miscellaneous(BaseAPI):
             type: Type of financial channel. For Ghanaian channels, please use either
                 mobile_money for mobile money channels OR ghipps for bank channels
             currency: Any value from the Currency enum.
+            pay_with_bank_transfer: A flag to filter for available banks a customer can make a transfer to
+                complete a payment
+            pay_with_bank: A flag to filter for banks a customer can pay directly from
             pagination: The number of objects to return per page. Defaults to 50, and limited to 100 records per page.
 
         Returns:
@@ -58,24 +63,10 @@ class Miscellaneous(BaseAPI):
             ("gateway", gateway),
             ("type", type),
             ("currency", currency),
+            ("pay_with_bank_transfer", pay_with_bank_transfer),
+            ("pay_with_bank", pay_with_bank),
         ]
         url = append_query_params(query_params, url)
-        return self._handle_request(HTTPMethod.GET, url)
-
-    def get_providers(
-        self,
-        pay_with_bank_transfer: bool = False,
-    ) -> Response:
-        """Get a list of all providers for Dedicated Virtual Account
-
-        Args:
-            pay_with_bank_transfer: A flag to filter for available providers
-
-        Returns:
-            A named tuple containing the response gotten from paystack's server.
-        """
-
-        url = self._parse_url(f"/bank?pay_with_bank_transfer={pay_with_bank_transfer}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def get_countries(self) -> Response:
@@ -106,7 +97,7 @@ class AsyncMiscellaneous(BaseAsyncAPI):
     """Provides a wrapper for paystack Miscellaneous API
 
     The Miscellaneous API are supporting APIs that can be used to provide more details to other APIs.
-    https://paystack.com/docs/api/#miscellaneous
+    https://paystack.com/docs/api/miscellaneous/
     """
 
     async def get_banks(
@@ -118,6 +109,8 @@ class AsyncMiscellaneous(BaseAsyncAPI):
         gateway: Optional[Gateway] = None,
         type: Optional[BankType] = None,
         currency: Optional[Currency] = None,
+        pay_with_bank_transfer: Optional[bool] = None,
+        pay_with_bank: Optional[bool] = None,
         pagination: int = 50,
     ) -> Response:
         """Get a list of all supported banks and their properties
@@ -132,6 +125,9 @@ class AsyncMiscellaneous(BaseAsyncAPI):
             type: Type of financial channel. For Ghanaian channels, please use either
                 mobile_money for mobile money channels OR ghipps for bank channels
             currency: Any value from the Currency enum.
+            pay_with_bank_transfer: A flag to filter for available banks a customer can make a transfer to
+                complete a payment
+            pay_with_bank: A flag to filter for banks a customer can pay directly from
             pagination: The number of objects to return per page. Defaults to 50, and limited to 100 records per page.
 
         Returns:
@@ -148,24 +144,10 @@ class AsyncMiscellaneous(BaseAsyncAPI):
             ("gateway", gateway),
             ("type", type),
             ("currency", currency),
+            ("pay_with_bank_transfer", pay_with_bank_transfer),
+            ("pay_with_bank", pay_with_bank),
         ]
         url = append_query_params(query_params, url)
-        return await self._handle_request(HTTPMethod.GET, url)
-
-    async def get_providers(
-        self,
-        pay_with_bank_transfer: bool = False,
-    ) -> Response:
-        """Get a list of all providers for Dedicated Virtual Account
-
-        Args:
-            pay_with_bank_transfer: A flag to filter for available providers
-
-        Returns:
-            A named tuple containing the response gotten from paystack's server.
-        """
-
-        url = self._parse_url(f"/bank?pay_with_bank_transfer={pay_with_bank_transfer}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def get_countries(self) -> Response:
