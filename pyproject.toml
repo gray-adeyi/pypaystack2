@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pypaystack2"
-version = "2.0.1"
+version = "2.0.2"
 description = "A developer-friendly API wrapper."
 authors = ["Gbenga Adeyi <adeyigbenga005@gmail.com>"]
 readme = "README.md"
@@ -14,8 +14,8 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.7"
-httpx = "^0.24.0"
+python = "^3.9"
+httpx = "^0.25.2"
 
 [tool.poetry.group.dev.dependencies]
 python-dotenv = "^0.21.0"
@@ -26,6 +26,7 @@ mkdocstrings = { extras = ["python"], version = "^0.21.2" }
 pytest = "^7.2.0"
 black = "^22.12.0"
 tomli = "^2.0.1"
+ruff = "^0.1.6"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
