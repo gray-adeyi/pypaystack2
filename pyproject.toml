@@ -1,32 +1,45 @@
-[tool.poetry]
+[project]
 name = "pypaystack2"
-version = "2.0.2"
-description = "A developer-friendly API wrapper."
-authors = ["Gbenga Adeyi <adeyigbenga005@gmail.com>"]
+version = "2.1.0"
+description = "A developer-friendly client library for Paystack"
 readme = "README.md"
-packages = [{ include = "pypaystack2" }]
-keywords = ["paystack-python", "pypaystack", "paystack", "paystackapi"]
 license = "MIT"
+authors = [
+    { name = "Gbenga Adeyi", email = "adeyigbenga005@gmail.com" }
+]
+keywords = ["paystack-python", "pypaystack", "paystack", "paystackapi"]
 classifiers = [
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
 ]
 
-[tool.poetry.dependencies]
-python = "^3.9"
-httpx = "^0.25.2"
-[tool.poetry.group.dev.dependencies]
-python-dotenv = "^0.21.0"
-mkdocs = "^1.4.2"
-mkdocs-material = "^8.5.11"
-typer = "^0.7.0"
-mkdocstrings = { extras = ["python"], version = "^0.21.2" }
-pytest = "^7.2.0"
-black = "^22.12.0"
-tomli = "^2.0.1"
-ruff = "^0.1.6"
+dependencies = [
+    "httpx>=0.27.0",
+]
+requires-python = ">= 3.9"
 
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "python-dotenv>=1.0.1",
+    "mkdocs>=1.5.3",
+    "mkdocs-material>=9.5.15",
+    "typer>=0.9.0",
+    "mkdocstrings[python]>=0.24.1",
+    "pytest>=8.1.1",
+    "tomli>=2.0.1",
+]
+[tool.rye.scripts]
+docs = "mkdocs serve"
+docs-build = "mkdocs build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/pypaystack2"]
