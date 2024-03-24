@@ -86,10 +86,5 @@ please create an issue at the projects [github repo](https://gray-adeyi.github.i
 - [gray-adeyi](https://github.com/gray-adeyi)
 
 ## Buy me a coffee
-```python
-account_information = {
-  "account_name": "Gbenga Adeyi",
-  "account_number":"3000606742",
-  "bank":"Kuda",
-}
-```
+
+[https://www.buymeacoffee.com/jigani](https://www.buymeacoffee.com/jigani)
