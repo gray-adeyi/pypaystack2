@@ -1,5 +1,5 @@
 *.pyc
-dist
+dist/
 .vscode
 .env
 .pytest_cache
