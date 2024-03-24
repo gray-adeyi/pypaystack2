@@ -55,5 +55,11 @@ class ApplePayTestCase(TestCase):
         self.assertEqual(response, expected_response)
 
     def test_can_unregister_domain(self):
-        with self.assertRaises(NotImplementedError):
-            self.wrapper.unregister_domain(domain_name="example.com")
+        response = self.wrapper.unregister_domain(domain_name="example.com")
+        expected_response = Response(
+            status_code=200,
+            status=True,
+            message="Domain successfully unregistered on Apple Pay",
+            data=None,
+        )
+        self.assertEqual(response, expected_response)

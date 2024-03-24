@@ -58,5 +58,11 @@ class AsyncApplePayTestCase(IsolatedAsyncioTestCase):
         self.assertEqual(response, expected_response)
 
     async def test_can_unregister_domain(self):
-        with self.assertRaises(NotImplementedError):
-            await self.wrapper.unregister_domain(domain_name="example.com")
+        response = await self.wrapper.unregister_domain(domain_name="example.com")
+        expected_response = Response(
+            status_code=200,
+            status=True,
+            message="Domain successfully unregistered on Apple Pay",
+            data=None,
+        )
+        self.assertEqual(response, expected_response)
