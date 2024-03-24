@@ -1,14 +1,14 @@
 ## How to use the new Paystack class
 
 In previous versions of `pypaystack2`, it is required to import all the various API
-wrappers required to achieve a goal. e.g. say you want to work with the transactions
+wrappers required to achieve a goal. E.g. say you want to work with the transactions
 API wrapper and the customer API wrapper, the code below demonstrates how it's achieved
 
 ```python
 from pypaystack2.api import Transaction, Customer
 ```
 
-Besides having to import these different wrappers, you'll also have to instantiate them, 
+Besides having to import these different wrappers, you'll also have to instantiate them,
 individually. While this kind of import will continue to be supported, I've added
 a new `Paystack` class which has all the wrappers bound to it. So now the preferred
 way to use `pypaystack2` is demonstrated below
@@ -40,17 +40,19 @@ from pypaystack2 import Paystack
 
 paystack_api = Paystack()  # assumes your PAYSTACK_AUTHORIZATION_KEY is set
 payment_requests_api_response = paystack_api.payment_requests.create(customer="CUS_xwaj0txjryg393b",
-                                                            amount=1000)  # Creates an invoice with a charge of ₦100
+                                                                     amount=1000)  # Creates an invoice with a charge of ₦100
 transaction_api_response = paystack_api.transactions.get_transactions()
 customer_api_response = paystack_api.transactions.get_transactions()
 ```
+
 For `async/await`
+
 ```python
 from pypaystack2 import AsyncPaystack
 
 paystack_api = AsyncPaystack()  # assumes your PAYSTACK_AUTHORIZATION_KEY is set
 payment_requests_api_response = await paystack_api.payment_requests.create(customer="CUS_xwaj0txjryg393b",
-                                                            amount=1000)  # Creates an invoice with a charge of ₦100
+                                                                           amount=1000)  # Creates an invoice with a charge of ₦100
 transaction_api_response = await paystack_api.transactions.get_transactions()
 customer_api_response = await paystack_api.transactions.get_transactions()
 ```
@@ -67,7 +69,6 @@ customer_api_response = await paystack_api.transactions.get_transactions()
         >>> import asyncio
         >>>
         ```
-
 
 ### Bindings on the Paystack object
 

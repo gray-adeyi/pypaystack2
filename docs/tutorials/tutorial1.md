@@ -38,7 +38,7 @@ If all work's fine, you're good to proceed.
 `pypaystack2` depends on your paystack authorization key that you get from signing up to paystack.
 Paystack provides you with two pairs. A pair of public and secret keys for live mode and another set
 for test mode. You can find them in your account settings. Since this is just a tutorial, we'll be
-using only the test secret key. create a new file named `.env` within your project's root directory.
+using only the test secret key. Create a new file named `.env` within your project's root directory.
 Now put in your test secret key in the `.env` file like so.
 
 ```env
