@@ -24,8 +24,8 @@ class MockedApplePayTestCase(MockedAPITestCase):
         self.assertEqual(response.status_code, httpx.codes.OK)
 
     def test_can_unregister_domain(self):
-        with self.assertRaises(NotImplementedError):
-            self.wrapper.unregister_domain(domain_name="example.com")
+        response = self.wrapper.unregister_domain(domain_name="example.com")
+        self.assertEqual(response.status_code, httpx.codes.OK)
 
 
 class ApplePayTestCase(TestCase):
@@ -39,7 +39,11 @@ class ApplePayTestCase(TestCase):
         expected_response = Response(
             status_code=400,
             status=False,
-            message="Domain could not be registered on Apple Pay. Please verify that the correct file is hosted at https://example.com/.well-known/apple-developer-merchantid-domain-association",
+            message=(
+                "Domain could not be registered on Apple Pay. Please verify that the "
+                "correct file is hosted at https://example.com/.well-known/apple-deve"
+                "loper-merchantid-domain-association"
+            ),
             data=None,
         )
         self.assertEqual(response, expected_response)
@@ -47,13 +51,19 @@ class ApplePayTestCase(TestCase):
     def test_can_get_domains(self):
         response = self.wrapper.get_domains()
         expected_response = Response(
-            status_code=200,
-            status=True,
-            message="Apple Pay registered domains retrieved",
-            data={"domainNames": []},
+            status_code=404,
+            status=False,
+            message="pypaystack2 was unable to serialize response as json data",
+            data={"content": b""},
         )
         self.assertEqual(response, expected_response)
 
     def test_can_unregister_domain(self):
-        with self.assertRaises(NotImplementedError):
-            self.wrapper.unregister_domain(domain_name="example.com")
+        response = self.wrapper.unregister_domain(domain_name="example.com")
+        expected_response = Response(
+            status_code=200,
+            status=True,
+            message="Domain successfully unregistered on Apple Pay",
+            data=None,
+        )
+        self.assertEqual(response, expected_response)

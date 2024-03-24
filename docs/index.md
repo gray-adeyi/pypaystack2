@@ -1,22 +1,23 @@
 ![PyPaystack2 logo](assets/pypaystack2.svg)
 <center>**A developer friendly wrapper for Paystack API**</center>
 <hr/>
-Documentation: [https://github.com/gray-adeyi/pypaystack2](https://github.com/gray-adeyi/pypaystack2)
+Documentation: [https://github.com/gray-adeyi/pypaystack2](https://gray-adeyi.github.io/pypaystack2/)
 
-Source Code: [https://gray-adeyi.github.io/pypaystack2/](https://gray-adeyi.github.io/pypaystack2/)
+Source Code: [https://gray-adeyi.github.io/pypaystack2/](https://github.com/gray-adeyi/pypaystack2)
 <hr/>
 PyPaystack2 is a python wrapper over the [Paystack API](https://paystack.com/docs/api). It aims at being 
 developer friendly and easy to use.
 
 The key features are:
 
-* **Type hints**: All methods provided by PyPaystack2 are type annotated, so you can easily infer. This improves the
+* **Type hints**: All methods provided by PyPaystack2 are type annotated, so you can infer. This improves the
   development experience.
 * **Async support**: PyPaystack2 allow you to also make calls to Paystack API using `async/await` which is super great,
-  for example, if your project is in [FastAPI](https://fastapi.tiangolo.com/) where every chance of a performance 
+  for example, if your project is in [FastAPI](https://fastapi.tiangolo.com/) where every chance of a performance
   improvement adds up.
 
 ## Requirements
+
 Python 3.9+
 
 PyPaystack2 now uses [httpx](https://www.python-httpx.org/) under the hood to make API calls to Paystack. Compared
@@ -24,12 +25,14 @@ to previous version `1.1.3` and down which use `requests`. This switch has made 
 based wrappers.
 
 ## Installation
+
 ```bash
 $ pip install pypaystack2
 ```
 
 ## Example
-```python
+
+```bash
 Python 3.9.15 (main, Dec 12 2022, 21:54:43) 
 [GCC 12.2.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
@@ -45,16 +48,22 @@ Customer retrieved
 >>> 
 
 ```
-All you need to interact with Paystack's API in your python project is the `Paystack class` it has [attributes](how-to-guides.md#bindings-on-the-paystack-object)
-bounded to it that provides methods you can call in your code to make API calls to Paystack. Every method call on the wrapper
-has the same return type, which is a [Response](reference/index.md#pypaystack2.utils.Response). A namedtuple containing the data from making the actual call to Paystack servers
+
+All you need to interact with Paystack's API in your python project is the `Paystack class` it
+has [attributes](how-to-guides.md#bindings-on-the-paystack-object)
+bounded to it that provides methods you can call in your code to make API calls to Paystack. Every method call on the
+wrapper
+has the same return type, which is a [Response](reference/index.md#pypaystack2.utils.Response). A namedtuple containing
+the data from making the actual call to Paystack servers
 
 ## Async Now!
+
 PyPaystack2 now supports asynchronous wrappers to Paystack's API. `AsyncPaystack` is an asynchronous mirror equivalent
 of the `Paystack` wrapper. i.e. `AsyncPaystack` provides the same functionality as the `Paystack` wrapper but is more
 useful in the context of `async\await` code. All the bindings on the `AsyncPaystack` are the same as on the `Paystack`
 wrapper except that the methods on the `AsyncPaystack` are `awaitable`
-```python
+
+```bash
 asyncio REPL 3.9.15 (main, Dec 12 2022, 21:54:43) 
 [GCC 12.2.0] on linux
 Use "await" directly instead of "asyncio.run()".
@@ -74,22 +83,13 @@ Customer retrieved
 ```
 
 ## License
+
 This project is licensed under the terms of the MIT license.
 
-## Notice
-This project is a third party open source project and is in no way directly related to Paystack. It's made out of love ♥️
-for the services offered by Paystack. You can help make it better. If you find typos while reading this documentation or
-you find any part of it that's out of date, also if you find any bugs while using it or have ideas to make it better,
-please create an issue at the projects [github repo](https://gray-adeyi.github.io/pypaystack2/).
-
 ## Contributors
+
 - [gray-adeyi](https://github.com/gray-adeyi)
 
 ## Buy me a coffee
-```python
-account_information = {
-  "account_name": "Gbenga Adeyi",
-  "account_number":"3000606742",
-  "bank":"Kuda",
-}
-```
+
+[https://www.buymeacoffee.com/jigani](https://www.buymeacoffee.com/jigani)

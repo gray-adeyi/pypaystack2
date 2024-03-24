@@ -1,5 +1,8 @@
 from typing import Optional
 
+import httpx
+from httpx import codes
+
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.utils import HTTPMethod, Response, append_query_params
 
@@ -74,10 +77,13 @@ class ApplePay(BaseAPI):
         payload = {
             "domainName": domain_name,
         }
-        # return self._handle_request(HTTPMethod.DELETE, url, payload)
-        raise NotImplementedError(
-            "The package `httpx` which PyPaystack uses to make REST "
-            "API calls does not allow HTTPMethod.DELETE have a body"
+        raw_response = httpx.request(
+            HTTPMethod.DELETE, url, json=payload, headers=self._headers
+        )
+        return (
+            self._parse_response(raw_response)
+            if codes.is_success(raw_response.status_code)
+            else self._parse_response(raw_response, as_error=True)
         )
 
 
@@ -145,8 +151,12 @@ class AsyncApplePay(BaseAsyncAPI):
         payload = {
             "domainName": domain_name,
         }
-        # return await self._handle_request(HTTPMethod.DELETE, url, payload)
-        raise NotImplementedError(
-            "The package `httpx` which PyPaystack uses to make REST "
-            "API calls does not allow HTTPMethod.DELETE have a body"
+        async with httpx.AsyncClient() as client:
+            raw_response = await client.request(
+                HTTPMethod.DELETE, url, json=payload, headers=self._headers
+            )
+        return (
+            self._parse_response(raw_response)
+            if codes.is_success(raw_response.status_code)
+            else self._parse_response(raw_response, as_error=True)
         )
