@@ -74,15 +74,11 @@ Customer retrieved
 ```
 
 ## License
+
 This project is licensed under the terms of the MIT license.
 
-## Notice
-This project is a third party open source project and is in no way directly related to Paystack. It's made out of love ♥️
-for the services offered by Paystack. You can help make it better. If you find typos while reading this documentation or
-you find any part of it that's out of date, also if you find any bugs while using it or have ideas to make it better,
-please create an issue at the projects [github repo](https://gray-adeyi.github.io/pypaystack2/).
-
 ## Contributors
+
 - [gray-adeyi](https://github.com/gray-adeyi)
 
 ## Buy me a coffee
