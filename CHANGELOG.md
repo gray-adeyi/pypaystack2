@@ -5,17 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.0.3] - 2024-03-24
+
+### Added
+
+- Changelog to project.
 
 ### Fixed
 
 - `ApplePay.unregister_domain` and `AsyncApplePay.unregister_domain` raises `NotImplementedError`
 - Client raises `JSONDecodeError` when response is not json serializable. It now returns with a
   `Response` with the `data` parameter containing a `content` field with the bytes content returned.
-
-### Added
-
-- Changelog to project.
+- Mismatched source code and documentation links in docs
 
 ## [2.0.2] - 2023-12-01
 
@@ -82,7 +83,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Breaks projects were it is added as a dependency
 
-[unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v2.0.2...HEAD
+[unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v2.0.3...HEAD
+
+[2.0.3]: https://github.com/olivierlacan/keep-a-changelog/compare/v2.0.2...v2.0.3
 
 [2.0.2]: https://github.com/gray-adeyi/pypaystack2/compare/v2.0.1...v2.0.2
 
