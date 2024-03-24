@@ -83,9 +83,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Breaks projects were it is added as a dependency
 
-[unreleased]: https://github.com/olivierlacan/keep-a-changelog/compare/v2.0.3...HEAD
+[unreleased]: https://github.com/gray-adeyi/pypaystack2/compare/v2.0.3...HEAD
 
-[2.0.3]: https://github.com/olivierlacan/keep-a-changelog/compare/v2.0.2...v2.0.3
+[2.0.3]: https://github.com/gray-adeyi/pypaystack2/compare/v2.0.2...v2.0.3
 
 [2.0.2]: https://github.com/gray-adeyi/pypaystack2/compare/v2.0.1...v2.0.2
 
