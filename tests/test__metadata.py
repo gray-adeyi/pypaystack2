@@ -2,6 +2,7 @@ from pathlib import Path
 from unittest import TestCase
 
 import tomli
+
 from pypaystack2 import __title__, __version__, __author__, __license__
 
 BASE_DIR = Path().parent
@@ -15,28 +16,28 @@ class PackageMetadataTestCase(TestCase):
 
     def test_package_title(self):
         self.assertEqual(
-            self.pyproject_data["tool"]["poetry"]["name"],
+            self.pyproject_data["project"]["name"],
             __title__,
             "Mismatched package name",
         )
 
     def test_package_version(self):
         self.assertEqual(
-            self.pyproject_data["tool"]["poetry"]["version"],
+            self.pyproject_data["project"]["version"],
             __version__,
             "Mismatched package version",
         )
 
     def test_package_author(self):
         self.assertListEqual(
-            self.pyproject_data["tool"]["poetry"]["authors"],
+            self.pyproject_data["project"]["authors"],
             __author__,
             "Mismatched package authors",
         )
 
     def test_package_license(self):
         self.assertEqual(
-            self.pyproject_data["tool"]["poetry"]["license"],
+            self.pyproject_data["project"]["license"],
             __license__,
             "Mismatched package license",
         )
