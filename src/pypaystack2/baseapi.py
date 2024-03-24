@@ -1,5 +1,6 @@
 import os
 from abc import ABC, abstractmethod
+from json import JSONDecodeError
 from typing import Union, Optional
 
 import httpx
@@ -54,7 +55,15 @@ class AbstractAPI(ABC):
             A python namedtuple of Response which contains
             status code, status(bool), message, data
         """
-        response_body = raw_response.json()
+        try:
+            response_body = raw_response.json()
+        except JSONDecodeError:
+            return Response(
+                status_code=raw_response.status_code,
+                status=False,
+                message="pypaystack2 was unable to serialize response as json data",
+                data={"content": raw_response.content},
+            )
 
         status = response_body.get("status", None)
         message = response_body.get("message", None)
@@ -78,8 +87,7 @@ class AbstractAPI(ABC):
     @abstractmethod
     def _handle_request(
         self, method: HTTPMethod, url: str, data: Optional[Union[dict, list]] = None
-    ) -> Response:
-        ...
+    ) -> Response: ...
 
 
 class BaseAPI(AbstractAPI):
