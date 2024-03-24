@@ -1,16 +1,16 @@
 ![PyPaystack2 logo](assets/pypaystack2.svg)
 <center>**A developer friendly wrapper for Paystack API**</center>
 <hr/>
-Documentation: [https://github.com/gray-adeyi/pypaystack2](https://github.com/gray-adeyi/pypaystack2)
+Documentation: [https://github.com/gray-adeyi/pypaystack2](https://gray-adeyi.github.io/pypaystack2/)
 
-Source Code: [https://gray-adeyi.github.io/pypaystack2/](https://gray-adeyi.github.io/pypaystack2/)
+Source Code: [https://gray-adeyi.github.io/pypaystack2/](https://github.com/gray-adeyi/pypaystack2)
 <hr/>
 PyPaystack2 is a python wrapper over the [Paystack API](https://paystack.com/docs/api). It aims at being 
 developer friendly and easy to use.
 
 The key features are:
 
-* **Type hints**: All methods provided by PyPaystack2 are type annotated, so you can easily infer. This improves the
+* **Type hints**: All methods provided by PyPaystack2 are type annotated, so you can infer. This improves the
   development experience.
 * **Async support**: PyPaystack2 allow you to also make calls to Paystack API using `async/await` which is super great,
   for example, if your project is in [FastAPI](https://fastapi.tiangolo.com/) where every chance of a performance
