@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - `ApplePay.unregister_domain` and `AsyncApplePay.unregister_domain` raises `NotImplementedError`
+- Client raises `JSONDecodeError` when response is not json serializable. It now returns with a
+  `Response` with the `data` parameter containing a `content` field with the bytes content returned.
 
 ### Added
 
