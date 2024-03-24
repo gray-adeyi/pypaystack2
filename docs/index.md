@@ -13,10 +13,11 @@ The key features are:
 * **Type hints**: All methods provided by PyPaystack2 are type annotated, so you can easily infer. This improves the
   development experience.
 * **Async support**: PyPaystack2 allow you to also make calls to Paystack API using `async/await` which is super great,
-  for example, if your project is in [FastAPI](https://fastapi.tiangolo.com/) where every chance of a performance 
+  for example, if your project is in [FastAPI](https://fastapi.tiangolo.com/) where every chance of a performance
   improvement adds up.
 
 ## Requirements
+
 Python 3.9+
 
 PyPaystack2 now uses [httpx](https://www.python-httpx.org/) under the hood to make API calls to Paystack. Compared
@@ -24,12 +25,14 @@ to previous version `1.1.3` and down which use `requests`. This switch has made 
 based wrappers.
 
 ## Installation
+
 ```bash
 $ pip install pypaystack2
 ```
 
 ## Example
-```python
+
+```bash
 Python 3.9.15 (main, Dec 12 2022, 21:54:43) 
 [GCC 12.2.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
@@ -45,16 +48,22 @@ Customer retrieved
 >>> 
 
 ```
-All you need to interact with Paystack's API in your python project is the `Paystack class` it has [attributes](how-to-guides.md#bindings-on-the-paystack-object)
-bounded to it that provides methods you can call in your code to make API calls to Paystack. Every method call on the wrapper
-has the same return type, which is a [Response](reference/index.md#pypaystack2.utils.Response). A namedtuple containing the data from making the actual call to Paystack servers
+
+All you need to interact with Paystack's API in your python project is the `Paystack class` it
+has [attributes](how-to-guides.md#bindings-on-the-paystack-object)
+bounded to it that provides methods you can call in your code to make API calls to Paystack. Every method call on the
+wrapper
+has the same return type, which is a [Response](reference/index.md#pypaystack2.utils.Response). A namedtuple containing
+the data from making the actual call to Paystack servers
 
 ## Async Now!
+
 PyPaystack2 now supports asynchronous wrappers to Paystack's API. `AsyncPaystack` is an asynchronous mirror equivalent
 of the `Paystack` wrapper. i.e. `AsyncPaystack` provides the same functionality as the `Paystack` wrapper but is more
 useful in the context of `async\await` code. All the bindings on the `AsyncPaystack` are the same as on the `Paystack`
 wrapper except that the methods on the `AsyncPaystack` are `awaitable`
-```python
+
+```bash
 asyncio REPL 3.9.15 (main, Dec 12 2022, 21:54:43) 
 [GCC 12.2.0] on linux
 Use "await" directly instead of "asyncio.run()".
