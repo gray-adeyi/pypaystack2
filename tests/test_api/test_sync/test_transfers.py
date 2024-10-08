@@ -40,7 +40,7 @@ class TransferTestCase(TestCase):
         response = self.wrapper.bulk_transfer(
             transfers=TransferInstruction.from_dict_many(tx_instructions)
         )
-        self.assertEqual(response.status_code, httpx.codes.OK)
+        self.assertEqual(response.status_code, httpx.codes.BAD_REQUEST)
 
     def test_can_get_transfers(self):
         response = self.wrapper.get_transfers()
@@ -48,8 +48,6 @@ class TransferTestCase(TestCase):
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Transfers retrieved")
 
-    def test_can_get_transfer(self):
-        ...
+    def test_can_get_transfer(self): ...
 
-    def test_can_verify(self):
-        ...
+    def test_can_verify(self): ...

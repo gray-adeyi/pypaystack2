@@ -66,6 +66,9 @@ class ApplePay(BaseAPI):
     def unregister_domain(self, domain_name: str) -> Response:
         """Unregister a top-level domain or subdomain previously used for your Apple Pay integration.
 
+        Args:
+            domain_name: Domain name to be unregistered
+
         Note
             * This feature is available to businesses in all markets except South Africa.
 
@@ -140,11 +143,14 @@ class AsyncApplePay(BaseAsyncAPI):
     async def unregister_domain(self, domain_name: str) -> Response:
         """Unregister a top-level domain or subdomain previously used for your Apple Pay integration.
 
-        Note
-            * This feature is available to businesses in all markets except South Africa.
+        Args:
+             domain_name: Domain name to be unregistered
 
-        Returns:
-            A named tuple containing the response gotten from paystack's server.
+         Note
+             * This feature is available to businesses in all markets except South Africa.
+
+         Returns:
+             A named tuple containing the response gotten from paystack's server.
         """
 
         url = self._parse_url("/apple-pay/domain")

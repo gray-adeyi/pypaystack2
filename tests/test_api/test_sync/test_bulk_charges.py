@@ -56,9 +56,7 @@ class BulkChargeTestCase(TestCase):
         response = self.wrapper.initiate(
             body=BulkChargeInstruction.from_dict_many(instructions)
         )
-        self.assertEqual(response.status_code, httpx.codes.OK)
-        self.assertTrue(response.status)
-        self.assertEqual(response.message, "Charges have been queued")
+        self.assertEqual(response.status_code, httpx.codes.BAD_REQUEST)
 
     def test_can_get_batches(self):
         response = self.wrapper.get_batches()

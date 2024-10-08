@@ -5,6 +5,48 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## unreleased
+
+### Changed
+
+- Charge.setAddress -> Charge.submitAddress
+
+## [2.1.0] - 2024-10-08
+
+### Added
+
+- Param documentation for ApplePay.unregister_domain
+- Param documentation for AsyncApplePay.unregister_domain
+- `meta`, `type` and `code` fields to `Response`
+
+### Changed
+
+- Bumped httpx to 0.27.2
+- Transaction.get_transactions(customer: Optional[int]) -> Transaction.get_transactions(customer: Optional[str])
+- AsyncTransaction.get_transactions(customer: Optional[int]) -> AsyncTransaction.get_transactions(customer:
+  Optional[str])
+- Transaction.export(customer: Optional[int]) -> Transaction.export(customer: Optional[str])
+- AsyncTransaction.export(customer: Optional[int]) -> AsyncTransaction.export(customer: Optional[str])
+- Transaction.export(settlement: Optional[int]) -> Transaction.export(settlement: Optional[str])
+- AsyncTransaction.export(settlement: Optional[int]) -> AsyncTransaction.export(settlement: Optional[str])
+- Transaction.export(payment_page: Optional[int]) -> Transaction.export(payment_page: Optional[str])
+- AsyncTransaction.export(payment_page: Optional[int]) -> AsyncTransaction.export(payment_page: Optional[str])
+- PaymentRequest.update `line_item` and `tax` parameter to use `Tax` and `LineItem` inplace of `list`
+- AsyncPaymentRequest.update `line_item` and `tax` parameter to use `Tax` and `LineItem` inplace of `list`
+- PaymentPage.metadata type
+- AsyncPaymentPage.metadata type
+- Plan.update documentation
+
+## Fixed
+
+- Use of literal "POST" in TransactionSplit.add_or_update
+- Use of literal "POST" in AsyncTransactionSplit.add_or_update
+
+## Removed
+
+- Redundant payload from Subscription.send_update_link
+- Redundant payload from AsyncSubscription.send_update_link
+
 ## [2.0.3] - 2024-03-24
 
 ### Added

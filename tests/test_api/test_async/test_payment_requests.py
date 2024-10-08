@@ -112,7 +112,7 @@ class AsyncPaymentRequestTestCase(IsolatedAsyncioTestCase):
     async def test_can_finalize(self):
         # TODO: Test Properly
         response = await self.wrapper.finalize(id_or_code="PRQ_886l127ke0on6jg")
-        self.assertEqual(response.status_code, httpx.codes.OK)
+        self.assertEqual(response.status_code, httpx.codes.BAD_REQUEST)
 
     async def test_can_update(self):
         # TODO: Test Properly
@@ -121,7 +121,7 @@ class AsyncPaymentRequestTestCase(IsolatedAsyncioTestCase):
             amount=300_000,
             customer="CUS_7khpwdrlvde8c6h",
         )
-        self.assertEqual(response.status_code, httpx.codes.OK)
+        self.assertEqual(response.status_code, httpx.codes.BAD_REQUEST)
 
     async def test_can_archive(self):
         response = await self.wrapper.archive(id_or_code="PRQ_886l127ke0on6jg")

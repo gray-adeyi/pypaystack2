@@ -53,6 +53,9 @@ class BaseAPITestCase(MockedAPITestCase):
                 status=True,
                 message="valid response",
                 data={"isValid": True},
+                meta=None,
+                type=None,
+                code=None,
             ),
         )
 
@@ -92,6 +95,9 @@ class BaseAPITestCase(MockedAPITestCase):
             status=True,
             message="This is a mocked response. No real API call to Paystack servers was made.",
             data={"isValid": True},
+            meta=None,
+            type=None,
+            code=None,
         )
         self.assertEqual(
             wrapper._handle_request(
@@ -120,6 +126,9 @@ class BaseAsyncAPITestCase(MockedAsyncAPITestCase):
             status=True,
             message="This is a mocked response. No real API call to Paystack servers was made.",
             data={"isValid": True},
+            meta=None,
+            type=None,
+            code=None,
         )
         self.assertEqual(
             await wrapper._handle_request(

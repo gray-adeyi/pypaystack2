@@ -44,6 +44,9 @@ class AsyncApplePayTestCase(IsolatedAsyncioTestCase):
                 "hosted at https://example.com/.well-known/apple-developer-merchantid-domain-association"
             ),
             data=None,
+            meta=None,
+            type=None,
+            code=None,
         )
         self.assertEqual(response, expected_response)
 
@@ -54,6 +57,9 @@ class AsyncApplePayTestCase(IsolatedAsyncioTestCase):
             status=False,
             message="pypaystack2 was unable to serialize response as json data",
             data={"content": b""},
+            meta=None,
+            type=None,
+            code=None,
         )
         self.assertEqual(response, expected_response)
 

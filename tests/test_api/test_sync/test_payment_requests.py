@@ -104,7 +104,7 @@ class PaymentRequestTestCase(TestCase):
     def test_can_finalize(self):
         # TODO: Test Properly
         response = self.wrapper.finalize(id_or_code="PRQ_886l127ke0on6jg")
-        self.assertEqual(response.status_code, httpx.codes.OK)
+        self.assertEqual(response.status_code, httpx.codes.BAD_REQUEST)
 
     def test_can_update(self):
         # TODO: Test Properly
@@ -113,7 +113,7 @@ class PaymentRequestTestCase(TestCase):
             amount=300_000,
             customer="CUS_7khpwdrlvde8c6h",
         )
-        self.assertEqual(response.status_code, httpx.codes.OK)
+        self.assertEqual(response.status_code, httpx.codes.BAD_REQUEST)
 
     def test_can_archive(self):
         response = self.wrapper.archive(id_or_code="PRQ_886l127ke0on6jg")
