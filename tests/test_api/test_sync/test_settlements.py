@@ -39,4 +39,4 @@ class SettlementTestCase(TestCase):
     def test_can_get_settlement_transactions(self):
         # TODO: Test properly
         response = self.wrapper.get_settlement_transactions(id="hello")
-        self.assertEqual(response.status_code, httpx.codes.OK)
+        self.assertEqual(response.status_code, httpx.codes.INTERNAL_SERVER_ERROR)

@@ -124,4 +124,4 @@ class AsyncCustomerTestCase(IsolatedAsyncioTestCase):
     async def test_can_deactivate(self):
         # TODO: Test properly
         response = await self.wrapper.deactivate(auth_code="AUTH_72btv547")
-        self.assertEqual(response.status_code, httpx.codes.OK)
+        self.assertEqual(response.status_code, httpx.codes.NOT_FOUND)

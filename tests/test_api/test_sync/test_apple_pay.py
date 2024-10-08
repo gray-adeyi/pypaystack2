@@ -55,6 +55,9 @@ class ApplePayTestCase(TestCase):
             status=False,
             message="pypaystack2 was unable to serialize response as json data",
             data={"content": b""},
+            meta=None,
+            type=None,
+            code=None,
         )
         self.assertEqual(response, expected_response)
 
