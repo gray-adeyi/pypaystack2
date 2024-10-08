@@ -168,7 +168,7 @@ class TransactionSplit(BaseAPI):
         share = validate_amount(share)
         payload = {"subaccount": subaccount, "share": share}
         url = self._parse_url(f"/split/{id}/subaccount/add")
-        return self._handle_request("POST", url, payload)
+        return self._handle_request(HTTPMethod.POST, url, payload)
 
     def remove(self, id: str, subaccount: str) -> Response:
         """Remove a subaccount from a transaction split
@@ -339,7 +339,7 @@ class AsyncTransactionSplit(BaseAsyncAPI):
         share = validate_amount(share)
         payload = {"subaccount": subaccount, "share": share}
         url = self._parse_url(f"/split/{id}/subaccount/add")
-        return await self._handle_request("POST", url, payload)
+        return await self._handle_request(HTTPMethod.POST, url, payload)
 
     async def remove(self, id: str, subaccount: str) -> Response:
         """Remove a subaccount from a transaction split

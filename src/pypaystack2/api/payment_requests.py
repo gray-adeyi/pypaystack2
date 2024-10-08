@@ -193,8 +193,8 @@ class PaymentRequest(BaseAPI):
         amount: int,
         due_date: Optional[str] = None,
         description: Optional[str] = None,
-        line_items: Optional[list[dict]] = None,
-        tax: Optional[list[dict]] = None,
+        line_items: Optional[list[LineItem]] = None,
+        tax: Optional[list[Tax]] = None,
         currency: Optional[Currency] = None,
         send_notification: Optional[bool] = None,
         draft: Optional[bool] = None,
@@ -225,6 +225,11 @@ class PaymentRequest(BaseAPI):
         """
 
         amount = validate_amount(amount)
+
+        if line_items:
+            line_items = [item.dict for item in line_items]
+        if tax:
+            tax = [unit_tax.dict for unit_tax in tax]
 
         url = self._parse_url(f"/paymentrequest/{id_or_code}")
         payload = {
@@ -437,8 +442,8 @@ class AsyncPaymentRequest(BaseAsyncAPI):
         amount: int,
         due_date: Optional[str] = None,
         description: Optional[str] = None,
-        line_items: Optional[list[dict]] = None,
-        tax: Optional[list[dict]] = None,
+        line_items: Optional[list[LineItem]] = None,
+        tax: Optional[list[Tax]] = None,
         currency: Optional[Currency] = None,
         send_notification: Optional[bool] = None,
         draft: Optional[bool] = None,
@@ -469,6 +474,11 @@ class AsyncPaymentRequest(BaseAsyncAPI):
         """
 
         amount = validate_amount(amount)
+
+        if line_items:
+            line_items = [item.dict for item in line_items]
+        if tax:
+            tax = [unit_tax.dict for unit_tax in tax]
 
         url = self._parse_url(f"/paymentrequest/{id_or_code}")
         payload = {

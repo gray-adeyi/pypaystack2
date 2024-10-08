@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Any
 
 from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
 from pypaystack2.utils import add_to_payload, append_query_params, HTTPMethod, Response
@@ -18,7 +18,7 @@ class PaymentPage(BaseAPI):
         amount: Optional[int] = None,
         split_code: Optional[str] = None,
         slug: Optional[str] = None,
-        metadata: Optional[str] = None,
+        metadata: Optional[dict[str, Any]] = None,
         redirect_url: Optional[str] = None,
         custom_fields: Optional[list] = None,
     ) -> Response:
@@ -180,7 +180,7 @@ class AsyncPaymentPage(BaseAsyncAPI):
         amount: Optional[int] = None,
         split_code: Optional[str] = None,
         slug: Optional[str] = None,
-        metadata: Optional[str] = None,
+        metadata: Optional[dict[str, Any]] = None,
         redirect_url: Optional[str] = None,
         custom_fields: Optional[list] = None,
     ) -> Response:

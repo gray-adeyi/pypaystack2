@@ -154,8 +154,7 @@ class Subscription(BaseAPI):
         """
 
         url = self._parse_url(f"/subscription/{code}/manage/email/")
-        payload = {"code": "code"}
-        return self._handle_request(HTTPMethod.POST, url, payload)
+        return self._handle_request(HTTPMethod.POST, url, None)
 
 
 class AsyncSubscription(BaseAsyncAPI):
@@ -308,5 +307,4 @@ class AsyncSubscription(BaseAsyncAPI):
         """
 
         url = self._parse_url(f"/subscription/{code}/manage/email/")
-        payload = {"code": "code"}
-        return await self._handle_request(HTTPMethod.POST, url, payload)
+        return await self._handle_request(HTTPMethod.POST, url, None)

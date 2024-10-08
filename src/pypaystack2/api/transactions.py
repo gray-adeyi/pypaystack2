@@ -113,7 +113,7 @@ class Transaction(BaseAPI):
 
     def get_transactions(
         self,
-        customer: Optional[int] = None,
+        customer: Optional[str] = None,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
         status: Optional[TransactionStatus] = None,
@@ -291,13 +291,13 @@ class Transaction(BaseAPI):
         page: Optional[int] = None,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
-        customer: Optional[int] = None,
+        customer: Optional[str] = None,
         status: Optional[TransactionStatus] = None,
         currency: Optional[Currency] = None,
         amount: Optional[int] = None,
         settled: Optional[bool] = None,
-        settlement: Optional[int] = None,
-        payment_page: Optional[int] = None,
+        settlement: Optional[str] = None,
+        payment_page: Optional[str] = None,
         pagination: int = 50,
     ) -> Response:
         """Fetch transactions carried out on your integration.
@@ -492,7 +492,7 @@ class AsyncTransaction(BaseAsyncAPI):
 
     async def get_transactions(
         self,
-        customer: Optional[int] = None,
+        customer: Optional[str] = None,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
         status: Optional[TransactionStatus] = None,
@@ -670,13 +670,13 @@ class AsyncTransaction(BaseAsyncAPI):
         page: Optional[int] = None,
         start_date: Optional[str] = None,
         end_date: Optional[str] = None,
-        customer: Optional[int] = None,
+        customer: Optional[str] = None,
         status: Optional[TransactionStatus] = None,
         currency: Optional[Currency] = None,
         amount: Optional[int] = None,
         settled: Optional[bool] = None,
-        settlement: Optional[int] = None,
-        payment_page: Optional[int] = None,
+        settlement: Optional[str] = None,
+        payment_page: Optional[str] = None,
         pagination: int = 50,
     ) -> Response:
         """Fetch transactions carried out on your integration.
