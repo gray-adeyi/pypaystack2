@@ -4,7 +4,6 @@ from json import JSONDecodeError
 from typing import Union, Optional
 
 import httpx
-from httpx import codes
 
 from pypaystack2._metadata import __version__
 from pypaystack2.exceptions import InvalidMethodException, MissingAuthKeyException
@@ -45,9 +44,7 @@ class AbstractAPI(ABC):
             "User-Agent": f"PyPaystack2-{__version__}",
         }
 
-    def _parse_response(
-        self, raw_response: httpx.Response, as_error: bool = False
-    ) -> Response:
+    def _parse_response(self, raw_response: httpx.Response) -> Response:
         """
         Parses an `httpx.Response` into a `Response`.
 
@@ -63,16 +60,20 @@ class AbstractAPI(ABC):
                 status=False,
                 message="pypaystack2 was unable to serialize response as json data",
                 data={"content": raw_response.content},
+                meta=None,
+                type=None,
+                code=None,
             )
 
         status = response_body.get("status", None)
         message = response_body.get("message", None)
-        data = (
-            response_body.get("data", None)
-            if not as_error
-            else response_body.get("errors")
+        data = response_body.get("data", None)
+        meta = response_body.get("meta", None)
+        type_ = response_body.get("type", None)
+        code = response_body.get("code", None)
+        return Response(
+            raw_response.status_code, status, message, data, meta, type_, code
         )
-        return Response(raw_response.status_code, status, message, data)
 
     def _parse_http_method_kwargs(
         self, url: str, method: HTTPMethod, data: Optional[Union[dict, list]]
@@ -127,10 +128,7 @@ class BaseAPI(AbstractAPI):
             )
 
         response = http_method(**http_method_kwargs)
-        if codes.is_success(response.status_code):
-            return self._parse_response(response)
-        else:
-            return self._parse_response(response, as_error=True)
+        return self._parse_response(response)
 
 
 class BaseAsyncAPI(AbstractAPI):
@@ -155,7 +153,4 @@ class BaseAsyncAPI(AbstractAPI):
                 )
             response = await http_method(**http_method_kwargs)
 
-        if codes.is_success(response.status_code):
-            return self._parse_response(response)
-        else:
-            return self._parse_response(response, as_error=True)
+        return self._parse_response(response)
