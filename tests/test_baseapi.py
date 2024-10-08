@@ -126,6 +126,9 @@ class BaseAsyncAPITestCase(MockedAsyncAPITestCase):
             status=True,
             message="This is a mocked response. No real API call to Paystack servers was made.",
             data={"isValid": True},
+            meta=None,
+            type=None,
+            code=None,
         )
         self.assertEqual(
             await wrapper._handle_request(
