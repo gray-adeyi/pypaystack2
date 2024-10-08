@@ -324,9 +324,17 @@ class Response(NamedTuple):
         status: A flag for the response status
         message: Paystack response message
         data: Data sent from paystack's server if any.
+        meta: Additional information about the response.
+        type: In cases where the response has a status of `False` or the status code
+            is an error status code. the `type` field indicates the type of error e.g. `api_error`
+        code: In cases where the response has a status of `False` or the status code
+            is an error status code. the `type` field indicates the type of error e.g. `api_error`
     """
 
     status_code: int
     status: bool
     message: str
     data: Optional[Union[dict[str, Any], list[dict[str, Any]]]]
+    meta: Optional[dict]
+    type: Optional[str]
+    code: Optional[str]
