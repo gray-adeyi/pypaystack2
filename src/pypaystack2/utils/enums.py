@@ -37,6 +37,7 @@ class Currency(str, Enum):
     KES = "KES"
     XOF = "XOF"
     EGP = "EGP"
+    RWF = "RWF"
 
 
 class Interval(str, Enum):
@@ -95,6 +96,7 @@ class Country(str, Enum):
     KENYA = "KE"
     COTE_D_IVOIRE = "CI"
     EGYPT = "EG"
+    RWANDA = "RW"
 
     @staticmethod
     def get_full(value: str) -> Optional[str]:
@@ -115,6 +117,7 @@ class Country(str, Enum):
             "ke": "kenya",
             "ci": "côte d'ivoire",
             "eg": "egypt",
+            "rw": "rwanda",
         }.get(value)
 
 
@@ -209,3 +212,4 @@ class DisputeStatus(str, Enum):
     RESOLVED = "resolved"
     AWAITING_BANK_FEEDBACK = "awaiting-bank-feedback"
     AWAITING_MERCHANT_FEEDBACK = "awaiting-merchant-feedback"
+    ARCHIVED = "archived"
