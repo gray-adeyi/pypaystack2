@@ -45,6 +45,9 @@ class ApplePayTestCase(TestCase):
                 "loper-merchantid-domain-association"
             ),
             data=None,
+            meta=None,
+            type=None,
+            code=None,
         )
         self.assertEqual(response, expected_response)
 
@@ -68,5 +71,8 @@ class ApplePayTestCase(TestCase):
             status=True,
             message="Domain successfully unregistered on Apple Pay",
             data=None,
+            meta=None,
+            type=None,
+            code=None,
         )
         self.assertEqual(response, expected_response)
