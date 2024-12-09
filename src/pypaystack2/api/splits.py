@@ -233,11 +233,11 @@ class AsyncTransactionSplit(BaseAsyncAPI):
 
     async def get_splits(
         self,
-        name: str,
-        sort_by: Optional[str],
-        page: Optional[int],
-        start_date: Optional[str],
-        end_date: Optional[str],
+        name: Optional[str] = None,
+        sort_by: Optional[str] = None,
+        page: Optional[int] = None,
+        start_date: Optional[str] = None,
+        end_date: Optional[str] = None,
         active: bool = True,
         pagination: int = 50,
     ) -> Response:
