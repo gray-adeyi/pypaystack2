@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## unreleased
 
+## [2.1.1] - 2024-12-09
+
+### Added
+
+- Rwanda to paystack supported countries
+- RWF to paystack supported currencies
+
+### Changed
+
+- Make `TransactionSplit.get_splits` parameters optional
+
 ### Changed
 
 - Charge.setAddress -> Charge.submitAddress
