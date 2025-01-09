@@ -23,7 +23,7 @@ class DedicatedAccountTestCase(TestCase):
 
     def test_can_create(self):
         # TODO: Test properly.
-        response = self.wrapper.create(customer="CUS_5qmwswiljybyyne")
+        self.wrapper.create(customer="CUS_5qmwswiljybyyne")
 
     def test_can_get_dedicated_accounts(self): ...
 

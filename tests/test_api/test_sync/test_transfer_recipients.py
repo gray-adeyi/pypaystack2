@@ -55,7 +55,7 @@ class MockedTransferRecipientTestCase(MockedAPITestCase):
         self.assertEqual(response.status_code, httpx.codes.OK)
 
     def test_can_delete(self):
-        all_recipients_response = self.wrapper.get_transfer_recipients()
+        self.wrapper.get_transfer_recipients()
         response = self.wrapper.delete(id_or_code="54134578")
         self.assertEqual(response.status_code, httpx.codes.OK)
 

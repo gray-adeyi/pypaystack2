@@ -23,7 +23,7 @@ class SubAccountTestCase(TestCase):
 
     def test_can_create(self):
         # TODO: Test properly
-        response = self.wrapper.create(
+        self.wrapper.create(
             business_name="Coyote solutions",
             settlement_bank="044",
             account_number="0193274682",

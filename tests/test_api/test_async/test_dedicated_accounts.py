@@ -23,7 +23,7 @@ class AsyncDedicatedAccountTestCase(IsolatedAsyncioTestCase):
 
     async def test_can_create(self):
         # TODO: Test properly.
-        response = await self.wrapper.create(customer="CUS_5qmwswiljybyyne")
+        await self.wrapper.create(customer="CUS_5qmwswiljybyyne")
 
     async def test_can_get_dedicated_accounts(self): ...
 

@@ -35,7 +35,7 @@ class DisputeTestCase(TestCase):
 
     def test_can_get_transaction_disputes(self):
         # TODO: Test properly.
-        response = self.wrapper.get_transaction_disputes(id="114782792")
+        self.wrapper.get_transaction_disputes(id="114782792")
 
     def test_can_update_dispute(self): ...
 

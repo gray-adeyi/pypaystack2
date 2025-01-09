@@ -76,7 +76,7 @@ class TransactionTestCase(TestCase):
 
     def test_can_partial_debit(self):
         # TODO: Test properly.
-        response = self.wrapper.partial_debit(
+        self.wrapper.partial_debit(
             auth_code="AUTH_72btv547",
             currency=Currency.NGN,
             amount=10_000,
