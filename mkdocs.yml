@@ -19,14 +19,20 @@ theme:
         icon: material/lightbulb-outline
         name: Switch to dark mode
   features:
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.tabs
+    - navigation.top
+    - navigation.sections
+    - navigation.path
+    - navigation.indexes
+    - navigation.footer
     - search.suggest
     - search.highlight
+    - search.share
     - content.tabs.link
     - content.code.copy
     - content.code.select
-    - navigation.sections
-    - navigation.path
-    - navigation.top
   icon:
     repo: fontawesome/brands/github-alt
   logo: assets/pypaystack2.svg
@@ -36,8 +42,25 @@ repo_name: gray-adeyi/pypaystack2
 repo_url: https://github.com/gray-adeyi/pypaystack2
 
 plugins:
-  - mkdocstrings
+  - mike:
+      alias_type: symlink
+      redirect_template: null
+      deploy_prefix: ''
+      canonical_version: latest
+      version_selector: true
+      css_dir: css
+      javascript_dir: js
   - search
+  - mkdocstrings
+  - glightbox
+
+extra:
+  version:
+    provider: mike
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/gray-adeyi/pypaystack2
+
 markdown_extensions:
   - admonition
   - pymdownx.details
