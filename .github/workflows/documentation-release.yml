@@ -30,6 +30,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install uv
           uv sync
+          source .venv/bin/activate
       - name: Setup doc deploy
         run: |
           git config --global user.name Docs deploy

@@ -40,7 +40,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install uv
       - name: Install dependencies with uv
-        run: uv sync
+        run: |
+          uv sync
+          source .venv/bin/activate
       - name: Format with ruff
         run: ruff format .
       - name: Lint with ruff
