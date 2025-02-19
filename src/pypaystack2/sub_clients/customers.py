@@ -1,10 +1,10 @@
+from http import HTTPMethod
 from typing import Optional
 
 from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.utils import (
     add_to_payload,
-    HTTPMethod,
     append_query_params,
     Identification,
     Country,

@@ -1,10 +1,11 @@
+from http import HTTPMethod
 from typing import Optional
 
 import httpx
 from httpx import codes
 
 from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
-from pypaystack2.utils import HTTPMethod, Response, append_query_params
+from pypaystack2.utils import Response, append_query_params
 
 
 class ApplePayClient(BaseAPIClient):

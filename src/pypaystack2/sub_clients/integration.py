@@ -1,5 +1,7 @@
+from http import HTTPMethod
+
 from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
-from pypaystack2.utils import HTTPMethod, Response
+from pypaystack2.utils import Response
 
 
 class IntegrationClient(BaseAPIClient):

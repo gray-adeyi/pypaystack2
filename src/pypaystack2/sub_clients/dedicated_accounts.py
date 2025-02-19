@@ -1,3 +1,4 @@
+from http import HTTPMethod
 from typing import Optional
 
 from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
@@ -5,7 +6,6 @@ from pypaystack2.utils import (
     Currency,
     add_to_payload,
     append_query_params,
-    HTTPMethod,
     Response,
 )
 from pypaystack2.utils.enums import Country

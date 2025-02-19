@@ -1,7 +1,8 @@
+from http import HTTPMethod
 from typing import Optional
 
 from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
-from pypaystack2.utils import validate_amount, add_to_payload, HTTPMethod, Response
+from pypaystack2.utils import validate_amount, add_to_payload, Response
 
 
 class ChargeClient(BaseAPIClient):

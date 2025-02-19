@@ -1,7 +1,8 @@
+from http import HTTPMethod
 from typing import Optional
 
 from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
-from pypaystack2.utils import AccountType, Country, Document, HTTPMethod, Response
+from pypaystack2.utils import AccountType, Country, Document, Response
 
 
 class VerificationClient(BaseAPIClient):

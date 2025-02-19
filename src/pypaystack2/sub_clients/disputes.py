@@ -1,10 +1,10 @@
+from http import HTTPMethod
 from typing import Optional
 
 from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import (
     DisputeStatus,
     append_query_params,
-    HTTPMethod,
     validate_amount,
     add_to_payload,
     Resolution,
