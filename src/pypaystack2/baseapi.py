@@ -7,10 +7,11 @@ import httpx
 
 from pypaystack2._metadata import __version__
 from pypaystack2.exceptions import InvalidMethodException, MissingAuthKeyException
+from pypaystack2.fees_calculation_mixin import FeesCalculationMixin
 from pypaystack2.utils import HTTPMethod, Response
 
 
-class AbstractAPI(ABC):
+class AbstractAPI(FeesCalculationMixin, ABC):
     _CONTENT_TYPE = "application/json"
     _BASE_URL = "https://api.paystack.co"
 
@@ -72,11 +73,10 @@ class AbstractAPI(ABC):
         type_ = response_body.get("type", None)
         code = response_body.get("code", None)
         return Response(
-            raw_response.status_code, status, message, data, meta, type_, code
-        )
+            raw_response.status_code, status, message, data, meta, type_, code)
 
     def _parse_http_method_kwargs(
-        self, url: str, method: HTTPMethod, data: Optional[Union[dict, list]]
+            self, url: str, method: HTTPMethod, data: Optional[Union[dict, list]]
     ) -> dict:
         if url == "":
             raise ValueError("No url provided")
@@ -87,8 +87,9 @@ class AbstractAPI(ABC):
 
     @abstractmethod
     def _handle_request(
-        self, method: HTTPMethod, url: str, data: Optional[Union[dict, list]] = None
-    ) -> Response: ...
+            self, method: HTTPMethod, url: str, data: Optional[Union[dict, list]] = None
+    ) -> Response:
+        ...
 
 
 class BaseAPI(AbstractAPI):
@@ -97,7 +98,7 @@ class BaseAPI(AbstractAPI):
     """
 
     def _handle_request(
-        self, method: HTTPMethod, url: str, data: Union[dict, list] = None
+            self, method: HTTPMethod, url: str, data: Union[dict, list] = None
     ) -> Response:
         """
         Makes request to paystack servers.
@@ -133,7 +134,7 @@ class BaseAPI(AbstractAPI):
 
 class BaseAsyncAPI(AbstractAPI):
     async def _handle_request(
-        self, method: HTTPMethod, url: str, data: Union[dict, list] = None
+            self, method: HTTPMethod, url: str, data: Union[dict, list] = None
     ) -> Response:
         """
         Makes request to paystack servers.

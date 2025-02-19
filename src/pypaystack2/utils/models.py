@@ -1,5 +1,7 @@
 from dataclasses import dataclass
-from typing import Any, Optional, Union, NamedTuple
+from typing import Any, Optional, Union, NamedTuple, Literal, TypedDict, Self
+
+from pydantic import BaseModel, model_validator
 
 from pypaystack2.utils.enums import RecipientType
 
@@ -338,3 +340,93 @@ class Response(NamedTuple):
     meta: Optional[dict]
     type: Optional[str]
     code: Optional[str]
+
+
+class ServiceFeeOptions(TypedDict):
+    is_international: bool | None
+    service: str
+    is_eft: bool | None
+    card: str | None
+
+
+class BaseServiceFeeOptions(BaseModel):
+    is_international: bool = False
+
+
+class NigeriaServiceFeeOptions(BaseServiceFeeOptions):
+    service: Literal[
+        "transactions",
+        "transfers",
+        "virtual_account_transactions",
+        "virtual_terminal_transfers",
+        "virtual_terminal_ussd_transactions",
+        "virtual_terminal_local_card_transactions",
+        "virtual_terminal_international_card_transactions",
+        "physical_terminal_live_smartpeak_p1000",
+        "physical_terminal_test_smartpeak_p1000",
+        "physical_terminal_card_transactions",
+        "physical_terminal_ussd_transactions",
+        "physical_terminal_bank_transfers",
+    ] = "transactions"
+    card: Literal["mastercard", "visa", "verve", "american_express"] | None = None
+
+    @model_validator(mode="after")
+    def validate(self) -> Self:
+        if self.is_international and self.service != "transactions":
+            raise ValueError(
+                'only service="transactions" is supported when is_international=True'
+            )
+        if self.is_international and self.card is None:
+            raise ValueError("card is required when is_international=True")
+        if (
+            self.service == "virtual_terminal_international_card_transactions"
+            and self.card is None
+        ):
+            raise ValueError(
+                "card is required for service=virtual_terminal_international_card_transactions"
+            )
+        return self
+
+
+class CoteDIvoreServiceFeeOptions(BaseServiceFeeOptions):
+    service: Literal["mobile_money_transactions", "card_transactions"] = (
+        "mobile_money_transactions"
+    )
+
+
+class GhanaServiceFeeOptions(BaseServiceFeeOptions):
+    service: Literal[
+        "transactions", "transfers_to_mobile_money", "transfers_to_bank_accounts"
+    ] = "transactions"
+
+
+class KenyaServiceFeeOptions(BaseServiceFeeOptions):
+    service: Literal[
+        "mpesa_transactions",
+        "card_transactions",
+        "transfers_to_mpesa_wallet",
+        "transfers_to_mpesa_paybill",
+        "transfers_to_bank_account",
+    ] = "mpesa_transactions"
+
+
+class SouthAfricaServiceFeeOptions(BaseServiceFeeOptions):
+    service: Literal["transactions", "transfers"]
+    is_eft: bool | None = None
+
+    @model_validator(mode="after")
+    def validate(self) -> Self:
+        if self.service == "transfers":
+            self.is_eft = None
+        if self.service == "transactions" and self.is_eft is None:
+            self.is_eft = False
+        return self
+
+
+class RwandaServiceFeeOptions(BaseServiceFeeOptions):
+    service: str = "transactions"
+
+
+class EgyptServiceFeeOptions(BaseServiceFeeOptions):
+    service: str = "transactions"
+    card: Literal["meeza", "others"] = "others"
