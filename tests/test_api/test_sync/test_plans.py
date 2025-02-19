@@ -3,7 +3,7 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api import Plan
+from pypaystack2.sub_clients import PlanClient
 from pypaystack2.utils import Interval
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
@@ -13,7 +13,7 @@ class MockedPlanTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = Plan()
+        cls.wrapper = PlanClient()
 
     def test_can_create(self):
         response = self.wrapper.create(
@@ -43,7 +43,7 @@ class PlanTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = Plan()
+        cls.wrapper = PlanClient()
 
     def test_can_create(self):
         response = self.wrapper.create(

@@ -3,7 +3,7 @@ from unittest import IsolatedAsyncioTestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api.apple_pay import AsyncApplePay
+from pypaystack2.sub_clients.apple_pay import AsyncApplePayClient
 from pypaystack2.utils import Response
 from tests.test_api.mocked_api_testcase import MockedAsyncAPITestCase
 
@@ -13,7 +13,7 @@ class MockedAsyncApplePayTestCase(MockedAsyncAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = AsyncApplePay()
+        cls.wrapper = AsyncApplePayClient()
 
     async def test_can_register_domain(self):
         response = await self.wrapper.register_domain(domain_name="example.com")
@@ -32,7 +32,7 @@ class AsyncApplePayTestCase(IsolatedAsyncioTestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = AsyncApplePay()
+        cls.wrapper = AsyncApplePayClient()
 
     async def test_can_register_domain(self):
         response = await self.wrapper.register_domain(domain_name="example.com")

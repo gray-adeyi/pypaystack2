@@ -3,7 +3,7 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api import Integration
+from pypaystack2.sub_clients import IntegrationClient
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
 
@@ -12,7 +12,7 @@ class MockedIntegrationTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = Integration()
+        cls.wrapper = IntegrationClient()
 
     def test_can_get_payment_session_timeout(self):
         response = self.wrapper.get_payment_session_timeout()
@@ -27,7 +27,7 @@ class ControlIntegrationTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = Integration()
+        cls.wrapper = IntegrationClient()
 
     def test_can_get_payment_session_timeout(self):
         response = self.wrapper.get_payment_session_timeout()

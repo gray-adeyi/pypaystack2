@@ -1,10 +1,10 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import add_to_payload, append_query_params, HTTPMethod, Response
 
 
-class Subscription(BaseAPI):
+class SubscriptionClient(BaseAPIClient):
     """Provides a wrapper for paystack Subscriptions API
 
     The Subscriptions API allows you to create and manage recurring
@@ -42,7 +42,7 @@ class Subscription(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/subscription")
+        url = self._full_url("/subscription")
 
         payload = {"customer": customer, "plan": plan}
         optional_params = [
@@ -73,7 +73,7 @@ class Subscription(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/subscription/?perPage=" + str(pagination))
+        url = self._full_url("/subscription/?perPage=" + str(pagination))
         query_params = [
             ("page", page),
             ("customer", customer),
@@ -92,7 +92,7 @@ class Subscription(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/subscription/{id_or_code}")
+        url = self._full_url(f"/subscription/{id_or_code}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def enable(self, code: str, token: str) -> Response:
@@ -106,7 +106,7 @@ class Subscription(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/subscription/enable")
+        url = self._full_url("/subscription/enable")
         payload = {
             "code": code,
             "token": token,
@@ -123,7 +123,7 @@ class Subscription(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url("/subscription/disable")
+        url = self._full_url("/subscription/disable")
         payload = {
             "code": code,
             "token": token,
@@ -140,7 +140,7 @@ class Subscription(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/subscription/{code}/manage/link/")
+        url = self._full_url(f"/subscription/{code}/manage/link/")
         return self._handle_request(HTTPMethod.GET, url)
 
     def send_update_link(self, code: str) -> Response:
@@ -153,11 +153,11 @@ class Subscription(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/subscription/{code}/manage/email/")
+        url = self._full_url(f"/subscription/{code}/manage/email/")
         return self._handle_request(HTTPMethod.POST, url, None)
 
 
-class AsyncSubscription(BaseAsyncAPI):
+class AsyncSubscriptionClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Subscriptions API
 
     The Subscriptions API allows you to create and manage recurring
@@ -195,7 +195,7 @@ class AsyncSubscription(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/subscription")
+        url = self._full_url("/subscription")
 
         payload = {"customer": customer, "plan": plan}
         optional_params = [
@@ -226,7 +226,7 @@ class AsyncSubscription(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/subscription/?perPage=" + str(pagination))
+        url = self._full_url("/subscription/?perPage=" + str(pagination))
         query_params = [
             ("page", page),
             ("customer", customer),
@@ -245,7 +245,7 @@ class AsyncSubscription(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/subscription/{id_or_code}")
+        url = self._full_url(f"/subscription/{id_or_code}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def enable(self, code: str, token: str) -> Response:
@@ -259,7 +259,7 @@ class AsyncSubscription(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/subscription/enable")
+        url = self._full_url("/subscription/enable")
         payload = {
             "code": code,
             "token": token,
@@ -276,7 +276,7 @@ class AsyncSubscription(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url("/subscription/disable")
+        url = self._full_url("/subscription/disable")
         payload = {
             "code": code,
             "token": token,
@@ -293,7 +293,7 @@ class AsyncSubscription(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/subscription/{code}/manage/link/")
+        url = self._full_url(f"/subscription/{code}/manage/link/")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def send_update_link(self, code: str) -> Response:
@@ -306,5 +306,5 @@ class AsyncSubscription(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/subscription/{code}/manage/email/")
+        url = self._full_url(f"/subscription/{code}/manage/email/")
         return await self._handle_request(HTTPMethod.POST, url, None)

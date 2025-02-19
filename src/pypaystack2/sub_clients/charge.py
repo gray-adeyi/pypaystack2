@@ -1,10 +1,10 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import validate_amount, add_to_payload, HTTPMethod, Response
 
 
-class Charge(BaseAPI):
+class ChargeClient(BaseAPIClient):
     """Provides a wrapper for paystack Charge API
 
     The Charge API allows you to configure a payment channel of your choice when initiating a payment.
@@ -62,7 +62,7 @@ class Charge(BaseAPI):
             ("device_id", device_id),
         ]
         payload = add_to_payload(optional_params, payload)
-        url = self._parse_url("/charge")
+        url = self._full_url("/charge")
         return self._handle_request(HTTPMethod.POST, url, payload)
 
     def submit_pin(self, pin: str, reference: str) -> Response:
@@ -77,7 +77,7 @@ class Charge(BaseAPI):
         """
 
         payload = {"pin": pin, "reference": reference}
-        url = self._parse_url("/charge/submit_pin")
+        url = self._full_url("/charge/submit_pin")
         return self._handle_request(HTTPMethod.POST, url, payload)
 
     def submit_otp(self, otp: str, reference: str) -> Response:
@@ -92,7 +92,7 @@ class Charge(BaseAPI):
         """
 
         payload = {"otp": otp, "reference": reference}
-        url = self._parse_url("/charge/submit_otp")
+        url = self._full_url("/charge/submit_otp")
         return self._handle_request(HTTPMethod.POST, url, payload)
 
     def submit_phone(self, phone: str, reference: str) -> Response:
@@ -107,7 +107,7 @@ class Charge(BaseAPI):
         """
 
         payload = {"phone": phone, "reference": reference}
-        url = self._parse_url("/charge/submit_phone")
+        url = self._full_url("/charge/submit_phone")
         return self._handle_request(HTTPMethod.POST, url, payload)
 
     def submit_birthday(self, birthday: str, reference: str) -> Response:
@@ -122,7 +122,7 @@ class Charge(BaseAPI):
         """
 
         payload = {"birthday": birthday, "reference": reference}
-        url = self._parse_url("/charge/submit_birthday")
+        url = self._full_url("/charge/submit_birthday")
         return self._handle_request(HTTPMethod.POST, url, payload)
 
     def set_address(
@@ -153,7 +153,7 @@ class Charge(BaseAPI):
             "state": state,
             "zip_code": zipcode,
         }
-        url = self._parse_url("/charge/submit_address")
+        url = self._full_url("/charge/submit_address")
         return self._handle_request(HTTPMethod.POST, url, payload)
 
     def check_pending_charge(self, reference: str) -> Response:
@@ -170,11 +170,11 @@ class Charge(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/charge/{reference}")
+        url = self._full_url(f"/charge/{reference}")
         return self._handle_request(HTTPMethod.GET, url)
 
 
-class AsyncCharge(BaseAsyncAPI):
+class AsyncChargeClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Charge API
 
     The Charge API allows you to configure a payment channel of your choice when initiating a payment.
@@ -232,7 +232,7 @@ class AsyncCharge(BaseAsyncAPI):
             ("device_id", device_id),
         ]
         payload = add_to_payload(optional_params, payload)
-        url = self._parse_url("/charge")
+        url = self._full_url("/charge")
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
     async def submit_pin(self, pin: str, reference: str) -> Response:
@@ -247,7 +247,7 @@ class AsyncCharge(BaseAsyncAPI):
         """
 
         payload = {"pin": pin, "reference": reference}
-        url = self._parse_url("/charge/submit_pin")
+        url = self._full_url("/charge/submit_pin")
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
     async def submit_otp(self, otp: str, reference: str) -> Response:
@@ -262,7 +262,7 @@ class AsyncCharge(BaseAsyncAPI):
         """
 
         payload = {"otp": otp, "reference": reference}
-        url = self._parse_url("/charge/submit_otp")
+        url = self._full_url("/charge/submit_otp")
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
     async def submit_phone(self, phone: str, reference: str) -> Response:
@@ -277,7 +277,7 @@ class AsyncCharge(BaseAsyncAPI):
         """
 
         payload = {"phone": phone, "reference": reference}
-        url = self._parse_url("/charge/submit_phone")
+        url = self._full_url("/charge/submit_phone")
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
     async def submit_birthday(self, birthday: str, reference: str) -> Response:
@@ -292,7 +292,7 @@ class AsyncCharge(BaseAsyncAPI):
         """
 
         payload = {"birthday": birthday, "reference": reference}
-        url = self._parse_url("/charge/submit_birthday")
+        url = self._full_url("/charge/submit_birthday")
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
     async def set_address(
@@ -323,7 +323,7 @@ class AsyncCharge(BaseAsyncAPI):
             "state": state,
             "zip_code": zipcode,
         }
-        url = self._parse_url("/charge/submit_address")
+        url = self._full_url("/charge/submit_address")
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
     async def check_pending_charge(self, reference: str) -> Response:
@@ -340,5 +340,5 @@ class AsyncCharge(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/charge/{reference}")
+        url = self._full_url(f"/charge/{reference}")
         return await self._handle_request(HTTPMethod.GET, url)

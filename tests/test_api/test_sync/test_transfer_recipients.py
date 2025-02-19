@@ -3,8 +3,8 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api import RecipientType
-from pypaystack2.api.transfer_recipients import TransferRecipient
+from pypaystack2.sub_clients import RecipientType
+from pypaystack2.sub_clients.transfer_recipients import TransferRecipientClient
 from pypaystack2.utils import Currency, Recipient
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
@@ -14,7 +14,7 @@ class MockedTransferRecipientTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = TransferRecipient()
+        cls.wrapper = TransferRecipientClient()
 
     def test_can_create(self):
         response = self.wrapper.create(
@@ -64,7 +64,7 @@ class TransferRecipientTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = TransferRecipient()
+        cls.wrapper = TransferRecipientClient()
 
     def test_can_create(self):
         response = self.wrapper.create(

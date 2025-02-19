@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.utils import (
     add_to_payload,
@@ -13,7 +13,7 @@ from pypaystack2.utils import (
 )
 
 
-class Customer(BaseAPI):
+class CustomerClient(BaseAPIClient):
     """Provides a wrapper for paystack Customer API
 
     The Customers API allows you to create and manage customers in your integration.
@@ -48,7 +48,7 @@ class Customer(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/customer/")
+        url = self._full_url("/customer/")
         payload = {
             "email": email,
         }
@@ -86,7 +86,7 @@ class Customer(BaseAPI):
             ("from", start_date),
             ("to", end_date),
         ]
-        url = self._parse_url(f"/customer/?perPage={pagination}")
+        url = self._full_url(f"/customer/?perPage={pagination}")
         url = append_query_params(query_params, url)
         return self._handle_request(HTTPMethod.GET, url)
 
@@ -100,7 +100,7 @@ class Customer(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/customer/{email_or_code}/")
+        url = self._full_url(f"/customer/{email_or_code}/")
         return self._handle_request(HTTPMethod.GET, url)
 
     def update(
@@ -125,7 +125,7 @@ class Customer(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/customer/{code}/")
+        url = self._full_url(f"/customer/{code}/")
         payload = {}
 
         optional_params = [
@@ -179,7 +179,7 @@ class Customer(BaseAPI):
                     "`account_number` is required if identification type is `Identification.BANK_ACCOUNT`"
                 )
 
-        url = self._parse_url(f"/customer/{email_or_code}/identification")
+        url = self._full_url(f"/customer/{email_or_code}/identification")
         payload = {
             "first_name": first_name,
             "last_name": last_name,
@@ -211,7 +211,7 @@ class Customer(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/customer/set_risk_action")
+        url = self._full_url("/customer/set_risk_action")
         payload = {
             "customer": customer,
         }
@@ -234,14 +234,14 @@ class Customer(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/customer/deactivate_authorization")
+        url = self._full_url("/customer/deactivate_authorization")
         payload = {
             "authorization_code": auth_code,
         }
         return self._handle_request(HTTPMethod.POST, url, payload)
 
 
-class AsyncCustomer(BaseAsyncAPI):
+class AsyncCustomerClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Customer API
 
     The Customers API allows you to create and manage customers in your integration.
@@ -276,7 +276,7 @@ class AsyncCustomer(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/customer/")
+        url = self._full_url("/customer/")
         payload = {
             "email": email,
         }
@@ -314,7 +314,7 @@ class AsyncCustomer(BaseAsyncAPI):
             ("from", start_date),
             ("to", end_date),
         ]
-        url = self._parse_url(f"/customer/?perPage={pagination}")
+        url = self._full_url(f"/customer/?perPage={pagination}")
         url = append_query_params(query_params, url)
         return await self._handle_request(HTTPMethod.GET, url)
 
@@ -328,7 +328,7 @@ class AsyncCustomer(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/customer/{email_or_code}/")
+        url = self._full_url(f"/customer/{email_or_code}/")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def update(
@@ -353,7 +353,7 @@ class AsyncCustomer(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/customer/{code}/")
+        url = self._full_url(f"/customer/{code}/")
         payload = {}
 
         optional_params = [
@@ -407,7 +407,7 @@ class AsyncCustomer(BaseAsyncAPI):
                     "`account_number` is required if identification type is `Identification.BANK_ACCOUNT`"
                 )
 
-        url = self._parse_url(f"/customer/{email_or_code}/identification")
+        url = self._full_url(f"/customer/{email_or_code}/identification")
         payload = {
             "first_name": first_name,
             "last_name": last_name,
@@ -439,7 +439,7 @@ class AsyncCustomer(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/customer/set_risk_action")
+        url = self._full_url("/customer/set_risk_action")
         payload = {
             "customer": customer,
         }
@@ -462,7 +462,7 @@ class AsyncCustomer(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/customer/deactivate_authorization")
+        url = self._full_url("/customer/deactivate_authorization")
         payload = {
             "authorization_code": auth_code,
         }

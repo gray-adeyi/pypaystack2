@@ -3,14 +3,14 @@ from unittest import TestCase
 
 from dotenv import load_dotenv
 
-from pypaystack2 import Paystack, Currency
+from pypaystack2 import PaystackClient, Currency
 
 
 class PaystackFeesCalculationTestcase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.client = Paystack()
+        cls.client = PaystackClient()
 
     def test_calculate_fee(self):
         cases = [

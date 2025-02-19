@@ -3,7 +3,7 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api import Verification
+from pypaystack2.sub_clients import VerificationClient
 from pypaystack2.utils import AccountType, Country, Document
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
@@ -13,14 +13,14 @@ class MockedVerificationTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = Verification()
+        cls.wrapper = VerificationClient()
 
 
 class VerificationTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = Verification()
+        cls.wrapper = VerificationClient()
 
     def test_can_resolve_account_number(self):
         response = self.wrapper.resolve_account_number(

@@ -3,7 +3,7 @@ from unittest import IsolatedAsyncioTestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api.integration import AsyncIntegration
+from pypaystack2.sub_clients.integration import AsyncIntegrationClient
 from tests.test_api.mocked_api_testcase import MockedAsyncAPITestCase
 
 
@@ -12,7 +12,7 @@ class MockedAsyncIntegrationTestCase(MockedAsyncAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = AsyncIntegration()
+        cls.wrapper = AsyncIntegrationClient()
 
     async def test_can_get_payment_session_timeout(self):
         response = await self.wrapper.get_payment_session_timeout()
@@ -27,7 +27,7 @@ class AsyncIntegrationTestCase(IsolatedAsyncioTestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = AsyncIntegration()
+        cls.wrapper = AsyncIntegrationClient()
 
     async def test_can_get_payment_session_timeout(self):
         response = await self.wrapper.get_payment_session_timeout()

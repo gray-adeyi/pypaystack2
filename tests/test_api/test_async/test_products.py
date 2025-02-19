@@ -3,7 +3,7 @@ from unittest import IsolatedAsyncioTestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api.products import AsyncProduct
+from pypaystack2.sub_clients.products import AsyncProductClient
 from pypaystack2.utils import Currency
 from tests.test_api.mocked_api_testcase import MockedAsyncAPITestCase
 
@@ -13,7 +13,7 @@ class MockedAsyncProductTestCase(MockedAsyncAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = AsyncProduct()
+        cls.wrapper = AsyncProductClient()
 
     async def test_can_create(self):
         response = await self.wrapper.create(
@@ -47,7 +47,7 @@ class AsyncProductTestCase(IsolatedAsyncioTestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = AsyncProduct()
+        cls.wrapper = AsyncProductClient()
 
     async def test_can_create(self):
         response = await self.wrapper.create(

@@ -3,7 +3,7 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api import ApplePay
+from pypaystack2.sub_clients import ApplePayClient
 from pypaystack2.utils import Response
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
@@ -13,7 +13,7 @@ class MockedApplePayTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = ApplePay()
+        cls.wrapper = ApplePayClient()
 
     def test_can_register_domain(self):
         response = self.wrapper.register_domain(domain_name="example.com")
@@ -32,7 +32,7 @@ class ApplePayTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = ApplePay()
+        cls.wrapper = ApplePayClient()
 
     def test_can_register_domain(self):
         response = self.wrapper.register_domain(domain_name="example.com")

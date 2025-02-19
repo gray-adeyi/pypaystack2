@@ -3,7 +3,7 @@ from unittest import IsolatedAsyncioTestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api.payment_requests import AsyncPaymentRequest
+from pypaystack2.sub_clients.payment_requests import AsyncPaymentRequestClient
 from tests.test_api.mocked_api_testcase import MockedAsyncAPITestCase
 
 
@@ -12,7 +12,7 @@ class MockedAsyncPaymentRequestTestCase(MockedAsyncAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = AsyncPaymentRequest()
+        cls.wrapper = AsyncPaymentRequestClient()
 
     async def test_can_create(self):
         response = await self.wrapper.create(customer="87620726", amount=900_000)
@@ -65,7 +65,7 @@ class AsyncPaymentRequestTestCase(IsolatedAsyncioTestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = AsyncPaymentRequest()
+        cls.wrapper = AsyncPaymentRequestClient()
 
     async def test_can_create(self):
         response = await self.wrapper.create(customer="87620726", amount=900_000)

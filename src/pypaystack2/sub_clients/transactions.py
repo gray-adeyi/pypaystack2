@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.utils import (
     Bearer,
@@ -15,7 +15,7 @@ from pypaystack2.utils import (
 )
 
 
-class Transaction(BaseAPI):
+class TransactionClient(BaseAPIClient):
     """Provides a wrapper for paystack Transactions API
 
     The Transactions API allows you to create and manage payments on your integration.
@@ -74,7 +74,7 @@ class Transaction(BaseAPI):
                 "Customer's Email is required for initialization"
             )
 
-        url = self._parse_url("/transaction/initialize")
+        url = self._full_url("/transaction/initialize")
         payload = {
             "email": email,
             "amount": amount,
@@ -108,7 +108,7 @@ class Transaction(BaseAPI):
         """
 
         reference = str(reference)
-        url = self._parse_url(f"/transaction/verify/{reference}")
+        url = self._full_url(f"/transaction/verify/{reference}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def get_transactions(
@@ -141,7 +141,7 @@ class Transaction(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/transaction/?perPage={pagination}")
+        url = self._full_url(f"/transaction/?perPage={pagination}")
         query_params = [
             ("page", page),
             ("customer", customer),
@@ -164,7 +164,7 @@ class Transaction(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/transaction/{id}/")
+        url = self._full_url(f"/transaction/{id}/")
         return self._handle_request(HTTPMethod.GET, url)
 
     def charge(
@@ -223,7 +223,7 @@ class Transaction(BaseAPI):
         if not auth_code:
             raise InvalidDataException("Customer's Auth code is required to charge")
 
-        url = self._parse_url("/transaction/charge_authorization")
+        url = self._full_url("/transaction/charge_authorization")
         payload = {
             "authorization_code": auth_code,
             "email": email,
@@ -253,7 +253,7 @@ class Transaction(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/transaction/timeline/{id_or_ref}")
+        url = self._full_url(f"/transaction/timeline/{id_or_ref}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def totals(
@@ -277,7 +277,7 @@ class Transaction(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/transaction/totals/?perPage={pagination}")
+        url = self._full_url(f"/transaction/totals/?perPage={pagination}")
         query_params = [
             ("page", page),
             ("from", start_date),
@@ -328,7 +328,7 @@ class Transaction(BaseAPI):
 
         if amount:
             amount = validate_amount(amount)
-        url = self._parse_url(f"/transaction/export/?perPage={pagination}")
+        url = self._full_url(f"/transaction/export/?perPage={pagination}")
         query_params = [
             ("page", page),
             ("from", start_date),
@@ -381,7 +381,7 @@ class Transaction(BaseAPI):
         if not auth_code:
             raise InvalidDataException("Customer's Auth code is required to charge")
 
-        url = self._parse_url("/transaction/partial_debit")
+        url = self._full_url("/transaction/partial_debit")
         payload = {
             "authorization_code": auth_code,
             "currency": currency,
@@ -394,7 +394,7 @@ class Transaction(BaseAPI):
         return self._handle_request(HTTPMethod.POST, url, payload)
 
 
-class AsyncTransaction(BaseAsyncAPI):
+class AsyncTransactionClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Transactions API
 
     The Transactions API allows you to create and manage payments on your integration.
@@ -453,7 +453,7 @@ class AsyncTransaction(BaseAsyncAPI):
                 "Customer's Email is required for initialization"
             )
 
-        url = self._parse_url("/transaction/initialize")
+        url = self._full_url("/transaction/initialize")
         payload = {
             "email": email,
             "amount": amount,
@@ -487,7 +487,7 @@ class AsyncTransaction(BaseAsyncAPI):
         """
 
         reference = str(reference)
-        url = self._parse_url(f"/transaction/verify/{reference}")
+        url = self._full_url(f"/transaction/verify/{reference}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def get_transactions(
@@ -520,7 +520,7 @@ class AsyncTransaction(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/transaction/?perPage={pagination}")
+        url = self._full_url(f"/transaction/?perPage={pagination}")
         query_params = [
             ("page", page),
             ("customer", customer),
@@ -543,7 +543,7 @@ class AsyncTransaction(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/transaction/{id}/")
+        url = self._full_url(f"/transaction/{id}/")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def charge(
@@ -602,7 +602,7 @@ class AsyncTransaction(BaseAsyncAPI):
         if not auth_code:
             raise InvalidDataException("Customer's Auth code is required to charge")
 
-        url = self._parse_url("/transaction/charge_authorization")
+        url = self._full_url("/transaction/charge_authorization")
         payload = {
             "authorization_code": auth_code,
             "email": email,
@@ -632,7 +632,7 @@ class AsyncTransaction(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/transaction/timeline/{id_or_ref}")
+        url = self._full_url(f"/transaction/timeline/{id_or_ref}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def totals(
@@ -656,7 +656,7 @@ class AsyncTransaction(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/transaction/totals/?perPage={pagination}")
+        url = self._full_url(f"/transaction/totals/?perPage={pagination}")
         query_params = [
             ("page", page),
             ("from", start_date),
@@ -707,7 +707,7 @@ class AsyncTransaction(BaseAsyncAPI):
 
         if amount:
             amount = validate_amount(amount)
-        url = self._parse_url(f"/transaction/export/?perPage={pagination}")
+        url = self._full_url(f"/transaction/export/?perPage={pagination}")
         query_params = [
             ("page", page),
             ("from", start_date),
@@ -760,7 +760,7 @@ class AsyncTransaction(BaseAsyncAPI):
         if not auth_code:
             raise InvalidDataException("Customer's Auth code is required to charge")
 
-        url = self._parse_url("/transaction/partial_debit")
+        url = self._full_url("/transaction/partial_debit")
         payload = {
             "authorization_code": auth_code,
             "currency": currency,

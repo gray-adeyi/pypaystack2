@@ -3,7 +3,7 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api import Charge
+from pypaystack2.sub_clients import ChargeClient
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
 
@@ -12,7 +12,7 @@ class MockedChargeTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = Charge()
+        cls.wrapper = ChargeClient()
 
     def test_can_charge(self):
         bank_data = {"code": "057", "account_number": "0000000000"}
@@ -66,7 +66,7 @@ class ChargeTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = Charge()
+        cls.wrapper = ChargeClient()
 
     def test_can_charge(self):
         bank_data = {"code": "057", "account_number": "0000000000"}

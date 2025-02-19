@@ -1,8 +1,8 @@
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import Reason, HTTPMethod, Response
 
 
-class TransferControl(BaseAPI):
+class TransferControlClient(BaseAPIClient):
     """Provides a wrapper for paystack Transfers Control API
 
     The Transfer Control API allows you to manage settings of your transfers.
@@ -15,7 +15,7 @@ class TransferControl(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url("/balance")
+        url = self._full_url("/balance")
         return self._handle_request(HTTPMethod.GET, url)
 
     def get_balance_ledger(self) -> Response:
@@ -24,7 +24,7 @@ class TransferControl(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url("/balance/ledger")
+        url = self._full_url("/balance/ledger")
         print(url)
         return self._handle_request(HTTPMethod.GET, url)
 
@@ -44,7 +44,7 @@ class TransferControl(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
         payload = {"transfer_code": transfer_code, "reason": reason}
-        url = self._parse_url("/transfer/resend_otp")
+        url = self._full_url("/transfer/resend_otp")
         return self._handle_request(HTTPMethod.POST, url, payload)
 
     def disable_otp(self) -> Response:
@@ -60,7 +60,7 @@ class TransferControl(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url("/transfer/disable_otp")
+        url = self._full_url("/transfer/disable_otp")
         return self._handle_request(HTTPMethod.POST, url)
 
     def finalize_disable_otp(self, otp: str) -> Response:
@@ -77,7 +77,7 @@ class TransferControl(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
         payload = {"otp": otp}
-        url = self._parse_url("/transfer/disable_otp_finalize")
+        url = self._full_url("/transfer/disable_otp_finalize")
         return self._handle_request(HTTPMethod.POST, url, payload)
 
     def enable_otp(self) -> Response:
@@ -93,11 +93,11 @@ class TransferControl(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url("/transfer/enable_otp")
+        url = self._full_url("/transfer/enable_otp")
         return self._handle_request(HTTPMethod.POST, url)
 
 
-class AsyncTransferControl(BaseAsyncAPI):
+class AsyncTransferControlClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Transfers Control API
 
     The Transfer Control API allows you to manage settings of your transfers.
@@ -110,7 +110,7 @@ class AsyncTransferControl(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url("/balance")
+        url = self._full_url("/balance")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def get_balance_ledger(self) -> Response:
@@ -119,7 +119,7 @@ class AsyncTransferControl(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url("balance/ledger")
+        url = self._full_url("balance/ledger")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def resend_otp(self, transfer_code: str, reason: Reason) -> Response:
@@ -138,7 +138,7 @@ class AsyncTransferControl(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
         payload = {"transfer_code": transfer_code, "reason": reason}
-        url = self._parse_url("/transfer/resend_otp")
+        url = self._full_url("/transfer/resend_otp")
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
     async def disable_otp(self) -> Response:
@@ -154,7 +154,7 @@ class AsyncTransferControl(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url("/transfer/disable_otp")
+        url = self._full_url("/transfer/disable_otp")
         return await self._handle_request(HTTPMethod.POST, url)
 
     async def finalize_disable_otp(self, otp: str) -> Response:
@@ -171,7 +171,7 @@ class AsyncTransferControl(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
         payload = {"otp": otp}
-        url = self._parse_url("/transfer/disable_otp_finalize")
+        url = self._full_url("/transfer/disable_otp_finalize")
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
     async def enable_otp(self) -> Response:
@@ -187,5 +187,5 @@ class AsyncTransferControl(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url("/transfer/enable_otp")
+        url = self._full_url("/transfer/enable_otp")
         return await self._handle_request(HTTPMethod.POST, url)

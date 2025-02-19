@@ -5,7 +5,7 @@ wrappers required to achieve a goal. E.g. say you want to work with the transact
 API wrapper and the customer API wrapper, the code below demonstrates how it's achieved
 
 ```python
-from pypaystack2.api import Transaction, Customer
+from pypaystack2.sub_clients import TransactionClient, CustomerClient
 ```
 
 Besides having to import these different wrappers, you'll also have to instantiate them,
@@ -14,7 +14,7 @@ a new `Paystack` class which has all the wrappers bound to it. So now the prefer
 way to use `pypaystack2` is demonstrated below
 
 ```python
-from pypaystack2 import Paystack
+from pypaystack2 import PaystackClient
 ```
 
 Here's a comparison of how a goal is achieved using the old API and the new API
@@ -22,23 +22,23 @@ Here's a comparison of how a goal is achieved using the old API and the new API
 ### Old API
 
 ```python
-from pypaystack2.api import PaymentRequest, Transaction, Customer
+from pypaystack2.sub_clients import PaymentRequestClient, TransactionClient, CustomerClient
 
-invoice_api_wrapper = PaymentRequest()  # assumes your PAYSTACK_AUTHORIZATION_KEY is set
+invoice_api_wrapper = PaymentRequestClient()  # assumes your PAYSTACK_AUTHORIZATION_KEY is set
 invoice_api_response = invoice_api_wrapper.create(customer="CUS_xwaj0txjryg393b",
                                                   amount=1000)  # Creates an invoice with a charge of ₦100
-transaction_api_wrapper = Transaction()
+transaction_api_wrapper = TransactionClient()
 transaction_api_response = transaction_api_wrapper.get_transactions()
-customer_api_wrapper = Customer()
+customer_api_wrapper = CustomerClient()
 customer_api_response = customer_api_wrapper.get_customers()
 ```
 
 ### New API
 
 ```python
-from pypaystack2 import Paystack
+from pypaystack2 import PaystackClient
 
-paystack_api = Paystack()  # assumes your PAYSTACK_AUTHORIZATION_KEY is set
+paystack_api = PaystackClient()  # assumes your PAYSTACK_AUTHORIZATION_KEY is set
 payment_requests_api_response = paystack_api.payment_requests.create(customer="CUS_xwaj0txjryg393b",
                                                                      amount=1000)  # Creates an invoice with a charge of ₦100
 transaction_api_response = paystack_api.transactions.get_transactions()
@@ -48,9 +48,9 @@ customer_api_response = paystack_api.transactions.get_transactions()
 For `async/await`
 
 ```python
-from pypaystack2 import AsyncPaystack
+from pypaystack2 import AsyncPaystackClient
 
-paystack_api = AsyncPaystack()  # assumes your PAYSTACK_AUTHORIZATION_KEY is set
+paystack_api = AsyncPaystackClient()  # assumes your PAYSTACK_AUTHORIZATION_KEY is set
 payment_requests_api_response = await paystack_api.payment_requests.create(customer="CUS_xwaj0txjryg393b",
                                                                            amount=1000)  # Creates an invoice with a charge of ₦100
 transaction_api_response = await paystack_api.transactions.get_transactions()

@@ -3,7 +3,7 @@ from unittest import IsolatedAsyncioTestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api.settlements import AsyncSettlement
+from pypaystack2.sub_clients.settlements import AsyncSettlementClient
 from tests.test_api.mocked_api_testcase import MockedAsyncAPITestCase
 
 
@@ -12,7 +12,7 @@ class MockedAsyncSettlementTestCase(MockedAsyncAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = AsyncSettlement()
+        cls.wrapper = AsyncSettlementClient()
 
     async def test_can_get_settlements(self):
         response = await self.wrapper.get_settlements()
@@ -28,7 +28,7 @@ class AsyncSettlementTestCase(IsolatedAsyncioTestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = AsyncSettlement()
+        cls.wrapper = AsyncSettlementClient()
 
     async def test_can_get_settlements(self):
         response = await self.wrapper.get_settlements()

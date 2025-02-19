@@ -2,18 +2,6 @@ from enum import Enum
 from typing import Optional
 
 
-class HTTPMethod(str, Enum):
-    """An enum of supported http methods"""
-
-    GET = "GET"
-    POST = "POST"
-    PUT = "PUT"
-    PATCH = "PATCH"
-    DELETE = "DELETE"
-    OPTIONS = "OPTIONS"
-    HEAD = "HEAD"
-
-
 class TerminalEvent(str, Enum):
     """Enum of the types of events supported by Terminal API"""
 

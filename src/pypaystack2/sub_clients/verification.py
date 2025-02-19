@@ -1,10 +1,10 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import AccountType, Country, Document, HTTPMethod, Response
 
 
-class Verification(BaseAPI):
+class VerificationClient(BaseAPIClient):
     """Provides a wrapper for paystack Verification API
 
     The Verification API allows you to perform KYC processes.
@@ -33,7 +33,7 @@ class Verification(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(
+        url = self._full_url(
             f"/bank/resolve?account_number={account_number}&bank_code={bank_code}"
         )
         return self._handle_request(HTTPMethod.GET, url)
@@ -74,7 +74,7 @@ class Verification(BaseAPI):
             "document_type": document_type,
             "document_number": document_number,
         }
-        url = self._parse_url("/bank/validate")
+        url = self._full_url("/bank/validate")
 
         return self._handle_request(HTTPMethod.POST, url, payload)
 
@@ -89,11 +89,11 @@ class Verification(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/decision/bin/{bin}")
+        url = self._full_url(f"/decision/bin/{bin}")
         return self._handle_request(HTTPMethod.GET, url)
 
 
-class AsyncVerification(BaseAsyncAPI):
+class AsyncVerificationClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Verification API
 
     The Verification API allows you to perform KYC processes.
@@ -122,7 +122,7 @@ class AsyncVerification(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(
+        url = self._full_url(
             f"/bank/resolve?account_number={account_number}&bank_code={bank_code}"
         )
         return await self._handle_request(HTTPMethod.GET, url)
@@ -162,7 +162,7 @@ class AsyncVerification(BaseAsyncAPI):
             "country_code": country_code,
             "document_type": document_type,
         }
-        url = self._parse_url("/bank/validate")
+        url = self._full_url("/bank/validate")
 
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
@@ -177,5 +177,5 @@ class AsyncVerification(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/decision/bin/{bin}")
+        url = self._full_url(f"/decision/bin/{bin}")
         return await self._handle_request(HTTPMethod.GET, url)

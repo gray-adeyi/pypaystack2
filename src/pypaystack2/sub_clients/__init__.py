@@ -1,4 +1,4 @@
-"""A package containing several wrappers for interfacing Paystack API, like apple pay api, bulk charges api e.t.c.
+"""A package containing several wrappers for interfacing Paystack API, like apple pay sub_clients, bulk charges sub_clients e.t.c.
 Modules exported by this package:
     - `apple_pay`: A module containing implementations for interfacing with Paystack's Apple Pay API
     - `bulk_charges`: A module containing implementations for interfacing with Paystack's Bulk Charges API
@@ -24,51 +24,26 @@ Modules exported by this package:
     - `verification`: A module containing implementations for interfacing with Paystack's Verification API
 """
 
-from pypaystack2.api.apple_pay import ApplePay
-from pypaystack2.api.bulk_charges import BulkCharge
-from pypaystack2.api.charge import Charge
-from pypaystack2.api.integration import Integration
-from pypaystack2.api.customers import Customer
-from pypaystack2.api.dedicated_accounts import DedicatedAccount
-from pypaystack2.api.disputes import Dispute
-from pypaystack2.api.payment_requests import PaymentRequest
-from pypaystack2.api.miscellaneous import Miscellaneous
-from pypaystack2.api.payment_pages import PaymentPage
-from pypaystack2.api.plans import Plan
-from pypaystack2.api.products import Product
-from pypaystack2.api.refunds import Refund
-from pypaystack2.api.settlements import Settlement
-from pypaystack2.api.splits import TransactionSplit
-from pypaystack2.api.subaccounts import SubAccount
-from pypaystack2.api.subscriptions import Subscription
-from pypaystack2.api.terminals import Terminal
-from pypaystack2.api.transactions import Transaction
-from pypaystack2.api.transfer_recipients import RecipientType
-from pypaystack2.api.transfers import Transfer
-from pypaystack2.api.transfers_control import TransferControl
-from pypaystack2.api.verification import Verification
-
-# prevent removal of unused import
-ApplePay
-BulkCharge
-Charge
-Integration
-Customer
-DedicatedAccount
-Dispute
-PaymentRequest
-Miscellaneous
-PaymentPage
-Plan
-Product
-Refund
-Settlement
-TransactionSplit
-SubAccount
-Subscription
-Terminal
-Transaction
-RecipientType
-Transfer
-TransferControl
-Verification
+# ruff: noqa: F401
+from pypaystack2.sub_clients.apple_pay import ApplePayClient
+from pypaystack2.sub_clients.bulk_charges import BulkChargeClient
+from pypaystack2.sub_clients.charge import ChargeClient
+from pypaystack2.sub_clients.customers import CustomerClient
+from pypaystack2.sub_clients.dedicated_accounts import DedicatedAccountClient
+from pypaystack2.sub_clients.disputes import DisputeClient
+from pypaystack2.sub_clients.integration import IntegrationClient
+from pypaystack2.sub_clients.miscellaneous import MiscellaneousClient
+from pypaystack2.sub_clients.payment_pages import PaymentPageClient
+from pypaystack2.sub_clients.payment_requests import PaymentRequestClient
+from pypaystack2.sub_clients.plans import PlanClient
+from pypaystack2.sub_clients.products import ProductClient
+from pypaystack2.sub_clients.refunds import RefundClient
+from pypaystack2.sub_clients.settlements import SettlementClient
+from pypaystack2.sub_clients.splits import TransactionSplitClient
+from pypaystack2.sub_clients.subaccounts import SubAccountClient
+from pypaystack2.sub_clients.subscriptions import SubscriptionClient
+from pypaystack2.sub_clients.terminals import TerminalClient
+from pypaystack2.sub_clients.transactions import TransactionClient
+from pypaystack2.sub_clients.transfers import TransferClient
+from pypaystack2.sub_clients.transfers_control import TransferControlClient
+from pypaystack2.sub_clients.verification import VerificationClient

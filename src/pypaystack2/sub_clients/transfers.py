@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import (
     Currency,
     add_to_payload,
@@ -12,7 +12,7 @@ from pypaystack2.utils import (
 )
 
 
-class Transfer(BaseAPI):
+class TransferClient(BaseAPIClient):
     """Provides a wrapper for paystack Transfers API
 
     The Transfers API allows you to automate sending money on your integration
@@ -47,7 +47,7 @@ class Transfer(BaseAPI):
         """
         amount = validate_amount(amount)
 
-        url = self._parse_url("/transfer")
+        url = self._full_url("/transfer")
 
         payload = {
             "amount": amount,
@@ -77,7 +77,7 @@ class Transfer(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/transfer/finalize_transfer")
+        url = self._full_url("/transfer/finalize_transfer")
 
         payload = {
             "transfer_code": transfer_code,
@@ -98,7 +98,7 @@ class Transfer(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/transfer/bulk")
+        url = self._full_url("/transfer/bulk")
 
         payload = {
             "transfers": [tx.dict for tx in transfers],
@@ -128,7 +128,7 @@ class Transfer(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/transfer?perPage={pagination}")
+        url = self._full_url(f"/transfer?perPage={pagination}")
         query_params = [
             ("customer", customer),
             ("page", page),
@@ -150,7 +150,7 @@ class Transfer(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/transfer/{id_or_code}")
+        url = self._full_url(f"/transfer/{id_or_code}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def verify(
@@ -165,11 +165,11 @@ class Transfer(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/transfer/verify/{reference}")
+        url = self._full_url(f"/transfer/verify/{reference}")
         return self._handle_request(HTTPMethod.GET, url)
 
 
-class AsyncTransfer(BaseAsyncAPI):
+class AsyncTransferClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Transfers API
 
     The Transfers API allows you to automate sending money on your integration
@@ -204,7 +204,7 @@ class AsyncTransfer(BaseAsyncAPI):
         """
         amount = validate_amount(amount)
 
-        url = self._parse_url("/transfer")
+        url = self._full_url("/transfer")
 
         payload = {
             "amount": amount,
@@ -234,7 +234,7 @@ class AsyncTransfer(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/transfer/finalize_transfer")
+        url = self._full_url("/transfer/finalize_transfer")
 
         payload = {
             "transfer_code": transfer_code,
@@ -255,7 +255,7 @@ class AsyncTransfer(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/transfer/bulk")
+        url = self._full_url("/transfer/bulk")
 
         payload = {
             "transfers": [tx.dict for tx in transfers],
@@ -285,7 +285,7 @@ class AsyncTransfer(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/transfer?perPage={pagination}")
+        url = self._full_url(f"/transfer?perPage={pagination}")
         query_params = [
             ("customer", customer),
             ("page", page),
@@ -307,7 +307,7 @@ class AsyncTransfer(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/transfer/{id_or_code}")
+        url = self._full_url(f"/transfer/{id_or_code}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def verify(
@@ -322,5 +322,5 @@ class AsyncTransfer(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/transfer/verify/{reference}")
+        url = self._full_url(f"/transfer/verify/{reference}")
         return await self._handle_request(HTTPMethod.GET, url)

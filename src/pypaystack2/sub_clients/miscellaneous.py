@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import (
     BankType,
     Country,
@@ -12,7 +12,7 @@ from pypaystack2.utils import (
 )
 
 
-class Miscellaneous(BaseAPI):
+class MiscellaneousClient(BaseAPIClient):
     """Provides a wrapper for paystack Miscellaneous API
 
     The Miscellaneous API are supporting APIs that can be used to provide more details to other APIs.
@@ -54,7 +54,7 @@ class Miscellaneous(BaseAPI):
         """
 
         country = Country.get_full(country)
-        url = self._parse_url(f"/bank?perPage={pagination}")
+        url = self._full_url(f"/bank?perPage={pagination}")
         query_params = [
             ("country", country),
             ("use_cursor", use_cursor),
@@ -76,7 +76,7 @@ class Miscellaneous(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/country")
+        url = self._full_url("/country")
         return self._handle_request(HTTPMethod.GET, url)
 
     def get_states(self, country: Country) -> Response:
@@ -89,11 +89,11 @@ class Miscellaneous(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/address_verification/states?country={country}")
+        url = self._full_url(f"/address_verification/states?country={country}")
         return self._handle_request(HTTPMethod.GET, url)
 
 
-class AsyncMiscellaneous(BaseAsyncAPI):
+class AsyncMiscellaneousClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Miscellaneous API
 
     The Miscellaneous API are supporting APIs that can be used to provide more details to other APIs.
@@ -135,7 +135,7 @@ class AsyncMiscellaneous(BaseAsyncAPI):
         """
 
         country = Country.get_full(country)
-        url = self._parse_url(f"/bank?perPage={pagination}")
+        url = self._full_url(f"/bank?perPage={pagination}")
         query_params = [
             ("country", country),
             ("use_cursor", use_cursor),
@@ -157,7 +157,7 @@ class AsyncMiscellaneous(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/country")
+        url = self._full_url("/country")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def get_states(self, country: Country) -> Response:
@@ -170,5 +170,5 @@ class AsyncMiscellaneous(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/address_verification/states?country={country}")
+        url = self._full_url(f"/address_verification/states?country={country}")
         return await self._handle_request(HTTPMethod.GET, url)

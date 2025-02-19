@@ -3,7 +3,7 @@ from unittest import IsolatedAsyncioTestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api.charge import AsyncCharge
+from pypaystack2.sub_clients.charge import AsyncChargeClient
 from tests.test_api.mocked_api_testcase import MockedAsyncAPITestCase
 
 
@@ -12,7 +12,7 @@ class MockedAsyncChargeTestCase(MockedAsyncAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = AsyncCharge()
+        cls.wrapper = AsyncChargeClient()
 
     async def test_can_charge(self):
         bank_data = {"code": "057", "account_number": "0000000000"}
@@ -70,7 +70,7 @@ class AsyncChargeTestCase(IsolatedAsyncioTestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = AsyncCharge()
+        cls.wrapper = AsyncChargeClient()
 
     async def test_can_charge(self):
         bank_data = {"code": "057", "account_number": "0000000000"}

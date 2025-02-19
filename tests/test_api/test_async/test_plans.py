@@ -3,7 +3,7 @@ from unittest import IsolatedAsyncioTestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api.plans import AsyncPlan
+from pypaystack2.sub_clients.plans import AsyncPlanClient
 from pypaystack2.utils import Interval
 from tests.test_api.mocked_api_testcase import MockedAsyncAPITestCase
 
@@ -13,7 +13,7 @@ class MockedAsyncPlanTestCase(MockedAsyncAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = AsyncPlan()
+        cls.wrapper = AsyncPlanClient()
 
     async def test_can_create(self):
         response = await self.wrapper.create(
@@ -43,7 +43,7 @@ class AsyncPlanTestCase(IsolatedAsyncioTestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = AsyncPlan()
+        cls.wrapper = AsyncPlanClient()
 
     async def test_can_create(self):
         response = await self.wrapper.create(

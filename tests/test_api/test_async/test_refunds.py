@@ -3,7 +3,7 @@ from unittest import IsolatedAsyncioTestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api.refunds import AsyncRefund
+from pypaystack2.sub_clients.refunds import AsyncRefundClient
 from tests.test_api.mocked_api_testcase import MockedAsyncAPITestCase
 
 
@@ -12,7 +12,7 @@ class MockedAsyncRefundTestCase(MockedAsyncAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = AsyncRefund()
+        cls.wrapper = AsyncRefundClient()
 
     async def test_can_create(self):
         response = await self.wrapper.create(transaction="1699903748", amount=5000)
@@ -31,7 +31,7 @@ class AsyncRefundTestCase(IsolatedAsyncioTestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = AsyncRefund()
+        cls.wrapper = AsyncRefundClient()
 
     async def test_can_create(self):
         response = await self.wrapper.create(transaction="1699903748", amount=5000)

@@ -3,7 +3,7 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api import PaymentRequest
+from pypaystack2.sub_clients import PaymentRequestClient
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
 
@@ -12,7 +12,7 @@ class MockedPaymentRequestTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = PaymentRequest()
+        cls.wrapper = PaymentRequestClient()
 
     def test_can_create(self):
         response = self.wrapper.create(customer="87620726", amount=900_000)
@@ -61,7 +61,7 @@ class PaymentRequestTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = PaymentRequest()
+        cls.wrapper = PaymentRequestClient()
 
     def test_can_create(self):
         response = self.wrapper.create(customer="87620726", amount=900_000)

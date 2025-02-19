@@ -3,7 +3,7 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api import TransferControl
+from pypaystack2.sub_clients import TransferControlClient
 from pypaystack2.utils import Reason
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
@@ -13,14 +13,14 @@ class MockedTransferControlTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = TransferControl()
+        cls.wrapper = TransferControlClient()
 
 
 class TransferControlTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = TransferControl()
+        cls.wrapper = TransferControlClient()
 
     def test_can_check_balance(self):
         response = self.wrapper.check_balance()

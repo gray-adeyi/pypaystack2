@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import (
     Currency,
     add_to_payload,
@@ -11,7 +11,7 @@ from pypaystack2.utils import (
 )
 
 
-class Refund(BaseAPI):
+class RefundClient(BaseAPIClient):
     """Provides a wrapper for paystack Refunds API
 
     The Refunds API allows you to create and manage transaction refunds.
@@ -45,7 +45,7 @@ class Refund(BaseAPI):
 
         if amount is not None:
             amount = validate_amount(amount)
-        url = self._parse_url("/refund")
+        url = self._full_url("/refund")
         payload = {"transaction": transaction}
         optional_params = [
             ("amount", amount),
@@ -81,7 +81,7 @@ class Refund(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/refund?perPage={pagination}")
+        url = self._full_url(f"/refund?perPage={pagination}")
         query_params = [
             ("reference", reference),
             ("currency", currency),
@@ -102,11 +102,11 @@ class Refund(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/refund/{reference}")
+        url = self._full_url(f"/refund/{reference}")
         return self._handle_request(HTTPMethod.GET, url)
 
 
-class AsyncRefund(BaseAsyncAPI):
+class AsyncRefundClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Refunds API
 
     The Refunds API allows you to create and manage transaction refunds.
@@ -140,7 +140,7 @@ class AsyncRefund(BaseAsyncAPI):
 
         if amount is not None:
             amount = validate_amount(amount)
-        url = self._parse_url("/refund")
+        url = self._full_url("/refund")
         payload = {"transaction": transaction}
         optional_params = [
             ("amount", amount),
@@ -176,7 +176,7 @@ class AsyncRefund(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/refund?perPage={pagination}")
+        url = self._full_url(f"/refund?perPage={pagination}")
         query_params = [
             ("reference", reference),
             ("currency", currency),
@@ -197,5 +197,5 @@ class AsyncRefund(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/refund/{reference}")
+        url = self._full_url(f"/refund/{reference}")
         return await self._handle_request(HTTPMethod.GET, url)

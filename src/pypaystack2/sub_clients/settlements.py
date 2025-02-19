@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import (
     append_query_params,
     HTTPMethod,
@@ -8,7 +8,7 @@ from pypaystack2.utils import (
 )
 
 
-class Settlement(BaseAPI):
+class SettlementClient(BaseAPIClient):
     """Provides a wrapper for paystack Settlement API
 
     The Settlements API allows you gain insights into payouts made by Paystack to your bank account.
@@ -39,7 +39,7 @@ class Settlement(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/settlement?perPage={pagination}")
+        url = self._full_url(f"/settlement?perPage={pagination}")
         query_params = [
             ("subaccount", subaccount),
             ("page", page),
@@ -73,7 +73,7 @@ class Settlement(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/settlement/{id}/transactions?perPage={pagination}")
+        url = self._full_url(f"/settlement/{id}/transactions?perPage={pagination}")
         query_params = [
             ("page", page),
             ("start_date", start_date),
@@ -83,7 +83,7 @@ class Settlement(BaseAPI):
         return self._handle_request(HTTPMethod.GET, url)
 
 
-class AsyncSettlement(BaseAsyncAPI):
+class AsyncSettlementClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Settlement API
 
     The Settlements API allows you gain insights into payouts made by Paystack to your bank account.
@@ -114,7 +114,7 @@ class AsyncSettlement(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/settlement?perPage={pagination}")
+        url = self._full_url(f"/settlement?perPage={pagination}")
         query_params = [
             ("subaccount", subaccount),
             ("page", page),
@@ -148,7 +148,7 @@ class AsyncSettlement(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/settlement/{id}/transactions?perPage={pagination}")
+        url = self._full_url(f"/settlement/{id}/transactions?perPage={pagination}")
         query_params = [
             ("page", page),
             ("start_date", start_date),

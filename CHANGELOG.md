@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## unreleased
 
+## [3.0.0] - 2025-02-
+
+### Added
+
+- Pydantic v2 to project dependencies.
+- Utility methods for fees calculation `calculate_fee`, `to_base_unit`, `to_subunit`.
+
+### Changed
+
+- `auth_key` parameter to `secret_key`.
+- secret key environmental variable name from `PAYSTACK_AUTHORIZATION_KEY` to `PAYSTACK_SECRET_KEY`
+- `MissingAuthKeyException` to  `MissingSecretKeyException`
+- Rename wrappers to clients. All usages of wrappers are now deprecated in favour of clients.
+  `Paystack` wrapper class in the past is now `PaystackClient` likewise all other api wrappers
+  are now sub clients e.g. `ApplePay` is now  `ApplePayClient`
+
+### Removed
+
+- Support for `python<=3.10`
+- Package defined `HTTPMethod` enum. Now using `HTTPMethod` from the standard lib.
+
 ## [2.1.1] - 2024-12-09
 
 ### Added

@@ -3,7 +3,7 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api import DedicatedAccount
+from pypaystack2.sub_clients import DedicatedAccountClient
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
 
@@ -12,14 +12,14 @@ class MockedDedicatedAccountTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = DedicatedAccount()
+        cls.wrapper = DedicatedAccountClient()
 
 
 class DedicatedAccountTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = DedicatedAccount()
+        cls.wrapper = DedicatedAccountClient()
 
     def test_can_create(self):
         # TODO: Test properly.

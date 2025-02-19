@@ -3,7 +3,7 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api import Transfer
+from pypaystack2.sub_clients import TransferClient
 from pypaystack2.utils import TransferInstruction
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
@@ -13,14 +13,14 @@ class MockedTransferTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = Transfer()
+        cls.wrapper = TransferClient()
 
 
 class TransferTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = Transfer()
+        cls.wrapper = TransferClient()
 
     def test_can_initiate(self):
         # TODO: Test properly

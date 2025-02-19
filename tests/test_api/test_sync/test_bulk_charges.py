@@ -3,7 +3,7 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api import BulkCharge
+from pypaystack2.sub_clients import BulkChargeClient
 from pypaystack2.utils import BulkChargeInstruction, Status
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
@@ -13,7 +13,7 @@ class MockedBulkChargeTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = BulkCharge()
+        cls.wrapper = BulkChargeClient()
 
     def test_can_initiate(self):
         instructions = [{"authorization": "", "amount": 1000, "reference": "qwerty"}]
@@ -49,7 +49,7 @@ class BulkChargeTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = BulkCharge()
+        cls.wrapper = BulkChargeClient()
 
     def test_can_initiate(self):
         instructions = [{"authorization": "", "amount": 1000, "reference": "qwerty"}]

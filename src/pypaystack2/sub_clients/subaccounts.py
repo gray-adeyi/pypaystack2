@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import (
     Schedule,
     add_to_payload,
@@ -10,7 +10,7 @@ from pypaystack2.utils import (
 )
 
 
-class SubAccount(BaseAPI):
+class SubAccountClient(BaseAPIClient):
     """Provides a wrapper for paystack Subaccounts API
 
     The Subaccounts API allows you to create and manage subaccounts on your integration.
@@ -54,7 +54,7 @@ class SubAccount(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/subaccount")
+        url = self._full_url("/subaccount")
         payload = {
             "business_name": business_name,
             "settlement_bank": settlement_bank,
@@ -86,7 +86,7 @@ class SubAccount(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/subaccount?perPage={pagination}")
+        url = self._full_url(f"/subaccount?perPage={pagination}")
         query_params = [
             ("from", start_date),
             ("to", end_date),
@@ -105,7 +105,7 @@ class SubAccount(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/subaccount/{id_or_code}")
+        url = self._full_url(f"/subaccount/{id_or_code}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def update(
@@ -168,11 +168,11 @@ class SubAccount(BaseAPI):
             ("metadata", metadata),
         ]
         payload = add_to_payload(optional_params, payload)
-        url = self._parse_url(f"/subaccount/{id_or_code}")
+        url = self._full_url(f"/subaccount/{id_or_code}")
         return self._handle_request(HTTPMethod.PUT, url, payload)
 
 
-class AsyncSubAccount(BaseAsyncAPI):
+class AsyncSubAccountClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Subaccounts API
 
     The Subaccounts API allows you to create and manage subaccounts on your integration.
@@ -216,7 +216,7 @@ class AsyncSubAccount(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/subaccount")
+        url = self._full_url("/subaccount")
         payload = {
             "business_name": business_name,
             "settlement_bank": settlement_bank,
@@ -248,7 +248,7 @@ class AsyncSubAccount(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/subaccount?perPage={pagination}")
+        url = self._full_url(f"/subaccount?perPage={pagination}")
         query_params = [
             ("from", start_date),
             ("to", end_date),
@@ -267,7 +267,7 @@ class AsyncSubAccount(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/subaccount/{id_or_code}")
+        url = self._full_url(f"/subaccount/{id_or_code}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def update(
@@ -330,5 +330,5 @@ class AsyncSubAccount(BaseAsyncAPI):
             ("metadata", metadata),
         ]
         payload = add_to_payload(optional_params, payload)
-        url = self._parse_url(f"/subaccount/{id_or_code}")
+        url = self._full_url(f"/subaccount/{id_or_code}")
         return await self._handle_request(HTTPMethod.PUT, url, payload)

@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.utils import (
     Currency,
@@ -11,7 +11,7 @@ from pypaystack2.utils import (
 )
 
 
-class Product(BaseAPI):
+class ProductClient(BaseAPIClient):
     """Provides a wrapper for paystack Products API
 
     The Products API allows you to create and manage inventories on your integration.
@@ -51,7 +51,7 @@ class Product(BaseAPI):
                 "You can't have unlimited set to True and have a quantity value."
             )
 
-        url = self._parse_url("/product")
+        url = self._full_url("/product")
 
         payload = {
             "name": name,
@@ -87,7 +87,7 @@ class Product(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/product?perPage=" + str(pagination))
+        url = self._full_url("/product?perPage=" + str(pagination))
         query_params = [
             ("page", page),
             ("start_date", start_date),
@@ -106,7 +106,7 @@ class Product(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/product/{id}")
+        url = self._full_url(f"/product/{id}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def update(
@@ -143,7 +143,7 @@ class Product(BaseAPI):
             raise InvalidDataException(
                 "You can't have unlimited set to True and quantity have a value."
             )
-        url = self._parse_url(f"/product/{id}")
+        url = self._full_url(f"/product/{id}")
         payload = {
             "name": name,
             "description": description,
@@ -158,7 +158,7 @@ class Product(BaseAPI):
         return self._handle_request(HTTPMethod.PUT, url, payload)
 
 
-class AsyncProduct(BaseAsyncAPI):
+class AsyncProductClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Products API
 
     The Products API allows you to create and manage inventories on your integration.
@@ -198,7 +198,7 @@ class AsyncProduct(BaseAsyncAPI):
                 "You can't have unlimited set to True and have a quantity value."
             )
 
-        url = self._parse_url("/product")
+        url = self._full_url("/product")
 
         payload = {
             "name": name,
@@ -234,7 +234,7 @@ class AsyncProduct(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/product?perPage=" + str(pagination))
+        url = self._full_url("/product?perPage=" + str(pagination))
         query_params = [
             ("page", page),
             ("start_date", start_date),
@@ -253,7 +253,7 @@ class AsyncProduct(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/product/{id}")
+        url = self._full_url(f"/product/{id}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def update(
@@ -290,7 +290,7 @@ class AsyncProduct(BaseAsyncAPI):
             raise InvalidDataException(
                 "You can't have unlimited set to True and quantity have a value."
             )
-        url = self._parse_url(f"/product/{id}")
+        url = self._full_url(f"/product/{id}")
         payload = {
             "name": name,
             "description": description,

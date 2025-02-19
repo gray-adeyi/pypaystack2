@@ -4,7 +4,7 @@ from uuid import uuid4
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api import Customer
+from pypaystack2.sub_clients import CustomerClient
 from pypaystack2.utils import Country, Identification, RiskAction
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
@@ -14,7 +14,7 @@ class MockedCustomerTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = Customer()
+        cls.wrapper = CustomerClient()
 
     def test_can_create(self):
         response = self.wrapper.create(
@@ -65,7 +65,7 @@ class CustomerTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = Customer()
+        cls.wrapper = CustomerClient()
 
     def test_can_create(self):
         response = self.wrapper.create(

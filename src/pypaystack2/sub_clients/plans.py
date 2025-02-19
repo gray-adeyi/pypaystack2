@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import (
     add_to_payload,
     Interval,
@@ -14,7 +14,7 @@ from pypaystack2.utils import (
 )
 
 
-class Plan(BaseAPI):
+class PlanClient(BaseAPIClient):
     """Provides a wrapper for paystack Plans API
 
     The Plans API allows you to create and manage installment payment options on your integration.
@@ -54,7 +54,7 @@ class Plan(BaseAPI):
         interval = validate_interval(interval)
         amount = validate_amount(amount)
 
-        url = self._parse_url("/plan/")
+        url = self._full_url("/plan/")
 
         payload = {
             "name": name,
@@ -99,7 +99,7 @@ class Plan(BaseAPI):
         if amount:
             amount = validate_amount(amount)
 
-        url = self._parse_url(f"/plan/?perPage={pagination}")
+        url = self._full_url(f"/plan/?perPage={pagination}")
         query_params = [
             ("page", page),
             ("status", status),
@@ -118,7 +118,7 @@ class Plan(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url("/plan/{}/".format(id_or_code))
+        url = self._full_url("/plan/{}/".format(id_or_code))
         return self._handle_request(HTTPMethod.GET, url)
 
     def update(
@@ -157,7 +157,7 @@ class Plan(BaseAPI):
         interval = validate_interval(interval)
         amount = validate_amount(amount)
 
-        url = self._parse_url("/plan/{}/".format(id_or_code))
+        url = self._full_url("/plan/{}/".format(id_or_code))
         payload = {
             "name": name,
             "amount": amount,
@@ -175,7 +175,7 @@ class Plan(BaseAPI):
         return self._handle_request(HTTPMethod.PUT, url, payload)
 
 
-class AsyncPlan(BaseAsyncAPI):
+class AsyncPlanClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Plans API
 
     The Plans API allows you to create and manage installment payment options on your integration.
@@ -215,7 +215,7 @@ class AsyncPlan(BaseAsyncAPI):
         interval = validate_interval(interval)
         amount = validate_amount(amount)
 
-        url = self._parse_url("/plan/")
+        url = self._full_url("/plan/")
 
         payload = {
             "name": name,
@@ -260,7 +260,7 @@ class AsyncPlan(BaseAsyncAPI):
         if amount:
             amount = validate_amount(amount)
 
-        url = self._parse_url(f"/plan/?perPage={pagination}")
+        url = self._full_url(f"/plan/?perPage={pagination}")
         query_params = [
             ("page", page),
             ("status", status),
@@ -279,7 +279,7 @@ class AsyncPlan(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url("/plan/{}/".format(id_or_code))
+        url = self._full_url("/plan/{}/".format(id_or_code))
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def update(
@@ -318,7 +318,7 @@ class AsyncPlan(BaseAsyncAPI):
         interval = validate_interval(interval)
         amount = validate_amount(amount)
 
-        url = self._parse_url("/plan/{}/".format(id_or_code))
+        url = self._full_url("/plan/{}/".format(id_or_code))
         payload = {
             "name": name,
             "amount": amount,

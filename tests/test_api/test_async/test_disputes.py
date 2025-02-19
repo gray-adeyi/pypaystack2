@@ -3,7 +3,7 @@ from unittest import IsolatedAsyncioTestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api.disputes import AsyncDispute
+from pypaystack2.sub_clients.disputes import AsyncDisputeClient
 from tests.test_api.mocked_api_testcase import MockedAsyncAPITestCase
 
 
@@ -12,14 +12,14 @@ class MockedAsyncDisputeTestCase(MockedAsyncAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = AsyncDispute()
+        cls.wrapper = AsyncDisputeClient()
 
 
 class AsyncDisputeTestCase(IsolatedAsyncioTestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = AsyncDispute()
+        cls.wrapper = AsyncDisputeClient()
 
     async def test_can_get_disputes(self):
         response = await self.wrapper.get_disputes(

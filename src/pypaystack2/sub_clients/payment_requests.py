@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import (
     Currency,
     HTTPMethod,
@@ -14,7 +14,7 @@ from pypaystack2.utils import (
 )
 
 
-class PaymentRequest(BaseAPI):
+class PaymentRequestClient(BaseAPIClient):
     """Provides a wrapper for paystack Payment Requests API
 
     The Payment Requests API allows you to manage requests for payment of goods and services.
@@ -64,7 +64,7 @@ class PaymentRequest(BaseAPI):
         if tax:
             tax = [unit_tax.dict for unit_tax in tax]
 
-        url = self._parse_url("/paymentrequest")
+        url = self._full_url("/paymentrequest")
 
         payload = {"customer": customer, "amount": amount}
         optional_params = [
@@ -111,7 +111,7 @@ class PaymentRequest(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/paymentrequest?perPage={pagination}")
+        url = self._full_url(f"/paymentrequest?perPage={pagination}")
         query_params = [
             ("customer", customer),
             ("status", status),
@@ -134,7 +134,7 @@ class PaymentRequest(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/paymentrequest/{id_or_code}")
+        url = self._full_url(f"/paymentrequest/{id_or_code}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def verify(self, code: str) -> Response:
@@ -147,7 +147,7 @@ class PaymentRequest(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/paymentrequest/verify/{code}")
+        url = self._full_url(f"/paymentrequest/verify/{code}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def send_notification(self, id_or_code: str) -> Response:
@@ -160,7 +160,7 @@ class PaymentRequest(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/paymentrequest/notify/{id_or_code}")
+        url = self._full_url(f"/paymentrequest/notify/{id_or_code}")
         return self._handle_request(HTTPMethod.POST, url)
 
     def get_total(self) -> Response:
@@ -170,7 +170,7 @@ class PaymentRequest(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/paymentrequest/totals")
+        url = self._full_url("/paymentrequest/totals")
         return self._handle_request(HTTPMethod.GET, url)
 
     def finalize(self, id_or_code: str) -> Response:
@@ -183,7 +183,7 @@ class PaymentRequest(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/paymentrequest/finalize/{id_or_code}")
+        url = self._full_url(f"/paymentrequest/finalize/{id_or_code}")
         return self._handle_request(HTTPMethod.POST, url)
 
     def update(
@@ -231,7 +231,7 @@ class PaymentRequest(BaseAPI):
         if tax:
             tax = [unit_tax.dict for unit_tax in tax]
 
-        url = self._parse_url(f"/paymentrequest/{id_or_code}")
+        url = self._full_url(f"/paymentrequest/{id_or_code}")
         payload = {
             "customer": customer,
             "amount": amount,
@@ -260,11 +260,11 @@ class PaymentRequest(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/paymentrequest/archive/{id_or_code}")
+        url = self._full_url(f"/paymentrequest/archive/{id_or_code}")
         return self._handle_request(HTTPMethod.POST, url)
 
 
-class AsyncPaymentRequest(BaseAsyncAPI):
+class AsyncPaymentRequestClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Payment Requests API
 
     The Payment Requests API allows you to manage requests for payment of goods and services.
@@ -313,7 +313,7 @@ class AsyncPaymentRequest(BaseAsyncAPI):
         if tax:
             tax = [unit_tax.dict for unit_tax in tax]
 
-        url = self._parse_url("/paymentrequest")
+        url = self._full_url("/paymentrequest")
 
         payload = {"customer": customer, "amount": amount}
         optional_params = [
@@ -360,7 +360,7 @@ class AsyncPaymentRequest(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/paymentrequest?perPage={pagination}")
+        url = self._full_url(f"/paymentrequest?perPage={pagination}")
         query_params = [
             ("customer", customer),
             ("status", status),
@@ -383,7 +383,7 @@ class AsyncPaymentRequest(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/paymentrequest/{id_or_code}")
+        url = self._full_url(f"/paymentrequest/{id_or_code}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def verify(self, code: str) -> Response:
@@ -396,7 +396,7 @@ class AsyncPaymentRequest(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/paymentrequest/verify/{code}")
+        url = self._full_url(f"/paymentrequest/verify/{code}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def send_notification(self, id_or_code: str) -> Response:
@@ -409,7 +409,7 @@ class AsyncPaymentRequest(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/paymentrequest/notify/{id_or_code}")
+        url = self._full_url(f"/paymentrequest/notify/{id_or_code}")
         return await self._handle_request(HTTPMethod.POST, url)
 
     async def get_total(self) -> Response:
@@ -419,7 +419,7 @@ class AsyncPaymentRequest(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/paymentrequest/totals")
+        url = self._full_url("/paymentrequest/totals")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def finalize(self, id_or_code: str) -> Response:
@@ -432,7 +432,7 @@ class AsyncPaymentRequest(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/paymentrequest/finalize/{id_or_code}")
+        url = self._full_url(f"/paymentrequest/finalize/{id_or_code}")
         return await self._handle_request(HTTPMethod.POST, url)
 
     async def update(
@@ -480,7 +480,7 @@ class AsyncPaymentRequest(BaseAsyncAPI):
         if tax:
             tax = [unit_tax.dict for unit_tax in tax]
 
-        url = self._parse_url(f"/paymentrequest/{id_or_code}")
+        url = self._full_url(f"/paymentrequest/{id_or_code}")
         payload = {
             "customer": customer,
             "amount": amount,
@@ -509,5 +509,5 @@ class AsyncPaymentRequest(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/paymentrequest/archive/{id_or_code}")
+        url = self._full_url(f"/paymentrequest/archive/{id_or_code}")
         return await self._handle_request(HTTPMethod.POST, url)

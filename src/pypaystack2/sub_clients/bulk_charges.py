@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import (
     HTTPMethod,
     append_query_params,
@@ -10,7 +10,7 @@ from pypaystack2.utils import (
 )
 
 
-class BulkCharge(BaseAPI):
+class BulkChargeClient(BaseAPIClient):
     """Provides a wrapper for paystack Bulk Charge API
 
     The Bulk Charges API allows you to create and manage multiple recurring payments from your customers.
@@ -30,7 +30,7 @@ class BulkCharge(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/bulkcharge")
+        url = self._full_url("/bulkcharge")
         payload = [item.dict for item in body]
         return self._handle_request(HTTPMethod.POST, url, payload)
 
@@ -54,7 +54,7 @@ class BulkCharge(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/bulkcharge?perPage={pagination}")
+        url = self._full_url(f"/bulkcharge?perPage={pagination}")
         query_params = [
             ("page", page),
             ("from", start_date),
@@ -76,7 +76,7 @@ class BulkCharge(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/bulkcharge/{id_or_code}")
+        url = self._full_url(f"/bulkcharge/{id_or_code}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def get_charges_in_batch(
@@ -107,7 +107,7 @@ class BulkCharge(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/bulkcharge/{id_or_code}/charges?perPage={pagination}")
+        url = self._full_url(f"/bulkcharge/{id_or_code}/charges?perPage={pagination}")
         query_params = [
             ("status", status),
             ("page", page),
@@ -127,7 +127,7 @@ class BulkCharge(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/bulkcharge/pause/{batch_code}")
+        url = self._full_url(f"/bulkcharge/pause/{batch_code}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def resume_batch(self, batch_code: str) -> Response:
@@ -140,11 +140,11 @@ class BulkCharge(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/bulkcharge/resume/{batch_code}")
+        url = self._full_url(f"/bulkcharge/resume/{batch_code}")
         return self._handle_request(HTTPMethod.GET, url)
 
 
-class AsyncBulkCharge(BaseAsyncAPI):
+class AsyncBulkChargeClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Bulk Charge API
 
     The Bulk Charges API allows you to create and manage multiple recurring payments from your customers.
@@ -164,7 +164,7 @@ class AsyncBulkCharge(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/bulkcharge")
+        url = self._full_url("/bulkcharge")
         payload = [item.dict for item in body]
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
@@ -188,7 +188,7 @@ class AsyncBulkCharge(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/bulkcharge?perPage={pagination}")
+        url = self._full_url(f"/bulkcharge?perPage={pagination}")
         query_params = [
             ("page", page),
             ("from", start_date),
@@ -210,7 +210,7 @@ class AsyncBulkCharge(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/bulkcharge/{id_or_code}")
+        url = self._full_url(f"/bulkcharge/{id_or_code}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def get_charges_in_batch(
@@ -241,7 +241,7 @@ class AsyncBulkCharge(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/bulkcharge/{id_or_code}/charges?perPage={pagination}")
+        url = self._full_url(f"/bulkcharge/{id_or_code}/charges?perPage={pagination}")
         query_params = [
             ("status", status),
             ("page", page),
@@ -261,7 +261,7 @@ class AsyncBulkCharge(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/bulkcharge/pause/{batch_code}")
+        url = self._full_url(f"/bulkcharge/pause/{batch_code}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def resume_batch(self, batch_code: str) -> Response:
@@ -274,5 +274,5 @@ class AsyncBulkCharge(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/bulkcharge/resume/{batch_code}")
+        url = self._full_url(f"/bulkcharge/resume/{batch_code}")
         return await self._handle_request(HTTPMethod.GET, url)

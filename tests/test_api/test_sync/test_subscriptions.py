@@ -3,7 +3,7 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api import Subscription
+from pypaystack2.sub_clients import SubscriptionClient
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
 
@@ -12,14 +12,14 @@ class MockedSubscriptionTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = Subscription()
+        cls.wrapper = SubscriptionClient()
 
 
 class SubscriptionTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = Subscription()
+        cls.wrapper = SubscriptionClient()
 
     def test_can_create(self):
         # TODO: Test properly

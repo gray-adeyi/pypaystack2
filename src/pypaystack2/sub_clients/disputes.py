@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import (
     DisputeStatus,
     append_query_params,
@@ -12,7 +12,7 @@ from pypaystack2.utils import (
 )
 
 
-class Dispute(BaseAPI):
+class DisputeClient(BaseAPIClient):
     """Provides a wrapper for paystack Disputes API
 
     The Disputes API allows you to manage transaction disputes on your integration.
@@ -44,7 +44,7 @@ class Dispute(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/dispute?perPage={pagination}")
+        url = self._full_url(f"/dispute?perPage={pagination}")
         query_params = [
             ("page", page),
             ("from", start_date),
@@ -65,7 +65,7 @@ class Dispute(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/dispute/{id}")
+        url = self._full_url(f"/dispute/{id}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def get_transaction_disputes(self, id: str) -> Response:
@@ -78,7 +78,7 @@ class Dispute(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/dispute/transaction/{id}")
+        url = self._full_url(f"/dispute/transaction/{id}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def update_dispute(
@@ -99,7 +99,7 @@ class Dispute(BaseAPI):
         refund_amount = validate_amount(refund_amount)
         payload = {"refund_amount": refund_amount}
         payload = add_to_payload([("uploaded_filename", uploaded_filename)], payload)
-        url = self._parse_url(f"/dispute/{id}")
+        url = self._full_url(f"/dispute/{id}")
         return self._handle_request(HTTPMethod.PUT, url, payload)
 
     def add_evidence(
@@ -138,7 +138,7 @@ class Dispute(BaseAPI):
             ("delivery_date", delivery_date),
         ]
         payload = add_to_payload(optional_params, payload)
-        url = self._parse_url(f"dispute/{id}/evidence")
+        url = self._full_url(f"dispute/{id}/evidence")
         return self._handle_request(HTTPMethod.POST, url, payload)
 
     def get_upload_url(self, id: str, upload_filename: str) -> Response:
@@ -151,7 +151,7 @@ class Dispute(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(
+        url = self._full_url(
             f"/dispute/{id}/upload_url?upload_filename={upload_filename}"
         )
         return self._handle_request(HTTPMethod.GET, url)
@@ -189,7 +189,7 @@ class Dispute(BaseAPI):
             "uploaded_filename": uploaded_filename,
         }
         payload = add_to_payload([("evidence", evidence)], payload)
-        url = self._parse_url(f"/dispute/{id}/resolve")
+        url = self._full_url(f"/dispute/{id}/resolve")
         return self._handle_request(HTTPMethod.PUT, url, payload)
 
     def export_disputes(
@@ -216,7 +216,7 @@ class Dispute(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/dispute/export?perPage={pagination}")
+        url = self._full_url(f"/dispute/export?perPage={pagination}")
         query_params = [
             ("page", page),
             ("from", start_date),
@@ -228,7 +228,7 @@ class Dispute(BaseAPI):
         return self._handle_request(HTTPMethod.GET, url)
 
 
-class AsyncDispute(BaseAsyncAPI):
+class AsyncDisputeClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Disputes API
 
     The Disputes API allows you manage transaction disputes on your integration.
@@ -260,7 +260,7 @@ class AsyncDispute(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/dispute?perPage={pagination}")
+        url = self._full_url(f"/dispute?perPage={pagination}")
         query_params = [
             ("page", page),
             ("from", start_date),
@@ -281,7 +281,7 @@ class AsyncDispute(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/dispute/{id}")
+        url = self._full_url(f"/dispute/{id}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def get_transaction_disputes(self, id: str) -> Response:
@@ -294,7 +294,7 @@ class AsyncDispute(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/dispute/transaction/{id}")
+        url = self._full_url(f"/dispute/transaction/{id}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def update_dispute(
@@ -315,7 +315,7 @@ class AsyncDispute(BaseAsyncAPI):
         refund_amount = validate_amount(refund_amount)
         payload = {"refund_amount": refund_amount}
         payload = add_to_payload([("uploaded_filename", uploaded_filename)], payload)
-        url = self._parse_url(f"/dispute/{id}")
+        url = self._full_url(f"/dispute/{id}")
         return await self._handle_request(HTTPMethod.PUT, url, payload)
 
     async def add_evidence(
@@ -354,7 +354,7 @@ class AsyncDispute(BaseAsyncAPI):
             ("delivery_date", delivery_date),
         ]
         payload = add_to_payload(optional_params, payload)
-        url = self._parse_url(f"dispute/{id}/evidence")
+        url = self._full_url(f"dispute/{id}/evidence")
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
     async def get_upload_url(self, id: str, upload_filename: str) -> Response:
@@ -367,7 +367,7 @@ class AsyncDispute(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(
+        url = self._full_url(
             f"/dispute/{id}/upload_url?upload_filename={upload_filename}"
         )
         return await self._handle_request(HTTPMethod.GET, url)
@@ -405,7 +405,7 @@ class AsyncDispute(BaseAsyncAPI):
             "uploaded_filename": uploaded_filename,
         }
         payload = add_to_payload([("evidence", evidence)], payload)
-        url = self._parse_url(f"/dispute/{id}/resolve")
+        url = self._full_url(f"/dispute/{id}/resolve")
         return await self._handle_request(HTTPMethod.PUT, url, payload)
 
     async def export_disputes(
@@ -432,7 +432,7 @@ class AsyncDispute(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/dispute/export?perPage={pagination}")
+        url = self._full_url(f"/dispute/export?perPage={pagination}")
         query_params = [
             ("page", page),
             ("from", start_date),

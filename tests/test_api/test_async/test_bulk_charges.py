@@ -3,7 +3,7 @@ from unittest import IsolatedAsyncioTestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api.bulk_charges import AsyncBulkCharge
+from pypaystack2.sub_clients.bulk_charges import AsyncBulkChargeClient
 from pypaystack2.utils import BulkChargeInstruction, Status
 from tests.test_api.mocked_api_testcase import MockedAsyncAPITestCase
 
@@ -13,7 +13,7 @@ class MockedAsyncBulkChargeTestCase(MockedAsyncAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = AsyncBulkCharge()
+        cls.wrapper = AsyncBulkChargeClient()
 
     async def test_can_initiate(self):
         instructions = [{"authorization": "", "amount": 1000, "reference": "qwerty"}]
@@ -50,7 +50,7 @@ class AsyncBulkChargeTestCase(IsolatedAsyncioTestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = AsyncBulkCharge()
+        cls.wrapper = AsyncBulkChargeClient()
 
     async def test_can_initiate(self):
         instructions = [{"authorization": "", "amount": 1000, "reference": "qwerty"}]

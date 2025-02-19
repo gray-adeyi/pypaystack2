@@ -3,7 +3,7 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api import Transaction
+from pypaystack2.sub_clients import TransactionClient
 from pypaystack2.utils import Currency
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
@@ -13,14 +13,14 @@ class MockedTransactionTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = Transaction()
+        cls.wrapper = TransactionClient()
 
 
 class TransactionTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = Transaction()
+        cls.wrapper = TransactionClient()
 
     def test_can_initialize(self):
         response = self.wrapper.initialize(

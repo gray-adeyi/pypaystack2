@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.utils import (
     Currency,
@@ -13,7 +13,7 @@ from pypaystack2.utils import (
 )
 
 
-class TransferRecipient(BaseAPI):
+class TransferRecipientClient(BaseAPIClient):
     """Provides a wrapper for paystack Transfer Receipts API
 
     The Transfer Recipients API allows you to create and manage beneficiaries that you send money to.
@@ -62,7 +62,7 @@ class TransferRecipient(BaseAPI):
                     "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"
                 )
 
-        url = self._parse_url("/transferrecipient")
+        url = self._full_url("/transferrecipient")
 
         payload = {
             "type": type,
@@ -104,7 +104,7 @@ class TransferRecipient(BaseAPI):
         """
         batch = [item.dict for item in batch]
 
-        url = self._parse_url("/transferrecipient/bulk")
+        url = self._full_url("/transferrecipient/bulk")
 
         payload = {
             "batch": batch,
@@ -132,7 +132,7 @@ class TransferRecipient(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/transferrecipient?perPage={pagination}")
+        url = self._full_url(f"/transferrecipient?perPage={pagination}")
         query_params = [
             ("page", page),
             ("from", start_date),
@@ -150,7 +150,7 @@ class TransferRecipient(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/transferrecipient/{id_or_code}")
+        url = self._full_url(f"/transferrecipient/{id_or_code}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def update(
@@ -169,7 +169,7 @@ class TransferRecipient(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/transferrecipient/{id_or_code}")
+        url = self._full_url(f"/transferrecipient/{id_or_code}")
         payload = {"name": name}
         optional_params = [("email", email)]
         payload = add_to_payload(optional_params, payload)
@@ -185,11 +185,11 @@ class TransferRecipient(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/transferrecipient/{id_or_code}")
+        url = self._full_url(f"/transferrecipient/{id_or_code}")
         return self._handle_request(HTTPMethod.DELETE, url)
 
 
-class AsyncTransferRecipient(BaseAsyncAPI):
+class AsyncTransferRecipientClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Transfer Receipts API
 
     The Transfer Recipients API allows you to create and manage beneficiaries that you send money to.
@@ -202,7 +202,7 @@ class AsyncTransferRecipient(BaseAsyncAPI):
 
     async def create(
         self,
-        type: TransferRecipient,
+        type: TransferRecipientClient,
         name: str,
         account_number: str,
         bank_code: Optional[str] = None,
@@ -238,7 +238,7 @@ class AsyncTransferRecipient(BaseAsyncAPI):
                     "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"
                 )
 
-        url = self._parse_url("/transferrecipient")
+        url = self._full_url("/transferrecipient")
 
         payload = {
             "type": type,
@@ -283,7 +283,7 @@ class AsyncTransferRecipient(BaseAsyncAPI):
 
         batch = [item.dict for item in batch]
 
-        url = self._parse_url("/transferrecipient/bulk")
+        url = self._full_url("/transferrecipient/bulk")
 
         payload = {
             "batch": batch,
@@ -311,7 +311,7 @@ class AsyncTransferRecipient(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/transferrecipient?perPage={pagination}")
+        url = self._full_url(f"/transferrecipient?perPage={pagination}")
         query_params = [
             ("page", page),
             ("from", start_date),
@@ -329,7 +329,7 @@ class AsyncTransferRecipient(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/transferrecipient/{id_or_code}")
+        url = self._full_url(f"/transferrecipient/{id_or_code}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def update(
@@ -348,7 +348,7 @@ class AsyncTransferRecipient(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/transferrecipient/{id_or_code}")
+        url = self._full_url(f"/transferrecipient/{id_or_code}")
         payload = {"name": name}
         optional_params = [("email", email)]
         payload = add_to_payload(optional_params, payload)
@@ -364,5 +364,5 @@ class AsyncTransferRecipient(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/transferrecipient/{id_or_code}")
+        url = self._full_url(f"/transferrecipient/{id_or_code}")
         return await self._handle_request(HTTPMethod.DELETE, url)

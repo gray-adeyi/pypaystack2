@@ -1,117 +1,131 @@
-from pypaystack2.api.apple_pay import AsyncApplePay, ApplePay
-from pypaystack2.api.bulk_charges import AsyncBulkCharge, BulkCharge
-from pypaystack2.api.charge import AsyncCharge, Charge
-from pypaystack2.api.integration import AsyncIntegration, Integration
-from pypaystack2.api.customers import AsyncCustomer, Customer
-from pypaystack2.api.dedicated_accounts import AsyncDedicatedAccount, DedicatedAccount
-from pypaystack2.api.disputes import AsyncDispute, Dispute
-from pypaystack2.api.payment_requests import AsyncPaymentRequest, PaymentRequest
-from pypaystack2.api.miscellaneous import AsyncMiscellaneous, Miscellaneous
-from pypaystack2.api.payment_pages import AsyncPaymentPage, PaymentPage
-from pypaystack2.api.plans import AsyncPlan, Plan
-from pypaystack2.api.products import AsyncProduct, Product
-from pypaystack2.api.refunds import AsyncRefund, Refund
-from pypaystack2.api.settlements import AsyncSettlement, Settlement
-from pypaystack2.api.splits import AsyncTransactionSplit, TransactionSplit
-from pypaystack2.api.subaccounts import AsyncSubAccount, SubAccount
-from pypaystack2.api.subscriptions import AsyncSubscription, Subscription
-from pypaystack2.api.terminals import Terminal, AsyncTerminal
-from pypaystack2.api.transactions import AsyncTransaction, Transaction
-from pypaystack2.api.transfer_recipients import (
-    AsyncTransferRecipient,
-    TransferRecipient,
+from pypaystack2.sub_clients.apple_pay import AsyncApplePayClient, ApplePayClient
+from pypaystack2.sub_clients.bulk_charges import AsyncBulkChargeClient, BulkChargeClient
+from pypaystack2.sub_clients.charge import AsyncChargeClient, ChargeClient
+from pypaystack2.sub_clients.customers import AsyncCustomerClient, CustomerClient
+from pypaystack2.sub_clients.dedicated_accounts import (
+    AsyncDedicatedAccountClient,
+    DedicatedAccountClient,
 )
-from pypaystack2.api.transfers import AsyncTransfer, Transfer
-from pypaystack2.api.transfers_control import AsyncTransferControl, TransferControl
-from pypaystack2.api.verification import AsyncVerification, Verification
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.sub_clients.disputes import AsyncDisputeClient, DisputeClient
+from pypaystack2.sub_clients.integration import (
+    AsyncIntegrationClient,
+    IntegrationClient,
+)
+from pypaystack2.sub_clients.miscellaneous import (
+    AsyncMiscellaneousClient,
+    MiscellaneousClient,
+)
+from pypaystack2.sub_clients.payment_pages import (
+    AsyncPaymentPageClient,
+    PaymentPageClient,
+)
+from pypaystack2.sub_clients.payment_requests import (
+    AsyncPaymentRequestClient,
+    PaymentRequestClient,
+)
+from pypaystack2.sub_clients.plans import AsyncPlanClient, PlanClient
+from pypaystack2.sub_clients.products import AsyncProductClient, ProductClient
+from pypaystack2.sub_clients.refunds import AsyncRefundClient, RefundClient
+from pypaystack2.sub_clients.settlements import AsyncSettlementClient, SettlementClient
+from pypaystack2.sub_clients.splits import (
+    AsyncTransactionSplitClient,
+    TransactionSplitClient,
+)
+from pypaystack2.sub_clients.subaccounts import AsyncSubAccountClient, SubAccountClient
+from pypaystack2.sub_clients.subscriptions import (
+    AsyncSubscriptionClient,
+    SubscriptionClient,
+)
+from pypaystack2.sub_clients.terminals import TerminalClient, AsyncTerminalClient
+from pypaystack2.sub_clients.transactions import (
+    AsyncTransactionClient,
+    TransactionClient,
+)
+from pypaystack2.sub_clients.transfer_recipients import (
+    AsyncTransferRecipientClient,
+    TransferRecipientClient,
+)
+from pypaystack2.sub_clients.transfers import AsyncTransferClient, TransferClient
+from pypaystack2.sub_clients.transfers_control import (
+    AsyncTransferControlClient,
+    TransferControlClient,
+)
+from pypaystack2.sub_clients.verification import (
+    AsyncVerificationClient,
+    VerificationClient,
+)
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 
 
-class Paystack(BaseAPI):
-    """A Paystack API wrapper class with all the wrappers supported by pypaystack2.
+class PaystackClient(BaseAPIClient):
+    """A Paystack API client class with all the wrappers supported by pypaystack2.
 
-    This class has all the individual api wrapper classes like `ApplePay`, `BulkCharge` bound to it.
-    its intent is to reduce the number of imports by exposing all the api wrappers bound to it via an
+    This class has all the individual sub_clients classes like `ApplePay`, `BulkCharge` bound to it.
+    its intent is to reduce the number of imports by exposing all the sub_clients bound to it via an
     instance of this class.
     """
 
-    def __init__(self, auth_key: str = None):
-        super().__init__(auth_key=auth_key)
-        self.apple_pay = ApplePay(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.bulk_charges = BulkCharge(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.charge = Charge(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.integration = Integration(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.customers = Customer(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.dedicated_accounts = DedicatedAccount(
-            auth_key=self._PAYSTACK_AUTHORIZATION_KEY
-        )
-        self.disputes = Dispute(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.payment_requests = PaymentRequest(
-            auth_key=self._PAYSTACK_AUTHORIZATION_KEY
-        )
-        self.miscellaneous = Miscellaneous(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.payment_pages = PaymentPage(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.plans = Plan(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.products = Product(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.refunds = Refund(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.settlements = Settlement(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.splits = TransactionSplit(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.subaccounts = SubAccount(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.subscriptions = Subscription(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.terminals = Terminal(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.transactions = Transaction(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.transfer_recipients = TransferRecipient(
-            auth_key=self._PAYSTACK_AUTHORIZATION_KEY
-        )
-        self.transfers = Transfer(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.transfer_control = TransferControl(
-            auth_key=self._PAYSTACK_AUTHORIZATION_KEY
-        )
-        self.verification = Verification(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
+    def __init__(self, secret_key: str = None):
+        super().__init__(secret_key=secret_key)
+        self.apple_pay = ApplePayClient(secret_key=self._secret_key)
+        self.bulk_charges = BulkChargeClient(secret_key=self._secret_key)
+        self.charge = ChargeClient(secret_key=self._secret_key)
+        self.integration = IntegrationClient(secret_key=self._secret_key)
+        self.customers = CustomerClient(secret_key=self._secret_key)
+        self.dedicated_accounts = DedicatedAccountClient(secret_key=self._secret_key)
+        self.disputes = DisputeClient(secret_key=self._secret_key)
+        self.payment_requests = PaymentRequestClient(secret_key=self._secret_key)
+        self.miscellaneous = MiscellaneousClient(secret_key=self._secret_key)
+        self.payment_pages = PaymentPageClient(secret_key=self._secret_key)
+        self.plans = PlanClient(secret_key=self._secret_key)
+        self.products = ProductClient(secret_key=self._secret_key)
+        self.refunds = RefundClient(secret_key=self._secret_key)
+        self.settlements = SettlementClient(secret_key=self._secret_key)
+        self.splits = TransactionSplitClient(secret_key=self._secret_key)
+        self.subaccounts = SubAccountClient(secret_key=self._secret_key)
+        self.subscriptions = SubscriptionClient(secret_key=self._secret_key)
+        self.terminals = TerminalClient(secret_key=self._secret_key)
+        self.transactions = TransactionClient(secret_key=self._secret_key)
+        self.transfer_recipients = TransferRecipientClient(secret_key=self._secret_key)
+        self.transfers = TransferClient(secret_key=self._secret_key)
+        self.transfer_control = TransferControlClient(secret_key=self._secret_key)
+        self.verification = VerificationClient(secret_key=self._secret_key)
 
 
-class AsyncPaystack(BaseAsyncAPI):
-    """An asynchronous Paystack API wrapper class with all the wrappers supported by pypaystack2.
+class AsyncPaystackClient(BaseAsyncAPIClient):
+    """An asynchronous Paystack API client class with all the wrappers supported by pypaystack2.
 
-    This class has all the individual api wrapper classes like `ApplePay`, `BulkCharge` bound to it.
-    its intent is to reduce the number of imports by exposing all the api wrappers bound to it via an
+    This class has all the individual sub_clients wrapper classes like `ApplePay`, `BulkCharge` bound to it.
+    its intent is to reduce the number of imports by exposing all the sub_clients wrappers bound to it via an
     instance of this class.
     """
 
-    def __init__(self, auth_key: str = None):
-        super().__init__(auth_key=auth_key)
-        self.apple_pay = AsyncApplePay(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.bulk_charges = AsyncBulkCharge(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.charge = AsyncCharge(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.integration = AsyncIntegration(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.customers = AsyncCustomer(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.dedicated_accounts = AsyncDedicatedAccount(
-            auth_key=self._PAYSTACK_AUTHORIZATION_KEY
+    def __init__(self, secret_key: str = None):
+        super().__init__(secret_key=secret_key)
+        self.apple_pay = AsyncApplePayClient(secret_key=self._secret_key)
+        self.bulk_charges = AsyncBulkChargeClient(secret_key=self._secret_key)
+        self.charge = AsyncChargeClient(secret_key=self._secret_key)
+        self.integration = AsyncIntegrationClient(secret_key=self._secret_key)
+        self.customers = AsyncCustomerClient(secret_key=self._secret_key)
+        self.dedicated_accounts = AsyncDedicatedAccountClient(
+            secret_key=self._secret_key
         )
-        self.disputes = AsyncDispute(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.payment_requests = AsyncPaymentRequest(
-            auth_key=self._PAYSTACK_AUTHORIZATION_KEY
+        self.disputes = AsyncDisputeClient(secret_key=self._secret_key)
+        self.payment_requests = AsyncPaymentRequestClient(secret_key=self._secret_key)
+        self.miscellaneous = AsyncMiscellaneousClient(secret_key=self._secret_key)
+        self.payment_pages = AsyncPaymentPageClient(secret_key=self._secret_key)
+        self.plans = AsyncPlanClient(secret_key=self._secret_key)
+        self.products = AsyncProductClient(secret_key=self._secret_key)
+        self.refunds = AsyncRefundClient(secret_key=self._secret_key)
+        self.settlements = AsyncSettlementClient(secret_key=self._secret_key)
+        self.splits = AsyncTransactionSplitClient(secret_key=self._secret_key)
+        self.subaccounts = AsyncSubAccountClient(secret_key=self._secret_key)
+        self.subscriptions = AsyncSubscriptionClient(secret_key=self._secret_key)
+        self.terminals = AsyncTerminalClient(secret_key=self._secret_key)
+        self.transactions = AsyncTransactionClient(secret_key=self._secret_key)
+        self.transfer_recipients = AsyncTransferRecipientClient(
+            secret_key=self._secret_key
         )
-        self.miscellaneous = AsyncMiscellaneous(
-            auth_key=self._PAYSTACK_AUTHORIZATION_KEY
-        )
-        self.payment_pages = AsyncPaymentPage(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.plans = AsyncPlan(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.products = AsyncProduct(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.refunds = AsyncRefund(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.settlements = AsyncSettlement(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.splits = AsyncTransactionSplit(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.subaccounts = AsyncSubAccount(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.subscriptions = AsyncSubscription(
-            auth_key=self._PAYSTACK_AUTHORIZATION_KEY
-        )
-        self.terminals = AsyncTerminal(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.transactions = AsyncTransaction(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.transfer_recipients = AsyncTransferRecipient(
-            auth_key=self._PAYSTACK_AUTHORIZATION_KEY
-        )
-        self.transfers = AsyncTransfer(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
-        self.transfer_control = AsyncTransferControl(
-            auth_key=self._PAYSTACK_AUTHORIZATION_KEY
-        )
-        self.verification = AsyncVerification(auth_key=self._PAYSTACK_AUTHORIZATION_KEY)
+        self.transfers = AsyncTransferClient(secret_key=self._secret_key)
+        self.transfer_control = AsyncTransferControlClient(secret_key=self._secret_key)
+        self.verification = AsyncVerificationClient(secret_key=self._secret_key)

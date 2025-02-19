@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import (
     Currency,
     add_to_payload,
@@ -11,7 +11,7 @@ from pypaystack2.utils import (
 from pypaystack2.utils.enums import Country
 
 
-class DedicatedAccount(BaseAPI):
+class DedicatedAccountClient(BaseAPIClient):
     """Provides a wrapper for paystack Dedicated Virtual Account API
 
     The Dedicated Virtual Account API enables Nigerian merchants to manage
@@ -53,7 +53,7 @@ class DedicatedAccount(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/dedicated_account")
+        url = self._full_url("/dedicated_account")
         payload = {
             "customer": customer,
         }
@@ -104,7 +104,7 @@ class DedicatedAccount(BaseAPI):
             split_code: Split code consisting of the lists of accounts you want to split the transaction with
         """
 
-        url = self._parse_url("/dedicated_account/assign")
+        url = self._full_url("/dedicated_account/assign")
         payload = {
             "email": email,
             "first_name": first_name,
@@ -155,7 +155,7 @@ class DedicatedAccount(BaseAPI):
             ("bank_id", bank_id),
             ("customer", customer),
         ]
-        url = self._parse_url(f"/dedicated_account?active={active}")
+        url = self._full_url(f"/dedicated_account?active={active}")
         url = append_query_params(query_params, url)
         return self._handle_request(HTTPMethod.GET, url)
 
@@ -173,7 +173,7 @@ class DedicatedAccount(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/dedicated_account/{dedicated_account_id}")
+        url = self._full_url(f"/dedicated_account/{dedicated_account_id}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def requery(
@@ -194,7 +194,7 @@ class DedicatedAccount(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/dedicated_account?account_number={account_number}")
+        url = self._full_url(f"/dedicated_account?account_number={account_number}")
         query_params = [
             ("provider_slug", provider_slug),
             ("date", date),
@@ -216,7 +216,7 @@ class DedicatedAccount(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/dedicated_account/{dedicated_account_id}")
+        url = self._full_url(f"/dedicated_account/{dedicated_account_id}")
         return self._handle_request(HTTPMethod.DELETE, url)
 
     def split(
@@ -243,7 +243,7 @@ class DedicatedAccount(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/dedicated_account/split")
+        url = self._full_url("/dedicated_account/split")
         payload = {"customer": customer}
 
         optional_params = [
@@ -271,7 +271,7 @@ class DedicatedAccount(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/dedicated_account/split")
+        url = self._full_url("/dedicated_account/split")
         payload = {
             "account_number": account_number,
         }
@@ -288,11 +288,11 @@ class DedicatedAccount(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/dedicated_account/available_providers")
+        url = self._full_url("/dedicated_account/available_providers")
         return self._handle_request(HTTPMethod.GET, url)
 
 
-class AsyncDedicatedAccount(BaseAsyncAPI):
+class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Dedicated Virtual Account API
 
     The Dedicated Virtual Account API enables Nigerian merchants to manage
@@ -334,7 +334,7 @@ class AsyncDedicatedAccount(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/dedicated_account")
+        url = self._full_url("/dedicated_account")
         payload = {
             "customer": customer,
         }
@@ -385,7 +385,7 @@ class AsyncDedicatedAccount(BaseAsyncAPI):
             split_code: Split code consisting of the lists of accounts you want to split the transaction with
         """
 
-        url = self._parse_url("/dedicated_account/assign")
+        url = self._full_url("/dedicated_account/assign")
         payload = {
             "email": email,
             "first_name": first_name,
@@ -436,7 +436,7 @@ class AsyncDedicatedAccount(BaseAsyncAPI):
             ("bank_id", bank_id),
             ("customer", customer),
         ]
-        url = self._parse_url(f"/dedicated_account?active={active}")
+        url = self._full_url(f"/dedicated_account?active={active}")
         url = append_query_params(query_params, url)
         return await self._handle_request(HTTPMethod.GET, url)
 
@@ -454,7 +454,7 @@ class AsyncDedicatedAccount(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/dedicated_account/{dedicated_account_id}")
+        url = self._full_url(f"/dedicated_account/{dedicated_account_id}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def requery(
@@ -475,7 +475,7 @@ class AsyncDedicatedAccount(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/dedicated_account?account_number={account_number}")
+        url = self._full_url(f"/dedicated_account?account_number={account_number}")
         query_params = [
             ("provider_slug", provider_slug),
             ("date", date),
@@ -497,7 +497,7 @@ class AsyncDedicatedAccount(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/dedicated_account/{dedicated_account_id}")
+        url = self._full_url(f"/dedicated_account/{dedicated_account_id}")
         return await self._handle_request(HTTPMethod.DELETE, url)
 
     async def split(
@@ -524,7 +524,7 @@ class AsyncDedicatedAccount(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/dedicated_account/split")
+        url = self._full_url("/dedicated_account/split")
         payload = {"customer": customer}
 
         optional_params = [
@@ -552,7 +552,7 @@ class AsyncDedicatedAccount(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/dedicated_account/split")
+        url = self._full_url("/dedicated_account/split")
         payload = {
             "account_number": account_number,
         }
@@ -569,5 +569,5 @@ class AsyncDedicatedAccount(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/dedicated_account/available_providers")
+        url = self._full_url("/dedicated_account/available_providers")
         return await self._handle_request(HTTPMethod.GET, url)

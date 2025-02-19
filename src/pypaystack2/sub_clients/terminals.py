@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.utils import (
     TerminalEvent,
@@ -11,7 +11,7 @@ from pypaystack2.utils import (
 )
 
 
-class Terminal(BaseAPI):
+class TerminalClient(BaseAPIClient):
     """Provides a wrapper for paystack Terminal API
 
     The Terminal API allows you to build delightful in-person payment experiences.
@@ -57,7 +57,7 @@ class Terminal(BaseAPI):
                 f"Terminal Event: {type} does not support Terminal Event Action: {action}"
             )
 
-        url = self._parse_url(f"/terminal/{terminal_id}/event")
+        url = self._full_url(f"/terminal/{terminal_id}/event")
 
         payload = {
             "type": type,
@@ -76,7 +76,7 @@ class Terminal(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/terminal/{terminal_id}/event/{event_id}")
+        url = self._full_url(f"/terminal/{terminal_id}/event/{event_id}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def get_terminal_status(self, terminal_id: str) -> Response:
@@ -88,7 +88,7 @@ class Terminal(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/terminal/{terminal_id}/presence")
+        url = self._full_url(f"/terminal/{terminal_id}/presence")
         return self._handle_request(HTTPMethod.GET, url)
 
     def get_terminals(
@@ -109,7 +109,7 @@ class Terminal(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/terminal?perPage={pagination}")
+        url = self._full_url(f"/terminal?perPage={pagination}")
         query_params = [
             ("next", next),
             ("previous", previous),
@@ -126,7 +126,7 @@ class Terminal(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/terminal/{terminal_id}/")
+        url = self._full_url(f"/terminal/{terminal_id}/")
         return self._handle_request(HTTPMethod.GET, url)
 
     def update_terminal(self, terminal_id: str, name: str, address: str) -> Response:
@@ -140,7 +140,7 @@ class Terminal(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/terminal/{terminal_id}")
+        url = self._full_url(f"/terminal/{terminal_id}")
 
         payload = {"name": name, "address": address}
         return self._handle_request(HTTPMethod.PUT, url, payload)
@@ -155,7 +155,7 @@ class Terminal(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/terminal/commission_device")
+        url = self._full_url("/terminal/commission_device")
 
         payload = {
             "serial_number": serial_number,
@@ -171,7 +171,7 @@ class Terminal(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url("/terminal/decommission_device")
+        url = self._full_url("/terminal/decommission_device")
 
         payload = {
             "serial_number": serial_number,
@@ -179,7 +179,7 @@ class Terminal(BaseAPI):
         return self._handle_request(HTTPMethod.POST, url, payload)
 
 
-class AsyncTerminal(BaseAsyncAPI):
+class AsyncTerminalClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Terminal API
 
     The Terminal API allows you to create and manage recurring
@@ -226,7 +226,7 @@ class AsyncTerminal(BaseAsyncAPI):
                 f"Terminal Event: {type} does not support Terminal Event Action: {action}"
             )
 
-        url = self._parse_url(f"/terminal/{terminal_id}/event")
+        url = self._full_url(f"/terminal/{terminal_id}/event")
 
         payload = {
             "type": type,
@@ -245,7 +245,7 @@ class AsyncTerminal(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/terminal/{terminal_id}/event/{event_id}")
+        url = self._full_url(f"/terminal/{terminal_id}/event/{event_id}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def get_terminal_status(self, terminal_id: str) -> Response:
@@ -257,7 +257,7 @@ class AsyncTerminal(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/terminal/{terminal_id}/presence")
+        url = self._full_url(f"/terminal/{terminal_id}/presence")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def get_terminals(
@@ -278,7 +278,7 @@ class AsyncTerminal(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/terminal?perPage={pagination}")
+        url = self._full_url(f"/terminal?perPage={pagination}")
         query_params = [
             ("next", next),
             ("previous", previous),
@@ -295,7 +295,7 @@ class AsyncTerminal(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/terminal/{terminal_id}/")
+        url = self._full_url(f"/terminal/{terminal_id}/")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def update_terminal(
@@ -311,7 +311,7 @@ class AsyncTerminal(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/terminal/{terminal_id}")
+        url = self._full_url(f"/terminal/{terminal_id}")
 
         payload = {"name": name, "address": address}
         return await self._handle_request(HTTPMethod.PUT, url, payload)
@@ -326,7 +326,7 @@ class AsyncTerminal(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/terminal/commission_device")
+        url = self._full_url("/terminal/commission_device")
 
         payload = {
             "serial_number": serial_number,
@@ -342,7 +342,7 @@ class AsyncTerminal(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url("/terminal/decommission_device")
+        url = self._full_url("/terminal/decommission_device")
 
         payload = {
             "serial_number": serial_number,

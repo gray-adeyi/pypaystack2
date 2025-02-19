@@ -1,6 +1,6 @@
 from typing import Optional
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.utils import (
     Bearer,
@@ -15,7 +15,7 @@ from pypaystack2.utils import (
 )
 
 
-class TransactionSplit(BaseAPI):
+class TransactionSplitClient(BaseAPIClient):
     """Provides a wrapper for paystack Transaction Splits API
 
     The Transaction Splits API enables merchants split the settlement for a transaction
@@ -49,7 +49,7 @@ class TransactionSplit(BaseAPI):
         """
         subaccounts = [account.dict for account in subaccounts]
 
-        url = self._parse_url("/split")
+        url = self._full_url("/split")
         payload = {
             "name": name,
             "type": type,
@@ -85,7 +85,7 @@ class TransactionSplit(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/split?perPage={pagination}")
+        url = self._full_url(f"/split?perPage={pagination}")
         query_params = [
             ("name", name),
             ("sort_by", sort_by),
@@ -107,7 +107,7 @@ class TransactionSplit(BaseAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/split/{id}/")
+        url = self._full_url(f"/split/{id}/")
         return self._handle_request(HTTPMethod.GET, url)
 
     def update(
@@ -148,7 +148,7 @@ class TransactionSplit(BaseAPI):
             ("bearer_subaccount", bearer_subaccount),
         ]
         payload = add_to_payload(optional_params, payload)
-        url = self._parse_url(f"/split/{id}/")
+        url = self._full_url(f"/split/{id}/")
         return self._handle_request(HTTPMethod.PUT, url, payload)
 
     def add_or_update(self, id: str, subaccount: str, share: int) -> Response:
@@ -167,7 +167,7 @@ class TransactionSplit(BaseAPI):
 
         share = validate_amount(share)
         payload = {"subaccount": subaccount, "share": share}
-        url = self._parse_url(f"/split/{id}/subaccount/add")
+        url = self._full_url(f"/split/{id}/subaccount/add")
         return self._handle_request(HTTPMethod.POST, url, payload)
 
     def remove(self, id: str, subaccount: str) -> Response:
@@ -182,11 +182,11 @@ class TransactionSplit(BaseAPI):
         """
 
         payload = {"subaccount": subaccount}
-        url = self._parse_url(f"/split/{id}/subaccount/remove")
+        url = self._full_url(f"/split/{id}/subaccount/remove")
         return self._handle_request(HTTPMethod.POST, url, payload)
 
 
-class AsyncTransactionSplit(BaseAsyncAPI):
+class AsyncTransactionSplitClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Transaction Splits API
 
     The Transaction Splits API enables merchants split the settlement for a transaction
@@ -197,7 +197,7 @@ class AsyncTransactionSplit(BaseAsyncAPI):
     async def create(
         self,
         name: str,
-        type: TransactionSplit,
+        type: TransactionSplitClient,
         currency: Currency,
         subaccounts: list[SplitAccount],
         bearer_type: Bearer,
@@ -220,7 +220,7 @@ class AsyncTransactionSplit(BaseAsyncAPI):
         """
         subaccounts = [account.dict for account in subaccounts]
 
-        url = self._parse_url("/split")
+        url = self._full_url("/split")
         payload = {
             "name": name,
             "type": type,
@@ -256,7 +256,7 @@ class AsyncTransactionSplit(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/split?perPage={pagination}")
+        url = self._full_url(f"/split?perPage={pagination}")
         query_params = [
             ("name", name),
             ("sort_by", sort_by),
@@ -278,7 +278,7 @@ class AsyncTransactionSplit(BaseAsyncAPI):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        url = self._parse_url(f"/split/{id}/")
+        url = self._full_url(f"/split/{id}/")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def update(
@@ -319,7 +319,7 @@ class AsyncTransactionSplit(BaseAsyncAPI):
             ("bearer_subaccount", bearer_subaccount),
         ]
         payload = add_to_payload(optional_params, payload)
-        url = self._parse_url(f"/split/{id}/")
+        url = self._full_url(f"/split/{id}/")
         return await self._handle_request(HTTPMethod.PUT, url, payload)
 
     async def add_or_update(self, id: str, subaccount: str, share: int) -> Response:
@@ -338,7 +338,7 @@ class AsyncTransactionSplit(BaseAsyncAPI):
 
         share = validate_amount(share)
         payload = {"subaccount": subaccount, "share": share}
-        url = self._parse_url(f"/split/{id}/subaccount/add")
+        url = self._full_url(f"/split/{id}/subaccount/add")
         return await self._handle_request(HTTPMethod.POST, url, payload)
 
     async def remove(self, id: str, subaccount: str) -> Response:
@@ -353,5 +353,5 @@ class AsyncTransactionSplit(BaseAsyncAPI):
         """
 
         payload = {"subaccount": subaccount}
-        url = self._parse_url(f"/split/{id}/subaccount/remove")
+        url = self._full_url(f"/split/{id}/subaccount/remove")
         return await self._handle_request(HTTPMethod.POST, url, payload)

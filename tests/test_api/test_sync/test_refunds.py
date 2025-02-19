@@ -3,7 +3,7 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api import Refund
+from pypaystack2.sub_clients import RefundClient
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
 
@@ -12,7 +12,7 @@ class MockedRefundTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = Refund()
+        cls.wrapper = RefundClient()
 
     def test_can_create(self):
         response = self.wrapper.create(transaction="1699903748", amount=5000)
@@ -31,7 +31,7 @@ class RefundTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = Refund()
+        cls.wrapper = RefundClient()
 
     def test_can_create(self):
         response = self.wrapper.create(transaction="1699903748", amount=5000)

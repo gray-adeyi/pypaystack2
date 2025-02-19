@@ -1,4 +1,4 @@
-class MissingAuthKeyException(Exception):
+class MissingSecretKeyException(Exception):
     """
     We can't find the authentication key
     """

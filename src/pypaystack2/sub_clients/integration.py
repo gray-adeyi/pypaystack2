@@ -1,8 +1,8 @@
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import HTTPMethod, Response
 
 
-class Integration(BaseAPI):
+class IntegrationClient(BaseAPIClient):
     """Provides a wrapper for paystack Integration API
 
     The Integration API allows you to manage some settings on your integration.
@@ -16,7 +16,7 @@ class Integration(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/integration/payment_session_timeout")
+        url = self._full_url("/integration/payment_session_timeout")
         return self._handle_request(HTTPMethod.GET, url)
 
     def update_payment_session_timeout(self, timeout: int) -> Response:
@@ -30,11 +30,11 @@ class Integration(BaseAPI):
         """
 
         payload = {"timeout": timeout}
-        url = self._parse_url("/integration/payment_session_timeout")
+        url = self._full_url("/integration/payment_session_timeout")
         return self._handle_request(HTTPMethod.PUT, url, payload)
 
 
-class AsyncIntegration(BaseAsyncAPI):
+class AsyncIntegrationClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Integration API
 
     The Integration API allows you to manage some settings on your integration.
@@ -48,7 +48,7 @@ class AsyncIntegration(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/integration/payment_session_timeout")
+        url = self._full_url("/integration/payment_session_timeout")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def update_payment_session_timeout(self, timeout: int) -> Response:
@@ -62,5 +62,5 @@ class AsyncIntegration(BaseAsyncAPI):
         """
 
         payload = {"timeout": timeout}
-        url = self._parse_url("/integration/payment_session_timeout")
+        url = self._full_url("/integration/payment_session_timeout")
         return await self._handle_request(HTTPMethod.PUT, url, payload)

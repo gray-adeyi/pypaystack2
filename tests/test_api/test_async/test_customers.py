@@ -4,7 +4,7 @@ from uuid import uuid4
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api.customers import AsyncCustomer
+from pypaystack2.sub_clients.customers import AsyncCustomerClient
 from pypaystack2.utils import Identification, RiskAction, Country
 from tests.test_api.mocked_api_testcase import MockedAsyncAPITestCase
 
@@ -14,7 +14,7 @@ class MockedAsyncCustomerTestCase(MockedAsyncAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = AsyncCustomer()
+        cls.wrapper = AsyncCustomerClient()
 
     async def test_can_create(self):
         response = await self.wrapper.create(
@@ -65,7 +65,7 @@ class AsyncCustomerTestCase(IsolatedAsyncioTestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = AsyncCustomer()
+        cls.wrapper = AsyncCustomerClient()
 
     async def test_can_create(self):
         response = await self.wrapper.create(

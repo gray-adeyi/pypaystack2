@@ -3,7 +3,7 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api import Dispute
+from pypaystack2.sub_clients import DisputeClient
 from tests.test_api.mocked_api_testcase import MockedAPITestCase
 
 
@@ -12,14 +12,14 @@ class MockedDisputeTestCase(MockedAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = Dispute()
+        cls.wrapper = DisputeClient()
 
 
 class DisputeTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = Dispute()
+        cls.wrapper = DisputeClient()
 
     def test_can_get_disputes(self):
         response = self.wrapper.get_disputes(

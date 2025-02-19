@@ -1,10 +1,10 @@
 from typing import Optional, Any
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import add_to_payload, append_query_params, HTTPMethod, Response
 
 
-class PaymentPage(BaseAPI):
+class PaymentPageClient(BaseAPIClient):
     """Provides a wrapper for paystack Payment Pages API
 
     The Payment Pages API provides a quick and secure way to collect payment for products.
@@ -43,7 +43,7 @@ class PaymentPage(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/page")
+        url = self._full_url("/page")
 
         payload = {"name": name}
         optional_params = [
@@ -79,7 +79,7 @@ class PaymentPage(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/page?perPage=" + str(pagination))
+        url = self._full_url("/page?perPage=" + str(pagination))
         query_params = [
             ("page", page),
             ("start_date", start_date),
@@ -98,7 +98,7 @@ class PaymentPage(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/page/{id_or_slug}")
+        url = self._full_url(f"/page/{id_or_slug}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def update(
@@ -125,7 +125,7 @@ class PaymentPage(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/page/{id_or_slug}")
+        url = self._full_url(f"/page/{id_or_slug}")
         payload = {
             "name": name,
             "description": description,
@@ -147,7 +147,7 @@ class PaymentPage(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/page/check_slug_availability/{slug}")
+        url = self._full_url(f"/page/check_slug_availability/{slug}")
         return self._handle_request(HTTPMethod.GET, url)
 
     def add_products(self, id: str, products: list[int]) -> Response:
@@ -161,12 +161,12 @@ class PaymentPage(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/page/{id}/product")
+        url = self._full_url(f"/page/{id}/product")
         payload = {"product": products}
         return self._handle_request(HTTPMethod.POST, url, payload)
 
 
-class AsyncPaymentPage(BaseAsyncAPI):
+class AsyncPaymentPageClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Payment Pages API
 
     The Payment Pages API provides a quick and secure way to collect payment for products.
@@ -205,7 +205,7 @@ class AsyncPaymentPage(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/page")
+        url = self._full_url("/page")
 
         payload = {"name": name}
         optional_params = [
@@ -241,7 +241,7 @@ class AsyncPaymentPage(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/page?perPage=" + str(pagination))
+        url = self._full_url("/page?perPage=" + str(pagination))
         query_params = [
             ("page", page),
             ("start_date", start_date),
@@ -260,7 +260,7 @@ class AsyncPaymentPage(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/page/{id_or_slug}")
+        url = self._full_url(f"/page/{id_or_slug}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def update(
@@ -287,7 +287,7 @@ class AsyncPaymentPage(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/page/{id_or_slug}")
+        url = self._full_url(f"/page/{id_or_slug}")
         payload = {
             "name": name,
             "description": description,
@@ -309,7 +309,7 @@ class AsyncPaymentPage(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/page/check_slug_availability/{slug}")
+        url = self._full_url(f"/page/check_slug_availability/{slug}")
         return await self._handle_request(HTTPMethod.GET, url)
 
     async def add_products(self, id: str, products: list[int]) -> Response:
@@ -323,6 +323,6 @@ class AsyncPaymentPage(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url(f"/page/{id}/product")
+        url = self._full_url(f"/page/{id}/product")
         payload = {"product": products}
         return await self._handle_request(HTTPMethod.POST, url, payload)

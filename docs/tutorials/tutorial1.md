@@ -100,12 +100,12 @@ you can pass it into any of the API wrappers. e.g.
 
 ```python
 # When you don't have PAYSTACK_AUTHORIZATION_KEY(paystack secret key) in your environmental variables
-from pypaystack2 import Paystack
+from pypaystack2 import PaystackClient
 
-paystack = Paystack(auth_key="<your test secret key>")
+paystack = PaystackClient(secret_key="<your test secret key>")
 
 # When you have PAYSTACK_AUTHORIZATION_KEY(paystack secret key) set in your environmental variables
-paystack = Paystack()
+paystack = PaystackClient()
 ```
 
 !!! note
@@ -183,13 +183,13 @@ at [Paystack's Customer Services API](https://paystack.com/docs/api/customer/)
 # root-dir/main.py
 from typing import Optional
 from dotenv import load_dotenv
-from pypaystack2 import Paystack
+from pypaystack2 import PaystackClient
 from typer import Typer
 
 load_dotenv()
 app = Typer()
 
-paystack = Paystack()
+paystack = PaystackClient()
 
 
 @app.command()
@@ -285,14 +285,14 @@ Let's add a few more commands to our **Paystack Command line Client**
 # root-dir/main.py
 from typing import Optional
 from dotenv import load_dotenv
-from pypaystack2 import Paystack
+from pypaystack2 import PaystackClient
 from typer import Typer
 
 load_dotenv()
 
 app = Typer()
 
-paystack = Paystack()
+paystack = PaystackClient()
 
 
 @app.command()

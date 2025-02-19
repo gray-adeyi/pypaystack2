@@ -3,11 +3,11 @@ from typing import Optional
 import httpx
 from httpx import codes
 
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import HTTPMethod, Response, append_query_params
 
 
-class ApplePay(BaseAPI):
+class ApplePayClient(BaseAPIClient):
     """Provides a wrapper for paystack Apple Pay API
 
     The Apple Pay API allows you to register your application's top-level domain or subdomain.
@@ -32,7 +32,7 @@ class ApplePay(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/apple-pay/domain")
+        url = self._full_url("/apple-pay/domain")
         payload = {
             "domainName": domain_name,
         }
@@ -54,7 +54,7 @@ class ApplePay(BaseAPI):
             An empty list in the data if no domains have been added.
         """
 
-        url = self._parse_url("/apple-pay/domain")
+        url = self._full_url("/apple-pay/domain")
         query_params = [
             ("use_cursor", use_cursor),
             ("next", next),
@@ -76,7 +76,7 @@ class ApplePay(BaseAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/apple-pay/domain")
+        url = self._full_url("/apple-pay/domain")
         payload = {
             "domainName": domain_name,
         }
@@ -84,17 +84,17 @@ class ApplePay(BaseAPI):
             HTTPMethod.DELETE, url, json=payload, headers=self._headers
         )
         return (
-            self._parse_response(raw_response)
+            self._deserialize_response(raw_response)
             if codes.is_success(raw_response.status_code)
-            else self._parse_response(raw_response, as_error=True)
+            else self._deserialize_response(raw_response, as_error=True)
         )
 
 
-class AsyncApplePay(BaseAsyncAPI):
+class AsyncApplePayClient(BaseAsyncAPIClient):
     """Provides a wrapper for paystack Apple Pay API
 
     The Apple Pay API allows you to register your application's top-level domain or subdomain.
-    [Visit paystack api doc](https://paystack.com/docs/api/apple-pay/)
+    [Visit paystack sub_clients doc](https://paystack.com/docs/api/apple-pay/)
     """
 
     async def register_domain(self, domain_name: str) -> Response:
@@ -109,7 +109,7 @@ class AsyncApplePay(BaseAsyncAPI):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/apple-pay/domain")
+        url = self._full_url("/apple-pay/domain")
         payload = {
             "domainName": domain_name,
         }
@@ -131,7 +131,7 @@ class AsyncApplePay(BaseAsyncAPI):
             An empty list in the data if no domains have been added.
         """
 
-        url = self._parse_url("/apple-pay/domain")
+        url = self._full_url("/apple-pay/domain")
         query_params = [
             ("use_cursor", use_cursor),
             ("next", next),
@@ -153,7 +153,7 @@ class AsyncApplePay(BaseAsyncAPI):
              A named tuple containing the response gotten from paystack's server.
         """
 
-        url = self._parse_url("/apple-pay/domain")
+        url = self._full_url("/apple-pay/domain")
         payload = {
             "domainName": domain_name,
         }
@@ -162,7 +162,7 @@ class AsyncApplePay(BaseAsyncAPI):
                 HTTPMethod.DELETE, url, json=payload, headers=self._headers
             )
         return (
-            self._parse_response(raw_response)
+            self._deserialize_response(raw_response)
             if codes.is_success(raw_response.status_code)
-            else self._parse_response(raw_response, as_error=True)
+            else self._deserialize_response(raw_response, as_error=True)
         )

@@ -3,7 +3,7 @@ from unittest import IsolatedAsyncioTestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.api.transfer_recipients import AsyncTransferRecipient
+from pypaystack2.sub_clients.transfer_recipients import AsyncTransferRecipientClient
 from pypaystack2.utils import RecipientType, Currency, Recipient
 from tests.test_api.mocked_api_testcase import MockedAsyncAPITestCase
 
@@ -13,7 +13,7 @@ class MockedAsyncTransferRecipientTestCase(MockedAsyncAPITestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         load_dotenv()
-        cls.wrapper = AsyncTransferRecipient()
+        cls.wrapper = AsyncTransferRecipientClient()
 
     async def test_can_create(self):
         response = await self.wrapper.create(
@@ -54,7 +54,7 @@ class AsyncTransferRecipientTestCase(IsolatedAsyncioTestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = AsyncTransferRecipient()
+        cls.wrapper = AsyncTransferRecipientClient()
 
     async def test_can_create(self):
         response = await self.wrapper.create(

@@ -4,8 +4,8 @@ import httpx
 from dotenv import load_dotenv
 
 from pypaystack2 import __version__
-from pypaystack2.baseapi import BaseAPI, BaseAsyncAPI
-from pypaystack2.exceptions import MissingAuthKeyException
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
+from pypaystack2.exceptions import MissingSecretKeyException
 from pypaystack2.utils import Response, HTTPMethod
 from tests.test_api.mocked_api_testcase import MockedAPITestCase, MockedAsyncAPITestCase
 
@@ -13,19 +13,19 @@ from tests.test_api.mocked_api_testcase import MockedAPITestCase, MockedAsyncAPI
 class BaseAPITestCase(MockedAPITestCase):
     def test_raises_exception_for_missing_key(self):
         os.environ.pop("PAYSTACK_AUTHORIZATION_KEY", None)
-        with self.assertRaises(MissingAuthKeyException):
-            BaseAPI()
+        with self.assertRaises(MissingSecretKeyException):
+            BaseAPIClient()
 
     def test__parse_url(self):
         load_dotenv()
-        wrapper = BaseAPI()
+        wrapper = BaseAPIClient()
         self.assertEqual(
-            wrapper._parse_url("/transactions"), "https://api.paystack.co/transactions"
+            wrapper._full_url("/transactions"), "https://api.paystack.co/transactions"
         )
 
     def test__headers(self):
         load_dotenv()
-        wrapper = BaseAPI()
+        wrapper = BaseAPIClient()
         self.assertDictEqual(
             wrapper._headers,
             {
@@ -37,7 +37,7 @@ class BaseAPITestCase(MockedAPITestCase):
 
     def test__parse_response(self):
         load_dotenv()
-        wrapper = BaseAPI()
+        wrapper = BaseAPIClient()
         raw_response = httpx.Response(
             status_code=httpx.codes.OK,
             json={
@@ -47,7 +47,7 @@ class BaseAPITestCase(MockedAPITestCase):
             },
         )
         self.assertEqual(
-            wrapper._parse_response(raw_response),
+            wrapper._deserialize_response(raw_response),
             Response(
                 status_code=httpx.codes.OK,
                 status=True,
@@ -61,9 +61,9 @@ class BaseAPITestCase(MockedAPITestCase):
 
     def test__parse_http_method_kwargs(self):
         load_dotenv()
-        wrapper = BaseAPI()
+        wrapper = BaseAPIClient()
         with self.assertRaises(ValueError):
-            wrapper._parse_http_method_kwargs(url="", method=HTTPMethod.GET, data=None)
+            wrapper._serialize_request_kwargs(url="", method=HTTPMethod.GET, data=None)
         headers = {
             "Authorization": f"Bearer {os.getenv('PAYSTACK_AUTHORIZATION_KEY')}",
             "Content-Type": "application/json",
@@ -71,16 +71,16 @@ class BaseAPITestCase(MockedAPITestCase):
         }
         url = "https://api.paystack.co/transactions"
         self.assertDictEqual(
-            wrapper._parse_http_method_kwargs(
-                url=wrapper._parse_url("/transactions"),
+            wrapper._serialize_request_kwargs(
+                url=wrapper._full_url("/transactions"),
                 method=HTTPMethod.GET,
                 data=None,
             ),
             {"headers": headers, "url": url},
         )
         self.assertDictEqual(
-            wrapper._parse_http_method_kwargs(
-                url=wrapper._parse_url("/transactions"),
+            wrapper._serialize_request_kwargs(
+                url=wrapper._full_url("/transactions"),
                 method=HTTPMethod.POST,
                 data={"isValid": True},
             ),
@@ -89,7 +89,7 @@ class BaseAPITestCase(MockedAPITestCase):
 
     def test__handle_request(self):
         load_dotenv()
-        wrapper = BaseAPI()
+        wrapper = BaseAPIClient()
         expected_response = Response(
             status_code=httpx.codes.OK,
             status=True,
@@ -102,7 +102,7 @@ class BaseAPITestCase(MockedAPITestCase):
         self.assertEqual(
             wrapper._handle_request(
                 method=HTTPMethod.GET,
-                url=wrapper._parse_url("/transactions"),
+                url=wrapper._full_url("/transactions"),
                 data={"id_or_code": "qwerty"},
             ),
             expected_response,
@@ -110,7 +110,7 @@ class BaseAPITestCase(MockedAPITestCase):
         self.assertEqual(
             wrapper._handle_request(
                 method=HTTPMethod.POST,
-                url=wrapper._parse_url("/transactions"),
+                url=wrapper._full_url("/transactions"),
                 data={"id_or_code": "qwerty"},
             ),
             expected_response,
@@ -120,7 +120,7 @@ class BaseAPITestCase(MockedAPITestCase):
 class BaseAsyncAPITestCase(MockedAsyncAPITestCase):
     async def test__handle_request(self):
         load_dotenv()
-        wrapper = BaseAsyncAPI()
+        wrapper = BaseAsyncAPIClient()
         expected_response = Response(
             status_code=httpx.codes.OK,
             status=True,
@@ -133,7 +133,7 @@ class BaseAsyncAPITestCase(MockedAsyncAPITestCase):
         self.assertEqual(
             await wrapper._handle_request(
                 method=HTTPMethod.GET,
-                url=wrapper._parse_url("/transactions"),
+                url=wrapper._full_url("/transactions"),
                 data={"id_or_code": "qwerty"},
             ),
             expected_response,
@@ -141,7 +141,7 @@ class BaseAsyncAPITestCase(MockedAsyncAPITestCase):
         self.assertEqual(
             await wrapper._handle_request(
                 method=HTTPMethod.POST,
-                url=wrapper._parse_url("/transactions"),
+                url=wrapper._full_url("/transactions"),
                 data={"id_or_code": "qwerty"},
             ),
             expected_response,
