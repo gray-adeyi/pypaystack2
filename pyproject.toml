@@ -1,6 +1,6 @@
 [project]
 name = "pypaystack2"
-version = "2.1.1"
+version = "3.0.0"
 description = "A developer-friendly client library for Paystack"
 readme = "README.md"
 license = "MIT"
