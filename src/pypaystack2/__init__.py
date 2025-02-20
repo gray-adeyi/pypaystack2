@@ -10,8 +10,6 @@ Modules and packages exported by this package:
    - `errors`: A module containing error types for pypaystack2
 """
 
-# ruff: noqa: F401
-from pypaystack2.paystack import PaystackClient, AsyncPaystackClient
 from pypaystack2._metadata import (
     __title__,
     __version__,
@@ -19,6 +17,9 @@ from pypaystack2._metadata import (
     __license__,
     __copyright__,
 )
+
+# ruff: noqa: F401
+from pypaystack2.paystack import PaystackClient, AsyncPaystackClient
 from pypaystack2.utils import (
     BulkChargeInstruction,
     LineItem,
@@ -47,7 +48,5 @@ from pypaystack2.utils import (
     Resolution,
     BankType,
     DisputeStatus,
-    validate_amount,
-    validate_interval,
     Response,
 )

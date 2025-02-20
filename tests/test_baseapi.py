@@ -7,7 +7,10 @@ from pypaystack2 import __version__
 from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.exceptions import MissingSecretKeyException
 from pypaystack2.utils import Response, HTTPMethod
-from tests.test_api.mocked_api_testcase import MockedAPITestCase, MockedAsyncAPITestCase
+from tests.test_sub_clients.mocked_api_testcase import (
+    MockedAPITestCase,
+    MockedAsyncAPITestCase,
+)
 
 
 class BaseAPITestCase(MockedAPITestCase):

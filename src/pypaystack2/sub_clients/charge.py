@@ -2,7 +2,7 @@ from http import HTTPMethod
 from typing import Optional
 
 from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
-from pypaystack2.utils import validate_amount, add_to_payload, Response
+from pypaystack2.utils import add_to_payload, Response
 
 
 class ChargeClient(BaseAPIClient):
@@ -49,7 +49,6 @@ class ChargeClient(BaseAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        amount = validate_amount(amount)
         payload = {"email": email, "amount": amount}
         optional_params = [
             ("bank", bank),
@@ -219,7 +218,6 @@ class AsyncChargeClient(BaseAsyncAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        amount = validate_amount(amount)
         payload = {"email": email, "amount": amount}
         optional_params = [
             ("bank", bank),

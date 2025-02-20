@@ -7,8 +7,6 @@ from pypaystack2.utils import (
     Interval,
     Currency,
     append_query_params,
-    validate_amount,
-    validate_interval,
     Response,
     Status,
 )
@@ -51,9 +49,6 @@ class PlanClient(BaseAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        interval = validate_interval(interval)
-        amount = validate_amount(amount)
-
         url = self._full_url("/plan/")
 
         payload = {
@@ -95,9 +90,6 @@ class PlanClient(BaseAPIClient):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-
-        if amount:
-            amount = validate_amount(amount)
 
         url = self._full_url(f"/plan/?perPage={pagination}")
         query_params = [
@@ -154,9 +146,6 @@ class PlanClient(BaseAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        interval = validate_interval(interval)
-        amount = validate_amount(amount)
-
         url = self._full_url("/plan/{}/".format(id_or_code))
         payload = {
             "name": name,
@@ -212,9 +201,6 @@ class AsyncPlanClient(BaseAsyncAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        interval = validate_interval(interval)
-        amount = validate_amount(amount)
-
         url = self._full_url("/plan/")
 
         payload = {
@@ -256,9 +242,6 @@ class AsyncPlanClient(BaseAsyncAPIClient):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-
-        if amount:
-            amount = validate_amount(amount)
 
         url = self._full_url(f"/plan/?perPage={pagination}")
         query_params = [
@@ -314,9 +297,6 @@ class AsyncPlanClient(BaseAsyncAPIClient):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-
-        interval = validate_interval(interval)
-        amount = validate_amount(amount)
 
         url = self._full_url("/plan/{}/".format(id_or_code))
         payload = {

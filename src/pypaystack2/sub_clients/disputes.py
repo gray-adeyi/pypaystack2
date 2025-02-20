@@ -5,7 +5,6 @@ from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.utils import (
     DisputeStatus,
     append_query_params,
-    validate_amount,
     add_to_payload,
     Resolution,
     Response,
@@ -96,7 +95,6 @@ class DisputeClient(BaseAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        refund_amount = validate_amount(refund_amount)
         payload = {"refund_amount": refund_amount}
         payload = add_to_payload([("uploaded_filename", uploaded_filename)], payload)
         url = self._full_url(f"/dispute/{id}")
@@ -181,7 +179,6 @@ class DisputeClient(BaseAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        refund_amount = validate_amount(refund_amount)
         payload = {
             "resolution": resolution,
             "message": message,
@@ -312,7 +309,6 @@ class AsyncDisputeClient(BaseAsyncAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        refund_amount = validate_amount(refund_amount)
         payload = {"refund_amount": refund_amount}
         payload = add_to_payload([("uploaded_filename", uploaded_filename)], payload)
         url = self._full_url(f"/dispute/{id}")
@@ -397,7 +393,6 @@ class AsyncDisputeClient(BaseAsyncAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        refund_amount = validate_amount(refund_amount)
         payload = {
             "resolution": resolution,
             "message": message,

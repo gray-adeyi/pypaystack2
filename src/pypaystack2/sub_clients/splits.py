@@ -9,7 +9,6 @@ from pypaystack2.utils import (
     Split,
     add_to_payload,
     append_query_params,
-    validate_amount,
     Response,
     SplitAccount,
 )
@@ -165,7 +164,6 @@ class TransactionSplitClient(BaseAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        share = validate_amount(share)
         payload = {"subaccount": subaccount, "share": share}
         url = self._full_url(f"/split/{id}/subaccount/add")
         return self._handle_request(HTTPMethod.POST, url, payload)
@@ -336,7 +334,6 @@ class AsyncTransactionSplitClient(BaseAsyncAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        share = validate_amount(share)
         payload = {"subaccount": subaccount, "share": share}
         url = self._full_url(f"/split/{id}/subaccount/add")
         return await self._handle_request(HTTPMethod.POST, url, payload)

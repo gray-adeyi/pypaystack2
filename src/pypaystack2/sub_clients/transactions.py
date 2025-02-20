@@ -10,7 +10,6 @@ from pypaystack2.utils import (
     TransactionStatus,
     add_to_payload,
     append_query_params,
-    validate_amount,
     Response,
 )
 
@@ -67,7 +66,6 @@ class TransactionClient(BaseAPIClient):
         Raises:
             InvalidDataError: When email is not provided.
         """
-        amount = validate_amount(amount)
 
         if not email:
             raise InvalidDataException(
@@ -215,8 +213,6 @@ class TransactionClient(BaseAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        amount = validate_amount(amount)
-
         if not email:
             raise InvalidDataException("Customer's Email is required to charge")
 
@@ -326,8 +322,6 @@ class TransactionClient(BaseAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        if amount:
-            amount = validate_amount(amount)
         url = self._full_url(f"/transaction/export/?perPage={pagination}")
         query_params = [
             ("page", page),
@@ -371,9 +365,6 @@ class TransactionClient(BaseAPIClient):
         Raises:
             InvalidDataError: When Customer's email is not provided. When Customer's auth code is not provided.
         """
-        amount = validate_amount(amount)
-        if at_least:
-            at_least = validate_amount(at_least)
 
         if not email:
             raise InvalidDataException("Customer's Email is required to charge")
@@ -446,7 +437,6 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         Raises:
             InvalidDataError: When email is not provided.
         """
-        amount = validate_amount(amount)
 
         if not email:
             raise InvalidDataException(
@@ -594,8 +584,6 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        amount = validate_amount(amount)
-
         if not email:
             raise InvalidDataException("Customer's Email is required to charge")
 
@@ -705,8 +693,6 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        if amount:
-            amount = validate_amount(amount)
         url = self._full_url(f"/transaction/export/?perPage={pagination}")
         query_params = [
             ("page", page),
@@ -750,9 +736,6 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         Raises:
             InvalidDataError: When Customer's email is not provided. When Customer's auth code is not provided.
         """
-        amount = validate_amount(amount)
-        if at_least:
-            at_least = validate_amount(at_least)
 
         if not email:
             raise InvalidDataException("Customer's Email is required to charge")

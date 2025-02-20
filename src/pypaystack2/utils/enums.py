@@ -1,21 +1,20 @@
-from enum import Enum
-from typing import Optional
+from enum import StrEnum
 
 
-class TerminalEvent(str, Enum):
+class TerminalEvent(StrEnum):
     """Enum of the types of events supported by Terminal API"""
 
     TRANSACTION = "transaction"
     INVOICE = "invoice"
 
 
-class TerminalEventAction(str, Enum):
+class TerminalEventAction(StrEnum):
     PROCESS = "process"
     VIEW = "view"
     PRINT = "print"
 
 
-class Currency(str, Enum):
+class Currency(StrEnum):
     """Enum of currencies supported by paystack."""
 
     NGN = "NGN"
@@ -28,7 +27,7 @@ class Currency(str, Enum):
     RWF = "RWF"
 
 
-class Interval(str, Enum):
+class Interval(StrEnum):
     """Enum of intervals supported by paystack."""
 
     HOURLY = "hourly"
@@ -40,7 +39,7 @@ class Interval(str, Enum):
     ANNUALLY = "annually"
 
 
-class Channel(str, Enum):
+class Channel(StrEnum):
     """Enum of payment channels supported by paystack"""
 
     CARD = "card"
@@ -51,7 +50,7 @@ class Channel(str, Enum):
     BANK_TRANSFER = "bank_transfer"
 
 
-class Bearer(str, Enum):
+class Bearer(StrEnum):
     """Enum for who bears paystack charges"""
 
     ACCOUNT = "account"
@@ -60,7 +59,7 @@ class Bearer(str, Enum):
     ALL = "all"
 
 
-class TransactionStatus(str, Enum):
+class TransactionStatus(StrEnum):
     """Enum of transaction status"""
 
     FAILED = "failed"
@@ -68,14 +67,14 @@ class TransactionStatus(str, Enum):
     ABANDONED = "abandoned"
 
 
-class Split(str, Enum):
+class Split(StrEnum):
     """Enum of split types"""
 
     PERCENTAGE = "percentage"
     FLAT = "flat"
 
 
-class Country(str, Enum):
+class Country(StrEnum):
     """Enum of countries supported by paystack"""
 
     NIGERIA = "NG"
@@ -87,7 +86,7 @@ class Country(str, Enum):
     RWANDA = "RW"
 
     @staticmethod
-    def get_full(value: str) -> Optional[str]:
+    def get_full(value: str) -> str | None:
         """Returns paystack supported country name in full lowercase
 
         Args:
@@ -109,7 +108,7 @@ class Country(str, Enum):
         }.get(value)
 
 
-class RiskAction(str, Enum):
+class RiskAction(StrEnum):
     """Enum of RiskActions supported by paystack"""
 
     DEFAULT = "default"
@@ -117,14 +116,14 @@ class RiskAction(str, Enum):
     BLACKLIST = "deny"
 
 
-class Identification(str, Enum):
+class Identification(StrEnum):
     """Enum of Identification methods supported by paystack"""
 
     BVN = "bvn"
     BANK_ACCOUNT = "bank_account"
 
 
-class RecipientType(str, Enum):
+class RecipientType(StrEnum):
     """Enum of Transfer Recipient types"""
 
     NUBAN = "nuban"
@@ -132,7 +131,7 @@ class RecipientType(str, Enum):
     BASA = "basa"
 
 
-class Document(str, Enum):
+class Document(StrEnum):
     """Enum of Document types supported by paystack"""
 
     IDENTITY_NUMBER = "identityNumber"
@@ -140,7 +139,7 @@ class Document(str, Enum):
     BUSINESS_REGISTRATION_NUMBER = "businessRegistrationNumber"
 
 
-class Status(str, Enum):
+class Status(StrEnum):
     """Enum of statuses supported by paystack, used by Invoice, Charge & Plan"""
 
     PENDING = "pending"
@@ -148,7 +147,7 @@ class Status(str, Enum):
     FAILED = "failed"
 
 
-class Schedule(str, Enum):
+class Schedule(StrEnum):
     """Enum of settlement schedules supported by paystack"""
 
     AUTO = "auto"
@@ -157,7 +156,7 @@ class Schedule(str, Enum):
     MANUAL = "manual"
 
 
-class Reason(str, Enum):
+class Reason(StrEnum):
     """Enum of Reset OTP options"""
 
     RESEND_OTP = "resend_otp"
@@ -165,35 +164,35 @@ class Reason(str, Enum):
     DISABLE_OTP = "disable_otp"
 
 
-class Gateway(str, Enum):
+class Gateway(StrEnum):
     """Enum of bank gateways supported by paystack"""
 
     EMANDATE = "emandate"
     DIGITALBANKMANDATE = "digitalbankmandate"
 
 
-class AccountType(str, Enum):
+class AccountType(StrEnum):
     """Enum of Account types supported by paystack"""
 
     PERSONAL = "personal"
     BUSINESS = "business"
 
 
-class Resolution(str, Enum):
+class Resolution(StrEnum):
     """Enum of Resolutions supported by paystack"""
 
     MERCHANT_ACCEPTED = "merchant-accepted"
     DECLINED = "declined"
 
 
-class BankType(str, Enum):
+class BankType(StrEnum):
     """Enum of bank types"""
 
     GHIPPS = "ghipps"
     MOBILE_MONEY = "mobile_money"
 
 
-class DisputeStatus(str, Enum):
+class DisputeStatus(StrEnum):
     """Enum of dispute status supported by paystack"""
 
     PENDING = "pending"

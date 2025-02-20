@@ -1,62 +1,6 @@
 from _operator import add
 from functools import reduce
-from typing import Union, Any
-
-from pypaystack2.exceptions import InvalidDataException
-
-
-def validate_amount(amount: Union[int, float]) -> Union[int, float]:
-    """Helps to validate money amount.
-
-    Helps to ensure that a valid amount of money
-    is supplied as an input, to prevent cases where
-    negative or zero value is provided as an amount.
-
-    Args:
-        amount: The money to be validated.
-
-    Returns:
-        The money supplied if it is valid.
-
-    Raises:
-        InvalidDataError: With the cause of the validation error
-    """
-
-    if not amount:
-        raise InvalidDataException("Amount to be charged is required")
-
-    if isinstance(amount, int) or isinstance(
-        amount, float
-    ):  # Save the sever some headaches
-        if amount < 0:
-            raise InvalidDataException("Negative amount is not allowed")
-        return amount
-    else:
-        raise InvalidDataException("Amount should be a number")
-
-
-def validate_interval(interval: str) -> str:
-    """Validates that the interval supplied is supported by paystack
-
-    Args:
-        interval: any of the intervals supported by paystack i.e. hourly, daily
-            weekly,monthly,annually
-
-    Returns:
-        The interval if it is a valid paystack interval
-
-    Raises:
-        InvalidDataError: to provide feedback that an invalid interval was provided.
-    """
-
-    interval = (
-        interval
-        if interval.lower() in ["hourly", "daily", "weekly", "monthly", "annually"]
-        else None
-    )
-    if not interval:
-        raise InvalidDataException("Please provide a valid plan interval")
-    return interval
+from typing import Any
 
 
 def add_to_payload(

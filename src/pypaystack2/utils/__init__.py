@@ -1,3 +1,4 @@
+# ruff: noqa: F401
 from pypaystack2.utils.enums import (
     TerminalEvent,
     TerminalEventAction,
@@ -20,11 +21,8 @@ from pypaystack2.utils.enums import (
     Resolution,
     BankType,
     DisputeStatus,
-    HTTPMethod,
 )
 from pypaystack2.utils.helpers import (
-    validate_amount,
-    validate_interval,
     append_query_params,
     add_to_payload,
 )
@@ -37,40 +35,3 @@ from pypaystack2.utils.models import (
     TransferInstruction,
     Response,
 )
-
-# prevent removal of unused import
-[
-    BulkChargeInstruction,
-    LineItem,
-    Tax,
-    SplitAccount,
-    Recipient,
-    TransferInstruction,
-    TerminalEvent,
-    TerminalEventAction,
-    Currency,
-    Interval,
-    Channel,
-    Bearer,
-    TransactionStatus,
-    Split,
-    Country,
-    RiskAction,
-    Identification,
-    RecipientType,
-    Document,
-    Status,
-    Schedule,
-    Reason,
-    Gateway,
-    AccountType,
-    Resolution,
-    BankType,
-    DisputeStatus,
-    validate_amount,
-    validate_interval,
-    Response,
-    HTTPMethod,
-    append_query_params,
-    add_to_payload,
-]

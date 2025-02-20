@@ -6,7 +6,6 @@ from pypaystack2.utils import (
     Currency,
     add_to_payload,
     append_query_params,
-    validate_amount,
     Response,
     TransferInstruction,
 )
@@ -45,7 +44,6 @@ class TransferClient(BaseAPIClient):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        amount = validate_amount(amount)
 
         url = self._full_url("/transfer")
 
@@ -202,7 +200,6 @@ class AsyncTransferClient(BaseAsyncAPIClient):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        amount = validate_amount(amount)
 
         url = self._full_url("/transfer")
 

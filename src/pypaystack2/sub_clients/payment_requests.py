@@ -6,7 +6,6 @@ from pypaystack2.utils import (
     Currency,
     add_to_payload,
     append_query_params,
-    validate_amount,
     Response,
     Status,
     LineItem,
@@ -223,8 +222,6 @@ class PaymentRequestClient(BaseAPIClient):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-
-        amount = validate_amount(amount)
 
         if line_items:
             line_items = [item.dict for item in line_items]
@@ -472,8 +469,6 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-
-        amount = validate_amount(amount)
 
         if line_items:
             line_items = [item.dict for item in line_items]

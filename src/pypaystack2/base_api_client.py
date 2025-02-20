@@ -2,14 +2,16 @@ import os
 from abc import ABC, abstractmethod
 from http import HTTPMethod
 from json import JSONDecodeError
-from typing import Union
+from typing import Type
 
 import httpx
+from pydantic import ValidationError
 
 from pypaystack2._metadata import __version__
 from pypaystack2.exceptions import InvalidMethodException, MissingSecretKeyException
 from pypaystack2.fees_calculation_mixin import FeesCalculationMixin
 from pypaystack2.utils import Response
+from pypaystack2.utils.models import PaystackDataModel
 
 
 class AbstractAPIClient(FeesCalculationMixin, ABC):
@@ -46,7 +48,11 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
             "User-Agent": f"PyPaystack2-{__version__}",
         }
 
-    def _deserialize_response(self, raw_response: httpx.Response) -> Response:
+    def _deserialize_response(
+        self,
+        raw_response: httpx.Response,
+        response_data_model_class: Type[PaystackDataModel] | None = None,
+    ) -> Response[PaystackDataModel]:
         """
         Parses an `httpx.Response` into a `Response`.
 
@@ -65,17 +71,43 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
                 meta=None,
                 type=None,
                 code=None,
+                raw=raw_response.content,
             )
 
-        status = response_body.get("status", None)
-        message = response_body.get("message", None)
-        data = response_body.get("data", None)
+        status = response_body.get("status", False)
+        message = response_body.get("message", "")
         meta = response_body.get("meta", None)
         type_ = response_body.get("type", None)
         code = response_body.get("code", None)
-        return Response(
-            raw_response.status_code, status, message, data, meta, type_, code
+        if data := response_body.get("data", None):
+            data = self._to_pydantic_model(data, response_data_model_class)
+        return Response[PaystackDataModel](
+            status_code=raw_response.status_code,
+            status=status,
+            message=message,
+            data=data,
+            meta=meta,
+            type=type_,
+            code=code,
+            raw=response_body,
         )
+
+    def _to_pydantic_model(
+        self, data, response_data_model_class: Type[PaystackDataModel] | None = None
+    ):
+        """Tries to convert the provided data to the provided pydantic instance, on failure to do so,
+        it returns None.
+        """
+        if not response_data_model_class:
+            return None
+        try:
+            if isinstance(data, dict):
+                return response_data_model_class.model_validate(data)
+            if isinstance(data, list):
+                return [response_data_model_class.model_validate(item) for item in data]
+        except ValidationError:
+            ...
+        return None
 
     def _serialize_request_kwargs(
         self, url: str, method: HTTPMethod, data: dict | list | None
@@ -89,8 +121,12 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
 
     @abstractmethod
     def _handle_request(
-        self, method: HTTPMethod, url: str, data: dict | list | None = None
-    ) -> Response: ...
+        self,
+        method: HTTPMethod,
+        url: str,
+        data: dict | list | None = None,
+        response_data_model_class: Type[PaystackDataModel] | None = None,
+    ) -> Response[PaystackDataModel]: ...
 
 
 class BaseAPIClient(AbstractAPIClient):
@@ -99,8 +135,12 @@ class BaseAPIClient(AbstractAPIClient):
     """
 
     def _handle_request(
-        self, method: HTTPMethod, url: str, data: dict | list | None = None
-    ) -> Response:
+        self,
+        method: HTTPMethod,
+        url: str,
+        data: dict | list | None = None,
+        response_data_model_class: Type[PaystackDataModel] | None = None,
+    ) -> Response[PaystackDataModel]:
         """
         Makes request to paystack servers.
 
@@ -130,13 +170,17 @@ class BaseAPIClient(AbstractAPIClient):
             )
 
         response = http_method_handler(**request_kwargs)
-        return self._deserialize_response(response)
+        return self._deserialize_response(response, response_data_model_class)
 
 
 class BaseAsyncAPIClient(AbstractAPIClient):
     async def _handle_request(
-        self, method: HTTPMethod, url: str, data: Union[dict, list] = None
-    ) -> Response:
+        self,
+        method: HTTPMethod,
+        url: str,
+        data: dict | list | None = None,
+        response_data_model_class: Type[PaystackDataModel] | None = None,
+    ) -> Response[PaystackDataModel]:
         """
         Makes request to paystack servers.
 
@@ -155,4 +199,4 @@ class BaseAsyncAPIClient(AbstractAPIClient):
                 )
             response = await http_method_handler(**request_kwargs)
 
-        return self._deserialize_response(response)
+        return self._deserialize_response(response, response_data_model_class)

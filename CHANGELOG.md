@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Support for `python<=3.10`
 - Package defined `HTTPMethod` enum. Now using `HTTPMethod` from the standard lib.
+- `validate_amount` and `validate_interval` helper methods
 
 ## [2.1.1] - 2024-12-09
 

@@ -1,3 +1,4 @@
+from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.sub_clients.apple_pay import AsyncApplePayClient, ApplePayClient
 from pypaystack2.sub_clients.bulk_charges import AsyncBulkChargeClient, BulkChargeClient
 from pypaystack2.sub_clients.charge import AsyncChargeClient, ChargeClient
@@ -54,7 +55,6 @@ from pypaystack2.sub_clients.verification import (
     AsyncVerificationClient,
     VerificationClient,
 )
-from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 
 
 class PaystackClient(BaseAPIClient):
@@ -100,7 +100,7 @@ class AsyncPaystackClient(BaseAsyncAPIClient):
     instance of this class.
     """
 
-    def __init__(self, secret_key: str = None):
+    def __init__(self, secret_key: str | None = None):
         super().__init__(secret_key=secret_key)
         self.apple_pay = AsyncApplePayClient(secret_key=self._secret_key)
         self.bulk_charges = AsyncBulkChargeClient(secret_key=self._secret_key)

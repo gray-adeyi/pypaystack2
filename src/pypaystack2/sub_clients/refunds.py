@@ -6,7 +6,6 @@ from pypaystack2.utils import (
     Currency,
     add_to_payload,
     append_query_params,
-    validate_amount,
     Response,
 )
 
@@ -43,8 +42,6 @@ class RefundClient(BaseAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        if amount is not None:
-            amount = validate_amount(amount)
         url = self._full_url("/refund")
         payload = {"transaction": transaction}
         optional_params = [
@@ -138,8 +135,6 @@ class AsyncRefundClient(BaseAsyncAPIClient):
             A named tuple containing the response gotten from paystack's server.
         """
 
-        if amount is not None:
-            amount = validate_amount(amount)
         url = self._full_url("/refund")
         payload = {"transaction": transaction}
         optional_params = [
