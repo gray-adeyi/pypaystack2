@@ -10,7 +10,7 @@ A developer-friendly [Paystack](https://paystack.com/) API wrapper.
 
 1. Create your [Paystack account](https://paystack.com/) to get your paystack secret key that is required to use this
    package from your account's settings.
-2. Store your paystack secret key in your environment variable as `PAYSTACK_AUTHORIZATION_KEY` or pass it into the
+2. Store your paystack secret key in your environment variable as `PAYSTACK_SECRET_KEY` or pass it into the
    pypaystack api wrapper on instantiation. (protect your secret key at all costs, never push it to a remote version
    control system. it is advisable to start trying out this package with your test private key).
 3. Install `pypaystack2` package.
