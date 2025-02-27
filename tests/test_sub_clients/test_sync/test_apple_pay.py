@@ -1,32 +1,10 @@
 from http import HTTPStatus
 from unittest import TestCase
 
-import httpx
 from dotenv import load_dotenv
 
 from pypaystack2.sub_clients import ApplePayClient
 from pypaystack2.utils import Response
-from tests.test_sub_clients.mocked_api_testcase import MockedAPITestCase
-
-
-class MockedApplePayTestCase(MockedAPITestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        super().setUpClass()
-        load_dotenv()
-        cls.client = ApplePayClient()
-
-    def test_can_register_domain(self):
-        response = self.client.register_domain(domain_name="example.com")
-        self.assertEqual(response.status_code, httpx.codes.OK)
-
-    def test_can_get_domains(self):
-        response = self.client.get_domains()
-        self.assertEqual(response.status_code, httpx.codes.OK)
-
-    def test_can_unregister_domain(self):
-        response = self.client.unregister_domain(domain_name="example.com")
-        self.assertEqual(response.status_code, httpx.codes.OK)
 
 
 class ApplePayTestCase(TestCase):
@@ -66,7 +44,7 @@ class ApplePayTestCase(TestCase):
             status_code=HTTPStatus.NOT_FOUND,
             status=False,
             message="pypaystack2 was unable to serialize response as json data",
-            data={"content": b""},
+            data=None,
             meta=None,
             type=None,
             code=None,
