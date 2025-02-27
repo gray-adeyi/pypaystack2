@@ -44,3 +44,7 @@ dev-dependencies = [
     "tomli>=2.0.1",
 ]
 
+[tool.mypy]
+strict = true
+mypy_path = "src"
+files = ["src/pypaystack2", "tests"]
