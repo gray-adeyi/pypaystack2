@@ -1,7 +1,7 @@
 from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.sub_clients.async_clients.apple_pay import AsyncApplePayClient
 from pypaystack2.sub_clients.async_clients.bulk_charges import AsyncBulkChargeClient
-from pypaystack2.sub_clients.charge import AsyncChargeClient, ChargeClient
+from pypaystack2.sub_clients.async_clients.charge import AsyncChargeClient
 from pypaystack2.sub_clients.customers import AsyncCustomerClient, CustomerClient
 from pypaystack2.sub_clients.dedicated_accounts import (
     AsyncDedicatedAccountClient,
@@ -43,6 +43,7 @@ from pypaystack2.sub_clients.sync_clients.apple_pay import (
 from pypaystack2.sub_clients.sync_clients.bulk_charges import (
     BulkChargeClient,
 )
+from pypaystack2.sub_clients.sync_clients.charge import ChargeClient
 from pypaystack2.sub_clients.terminals import TerminalClient, AsyncTerminalClient
 from pypaystack2.sub_clients.transactions import (
     AsyncTransactionClient,

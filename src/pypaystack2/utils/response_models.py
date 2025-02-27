@@ -11,6 +11,7 @@ from pypaystack2.utils.enums import (
     RiskAction,
     SupportedCountryRelationshipType,
     DisputeStatus,
+    Interval,
 )
 from pypaystack2.utils.models import LineItem, Tax
 
@@ -48,6 +49,7 @@ class BulkChargeUnitCharge(BaseModel):
 
 
 class Customer(BaseModel):
+    # model_config = ConfigDict(arbitrary_types_allowed=True)
     integration: int
     id: int
     first_name: str
@@ -64,7 +66,7 @@ class Customer(BaseModel):
     subscriptions: list["Subscription"] | None = None
     authorizations: list["Authorization"] | None = None
     created_at: str | None = None
-    updated_at: str | None == None
+    updated_at: str | None = None
     total_transactions: int | None = None
     total_transaction_value: list[Any] | None = None
     dedicated_account: str | None = None
@@ -204,7 +206,6 @@ class Subscription(BaseModel):
     updated_at: datetime | None = None
     payments_count: int
     most_recent_invoice: Optional["Invoice"] = None
-    cancelled_at: datetime | None = None
     invoices: list["Invoice"]
     invoice_history: list[Any] | None = None
 
@@ -326,7 +327,7 @@ class Plan(BaseModel):
     plan_code: str
     description: str | None = None
     amount: int
-    interval: "Interval"
+    interval: Interval
     invoice_limit: int
     send_invoices: bool
     send_sms: bool
@@ -453,7 +454,7 @@ class DedicatedAccount(BaseModel):
     created_at: datetime
     updated_at: datetime
     assignment: DedicatedAccountAssignment
-    customer: Customer
+    # customer: Customer
     split_config: dict[str, Any]
 
 
