@@ -200,3 +200,21 @@ class DisputeStatus(StrEnum):
     AWAITING_BANK_FEEDBACK = "awaiting-bank-feedback"
     AWAITING_MERCHANT_FEEDBACK = "awaiting-merchant-feedback"
     ARCHIVED = "archived"
+
+
+class Domain(StrEnum):
+    LIVE = "live"
+    TEST = "test"
+
+
+class BulkChargeStatus(StrEnum):
+    ACTIVE = "active"
+    PAUSED = "paused"
+    COMPLETE = "complete"
+
+
+class SupportedCountryRelationshipType(StrEnum):
+    CURRENCY = "currency"
+    INTEGRATION_FEATURE = "integration_feature"
+    INTEGRATION_TYPE = "integration_type"
+    PAYMENT_METHOD = "payment_method"

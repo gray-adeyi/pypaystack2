@@ -1,4 +1,6 @@
+import logging
 import os
+import re
 from abc import ABC, abstractmethod
 from http import HTTPMethod
 from json import JSONDecodeError
@@ -12,6 +14,8 @@ from pypaystack2.exceptions import InvalidMethodException, MissingSecretKeyExcep
 from pypaystack2.fees_calculation_mixin import FeesCalculationMixin
 from pypaystack2.utils import Response
 from pypaystack2.utils.models import PaystackDataModel
+
+logger = logging.getLogger(__name__)
 
 
 class AbstractAPIClient(FeesCalculationMixin, ABC):
@@ -52,6 +56,7 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
         self,
         raw_response: httpx.Response,
         response_data_model_class: Type[PaystackDataModel] | None = None,
+        raise_serialization_exception: bool = False,
     ) -> Response[PaystackDataModel]:
         """
         Parses an `httpx.Response` into a `Response`.
@@ -67,7 +72,7 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
                 status_code=raw_response.status_code,
                 status=False,
                 message="pypaystack2 was unable to serialize response as json data",
-                data={"content": raw_response.content},
+                data=None,
                 meta=None,
                 type=None,
                 code=None,
@@ -80,8 +85,12 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
         type_ = response_body.get("type", None)
         code = response_body.get("code", None)
         if data := response_body.get("data", None):
-            data = self._to_pydantic_model(data, response_data_model_class)
-        return Response[PaystackDataModel](
+            data = self._to_pydantic_model(
+                self._normalize_data(data),
+                response_data_model_class,
+                raise_serialization_exception,
+            )
+        return Response(
             status_code=raw_response.status_code,
             status=status,
             message=message,
@@ -93,7 +102,10 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
         )
 
     def _to_pydantic_model(
-        self, data, response_data_model_class: Type[PaystackDataModel] | None = None
+        self,
+        data,
+        response_data_model_class: Type[PaystackDataModel] | None = None,
+        raise_serialization_exception: bool = False,
     ):
         """Tries to convert the provided data to the provided pydantic instance, on failure to do so,
         it returns None.
@@ -105,8 +117,23 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
                 return response_data_model_class.model_validate(data)
             if isinstance(data, list):
                 return [response_data_model_class.model_validate(item) for item in data]
-        except ValidationError:
-            ...
+        except ValidationError as error:
+            if raise_serialization_exception:
+                raise error
+            warning_message = f"""An validation error occurred while trying to serialize the data returned
+by paystack with the pydantic model `{response_data_model_class}` but has been allowed to
+fail silently. `Response.data` has been set to `None` but this data is still available in
+`Response.raw`. If the pydantic model that raised this error is from the
+library, It's not your fault, Its either I goofed up in the model definitions
+or the response data doesn't match the model.
+please create an issue at https://github.com/gray-adeyi/pypaystack2/issues
+If you're using a custom pydantic model other than the one from the library,
+please see that your model definitions match the data returned by paystack
+            
+These are the validation errors:
+{error}
+"""
+            logger.warning(warning_message)
         return None
 
     def _serialize_request_kwargs(
@@ -119,6 +146,22 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
             request_kwargs.pop("json", None)
         return request_kwargs
 
+    def _normalize_data(self, data: dict | list) -> dict | list:
+        """Converts keys in the data from camelCase to snake_case"""
+        if isinstance(data, dict):
+            new_dict = {}
+            for key, value in data.items():
+                new_key = self._camel_to_snake_case(key)
+                new_dict[new_key] = self._normalize_data(value)
+            return new_dict
+        elif isinstance(data, list):
+            return [self._normalize_data(item) for item in data]
+        return data
+
+    def _camel_to_snake_case(self, value: str) -> str:
+        """Converts a camelCase value to a snake_case value"""
+        return re.sub(r"(?<!^)(?=[A-Z])", "_", value).lower()
+
     @abstractmethod
     def _handle_request(
         self,
@@ -126,6 +169,7 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
         url: str,
         data: dict | list | None = None,
         response_data_model_class: Type[PaystackDataModel] | None = None,
+        raise_serialization_exception: bool = False,
     ) -> Response[PaystackDataModel]: ...
 
 
@@ -139,10 +183,17 @@ class BaseAPIClient(AbstractAPIClient):
         method: HTTPMethod,
         url: str,
         data: dict | list | None = None,
-        response_data_model_class: Type[PaystackDataModel] | None = None,
+        response_data_model_class: Type[PaystackDataModel] = None,
+        raise_serialization_exception: bool = False,
     ) -> Response[PaystackDataModel]:
         """
         Makes request to paystack servers.
+
+        Args:
+            raise_serialization_exception: Set to `True` to raise pydantic validation errors when it fails
+                to serialize the data returned by paystack with the response model or
+                `alternate_response_model` if provided. The default behaviour is to fail
+                silently and set `Response.data` to None
 
         Returns:
             Returns a python namedtuple of Response which contains
@@ -170,7 +221,9 @@ class BaseAPIClient(AbstractAPIClient):
             )
 
         response = http_method_handler(**request_kwargs)
-        return self._deserialize_response(response, response_data_model_class)
+        return self._deserialize_response(
+            response, response_data_model_class, raise_serialization_exception
+        )
 
 
 class BaseAsyncAPIClient(AbstractAPIClient):
@@ -180,9 +233,16 @@ class BaseAsyncAPIClient(AbstractAPIClient):
         url: str,
         data: dict | list | None = None,
         response_data_model_class: Type[PaystackDataModel] | None = None,
+        raise_serialization_exception: bool = False,
     ) -> Response[PaystackDataModel]:
         """
         Makes request to paystack servers.
+
+        Args:
+            raise_serialization_exception: Set to `True` to raise pydantic validation errors when it fails
+                to serialize the data returned by paystack with the response model or
+                `alternate_response_model` if provided. The default behaviour is to fail
+                silently and set `Response.data` to None
 
         Returns:
             Returns a python namedtuple of Response which contains
@@ -199,4 +259,6 @@ class BaseAsyncAPIClient(AbstractAPIClient):
                 )
             response = await http_method_handler(**request_kwargs)
 
-        return self._deserialize_response(response, response_data_model_class)
+        return self._deserialize_response(
+            response, response_data_model_class, raise_serialization_exception
+        )

@@ -5,7 +5,7 @@ from pydantic import BaseModel, model_validator
 
 from pypaystack2.utils.enums import RecipientType
 
-PaystackDataModel = TypeVar("PaystackDataModel")
+PaystackDataModel = TypeVar("PaystackDataModel", BaseModel, list, None)
 
 
 class BulkChargeInstruction(BaseModel):
@@ -105,18 +105,39 @@ class Response(BaseModel, Generic[PaystackDataModel]):
         status_code: The response status code
         status: A flag for the response status
         message: Paystack response message
-        data: Data sent from paystack's server if any.
+        data: Data sent from paystack's server if any. This data is of a generic type called `PaystackDataModel`
+            indicating that data can either be a pydantic model instance, a list of pydantic model instances or
+            `None`. The exact type of the data can be determined by looking at the return type of the client method
+            that you called that returns a `Response`. E.g. `PaystackClient.bulk_charges.get_batches` method has
+            its return type as `Response[list[BulkCharge]]`, hence, if you called this method and got a `Response`,
+            even though `Response.data` is type hinted as `PaystackDataModel`, you should expect `Response.data` to
+            be `list[BulkCharge]` which is a list of `BulkCharge` pydantic model instances which is a valid
+            `PaystackDataModel`. A client method with a return type of `Response[None]` indicates that no data is
+            expected to be returned from paystack by calling that method, hence, `Response.data` is `None`. If
+            `Response.data` is `None` when the client method does not explicitly specify that the return type of
+            the method at `Response[None]`, this is an indicator that the library has failed to serialize the
+            data returned from paystack into the `PaystackDataModel` (pydantic model) defined by the library.
+            The data that failed to be serialized is still available via `Response.raw`. You may choose to override
+            the type of `Response.data` by specifying a custom pydantic model class implemented by you or inheriting
+            the model from the library and overriding the faulty fields and passing the custom class via the
+            `alternate_response_model` parameter of the client methods that return a Response.
+            As a result of this, they type of data is either an instance  or a list of instances of the custom
+            pydantic model depending on if the client method is supposed to return a list or a single resource.
         meta: Additional information about the response.
         type: In cases where the response has a status of `False` or the status code
             is an error status code. the `type` field indicates the type of error e.g. `api_error`
         code: In cases where the response has a status of `False` or the status code
             is an error status code. the `type` field indicates the type of error e.g. `api_error`
+        raw: The original data returned by paystack in native python types i.e. the JSON data returned
+            from paystack REST APIs have only been converted to dicts or list. This is the same data
+            that is further extracted into individual fields such as `status`, `message`, `data` e.t.c
+            and also serialized to pydantic models in the case of `Response.data`.
     """
 
     status_code: HTTPStatus
     status: bool
     message: str
-    data: PaystackDataModel | None
+    data: PaystackDataModel
     meta: dict | None
     type: str | None
     code: str | None

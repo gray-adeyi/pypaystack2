@@ -24,9 +24,6 @@ Modules exported by this package:
     - `verification`: A module containing implementations for interfacing with Paystack's Verification API
 """
 
-# ruff: noqa: F401
-from pypaystack2.sub_clients.apple_pay import ApplePayClient
-from pypaystack2.sub_clients.bulk_charges import BulkChargeClient
 from pypaystack2.sub_clients.charge import ChargeClient
 from pypaystack2.sub_clients.customers import CustomerClient
 from pypaystack2.sub_clients.dedicated_accounts import DedicatedAccountClient
@@ -42,6 +39,10 @@ from pypaystack2.sub_clients.settlements import SettlementClient
 from pypaystack2.sub_clients.splits import TransactionSplitClient
 from pypaystack2.sub_clients.subaccounts import SubAccountClient
 from pypaystack2.sub_clients.subscriptions import SubscriptionClient
+
+# ruff: noqa: F401
+from pypaystack2.sub_clients.sync_clients.apple_pay import ApplePayClient
+from pypaystack2.sub_clients.sync_clients.bulk_charges import BulkChargeClient
 from pypaystack2.sub_clients.terminals import TerminalClient
 from pypaystack2.sub_clients.transactions import TransactionClient
 from pypaystack2.sub_clients.transfers import TransferClient
