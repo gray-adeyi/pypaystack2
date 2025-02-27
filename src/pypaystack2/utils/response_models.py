@@ -11,6 +11,7 @@ from pypaystack2.utils.enums import (
     RiskAction,
     SupportedCountryRelationshipType,
     DisputeStatus,
+    Interval,
 )
 from pypaystack2.utils.models import LineItem, Tax
 
@@ -48,6 +49,7 @@ class BulkChargeUnitCharge(BaseModel):
 
 
 class Customer(BaseModel):
+    # model_config = ConfigDict(arbitrary_types_allowed=True)
     integration: int
     id: int
     first_name: str
@@ -57,18 +59,18 @@ class Customer(BaseModel):
     phone: str
     metadata: dict[str, Any]
     risk_action: RiskAction
-    international_phone_format: str | None
-    identified: bool | None
-    identifications: Any | None
-    transactions: list["Transaction"] | None
-    subscriptions: list["Subscription"] | None
-    authorizations: list["Authorization"] | None
-    created_at: str | None
-    updated_at: str | None
-    total_transactions: int | None
-    total_transaction_value: list[Any] | None
-    dedicated_account: str | None
-    dedicated_accounts: list[Any] | None
+    international_phone_format: str | None = None
+    identified: bool | None = None
+    identifications: Any | None = None
+    transactions: list["Transaction"] | None = None
+    subscriptions: list["Subscription"] | None = None
+    authorizations: list["Authorization"] | None = None
+    created_at: str | None = None
+    updated_at: str | None = None
+    total_transactions: int | None = None
+    total_transaction_value: list[Any] | None = None
+    dedicated_account: str | None = None
+    dedicated_accounts: list[Any] | None = None
 
 
 class Authorization(BaseModel):
@@ -125,7 +127,7 @@ class TransactionExport(BaseModel):
 class TransactionSource(BaseModel):
     source: str = "merchant_api"
     type: str = "api"
-    identifier: Any | None
+    identifier: Any | None = None
     entry_point: str = "charge"
 
 
@@ -135,27 +137,27 @@ class Transaction(BaseModel):
     status: str
     reference: str
     amount: int
-    message: str | None
+    message: str | None = None
     gateway_response: str
     paid_at: str
     channel: str
     currency: Currency
-    ip_address: str | None
+    ip_address: str | None = None
     metadata: dict[str, Any]
-    log: TransactionLog | None
-    fees: int | None
-    fees_split: Any | None
+    log: TransactionLog | None = None
+    fees: int | None = None
+    fees_split: Any | None = None
     customer: Customer | dict[str, Any]
     authorization: Authorization | dict[str, Any]
     plan: Union["Plan", dict[str, Any]]
     split: Union["TransactionSplit", dict[str, Any]]
     subaccount: Union["SubAccount", dict[str, Any]]
-    order_id: str | None
+    order_id: str | None = None
     created_at: datetime
     requested_amount: int
     source: TransactionSource
-    connect: Any | None
-    post_transaction_data: Any | None
+    connect: Any | None = None
+    post_transaction_data: Any | None = None
 
 
 class TransactionSplitSubAccount(BaseModel):
@@ -173,7 +175,7 @@ class TransactionSplit(BaseModel):
     split_code: str
     active: bool
     bearer_type: str
-    bearer_subaccount: str | None
+    bearer_subaccount: str | None = None
     created_at: datetime
     updated_at: datetime
     is_dynamic: bool
@@ -193,20 +195,19 @@ class Subscription(BaseModel):
     subscription_code: str
     email_token: str
     authorization: int | Authorization
-    easy_cron_id: str | None
+    easy_cron_id: str | None = None
     cron_expression: str
-    next_payment_date: datetime | None
-    open_invoice: Any | None
+    next_payment_date: datetime | None = None
+    open_invoice: Any | None = None
     invoice_limit: int
     id: int
-    split_code: str | None
-    cancelled_at: datetime | None
-    updated_at: datetime | None
+    split_code: str | None = None
+    cancelled_at: datetime | None = None
+    updated_at: datetime | None = None
     payments_count: int
-    most_recent_invoice: Optional["Invoice"]
-    cancelled_at: datetime | None
+    most_recent_invoice: Optional["Invoice"] = None
     invoices: list["Invoice"]
-    invoice_history: list[Any] | None
+    invoice_history: list[Any] | None = None
 
 
 class Invoice(BaseModel):
@@ -225,8 +226,8 @@ class Invoice(BaseModel):
     authorization: int
     paid_at: str
     next_notification: str
-    notification_flag: Any | None
-    description: str | None
+    notification_flag: Any | None = None
+    description: str | None = None
     id: int
     created_at: datetime
     update_at: datetime
@@ -234,24 +235,24 @@ class Invoice(BaseModel):
 
 class PaymentPage(BaseModel):
     integration: str
-    plan: int | None
+    plan: int | None = None
     domain: Domain
     name: str
-    description: str | None
-    amount: int | None
+    description: str | None = None
+    amount: int | None = None
     currency: Currency
     slug: str
-    custom_fields: dict[str, Any] | None  # TODO: find custom_field types
+    custom_fields: dict[str, Any] | None = None  # TODO: find custom_field types
     type: str
     redirect_url: str
-    success_message: str | None
+    success_message: str | None = None
     collect_phone: bool
     active: bool
     published: bool
     migrate: bool
-    notification_email: str | None
-    metadata: dict[str, Any] | None
-    split_code: str | None
+    notification_email: str | None = None
+    metadata: dict[str, Any] | None = None
+    split_code: str | None = None
     id: int
     created_at: datetime
     updated_at: datetime
@@ -269,32 +270,32 @@ class PaymentRequest(BaseModel):
     domain: Domain
     amount: int
     currency: Currency
-    due_date: datetime | None
-    has_invoice: bool | None
-    invoice_number: str | None
-    description: str | None
-    pdf_url: str | None
+    due_date: datetime | None = None
+    has_invoice: bool | None = None
+    invoice_number: str | None = None
+    description: str | None = None
+    pdf_url: str | None = None
     line_items: list[LineItem]
     tax: list[Tax]
     request_code: str
     status: str
     paid: bool
-    paid_at: datetime | None
+    paid_at: datetime | None = None
     metadata: dict[str, Any]
     notifications: list[PaymentRequestNotification]
     offline_reference: str
     customer: Customer
     created_at: datetime
-    discount: str | None
-    split_code: str | None
-    transactions: list[Transaction] | None
-    archived: bool | None
-    source: str | None
-    payment_method: Any | None
-    note: Any | None
-    amount_paid: int | None
+    discount: str | None = None
+    split_code: str | None = None
+    transactions: list[Transaction] | None = None
+    archived: bool | None = None
+    source: str | None = None
+    payment_method: Any | None = None
+    note: Any | None = None
+    amount_paid: int | None = None
     updated_at: datetime
-    pending_amount: int | None
+    pending_amount: int | None = None
 
 
 class Money(BaseModel):
@@ -324,15 +325,15 @@ class Plan(BaseModel):
     domain: Domain
     name: str
     plan_code: str
-    description: str | None
+    description: str | None = None
     amount: int
-    interval: "Interval"
+    interval: Interval
     invoice_limit: int
     send_invoices: bool
     send_sms: bool
     hosted_page: bool
-    hosted_page_url: str | None
-    hosted_page_summary: str | None
+    hosted_page_url: str | None = None
+    hosted_page_summary: str | None = None
     currency: Currency
     migrate: bool
     is_deleted: bool
@@ -341,14 +342,14 @@ class Plan(BaseModel):
     integration: int
     created_at: datetime
     updated_at: datetime
-    total_subscriptions: int | None
-    active_subscriptions: int | None
-    total_subscriptions_revenue: int | None
-    pages_count: int | None
-    subscribers_count: int | None
-    subscriptions_count: int | None
-    active_subscriptions_count: int | None
-    total_revenue: int | None
+    total_subscriptions: int | None = None
+    active_subscriptions: int | None = None
+    total_subscriptions_revenue: int | None = None
+    pages_count: int | None = None
+    subscribers_count: int | None = None
+    subscriptions_count: int | None = None
+    active_subscriptions_count: int | None = None
+    total_revenue: int | None = None
     subscribers: list[PlanSubscriber]
 
 
@@ -356,10 +357,10 @@ class SubAccount(BaseModel):
     id: int
     subaccount_code: str
     business_name: str
-    description: str | None
-    primary_contact_name: str | None
-    primary_contact_email: str | None
-    primary_contact_phone: str | None
+    description: str | None = None
+    primary_contact_name: str | None = None
+    primary_contact_email: str | None = None
+    primary_contact_phone: str | None = None
     metadata: dict[str, Any]
     percentage_charge: int
     settlement_bank: str
@@ -368,19 +369,19 @@ class SubAccount(BaseModel):
     currency: Currency
     active: int | bool
     is_verified: bool
-    integration: int | None
-    bank: str | None
-    managed_by_integration: int | None
-    domain: Domain | None
-    migrate: bool | None
-    account_name: str | None
-    product: str | None
+    integration: int | None = None
+    bank: str | None = None
+    managed_by_integration: int | None = None
+    domain: Domain | None = None
+    migrate: bool | None = None
+    account_name: str | None = None
+    product: str | None = None
 
 
 class Product(BaseModel):
     id: int
     name: str
-    description: str | None
+    description: str | None = None
     product_code: str
     slug: str
     currency: Currency
@@ -394,36 +395,36 @@ class Product(BaseModel):
     unlimited: bool
     metadata: dict[str, Any]
     files: list[Any]  # TODO: Find all the type of files
-    file_path: str | None
-    success_message: str | None
-    redirect_url: str | None
-    split_code: str | None
-    notifications_emails: list[Any] | None
+    file_path: str | None = None
+    success_message: str | None = None
+    redirect_url: str | None = None
+    split_code: str | None = None
+    notifications_emails: list[Any] | None = None
     minimum_orderable: int
     maximum_orderable: int
     created_at: datetime
     updated_at: datetime
-    features: Any | None
+    features: Any | None = None
     digital_assets: list[Any]  # TODO: Find the type of digital_assets
     variant_options: list[Any]  # TODO: Find the type of variant_options
     is_shippable: bool
     shipping_fields: dict[str, Any]
     integration: int
     low_stock_alert: int | bool
-    stock_threshold: Any | None
-    expires_in: Any | None
+    stock_threshold: Any | None = None
+    expires_in: Any | None = None
 
 
 class Terminal(BaseModel):
     id: int
-    serial_number: str | None
-    device_make: str | None
+    serial_number: str | None = None
+    device_make: str | None = None
     terminal_id: str
     integration: int
     domain: Domain
     name: str
-    address: str | None
-    status: str | None  # TODO: Find all the supported status
+    address: str | None = None
+    status: str | None = None  # TODO: Find all the supported status
 
 
 class DedicatedAccountBank(BaseModel):
@@ -453,7 +454,7 @@ class DedicatedAccount(BaseModel):
     created_at: datetime
     updated_at: datetime
     assignment: DedicatedAccountAssignment
-    customer: Customer
+    # customer: Customer
     split_config: dict[str, Any]
 
 
@@ -474,15 +475,15 @@ class Settlement(BaseModel):
     effective_amount: int
     total_fees: int
     total_processed: int
-    deductions: Any | None
+    deductions: Any | None = None
     settlement_date: datetime
-    settled_by: Any | None
+    settled_by: Any | None = None
     created_at: datetime
     update_at: datetime
 
 
 class TransferRecipientDetail(BaseModel):
-    authorization_code: int | None
+    authorization_code: int | None = None
     account_name: str
     bank_code: str
     bank_name: str
@@ -492,9 +493,9 @@ class TransferRecipient(BaseModel):
     active: bool
     created_at: datetime
     currency: Currency
-    description: str | None
+    description: str | None = None
     domain: Domain
-    email: str | None
+    email: str | None = None
     id: int
     integration: int
     metadata: dict[str, Any]
@@ -503,14 +504,14 @@ class TransferRecipient(BaseModel):
     type: str  # TODO: Find out all the supported types
     updated_at: datetime
     is_deleted: bool
-    recipient_account: str | None
-    institution_code: str | None
+    recipient_account: str | None = None
+    institution_code: str | None = None
     details: TransferRecipientDetail
 
 
 class TransferSession(BaseModel):
-    provider: Any | None
-    id: Any | None
+    provider: Any | None = None
+    id: Any | None = None
 
 
 class Transfer(BaseModel):
@@ -519,12 +520,12 @@ class Transfer(BaseModel):
     amount: int
     currency: Currency
     source: str
-    source_details: Any | None
-    failures: Any | None
-    titian_code: Any | None
-    transferred_at: str | None
-    reference: str | None
-    request: int | None
+    source_details: Any | None = None
+    failures: Any | None = None
+    titian_code: Any | None = None
+    transferred_at: str | None = None
+    reference: str | None = None
+    request: int | None = None
     reason: str
     recipient: int | TransferRecipient
     status: str  # TODO: Find all the supported status for transfer
@@ -533,9 +534,9 @@ class Transfer(BaseModel):
     created_at: datetime
     updated_at: datetime
     session: TransferSession
-    fee_charged: int | None
-    fees_breakdown: Any | None
-    gateway_response: Any | None
+    fee_charged: int | None = None
+    fees_breakdown: Any | None = None
+    gateway_response: Any | None = None
 
 
 class BulkTransferItem(BaseModel):
@@ -575,22 +576,22 @@ class DisputeMessage(BaseModel):
 
 class Dispute(BaseModel):
     id: int
-    refund_amount: int | None
-    currency: Currency | None
+    refund_amount: int | None = None
+    currency: Currency | None = None
     status: DisputeStatus
-    resolution: Any | None
+    resolution: Any | None = None
     domain: Domain
     transaction: Transaction
-    transaction_reference: str | None
-    category: Any | None
+    transaction_reference: str | None = None
+    category: Any | None = None
     customer: Customer
-    bin: str | None
-    last4: str | None
-    due_at: str | None
-    resolved_at: str | None
-    evidence: Any | None
+    bin: str | None = None
+    last4: str | None = None
+    due_at: str | None = None
+    resolved_at: str | None = None
+    evidence: Any | None = None
     attachments: Any
-    note: Any | None
+    note: Any | None = None
     history: list[DisputeHistory]
     messages: list[DisputeMessage]
     created_at: datetime
@@ -622,21 +623,21 @@ class DisputeExportInfo(BaseModel):
 class Refund(BaseModel):
     integration: int
     transaction: int
-    dispute: Any | None
-    settlement: Any | None
+    dispute: Any | None = None
+    settlement: Any | None = None
     id: int
     domain: Domain
     currency: Currency
     amount: int
     status: str  # TODO: Find all the status types
-    refunded_at: datetime | None
+    refunded_at: datetime | None = None
     refunded_by: str
     customer_note: str
     merchant_note: str
     deducted_amount: int
     fully_deducted: int | bool
     created_at: datetime
-    bank_reference: Any | None
+    bank_reference: Any | None = None
     transaction_reference: str
     reason: str
     customer: Customer
@@ -644,7 +645,7 @@ class Refund(BaseModel):
     transaction_amount: int
     initiated_by: str
     refund_channel: str
-    session_id: Any | None
+    session_id: Any | None = None
     collect_account_number: bool
 
 
@@ -664,7 +665,7 @@ class Bank(BaseModel):
     slug: str
     code: str
     longcode: str
-    gateway: str | None
+    gateway: str | None = None
     pay_with_bank: bool
     supports_transfer: bool
     active: bool
@@ -711,8 +712,8 @@ class SupportedCountryCurrencyMobileMoney(BaseModel):
     bank: Literal["mobile_money", "mobile_money_business"]
     phone_number_label: str
     account_number_pattern: "AccountNumberPattern"
-    placeholder: str | None
-    account_verification_required: bool | None
+    placeholder: str | None = None
+    account_verification_required: bool | None = None
 
 
 class SupportedCountryCurrencyEFT(BaseModel):
@@ -722,14 +723,14 @@ class SupportedCountryCurrencyEFT(BaseModel):
 
 class SupportedCountryCurrency(BaseModel):
     bank: "SupportedCountryBank"
-    mobile_money: SupportedCountryCurrencyMobileMoney | None
-    mobile_money_business: SupportedCountryCurrencyMobileMoney | None
-    eft: SupportedCountryCurrencyEFT | None
+    mobile_money: SupportedCountryCurrencyMobileMoney | None = None
+    mobile_money_business: SupportedCountryCurrencyMobileMoney | None = None
+    eft: SupportedCountryCurrencyEFT | None = None
 
 
 class SupportedCountryBank(BaseModel):
     bank_type: str
-    required_fields: list[str] | None
+    required_fields: list[str] | None = None
     branch_code: str
     branch_code_type: str
     account_name: str
@@ -737,8 +738,8 @@ class SupportedCountryBank(BaseModel):
     account_number_label: str
     account_number_pattern: "AccountNumberPattern"
     documents: list[str]
-    notices: list[str] | None
-    show_account_number_tooltip: bool | None
+    notices: list[str] | None = None
+    show_account_number_tooltip: bool | None = None
 
 
 class AccountNumberPattern(BaseModel):
