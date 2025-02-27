@@ -91,8 +91,7 @@ class ApplePayClient(BaseAPIClient):
                 data can be accessed via `Response.raw`.
 
         Returns:
-            A named tuple containing the response gotten from paystack's server.
-            An empty list in the data if no domains have been added.
+            A pydantic model containing the response gotten from paystack's server.
         """
 
         url = self._full_url("/apple-pay/domain")
@@ -134,7 +133,7 @@ class ApplePayClient(BaseAPIClient):
             * This feature is available to businesses in all markets except South Africa.
 
         Returns:
-            A named tuple containing the response gotten from paystack's server.
+            A pydantic model containing the response gotten from paystack's server.
         """
 
         url = self._full_url("/apple-pay/domain")
@@ -181,7 +180,7 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
                 data can be accessed via `Response.raw`.
 
         Returns:
-            A named tuple containing the response gotten from paystack's server.
+            A pydantic model containing the response gotten from paystack's server.
         """
 
         url = self._full_url("/apple-pay/domain")
@@ -225,8 +224,7 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
                 data can be accessed via `Response.raw`.
 
         Returns:
-            A named tuple containing the response gotten from paystack's server.
-            An empty list in the data if no domains have been added.
+            A pydantic model containing the response gotten from paystack's server.
         """
 
         url = self._full_url("/apple-pay/domain")
@@ -268,7 +266,7 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
              * This feature is available to businesses in all markets except South Africa.
 
          Returns:
-             A named tuple containing the response gotten from paystack's server.
+            A pydantic model containing the response gotten from paystack's server.
         """
 
         url = self._full_url("/apple-pay/domain")
