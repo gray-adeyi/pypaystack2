@@ -1,9 +1,8 @@
 from datetime import datetime
-from typing import Any, Optional, Literal, Generic, TypeVar
+from typing import Any, Optional, Literal, Generic, TypeVar, Union
 
 from pydantic import BaseModel
 
-from pypaystack2 import DisputeStatus
 from pypaystack2.utils.enums import (
     Domain,
     BulkChargeStatus,
@@ -11,6 +10,7 @@ from pypaystack2.utils.enums import (
     Currency,
     RiskAction,
     SupportedCountryRelationshipType,
+    DisputeStatus,
 )
 from pypaystack2.utils.models import LineItem, Tax
 
@@ -21,13 +21,13 @@ class ApplePayDomains(BaseModel):
 
 class BulkCharge(BaseModel):
     batch_code: str
-    reference: str | None
+    reference: str | None = None
     id: int
-    integration: int | None
+    integration: int | None = None
     domain: Domain
     status: BulkChargeStatus
-    total_charges: int | None
-    pending_charges: int | None
+    total_charges: int | None = None
+    pending_charges: int | None = None
     created_at: datetime
     updated_at: datetime
 
@@ -147,9 +147,9 @@ class Transaction(BaseModel):
     fees_split: Any | None
     customer: Customer | dict[str, Any]
     authorization: Authorization | dict[str, Any]
-    plan: "Plan" | dict[str, Any]
-    split: "TransactionSplit" | dict[str, Any]
-    subaccount: "SubAccount" | dict[str, Any]
+    plan: Union["Plan", dict[str, Any]]
+    split: Union["TransactionSplit", dict[str, Any]]
+    subaccount: Union["SubAccount", dict[str, Any]]
     order_id: str | None
     created_at: datetime
     requested_amount: int
@@ -183,7 +183,7 @@ class TransactionSplit(BaseModel):
 
 class Subscription(BaseModel):
     customer: int | Customer
-    plan: int | "Plan"
+    plan: Union[int, "Plan"]
     integration: int
     domain: Domain
     start: int

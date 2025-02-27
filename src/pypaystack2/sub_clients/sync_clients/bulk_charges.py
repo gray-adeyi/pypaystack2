@@ -1,39 +1,37 @@
 from http import HTTPMethod
 from typing import Type
 
-import httpx
-
-from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
-from pypaystack2.utils import Response, append_query_params
+from pypaystack2.base_api_client import BaseAPIClient
+from pypaystack2.utils import (
+    append_query_params,
+    Response,
+    Status,
+    BulkChargeInstruction,
+)
 from pypaystack2.utils.models import PaystackDataModel
-from pypaystack2.utils.response_models import ApplePayDomains
+from pypaystack2.utils.response_models import BulkCharge, BulkChargeUnitCharge
 
 
-class ApplePayClient(BaseAPIClient):
-    """Provides a wrapper for paystack Apple Pay API
+class BulkChargeClient(BaseAPIClient):
+    """Provides a wrapper for paystack Bulk Charge API
 
-    The Apple Pay API allows you to register your application's top-level domain or subdomain.
-    see https://paystack.com/docs/api/apple-pay/
-
-    Note
-      This feature is available to businesses in all markets except South Africa.
+    The Bulk Charges API allows you to create and manage multiple recurring payments from your customers.
+    https://paystack.com/docs/api/bulk-charge/
     """
 
-    def register_domain(
+    def initiate(
         self,
-        domain_name: str,
-        alternate_response_model: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
-        """Register a top-level domain or subdomain for your Apple Pay integration.
-
-        Note:
-            * This method can only be called with one domain or subdomain at a time.
-            * This feature is available to businesses in all markets except South Africa.
-
+        body: list[BulkChargeInstruction],
+        alternate_model_class: Type[PaystackDataModel] | None = None,
+    ) -> Response[BulkCharge]:
+        """
+        Send a list of dictionaries with authorization ``codes`` and ``amount``
+        (in kobo if currency is NGN, pesewas, if currency is GHS, and cents,
+        if currency is ZAR ) so paystack can process transactions as a batch.
 
         Args:
-            domain_name: Domain name to be registered.
-            alternate_response_model: A pydantic model class to use instead of the
+            body: A list of BulkChargeInstruction.
+            alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
                 set  `Response.data` to `None` if it fails to serialize the data
@@ -50,34 +48,32 @@ class ApplePayClient(BaseAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
 
-        url = self._full_url("/apple-pay/domain")
-        payload = {
-            "domainName": domain_name,
-        }
+        url = self._full_url("/bulkcharge")
+        payload = [item.model_dump() for item in body]
         return self._handle_request(
             HTTPMethod.POST,
             url,
             payload,
-            response_data_model_class=alternate_response_model,
+            response_data_model_class=alternate_model_class or BulkCharge,
         )
 
-    def get_domains(
+    def get_batches(
         self,
-        use_cursor: bool = False,
-        next: str | None = None,
-        previous: str | None = None,
-        alternate_response_model: Type[PaystackDataModel] | None = None,
-    ) -> Response[ApplePayDomains]:
-        """Fetches all registered domains on your integration.
-
-        Note
-            * This feature is available to businesses in all markets except South Africa.
+        page: int = 1,
+        pagination: int = 50,
+        start_date: str | None = None,
+        end_date: str | None = None,
+        alternate_model_class: Type[PaystackDataModel] | None = None,
+    ) -> Response[list[BulkCharge]]:
+        """This gets all bulk charge batches created by the integration.
 
         Args:
-            use_cursor:
-            next:
-            previous:
-            alternate_response_model: A pydantic model class to use instead of the
+            page: Specify exactly what transfer you want to page. If not specified, we use a default value of 1.
+            pagination: Specify how many records you want to retrieve per page.
+                If not specified we use a default value of 50.
+            start_date: A timestamp from which to start listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
+            end_date: A timestamp at which to stop listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
+            alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
                 set  `Response.data` to `None` if it fails to serialize the data
@@ -94,79 +90,32 @@ class ApplePayClient(BaseAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
 
-        url = self._full_url("/apple-pay/domain")
+        url = self._full_url(f"/bulkcharge?perPage={pagination}")
         query_params = [
-            ("use_cursor", use_cursor),
-            ("next", next),
-            ("previous", previous),
+            ("page", page),
+            ("from", start_date),
+            ("to", end_date),
         ]
         url = append_query_params(query_params, url)
         return self._handle_request(
             HTTPMethod.GET,
             url,
-            response_data_model_class=alternate_response_model or ApplePayDomains,
+            response_data_model_class=alternate_model_class or BulkCharge,
         )
 
-    def unregister_domain(
+    def get_batch(
         self,
-        domain_name: str,
-        alternate_response_model: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
-        """Unregister a top-level domain or subdomain previously used for your Apple Pay integration.
-
-        Args:
-            domain_name: Domain name to be unregistered
-            alternate_response_model: A pydantic model class to use instead of the
-                default pydantic model used by the library to present the data in
-                the `Response.data`. The default behaviour of the library is to
-                set  `Response.data` to `None` if it fails to serialize the data
-                returned from paystack with the model provided in the library.
-                Providing a pydantic model class via this parameter overrides
-                the library default model with the model class you provide.
-                This can come in handy when the models in the library do not
-                accurately represent the data returned, and you prefer working with the
-                data as a pydantic model instead of as a dict of the response returned
-                by  paystack before it is serialized with pydantic models, The original
-                data can be accessed via `Response.raw`.
-
-        Note
-            * This feature is available to businesses in all markets except South Africa.
-
-        Returns:
-            A pydantic model containing the response gotten from paystack's server.
+        id_or_code: str,
+        alternate_model_class: Type[PaystackDataModel] | None = None,
+    ) -> Response[BulkCharge]:
         """
-
-        url = self._full_url("/apple-pay/domain")
-        payload = {
-            "domainName": domain_name,
-        }
-        raw_response = httpx.request(
-            HTTPMethod.DELETE, url, json=payload, headers=self._headers
-        )
-        return self._deserialize_response(
-            raw_response, response_data_model_class=alternate_response_model
-        )
-
-
-class AsyncApplePayClient(BaseAsyncAPIClient):
-    """Provides a wrapper for paystack Apple Pay API
-
-    The Apple Pay API allows you to register your application's top-level domain or subdomain.
-    [Visit paystack sub_clients doc](https://paystack.com/docs/api/apple-pay/)
-    """
-
-    async def register_domain(
-        self,
-        domain_name: str,
-        alternate_response_model: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
-        """Register a top-level domain or subdomain for your Apple Pay integration.
-
-        This method can only be called with one domain or subdomain at a time.
+        This method retrieves a specific batch code. It also returns
+        useful information on its progress by way of the total_charges
+        and pending_charges attributes in the Response.
 
         Args:
-            domain_name: Domain name to be registered.
-            alternate_response_model: A pydantic model class to use instead of the
+            id_or_code: An ID or code for the charge whose batches you want to retrieve.
+            alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
                 set  `Response.data` to `None` if it fails to serialize the data
@@ -183,73 +132,38 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
 
-        url = self._full_url("/apple-pay/domain")
-        payload = {
-            "domainName": domain_name,
-        }
-        return await self._handle_request(
-            HTTPMethod.POST,
-            url,
-            payload,
-            response_data_model_class=alternate_response_model,
-        )
-
-    async def get_domains(
-        self,
-        use_cursor: bool = False,
-        next: str | None = None,
-        previous: str | None = None,
-        alternate_response_model: Type[PaystackDataModel] | None = None,
-    ) -> Response[ApplePayDomains]:
-        """Fetches all registered domains on your integration.
-
-        Note
-            * This feature is available to businesses in all markets except South Africa.
-
-        Args:
-            use_cursor:
-            next:
-            previous:
-            alternate_response_model: A pydantic model class to use instead of the
-                default pydantic model used by the library to present the data in
-                the `Response.data`. The default behaviour of the library is to
-                set  `Response.data` to `None` if it fails to serialize the data
-                returned from paystack with the model provided in the library.
-                Providing a pydantic model class via this parameter overrides
-                the library default model with the model class you provide.
-                This can come in handy when the models in the library do not
-                accurately represent the data returned, and you prefer working with the
-                data as a pydantic model instead of as a dict of the response returned
-                by  paystack before it is serialized with pydantic models, The original
-                data can be accessed via `Response.raw`.
-
-        Returns:
-            A pydantic model containing the response gotten from paystack's server.
-        """
-
-        url = self._full_url("/apple-pay/domain")
-        query_params = [
-            ("use_cursor", use_cursor),
-            ("next", next),
-            ("previous", previous),
-        ]
-        url = append_query_params(query_params, url)
-        return await self._handle_request(
+        url = self._full_url(f"/bulkcharge/{id_or_code}")
+        return self._handle_request(
             HTTPMethod.GET,
             url,
-            response_data_model_class=alternate_response_model or ApplePayDomains,
+            response_data_model_class=BulkCharge or alternate_model_class,
         )
 
-    async def unregister_domain(
+    def get_charges_in_batch(
         self,
-        domain_name: str,
-        alternate_response_model: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
-        """Unregister a top-level domain or subdomain previously used for your Apple Pay integration.
+        id_or_code: str,
+        status: Status,
+        pagination: int = 50,
+        page: int = 1,
+        start_date: str | None = None,
+        end_date: str | None = None,
+        alternate_model_class: Type[PaystackDataModel] | None = None,
+    ) -> Response[list[BulkChargeUnitCharge]]:
+        """
+        This method retrieves the charges associated with a specified
+        batch code. Pagination parameters are available. You can also
+        filter by status. Charge statuses can be `Status.PENDING`,
+        `Status.SUCCESS` or `Status.FAILED`.
 
         Args:
-             domain_name: Domain name to be unregistered
-             alternate_response_model: A pydantic model class to use instead of the
+            id_or_code: An ID or code for the batch whose charges you want to retrieve.
+            status: Any of the values from the Status enum.
+            pagination: Specify how many records you want to retrieve per page.
+                If not specified we use a default value of 50.
+            page: Specify exactly what transfer you want to page. If not specified we use a default value of 1.
+            start_date: A timestamp from which to start listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
+            end_date: A timestamp at which to stop listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
+            alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
                 set  `Response.data` to `None` if it fails to serialize the data
@@ -262,21 +176,86 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
                 by  paystack before it is serialized with pydantic models, The original
                 data can be accessed via `Response.raw`.
 
-         Note
-             * This feature is available to businesses in all markets except South Africa.
-
-         Returns:
+        Returns:
             A pydantic model containing the response gotten from paystack's server.
         """
 
-        url = self._full_url("/apple-pay/domain")
-        payload = {
-            "domainName": domain_name,
-        }
-        async with httpx.AsyncClient() as client:
-            raw_response = await client.request(
-                HTTPMethod.DELETE, url, json=payload, headers=self._headers
-            )
-        return self._deserialize_response(
-            raw_response, response_data_model_class=alternate_response_model
+        url = self._full_url(f"/bulkcharge/{id_or_code}/charges?perPage={pagination}")
+        query_params = [
+            ("status", status),
+            ("page", page),
+            ("from", start_date),
+            ("to", end_date),
+        ]
+        url = append_query_params(query_params, url)
+        return self._handle_request(
+            HTTPMethod.GET,
+            url,
+            response_data_model_class=alternate_model_class or BulkChargeUnitCharge,
+        )
+
+    def pause_batch(
+        self,
+        batch_code: str,
+        alternate_model_class: Type[PaystackDataModel] | None = None,
+    ) -> Response[None]:
+        """Use this method to pause processing a batch.
+
+        Args:
+            batch_code: The batch code for the bulk charge you want to pause.
+            alternate_model_class: A pydantic model class to use instead of the
+                default pydantic model used by the library to present the data in
+                the `Response.data`. The default behaviour of the library is to
+                set  `Response.data` to `None` if it fails to serialize the data
+                returned from paystack with the model provided in the library.
+                Providing a pydantic model class via this parameter overrides
+                the library default model with the model class you provide.
+                This can come in handy when the models in the library do not
+                accurately represent the data returned, and you prefer working with the
+                data as a pydantic model instead of as a dict of the response returned
+                by  paystack before it is serialized with pydantic models, The original
+                data can be accessed via `Response.raw`.
+
+        Returns:
+            A pydantic model containing the response gotten from paystack's server.
+        """
+
+        url = self._full_url(f"/bulkcharge/pause/{batch_code}")
+        return self._handle_request(
+            HTTPMethod.GET,
+            url,
+            response_data_model_class=alternate_model_class,
+        )
+
+    def resume_batch(
+        self,
+        batch_code: str,
+        alternate_model_class: Type[PaystackDataModel] | None = None,
+    ) -> Response[None]:
+        """Use this method to resume processing a batch
+
+        Args:
+            batch_code: The batch code for the bulk charge you want to resume.
+            alternate_model_class: A pydantic model class to use instead of the
+                default pydantic model used by the library to present the data in
+                the `Response.data`. The default behaviour of the library is to
+                set  `Response.data` to `None` if it fails to serialize the data
+                returned from paystack with the model provided in the library.
+                Providing a pydantic model class via this parameter overrides
+                the library default model with the model class you provide.
+                This can come in handy when the models in the library do not
+                accurately represent the data returned, and you prefer working with the
+                data as a pydantic model instead of as a dict of the response returned
+                by  paystack before it is serialized with pydantic models, The original
+                data can be accessed via `Response.raw`.
+
+        Returns:
+            A pydantic model containing the response gotten from paystack's server.
+        """
+
+        url = self._full_url(f"/bulkcharge/resume/{batch_code}")
+        return self._handle_request(
+            HTTPMethod.GET,
+            url,
+            response_data_model_class=alternate_model_class,
         )

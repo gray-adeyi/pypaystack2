@@ -189,6 +189,12 @@ class BaseAPIClient(AbstractAPIClient):
         """
         Makes request to paystack servers.
 
+        Args:
+            raise_serialization_exception: Set to `True` to raise pydantic validation errors when it fails
+                to serialize the data returned by paystack with the response model or
+                `alternate_response_model` if provided. The default behaviour is to fail
+                silently and set `Response.data` to None
+
         Returns:
             Returns a python namedtuple of Response which contains
             status code, status(bool), message, data
@@ -231,6 +237,12 @@ class BaseAsyncAPIClient(AbstractAPIClient):
     ) -> Response[PaystackDataModel]:
         """
         Makes request to paystack servers.
+
+        Args:
+            raise_serialization_exception: Set to `True` to raise pydantic validation errors when it fails
+                to serialize the data returned by paystack with the response model or
+                `alternate_response_model` if provided. The default behaviour is to fail
+                silently and set `Response.data` to None
 
         Returns:
             Returns a python namedtuple of Response which contains
