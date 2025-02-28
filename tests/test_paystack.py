@@ -30,7 +30,7 @@ from pypaystack2.sub_clients import (
 from pypaystack2.sub_clients.async_clients.apple_pay import AsyncApplePayClient
 from pypaystack2.sub_clients.async_clients.bulk_charges import AsyncBulkChargeClient
 from pypaystack2.sub_clients.async_clients.charge import AsyncChargeClient
-from pypaystack2.sub_clients.customers import AsyncCustomerClient
+from pypaystack2.sub_clients.async_clients.customers import AsyncCustomerClient
 from pypaystack2.sub_clients.dedicated_accounts import AsyncDedicatedAccountClient
 from pypaystack2.sub_clients.disputes import AsyncDisputeClient
 from pypaystack2.sub_clients.integration import AsyncIntegrationClient
