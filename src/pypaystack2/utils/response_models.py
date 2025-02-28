@@ -52,12 +52,12 @@ class Customer(BaseModel):
     # model_config = ConfigDict(arbitrary_types_allowed=True)
     integration: int
     id: int
-    first_name: str
-    last_name: str
+    first_name: str | None = None
+    last_name: str | None = None
     email: str
     customer_code: str
-    phone: str
-    metadata: dict[str, Any]
+    phone: str | None = None
+    metadata: dict[str, Any] | None = None
     risk_action: RiskAction
     international_phone_format: str | None = None
     identified: bool | None = None
