@@ -4,25 +4,16 @@ import httpx
 from dotenv import load_dotenv
 
 from pypaystack2.sub_clients import DisputeClient
-from tests.test_sub_clients.mocked_api_testcase import MockedAPITestCase
-
-
-class MockedDisputeTestCase(MockedAPITestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        super().setUpClass()
-        load_dotenv()
-        cls.wrapper = DisputeClient()
 
 
 class DisputeTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = DisputeClient()
+        cls.client = DisputeClient()
 
     def test_can_get_disputes(self):
-        response = self.wrapper.get_disputes(
+        response = self.client.get_disputes(
             start_date="2022-01-01", end_date="2023-05-11"
         )
         self.assertEqual(response.status_code, httpx.codes.OK)
@@ -35,7 +26,7 @@ class DisputeTestCase(TestCase):
 
     def test_can_get_transaction_disputes(self):
         # TODO: Test properly.
-        self.wrapper.get_transaction_disputes(id="114782792")
+        self.client.get_transaction_disputes(id="114782792")
 
     def test_can_update_dispute(self): ...
 

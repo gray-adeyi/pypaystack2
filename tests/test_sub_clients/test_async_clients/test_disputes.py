@@ -3,26 +3,17 @@ from unittest import IsolatedAsyncioTestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.sub_clients.disputes import AsyncDisputeClient
-from tests.test_sub_clients.mocked_api_testcase import MockedAsyncAPITestCase
-
-
-class MockedAsyncDisputeTestCase(MockedAsyncAPITestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        super().setUpClass()
-        load_dotenv()
-        cls.wrapper = AsyncDisputeClient()
+from pypaystack2.sub_clients.async_clients.disputes import AsyncDisputeClient
 
 
 class AsyncDisputeTestCase(IsolatedAsyncioTestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = AsyncDisputeClient()
+        cls.client = AsyncDisputeClient()
 
     async def test_can_get_disputes(self):
-        response = await self.wrapper.get_disputes(
+        response = await self.client.get_disputes(
             start_date="2022-01-01", end_date="2023-05-11"
         )
         self.assertEqual(response.status_code, httpx.codes.OK)
@@ -31,7 +22,7 @@ class AsyncDisputeTestCase(IsolatedAsyncioTestCase):
 
     async def test_can_get_dispute(self):
         # TODO: Test properly.
-        response = await self.wrapper.get_dispute(id="114782792")
+        response = await self.client.get_dispute(id="114782792")
         self.assertEqual(response.status_code, httpx.codes.NOT_FOUND)
 
     async def test_can_get_transaction_disputes(self):

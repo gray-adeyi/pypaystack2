@@ -24,7 +24,6 @@ Modules exported by this package:
     - `verification`: A module containing implementations for interfacing with Paystack's Verification API
 """
 
-from pypaystack2.sub_clients.disputes import DisputeClient
 from pypaystack2.sub_clients.integration import IntegrationClient
 from pypaystack2.sub_clients.miscellaneous import MiscellaneousClient
 from pypaystack2.sub_clients.payment_pages import PaymentPageClient
@@ -45,6 +44,7 @@ from pypaystack2.sub_clients.sync_clients.customers import CustomerClient
 from pypaystack2.sub_clients.sync_clients.dedicated_accounts import (
     DedicatedAccountClient,
 )
+from pypaystack2.sub_clients.sync_clients.disputes import DisputeClient
 from pypaystack2.sub_clients.terminals import TerminalClient
 from pypaystack2.sub_clients.transactions import TransactionClient
 from pypaystack2.sub_clients.transfers import TransferClient
