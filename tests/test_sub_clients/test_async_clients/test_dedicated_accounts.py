@@ -3,27 +3,20 @@ from unittest import IsolatedAsyncioTestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.sub_clients.dedicated_accounts import AsyncDedicatedAccountClient
-from tests.test_sub_clients.mocked_api_testcase import MockedAsyncAPITestCase
-
-
-class MockedAsyncDedicatedAccountTestCase(MockedAsyncAPITestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        super().setUpClass()
-        load_dotenv()
-        cls.wrapper = AsyncDedicatedAccountClient()
+from pypaystack2.sub_clients.async_clients.dedicated_accounts import (
+    AsyncDedicatedAccountClient,
+)
 
 
 class AsyncDedicatedAccountTestCase(IsolatedAsyncioTestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = AsyncDedicatedAccountClient()
+        cls.client = AsyncDedicatedAccountClient()
 
     async def test_can_create(self):
         # TODO: Test properly.
-        await self.wrapper.create(customer="CUS_5qmwswiljybyyne")
+        await self.client.create(customer="CUS_5qmwswiljybyyne")
 
     async def test_can_get_dedicated_accounts(self): ...
 
@@ -39,5 +32,5 @@ class AsyncDedicatedAccountTestCase(IsolatedAsyncioTestCase):
 
     async def test_can_get_providers(self):
         # TODO: Test properly.
-        response = await self.wrapper.get_providers()
+        response = await self.client.get_providers()
         self.assertEqual(response.status_code, httpx.codes.UNAUTHORIZED)
