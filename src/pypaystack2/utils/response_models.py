@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Any, Optional, Literal, Generic, TypeVar, Union
 
 from pydantic import BaseModel
@@ -14,6 +14,10 @@ from pypaystack2.utils.enums import (
     Interval,
 )
 from pypaystack2.utils.models import LineItem, Tax
+
+
+class IntegrationTimeout(BaseModel):
+    payment_session_timeout: timedelta
 
 
 class ApplePayDomains(BaseModel):

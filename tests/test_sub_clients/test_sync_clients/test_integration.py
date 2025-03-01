@@ -1,42 +1,31 @@
+from datetime import timedelta
 from unittest import TestCase
 
 import httpx
 from dotenv import load_dotenv
 
 from pypaystack2.sub_clients import IntegrationClient
-from tests.test_sub_clients.mocked_api_testcase import MockedAPITestCase
+from pypaystack2.utils.response_models import IntegrationTimeout
 
 
-class MockedIntegrationTestCase(MockedAPITestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        super().setUpClass()
-        load_dotenv()
-        cls.wrapper = IntegrationClient()
-
-    def test_can_get_payment_session_timeout(self):
-        response = self.wrapper.get_payment_session_timeout()
-        self.assertEqual(response.status_code, httpx.codes.OK)
-
-    def test_can_update_payment_session_timeout(self):
-        response = self.wrapper.update_payment_session_timeout(timeout=5)
-        self.assertEqual(response.status_code, httpx.codes.OK)
-
-
-class ControlIntegrationTestCase(TestCase):
+class IntegrationTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = IntegrationClient()
+        cls.client = IntegrationClient()
 
     def test_can_get_payment_session_timeout(self):
-        response = self.wrapper.get_payment_session_timeout()
+        response = self.client.get_payment_session_timeout()
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Payment session timeout retrieved")
+        self.assertIsInstance(response.data, IntegrationTimeout)
+        self.assertEqual(response.data.payment_session_timeout, timedelta(seconds=60))
 
     def test_can_update_payment_session_timeout(self):
-        response = self.wrapper.update_payment_session_timeout(timeout=60)
+        response = self.client.update_payment_session_timeout(timeout=60)
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Payment session timeout updated")
+        self.assertIsInstance(response.data, IntegrationTimeout)
+        self.assertEqual(response.data.payment_session_timeout, timedelta(seconds=60))
