@@ -108,6 +108,8 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
                 response_data_model_class,
                 raise_serialization_exception,
             )
+        if isinstance(data, dict) and len(data) == 0:  # Data is empty
+            data = None
         return Response(
             status_code=raw_response.status_code,
             status=status,

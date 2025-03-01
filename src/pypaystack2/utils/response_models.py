@@ -150,16 +150,16 @@ class TransactionSource(BaseModel):
 class Transaction(BaseModel):
     id: int
     domain: Domain
-    status: str
+    status: str | None = None
     reference: str
     amount: int
     message: str | None = None
-    gateway_response: str
+    gateway_response: str | None = None
     paid_at: str
     channel: str
     currency: Currency
     ip_address: str | None = None
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] | None = None
     log: TransactionLog | None = None
     fees: int | None = None
     fees_split: Any | None = None
@@ -169,9 +169,9 @@ class Transaction(BaseModel):
     split: Union["TransactionSplit", dict[str, Any]]
     subaccount: Union["SubAccount", dict[str, Any]]
     order_id: str | None = None
-    created_at: datetime
-    requested_amount: int
-    source: TransactionSource
+    created_at: datetime | None = None
+    requested_amount: int | None = None
+    source: TransactionSource | None = None
     connect: Any | None = None
     post_transaction_data: Any | None = None
 
@@ -638,7 +638,7 @@ class DisputeExportInfo(BaseModel):
 
 class Refund(BaseModel):
     integration: int
-    transaction: int
+    transaction: Union[int, "Transaction"]
     dispute: Any | None = None
     settlement: Any | None = None
     id: int
@@ -654,15 +654,15 @@ class Refund(BaseModel):
     fully_deducted: int | bool
     created_at: datetime
     bank_reference: Any | None = None
-    transaction_reference: str
-    reason: str
-    customer: Customer
-    refund_type: str
-    transaction_amount: int
-    initiated_by: str
-    refund_channel: str
+    transaction_reference: str | None = None
+    reason: str | None = None
+    customer: Customer | None = None
+    refund_type: str | None = None
+    transaction_amount: int | None = None
+    initiated_by: str | None = None
+    refund_channel: str | None = None
     session_id: Any | None = None
-    collect_account_number: bool
+    collect_account_number: bool | None = None
 
 
 class CardBin(BaseModel):
