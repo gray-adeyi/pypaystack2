@@ -378,7 +378,7 @@ class SubAccount(BaseModel):
     primary_contact_email: str | None = None
     primary_contact_phone: str | None = None
     metadata: dict[str, Any] | None = None
-    percentage_charge: int | None = None
+    percentage_charge: int | float | None = None
     settlement_bank: str
     bank_id: int | None = None
     account_number: str
@@ -386,7 +386,7 @@ class SubAccount(BaseModel):
     active: int | bool | None = None
     is_verified: bool | None = None
     integration: int | None = None
-    bank: str | None = None
+    bank: int | None = None
     managed_by_integration: int | None = None
     domain: Domain | None = None
     migrate: bool | None = None
