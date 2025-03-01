@@ -1,11 +1,12 @@
 from http import HTTPMethod
 from typing import Type, Optional
 
-from pypaystack2 import Response, Identification, Country, RiskAction
 from pypaystack2.base_api_client import BaseAsyncAPIClient
 from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.utils import add_to_payload, append_query_params
+from pypaystack2.utils.enums import Identification, Country, RiskAction
 from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.models import Response
 from pypaystack2.utils.response_models import Customer
 
 

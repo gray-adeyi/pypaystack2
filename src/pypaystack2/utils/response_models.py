@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import Any, Optional, Literal, Generic, TypeVar, Union
 
 from pydantic import BaseModel
@@ -14,6 +14,16 @@ from pypaystack2.utils.enums import (
     Interval,
 )
 from pypaystack2.utils.models import LineItem, Tax
+
+
+class State(BaseModel):
+    name: str
+    slug: str
+    abbreviation: str
+
+
+class IntegrationTimeout(BaseModel):
+    payment_session_timeout: timedelta
 
 
 class ApplePayDomains(BaseModel):
@@ -674,7 +684,7 @@ class Bank(BaseModel):
     currency: Currency
     type: str
     id: int
-    created_at: datetime
+    created_at: datetime | None
     updated_at: datetime
 
 
@@ -690,7 +700,7 @@ class PaystackSupportedCountry(BaseModel):
     relationships: dict[
         SupportedCountryRelationshipType, "SupportedCountryCurrencyRelationship"
     ]
-    can_go_live_automatically: bool
+    can_go_live_automatically: bool | None = None
 
 
 T = TypeVar("T", SupportedCountryRelationshipType, str)
@@ -702,14 +712,16 @@ class SupportedCountryRelationship(BaseModel, Generic[T, D]):
     data: list[D]
 
 
-class SupportedCountryCurrencyRelationship(
-    SupportedCountryRelationship[SupportedCountryRelationshipType.CURRENCY, list[str]]
-):
-    supported_currencies: dict[Currency, "SupportedCountryCurrency"]
+class SupportedCountryCurrencyRelationship(BaseModel):
+    type: SupportedCountryRelationshipType
+    data: list[str]
+    supported_currencies: dict[Currency, "SupportedCountryCurrency"] | None = None
+    integration_type: dict | None = None
+    payment_method: dict | None = None
 
 
 class SupportedCountryCurrencyMobileMoney(BaseModel):
-    bank: Literal["mobile_money", "mobile_money_business"]
+    bank_type: Literal["mobile_money", "mobile_money_business"]
     phone_number_label: str
     account_number_pattern: "AccountNumberPattern"
     placeholder: str | None = None
@@ -731,13 +743,13 @@ class SupportedCountryCurrency(BaseModel):
 class SupportedCountryBank(BaseModel):
     bank_type: str
     required_fields: list[str] | None = None
-    branch_code: str
+    branch_code: str | bool
     branch_code_type: str
-    account_name: str
+    account_name: str | bool
     account_verification_required: bool
     account_number_label: str
     account_number_pattern: "AccountNumberPattern"
-    documents: list[str]
+    documents: list[str] | None = None
     notices: list[str] | None = None
     show_account_number_tooltip: bool | None = None
 

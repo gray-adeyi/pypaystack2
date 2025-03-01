@@ -3,10 +3,10 @@ from typing import Type
 
 import httpx
 
-from pypaystack2 import Response
 from pypaystack2.base_api_client import BaseAsyncAPIClient
 from pypaystack2.utils import append_query_params
 from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.models import Response
 from pypaystack2.utils.response_models import ApplePayDomains
 
 

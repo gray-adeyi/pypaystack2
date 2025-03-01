@@ -1,9 +1,10 @@
 from http import HTTPMethod
 from typing import Type
 
-from pypaystack2 import BulkChargeInstruction, Response, Status
 from pypaystack2.base_api_client import BaseAsyncAPIClient
 from pypaystack2.utils import append_query_params
+from pypaystack2.utils.enums import Status
+from pypaystack2.utils.models import BulkChargeInstruction, Response
 from pypaystack2.utils.models import PaystackDataModel
 from pypaystack2.utils.response_models import BulkCharge, BulkChargeUnitCharge
 

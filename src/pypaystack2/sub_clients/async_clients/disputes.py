@@ -1,7 +1,8 @@
 from http import HTTPMethod
 from typing import Type
 
-from pypaystack2 import DisputeStatus, Response, Resolution
+from pypaystack2.utils.models import Response
+from pypaystack2.utils.enums import DisputeStatus, Resolution
 from pypaystack2.base_api_client import BaseAsyncAPIClient
 from pypaystack2.utils import append_query_params, add_to_payload
 from pypaystack2.utils.models import PaystackDataModel
