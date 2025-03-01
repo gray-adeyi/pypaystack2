@@ -403,26 +403,26 @@ class Product(BaseModel):
     currency: Currency
     price: int
     quantity: int
-    quantity_sold: int
+    quantity_sold: int | None = None
     active: bool
     domain: Domain
     type: str
     in_stock: bool
     unlimited: bool
     metadata: dict[str, Any]
-    files: list[Any]  # TODO: Find all the type of files
+    files: list[Any] | None = None  # TODO: Find all the type of files
     file_path: str | None = None
     success_message: str | None = None
     redirect_url: str | None = None
     split_code: str | None = None
     notifications_emails: list[Any] | None = None
     minimum_orderable: int
-    maximum_orderable: int
+    maximum_orderable: int | None = None
     created_at: datetime
     updated_at: datetime
     features: Any | None = None
-    digital_assets: list[Any]  # TODO: Find the type of digital_assets
-    variant_options: list[Any]  # TODO: Find the type of variant_options
+    digital_assets: list[Any] | None = None  # TODO: Find the type of digital_assets
+    variant_options: list[Any] | None = None  # TODO: Find the type of variant_options
     is_shippable: bool
     shipping_fields: dict[str, Any]
     integration: int
