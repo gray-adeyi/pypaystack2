@@ -101,7 +101,7 @@ class Authorization(BaseModel):
     country_code: Country
     brand: str
     reusable: bool
-    account_name: str
+    account_name: str | None = None
 
 
 class InitTransaction(BaseModel):
@@ -204,9 +204,9 @@ class Subscription(BaseModel):
     plan: Union[int, "Plan"]
     integration: int
     domain: Domain
-    start: int
+    start: int | None = None
     status: str  # TODO: find all the supported status for subscription
-    quantity: int
+    quantity: int | None = None
     amount: int
     subscription_code: str
     email_token: str
@@ -226,6 +226,10 @@ class Subscription(BaseModel):
     invoice_history: list[Any] | None = None
 
 
+class SubscriptionLink(BaseModel):
+    link: str
+
+
 class Invoice(BaseModel):
     subscription: int
     integration: int
@@ -240,13 +244,13 @@ class Invoice(BaseModel):
     paid: int | bool
     retries: int
     authorization: int
-    paid_at: str
+    paid_at: datetime | None = None
     next_notification: str
     notification_flag: Any | None = None
     description: str | None = None
     id: int
     created_at: datetime
-    update_at: datetime
+    updated_at: datetime
 
 
 class PaymentPage(BaseModel):
@@ -338,26 +342,26 @@ class PlanSubscriber(BaseModel):
 class Plan(BaseModel):
     subscriptions: list[Subscription] | None = None
     pages: list[PaymentPage] | None = None
-    domain: Domain
+    domain: Domain | None = None
     name: str
     plan_code: str
     description: str | None = None
     amount: int
     interval: Interval
-    invoice_limit: int
+    invoice_limit: int | None = None
     send_invoices: bool
     send_sms: bool
-    hosted_page: bool
+    hosted_page: bool | None = None
     hosted_page_url: str | None = None
     hosted_page_summary: str | None = None
     currency: Currency
-    migrate: bool
+    migrate: bool | None = None
     is_deleted: bool | None = None
-    is_archived: bool
+    is_archived: bool | None = None
     id: int
-    integration: int
-    created_at: datetime
-    updated_at: datetime
+    integration: int | None = None
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
     total_subscriptions: int | None = None
     active_subscriptions: int | None = None
     total_subscriptions_revenue: int | None = None
