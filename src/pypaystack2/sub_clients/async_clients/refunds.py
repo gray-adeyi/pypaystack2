@@ -1,10 +1,11 @@
 from http import HTTPMethod
 from typing import Type
 
-from pypaystack2 import Currency, Response
 from pypaystack2.base_api_client import BaseAsyncAPIClient
 from pypaystack2.utils import add_to_payload, append_query_params
+from pypaystack2.utils.enums import Currency
 from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.models import Response
 from pypaystack2.utils.response_models import Refund
 
 
