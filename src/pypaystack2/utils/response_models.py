@@ -26,6 +26,13 @@ class IntegrationTimeout(BaseModel):
     payment_session_timeout: timedelta
 
 
+class Integration(BaseModel):
+    key: str
+    name: str
+    logo: str
+    allowed_currencies: list[Currency]
+
+
 class ApplePayDomains(BaseModel):
     domain_names: list[str]
 
@@ -59,8 +66,7 @@ class BulkChargeUnitCharge(BaseModel):
 
 
 class Customer(BaseModel):
-    # model_config = ConfigDict(arbitrary_types_allowed=True)
-    integration: int
+    integration: int | None = None
     id: int
     first_name: str | None = None
     last_name: str | None = None
@@ -75,8 +81,8 @@ class Customer(BaseModel):
     transactions: list["Transaction"] | None = None
     subscriptions: list["Subscription"] | None = None
     authorizations: list["Authorization"] | None = None
-    created_at: str | None = None
-    updated_at: str | None = None
+    created_at: datetime | None = None
+    updated_at: datetime | None = None
     total_transactions: int | None = None
     total_transaction_value: list[Any] | None = None
     dedicated_account: str | None = None
@@ -276,13 +282,13 @@ class PaymentRequestNotification(BaseModel):
 
 class PaymentRequest(BaseModel):
     id: int
-    integration: int
+    integration: int | Integration
     domain: Domain
     amount: int
     currency: Currency
     due_date: datetime | None = None
     has_invoice: bool | None = None
-    invoice_number: str | None = None
+    invoice_number: int | None = None
     description: str | None = None
     pdf_url: str | None = None
     line_items: list[LineItem]
@@ -291,10 +297,10 @@ class PaymentRequest(BaseModel):
     status: str
     paid: bool
     paid_at: datetime | None = None
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] | None = None
     notifications: list[PaymentRequestNotification]
     offline_reference: str
-    customer: Customer
+    customer: Customer | int
     created_at: datetime
     discount: str | None = None
     split_code: str | None = None
@@ -304,7 +310,7 @@ class PaymentRequest(BaseModel):
     payment_method: Any | None = None
     note: Any | None = None
     amount_paid: int | None = None
-    updated_at: datetime
+    updated_at: datetime | None = None
     pending_amount: int | None = None
 
 
