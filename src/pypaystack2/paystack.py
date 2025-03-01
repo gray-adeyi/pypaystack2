@@ -14,12 +14,10 @@ from pypaystack2.sub_clients.async_clients.payment_requests import (
     AsyncPaymentRequestClient,
 )
 from pypaystack2.sub_clients.async_clients.plans import AsyncPlanClient
+from pypaystack2.sub_clients.async_clients.products import AsyncProductClient
 from pypaystack2.sub_clients.async_clients.refunds import AsyncRefundClient
 from pypaystack2.sub_clients.async_clients.settlements import AsyncSettlementClient
-from pypaystack2.sub_clients.splits import (
-    AsyncTransactionSplitClient,
-    TransactionSplitClient,
-)
+from pypaystack2.sub_clients.async_clients.splits import AsyncTransactionSplitClient
 from pypaystack2.sub_clients.subaccounts import AsyncSubAccountClient, SubAccountClient
 from pypaystack2.sub_clients.subscriptions import (
     AsyncSubscriptionClient,
@@ -55,12 +53,14 @@ from pypaystack2.sub_clients.sync_clients.payment_requests import (
 )
 from pypaystack2.sub_clients.sync_clients.plans import PlanClient
 from pypaystack2.sub_clients.sync_clients.products import (
-    AsyncProductClient,
     ProductClient,
 )
 from pypaystack2.sub_clients.sync_clients.refunds import RefundClient
 from pypaystack2.sub_clients.sync_clients.settlements import (
     SettlementClient,
+)
+from pypaystack2.sub_clients.sync_clients.splits import (
+    TransactionSplitClient,
 )
 from pypaystack2.sub_clients.terminals import TerminalClient, AsyncTerminalClient
 from pypaystack2.sub_clients.transactions import (
