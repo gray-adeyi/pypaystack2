@@ -17,6 +17,24 @@ from pypaystack2.utils.models import PaystackDataModel
 
 logger = logging.getLogger(__name__)
 
+SERIALIZATION_FAILED_WARNING_MESSAGE = """An validation error occurred while trying to serialize the data returned
+by paystack with the pydantic model `%s` but has been allowed to
+fail silently. `Response.data` has been set to `None` but this data is still available in
+`Response.raw`. If the pydantic model that raised this error is from the
+library, It's not your fault, Its either I goofed up in the model definitions
+or the response data doesn't match the model.
+please create an issue at https://github.com/gray-adeyi/pypaystack2/issues
+If you're using a custom pydantic model other than the one from the library,
+please see that your model definitions match the data returned by paystack
+
+These are the validation errors:
+%s
+"""
+
+# When the function that converts the payload keys that are on in snake_case from
+# camelCase, it would skip transform keys  in the list below
+SKIP_CASE_TRANSFORMATION_KEYS = ["NGN", "GHS", "ZAR", "USD", "KES", "XOF", "EGP", "RWF"]
+
 
 class AbstractAPIClient(FeesCalculationMixin, ABC):
     _CONTENT_TYPE = "application/json"
@@ -120,20 +138,10 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
         except ValidationError as error:
             if raise_serialization_exception:
                 raise error
-            warning_message = f"""An validation error occurred while trying to serialize the data returned
-by paystack with the pydantic model `{response_data_model_class}` but has been allowed to
-fail silently. `Response.data` has been set to `None` but this data is still available in
-`Response.raw`. If the pydantic model that raised this error is from the
-library, It's not your fault, Its either I goofed up in the model definitions
-or the response data doesn't match the model.
-please create an issue at https://github.com/gray-adeyi/pypaystack2/issues
-If you're using a custom pydantic model other than the one from the library,
-please see that your model definitions match the data returned by paystack
-            
-These are the validation errors:
-{error}
-"""
-            logger.warning(warning_message)
+            logger.warning(
+                SERIALIZATION_FAILED_WARNING_MESSAGE
+                % (response_data_model_class, error)
+            )
         return None
 
     def _serialize_request_kwargs(
@@ -160,6 +168,8 @@ These are the validation errors:
 
     def _camel_to_snake_case(self, value: str) -> str:
         """Converts a camelCase value to a snake_case value"""
+        if value in SKIP_CASE_TRANSFORMATION_KEYS:
+            return value
         return re.sub(r"(?<!^)(?=[A-Z])", "_", value).lower()
 
     @abstractmethod

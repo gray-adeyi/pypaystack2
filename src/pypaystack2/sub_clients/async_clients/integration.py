@@ -1,9 +1,9 @@
 from http import HTTPMethod
 from typing import Type
 
-from pypaystack2 import Response
 from pypaystack2.base_api_client import BaseAsyncAPIClient
 from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.models import Response
 from pypaystack2.utils.response_models import IntegrationTimeout
 
 
