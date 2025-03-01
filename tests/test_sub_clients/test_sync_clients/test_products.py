@@ -65,6 +65,7 @@ class ProductTestCase(TestCase):
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Products retrieved")
+        print(response)
 
     def test_can_get_product(self):
         response = self.wrapper.get_product(id="1209661")

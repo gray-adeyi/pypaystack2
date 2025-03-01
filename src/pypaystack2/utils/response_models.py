@@ -244,7 +244,7 @@ class Invoice(BaseModel):
 
 
 class PaymentPage(BaseModel):
-    integration: str
+    integration: int
     plan: int | None = None
     domain: Domain
     name: str
@@ -254,7 +254,7 @@ class PaymentPage(BaseModel):
     slug: str
     custom_fields: dict[str, Any] | None = None  # TODO: find custom_field types
     type: str
-    redirect_url: str
+    redirect_url: str | None = None
     success_message: str | None = None
     collect_phone: bool
     active: bool
@@ -266,7 +266,7 @@ class PaymentPage(BaseModel):
     id: int
     created_at: datetime
     updated_at: datetime
-    products: list["Product"]
+    products: list["Product"] | None = None
 
 
 class PaymentRequestNotification(BaseModel):

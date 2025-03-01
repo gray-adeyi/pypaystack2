@@ -9,10 +9,7 @@ from pypaystack2.sub_clients.async_clients.dedicated_accounts import (
 from pypaystack2.sub_clients.async_clients.disputes import AsyncDisputeClient
 from pypaystack2.sub_clients.async_clients.integration import AsyncIntegrationClient
 from pypaystack2.sub_clients.async_clients.miscellaneous import AsyncMiscellaneousClient
-from pypaystack2.sub_clients.payment_pages import (
-    AsyncPaymentPageClient,
-    PaymentPageClient,
-)
+from pypaystack2.sub_clients.async_clients.payment_pages import AsyncPaymentPageClient
 from pypaystack2.sub_clients.payment_requests import (
     AsyncPaymentRequestClient,
     PaymentRequestClient,
@@ -51,6 +48,9 @@ from pypaystack2.sub_clients.sync_clients.integration import (
 )
 from pypaystack2.sub_clients.sync_clients.miscellaneous import (
     MiscellaneousClient,
+)
+from pypaystack2.sub_clients.sync_clients.payment_pages import (
+    PaymentPageClient,
 )
 from pypaystack2.sub_clients.terminals import TerminalClient, AsyncTerminalClient
 from pypaystack2.sub_clients.transactions import (
