@@ -220,9 +220,9 @@ class Subscription(BaseModel):
     split_code: str | None = None
     cancelled_at: datetime | None = None
     updated_at: datetime | None = None
-    payments_count: int
+    payments_count: int | None = None
     most_recent_invoice: Optional["Invoice"] = None
-    invoices: list["Invoice"]
+    invoices: list["Invoice"] | None = None
     invoice_history: list[Any] | None = None
 
 
@@ -336,8 +336,8 @@ class PlanSubscriber(BaseModel):
 
 
 class Plan(BaseModel):
-    subscriptions: list[Subscription]
-    pages: list[PaymentPage]
+    subscriptions: list[Subscription] | None = None
+    pages: list[PaymentPage] | None = None
     domain: Domain
     name: str
     plan_code: str
@@ -352,7 +352,7 @@ class Plan(BaseModel):
     hosted_page_summary: str | None = None
     currency: Currency
     migrate: bool
-    is_deleted: bool
+    is_deleted: bool | None = None
     is_archived: bool
     id: int
     integration: int
@@ -366,7 +366,7 @@ class Plan(BaseModel):
     subscriptions_count: int | None = None
     active_subscriptions_count: int | None = None
     total_revenue: int | None = None
-    subscribers: list[PlanSubscriber]
+    subscribers: list[PlanSubscriber] | None = None
 
 
 class SubAccount(BaseModel):

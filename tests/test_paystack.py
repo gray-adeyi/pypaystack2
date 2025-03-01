@@ -41,7 +41,7 @@ from pypaystack2.sub_clients.async_clients.payment_pages import AsyncPaymentPage
 from pypaystack2.sub_clients.async_clients.payment_requests import (
     AsyncPaymentRequestClient,
 )
-from pypaystack2.sub_clients.plans import AsyncPlanClient
+from pypaystack2.sub_clients.async_clients.plans import AsyncPlanClient
 from pypaystack2.sub_clients.products import AsyncProductClient
 from pypaystack2.sub_clients.refunds import AsyncRefundClient
 from pypaystack2.sub_clients.settlements import AsyncSettlementClient
