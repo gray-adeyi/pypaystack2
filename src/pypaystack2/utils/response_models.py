@@ -155,19 +155,19 @@ class Transaction(BaseModel):
     amount: int
     message: str | None = None
     gateway_response: str | None = None
-    paid_at: str
+    paid_at: datetime | None = None
     channel: str
     currency: Currency
     ip_address: str | None = None
-    metadata: dict[str, Any] | None = None
+    metadata: dict[str, Any] | str | int | None = None
     log: TransactionLog | None = None
     fees: int | None = None
     fees_split: Any | None = None
     customer: Customer | dict[str, Any]
     authorization: Authorization | dict[str, Any]
-    plan: Union["Plan", dict[str, Any]]
-    split: Union["TransactionSplit", dict[str, Any]]
-    subaccount: Union["SubAccount", dict[str, Any]]
+    plan: Optional[Union["Plan", dict[str, Any]]] = None
+    split: Optional[Union["TransactionSplit", dict[str, Any]]] = None
+    subaccount: Optional[Union["SubAccount", dict[str, Any]]] = None
     order_id: str | None = None
     created_at: datetime | None = None
     requested_amount: int | None = None

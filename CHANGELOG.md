@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## unreleased
 
-## [3.0.0] - 2025-02-
+## [3.0.0] - 2025-03-
 
 ### Added
 
@@ -22,6 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename wrappers to clients. All usages of wrappers are now deprecated in favour of clients.
   `Paystack` wrapper class in the past is now `PaystackClient` likewise all other api wrappers
   are now sub clients e.g. `ApplePay` is now  `ApplePayClient`
+
+### Fixed
+
+- Unused `amaount` parameter in `TransactionClient.export`
 
 ### Removed
 
