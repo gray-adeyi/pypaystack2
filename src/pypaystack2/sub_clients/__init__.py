@@ -47,5 +47,5 @@ from pypaystack2.sub_clients.sync_clients.subscriptions import SubscriptionClien
 from pypaystack2.sub_clients.sync_clients.terminals import TerminalClient
 from pypaystack2.sub_clients.sync_clients.transactions import TransactionClient
 from pypaystack2.sub_clients.sync_clients.transfers import TransferClient
-from pypaystack2.sub_clients.transfers_control import TransferControlClient
-from pypaystack2.sub_clients.verification import VerificationClient
+from pypaystack2.sub_clients.sync_clients.transfers_control import TransferControlClient
+from pypaystack2.sub_clients.sync_clients.verification import VerificationClient

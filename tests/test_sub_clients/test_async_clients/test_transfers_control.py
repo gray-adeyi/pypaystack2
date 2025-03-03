@@ -3,21 +3,24 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.sub_clients.sync_clients.transfers_control import TransferControlClient
+from pypaystack2.sub_clients.async_clients.transfers_control import (
+    AsyncTransferControlClient,
+)
 from pypaystack2.utils.enums import Reason
+from pypaystack2.utils.models import Response
 from pypaystack2.utils.response_models import IntegrationBalance, BalanceLedgerItem
 
 
-class TransferControlTestCase(TestCase):
-    client: TransferControlClient
+class AsyncTransferControlTestCase(TestCase):
+    client: AsyncTransferControlClient
 
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.client = TransferControlClient()
+        cls.client = AsyncTransferControlClient()
 
-    def test_can_check_balance(self) -> None:
-        response = self.client.check_balance()
+    async def test_can_check_balance(self) -> None:
+        response: Response[list[IntegrationBalance]] = await self.client.check_balance()
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Balances retrieved")
@@ -25,8 +28,10 @@ class TransferControlTestCase(TestCase):
         if len(response.data) > 0:
             self.assertIsInstance(response.data[0], IntegrationBalance)
 
-    def test_can_get_balance_ledger(self) -> None:
-        response = self.client.get_balance_ledger()
+    async def test_can_get_balance_ledger(self) -> None:
+        response: Response[
+            list[BalanceLedgerItem]
+        ] = await self.client.get_balance_ledger()
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Balance ledger retrieved")
@@ -34,16 +39,16 @@ class TransferControlTestCase(TestCase):
         if len(response.data) > 0:
             self.assertIsInstance(response.data[0], BalanceLedgerItem)
 
-    def test_can_resend_otp(self) -> None:
-        response = self.client.resend_otp(
+    async def test_can_resend_otp(self) -> None:
+        response: Response[None] = await self.client.resend_otp(
             transfer_code="TRF_vsyqdmlzble3uii", reason=Reason.DISABLE_OTP
         )
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "OTP has been resent")
 
-    def test_can_disable_otp(self) -> None:
-        response = self.client.disable_otp()
+    async def test_can_disable_otp(self) -> None:
+        response: Response[None] = await self.client.disable_otp()
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(
@@ -51,13 +56,13 @@ class TransferControlTestCase(TestCase):
             "OTP has been sent to mobile number ending with 9831 and to email a******@g******.com",
         )
 
-    def test_can_finalize_disable_otp(self) -> None:
+    async def test_can_finalize_disable_otp(self) -> None:
         # TODO: Test properly
-        response = self.client.finalize_disable_otp(otp="123456")
+        response: Response[None] = await self.client.finalize_disable_otp(otp="123456")
         self.assertEqual(response.status_code, httpx.codes.OK)
 
-    def test_can_enable_otp(self) -> None:
-        response = self.client.enable_otp()
+    async def test_can_enable_otp(self) -> None:
+        response: Response[None] = await self.client.enable_otp()
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(

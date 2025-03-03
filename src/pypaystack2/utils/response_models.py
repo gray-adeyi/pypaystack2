@@ -26,6 +26,11 @@ class IntegrationTimeout(BaseModel):
     payment_session_timeout: timedelta
 
 
+class IntegrationBalance(BaseModel):
+    currency: Currency
+    balance: int
+
+
 class Integration(BaseModel):
     key: str
     name: str
@@ -597,7 +602,7 @@ class BalanceLedgerItem(BaseModel):
     model_row: int
     id: int
     created_at: datetime
-    update_at: datetime
+    updated_at: datetime
 
 
 class DisputeHistory(BaseModel):
@@ -714,6 +719,16 @@ class Bank(BaseModel):
     id: int
     created_at: datetime | None
     updated_at: datetime
+
+
+class BankAccountInfo(BaseModel):
+    account_number: str
+    account_name: str
+
+
+class AccountVerificationInfo(BaseModel):
+    verified: bool
+    verification_message: str
 
 
 class PaystackSupportedCountry(BaseModel):
