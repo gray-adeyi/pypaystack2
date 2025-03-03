@@ -2,7 +2,7 @@ from http import HTTPMethod
 from typing import Any, Type
 
 from pypaystack2.base_api_client import BaseAsyncAPIClient
-from pypaystack2.utils import add_to_payload, append_query_params
+from pypaystack2.utils.helpers import add_to_payload, append_query_params
 from pypaystack2.utils.models import PaystackDataModel
 from pypaystack2.utils.models import Response
 from pypaystack2.utils.response_models import PaymentPage
@@ -26,7 +26,7 @@ class AsyncPaymentPageClient(BaseAsyncAPIClient):
         redirect_url: str | None = None,
         custom_fields: list | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[PaymentPage]:
+    ) -> Response[PaymentPage] | Response[PaystackDataModel]:
         """Create a payment page on your integration
 
         Args:
@@ -73,7 +73,7 @@ class AsyncPaymentPageClient(BaseAsyncAPIClient):
             ("custom_fields", custom_fields),
         ]
         payload = add_to_payload(optional_params, payload)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -87,7 +87,7 @@ class AsyncPaymentPageClient(BaseAsyncAPIClient):
         start_date: str | None = None,
         end_date: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[PaymentPage]]:
+    ) -> Response[list[PaymentPage]] | Response[PaystackDataModel]:
         """Fetch payment pages available on your integration.
 
         Args:
@@ -121,7 +121,7 @@ class AsyncPaymentPageClient(BaseAsyncAPIClient):
             ("end_date", end_date),
         ]
         url = append_query_params(query_params, url)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or PaymentPage,
@@ -131,7 +131,7 @@ class AsyncPaymentPageClient(BaseAsyncAPIClient):
         self,
         id_or_slug: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[PaymentPage]:
+    ) -> Response[PaymentPage] | Response[PaystackDataModel]:
         """Get details of a payment page on your integration.
 
         Args:
@@ -154,7 +154,7 @@ class AsyncPaymentPageClient(BaseAsyncAPIClient):
         """
 
         url = self._full_url(f"/page/{id_or_slug}")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or PaymentPage,
@@ -168,7 +168,7 @@ class AsyncPaymentPageClient(BaseAsyncAPIClient):
         amount: int | None = None,
         active: bool | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[PaymentPage]:
+    ) -> Response[PaymentPage] | Response[PaystackDataModel]:
         """Get details of a payment page on your integration.
 
         Args:
@@ -207,7 +207,7 @@ class AsyncPaymentPageClient(BaseAsyncAPIClient):
             ("description", description),
         ]
         payload = add_to_payload(optional_params, payload)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.PUT,
             url,
             payload,
@@ -218,7 +218,7 @@ class AsyncPaymentPageClient(BaseAsyncAPIClient):
         self,
         slug: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Check the availability of a slug for a payment page.
 
         Args:
@@ -241,7 +241,7 @@ class AsyncPaymentPageClient(BaseAsyncAPIClient):
         """
 
         url = self._full_url(f"/page/check_slug_availability/{slug}")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class,
@@ -252,7 +252,7 @@ class AsyncPaymentPageClient(BaseAsyncAPIClient):
         id: str,
         products: list[int],
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[PaymentPage]:
+    ) -> Response[PaymentPage] | Response[PaystackDataModel]:
         """Add products to a payment page
 
         Args:
@@ -277,7 +277,7 @@ class AsyncPaymentPageClient(BaseAsyncAPIClient):
 
         url = self._full_url(f"/page/{id}/product")
         payload = {"products": products}
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,

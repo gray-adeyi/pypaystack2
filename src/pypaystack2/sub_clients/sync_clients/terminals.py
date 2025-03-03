@@ -3,13 +3,11 @@ from typing import Type
 
 from pypaystack2.base_api_client import BaseAPIClient
 from pypaystack2.exceptions import InvalidDataException
-from pypaystack2.utils import (
-    TerminalEvent,
-    TerminalEventAction,
+from pypaystack2.utils.enums import TerminalEvent, TerminalEventAction
+from pypaystack2.utils.helpers import (
     append_query_params,
-    Response,
 )
-from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.models import PaystackDataModel, Response
 from pypaystack2.utils.response_models import (
     TerminalEventData,
     TerminalEventStatusData,
@@ -32,7 +30,7 @@ class TerminalClient(BaseAPIClient):
         action: TerminalEventAction,
         data: dict,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[TerminalEventData]:
+    ) -> Response[TerminalEventData] | Response[PaystackDataModel]:
         """Send an event from your application to the Paystack Terminal
 
         Args:
@@ -84,7 +82,7 @@ class TerminalClient(BaseAPIClient):
             "action": action,
             "data": data,
         }
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -96,7 +94,7 @@ class TerminalClient(BaseAPIClient):
         terminal_id: str,
         event_id: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[TerminalEventStatusData]:
+    ) -> Response[TerminalEventStatusData] | Response[PaystackDataModel]:
         """Check the status of an event sent to the Terminal
 
         Args:
@@ -119,7 +117,7 @@ class TerminalClient(BaseAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
         url = self._full_url(f"/terminal/{terminal_id}/event/{event_id}")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or TerminalEventStatusData,
@@ -129,7 +127,7 @@ class TerminalClient(BaseAPIClient):
         self,
         terminal_id: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[TerminalStatusData]:
+    ) -> Response[TerminalStatusData] | Response[PaystackDataModel]:
         """Check the availability of a Terminal before sending an event to it.
 
         Args:
@@ -151,7 +149,7 @@ class TerminalClient(BaseAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
         url = self._full_url(f"/terminal/{terminal_id}/presence")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or TerminalStatusData,
@@ -163,7 +161,7 @@ class TerminalClient(BaseAPIClient):
         next: str | None = None,
         previous: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[Terminal]]:
+    ) -> Response[list[Terminal]] | Response[PaystackDataModel]:
         """List the Terminals available on your integration
 
         Args:
@@ -194,7 +192,7 @@ class TerminalClient(BaseAPIClient):
             ("previous", previous),
         ]
         url = append_query_params(query_params, url)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Terminal,
@@ -204,7 +202,7 @@ class TerminalClient(BaseAPIClient):
         self,
         terminal_id: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Terminal]:
+    ) -> Response[Terminal] | Response[PaystackDataModel]:
         """Get the details of a Terminal
 
         Args:
@@ -226,7 +224,7 @@ class TerminalClient(BaseAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
         url = self._full_url(f"/terminal/{terminal_id}/")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Terminal,
@@ -238,7 +236,7 @@ class TerminalClient(BaseAPIClient):
         name: str,
         address: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Update the details of a Terminal
 
         Args:
@@ -264,7 +262,7 @@ class TerminalClient(BaseAPIClient):
         url = self._full_url(f"/terminal/{terminal_id}")
 
         payload = {"name": name, "address": address}
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.PUT,
             url,
             payload,
@@ -275,7 +273,7 @@ class TerminalClient(BaseAPIClient):
         self,
         serial_number: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Activate your debug device by linking it to your integration
 
         Args:
@@ -302,7 +300,7 @@ class TerminalClient(BaseAPIClient):
         payload = {
             "serial_number": serial_number,
         }
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -313,7 +311,7 @@ class TerminalClient(BaseAPIClient):
         self,
         serial_number: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Unlink your debug device from your integration
 
         Args:
@@ -339,7 +337,7 @@ class TerminalClient(BaseAPIClient):
         payload = {
             "serial_number": serial_number,
         }
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,

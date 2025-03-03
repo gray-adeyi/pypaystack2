@@ -3,9 +3,13 @@ from typing import Any, Optional, Literal, TypedDict, Self, TypeVar, Generic
 
 from pydantic import BaseModel, model_validator
 
-from pypaystack2.utils.enums import RecipientType
+from pypaystack2.utils.enums import RecipientType, Currency
 
-PaystackDataModel = TypeVar("PaystackDataModel", BaseModel, list, None)
+PaystackDataModel = TypeVar("PaystackDataModel", bound=BaseModel)
+
+# FIXME: I was having issues constraining this generic type to the types
+#   `PaystackDataModel`, `list[PaystackDataModel]` or `None`. it's why it's left as is.
+PaystackResponseData = TypeVar("PaystackResponseData")
 
 
 class BulkChargeInstruction(BaseModel):
@@ -61,19 +65,28 @@ class SplitAccount(BaseModel):
 
 
 class Recipient(BaseModel):
-    """A dataclass for Recipient.
+    """A model for representing Transfer Recipients.
 
     Attributes:
-        type: The type of recipient e.g., RecipientType.NUBAN, RecipientType.BASA.
-        name: The name.
-        bank_code: The bank code.
-        account_number: The account number of recipient.
+        type: Recipient Type. any value from the `RecipientType` enum
+        name: A name for the recipient
+        account_number: Required if `type` is `RecipientType.NUBAN` or `RecipientType.BASA`
+        bank_code: Required if `type` is `RecipientType.NUBAN` or `RecipientType.BASA`.
+            You can get the list of Bank Codes by calling the `PaystackClient.get_banks`.
+        description: description
+        currency: currency
+        auth_code: auth code
+        metadata: metadata
     """
 
     type: RecipientType
     name: str
-    bank_code: str
     account_number: str
+    bank_code: str | None = None
+    description: str | None = None
+    currency: Currency | None = None
+    auth_code: str | None = None
+    metadata: dict[str, Any] | None = None
 
 
 class TransferInstruction(BaseModel):
@@ -92,7 +105,7 @@ class TransferInstruction(BaseModel):
     reason: Optional[str]
 
 
-class Response(BaseModel, Generic[PaystackDataModel]):
+class Response(BaseModel, Generic[PaystackResponseData]):
     """
     A namedtuple containing the data gotten from making a request to paystack's API endpoints.
 
@@ -137,8 +150,8 @@ class Response(BaseModel, Generic[PaystackDataModel]):
     status_code: HTTPStatus
     status: bool
     message: str
-    data: PaystackDataModel
-    meta: dict | None
+    data: PaystackResponseData
+    meta: dict[str, Any] | None
     type: str | None
     code: str | None
     raw: dict[str, Any] | list[dict[str, Any]] | bytes | None
@@ -173,7 +186,7 @@ class NigeriaServiceFeeOptions(BaseServiceFeeOptions):
     card: Literal["mastercard", "visa", "verve", "american_express"] | None = None
 
     @model_validator(mode="after")
-    def validate_model(self) -> Self:  # type: ignore
+    def validate_model(self) -> Self:  # type: ignore[unused-ignore]
         if self.is_international and self.service != "transactions":
             raise ValueError(
                 'only service="transactions" is supported when is_international=True'

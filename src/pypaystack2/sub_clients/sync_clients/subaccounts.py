@@ -2,13 +2,12 @@ from http import HTTPMethod
 from typing import Type
 
 from pypaystack2.base_api_client import BaseAPIClient
-from pypaystack2.utils import (
-    Schedule,
+from pypaystack2.utils.enums import Schedule
+from pypaystack2.utils.helpers import (
     add_to_payload,
     append_query_params,
-    Response,
 )
-from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.models import PaystackDataModel, Response
 from pypaystack2.utils.response_models import SubAccount
 
 
@@ -33,7 +32,7 @@ class SubAccountClient(BaseAPIClient):
         primary_contact_phone: str | None = None,
         metadata: dict | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[SubAccount]:
+    ) -> Response[SubAccount] | Response[PaystackDataModel]:
         """Create a subacount on your integration.
 
         Args:
@@ -84,7 +83,7 @@ class SubAccountClient(BaseAPIClient):
             ("metadata", metadata),
         ]
         payload = add_to_payload(optional_params, payload)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -98,7 +97,7 @@ class SubAccountClient(BaseAPIClient):
         page: int = 1,
         pagination: int = 50,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[SubAccount]]:
+    ) -> Response[list[SubAccount]] | Response[PaystackDataModel]:
         """Fetch subaccounts available on your integration.
 
         Args:
@@ -140,7 +139,7 @@ class SubAccountClient(BaseAPIClient):
         self,
         id_or_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[SubAccount]:
+    ) -> Response[SubAccount] | Response[PaystackDataModel]:
         """Get details of a subaccount on your integration.
 
         Args:
@@ -163,7 +162,7 @@ class SubAccountClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/subaccount/{id_or_code}")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or SubAccount,
@@ -184,7 +183,7 @@ class SubAccountClient(BaseAPIClient):
         settlement_schedule: Schedule | None = None,
         metadata: dict | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[SubAccount]:
+    ) -> Response[SubAccount] | Response[PaystackDataModel]:
         """Update a subaccount details on your integration.
 
         Args:
@@ -243,7 +242,7 @@ class SubAccountClient(BaseAPIClient):
         ]
         payload = add_to_payload(optional_params, payload)
         url = self._full_url(f"/subaccount/{id_or_code}")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.PUT,
             url,
             payload,

@@ -2,15 +2,12 @@ from http import HTTPMethod
 from typing import Type
 
 from pypaystack2.base_api_client import BaseAPIClient
-from pypaystack2.utils import (
+from pypaystack2.utils.enums import Interval, Currency, Status
+from pypaystack2.utils.helpers import (
     add_to_payload,
-    Interval,
-    Currency,
     append_query_params,
-    Response,
-    Status,
 )
-from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.models import Response, PaystackDataModel
 from pypaystack2.utils.response_models import Plan
 
 
@@ -32,7 +29,7 @@ class PlanClient(BaseAPIClient):
         send_invoices: bool = False,
         send_sms: bool = False,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Plan]:
+    ) -> Response[Plan] | Response[PaystackDataModel]:
         """Create a plan on your integration
 
         Args:
@@ -79,7 +76,7 @@ class PlanClient(BaseAPIClient):
             ("invoice_limit", invoice_limit),
         ]
         payload = add_to_payload(optional_params, payload)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -94,7 +91,7 @@ class PlanClient(BaseAPIClient):
         interval: Interval | None = None,
         amount: int | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[Plan]]:
+    ) -> Response[list[Plan]] | Response[PaystackDataModel]:
         """Fetch plans available on your integration.
 
         Args:
@@ -132,7 +129,7 @@ class PlanClient(BaseAPIClient):
             ("amount", amount),
         ]
         url = append_query_params(query_params, url)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Plan,
@@ -142,7 +139,7 @@ class PlanClient(BaseAPIClient):
         self,
         id_or_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Plan]:
+    ) -> Response[Plan] | Response[PaystackDataModel]:
         """Get details of a plan on your integration.
 
         Args:
@@ -164,7 +161,7 @@ class PlanClient(BaseAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
         url = self._full_url("/plan/{}/".format(id_or_code))
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Plan,
@@ -182,7 +179,7 @@ class PlanClient(BaseAPIClient):
         send_invoices: bool = False,
         send_sms: bool = False,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """update a plan details on your integration
 
         Args:
@@ -216,7 +213,7 @@ class PlanClient(BaseAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
 
-        url = self._full_url("/plan/{}/".format(id_or_code))
+        url = self._full_url(f"/plan/{id_or_code}/")
         payload = {
             "name": name,
             "amount": amount,
@@ -231,7 +228,7 @@ class PlanClient(BaseAPIClient):
             ("invoice_limit", invoice_limit),
         ]
         payload = add_to_payload(optional_params, payload)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.PUT,
             url,
             payload,

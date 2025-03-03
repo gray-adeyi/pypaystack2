@@ -17,7 +17,7 @@ class AsyncIntegrationClient(BaseAsyncAPIClient):
     async def get_payment_session_timeout(
         self,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[IntegrationTimeout]:
+    ) -> Response[IntegrationTimeout] | Response[PaystackDataModel]:
         """Fetch the payment session timeout on your integration
 
         Args:
@@ -39,7 +39,7 @@ class AsyncIntegrationClient(BaseAsyncAPIClient):
         """
 
         url = self._full_url("/integration/payment_session_timeout")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or IntegrationTimeout,
@@ -49,7 +49,7 @@ class AsyncIntegrationClient(BaseAsyncAPIClient):
         self,
         timeout: int,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[IntegrationTimeout]:
+    ) -> Response[IntegrationTimeout] | Response[PaystackDataModel]:
         """Update the payment session timeout on your integration
 
         Args:
@@ -73,7 +73,7 @@ class AsyncIntegrationClient(BaseAsyncAPIClient):
 
         payload = {"timeout": timeout}
         url = self._full_url("/integration/payment_session_timeout")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.PUT,
             url,
             payload,

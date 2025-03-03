@@ -3,16 +3,15 @@ from typing import Type
 
 from pypaystack2.base_api_client import BaseAPIClient
 from pypaystack2.exceptions import InvalidDataException
-from pypaystack2.utils import (
+from pypaystack2.utils.enums import (
     Bearer,
     Channel,
     Currency,
     TransactionStatus,
-    add_to_payload,
-    append_query_params,
-    Response,
 )
+from pypaystack2.utils.helpers import add_to_payload, append_query_params
 from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.models import Response
 from pypaystack2.utils.response_models import (
     InitTransaction,
     Transaction,
@@ -45,7 +44,7 @@ class TransactionClient(BaseAPIClient):
         transfer_charge: int | None = None,
         bearer: Bearer | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[InitTransaction]:
+    ) -> Response[InitTransaction] | Response[PaystackDataModel]:
         """Initialize a transaction from your backend
 
         Args:
@@ -114,7 +113,7 @@ class TransactionClient(BaseAPIClient):
         ]
         payload = add_to_payload(optional_params, payload)
 
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -125,7 +124,7 @@ class TransactionClient(BaseAPIClient):
         self,
         reference: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction]:
+    ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Confirm the status of a transaction
 
         Args:
@@ -149,7 +148,7 @@ class TransactionClient(BaseAPIClient):
 
         reference = str(reference)
         url = self._full_url(f"/transaction/verify/{reference}")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Transaction,
@@ -165,7 +164,7 @@ class TransactionClient(BaseAPIClient):
         amount: int | None = None,
         pagination: int = 50,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[Transaction]]:
+    ) -> Response[list[Transaction]] | Response[PaystackDataModel]:
         """Fetch transactions carried out on your integration.
 
         Args:
@@ -209,7 +208,7 @@ class TransactionClient(BaseAPIClient):
         ]
         url = append_query_params(query_params, url)
 
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Transaction,
@@ -219,7 +218,7 @@ class TransactionClient(BaseAPIClient):
         self,
         id: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction]:
+    ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Get details of a transaction carried out on your integration.
 
         Args:
@@ -242,7 +241,7 @@ class TransactionClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/transaction/{id}/")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Transaction,
@@ -262,7 +261,7 @@ class TransactionClient(BaseAPIClient):
         bearer: Bearer | None = None,
         queue: bool = False,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction]:
+    ) -> Response[Transaction] | Response[PaystackDataModel]:
         """
         All authorizations marked as reusable can be charged with this
         endpoint whenever you need to receive payments.
@@ -333,7 +332,7 @@ class TransactionClient(BaseAPIClient):
         ]
         payload = add_to_payload(optional_params, payload)
 
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -344,7 +343,7 @@ class TransactionClient(BaseAPIClient):
         self,
         id_or_ref: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[TransactionLog]:
+    ) -> Response[TransactionLog] | Response[PaystackDataModel]:
         """View the timeline of a transaction
 
         Args:
@@ -367,7 +366,7 @@ class TransactionClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/transaction/timeline/{id_or_ref}")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or TransactionLog,
@@ -380,7 +379,7 @@ class TransactionClient(BaseAPIClient):
         end_date: str | None = None,
         pagination: int = 50,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[TransactionTotal]:
+    ) -> Response[TransactionTotal] | Response[PaystackDataModel]:
         """Total amount received on your account
 
         Args:
@@ -414,7 +413,7 @@ class TransactionClient(BaseAPIClient):
             ("to", end_date),
         ]
         url = append_query_params(query_params, url)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or TransactionTotal,
@@ -434,7 +433,7 @@ class TransactionClient(BaseAPIClient):
         payment_page: str | None = None,
         pagination: int = 50,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[TransactionExport]:
+    ) -> Response[TransactionExport] | Response[PaystackDataModel]:
         """Fetch transactions carried out on your integration.
 
         Args:
@@ -487,7 +486,7 @@ class TransactionClient(BaseAPIClient):
             ("payment_page", payment_page),
         ]
         url = append_query_params(query_params, url)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or TransactionExport,
@@ -502,7 +501,7 @@ class TransactionClient(BaseAPIClient):
         reference: str | None = None,
         at_least: int | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction]:
+    ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Retrieve part of a payment from a customer
 
         Args:
@@ -551,7 +550,7 @@ class TransactionClient(BaseAPIClient):
         optional_params = [("reference", reference), ("at_least", at_least)]
         payload = add_to_payload(optional_params, payload)
 
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,

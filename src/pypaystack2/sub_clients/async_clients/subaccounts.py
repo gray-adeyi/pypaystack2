@@ -2,7 +2,7 @@ from http import HTTPMethod
 from typing import Type
 
 from pypaystack2.base_api_client import BaseAsyncAPIClient
-from pypaystack2.utils import add_to_payload, append_query_params
+from pypaystack2.utils.helpers import add_to_payload, append_query_params
 from pypaystack2.utils.enums import Schedule
 from pypaystack2.utils.models import PaystackDataModel
 from pypaystack2.utils.models import Response
@@ -30,7 +30,7 @@ class AsyncSubAccountClient(BaseAsyncAPIClient):
         primary_contact_phone: str | None = None,
         metadata: dict | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[SubAccount]:
+    ) -> Response[SubAccount] | Response[PaystackDataModel]:
         """Create a subacount on your integration.
 
         Args:
@@ -95,7 +95,7 @@ class AsyncSubAccountClient(BaseAsyncAPIClient):
         page: int = 1,
         pagination: int = 50,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[SubAccount]]:
+    ) -> Response[list[SubAccount]] | Response[PaystackDataModel]:
         """Fetch subaccounts available on your integration.
 
         Args:
@@ -137,7 +137,7 @@ class AsyncSubAccountClient(BaseAsyncAPIClient):
         self,
         id_or_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[SubAccount]:
+    ) -> Response[SubAccount] | Response[PaystackDataModel]:
         """Get details of a subaccount on your integration.
 
         Args:
@@ -181,7 +181,7 @@ class AsyncSubAccountClient(BaseAsyncAPIClient):
         settlement_schedule: Schedule | None = None,
         metadata: dict | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[SubAccount]:
+    ) -> Response[SubAccount] | Response[PaystackDataModel]:
         """Update a subaccount details on your integration.
 
         Args:
@@ -240,7 +240,7 @@ class AsyncSubAccountClient(BaseAsyncAPIClient):
         ]
         payload = add_to_payload(optional_params, payload)
         url = self._full_url(f"/subaccount/{id_or_code}")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.PUT,
             url,
             payload,

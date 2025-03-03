@@ -3,13 +3,12 @@ from typing import Type
 
 from pypaystack2.base_api_client import BaseAPIClient
 from pypaystack2.exceptions import InvalidDataException
-from pypaystack2.utils import (
-    Currency,
+from pypaystack2.utils.enums import Currency
+from pypaystack2.utils.helpers import (
     add_to_payload,
     append_query_params,
-    Response,
 )
-from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.models import PaystackDataModel, Response
 from pypaystack2.utils.response_models import Product
 
 
@@ -29,7 +28,7 @@ class ProductClient(BaseAPIClient):
         unlimited: bool | None = None,
         quantity: int | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Product]:
+    ) -> Response[Product] | Response[PaystackDataModel]:
         """Create a product on your integration
 
         Args:
@@ -79,7 +78,7 @@ class ProductClient(BaseAPIClient):
             ("quantity", quantity),
         ]
         payload = add_to_payload(optional_params, payload)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -93,7 +92,7 @@ class ProductClient(BaseAPIClient):
         start_date: str | None = None,
         end_date: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[Product]]:
+    ) -> Response[list[Product]] | Response[PaystackDataModel]:
         """Fetches products available on your integration.
 
         Args:
@@ -127,7 +126,7 @@ class ProductClient(BaseAPIClient):
             ("end_date", end_date),
         ]
         url = append_query_params(query_params, url)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Product,
@@ -137,7 +136,7 @@ class ProductClient(BaseAPIClient):
         self,
         id: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Product]:
+    ) -> Response[Product] | Response[PaystackDataModel]:
         """Get details of a product on your integration.
 
         Args:
@@ -160,7 +159,7 @@ class ProductClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/product/{id}")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Product,
@@ -176,7 +175,7 @@ class ProductClient(BaseAPIClient):
         unlimited: bool | None = None,
         quantity: int | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Product]:
+    ) -> Response[Product] | Response[PaystackDataModel]:
         """Update a product details on your integration
 
         Args:
@@ -225,7 +224,7 @@ class ProductClient(BaseAPIClient):
             ("quantity", quantity),
         ]
         payload = add_to_payload(optional_params, payload)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.PUT,
             url,
             payload,

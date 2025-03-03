@@ -3,15 +3,12 @@ from typing import Type
 
 from pypaystack2.base_api_client import BaseAPIClient
 from pypaystack2.exceptions import InvalidDataException
-from pypaystack2.utils import (
+from pypaystack2.utils.enums import Country, RiskAction, Identification
+from pypaystack2.utils.helpers import (
     add_to_payload,
     append_query_params,
-    Identification,
-    Country,
-    RiskAction,
-    Response,
 )
-from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.models import PaystackDataModel, Response
 from pypaystack2.utils.response_models import Customer
 
 
@@ -30,7 +27,7 @@ class CustomerClient(BaseAPIClient):
         phone: str | None = None,
         metadata: dict | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Customer]:
+    ) -> Response[Customer] | Response[PaystackDataModel]:
         """Create a customer on your integration.
 
         Note:
@@ -74,7 +71,7 @@ class CustomerClient(BaseAPIClient):
             ("metadata", metadata),
         ]
         payload = add_to_payload(optional_params, payload)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -88,7 +85,7 @@ class CustomerClient(BaseAPIClient):
         page: int = 1,
         pagination: int = 50,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[Customer]]:
+    ) -> Response[list[Customer]] | Response[PaystackDataModel]:
         """Fetches customers available on your integration.
 
         Args:
@@ -121,7 +118,7 @@ class CustomerClient(BaseAPIClient):
         ]
         url = self._full_url(f"/customer/?perPage={pagination}")
         url = append_query_params(query_params, url)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Customer,
@@ -131,7 +128,7 @@ class CustomerClient(BaseAPIClient):
         self,
         email_or_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Customer]:
+    ) -> Response[Customer] | Response[PaystackDataModel]:
         """Get details of a customer on your integration.
 
         Args:
@@ -154,7 +151,7 @@ class CustomerClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/customer/{email_or_code}/")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Customer,
@@ -168,7 +165,7 @@ class CustomerClient(BaseAPIClient):
         phone: str | None = None,
         metadata: dict | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Customer]:
+    ) -> Response[Customer] | Response[PaystackDataModel]:
         """Update a customer's details on your integration
 
         Args:
@@ -204,7 +201,7 @@ class CustomerClient(BaseAPIClient):
             ("metadata", metadata),
         ]
         payload = add_to_payload(optional_params, payload)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.PUT,
             url,
             payload,
@@ -224,7 +221,7 @@ class CustomerClient(BaseAPIClient):
         account_number: str | None = None,
         middle_name: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Validate a customer's identity
 
         Args:
@@ -281,7 +278,7 @@ class CustomerClient(BaseAPIClient):
             ("value", identification_number),
         ]
         payload = add_to_payload(optional_params, payload)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -293,7 +290,7 @@ class CustomerClient(BaseAPIClient):
         customer: str,
         risk_action: RiskAction | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Customer]:
+    ) -> Response[Customer] | Response[PaystackDataModel]:
         """Whitelist or blacklist a customer on your integration
 
         Args:
@@ -324,7 +321,7 @@ class CustomerClient(BaseAPIClient):
             ("risk_action", risk_action),
         ]
         payload = add_to_payload(optional_params, payload)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -335,7 +332,7 @@ class CustomerClient(BaseAPIClient):
         self,
         auth_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Deactivate an authorization when the card needs to be forgotten
 
         Args:
@@ -361,7 +358,7 @@ class CustomerClient(BaseAPIClient):
         payload = {
             "authorization_code": auth_code,
         }
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,

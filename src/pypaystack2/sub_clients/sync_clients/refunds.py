@@ -2,13 +2,12 @@ from http import HTTPMethod
 from typing import Type
 
 from pypaystack2.base_api_client import BaseAPIClient
-from pypaystack2.utils import (
-    Currency,
+from pypaystack2.utils.enums import Currency
+from pypaystack2.utils.helpers import (
     add_to_payload,
     append_query_params,
-    Response,
 )
-from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.models import PaystackDataModel, Response
 from pypaystack2.utils.response_models import Refund
 
 
@@ -27,7 +26,7 @@ class RefundClient(BaseAPIClient):
         customer_note: str | None = None,
         merchant_note: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Refund]:
+    ) -> Response[Refund] | Response[PaystackDataModel]:
         """Initiate a refund on your integration
 
         Args:
@@ -82,7 +81,7 @@ class RefundClient(BaseAPIClient):
         start_date: str | None = None,
         end_date: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[Refund]]:
+    ) -> Response[list[Refund]] | Response[PaystackDataModel]:
         """Fetch refunds available on your integration.
 
         Args:
@@ -130,7 +129,7 @@ class RefundClient(BaseAPIClient):
         self,
         reference: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Refund]:
+    ) -> Response[Refund] | Response[PaystackDataModel]:
         """Get details of a refund on your integration.
 
         Args:

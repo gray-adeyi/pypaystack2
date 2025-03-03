@@ -1,9 +1,9 @@
 from http import HTTPMethod
 from typing import Type
 
-from pypaystack2.utils.enums import Country, Gateway, BankType, Currency
 from pypaystack2.base_api_client import BaseAsyncAPIClient
-from pypaystack2.utils import append_query_params
+from pypaystack2.utils.enums import Country, Gateway, BankType, Currency
+from pypaystack2.utils.helpers import append_query_params
 from pypaystack2.utils.models import PaystackDataModel, Response
 from pypaystack2.utils.response_models import Bank, PaystackSupportedCountry, State
 
@@ -29,7 +29,7 @@ class AsyncMiscellaneousClient(BaseAsyncAPIClient):
         include_nip_sort_code: bool | None = None,
         pagination: int = 50,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[Bank]]:
+    ) -> Response[list[Bank]] | Response[PaystackDataModel]:
         """Get a list of all supported banks and their properties
 
         Args:
@@ -80,7 +80,7 @@ class AsyncMiscellaneousClient(BaseAsyncAPIClient):
             ("include_nip_sort_code", include_nip_sort_code),
         ]
         url = append_query_params(query_params, url)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Bank,
@@ -89,7 +89,7 @@ class AsyncMiscellaneousClient(BaseAsyncAPIClient):
     async def get_countries(
         self,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[PaystackSupportedCountry]]:
+    ) -> Response[list[PaystackSupportedCountry]] | Response[PaystackDataModel]:
         """Gets a list of Countries that Paystack currently supports
 
         Args:
@@ -111,7 +111,7 @@ class AsyncMiscellaneousClient(BaseAsyncAPIClient):
         """
 
         url = self._full_url("/country")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or PaystackSupportedCountry,
@@ -121,7 +121,7 @@ class AsyncMiscellaneousClient(BaseAsyncAPIClient):
         self,
         country: Country | str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[State]:
+    ) -> Response[State] | Response[PaystackDataModel]:
         """Get a list of states for a country for address verification.
 
         Args:
@@ -144,7 +144,7 @@ class AsyncMiscellaneousClient(BaseAsyncAPIClient):
         """
 
         url = self._full_url(f"/address_verification/states?country={country}")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or State,

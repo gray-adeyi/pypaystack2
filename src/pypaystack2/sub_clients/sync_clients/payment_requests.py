@@ -2,16 +2,9 @@ from http import HTTPMethod
 from typing import Type
 
 from pypaystack2.base_api_client import BaseAPIClient
-from pypaystack2.utils import (
-    Currency,
-    add_to_payload,
-    append_query_params,
-    Response,
-    Status,
-    LineItem,
-    Tax,
-)
-from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.enums import Currency, Status
+from pypaystack2.utils.helpers import add_to_payload, append_query_params
+from pypaystack2.utils.models import PaystackDataModel, Response, LineItem, Tax
 from pypaystack2.utils.response_models import PaymentRequest, PaymentRequestStat
 
 
@@ -37,7 +30,7 @@ class PaymentRequestClient(BaseAPIClient):
         invoice_number: int | None = None,
         split_code: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[PaymentRequest]:
+    ) -> Response[PaymentRequest] | Response[PaystackDataModel]:
         """Create a payment request for a transaction on your integration
 
         Args:
@@ -112,7 +105,7 @@ class PaymentRequestClient(BaseAPIClient):
         start_date: str | None = None,
         end_date: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[PaymentRequest]]:
+    ) -> Response[list[PaymentRequest]] | Response[PaystackDataModel]:
         """Fetches the payment requests available on your integration.
 
         Args:
@@ -164,7 +157,7 @@ class PaymentRequestClient(BaseAPIClient):
         self,
         id_or_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[PaymentRequest]:
+    ) -> Response[PaymentRequest] | Response[PaystackDataModel]:
         """Get details of a payment request on your integration
 
         Args:
@@ -197,7 +190,7 @@ class PaymentRequestClient(BaseAPIClient):
         self,
         code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[PaymentRequest]:
+    ) -> Response[PaymentRequest] | Response[PaystackDataModel]:
         """Verify details of a payment request on your integration.
 
         Args:
@@ -230,7 +223,7 @@ class PaymentRequestClient(BaseAPIClient):
         self,
         id_or_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Send notification of a payment request to your customers
 
         Args:
@@ -262,7 +255,7 @@ class PaymentRequestClient(BaseAPIClient):
     def get_total(
         self,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[PaymentRequestStat]:
+    ) -> Response[PaymentRequestStat] | Response[PaystackDataModel]:
         """Get payment requests metric
 
         Args:
@@ -294,7 +287,7 @@ class PaymentRequestClient(BaseAPIClient):
         self,
         id_or_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[PaymentRequest]:
+    ) -> Response[PaymentRequest] | Response[PaystackDataModel]:
         """Finalize a draft payment request
 
         Args:
@@ -329,7 +322,7 @@ class PaymentRequestClient(BaseAPIClient):
         customer: str,
         amount: int,
         due_date: str | None = None,
-        description: str = None,
+        description: str | None = None,
         line_items: list[LineItem] | None = None,
         tax: list[Tax] | None = None,
         currency: Currency | None = None,
@@ -338,7 +331,7 @@ class PaymentRequestClient(BaseAPIClient):
         invoice_number: int | None = None,
         split_code: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[PaymentRequest]:
+    ) -> Response[PaymentRequest] | Response[PaystackDataModel]:
         """Update the payment request details on your integration
 
         Args:
@@ -407,7 +400,7 @@ class PaymentRequestClient(BaseAPIClient):
         self,
         id_or_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Used to archive a payment request. A payment request will no longer be fetched on list or returned on verify.
 
         Args:
@@ -430,7 +423,7 @@ class PaymentRequestClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/paymentrequest/archive/{id_or_code}")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             response_data_model_class=alternate_model_class,

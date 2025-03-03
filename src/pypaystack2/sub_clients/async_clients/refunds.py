@@ -2,7 +2,7 @@ from http import HTTPMethod
 from typing import Type
 
 from pypaystack2.base_api_client import BaseAsyncAPIClient
-from pypaystack2.utils import add_to_payload, append_query_params
+from pypaystack2.utils.helpers import add_to_payload, append_query_params
 from pypaystack2.utils.enums import Currency
 from pypaystack2.utils.models import PaystackDataModel
 from pypaystack2.utils.models import Response
@@ -24,7 +24,7 @@ class AsyncRefundClient(BaseAsyncAPIClient):
         customer_note: str | None = None,
         merchant_note: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Refund]:
+    ) -> Response[Refund] | Response[PaystackDataModel]:
         """Initiate a refund on your integration
 
         Args:
@@ -63,7 +63,7 @@ class AsyncRefundClient(BaseAsyncAPIClient):
             ("merchant_note", merchant_note),
         ]
         payload = add_to_payload(optional_params, payload)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -79,7 +79,7 @@ class AsyncRefundClient(BaseAsyncAPIClient):
         start_date: str | None = None,
         end_date: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[Refund]]:
+    ) -> Response[list[Refund]] | Response[PaystackDataModel]:
         """Fetch refunds available on your integration.
 
         Args:
@@ -117,7 +117,7 @@ class AsyncRefundClient(BaseAsyncAPIClient):
             ("end_date", end_date),
         ]
         url = append_query_params(query_params, url)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Refund,
@@ -127,7 +127,7 @@ class AsyncRefundClient(BaseAsyncAPIClient):
         self,
         reference: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Refund]:
+    ) -> Response[Refund] | Response[PaystackDataModel]:
         """Get details of a refund on your integration.
 
         Args:
@@ -150,7 +150,7 @@ class AsyncRefundClient(BaseAsyncAPIClient):
         """
 
         url = self._full_url(f"/refund/{reference}")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Refund,

@@ -4,7 +4,7 @@ from unittest import IsolatedAsyncioTestCase
 from dotenv import load_dotenv
 
 from pypaystack2.sub_clients.async_clients.apple_pay import AsyncApplePayClient
-from pypaystack2.utils import Response
+from pypaystack2.utils.models import Response
 
 
 class AsyncApplePayTestCase(IsolatedAsyncioTestCase):

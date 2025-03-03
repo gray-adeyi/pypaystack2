@@ -4,7 +4,7 @@ from typing import Type
 import httpx
 
 from pypaystack2.base_api_client import BaseAsyncAPIClient
-from pypaystack2.utils import append_query_params
+from pypaystack2.utils.helpers import append_query_params
 from pypaystack2.utils.models import PaystackDataModel
 from pypaystack2.utils.models import Response
 from pypaystack2.utils.response_models import ApplePayDomains
@@ -21,7 +21,7 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
         self,
         domain_name: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Register a top-level domain or subdomain for your Apple Pay integration.
 
         This method can only be called with one domain or subdomain at a time.
@@ -49,7 +49,7 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
         payload = {
             "domainName": domain_name,
         }
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -62,7 +62,7 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
         next: str | None = None,
         previous: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[ApplePayDomains]:
+    ) -> Response[ApplePayDomains] | Response[PaystackDataModel]:
         """Fetches all registered domains on your integration.
 
         Note
@@ -96,7 +96,7 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
             ("previous", previous),
         ]
         url = append_query_params(query_params, url)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or ApplePayDomains,
@@ -106,7 +106,7 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
         self,
         domain_name: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Unregister a top-level domain or subdomain previously used for your Apple Pay integration.
 
         Args:
@@ -139,7 +139,7 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
             raw_response = await client.request(
                 HTTPMethod.DELETE, url, json=payload, headers=self._headers
             )
-        return self._deserialize_response(
+        return self._deserialize_response(  # type: ignore
             raw_response,
             response_data_model_class=alternate_model_class,
         )

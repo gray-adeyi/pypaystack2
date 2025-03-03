@@ -2,15 +2,12 @@ from http import HTTPMethod
 from typing import Type
 
 from pypaystack2.base_api_client import BaseAPIClient
-from pypaystack2.utils import (
-    BankType,
-    Country,
-    Currency,
-    Gateway,
-    append_query_params,
+from pypaystack2.utils.enums import BankType, Country, Gateway, Currency
+from pypaystack2.utils.helpers import append_query_params
+from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.models import (
     Response,
 )
-from pypaystack2.utils.models import PaystackDataModel
 from pypaystack2.utils.response_models import Bank, PaystackSupportedCountry, State
 
 
@@ -35,7 +32,7 @@ class MiscellaneousClient(BaseAPIClient):
         include_nip_sort_code: bool | None = None,
         pagination: int = 50,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[Bank]]:
+    ) -> Response[list[Bank]] | Response[PaystackDataModel]:
         """Get a list of all supported banks and their properties
 
         Args:
@@ -95,7 +92,7 @@ class MiscellaneousClient(BaseAPIClient):
     def get_countries(
         self,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[PaystackSupportedCountry]]:
+    ) -> Response[list[PaystackSupportedCountry]] | Response[PaystackDataModel]:
         """Gets a list of Countries that Paystack currently supports
 
         Args:
@@ -117,7 +114,7 @@ class MiscellaneousClient(BaseAPIClient):
         """
 
         url = self._full_url("/country")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or PaystackSupportedCountry,
@@ -127,7 +124,7 @@ class MiscellaneousClient(BaseAPIClient):
         self,
         country: Country | str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[State]:
+    ) -> Response[State] | Response[PaystackDataModel]:
         """Get a list of states for a country for address verification.
 
         Args:
@@ -150,7 +147,7 @@ class MiscellaneousClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/address_verification/states?country={country}")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or State,

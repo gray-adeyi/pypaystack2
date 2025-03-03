@@ -2,8 +2,8 @@ from http import HTTPMethod
 from typing import Type
 
 from pypaystack2.base_api_client import BaseAPIClient
-from pypaystack2.utils import add_to_payload, append_query_params, Response
-from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.helpers import add_to_payload, append_query_params
+from pypaystack2.utils.models import PaystackDataModel, Response
 from pypaystack2.utils.response_models import Subscription, SubscriptionLink
 
 
@@ -22,7 +22,7 @@ class SubscriptionClient(BaseAPIClient):
         authorization: str | None = None,
         start_date: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Subscription]:
+    ) -> Response[Subscription] | Response[PaystackDataModel]:
         """Create a subscription on your integration
 
         Note:
@@ -65,7 +65,7 @@ class SubscriptionClient(BaseAPIClient):
             ("authorization", authorization),
         ]
         payload = add_to_payload(optional_params, payload)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -79,7 +79,7 @@ class SubscriptionClient(BaseAPIClient):
         customer: int | None = None,
         plan: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[Subscription]]:
+    ) -> Response[list[Subscription]] | Response[PaystackDataModel]:
         """Fetch subscriptions available on your integration.
 
         Args:
@@ -113,7 +113,7 @@ class SubscriptionClient(BaseAPIClient):
             ("plan", plan),
         ]
         url = append_query_params(query_params, url)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Subscription,
@@ -123,7 +123,7 @@ class SubscriptionClient(BaseAPIClient):
         self,
         id_or_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Subscription]:
+    ) -> Response[Subscription] | Response[PaystackDataModel]:
         """Fetch details of a subscription on your integration.
 
         Args:
@@ -146,7 +146,7 @@ class SubscriptionClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/subscription/{id_or_code}")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Subscription,
@@ -157,7 +157,7 @@ class SubscriptionClient(BaseAPIClient):
         code: str,
         token: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Enable a subscription on your integration
 
         Args:
@@ -185,7 +185,7 @@ class SubscriptionClient(BaseAPIClient):
             "code": code,
             "token": token,
         }
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -197,7 +197,7 @@ class SubscriptionClient(BaseAPIClient):
         code: str,
         token: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Disable a subscription on your integration
 
         Args:
@@ -224,7 +224,7 @@ class SubscriptionClient(BaseAPIClient):
             "code": code,
             "token": token,
         }
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -235,7 +235,7 @@ class SubscriptionClient(BaseAPIClient):
         self,
         code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[SubscriptionLink]:
+    ) -> Response[SubscriptionLink] | Response[PaystackDataModel]:
         """Generate a link for updating the card on a subscription
 
         Args:
@@ -258,7 +258,7 @@ class SubscriptionClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/subscription/{code}/manage/link/")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or SubscriptionLink,
@@ -268,7 +268,7 @@ class SubscriptionClient(BaseAPIClient):
         self,
         code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Email a customer a link for updating the card on their subscription
 
         Args:
@@ -291,7 +291,7 @@ class SubscriptionClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/subscription/{code}/manage/email/")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             response_data_model_class=alternate_model_class,

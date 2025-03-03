@@ -2,8 +2,8 @@ from http import HTTPMethod
 from typing import Type
 
 from pypaystack2.base_api_client import BaseAsyncAPIClient
-from pypaystack2.utils import add_to_payload, append_query_params
 from pypaystack2.utils.enums import Country, Currency
+from pypaystack2.utils.helpers import add_to_payload, append_query_params
 from pypaystack2.utils.models import PaystackDataModel
 from pypaystack2.utils.models import Response
 from pypaystack2.utils.response_models import DedicatedAccount, DedicatedAccountProvider
@@ -31,7 +31,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         last_name: str | None = None,
         phone: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[DedicatedAccount]:
+    ) -> Response[DedicatedAccount] | Response[PaystackDataModel]:
         """Create a dedicated virtual account for an existing customer
 
         Note:
@@ -77,7 +77,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
             ("phone", phone),
         ]
         payload = add_to_payload(optional_params, payload)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -98,7 +98,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         subaccount: str | None = None,
         split_code: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Create a customer, validate the customer, and assign a DVA to the customer.
 
         Note:
@@ -153,7 +153,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
             ("split_code", split_code),
         ]
         payload = add_to_payload(optional_params, payload)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -168,7 +168,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         bank_id: str | None = None,
         customer: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[DedicatedAccount]]:
+    ) -> Response[list[DedicatedAccount]] | Response[PaystackDataModel]:
         """Fetches dedicated virtual accounts available on your integration.
 
         Note:
@@ -207,7 +207,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         ]
         url = self._full_url(f"/dedicated_account?active={active}")
         url = append_query_params(query_params, url)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or DedicatedAccount,
@@ -217,7 +217,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         self,
         dedicated_account_id: int,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[DedicatedAccount]:
+    ) -> Response[DedicatedAccount] | Response[PaystackDataModel]:
         """Get details of a dedicated virtual account on your integration.
 
         Note:
@@ -244,7 +244,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         """
 
         url = self._full_url(f"/dedicated_account/{dedicated_account_id}")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or DedicatedAccount,
@@ -256,7 +256,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         provider_slug: str,
         date: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Get details of a dedicated virtual account on your integration.
 
         Note:
@@ -290,7 +290,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
             ("date", date),
         ]
         url = append_query_params(query_params, url)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET, url, response_data_model_class=alternate_model_class
         )
 
@@ -298,7 +298,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         self,
         dedicated_account_id: int,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[DedicatedAccount]:
+    ) -> Response[DedicatedAccount] | Response[PaystackDataModel]:
         """Deactivate a dedicated virtual account on your integration.
 
         Note:
@@ -325,7 +325,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         """
 
         url = self._full_url(f"/dedicated_account/{dedicated_account_id}")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.DELETE, url, response_data_model_class=alternate_model_class
         )
 
@@ -336,7 +336,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         split_code: str | None = None,
         preferred_bank: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[DedicatedAccount]:
+    ) -> Response[DedicatedAccount] | Response[PaystackDataModel]:
         """Split a dedicated virtual account transaction with one or more accounts
 
         Note:
@@ -375,7 +375,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
             ("preferred_bank", preferred_bank),
         ]
         payload = add_to_payload(optional_params, payload)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -386,7 +386,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         self,
         account_number: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response:
+    ) -> Response[DedicatedAccount] | Response[PaystackDataModel]:
         """Removes a split.
 
         If you've previously set up split payment for transactions on a dedicated virtual
@@ -419,7 +419,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         payload = {
             "account_number": account_number,
         }
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.DELETE,
             url,
             payload,
@@ -429,7 +429,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
     async def get_providers(
         self,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[DedicatedAccountProvider]]:
+    ) -> Response[list[DedicatedAccountProvider]] | Response[PaystackDataModel]:
         """Get available bank providers for a dedicated virtual account
 
         Note:
@@ -455,7 +455,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         """
 
         url = self._full_url("/dedicated_account/available_providers")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or DedicatedAccountProvider,

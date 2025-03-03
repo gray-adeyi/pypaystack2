@@ -2,9 +2,9 @@ import logging
 import os
 import re
 from abc import ABC, abstractmethod
-from http import HTTPMethod
+from http import HTTPMethod, HTTPStatus
 from json import JSONDecodeError
-from typing import Type
+from typing import Type, Any, cast
 
 import httpx
 from pydantic import ValidationError
@@ -12,8 +12,8 @@ from pydantic import ValidationError
 from pypaystack2._metadata import __version__
 from pypaystack2.exceptions import InvalidMethodException, MissingSecretKeyException
 from pypaystack2.fees_calculation_mixin import FeesCalculationMixin
-from pypaystack2.utils import Response
 from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.models import Response
 
 logger = logging.getLogger(__name__)
 
@@ -75,7 +75,9 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
         raw_response: httpx.Response,
         response_data_model_class: Type[PaystackDataModel] | None = None,
         raise_serialization_exception: bool = False,
-    ) -> Response[PaystackDataModel]:
+    ) -> (
+        Response[None] | Response[list[PaystackDataModel]] | Response[PaystackDataModel]
+    ):
         """
         Parses an `httpx.Response` into a `Response`.
 
@@ -87,7 +89,7 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
             response_body = raw_response.json()
         except JSONDecodeError:
             return Response(
-                status_code=raw_response.status_code,
+                status_code=cast(HTTPStatus, raw_response.status_code),
                 status=False,
                 message="pypaystack2 was unable to serialize response as json data",
                 data=None,
@@ -111,7 +113,7 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
         if isinstance(data, dict) and len(data) == 0:  # Data is empty
             data = None
         return Response(
-            status_code=raw_response.status_code,
+            status_code=cast(HTTPStatus, raw_response.status_code),
             status=status,
             message=message,
             data=data,
@@ -123,10 +125,10 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
 
     def _to_pydantic_model(
         self,
-        data,
+        data: dict[str, Any] | list[Any],
         response_data_model_class: Type[PaystackDataModel] | None = None,
         raise_serialization_exception: bool = False,
-    ):
+    ) -> PaystackDataModel | list[PaystackDataModel] | None:
         """Tries to convert the provided data to the provided pydantic instance, on failure to do so,
         it returns None.
         """
@@ -182,7 +184,9 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
         data: dict | list | None = None,
         response_data_model_class: Type[PaystackDataModel] | None = None,
         raise_serialization_exception: bool = False,
-    ) -> Response[PaystackDataModel]: ...
+    ) -> (
+        Response[None] | Response[list[PaystackDataModel]] | Response[PaystackDataModel]
+    ): ...
 
 
 class BaseAPIClient(AbstractAPIClient):
@@ -195,9 +199,11 @@ class BaseAPIClient(AbstractAPIClient):
         method: HTTPMethod,
         url: str,
         data: dict | list | None = None,
-        response_data_model_class: Type[PaystackDataModel] = None,
+        response_data_model_class: Type[PaystackDataModel] | None = None,
         raise_serialization_exception: bool = False,
-    ) -> Response[PaystackDataModel]:
+    ) -> (
+        Response[None] | Response[list[PaystackDataModel]] | Response[PaystackDataModel]
+    ):
         """
         Makes request to paystack servers.
 
@@ -246,7 +252,9 @@ class BaseAsyncAPIClient(AbstractAPIClient):
         data: dict | list | None = None,
         response_data_model_class: Type[PaystackDataModel] | None = None,
         raise_serialization_exception: bool = False,
-    ) -> Response[PaystackDataModel]:
+    ) -> (
+        Response[None] | Response[list[PaystackDataModel]] | Response[PaystackDataModel]
+    ):
         """
         Makes request to paystack servers.
 

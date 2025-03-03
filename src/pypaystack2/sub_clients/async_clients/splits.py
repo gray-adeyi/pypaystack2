@@ -3,7 +3,7 @@ from typing import Type
 
 from pypaystack2.base_api_client import BaseAsyncAPIClient
 from pypaystack2.exceptions import InvalidDataException
-from pypaystack2.utils import append_query_params, add_to_payload
+from pypaystack2.utils.helpers import append_query_params, add_to_payload
 from pypaystack2.utils.enums import Currency, Bearer, Split
 from pypaystack2.utils.models import PaystackDataModel
 from pypaystack2.utils.models import SplitAccount, Response
@@ -27,7 +27,7 @@ class AsyncTransactionSplitClient(BaseAsyncAPIClient):
         bearer_type: Bearer,
         bearer_subaccount: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[TransactionSplit]:
+    ) -> Response[TransactionSplit] | Response[PaystackDataModel]:
         """Create a split payment on your integration
 
         Args:
@@ -66,7 +66,7 @@ class AsyncTransactionSplitClient(BaseAsyncAPIClient):
             "bearer_type": bearer_type,
             "bearer_subaccount": bearer_subaccount,
         }
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -83,7 +83,7 @@ class AsyncTransactionSplitClient(BaseAsyncAPIClient):
         active: bool = True,
         pagination: int = 50,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[TransactionSplit]]:
+    ) -> Response[list[TransactionSplit]] | Response[PaystackDataModel]:
         """Get/search for the transaction splits available on your integration.
 
         Args:
@@ -122,7 +122,7 @@ class AsyncTransactionSplitClient(BaseAsyncAPIClient):
         ]
         url = append_query_params(query_params, url)
 
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or TransactionSplit,
@@ -132,7 +132,7 @@ class AsyncTransactionSplitClient(BaseAsyncAPIClient):
         self,
         id_or_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[TransactionSplit]:
+    ) -> Response[TransactionSplit] | Response[PaystackDataModel]:
         """Get details of a split on your integration.
 
         Args:
@@ -154,7 +154,7 @@ class AsyncTransactionSplitClient(BaseAsyncAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
         url = self._full_url(f"/split/{id_or_code}/")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or TransactionSplit,
@@ -168,7 +168,7 @@ class AsyncTransactionSplitClient(BaseAsyncAPIClient):
         bearer_type: Bearer | None = None,
         bearer_subaccount: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[TransactionSplit]:
+    ) -> Response[TransactionSplit] | Response[PaystackDataModel]:
         """Update a transaction split details on your integration
 
         Args:
@@ -212,7 +212,7 @@ class AsyncTransactionSplitClient(BaseAsyncAPIClient):
         ]
         payload = add_to_payload(optional_params, payload)
         url = self._full_url(f"/split/{id}/")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.PUT,
             url,
             payload,
@@ -225,7 +225,7 @@ class AsyncTransactionSplitClient(BaseAsyncAPIClient):
         subaccount: str,
         share: int | float,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[TransactionSplit]:
+    ) -> Response[TransactionSplit] | Response[PaystackDataModel]:
         """
         Add a Subaccount to a Transaction Split, or update
         the share of an existing Subaccount in a Transaction Split
@@ -253,7 +253,7 @@ class AsyncTransactionSplitClient(BaseAsyncAPIClient):
 
         payload = {"subaccount": subaccount, "share": share}
         url = self._full_url(f"/split/{id}/subaccount/add")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -265,7 +265,7 @@ class AsyncTransactionSplitClient(BaseAsyncAPIClient):
         id: str,
         subaccount: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Remove a subaccount from a transaction split
 
         Args:
@@ -290,7 +290,7 @@ class AsyncTransactionSplitClient(BaseAsyncAPIClient):
 
         payload = {"subaccount": subaccount}
         url = self._full_url(f"/split/{id}/subaccount/remove")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
