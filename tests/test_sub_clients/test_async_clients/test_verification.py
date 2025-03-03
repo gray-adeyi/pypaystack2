@@ -1,9 +1,11 @@
 from unittest import TestCase
+from unittest.async_case import IsolatedAsyncioTestCase
 
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.sub_clients.sync_clients.verification import VerificationClient
+from pypaystack2.utils.models import Response
+from pypaystack2.sub_clients.async_clients.verification import AsyncVerificationClient
 from pypaystack2.utils.enums import AccountType, Country, Document
 from pypaystack2.utils.response_models import (
     BankAccountInfo,
@@ -12,16 +14,16 @@ from pypaystack2.utils.response_models import (
 )
 
 
-class VerificationTestCase(TestCase):
-    client: VerificationClient
+class AsyncVerificationTestCase(IsolatedAsyncioTestCase):
+    client: AsyncVerificationClient
 
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.client = VerificationClient()
+        cls.client = AsyncVerificationClient()
 
-    def test_can_resolve_account_number(self) -> None:
-        response = self.client.resolve_account_number(
+    async def test_can_resolve_account_number(self) -> None:
+        response: Response[BankAccountInfo] = await self.client.resolve_account_number(
             bank_code="214", account_number="5273681014"
         )
         self.assertEqual(response.status_code, httpx.codes.OK)
@@ -29,8 +31,10 @@ class VerificationTestCase(TestCase):
         self.assertEqual(response.message, "Account number resolved")
         self.assertIsInstance(response.data, BankAccountInfo)
 
-    def test_can_validate_account(self) -> None:
-        response = self.client.validate_account(
+    async def test_can_validate_account(self) -> None:
+        response: Response[
+            AccountVerificationInfo
+        ] = await self.client.validate_account(
             account_number="0123456789",
             account_name="Ann Bron",
             account_type=AccountType.PERSONAL,
@@ -44,8 +48,8 @@ class VerificationTestCase(TestCase):
         self.assertEqual(response.message, "Personal Account Verification attempted")
         self.assertIsInstance(response.data, AccountVerificationInfo)
 
-    def test_can_resolve_card_bin(self) -> None:
-        response = self.client.resolve_card_bin(bin="539983")
+    async def test_can_resolve_card_bin(self) -> None:
+        response: Response[CardBin] = await self.client.resolve_card_bin(bin="539983")
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Bin resolved")
