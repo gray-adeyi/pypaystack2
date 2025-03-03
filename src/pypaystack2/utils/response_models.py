@@ -447,6 +447,19 @@ class Terminal(BaseModel):
     status: str | None = None  # TODO: Find all the supported status
 
 
+class TerminalEventData(BaseModel):
+    id: str
+
+
+class TerminalEventStatusData(BaseModel):
+    delivered: bool
+
+
+class TerminalStatusData(BaseModel):
+    online: bool
+    available: bool
+
+
 class DedicatedAccountBank(BaseModel):
     name: str
     id: int

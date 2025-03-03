@@ -44,7 +44,7 @@ from pypaystack2.sub_clients.sync_clients.settlements import SettlementClient
 from pypaystack2.sub_clients.sync_clients.splits import TransactionSplitClient
 from pypaystack2.sub_clients.sync_clients.subaccounts import SubAccountClient
 from pypaystack2.sub_clients.sync_clients.subscriptions import SubscriptionClient
-from pypaystack2.sub_clients.terminals import TerminalClient
+from pypaystack2.sub_clients.sync_clients.terminals import TerminalClient
 from pypaystack2.sub_clients.transactions import TransactionClient
 from pypaystack2.sub_clients.transfers import TransferClient
 from pypaystack2.sub_clients.transfers_control import TransferControlClient
