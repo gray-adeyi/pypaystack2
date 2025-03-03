@@ -52,11 +52,11 @@ from pypaystack2.sub_clients.async_clients.transactions import AsyncTransactionC
 from pypaystack2.sub_clients.async_clients.transfer_recipients import (
     AsyncTransferRecipientClient,
 )
+from pypaystack2.sub_clients.async_clients.transfers import AsyncTransferClient
 from pypaystack2.sub_clients.sync_clients.products import AsyncProductClient
 from pypaystack2.sub_clients.sync_clients.transfer_recipients import (
     TransferRecipientClient,
 )
-from pypaystack2.sub_clients.transfers import AsyncTransferClient
 from pypaystack2.sub_clients.transfers_control import AsyncTransferControlClient
 from pypaystack2.sub_clients.verification import AsyncVerificationClient
 
