@@ -2,13 +2,12 @@ from http import HTTPMethod
 from typing import Type
 
 from pypaystack2.base_api_client import BaseAPIClient
-from pypaystack2.utils import (
+from pypaystack2.utils.enums import Status
+from pypaystack2.utils.helpers import (
     append_query_params,
-    Response,
-    Status,
-    BulkChargeInstruction,
 )
 from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.models import Response, BulkChargeInstruction
 from pypaystack2.utils.response_models import BulkCharge, BulkChargeUnitCharge
 
 
@@ -23,7 +22,7 @@ class BulkChargeClient(BaseAPIClient):
         self,
         body: list[BulkChargeInstruction],
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[BulkCharge]:
+    ) -> Response[BulkCharge] | Response[PaystackDataModel]:
         """
         Send a list of dictionaries with authorization ``codes`` and ``amount``
         (in kobo if currency is NGN, pesewas, if currency is GHS, and cents,
@@ -50,7 +49,7 @@ class BulkChargeClient(BaseAPIClient):
 
         url = self._full_url("/bulkcharge")
         payload = [item.model_dump() for item in body]
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -64,7 +63,7 @@ class BulkChargeClient(BaseAPIClient):
         start_date: str | None = None,
         end_date: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[BulkCharge]]:
+    ) -> Response[list[BulkCharge]] | Response[PaystackDataModel]:
         """This gets all bulk charge batches created by the integration.
 
         Args:
@@ -97,7 +96,7 @@ class BulkChargeClient(BaseAPIClient):
             ("to", end_date),
         ]
         url = append_query_params(query_params, url)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or BulkCharge,
@@ -107,7 +106,7 @@ class BulkChargeClient(BaseAPIClient):
         self,
         id_or_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[BulkCharge]:
+    ) -> Response[BulkCharge] | Response[PaystackDataModel]:
         """
         This method retrieves a specific batch code. It also returns
         useful information on its progress by way of the total_charges
@@ -133,10 +132,10 @@ class BulkChargeClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/bulkcharge/{id_or_code}")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
-            response_data_model_class=BulkCharge or alternate_model_class,
+            response_data_model_class=alternate_model_class or BulkCharge,
         )
 
     def get_charges_in_batch(
@@ -148,7 +147,7 @@ class BulkChargeClient(BaseAPIClient):
         start_date: str | None = None,
         end_date: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[BulkChargeUnitCharge]]:
+    ) -> Response[list[BulkChargeUnitCharge]] | Response[PaystackDataModel]:
         """
         This method retrieves the charges associated with a specified
         batch code. Pagination parameters are available. You can also
@@ -188,7 +187,7 @@ class BulkChargeClient(BaseAPIClient):
             ("to", end_date),
         ]
         url = append_query_params(query_params, url)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or BulkChargeUnitCharge,
@@ -198,7 +197,7 @@ class BulkChargeClient(BaseAPIClient):
         self,
         batch_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Use this method to pause processing a batch.
 
         Args:
@@ -221,7 +220,7 @@ class BulkChargeClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/bulkcharge/pause/{batch_code}")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class,
@@ -231,7 +230,7 @@ class BulkChargeClient(BaseAPIClient):
         self,
         batch_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Use this method to resume processing a batch
 
         Args:
@@ -254,7 +253,7 @@ class BulkChargeClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/bulkcharge/resume/{batch_code}")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class,

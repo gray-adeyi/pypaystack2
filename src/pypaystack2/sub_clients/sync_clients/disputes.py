@@ -2,14 +2,12 @@ from http import HTTPMethod
 from typing import Type
 
 from pypaystack2.base_api_client import BaseAPIClient
-from pypaystack2.utils import (
+from pypaystack2.utils.enums import (
     DisputeStatus,
-    append_query_params,
-    add_to_payload,
     Resolution,
-    Response,
 )
-from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.helpers import append_query_params, add_to_payload
+from pypaystack2.utils.models import PaystackDataModel, Response
 from pypaystack2.utils.response_models import (
     Dispute,
     DisputeEvidence,
@@ -34,7 +32,7 @@ class DisputeClient(BaseAPIClient):
         transaction: str | None = None,
         status: DisputeStatus | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[Dispute]]:
+    ) -> Response[list[Dispute]] | Response[PaystackDataModel]:
         """Fetches disputes filed against you
 
         Args:
@@ -72,7 +70,7 @@ class DisputeClient(BaseAPIClient):
             ("status", status),
         ]
         url = append_query_params(query_params, url)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Dispute,
@@ -82,7 +80,7 @@ class DisputeClient(BaseAPIClient):
         self,
         id: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Dispute]:
+    ) -> Response[Dispute] | Response[PaystackDataModel]:
         """Get more details about a dispute.
 
         Args:
@@ -105,7 +103,7 @@ class DisputeClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/dispute/{id}")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Dispute,
@@ -115,7 +113,7 @@ class DisputeClient(BaseAPIClient):
         self,
         id: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[Dispute]]:
+    ) -> Response[list[Dispute]] | Response[PaystackDataModel]:
         """This method retrieves disputes for a particular transaction
 
         Args:
@@ -138,7 +136,7 @@ class DisputeClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/dispute/transaction/{id}")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Dispute,
@@ -150,7 +148,7 @@ class DisputeClient(BaseAPIClient):
         refund_amount: int,
         uploaded_filename: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Dispute]:
+    ) -> Response[Dispute] | Response[PaystackDataModel]:
         """Update details of a dispute on your integration
 
         Args:
@@ -178,7 +176,7 @@ class DisputeClient(BaseAPIClient):
         payload = {"refund_amount": refund_amount}
         payload = add_to_payload([("uploaded_filename", uploaded_filename)], payload)
         url = self._full_url(f"/dispute/{id}")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.PUT,
             url,
             payload,
@@ -195,7 +193,7 @@ class DisputeClient(BaseAPIClient):
         delivery_address: str | None = None,
         delivery_date: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[DisputeEvidence]:
+    ) -> Response[DisputeEvidence] | Response[PaystackDataModel]:
         """Provide evidence for a dispute
 
         Args:
@@ -235,7 +233,7 @@ class DisputeClient(BaseAPIClient):
         ]
         payload = add_to_payload(optional_params, payload)
         url = self._full_url(f"dispute/{id}/evidence")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -247,7 +245,7 @@ class DisputeClient(BaseAPIClient):
         id: str,
         upload_filename: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[DisputeUploadInfo]:
+    ) -> Response[DisputeUploadInfo] | Response[PaystackDataModel]:
         """Get URL to upload a dispute evidence.
 
         Args:
@@ -272,7 +270,7 @@ class DisputeClient(BaseAPIClient):
         url = self._full_url(
             f"/dispute/{id}/upload_url?upload_filename={upload_filename}"
         )
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or DisputeUploadInfo,
@@ -287,7 +285,7 @@ class DisputeClient(BaseAPIClient):
         uploaded_filename: str,
         evidence: int | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Dispute]:
+    ) -> Response[Dispute] | Response[PaystackDataModel]:
         """Resolve a dispute on your integration
 
         Args:
@@ -324,7 +322,7 @@ class DisputeClient(BaseAPIClient):
         }
         payload = add_to_payload([("evidence", evidence)], payload)
         url = self._full_url(f"/dispute/{id}/resolve")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.PUT,
             url,
             payload,
@@ -340,7 +338,7 @@ class DisputeClient(BaseAPIClient):
         transaction: str | None = None,
         status: DisputeStatus | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[DisputeExportInfo]:
+    ) -> Response[DisputeExportInfo] | Response[PaystackDataModel]:
         """Export disputes available on your integration.
 
         Args:
@@ -377,7 +375,7 @@ class DisputeClient(BaseAPIClient):
             ("status", status),
         ]
         url = append_query_params(query_params, url)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or DisputeExportInfo,

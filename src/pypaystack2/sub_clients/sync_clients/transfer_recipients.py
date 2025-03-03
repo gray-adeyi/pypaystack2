@@ -1,33 +1,58 @@
 from http import HTTPMethod
-from typing import Type
+from typing import Type, Any
 
-from pypaystack2.base_api_client import BaseAsyncAPIClient
-from pypaystack2.utils.enums import Status
-from pypaystack2.utils.helpers import append_query_params
-from pypaystack2.utils.models import BulkChargeInstruction, Response
+from pypaystack2.base_api_client import BaseAPIClient
+from pypaystack2.exceptions import InvalidDataException
+from pypaystack2.utils.enums import (
+    Currency,
+    RecipientType,
+)
+from pypaystack2.utils.helpers import add_to_payload, append_query_params
 from pypaystack2.utils.models import PaystackDataModel
-from pypaystack2.utils.response_models import BulkCharge, BulkChargeUnitCharge
+from pypaystack2.utils.models import Response, Recipient
+from pypaystack2.utils.response_models import (
+    TransferRecipient,
+    TransferRecipientBulkCreateData,
+)
 
 
-class AsyncBulkChargeClient(BaseAsyncAPIClient):
-    """Provides a wrapper for paystack Bulk Charge API
+class TransferRecipientClient(BaseAPIClient):
+    """Provides a wrapper for paystack Transfer Receipts API
 
-    The Bulk Charges API allows you to create and manage multiple recurring payments from your customers.
-    https://paystack.com/docs/api/bulk-charge/
+    The Transfer Recipients API allows you to create and manage beneficiaries that you send money to.
+    https://paystack.com/docs/api/transfer-recipient/
+
+    Note:
+        Feature Availability
+            This feature is only available to businesses in Nigeria and Ghana.
     """
 
-    async def initiate(
+    def create(
         self,
-        body: list[BulkChargeInstruction],
-        alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[BulkCharge] | Response[PaystackDataModel]:
+        type: RecipientType,
+        name: str,
+        account_number: str,
+        bank_code: str | None = None,
+        description: str | None = None,
+        currency: Currency | None = None,
+        auth_code: str | None = None,
+        metadata: dict[str, Any] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
+    ) -> Response[TransferRecipient] | Response[PaystackDataModel]:
         """
-        Send a list of dictionaries with authorization ``codes`` and ``amount``
-        (in kobo if currency is NGN, pesewas, if currency is GHS, and cents,
-        if currency is ZAR ) so paystack can process transactions as a batch.
+        Creates a new recipient. A duplicate account number will lead to the
+        retrieval of the existing record.
 
         Args:
-            body: A list of BulkChargeInstruction.
+            type: Recipient Type. any value from the `RecipientType` enum
+            name: A name for the recipient
+            account_number: Required if `type` is `RecipientType.NUBAN` or `RecipientType.BASA`
+            bank_code: Required if `type` is `RecipientType.NUBAN` or `RecipientType.BASA`.
+                You can get the list of Bank Codes by calling the `PaystackClient.get_banks`.
+            description: description
+            currency: currency
+            auth_code: auth code
+            metadata: metadata
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
@@ -38,38 +63,100 @@ class AsyncBulkChargeClient(BaseAsyncAPIClient):
                 This can come in handy when the models in the library do not
                 accurately represent the data returned, and you prefer working with the
                 data as a pydantic model instead of as a dict of the response returned
-                by paystack before it is serialized with pydantic models, The original
+                by  paystack before it is serialized with pydantic models, The original
                 data can be accessed via `Response.raw`.
 
         Returns:
             A pydantic model containing the response gotten from paystack's server.
         """
+        if type == RecipientType.NUBAN or type == RecipientType.BASA:
+            if bank_code is None:
+                raise InvalidDataException(
+                    "`bank_code` is required if type is `RecipientType.NUBAN` or `RecipientType.BASA`"
+                )
 
-        url = self._full_url("/bulkcharge")
-        payload = [item.model_dump() for item in body]
-        return await self._handle_request(  # type: ignore
+        url = self._full_url("/transferrecipient")
+
+        payload = {
+            "type": type,
+            "name": name,
+            "account_number": account_number,
+        }
+        optional_params = [
+            ("bank_code", bank_code),
+            ("description", description),
+            ("currency", currency),
+            ("authorization_code", auth_code),
+            ("metadata", metadata),
+        ]
+        payload = add_to_payload(optional_params, payload)
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
-            response_data_model_class=alternate_model_class or BulkCharge,
+            response_data_model_class=alternate_model_class or TransferRecipient,
         )
 
-    async def get_batches(
+    def bulk_create(
+        self,
+        batch: list[Recipient],
+        alternate_model_class: Type[PaystackDataModel] | None = None,
+    ) -> Response[TransferRecipientBulkCreateData] | Response[PaystackDataModel]:
+        """
+        Create multiple transfer recipients in batches. A duplicate account
+        number will lead to the retrieval of the existing record.
+
+        Args:
+            batch: recipients to be created.
+            alternate_model_class: A pydantic model class to use instead of the
+                default pydantic model used by the library to present the data in
+                the `Response.data`. The default behaviour of the library is to
+                set  `Response.data` to `None` if it fails to serialize the data
+                returned from paystack with the model provided in the library.
+                Providing a pydantic model class via this parameter overrides
+                the library default model with the model class you provide.
+                This can come in handy when the models in the library do not
+                accurately represent the data returned, and you prefer working with the
+                data as a pydantic model instead of as a dict of the response returned
+                by  paystack before it is serialized with pydantic models, The original
+                data can be accessed via `Response.raw`.
+
+        Returns:
+            A pydantic model containing the response gotten from paystack's server.
+        """
+        batch_data = [item.model_dump() for item in batch]
+
+        url = self._full_url("/transferrecipient/bulk")
+
+        payload = {
+            "batch": batch_data,
+        }
+        return self._handle_request(  # type: ignore
+            HTTPMethod.POST,
+            url,
+            payload,
+            response_data_model_class=alternate_model_class
+            or TransferRecipientBulkCreateData,
+        )
+
+    def get_transfer_recipients(
         self,
         page: int = 1,
         pagination: int = 50,
         start_date: str | None = None,
         end_date: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[BulkCharge]] | Response[PaystackDataModel]:
-        """This gets all bulk charge batches created by the integration.
+    ) -> Response[list[TransferRecipient]] | Response[PaystackDataModel]:
+        """Fetch transfer recipients available on your integration
 
         Args:
-            page: Specify exactly what transfer you want to page. If not specified, we use a default value of 1.
-            pagination: Specify how many records you want to retrieve per page.
-                If not specified we use a default value of 50.
-            start_date: A timestamp from which to start listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
-            end_date: A timestamp at which to stop listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
+            page: Specifies exactly what page you want to retrieve.
+                If not specified, we use a default value of 1.
+            pagination: Specifies how many records you want to retrieve per page.
+                If not specified, we use a default value of 50.
+            start_date: A timestamp from which to start listing transfer recipients
+                e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
+            end_date: A timestamp at which to stop listing transfer recipients e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
@@ -86,32 +173,28 @@ class AsyncBulkChargeClient(BaseAsyncAPIClient):
         Returns:
             A pydantic model containing the response gotten from paystack's server.
         """
-
-        url = self._full_url(f"/bulkcharge?perPage={pagination}")
+        url = self._full_url(f"/transferrecipient?perPage={pagination}")
         query_params = [
             ("page", page),
             ("from", start_date),
             ("to", end_date),
         ]
         url = append_query_params(query_params, url)
-        return await self._handle_request(  # type: ignore
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
-            response_data_model_class=alternate_model_class or BulkCharge,
+            response_data_model_class=alternate_model_class or TransferRecipient,
         )
 
-    async def get_batch(
+    def get_transfer_recipient(
         self,
         id_or_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[BulkCharge] | Response[PaystackDataModel]:
-        """
-        This method retrieves a specific batch code. It also returns
-        useful information on its progress by way of the total_charges
-        and pending_charges attributes in the Response.
+    ) -> Response[TransferRecipient] | Response[PaystackDataModel]:
+        """Fetch the details of a transfer recipient
 
         Args:
-            id_or_code: An ID or code for the charge whose batches you want to retrieve.
+            id_or_code: An ID or code for the recipient whose details you want to receive.
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
@@ -128,78 +211,28 @@ class AsyncBulkChargeClient(BaseAsyncAPIClient):
         Returns:
             A pydantic model containing the response gotten from paystack's server.
         """
-
-        url = self._full_url(f"/bulkcharge/{id_or_code}")
-        return await self._handle_request(  # type: ignore
+        url = self._full_url(f"/transferrecipient/{id_or_code}")
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
-            response_data_model_class=alternate_model_class or BulkCharge,
+            response_data_model_class=alternate_model_class or TransferRecipient,
         )
 
-    async def get_charges_in_batch(
+    def update(
         self,
         id_or_code: str,
-        status: Status,
-        pagination: int = 50,
-        page: int = 1,
-        start_date: str | None = None,
-        end_date: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[BulkChargeUnitCharge]] | Response[PaystackDataModel]:
-        """
-        This method retrieves the charges associated with a specified
-        batch code. Pagination parameters are available. You can also
-        filter by status. Charge statuses can be `Status.PENDING`,
-        `Status.SUCCESS` or `Status.FAILED`.
-
-        Args:
-            id_or_code: An ID or code for the batch whose charges you want to retrieve.
-            status: Any of the values from the Status enum.
-            pagination: Specify how many records you want to retrieve per page.
-                If not specified we use a default value of 50.
-            page: Specify exactly what transfer you want to page. If not specified we use a default value of 1.
-            start_date: A timestamp from which to start listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
-            end_date: A timestamp at which to stop listing batches e.g. 2016-09-24T00:00:05.000Z, 2016-09-21
-            alternate_model_class: A pydantic model class to use instead of the
-                default pydantic model used by the library to present the data in
-                the `Response.data`. The default behaviour of the library is to
-                set  `Response.data` to `None` if it fails to serialize the data
-                returned from paystack with the model provided in the library.
-                Providing a pydantic model class via this parameter overrides
-                the library default model with the model class you provide.
-                This can come in handy when the models in the library do not
-                accurately represent the data returned, and you prefer working with the
-                data as a pydantic model instead of as a dict of the response returned
-                by  paystack before it is serialized with pydantic models, The original
-                data can be accessed via `Response.raw`.
-
-        Returns:
-            A pydantic model containing the response gotten from paystack's server.
-        """
-
-        url = self._full_url(f"/bulkcharge/{id_or_code}/charges?perPage={pagination}")
-        query_params = [
-            ("status", status),
-            ("page", page),
-            ("from", start_date),
-            ("to", end_date),
-        ]
-        url = append_query_params(query_params, url)
-        return await self._handle_request(  # type: ignore
-            HTTPMethod.GET,
-            url,
-            response_data_model_class=alternate_model_class or BulkChargeUnitCharge,
-        )
-
-    async def pause_batch(
-        self,
-        batch_code: str,
+        name: str,
+        email: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
-        """Use this method to pause processing a batch.
+        """
+        Update an existing recipient. A duplicate account number will lead
+        to the retrieval of the existing record.
 
         Args:
-            batch_code: The batch code for the bulk charge you want to pause.
+            id_or_code: Transfer Recipient's ID or code
+            name: A name for the recipient
+            email: Email address of the recipient
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
@@ -217,22 +250,26 @@ class AsyncBulkChargeClient(BaseAsyncAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
 
-        url = self._full_url(f"/bulkcharge/pause/{batch_code}")
-        return await self._handle_request(  # type: ignore
-            HTTPMethod.GET,
+        url = self._full_url(f"/transferrecipient/{id_or_code}")
+        payload = {"name": name}
+        optional_params = [("email", email)]
+        payload = add_to_payload(optional_params, payload)
+        return self._handle_request(  # type: ignore
+            HTTPMethod.PUT,
             url,
+            payload,
             response_data_model_class=alternate_model_class,
         )
 
-    async def resume_batch(
+    def delete(
         self,
-        batch_code: str,
+        id_or_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
-        """Use this method to resume processing a batch
+        """Deletes a transfer recipient (sets the transfer recipient to inactive)
 
         Args:
-            batch_code: The batch code for the bulk charge you want to resume.
+            id_or_code: An ID or code for the recipient who you want to delete.
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
@@ -250,9 +287,9 @@ class AsyncBulkChargeClient(BaseAsyncAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
 
-        url = self._full_url(f"/bulkcharge/resume/{batch_code}")
-        return await self._handle_request(  # type: ignore
-            HTTPMethod.GET,
+        url = self._full_url(f"/transferrecipient/{id_or_code}")
+        return self._handle_request(  # type: ignore
+            HTTPMethod.DELETE,
             url,
             response_data_model_class=alternate_model_class,
         )

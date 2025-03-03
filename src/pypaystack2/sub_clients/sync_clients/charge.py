@@ -2,8 +2,8 @@ from http import HTTPMethod
 from typing import Type
 
 from pypaystack2.base_api_client import BaseAPIClient
-from pypaystack2.utils import add_to_payload, Response
-from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.helpers import add_to_payload
+from pypaystack2.utils.models import PaystackDataModel, Response
 from pypaystack2.utils.response_models import Transaction
 
 
@@ -29,7 +29,7 @@ class ChargeClient(BaseAPIClient):
         mobile_money: dict | None = None,
         device_id: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction]:
+    ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Initiate a payment by integrating the payment channel of your choice.
 
         Args:
@@ -78,7 +78,7 @@ class ChargeClient(BaseAPIClient):
         ]
         payload = add_to_payload(optional_params, payload)
         url = self._full_url("/charge")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -90,7 +90,7 @@ class ChargeClient(BaseAPIClient):
         pin: str,
         reference: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction]:
+    ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Submit PIN to continue a charge
 
         Args:
@@ -115,7 +115,7 @@ class ChargeClient(BaseAPIClient):
 
         payload = {"pin": pin, "reference": reference}
         url = self._full_url("/charge/submit_pin")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -127,7 +127,7 @@ class ChargeClient(BaseAPIClient):
         otp: str,
         reference: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction]:
+    ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Submit OTP to complete a charge
 
         Args:
@@ -152,7 +152,7 @@ class ChargeClient(BaseAPIClient):
 
         payload = {"otp": otp, "reference": reference}
         url = self._full_url("/charge/submit_otp")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -164,7 +164,7 @@ class ChargeClient(BaseAPIClient):
         phone: str,
         reference: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction]:
+    ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Submit Phone when requested
 
         Args:
@@ -189,7 +189,7 @@ class ChargeClient(BaseAPIClient):
 
         payload = {"phone": phone, "reference": reference}
         url = self._full_url("/charge/submit_phone")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -201,7 +201,7 @@ class ChargeClient(BaseAPIClient):
         birthday: str,
         reference: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction]:
+    ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Submit Birthday when requested
 
         Args:
@@ -226,7 +226,7 @@ class ChargeClient(BaseAPIClient):
 
         payload = {"birthday": birthday, "reference": reference}
         url = self._full_url("/charge/submit_birthday")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -241,7 +241,7 @@ class ChargeClient(BaseAPIClient):
         state: str,
         zipcode: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction]:
+    ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Submit address to continue a charge
 
         Args:
@@ -275,7 +275,7 @@ class ChargeClient(BaseAPIClient):
             "zip_code": zipcode,
         }
         url = self._full_url("/charge/submit_address")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -286,7 +286,7 @@ class ChargeClient(BaseAPIClient):
         self,
         reference: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction]:
+    ) -> Response[Transaction] | Response[PaystackDataModel]:
         """
         When you get "pending" as a charge status or if there was an
         exception when calling any of the /charge endpoints, wait 10
@@ -313,7 +313,7 @@ class ChargeClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/charge/{reference}")
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Transaction,

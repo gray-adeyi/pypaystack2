@@ -1,63 +1,30 @@
+from typing import cast
 from unittest import IsolatedAsyncioTestCase
 
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.sub_clients.transfer_recipients import AsyncTransferRecipientClient
-from pypaystack2.utils import RecipientType, Currency, Recipient
-from tests.test_sub_clients.mocked_api_testcase import MockedAsyncAPITestCase
-
-
-class MockedAsyncTransferRecipientTestCase(MockedAsyncAPITestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        super().setUpClass()
-        load_dotenv()
-        cls.wrapper = AsyncTransferRecipientClient()
-
-    async def test_can_create(self):
-        response = await self.wrapper.create(
-            type=RecipientType.NUBAN,
-            name="Adeyi Gbenga Michael",
-            account_number="5273681014",
-            bank_code="214",
-            currency=Currency.NGN,
-        )
-        self.assertEqual(response.status_code, httpx.codes.OK)
-
-    async def test_can_bulk_create(self):
-        batch = [
-            {
-                "type": RecipientType.NUBAN,
-                "name": "Adeyi Gbenga Michael",
-                "account_number": "5273681014",
-                "bank_code": "214",
-            }
-        ]
-        response = await self.wrapper.bulk_create(batch=Recipient.from_dict_many(batch))
-        self.assertEqual(response.status_code, httpx.codes.OK)
-
-    async def test_can_update(self):
-        response = await self.wrapper.update(
-            id_or_code="54134578",
-            name="Adeyi Gbenga Michael",
-            email="coyotedevmail@gmail.com",
-        )
-        self.assertEqual(response.status_code, httpx.codes.OK)
-
-    async def test_can_delete(self):
-        response = await self.wrapper.delete(id_or_code="54134578")
-        self.assertEqual(response.status_code, httpx.codes.OK)
+from pypaystack2.sub_clients.async_clients.transfer_recipients import (
+    AsyncTransferRecipientClient,
+)
+from pypaystack2.utils.enums import RecipientType, Currency
+from pypaystack2.utils.models import Recipient, Response
+from pypaystack2.utils.response_models import (
+    TransferRecipient,
+    TransferRecipientBulkCreateData,
+)
 
 
 class AsyncTransferRecipientTestCase(IsolatedAsyncioTestCase):
+    client: AsyncTransferRecipientClient
+
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = AsyncTransferRecipientClient()
+        cls.client = AsyncTransferRecipientClient()
 
-    async def test_can_create(self):
-        response = await self.wrapper.create(
+    async def test_can_create(self) -> None:
+        response: Response[TransferRecipient] = await self.client.create(
             type=RecipientType.NUBAN,
             name="Adeyi Gbenga Michael",
             account_number="5273681014",
@@ -67,8 +34,9 @@ class AsyncTransferRecipientTestCase(IsolatedAsyncioTestCase):
         self.assertEqual(response.status_code, httpx.codes.CREATED)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Transfer recipient created successfully")
+        self.assertIsInstance(response.data, TransferRecipient)
 
-    async def test_can_bulk_create(self):
+    async def test_can_bulk_create(self) -> None:
         batch = [
             {
                 "type": RecipientType.NUBAN,
@@ -77,25 +45,39 @@ class AsyncTransferRecipientTestCase(IsolatedAsyncioTestCase):
                 "bank_code": "214",
             }
         ]
-        response = await self.wrapper.bulk_create(batch=Recipient.from_dict_many(batch))
+        response: Response[
+            TransferRecipientBulkCreateData
+        ] = await self.client.bulk_create(
+            batch=[Recipient.model_validate(item) for item in batch]
+        )
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Recipients added successfully")
+        self.assertIsInstance(response.data, TransferRecipientBulkCreateData)
 
-    async def test_can_get_transfer_recipients(self):
-        response = await self.wrapper.get_transfer_recipients()
+    async def test_can_get_transfer_recipients(self) -> None:
+        response = cast(
+            Response[list[TransferRecipient]],
+            await self.client.get_transfer_recipients(),
+        )
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Recipients retrieved")
+        self.assertIsInstance(response.data, list)
+        if len(response.data) > 1:
+            self.assertIsInstance(response.data[0], TransferRecipient)
 
-    async def test_can_get_transfer_recipient(self):
-        response = await self.wrapper.get_transfer_recipient(id_or_code="54134578")
+    async def test_can_get_transfer_recipient(self) -> None:
+        response: Response[
+            TransferRecipient
+        ] = await self.client.get_transfer_recipient(id_or_code="54134578")
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Recipient retrieved")
+        self.assertIsInstance(response.data, TransferRecipient)
 
-    async def test_can_update(self):
-        response = await self.wrapper.update(
+    async def test_can_update(self) -> None:
+        response: Response[None] = await self.client.update(
             id_or_code="54134578",
             name="Adeyi Gbenga Michael",
             email="coyotedevmail@gmail.com",
@@ -104,10 +86,12 @@ class AsyncTransferRecipientTestCase(IsolatedAsyncioTestCase):
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Recipient updated")
 
-    async def test_can_delete(self):
-        all_recipients_response = await self.wrapper.get_transfer_recipients()
-        response = await self.wrapper.delete(
-            id_or_code=all_recipients_response.data[0]["id"]
+    async def test_can_delete(self) -> None:
+        all_recipients_response = cast(
+            Response[TransferRecipient], await self.client.get_transfer_recipients()
+        )
+        response: Response[None] = await self.client.delete(
+            id_or_code=all_recipients_response.data[0].id
         )
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)

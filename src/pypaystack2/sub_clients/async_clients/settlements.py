@@ -2,7 +2,7 @@ from http import HTTPMethod
 from typing import Type
 
 from pypaystack2.base_api_client import BaseAsyncAPIClient
-from pypaystack2.utils import append_query_params
+from pypaystack2.utils.helpers import append_query_params
 from pypaystack2.utils.models import PaystackDataModel, Response
 from pypaystack2.utils.response_models import Settlement, Transaction
 
@@ -22,7 +22,7 @@ class AsyncSettlementClient(BaseAsyncAPIClient):
         end_date: str | None = None,
         subaccount: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Settlement]:
+    ) -> Response[Settlement] | Response[PaystackDataModel]:
         """Fetch settlements made to your settlement accounts.
 
         Args:
@@ -59,7 +59,7 @@ class AsyncSettlementClient(BaseAsyncAPIClient):
             ("end_date", end_date),
         ]
         url = append_query_params(query_params, url)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Settlement,
@@ -73,7 +73,7 @@ class AsyncSettlementClient(BaseAsyncAPIClient):
         start_date: str | None = None,
         end_date: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction]:
+    ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Get the transactions that make up a particular settlement
 
         Args:
@@ -109,7 +109,7 @@ class AsyncSettlementClient(BaseAsyncAPIClient):
             ("end_date", end_date),
         ]
         url = append_query_params(query_params, url)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Transaction,

@@ -3,8 +3,8 @@ from typing import Type, Optional
 
 from pypaystack2.base_api_client import BaseAsyncAPIClient
 from pypaystack2.exceptions import InvalidDataException
-from pypaystack2.utils import add_to_payload, append_query_params
 from pypaystack2.utils.enums import Identification, Country, RiskAction
+from pypaystack2.utils.helpers import add_to_payload, append_query_params
 from pypaystack2.utils.models import PaystackDataModel
 from pypaystack2.utils.models import Response
 from pypaystack2.utils.response_models import Customer
@@ -25,7 +25,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
         phone: str | None = None,
         metadata: dict | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Customer]:
+    ) -> Response[Customer] | Response[PaystackDataModel]:
         """Create a customer on your integration.
 
         Note:
@@ -69,7 +69,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
             ("metadata", metadata),
         ]
         payload = add_to_payload(optional_params, payload)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -83,7 +83,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
         page: int = 1,
         pagination: int = 50,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[Customer]]:
+    ) -> Response[list[Customer]] | Response[PaystackDataModel]:
         """Fetches customers available on your integration.
 
         Args:
@@ -116,7 +116,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
         ]
         url = self._full_url(f"/customer/?perPage={pagination}")
         url = append_query_params(query_params, url)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Customer,
@@ -126,7 +126,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
         self,
         email_or_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Customer]:
+    ) -> Response[Customer] | Response[PaystackDataModel]:
         """Get details of a customer on your integration.
 
         Args:
@@ -149,7 +149,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
         """
 
         url = self._full_url(f"/customer/{email_or_code}/")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Customer,
@@ -163,7 +163,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
         phone: str | None = None,
         metadata: dict | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Customer]:
+    ) -> Response[Customer] | Response[PaystackDataModel]:
         """Update a customer's details on your integration
 
         Args:
@@ -200,7 +200,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
             ("metadata", metadata),
         ]
         payload = add_to_payload(optional_params, payload)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.PUT,
             url,
             payload,
@@ -220,7 +220,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
         account_number: str | None = None,
         middle_name: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Validate a customer's identity
 
         Args:
@@ -277,7 +277,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
             ("value", identification_number),
         ]
         payload = add_to_payload(optional_params, payload)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -289,7 +289,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
         customer: str,
         risk_action: Optional[RiskAction] = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Customer]:
+    ) -> Response[Customer] | Response[PaystackDataModel]:
         """Whitelist or blacklist a customer on your integration
 
         Args:
@@ -320,7 +320,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
             ("risk_action", risk_action),
         ]
         payload = add_to_payload(optional_params, payload)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -331,7 +331,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
         self,
         auth_code: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Deactivate an authorization when the card needs to be forgotten
 
         Args:
@@ -357,7 +357,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
         payload = {
             "authorization_code": auth_code,
         }
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,

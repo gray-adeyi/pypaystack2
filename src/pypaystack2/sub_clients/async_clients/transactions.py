@@ -3,13 +3,15 @@ from typing import Type
 
 from pypaystack2.base_api_client import BaseAsyncAPIClient
 from pypaystack2.exceptions import InvalidDataException
-from pypaystack2.utils import add_to_payload, append_query_params
 from pypaystack2.utils.enums import Currency, Channel, Bearer, TransactionStatus
+from pypaystack2.utils.helpers import add_to_payload, append_query_params
 from pypaystack2.utils.models import Response, PaystackDataModel
 from pypaystack2.utils.response_models import (
     InitTransaction,
     Transaction,
     TransactionLog,
+    TransactionExport,
+    TransactionTotal,
 )
 
 
@@ -36,7 +38,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         transfer_charge: int | None = None,
         bearer: Bearer | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[InitTransaction]:
+    ) -> Response[InitTransaction] | Response[PaystackDataModel]:
         """Initialize a transaction from your backend
 
         Args:
@@ -106,16 +108,20 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         payload = add_to_payload(
             optional_params,
             payload,
-            response_data_model_class=alternate_model_class or InitTransaction,
         )
 
-        return await self._handle_request(HTTPMethod.POST, url, payload)
+        return await self._handle_request(
+            HTTPMethod.POST,
+            url,
+            payload,  # type: ignore
+            response_data_model_class=alternate_model_class or InitTransaction,
+        )
 
     async def verify(
         self,
         reference: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction]:
+    ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Confirm the status of a transaction
 
         Args:
@@ -155,7 +161,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         amount: int | None = None,
         pagination: int = 50,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[list[Transaction]]:
+    ) -> Response[list[Transaction]] | Response[PaystackDataModel]:
         """Fetch transactions carried out on your integration.
 
         Args:
@@ -199,7 +205,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         ]
         url = append_query_params(query_params, url)
 
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Transaction,
@@ -209,7 +215,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         self,
         id: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction]:
+    ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Get details of a transaction carried out on your integration.
 
         Args:
@@ -232,7 +238,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         """
 
         url = self._full_url(f"/transaction/{id}/")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Transaction,
@@ -252,7 +258,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         bearer: Bearer | None = None,
         queue: bool = False,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction]:
+    ) -> Response[Transaction] | Response[PaystackDataModel]:
         """
         All authorizations marked as reusable can be charged with this
         endpoint whenever you need to receive payments.
@@ -323,7 +329,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         ]
         payload = add_to_payload(optional_params, payload)
 
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -334,7 +340,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         self,
         id_or_ref: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[TransactionLog]:
+    ) -> Response[TransactionLog] | Response[PaystackDataModel]:
         """View the timeline of a transaction
 
         Args:
@@ -357,7 +363,11 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         """
 
         url = self._full_url(f"/transaction/timeline/{id_or_ref}")
-        return await self._handle_request(HTTPMethod.GET, url)
+        return await self._handle_request(  # type: ignore
+            HTTPMethod.GET,
+            url,
+            response_data_model_class=alternate_model_class or TransactionLog,
+        )
 
     async def totals(
         self,
@@ -366,7 +376,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         end_date: str | None = None,
         pagination: int = 50,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response:
+    ) -> Response[TransactionTotal] | Response[PaystackDataModel]:
         """Total amount received on your account
 
         Args:
@@ -400,7 +410,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
             ("to", end_date),
         ]
         url = append_query_params(query_params, url)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or TransactionTotal,
@@ -419,8 +429,8 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         settlement: str | None = None,
         payment_page: str | None = None,
         pagination: int = 50,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response:
+        alternate_model_class: type[PaystackDataModel] | None = None,
+    ) -> Response[TransactionExport] | Response[PaystackDataModel]:
         """Fetch transactions carried out on your integration.
 
         Args:
@@ -473,7 +483,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
             ("payment_page", payment_page),
         ]
         url = append_query_params(query_params, url)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or TransactionExport,
@@ -488,7 +498,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         reference: str | None = None,
         at_least: int | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response:
+    ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Retrieve part of a payment from a customer
 
         Args:
@@ -537,4 +547,9 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         optional_params = [("reference", reference), ("at_least", at_least)]
         payload = add_to_payload(optional_params, payload)
 
-        return await self._handle_request(HTTPMethod.POST, url, payload)
+        return await self._handle_request(  # type: ignore
+            HTTPMethod.POST,
+            url,
+            payload,
+            response_data_model_class=alternate_model_class or Transaction,
+        )

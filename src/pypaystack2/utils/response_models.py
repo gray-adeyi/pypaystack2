@@ -516,8 +516,8 @@ class Settlement(BaseModel):
 
 
 class TransferRecipientDetail(BaseModel):
-    authorization_code: int | None = None
-    account_name: str
+    authorization_code: str | None = None
+    account_name: str | None = None
     bank_code: str
     bank_name: str
 
@@ -531,7 +531,7 @@ class TransferRecipient(BaseModel):
     email: str | None = None
     id: int
     integration: int
-    metadata: dict[str, Any]
+    metadata: dict[str, Any] | None = None
     name: str
     recipient_code: str
     type: str  # TODO: Find out all the supported types
@@ -540,6 +540,11 @@ class TransferRecipient(BaseModel):
     recipient_account: str | None = None
     institution_code: str | None = None
     details: TransferRecipientDetail
+
+
+class TransferRecipientBulkCreateData(BaseModel):
+    success: list[TransferRecipient]
+    errors: list[Any]
 
 
 class TransferSession(BaseModel):

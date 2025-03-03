@@ -4,8 +4,9 @@ from typing import Type
 import httpx
 
 from pypaystack2.base_api_client import BaseAPIClient
-from pypaystack2.utils import Response, append_query_params
+from pypaystack2.utils.helpers import append_query_params
 from pypaystack2.utils.models import PaystackDataModel
+from pypaystack2.utils.models import Response
 from pypaystack2.utils.response_models import ApplePayDomains
 
 
@@ -23,7 +24,7 @@ class ApplePayClient(BaseAPIClient):
         self,
         domain_name: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Register a top-level domain or subdomain for your Apple Pay integration.
 
         Note:
@@ -54,7 +55,7 @@ class ApplePayClient(BaseAPIClient):
         payload = {
             "domainName": domain_name,
         }
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -67,7 +68,7 @@ class ApplePayClient(BaseAPIClient):
         next: str | None = None,
         previous: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[ApplePayDomains]:
+    ) -> Response[ApplePayDomains] | Response[PaystackDataModel]:
         """Fetches all registered domains on your integration.
 
         Note
@@ -101,7 +102,7 @@ class ApplePayClient(BaseAPIClient):
             ("previous", previous),
         ]
         url = append_query_params(query_params, url)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or ApplePayDomains,
@@ -111,7 +112,7 @@ class ApplePayClient(BaseAPIClient):
         self,
         domain_name: str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[None]:
+    ) -> Response[None] | Response[PaystackDataModel]:
         """Unregister a top-level domain or subdomain previously used for your Apple Pay integration.
 
         Args:
@@ -143,7 +144,7 @@ class ApplePayClient(BaseAPIClient):
         raw_response = httpx.request(
             HTTPMethod.DELETE, url, json=payload, headers=self._headers
         )
-        return self._deserialize_response(
+        return self._deserialize_response(  # type: ignore
             raw_response,
             response_data_model_class=alternate_model_class,
         )
