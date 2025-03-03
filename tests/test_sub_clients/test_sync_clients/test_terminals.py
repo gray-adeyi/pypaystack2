@@ -3,22 +3,13 @@ from unittest import TestCase
 from dotenv import load_dotenv
 
 from pypaystack2.sub_clients import TerminalClient
-from tests.test_sub_clients.mocked_api_testcase import MockedAPITestCase
-
-
-class MockedTerminalTestCase(MockedAPITestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        super().setUpClass()
-        load_dotenv()
-        cls.wrapper = TerminalClient()
 
 
 class TerminalTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = TerminalClient()
+        cls.client = TerminalClient()
 
     def test_can_send_event(self): ...
 

@@ -20,6 +20,7 @@ from pypaystack2.sub_clients.async_clients.settlements import AsyncSettlementCli
 from pypaystack2.sub_clients.async_clients.splits import AsyncTransactionSplitClient
 from pypaystack2.sub_clients.async_clients.subaccounts import AsyncSubAccountClient
 from pypaystack2.sub_clients.async_clients.subscriptions import AsyncSubscriptionClient
+from pypaystack2.sub_clients.async_clients.terminals import AsyncTerminalClient
 from pypaystack2.sub_clients.sync_clients.apple_pay import (
     ApplePayClient,
 )
@@ -65,7 +66,9 @@ from pypaystack2.sub_clients.sync_clients.subaccounts import (
 from pypaystack2.sub_clients.sync_clients.subscriptions import (
     SubscriptionClient,
 )
-from pypaystack2.sub_clients.terminals import TerminalClient, AsyncTerminalClient
+from pypaystack2.sub_clients.sync_clients.terminals import (
+    TerminalClient,
+)
 from pypaystack2.sub_clients.transactions import (
     AsyncTransactionClient,
     TransactionClient,
