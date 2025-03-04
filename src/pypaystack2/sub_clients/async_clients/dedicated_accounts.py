@@ -1,5 +1,4 @@
 from http import HTTPMethod
-from typing import Type
 
 from pypaystack2.base_clients import (
     BaseAsyncAPIClient,
@@ -7,12 +6,12 @@ from pypaystack2.base_clients import (
     append_query_params,
 )
 from pypaystack2.enums import Country, Currency
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models import Response
 from pypaystack2.models.response_models import (
     DedicatedAccount,
     DedicatedAccountProvider,
 )
+from pypaystack2.types import PaystackDataModel
 
 
 class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
@@ -36,7 +35,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         first_name: str | None = None,
         last_name: str | None = None,
         phone: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[DedicatedAccount] | Response[PaystackDataModel]:
         """Create a dedicated virtual account for an existing customer
 
@@ -103,7 +102,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         bank_code: str | None = None,
         subaccount: str | None = None,
         split_code: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Create a customer, validate the customer, and assign a DVA to the customer.
 
@@ -171,9 +170,9 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         active: bool = True,
         currency: Currency = Currency.NGN,
         provider_slug: str | None = None,
-        bank_id: str | None = None,
+        bank_id: str | int | None = None,
         customer: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[DedicatedAccount]] | Response[PaystackDataModel]:
         """Fetches dedicated virtual accounts available on your integration.
 
@@ -221,8 +220,8 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
 
     async def get_dedicated_account(
         self,
-        dedicated_account_id: int,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        dedicated_account_id: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[DedicatedAccount] | Response[PaystackDataModel]:
         """Get details of a dedicated virtual account on your integration.
 
@@ -261,7 +260,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
         account_number: str,
         provider_slug: str,
         date: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Get details of a dedicated virtual account on your integration.
 
@@ -302,8 +301,8 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
 
     async def deactivate(
         self,
-        dedicated_account_id: int,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        dedicated_account_id: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[DedicatedAccount] | Response[PaystackDataModel]:
         """Deactivate a dedicated virtual account on your integration.
 
@@ -337,11 +336,11 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
 
     async def split(
         self,
-        customer: str,
+        customer: int | str,
         subaccount: str | None = None,
         split_code: str | None = None,
         preferred_bank: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[DedicatedAccount] | Response[PaystackDataModel]:
         """Split a dedicated virtual account transaction with one or more accounts
 
@@ -391,7 +390,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
     async def remove_split(
         self,
         account_number: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[DedicatedAccount] | Response[PaystackDataModel]:
         """Removes a split.
 
@@ -434,7 +433,7 @@ class AsyncDedicatedAccountClient(BaseAsyncAPIClient):
 
     async def get_providers(
         self,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[DedicatedAccountProvider]] | Response[PaystackDataModel]:
         """Get available bank providers for a dedicated virtual account
 
