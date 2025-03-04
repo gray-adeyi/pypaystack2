@@ -23,5 +23,5 @@ class SettlementClientTestCase(TestCase):
     @skip("incomplete test")
     def test_can_get_settlement_transactions(self) -> None:
         # TODO: Test properly
-        response = self.client.get_settlement_transactions(id="hello")
+        response = self.client.get_settlement_transactions(id_="hello")
         self.assertEqual(response.status_code, httpx.codes.INTERNAL_SERVER_ERROR)
