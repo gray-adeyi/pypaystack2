@@ -1,5 +1,4 @@
 from http import HTTPMethod
-from typing import Type
 
 from pypaystack2.base_clients import (
     BaseAPIClient,
@@ -24,18 +23,18 @@ class TransactionSplitClient(BaseAPIClient):
     def create(
         self,
         name: str,
-        type: Split,
+        type_: Split,
         currency: Currency,
         subaccounts: list[SplitAccount],
         bearer_type: Bearer,
         bearer_subaccount: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[TransactionSplit] | Response[PaystackDataModel]:
         """Create a split payment on your integration
 
         Args:
             name: Name of the transaction split
-            type: The type of transaction split you want to create.
+            type_: The type of transaction split you want to create.
                 Any value from the ``SplitType`` enum
             currency: Any value from the ``Currency`` enum
             subaccounts: A list of dictionaries containing subaccount code and
@@ -58,14 +57,14 @@ class TransactionSplitClient(BaseAPIClient):
         Returns:
             A pydantic model containing the response gotten from paystack's server.
         """
-        subaccounts = [account.model_dump() for account in subaccounts]
+        _subaccounts = [account.model_dump() for account in subaccounts]
 
         url = self._full_url("/split")
         payload = {
             "name": name,
-            "type": type,
+            "type": type_,
             "currency": currency,
-            "subaccounts": subaccounts,
+            "subaccounts": _subaccounts,
             "bearer_type": bearer_type,
             "bearer_subaccount": bearer_subaccount,
         }
@@ -85,7 +84,7 @@ class TransactionSplitClient(BaseAPIClient):
         end_date: str | None = None,
         active: bool = True,
         pagination: int = 50,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[TransactionSplit]] | Response[PaystackDataModel]:
         """Get/search for the transaction splits available on your integration.
 
@@ -133,8 +132,8 @@ class TransactionSplitClient(BaseAPIClient):
 
     def get_split(
         self,
-        id_or_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_or_code: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[TransactionSplit] | Response[PaystackDataModel]:
         """Get details of a split on your integration.
 
@@ -165,17 +164,17 @@ class TransactionSplitClient(BaseAPIClient):
 
     def update(
         self,
-        id: str,
+        id_: int | str,
         name: str,
         active: bool,
         bearer_type: Bearer | None = None,
         bearer_subaccount: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[TransactionSplit] | Response[PaystackDataModel]:
         """Update a transaction split details on your integration
 
         Args:
-            id: Split ID
+            id_: Split ID
             name: Name of the transaction split
             active: Flag for active
             bearer_type: Any value from the Bearer enum
@@ -215,7 +214,7 @@ class TransactionSplitClient(BaseAPIClient):
             ("bearer_subaccount", bearer_subaccount),
         ]
         payload = add_to_payload(optional_params, payload)
-        url = self._full_url(f"/split/{id}/")
+        url = self._full_url(f"/split/{id_}/")
         return self._handle_request(  # type: ignore
             HTTPMethod.PUT,
             url,
@@ -225,17 +224,17 @@ class TransactionSplitClient(BaseAPIClient):
 
     def add_or_update(
         self,
-        id: str,
+        id_: int | str,
         subaccount: str,
         share: int | float,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[TransactionSplit] | Response[PaystackDataModel]:
         """
         Add a Subaccount to a Transaction Split, or update
         the share of an existing Subaccount in a Transaction Split
 
         Args:
-         id: Split ID
+         id_: Split ID
          subaccount: This is the subaccount code
          share: This is the transaction share for the subaccount
          alternate_model_class: A pydantic model class to use instead of the
@@ -256,7 +255,7 @@ class TransactionSplitClient(BaseAPIClient):
         """
 
         payload = {"subaccount": subaccount, "share": share}
-        url = self._full_url(f"/split/{id}/subaccount/add")
+        url = self._full_url(f"/split/{id_}/subaccount/add")
         return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
@@ -266,14 +265,14 @@ class TransactionSplitClient(BaseAPIClient):
 
     def remove(
         self,
-        id: str,
+        id_: int | str,
         subaccount: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Remove a subaccount from a transaction split
 
         Args:
-            id: Split ID
+            id_: Split ID
             subaccount: This is the subaccount code
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
@@ -293,7 +292,7 @@ class TransactionSplitClient(BaseAPIClient):
         """
 
         payload = {"subaccount": subaccount}
-        url = self._full_url(f"/split/{id}/subaccount/remove")
+        url = self._full_url(f"/split/{id_}/subaccount/remove")
         return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
