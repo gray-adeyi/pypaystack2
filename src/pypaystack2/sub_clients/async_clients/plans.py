@@ -1,5 +1,4 @@
 from http import HTTPMethod
-from typing import Type
 
 from pypaystack2.base_clients import (
     BaseAsyncAPIClient,
@@ -8,8 +7,8 @@ from pypaystack2.base_clients import (
 )
 from pypaystack2.enums import Interval, Currency, Status
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models.response_models import Plan
+from pypaystack2.types import PaystackDataModel
 
 
 class AsyncPlanClient(BaseAsyncAPIClient):
@@ -29,7 +28,7 @@ class AsyncPlanClient(BaseAsyncAPIClient):
         invoice_limit: int | None = None,
         send_invoices: bool = False,
         send_sms: bool = False,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Plan] | Response[PaystackDataModel]:
         """Create a plan on your integration
 
@@ -91,7 +90,7 @@ class AsyncPlanClient(BaseAsyncAPIClient):
         status: Status | None = None,
         interval: Interval | None = None,
         amount: int | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[Plan]] | Response[PaystackDataModel]:
         """Fetch plans available on your integration.
 
@@ -138,8 +137,8 @@ class AsyncPlanClient(BaseAsyncAPIClient):
 
     async def get_plan(
         self,
-        id_or_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_or_code: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Plan] | Response[PaystackDataModel]:
         """Get details of a plan on your integration.
 
@@ -170,7 +169,7 @@ class AsyncPlanClient(BaseAsyncAPIClient):
 
     async def update(
         self,
-        id_or_code: str,
+        id_or_code: int | str,
         name: str | None = None,
         amount: int | None = None,
         interval: Interval | None = None,
@@ -179,7 +178,7 @@ class AsyncPlanClient(BaseAsyncAPIClient):
         invoice_limit: int | None = None,
         send_invoices: bool = False,
         send_sms: bool = False,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Update a plan details on your integration
 
