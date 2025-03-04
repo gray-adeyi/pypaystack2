@@ -9,13 +9,14 @@ from json import JSONDecodeError
 from typing import Type, Any, cast
 
 import httpx
+from httpx import NetworkError
 from pydantic import ValidationError
 
 from pypaystack2._metadata import __version__
-from pypaystack2.exceptions import MissingSecretKeyException
+from pypaystack2.exceptions import MissingSecretKeyException, ClientNetworkError
 from pypaystack2.fees_calculation_mixin import FeesCalculationMixin
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models import Response
+from pypaystack2.types import PaystackDataModel
 
 logger = logging.getLogger(__name__)
 
@@ -241,7 +242,10 @@ class BaseAPIClient(AbstractAPIClient):
         if not http_method_handler:
             raise ValueError("HTTP Request method not recognised or implemented")
 
-        response = http_method_handler(**request_kwargs)  # type: ignore
+        try:
+            response = http_method_handler(**request_kwargs)  # type: ignore
+        except NetworkError as error:
+            raise ClientNetworkError(f"network error occurred: {error}", error)
         return self._deserialize_response(
             response, response_data_model_class, raise_serialization_exception
         )
@@ -278,7 +282,10 @@ class BaseAsyncAPIClient(AbstractAPIClient):
             )
             if not http_method_handler:
                 raise ValueError("HTTP Request method not recognised or implemented")
-            response = await http_method_handler(**request_kwargs)
+            try:
+                response = await http_method_handler(**request_kwargs)
+            except NetworkError as error:
+                raise ClientNetworkError(f"network error occurred: {error}", error)
 
         return self._deserialize_response(
             response, response_data_model_class, raise_serialization_exception

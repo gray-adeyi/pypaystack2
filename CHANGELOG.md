@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Pydantic v2 to project dependencies.
 - Utility methods for fees calculation `calculate_fee`, `to_base_unit`, `to_subunit`.
+- `ClientNetworkError`. An exception raised for all network related errors.
 
 ### Changed
 
