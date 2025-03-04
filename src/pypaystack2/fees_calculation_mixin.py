@@ -1,17 +1,23 @@
 from decimal import Decimal
-from typing import Unpack
+from typing import Unpack, TypedDict, cast
 
-from pypaystack2.utils import Currency
-from pypaystack2.utils.models import (
+from pypaystack2.enums import Currency
+from pypaystack2.models.payload_models import (
     NigeriaServiceFeeOptions,
     CoteDIvoreServiceFeeOptions,
     GhanaServiceFeeOptions,
     KenyaServiceFeeOptions,
     SouthAfricaServiceFeeOptions,
-    ServiceFeeOptions,
     RwandaServiceFeeOptions,
     EgyptServiceFeeOptions,
 )
+
+
+class ServiceFeeOptions(TypedDict):
+    is_international: bool | None
+    service: str
+    is_eft: bool | None
+    card: str | None
 
 
 class FeesCalculationMixin:
@@ -111,7 +117,7 @@ class FeesCalculationMixin:
             raise ValueError(
                 f"fees calculation for currency {currency} is not supported"
             )
-        options_model = options_validator_class.model_validate(options)
+        options_model = options_validator_class.model_validate(options)  # type: ignore
 
         if currency == Currency.NGN:
             return self._calculate_ngn_fee(amount, options_model)
@@ -141,13 +147,15 @@ class FeesCalculationMixin:
         Args:
             value: The currency value in its subunit. e.g. Kobo
         """
-        is_integer = isinstance(value, int)
-        is_decimal = isinstance(value, Decimal)
+        _value = value
+        is_integer = isinstance(_value, int)
+        is_decimal = isinstance(_value, Decimal)
         if not any([is_integer, is_decimal]):
             raise ValueError("value must be an integer or Decimal")
         if is_integer:
-            value = Decimal(value)
-        return value / 100
+            _value = Decimal(_value)
+        _value = cast(Decimal, _value)
+        return _value / 100
 
     def to_subunit(self, value: int | float | Decimal) -> int:
         """Converts a currency value from its base unit to its subunit.
@@ -220,7 +228,7 @@ class FeesCalculationMixin:
             )
         raise ValueError("unsupported service option")
 
-    def _calculate_ngn_local_transaction_fee(self, amount: int):
+    def _calculate_ngn_local_transaction_fee(self, amount: int) -> int:
         fee = amount * self._NGN_LOCAL_TRANSACTIONS_DECIMAL_FEE
         if amount > self._NGN_LOCAL_TRANSACTIONS_FLAT_FEE_WAIVED:
             fee += self._NGN_LOCAL_TRANSACTIONS_FLAT_FEE

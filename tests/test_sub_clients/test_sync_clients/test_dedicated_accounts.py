@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, skip
 
 import httpx
 from dotenv import load_dotenv
@@ -6,29 +6,39 @@ from dotenv import load_dotenv
 from pypaystack2.sub_clients import DedicatedAccountClient
 
 
-class DedicatedAccountTestCase(TestCase):
+class DedicatedAccountClientTestCase(TestCase):
+    client: DedicatedAccountClient
+
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
         cls.client = DedicatedAccountClient()
 
-    def test_can_create(self):
+    @skip("incomplete test")
+    def test_can_create(self) -> None:
         # TODO: Test properly.
         self.client.create(customer="CUS_5qmwswiljybyyne")
 
-    def test_can_get_dedicated_accounts(self): ...
+    @skip("incomplete test")
+    def test_can_get_dedicated_accounts(self) -> None: ...
 
-    def test_can_get_dedicated_account(self): ...
+    @skip("incomplete test")
+    def test_can_get_dedicated_account(self) -> None: ...
 
-    def test_can_requery(self): ...
+    @skip("incomplete test")
+    def test_can_requery(self) -> None: ...
 
-    def test_can_deactivate(self): ...
+    @skip("incomplete test")
+    def test_can_deactivate(self) -> None: ...
 
-    def test_can_split(self): ...
+    @skip("incomplete test")
+    def test_can_split(self) -> None: ...
 
-    def test_can_remove_split(self): ...
+    @skip("incomplete test")
+    def test_can_remove_split(self) -> None: ...
 
-    def test_can_get_providers(self):
+    @skip("incomplete test")
+    def test_can_get_providers(self) -> None:
         # TODO: Test properly.
         response = self.client.get_providers()
         self.assertEqual(response.status_code, httpx.codes.UNAUTHORIZED)

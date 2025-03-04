@@ -1,17 +1,20 @@
 from http import HTTPMethod
 from typing import Type
 
-from pypaystack2.base_api_client import BaseAsyncAPIClient
-from pypaystack2.utils.enums import DisputeStatus, Resolution
-from pypaystack2.utils.helpers import append_query_params, add_to_payload
-from pypaystack2.utils.models import PaystackDataModel
-from pypaystack2.utils.models import Response
-from pypaystack2.utils.response_models import (
+from pypaystack2.base_clients import (
+    BaseAsyncAPIClient,
+    add_to_payload,
+    append_query_params,
+)
+from pypaystack2.enums import DisputeStatus, Resolution
+from pypaystack2.models import Response
+from pypaystack2.models.response_models import (
     Dispute,
     DisputeEvidence,
     DisputeExportInfo,
     DisputeUploadInfo,
 )
+from pypaystack2.types import PaystackDataModel
 
 
 class AsyncDisputeClient(BaseAsyncAPIClient):
@@ -23,14 +26,14 @@ class AsyncDisputeClient(BaseAsyncAPIClient):
 
     async def get_disputes(
         self,
-        start_date: str,
-        end_date: str,
+        start_date: str = None,
+        end_date: str = None,
         pagination: int = 50,
         page: int = 1,
         transaction: str | None = None,
         status: DisputeStatus | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Dispute] | Response[PaystackDataModel]:
+    ) -> Response[list[Dispute]] | Response[PaystackDataModel]:
         """Fetches disputes filed against you
 
         Args:

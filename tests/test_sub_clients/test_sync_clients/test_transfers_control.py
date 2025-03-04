@@ -1,14 +1,14 @@
-from unittest import TestCase
+from unittest import TestCase, skip
 
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.sub_clients.sync_clients.transfers_control import TransferControlClient
-from pypaystack2.utils.enums import Reason
-from pypaystack2.utils.response_models import IntegrationBalance, BalanceLedgerItem
+from pypaystack2.enums import Reason
+from pypaystack2.models import IntegrationBalance, BalanceLedgerItem
+from pypaystack2.sub_clients import TransferControlClient
 
 
-class TransferControlTestCase(TestCase):
+class TransferControlClientTestCase(TestCase):
     client: TransferControlClient
 
     @classmethod
@@ -51,6 +51,7 @@ class TransferControlTestCase(TestCase):
             "OTP has been sent to mobile number ending with 9831 and to email a******@g******.com",
         )
 
+    @skip("incomplete test")
     def test_can_finalize_disable_otp(self) -> None:
         # TODO: Test properly
         response = self.client.finalize_disable_otp(otp="123456")

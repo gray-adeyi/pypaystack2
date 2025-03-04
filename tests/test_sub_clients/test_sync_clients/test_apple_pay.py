@@ -3,17 +3,19 @@ from unittest import TestCase
 
 from dotenv import load_dotenv
 
+from pypaystack2.models import Response
 from pypaystack2.sub_clients import ApplePayClient
-from pypaystack2.utils import Response
 
 
-class ApplePayTestCase(TestCase):
+class ApplePayClientTestCase(TestCase):
+    client: ApplePayClient
+
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
         cls.client = ApplePayClient()
 
-    def test_can_register_domain(self):
+    def test_can_register_domain(self) -> None:
         response = self.client.register_domain(domain_name="example.com")
         raw_data = {
             "status": False,
@@ -38,7 +40,7 @@ class ApplePayTestCase(TestCase):
         )
         self.assertEqual(response, expected_response)
 
-    def test_can_get_domains(self):
+    def test_can_get_domains(self) -> None:
         response = self.client.get_domains()
         expected_response = Response(
             status_code=HTTPStatus.NOT_FOUND,
@@ -52,7 +54,7 @@ class ApplePayTestCase(TestCase):
         )
         self.assertEqual(response, expected_response)
 
-    def test_can_unregister_domain(self):
+    def test_can_unregister_domain(self) -> None:
         response = self.client.unregister_domain(domain_name="example.com")
         raw_data = {
             "status": True,

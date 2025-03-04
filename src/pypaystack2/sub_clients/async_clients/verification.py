@@ -1,10 +1,11 @@
 from http import HTTPMethod
 from typing import Type
 
-from pypaystack2.base_api_client import BaseAsyncAPIClient
-from pypaystack2.utils.enums import AccountType, Country, Document
-from pypaystack2.utils.models import Response, PaystackDataModel
-from pypaystack2.utils.response_models import (
+from pypaystack2.base_clients import BaseAsyncAPIClient
+from pypaystack2.enums import AccountType, Country, Document
+from pypaystack2.models import Response
+from pypaystack2.types import PaystackDataModel
+from pypaystack2.models.response_models import (
     BankAccountInfo,
     AccountVerificationInfo,
     CardBin,

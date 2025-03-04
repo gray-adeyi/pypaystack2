@@ -1,17 +1,16 @@
-from unittest import TestCase
 from unittest.async_case import IsolatedAsyncioTestCase
 
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.utils.models import Response
-from pypaystack2.sub_clients.async_clients.verification import AsyncVerificationClient
-from pypaystack2.utils.enums import AccountType, Country, Document
-from pypaystack2.utils.response_models import (
+from pypaystack2.enums import AccountType, Country, Document
+from pypaystack2.models import (
+    Response,
     BankAccountInfo,
     AccountVerificationInfo,
     CardBin,
 )
+from pypaystack2.sub_clients import AsyncVerificationClient
 
 
 class AsyncVerificationTestCase(IsolatedAsyncioTestCase):

@@ -1,12 +1,10 @@
 from http import HTTPMethod
 from typing import Type
 
-from pypaystack2.base_api_client import BaseAPIClient
-from pypaystack2.utils.helpers import (
-    append_query_params,
-)
-from pypaystack2.utils.models import PaystackDataModel, Response
-from pypaystack2.utils.response_models import Settlement, Transaction
+from pypaystack2.base_clients import BaseAPIClient, append_query_params
+from pypaystack2.models import Response
+from pypaystack2.models.response_models import Settlement, Transaction
+from pypaystack2.types import PaystackDataModel
 
 
 class SettlementClient(BaseAPIClient):
@@ -24,7 +22,7 @@ class SettlementClient(BaseAPIClient):
         end_date: str | None = None,
         subaccount: str | None = None,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[Settlement] | Response[PaystackDataModel]:
+    ) -> Response[list[Settlement]] | Response[PaystackDataModel]:
         """Fetch settlements made to your settlement accounts.
 
         Args:

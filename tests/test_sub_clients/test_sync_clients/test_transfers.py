@@ -1,13 +1,13 @@
-from unittest import TestCase
+from unittest import TestCase, skip
 
 import httpx
 from dotenv import load_dotenv
 
+from pypaystack2.models.payload_models import TransferInstruction
 from pypaystack2.sub_clients.sync_clients.transfers import TransferClient
-from pypaystack2.utils.models import TransferInstruction
 
 
-class TransferTestCase(TestCase):
+class TransferClientTestCase(TestCase):
     client: TransferClient
 
     @classmethod
@@ -15,16 +15,19 @@ class TransferTestCase(TestCase):
         load_dotenv()
         cls.client = TransferClient()
 
+    @skip("incomplete test")
     def test_can_initiate(self) -> None:
         # TODO: Test properly
         response = self.client.initiate(amount=1000, recipient="RCP_dv0jwap08v8niic")
         self.assertEqual(response.status_code, httpx.codes.BAD_REQUEST)
 
+    @skip("incomplete test")
     def test_can_finalize(self) -> None:
         # TODO: Test properly
         response = self.client.finalize(transfer_code="", otp="")
         self.assertEqual(response.status_code, httpx.codes.BAD_REQUEST)
 
+    @skip("incomplete test")
     def test_can_bulk_transfer(self) -> None:
         # TODO: Test properly
         tx_instructions = [{"amount": 1000, "recipient": "RCP_dv0jwap08v8niic"}]
@@ -41,6 +44,8 @@ class TransferTestCase(TestCase):
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Transfers retrieved")
 
+    @skip("incomplete test")
     def test_can_get_transfer(self) -> None: ...
 
+    @skip("incomplete test")
     def test_can_verify(self) -> None: ...

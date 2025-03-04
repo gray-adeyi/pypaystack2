@@ -1,14 +1,11 @@
 from http import HTTPMethod
 from typing import Type
 
-from pypaystack2.base_api_client import BaseAPIClient
-from pypaystack2.utils.enums import BankType, Country, Gateway, Currency
-from pypaystack2.utils.helpers import append_query_params
-from pypaystack2.utils.models import PaystackDataModel
-from pypaystack2.utils.models import (
-    Response,
-)
-from pypaystack2.utils.response_models import Bank, PaystackSupportedCountry, State
+from pypaystack2.base_clients import BaseAPIClient, append_query_params
+from pypaystack2.enums import BankType, Country, Gateway, Currency
+from pypaystack2.models import Response
+from pypaystack2.models.response_models import Bank, PaystackSupportedCountry, State
+from pypaystack2.types import PaystackDataModel
 
 
 class MiscellaneousClient(BaseAPIClient):
@@ -124,7 +121,7 @@ class MiscellaneousClient(BaseAPIClient):
         self,
         country: Country | str,
         alternate_model_class: Type[PaystackDataModel] | None = None,
-    ) -> Response[State] | Response[PaystackDataModel]:
+    ) -> Response[list[State]] | Response[PaystackDataModel]:
         """Get a list of states for a country for address verification.
 
         Args:

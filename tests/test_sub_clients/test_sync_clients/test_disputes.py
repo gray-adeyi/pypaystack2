@@ -1,4 +1,4 @@
-from unittest import TestCase
+from unittest import TestCase, skip
 
 import httpx
 from dotenv import load_dotenv
@@ -6,13 +6,15 @@ from dotenv import load_dotenv
 from pypaystack2.sub_clients import DisputeClient
 
 
-class DisputeTestCase(TestCase):
+class DisputeClientTestCase(TestCase):
+    client: DisputeClient
+
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
         cls.client = DisputeClient()
 
-    def test_can_get_disputes(self):
+    def test_can_get_disputes(self) -> None:
         response = self.client.get_disputes(
             start_date="2022-01-01", end_date="2023-05-11"
         )
@@ -20,20 +22,27 @@ class DisputeTestCase(TestCase):
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Disputes retrieved")
 
-    def test_can_get_dispute(self):
+    @skip("incomplete test")
+    def test_can_get_dispute(self) -> None:
         # TODO: Test properly.
         ...
 
-    def test_can_get_transaction_disputes(self):
+    @skip("incomplete test")
+    def test_can_get_transaction_disputes(self) -> None:
         # TODO: Test properly.
         self.client.get_transaction_disputes(id="114782792")
 
-    def test_can_update_dispute(self): ...
+    @skip("incomplete test")
+    def test_can_update_dispute(self) -> None: ...
 
-    def test_can_add_evidence(self): ...
+    @skip("incomplete test")
+    def test_can_add_evidence(self) -> None: ...
 
-    def test_can_get_upload_url(self): ...
+    @skip("incomplete test")
+    def test_can_get_upload_url(self) -> None: ...
 
-    def test_can_resolve_dispute(self): ...
+    @skip("incomplete test")
+    def test_can_resolve_dispute(self) -> None: ...
 
-    def test_can_export_disputes(self): ...
+    @skip("incomplete test")
+    def test_can_export_disputes(self) -> None: ...

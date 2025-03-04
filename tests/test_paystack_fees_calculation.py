@@ -3,16 +3,19 @@ from unittest import TestCase
 
 from dotenv import load_dotenv
 
-from pypaystack2 import PaystackClient, Currency
+from pypaystack2 import PaystackClient
+from pypaystack2.enums import Currency
 
 
 class PaystackFeesCalculationTestcase(TestCase):
+    client: PaystackClient
+
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
         cls.client = PaystackClient()
 
-    def test_calculate_fee(self):
+    def test_calculate_fee(self) -> None:
         cases = [
             {
                 "name": "NGN: Test fee for less than NGN 2500",
@@ -74,7 +77,7 @@ class PaystackFeesCalculationTestcase(TestCase):
                     self.client.calculate_fee(**case["options"]), case["expected_value"]
                 )
 
-    def test_to_base_unit(self):
+    def test_to_base_unit(self) -> None:
         cases = [
             {"value": 100, "expected": Decimal(1)},
             {"value": 1000, "expected": Decimal(10)},
@@ -90,14 +93,14 @@ class PaystackFeesCalculationTestcase(TestCase):
                     self.client.to_base_unit(case["value"]), case["expected"]
                 )
 
-    def test_to_base_unit_raises_error_on_invalid_input_value(self):
+    def test_to_base_unit_raises_error_on_invalid_input_value(self) -> None:
         with self.assertRaises(ValueError) as context:
-            self.client.to_base_unit(10.00)
+            self.client.to_base_unit(10.00)  # type: ignore
         self.assertEqual(
             context.exception.args[0], "value must be an integer or Decimal"
         )
 
-    def test_to_subunit(self):
+    def test_to_subunit(self) -> None:
         cases = [
             {"value": 1, "expected": 100},
             {"value": 10, "expected": 1000},

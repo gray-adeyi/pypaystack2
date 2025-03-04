@@ -3,16 +3,12 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.sub_clients.sync_clients.verification import VerificationClient
-from pypaystack2.utils.enums import AccountType, Country, Document
-from pypaystack2.utils.response_models import (
-    BankAccountInfo,
-    AccountVerificationInfo,
-    CardBin,
-)
+from pypaystack2.enums import AccountType, Country, Document
+from pypaystack2.models import BankAccountInfo, AccountVerificationInfo, CardBin
+from pypaystack2.sub_clients import VerificationClient
 
 
-class VerificationTestCase(TestCase):
+class VerificationClientTestCase(TestCase):
     client: VerificationClient
 
     @classmethod

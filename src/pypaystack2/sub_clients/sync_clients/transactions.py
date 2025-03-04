@@ -1,18 +1,21 @@
 from http import HTTPMethod
 from typing import Type
 
-from pypaystack2.base_api_client import BaseAPIClient
-from pypaystack2.exceptions import InvalidDataException
-from pypaystack2.utils.enums import (
+from pypaystack2.base_clients import (
+    BaseAPIClient,
+    add_to_payload,
+    append_query_params,
+)
+from pypaystack2.enums import (
     Bearer,
     Channel,
     Currency,
     TransactionStatus,
 )
-from pypaystack2.utils.helpers import add_to_payload, append_query_params
-from pypaystack2.utils.models import PaystackDataModel
-from pypaystack2.utils.models import Response
-from pypaystack2.utils.response_models import (
+from pypaystack2.exceptions import InvalidDataException
+from pypaystack2.types import PaystackDataModel
+from pypaystack2.models import Response
+from pypaystack2.models.response_models import (
     InitTransaction,
     Transaction,
     TransactionLog,

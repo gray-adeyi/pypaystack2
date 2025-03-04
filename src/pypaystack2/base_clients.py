@@ -1,7 +1,9 @@
 import logging
 import os
 import re
+from _operator import add
 from abc import ABC, abstractmethod
+from functools import reduce
 from http import HTTPMethod, HTTPStatus
 from json import JSONDecodeError
 from typing import Type, Any, cast
@@ -10,10 +12,10 @@ import httpx
 from pydantic import ValidationError
 
 from pypaystack2._metadata import __version__
-from pypaystack2.exceptions import InvalidMethodException, MissingSecretKeyException
+from pypaystack2.exceptions import MissingSecretKeyException
 from pypaystack2.fees_calculation_mixin import FeesCalculationMixin
-from pypaystack2.utils.models import PaystackDataModel
-from pypaystack2.utils.models import Response
+from pypaystack2.types import PaystackDataModel
+from pypaystack2.models import Response
 
 logger = logging.getLogger(__name__)
 
@@ -49,15 +51,28 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
                 if it is not provided in your environmental
                 variables as ``PAYSTACK_SECRET_KEY=your_key``
         """
+        self._secret_key: str | None
         if secret_key:
             self._secret_key = secret_key
         else:
-            self._secret_key = os.getenv(self._SECRET_KEY_IN_ENV_KEY, None)
+            self._secret_key = os.getenv(self._SECRET_KEY_IN_ENV_KEY)
         if not self._secret_key:
             raise MissingSecretKeyException(
                 "secret key was not provided on client instantiation "
                 f"or set in env variables as `{self._SECRET_KEY_IN_ENV_KEY}`"
             )
+
+    @abstractmethod
+    def _handle_request(
+        self,
+        method: HTTPMethod,
+        url: str,
+        data: dict[str, Any] | list[Any] | None = None,
+        response_data_model_class: Type[PaystackDataModel] | None = None,
+        raise_serialization_exception: bool = False,
+    ) -> (
+        Response[None] | Response[list[PaystackDataModel]] | Response[PaystackDataModel]
+    ): ...
 
     def _full_url(self, endpoint: str) -> str:
         return f"{self._BASE_URL}{endpoint}"
@@ -79,10 +94,10 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
         Response[None] | Response[list[PaystackDataModel]] | Response[PaystackDataModel]
     ):
         """
-        Parses an `httpx.Response` into a `Response`.
+        Serializes an `httpx.Response` into a `Response`.
 
         Returns:
-            A python namedtuple of Response which contains
+            A pydantic model Response which contains
             status code, status(bool), message, data
         """
         try:
@@ -149,8 +164,8 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
         return None
 
     def _serialize_request_kwargs(
-        self, url: str, method: HTTPMethod, data: dict | list | None
-    ) -> dict:
+        self, url: str, method: HTTPMethod, data: dict[str, Any] | list[Any] | None
+    ) -> dict[str, Any]:
         if url == "":
             raise ValueError("No url provided")
         request_kwargs = {"url": url, "json": data, "headers": self._headers}
@@ -158,7 +173,9 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
             request_kwargs.pop("json", None)
         return request_kwargs
 
-    def _normalize_data(self, data: dict | list) -> dict | list:
+    def _normalize_data(
+        self, data: dict[str, Any] | list[Any]
+    ) -> dict[str, Any] | list[Any]:
         """Converts keys in the data from camelCase to snake_case"""
         if isinstance(data, dict):
             new_dict = {}
@@ -176,18 +193,6 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
             return value
         return re.sub(r"(?<!^)(?=[A-Z])", "_", value).lower()
 
-    @abstractmethod
-    def _handle_request(
-        self,
-        method: HTTPMethod,
-        url: str,
-        data: dict | list | None = None,
-        response_data_model_class: Type[PaystackDataModel] | None = None,
-        raise_serialization_exception: bool = False,
-    ) -> (
-        Response[None] | Response[list[PaystackDataModel]] | Response[PaystackDataModel]
-    ): ...
-
 
 class BaseAPIClient(AbstractAPIClient):
     """
@@ -198,7 +203,7 @@ class BaseAPIClient(AbstractAPIClient):
         self,
         method: HTTPMethod,
         url: str,
-        data: dict | list | None = None,
+        data: dict[str, Any] | list[Any] | None = None,
         response_data_model_class: Type[PaystackDataModel] | None = None,
         raise_serialization_exception: bool = False,
     ) -> (
@@ -234,22 +239,20 @@ class BaseAPIClient(AbstractAPIClient):
         )
 
         if not http_method_handler:
-            raise InvalidMethodException(
-                "HTTP Request method not recognised or implemented"
-            )
+            raise ValueError("HTTP Request method not recognised or implemented")
 
-        response = http_method_handler(**request_kwargs)
+        response = http_method_handler(**request_kwargs)  # type: ignore
         return self._deserialize_response(
             response, response_data_model_class, raise_serialization_exception
         )
 
 
 class BaseAsyncAPIClient(AbstractAPIClient):
-    async def _handle_request(
+    async def _handle_request(  # type: ignore
         self,
         method: HTTPMethod,
         url: str,
-        data: dict | list | None = None,
+        data: dict[str, Any] | list[Any] | None = None,
         response_data_model_class: Type[PaystackDataModel] | None = None,
         raise_serialization_exception: bool = False,
     ) -> (
@@ -274,11 +277,70 @@ class BaseAsyncAPIClient(AbstractAPIClient):
                 url=url, method=method, data=data
             )
             if not http_method_handler:
-                raise InvalidMethodException(
-                    "HTTP Request method not recognised or implemented"
-                )
+                raise ValueError("HTTP Request method not recognised or implemented")
             response = await http_method_handler(**request_kwargs)
 
         return self._deserialize_response(
             response, response_data_model_class, raise_serialization_exception
         )
+
+
+def add_to_payload(
+    optional_params: list[tuple[str, Any]], payload: dict[str, Any]
+) -> dict[str, Any]:
+    """Adds more parameters to an existing payload.
+
+    This is a utility is used in the generation of payloads
+    for a request body. It helps to add more parameters to
+    a payload if it is not None.
+    e.g. say you want to send a payload which is currently
+    ``{"amount": 20000}`` and you want to include an additional
+    data such as ``currency`` if provided in the ``optional_params``
+    to send this ``{"amount": 20000,"currency":"ngn"}`` if only
+    the currency is available otherwise send the initial payload.
+    This functions takes a list of optional parameters
+    which is added to the payload is they are available and
+    returns the payload.
+
+    Args:
+        optional_params: A list of additional data to be added to the payload if it is
+            available. It follows the format ``[("name-on-payload","value")].``
+            e.g ``[("currency","ngn"),("amount",2000)]``
+        payload: A dictionary containing the data to be sent in the request body.
+
+    Returns:
+        A dictionary of the payload updated with additional data in the
+            optional_params that are not `None`.
+    """
+    [
+        payload.update({item[0]: item[1]})
+        for item in optional_params
+        if item[1] is not None
+    ]
+    return payload
+
+
+def append_query_params(query_params: list[tuple[str, Any]], url: str) -> str:
+    """Adds more queries to url that already have query parameters in its suffix
+
+    This function should only be used with urls that already have a
+    query parameter suffixed to it because it makes that assumption
+    that the url supplied is of the state ``http://example-url.com?firstQuery=1``
+    and it adds more query parameters delimited by & to the end of the provided
+    url ``http://example-url.com?firstQuery=1&otherQuery=2&...``
+
+    Args:
+        query_params: A list of other query parameters that should be appended to the url
+            if it is not None. e.g ``[("page",2),("pagination",50),("currency",None)]`` ->
+            ``url&page=2&pagination=50``
+        url: The url to which additional query parameters are added.
+
+    Returns:
+        The new url with padded query parameters.
+    """
+    params = [
+        f"&{param[0]}={param[1]}" for param in query_params if param[1] is not None
+    ]
+    if len(params) == 0:
+        return url
+    return url + reduce(add, params)
