@@ -1,5 +1,4 @@
 from http import HTTPMethod
-from typing import Type
 
 import httpx
 
@@ -19,7 +18,7 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
     async def register_domain(
         self,
         domain_name: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Register a top-level domain or subdomain for your Apple Pay integration.
 
@@ -58,9 +57,9 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
     async def get_domains(
         self,
         use_cursor: bool = False,
-        next: str | None = None,
+        next_: str | None = None,
         previous: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[ApplePayDomains] | Response[PaystackDataModel]:
         """Fetches all registered domains on your integration.
 
@@ -69,7 +68,7 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
 
         Args:
             use_cursor:
-            next:
+            next_:
             previous:
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
@@ -91,7 +90,7 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
         url = self._full_url("/apple-pay/domain")
         query_params = [
             ("use_cursor", use_cursor),
-            ("next", next),
+            ("next", next_),
             ("previous", previous),
         ]
         url = append_query_params(query_params, url)
@@ -104,7 +103,7 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
     async def unregister_domain(
         self,
         domain_name: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Unregister a top-level domain or subdomain previously used for your Apple Pay integration.
 
@@ -123,7 +122,7 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
                 by  paystack before it is serialized with pydantic models, The original
                 data can be accessed via `Response.raw`.
 
-         Note
+        Note
              * This feature is available to businesses in all markets except South Africa.
 
          Returns:

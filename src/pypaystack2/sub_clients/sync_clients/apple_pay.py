@@ -1,12 +1,11 @@
 from http import HTTPMethod
-from typing import Type
 
 import httpx
 
 from pypaystack2.base_clients import BaseAPIClient, append_query_params
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models import Response
 from pypaystack2.models.response_models import ApplePayDomains
+from pypaystack2.types import PaystackDataModel
 
 
 class ApplePayClient(BaseAPIClient):
@@ -22,7 +21,7 @@ class ApplePayClient(BaseAPIClient):
     def register_domain(
         self,
         domain_name: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Register a top-level domain or subdomain for your Apple Pay integration.
 
@@ -64,9 +63,9 @@ class ApplePayClient(BaseAPIClient):
     def get_domains(
         self,
         use_cursor: bool = False,
-        next: str | None = None,
+        next_: str | None = None,
         previous: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[ApplePayDomains] | Response[PaystackDataModel]:
         """Fetches all registered domains on your integration.
 
@@ -75,7 +74,7 @@ class ApplePayClient(BaseAPIClient):
 
         Args:
             use_cursor:
-            next:
+            next_:
             previous:
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
@@ -97,7 +96,7 @@ class ApplePayClient(BaseAPIClient):
         url = self._full_url("/apple-pay/domain")
         query_params = [
             ("use_cursor", use_cursor),
-            ("next", next),
+            ("next", next_),
             ("previous", previous),
         ]
         url = append_query_params(query_params, url)
@@ -110,7 +109,7 @@ class ApplePayClient(BaseAPIClient):
     def unregister_domain(
         self,
         domain_name: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Unregister a top-level domain or subdomain previously used for your Apple Pay integration.
 
