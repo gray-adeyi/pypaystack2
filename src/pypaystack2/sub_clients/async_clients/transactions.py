@@ -7,9 +7,7 @@ from pypaystack2.base_clients import (
     append_query_params,
 )
 from pypaystack2.enums import Currency, Channel, Bearer, TransactionStatus
-from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models.response_models import (
     InitTransaction,
     Transaction,
@@ -17,6 +15,7 @@ from pypaystack2.models.response_models import (
     TransactionExport,
     TransactionTotal,
 )
+from pypaystack2.types import PaystackDataModel
 
 
 class AsyncTransactionClient(BaseAsyncAPIClient):
@@ -86,9 +85,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         """
 
         if not email:
-            raise InvalidDataException(
-                "Customer's Email is required for initialization"
-            )
+            raise ValueError("Customer's Email is required for initialization")
 
         url = self._full_url("/transaction/initialize")
         payload = {
@@ -310,10 +307,10 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         """
 
         if not email:
-            raise InvalidDataException("Customer's Email is required to charge")
+            raise ValueError("Customer's Email is required to charge")
 
         if not auth_code:
-            raise InvalidDataException("Customer's Auth code is required to charge")
+            raise ValueError("Customer's Auth code is required to charge")
 
         url = self._full_url("/transaction/charge_authorization")
         payload = {
@@ -536,10 +533,10 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         """
 
         if not email:
-            raise InvalidDataException("Customer's Email is required to charge")
+            raise ValueError("Customer's Email is required to charge")
 
         if not auth_code:
-            raise InvalidDataException("Customer's Auth code is required to charge")
+            raise ValueError("Customer's Auth code is required to charge")
 
         url = self._full_url("/transaction/partial_debit")
         payload = {

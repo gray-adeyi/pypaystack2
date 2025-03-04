@@ -7,14 +7,13 @@ from pypaystack2.base_clients import (
     append_query_params,
 )
 from pypaystack2.enums import Currency, RecipientType
-from pypaystack2.exceptions import InvalidDataException
-from pypaystack2.types import PaystackDataModel
-from pypaystack2.models.payload_models import Recipient
 from pypaystack2.models import Response
+from pypaystack2.models.payload_models import Recipient
 from pypaystack2.models.response_models import (
     TransferRecipient,
     TransferRecipientBulkCreateData,
 )
+from pypaystack2.types import PaystackDataModel
 
 
 class AsyncTransferRecipientClient(BaseAsyncAPIClient):
@@ -72,7 +71,7 @@ class AsyncTransferRecipientClient(BaseAsyncAPIClient):
         """
         if type == RecipientType.NUBAN or type == RecipientType.BASA:
             if bank_code is None:
-                raise InvalidDataException(
+                raise ValueError(
                     "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"
                 )
 

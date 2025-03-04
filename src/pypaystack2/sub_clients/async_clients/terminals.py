@@ -3,15 +3,14 @@ from typing import Type
 
 from pypaystack2.base_clients import BaseAsyncAPIClient, append_query_params
 from pypaystack2.enums import TerminalEvent, TerminalEventAction
-from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models.response_models import (
     TerminalEventData,
     TerminalEventStatusData,
     Terminal,
     TerminalStatusData,
 )
+from pypaystack2.types import PaystackDataModel
 
 
 class AsyncTerminalClient(BaseAsyncAPIClient):
@@ -70,7 +69,7 @@ class AsyncTerminalClient(BaseAsyncAPIClient):
             },
         }
         if action not in supported_actions_mapping[type]:
-            raise InvalidDataException(
+            raise ValueError(
                 f"Terminal Event: {type} does not support Terminal Event Action: {action}"
             )
 

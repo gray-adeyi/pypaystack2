@@ -12,8 +12,6 @@ from pypaystack2.enums import (
     Currency,
     TransactionStatus,
 )
-from pypaystack2.exceptions import InvalidDataException
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models import Response
 from pypaystack2.models.response_models import (
     InitTransaction,
@@ -22,6 +20,7 @@ from pypaystack2.models.response_models import (
     TransactionTotal,
     TransactionExport,
 )
+from pypaystack2.types import PaystackDataModel
 
 
 class TransactionClient(BaseAPIClient):
@@ -91,9 +90,7 @@ class TransactionClient(BaseAPIClient):
         """
 
         if not email:
-            raise InvalidDataException(
-                "Customer's Email is required for initialization"
-            )
+            raise ValueError("Customer's Email is required for initialization")
 
         url = self._full_url("/transaction/initialize")
         payload = {
@@ -312,10 +309,10 @@ class TransactionClient(BaseAPIClient):
         """
 
         if not email:
-            raise InvalidDataException("Customer's Email is required to charge")
+            raise ValueError("Customer's Email is required to charge")
 
         if not auth_code:
-            raise InvalidDataException("Customer's Auth code is required to charge")
+            raise ValueError("Customer's Auth code is required to charge")
 
         url = self._full_url("/transaction/charge_authorization")
         payload = {
@@ -538,10 +535,10 @@ class TransactionClient(BaseAPIClient):
         """
 
         if not email:
-            raise InvalidDataException("Customer's Email is required to charge")
+            raise ValueError("Customer's Email is required to charge")
 
         if not auth_code:
-            raise InvalidDataException("Customer's Auth code is required to charge")
+            raise ValueError("Customer's Auth code is required to charge")
 
         url = self._full_url("/transaction/partial_debit")
         payload = {

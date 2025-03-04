@@ -7,10 +7,9 @@ from pypaystack2.base_clients import (
     append_query_params,
 )
 from pypaystack2.enums import Currency
-from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models.response_models import Product
+from pypaystack2.types import PaystackDataModel
 
 
 class AsyncProductClient(BaseAsyncAPIClient):
@@ -62,7 +61,7 @@ class AsyncProductClient(BaseAsyncAPIClient):
         """
 
         if unlimited is True and quantity is not None:
-            raise InvalidDataException(
+            raise ValueError(
                 "You can't have unlimited set to True and have a quantity value."
             )
 
@@ -210,7 +209,7 @@ class AsyncProductClient(BaseAsyncAPIClient):
         """
 
         if unlimited is True and quantity is not None:
-            raise InvalidDataException(
+            raise ValueError(
                 "You can't have unlimited set to True and quantity have a value."
             )
         url = self._full_url(f"/product/{id}")

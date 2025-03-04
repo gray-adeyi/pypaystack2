@@ -7,11 +7,10 @@ from pypaystack2.base_clients import (
     append_query_params,
 )
 from pypaystack2.enums import Currency, Bearer, Split
-from pypaystack2.exceptions import InvalidDataException
-from pypaystack2.types import PaystackDataModel
-from pypaystack2.models.payload_models import SplitAccount
 from pypaystack2.models import Response
+from pypaystack2.models.payload_models import SplitAccount
 from pypaystack2.models.response_models import TransactionSplit
+from pypaystack2.types import PaystackDataModel
 
 
 class AsyncTransactionSplitClient(BaseAsyncAPIClient):
@@ -202,7 +201,7 @@ class AsyncTransactionSplitClient(BaseAsyncAPIClient):
 
         if bearer_subaccount:
             if bearer_type != Bearer.SUB_ACCOUNT:
-                raise InvalidDataException(
+                raise ValueError(
                     "`bearer_subaccount` can only have a value if `bearer_type` is `Bearer.SUBACCOUNT`"
                 )
 

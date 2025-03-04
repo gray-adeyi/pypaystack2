@@ -7,10 +7,9 @@ from pypaystack2.base_clients import (
     append_query_params,
 )
 from pypaystack2.enums import Country, RiskAction, Identification
-from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models.response_models import Customer
+from pypaystack2.types import PaystackDataModel
 
 
 class CustomerClient(BaseAPIClient):
@@ -256,11 +255,11 @@ class CustomerClient(BaseAPIClient):
 
         if identification_type == Identification.BANK_ACCOUNT:
             if bank_code is None:
-                raise InvalidDataException(
+                raise ValueError(
                     "`bank_code` is required if identification type is `Identification.BANK_ACCOUNT`"
                 )
             if account_number is None:
-                raise InvalidDataException(
+                raise ValueError(
                     "`account_number` is required if identification type is `Identification.BANK_ACCOUNT`"
                 )
 
