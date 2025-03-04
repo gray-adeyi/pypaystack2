@@ -53,7 +53,7 @@ class AsyncTransactionTestCase(IsolatedAsyncioTestCase):
 
     async def test_can_get_transaction(self) -> None:
         response: Response[Transaction] = await self.client.get_transaction(
-            id="1728885471"
+            id_="1728885471"
         )
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
