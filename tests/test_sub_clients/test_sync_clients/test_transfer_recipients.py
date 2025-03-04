@@ -22,7 +22,7 @@ class TransferRecipientClientTestCase(TestCase):
 
     def test_can_create(self) -> None:
         response = self.client.create(
-            type=RecipientType.NUBAN,
+            type_=RecipientType.NUBAN,
             name="Adeyi Gbenga Michael",
             account_number="5273681014",
             bank_code="214",
