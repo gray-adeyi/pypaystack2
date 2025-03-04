@@ -4,9 +4,9 @@ from typing import Type
 import httpx
 
 from pypaystack2.base_clients import BaseAsyncAPIClient, append_query_params
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models import Response
 from pypaystack2.models.response_models import ApplePayDomains
+from pypaystack2.types import PaystackDataModel
 
 
 class AsyncApplePayClient(BaseAsyncAPIClient):
@@ -109,8 +109,8 @@ class AsyncApplePayClient(BaseAsyncAPIClient):
         """Unregister a top-level domain or subdomain previously used for your Apple Pay integration.
 
         Args:
-             domain_name: Domain name to be unregistered
-             alternate_model_class: A pydantic model class to use instead of the
+            domain_name: Domain name to be unregistered
+            alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
                 set  `Response.data` to `None` if it fails to serialize the data

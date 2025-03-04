@@ -1,13 +1,39 @@
-"""Pypaystack2 is a developer-friendly client library for Paystack.
+"""
+This is the package-level documentation for the `pypaystack2` package.
 
-It is a fork of [Pypaystack](https://github.com/edwardpopoola/pypaystack)
-That has transformed into its own thing over the years
+The ``pypaystack2`` package provides clients for interacting with Paystack's API in your python project
+it provides ``PaystackClient`` and ``AsyncPaystackClient``. The former for working in synchronous contexts
+and the latter for working in asynchronous contexts. These two classes are considered the main clients
+and provide bindings to other sub-clients as class attributes. E.g. ``PaystackClient.apple_pay``
 
-Modules and packages exported by this package:
-   - `sub_clients`: A package containing several clients for Paystack API, like apple pay sub_clients,
-    bulk charges sub_clients e.t.c.
-   - `models`: A module containing useful utilities and enums
-   - `errors`: A module containing error types for pypaystack2
+Subpackages:
+    - `pypaystack2.sub_clients`: A package containing clients for interacting with specific Paystack's API
+    - `pypaystack2.models`: A package containing pydantic model representations of payload and response data
+    the individual models may also be referred to as generic type called `PaystackDataModel` which serves
+    as a placeholder for the models.
+
+Module:
+    - `pypaystack2.enum`: A module containing enums used package wide.
+
+
+Example usage:
+
+    from pypaystack2 import PaystackClient
+    from pypaystack2.enums import Country
+
+    client = PaystackClient() # Assumes your secret key is set in your environmental variables
+    # as PAYSTACK_SECRET_KEY. you may also choose to pass the secret key explicitly on instantiation
+    # of the client. `client = PaystackClient(secret_key='<your-secret-key>')`
+
+    # Initializing a transaction
+    response = client.transactions.initialize(amount=10_000,email="johndoe@example.com")
+    print(repr(response))
+
+    # Get banks
+    response = client.miscellaneous.get_banks(country=Country.NIGERIA)
+    print(repr(response))
+
+For more details, refer to the documentation.
 """
 
 # ruff: noqa: F401
