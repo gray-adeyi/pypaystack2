@@ -1,12 +1,11 @@
 from http import HTTPMethod
-from typing import Type
 
 from pypaystack2.base_clients import BaseAsyncAPIClient, append_query_params
 from pypaystack2.enums import Status
-from pypaystack2.models.payload_models import BulkChargeInstruction
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
+from pypaystack2.models.payload_models import BulkChargeInstruction
 from pypaystack2.models.response_models import BulkCharge, BulkChargeUnitCharge
+from pypaystack2.types import PaystackDataModel
 
 
 class AsyncBulkChargeClient(BaseAsyncAPIClient):
@@ -19,7 +18,7 @@ class AsyncBulkChargeClient(BaseAsyncAPIClient):
     async def initiate(
         self,
         body: list[BulkChargeInstruction],
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[BulkCharge] | Response[PaystackDataModel]:
         """
         Send a list of dictionaries with authorization ``codes`` and ``amount``
@@ -60,7 +59,7 @@ class AsyncBulkChargeClient(BaseAsyncAPIClient):
         pagination: int = 50,
         start_date: str | None = None,
         end_date: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[BulkCharge]] | Response[PaystackDataModel]:
         """This gets all bulk charge batches created by the integration.
 
@@ -102,8 +101,8 @@ class AsyncBulkChargeClient(BaseAsyncAPIClient):
 
     async def get_batch(
         self,
-        id_or_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_or_code: str | int,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[BulkCharge] | Response[PaystackDataModel]:
         """
         This method retrieves a specific batch code. It also returns
@@ -138,13 +137,13 @@ class AsyncBulkChargeClient(BaseAsyncAPIClient):
 
     async def get_charges_in_batch(
         self,
-        id_or_code: str,
+        id_or_code: str | int,
         status: Status,
         pagination: int = 50,
         page: int = 1,
         start_date: str | None = None,
         end_date: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[BulkChargeUnitCharge]] | Response[PaystackDataModel]:
         """
         This method retrieves the charges associated with a specified
@@ -194,7 +193,7 @@ class AsyncBulkChargeClient(BaseAsyncAPIClient):
     async def pause_batch(
         self,
         batch_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Use this method to pause processing a batch.
 
@@ -227,7 +226,7 @@ class AsyncBulkChargeClient(BaseAsyncAPIClient):
     async def resume_batch(
         self,
         batch_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Use this method to resume processing a batch
 
