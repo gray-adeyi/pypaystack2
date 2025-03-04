@@ -1,5 +1,4 @@
 from http import HTTPMethod
-from typing import Type
 
 from pypaystack2.base_clients import (
     BaseAsyncAPIClient,
@@ -7,8 +6,8 @@ from pypaystack2.base_clients import (
     append_query_params,
 )
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models.response_models import Subscription, SubscriptionLink
+from pypaystack2.types import PaystackDataModel
 
 
 class AsyncSubscriptionClient(BaseAsyncAPIClient):
@@ -21,11 +20,11 @@ class AsyncSubscriptionClient(BaseAsyncAPIClient):
 
     async def create(
         self,
-        customer: str,
+        customer: int | str,
         plan: str,
         authorization: str | None = None,
         start_date: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Subscription] | Response[PaystackDataModel]:
         """Create a subscription on your integration
 
@@ -81,8 +80,8 @@ class AsyncSubscriptionClient(BaseAsyncAPIClient):
         page: int = 1,
         pagination: int = 50,
         customer: int | None = None,
-        plan: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        plan: str | int | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[Subscription]] | Response[PaystackDataModel]:
         """Fetch subscriptions available on your integration.
 
@@ -125,8 +124,8 @@ class AsyncSubscriptionClient(BaseAsyncAPIClient):
 
     async def get_subscription(
         self,
-        id_or_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_or_code: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Subscription] | Response[PaystackDataModel]:
         """Fetch details of a subscription on your integration.
 
@@ -160,7 +159,7 @@ class AsyncSubscriptionClient(BaseAsyncAPIClient):
         self,
         code: str,
         token: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Enable a subscription on your integration
 
@@ -200,7 +199,7 @@ class AsyncSubscriptionClient(BaseAsyncAPIClient):
         self,
         code: str,
         token: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Disable a subscription on your integration
 
@@ -238,7 +237,7 @@ class AsyncSubscriptionClient(BaseAsyncAPIClient):
     async def get_update_link(
         self,
         code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[SubscriptionLink] | Response[PaystackDataModel]:
         """Generate a link for updating the card on a subscription
 
@@ -271,7 +270,7 @@ class AsyncSubscriptionClient(BaseAsyncAPIClient):
     async def send_update_link(
         self,
         code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Email a customer a link for updating the card on their subscription
 
