@@ -1,5 +1,5 @@
 from http import HTTPMethod
-from typing import Type, Optional
+from typing import Any
 
 from pypaystack2.base_clients import (
     BaseAsyncAPIClient,
@@ -25,8 +25,8 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
         first_name: str | None = None,
         last_name: str | None = None,
         phone: str | None = None,
-        metadata: dict | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        metadata: dict[str, Any] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Customer] | Response[PaystackDataModel]:
         """Create a customer on your integration.
 
@@ -84,7 +84,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
         end_date: str | None = None,
         page: int = 1,
         pagination: int = 50,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[Customer]] | Response[PaystackDataModel]:
         """Fetches customers available on your integration.
 
@@ -127,7 +127,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
     async def get_customer(
         self,
         email_or_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Customer] | Response[PaystackDataModel]:
         """Get details of a customer on your integration.
 
@@ -163,8 +163,8 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
         first_name: str | None = None,
         last_name: str | None = None,
         phone: str | None = None,
-        metadata: dict | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        metadata: dict[str, Any] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Customer] | Response[PaystackDataModel]:
         """Update a customer's details on your integration
 
@@ -193,7 +193,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
         """
 
         url = self._full_url(f"/customer/{code}/")
-        payload = {}
+        payload: dict[str, Any] = {}
 
         optional_params = [
             ("first_name", first_name),
@@ -221,7 +221,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
         bank_code: str | None = None,
         account_number: str | None = None,
         middle_name: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Validate a customer's identity
 
@@ -289,8 +289,8 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
     async def flag(
         self,
         customer: str,
-        risk_action: Optional[RiskAction] = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        risk_action: RiskAction | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Customer] | Response[PaystackDataModel]:
         """Whitelist or blacklist a customer on your integration
 
@@ -332,7 +332,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
     async def deactivate(
         self,
         auth_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Deactivate an authorization when the card needs to be forgotten
 
