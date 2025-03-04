@@ -1,5 +1,4 @@
 from http import HTTPMethod
-from typing import Type
 
 from pypaystack2.base_clients import (
     BaseAPIClient,
@@ -7,10 +6,10 @@ from pypaystack2.base_clients import (
     append_query_params,
 )
 from pypaystack2.enums import Currency
-from pypaystack2.models.payload_models import TransferInstruction
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
+from pypaystack2.models.payload_models import TransferInstruction
 from pypaystack2.models.response_models import Transfer, BulkTransferItem
+from pypaystack2.types import PaystackDataModel
 
 
 class TransferClient(BaseAPIClient):
@@ -32,7 +31,7 @@ class TransferClient(BaseAPIClient):
         currency: Currency | None = None,
         reference: str | None = None,
         source: str = "balance",
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transfer] | Response[PaystackDataModel]:
         """Initiate transfer
 
@@ -84,7 +83,7 @@ class TransferClient(BaseAPIClient):
         self,
         transfer_code: str,
         otp: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transfer] | Response[PaystackDataModel]:
         """Finalize transfer
 
@@ -125,7 +124,7 @@ class TransferClient(BaseAPIClient):
         self,
         transfers: list[TransferInstruction],
         source: str = "balance",
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[BulkTransferItem]] | Response[PaystackDataModel]:
         """Transfer in bulk
 
@@ -166,10 +165,10 @@ class TransferClient(BaseAPIClient):
         self,
         page: int = 1,
         pagination: int = 50,
-        customer: str | None = None,
+        customer: str | int | None = None,
         start_date: str | None = None,
         end_date: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transfer] | Response[PaystackDataModel]:
         """Retrieve transfers made to a customer
 
@@ -213,8 +212,8 @@ class TransferClient(BaseAPIClient):
 
     def get_transfer(
         self,
-        id_or_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_or_code: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transfer] | Response[PaystackDataModel]:
         """Retrieve a transfer
 
@@ -246,7 +245,7 @@ class TransferClient(BaseAPIClient):
     def verify(
         self,
         reference: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transfer] | Response[PaystackDataModel]:
         """Verify a transfer
 

@@ -1,5 +1,4 @@
 from http import HTTPMethod
-from typing import Type
 
 from pypaystack2.base_clients import (
     BaseAsyncAPIClient,
@@ -31,7 +30,7 @@ class AsyncTransferClient(BaseAsyncAPIClient):
         currency: Currency | None = None,
         reference: str | None = None,
         source: str = "balance",
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transfer] | Response[PaystackDataModel]:
         """Initiate transfer
 
@@ -83,7 +82,7 @@ class AsyncTransferClient(BaseAsyncAPIClient):
         self,
         transfer_code: str,
         otp: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transfer] | Response[PaystackDataModel]:
         """Finalize transfer
 
@@ -124,7 +123,7 @@ class AsyncTransferClient(BaseAsyncAPIClient):
         self,
         transfers: list[TransferInstruction],
         source: str = "balance",
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[BulkTransferItem]] | Response[PaystackDataModel]:
         """Transfer in bulk
 
@@ -165,10 +164,10 @@ class AsyncTransferClient(BaseAsyncAPIClient):
         self,
         page: int = 1,
         pagination: int = 50,
-        customer: str | None = None,
+        customer: str | int | None = None,
         start_date: str | None = None,
         end_date: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transfer] | Response[PaystackDataModel]:
         """Retrieve transfers made to a customer
 
@@ -204,7 +203,7 @@ class AsyncTransferClient(BaseAsyncAPIClient):
             ("to", end_date),
         ]
         url = append_query_params(query_params, url)
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Transfer,
@@ -212,8 +211,8 @@ class AsyncTransferClient(BaseAsyncAPIClient):
 
     async def get_transfer(
         self,
-        id_or_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_or_code: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transfer] | Response[PaystackDataModel]:
         """Retrieve a transfer
 
@@ -236,7 +235,7 @@ class AsyncTransferClient(BaseAsyncAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
         url = self._full_url(f"/transfer/{id_or_code}")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Transfer,
@@ -245,7 +244,7 @@ class AsyncTransferClient(BaseAsyncAPIClient):
     async def verify(
         self,
         reference: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transfer] | Response[PaystackDataModel]:
         """Verify a transfer
 
@@ -268,7 +267,7 @@ class AsyncTransferClient(BaseAsyncAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
         url = self._full_url(f"/transfer/verify/{reference}")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Transfer,
