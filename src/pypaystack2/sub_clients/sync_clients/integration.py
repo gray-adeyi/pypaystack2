@@ -1,10 +1,9 @@
 from http import HTTPMethod
-from typing import Type
 
 from pypaystack2.base_clients import BaseAPIClient
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models.response_models import IntegrationTimeout
+from pypaystack2.types import PaystackDataModel
 
 
 class IntegrationClient(BaseAPIClient):
@@ -16,7 +15,7 @@ class IntegrationClient(BaseAPIClient):
 
     def get_payment_session_timeout(
         self,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[IntegrationTimeout] | Response[PaystackDataModel]:
         """Fetch the payment session timeout on your integration
 
@@ -48,7 +47,7 @@ class IntegrationClient(BaseAPIClient):
     def update_payment_session_timeout(
         self,
         timeout: int,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[IntegrationTimeout] | Response[PaystackDataModel]:
         """Update the payment session timeout on your integration
 
