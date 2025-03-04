@@ -48,7 +48,7 @@ class AsyncVerificationTestCase(IsolatedAsyncioTestCase):
         self.assertIsInstance(response.data, AccountVerificationInfo)
 
     async def test_can_resolve_card_bin(self) -> None:
-        response: Response[CardBin] = await self.client.resolve_card_bin(bin="539983")
+        response: Response[CardBin] = await self.client.resolve_card_bin(bin_="539983")
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Bin resolved")
