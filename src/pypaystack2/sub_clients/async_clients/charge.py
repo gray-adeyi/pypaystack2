@@ -1,10 +1,10 @@
 from http import HTTPMethod
-from typing import Type
+from typing import Any
 
 from pypaystack2.base_clients import BaseAsyncAPIClient, add_to_payload
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models import Response
 from pypaystack2.models.response_models import Transaction
+from pypaystack2.types import PaystackDataModel
 
 
 class AsyncChargeClient(BaseAsyncAPIClient):
@@ -19,16 +19,16 @@ class AsyncChargeClient(BaseAsyncAPIClient):
         self,
         email: str,
         amount: int,
-        bank: dict | None = None,
-        bank_transfer: dict | None = None,
+        bank: dict[str, Any] | None = None,
+        bank_transfer: dict[str, Any] | None = None,
         auth_code: str | None = None,
         pin: str | None = None,
-        metadata: dict | None = None,
+        metadata: dict[str, Any] | None = None,
         reference: str | None = None,
-        ussd: dict | None = None,
-        mobile_money: dict | None = None,
+        ussd: dict[str, Any] | None = None,
+        mobile_money: dict[str, Any] | None = None,
         device_id: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Initiate a payment by integrating the payment channel of your choice.
 
@@ -89,7 +89,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
         self,
         pin: str,
         reference: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Submit PIN to continue a charge
 
@@ -126,7 +126,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
         self,
         otp: str,
         reference: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Submit OTP to complete a charge
 
@@ -163,7 +163,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
         self,
         phone: str,
         reference: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Submit Phone when requested
 
@@ -189,7 +189,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
 
         payload = {"phone": phone, "reference": reference}
         url = self._full_url("/charge/submit_phone")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -200,7 +200,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
         self,
         birthday: str,
         reference: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Submit Birthday when requested
 
@@ -226,7 +226,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
 
         payload = {"birthday": birthday, "reference": reference}
         url = self._full_url("/charge/submit_birthday")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
@@ -240,7 +240,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
         city: str,
         state: str,
         zipcode: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Submit address to continue a charge
 
@@ -285,7 +285,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
     async def check_pending_charge(
         self,
         reference: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transaction] | Response[PaystackDataModel]:
         """
         When you get "pending" as a charge status or if there was an
