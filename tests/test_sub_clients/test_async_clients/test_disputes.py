@@ -26,7 +26,7 @@ class AsyncDisputeClientTestCase(IsolatedAsyncioTestCase):
     @skip("incomplete test")
     async def test_can_get_dispute(self) -> None:
         # TODO: Test properly.
-        response: Response[Dispute] = await self.client.get_dispute(id="114782792")
+        response: Response[Dispute] = await self.client.get_dispute(id_="114782792")
         self.assertEqual(response.status_code, httpx.codes.NOT_FOUND)
 
     @skip("incomplete test")

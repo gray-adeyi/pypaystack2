@@ -1,5 +1,5 @@
 from http import HTTPMethod
-from typing import Type
+from typing import Any
 
 from pypaystack2.base_clients import (
     BaseAPIClient,
@@ -7,10 +7,9 @@ from pypaystack2.base_clients import (
     append_query_params,
 )
 from pypaystack2.enums import Country, RiskAction, Identification
-from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models.response_models import Customer
+from pypaystack2.types import PaystackDataModel
 
 
 class CustomerClient(BaseAPIClient):
@@ -26,8 +25,8 @@ class CustomerClient(BaseAPIClient):
         first_name: str | None = None,
         last_name: str | None = None,
         phone: str | None = None,
-        metadata: dict | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        metadata: dict[str, Any] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Customer] | Response[PaystackDataModel]:
         """Create a customer on your integration.
 
@@ -85,7 +84,7 @@ class CustomerClient(BaseAPIClient):
         end_date: str | None = None,
         page: int = 1,
         pagination: int = 50,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[Customer]] | Response[PaystackDataModel]:
         """Fetches customers available on your integration.
 
@@ -128,7 +127,7 @@ class CustomerClient(BaseAPIClient):
     def get_customer(
         self,
         email_or_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Customer] | Response[PaystackDataModel]:
         """Get details of a customer on your integration.
 
@@ -164,8 +163,8 @@ class CustomerClient(BaseAPIClient):
         first_name: str | None = None,
         last_name: str | None = None,
         phone: str | None = None,
-        metadata: dict | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        metadata: dict[str, Any] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Customer] | Response[PaystackDataModel]:
         """Update a customer's details on your integration
 
@@ -194,7 +193,7 @@ class CustomerClient(BaseAPIClient):
         """
 
         url = self._full_url(f"/customer/{code}/")
-        payload = {}
+        payload: dict[str, Any] = {}
         optional_params = [
             ("first_name", first_name),
             ("last_name", last_name),
@@ -221,7 +220,7 @@ class CustomerClient(BaseAPIClient):
         bank_code: str | None = None,
         account_number: str | None = None,
         middle_name: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Validate a customer's identity
 
@@ -256,11 +255,11 @@ class CustomerClient(BaseAPIClient):
 
         if identification_type == Identification.BANK_ACCOUNT:
             if bank_code is None:
-                raise InvalidDataException(
+                raise ValueError(
                     "`bank_code` is required if identification type is `Identification.BANK_ACCOUNT`"
                 )
             if account_number is None:
-                raise InvalidDataException(
+                raise ValueError(
                     "`account_number` is required if identification type is `Identification.BANK_ACCOUNT`"
                 )
 
@@ -290,7 +289,7 @@ class CustomerClient(BaseAPIClient):
         self,
         customer: str,
         risk_action: RiskAction | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Customer] | Response[PaystackDataModel]:
         """Whitelist or blacklist a customer on your integration
 
@@ -332,7 +331,7 @@ class CustomerClient(BaseAPIClient):
     def deactivate(
         self,
         auth_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Deactivate an authorization when the card needs to be forgotten
 

@@ -25,6 +25,6 @@ class AsyncSettlementClientTestCase(IsolatedAsyncioTestCase):
     async def test_can_get_settlement_transactions(self) -> None:
         # TODO: Test properly
         response: Response[Transaction] = await self.client.get_settlement_transactions(
-            id="hello"
+            id_="hello"
         )
         self.assertEqual(response.status_code, httpx.codes.INTERNAL_SERVER_ERROR)

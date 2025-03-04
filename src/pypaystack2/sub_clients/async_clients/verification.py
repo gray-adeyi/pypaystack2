@@ -1,15 +1,14 @@
 from http import HTTPMethod
-from typing import Type
 
 from pypaystack2.base_clients import BaseAsyncAPIClient
 from pypaystack2.enums import AccountType, Country, Document
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models.response_models import (
     BankAccountInfo,
     AccountVerificationInfo,
     CardBin,
 )
+from pypaystack2.types import PaystackDataModel
 
 
 class AsyncVerificationClient(BaseAsyncAPIClient):
@@ -26,7 +25,7 @@ class AsyncVerificationClient(BaseAsyncAPIClient):
         self,
         account_number: str,
         bank_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[BankAccountInfo] | Response[PaystackDataModel]:
         """Confirm an account belongs to the right customer
 
@@ -72,7 +71,7 @@ class AsyncVerificationClient(BaseAsyncAPIClient):
         country_code: Country,
         document_type: Document,
         document_number: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[AccountVerificationInfo] | Response[PaystackDataModel]:
         """Confirm the authenticity of a customer's account number before sending money
 
@@ -123,13 +122,13 @@ class AsyncVerificationClient(BaseAsyncAPIClient):
 
     async def resolve_card_bin(
         self,
-        bin: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        bin_: str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[CardBin] | Response[PaystackDataModel]:
         """Get more information about a customer's card
 
         Args:
-            bin: First 6 characters of card
+            bin_: First 6 characters of card
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
@@ -148,7 +147,7 @@ class AsyncVerificationClient(BaseAsyncAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
 
-        url = self._full_url(f"/decision/bin/{bin}")
+        url = self._full_url(f"/decision/bin/{bin_}")
         return await self._handle_request(
             HTTPMethod.GET,
             url,  # type: ignore

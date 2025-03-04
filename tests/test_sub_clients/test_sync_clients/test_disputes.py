@@ -30,7 +30,7 @@ class DisputeClientTestCase(TestCase):
     @skip("incomplete test")
     def test_can_get_transaction_disputes(self) -> None:
         # TODO: Test properly.
-        self.client.get_transaction_disputes(id="114782792")
+        self.client.get_transaction_disputes(id_="114782792")
 
     @skip("incomplete test")
     def test_can_update_dispute(self) -> None: ...

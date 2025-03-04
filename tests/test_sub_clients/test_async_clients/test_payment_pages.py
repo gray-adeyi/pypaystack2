@@ -69,6 +69,6 @@ class AsyncPaymentPageClientTestCase(IsolatedAsyncioTestCase):
     async def test_can_add_products(self) -> None:
         # TODO: Test properly when endpoint is fixed
         response: Response[PaymentPage] = await self.client.add_products(
-            id="cgc4jh2uvv", products=[1803331, 1803324]
+            id_="cgc4jh2uvv", products=[1803331, 1803324]
         )
         self.assertEqual(response.status_code, httpx.codes.INTERNAL_SERVER_ERROR)

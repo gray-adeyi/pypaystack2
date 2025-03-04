@@ -38,7 +38,7 @@ class ProductClientTestCase(TestCase):
             self.assertIsInstance(response.data[0], Product)
 
     def test_can_get_product(self) -> None:
-        response = self.client.get_product(id="1209661")
+        response = self.client.get_product(id_="1209661")
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Product retrieved")
@@ -46,7 +46,7 @@ class ProductClientTestCase(TestCase):
 
     def test_update(self) -> None:
         response = self.client.update(
-            id="1209661",
+            id_="1209661",
             name="Updated test product",
             description="the test description",
             price=600_000,

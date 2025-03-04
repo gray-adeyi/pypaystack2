@@ -1,5 +1,4 @@
 from http import HTTPMethod
-from typing import Type
 
 from pypaystack2.base_clients import BaseAsyncAPIClient, append_query_params
 from pypaystack2.enums import Country, Gateway, BankType, Currency
@@ -19,27 +18,27 @@ class AsyncMiscellaneousClient(BaseAsyncAPIClient):
         self,
         country: Country,
         use_cursor: bool = False,
-        next: str | None = None,
+        next_: str | None = None,
         previous: str | None = None,
         gateway: Gateway | None = None,
-        type: BankType | None = None,
+        type_: BankType | None = None,
         currency: Currency | None = None,
         pay_with_bank_transfer: bool | None = None,
         pay_with_bank: bool | None = None,
         include_nip_sort_code: bool | None = None,
         pagination: int = 50,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[Bank]] | Response[PaystackDataModel]:
         """Get a list of all supported banks and their properties
 
         Args:
             country: The country from which to obtain the list of supported banks. any value from the ``Country`` enum.
             use_cursor: Flag to enable cursor pagination.
-            next: A cursor that indicates your place in the list. It can be used to fetch the next page of the list
+            next_: A cursor that indicates your place in the list. It can be used to fetch the next page of the list
             previous: A cursor that indicates your place in the list. It should be used
                 to fetch the previous page of the list after an intial next request
             gateway: The gateway type of the bank. Any value from the ``Gateway`` enum.
-            type: Type of financial channel. For Ghanaian channels, please use either
+            type_: Type of financial channel. For Ghanaian channels, please use either
                 mobile_money for mobile money channels OR ghipps for bank channels
             currency: Any value from the Currency enum.
             pay_with_bank_transfer: A flag to filter for available banks a customer can make a transfer to
@@ -65,15 +64,15 @@ class AsyncMiscellaneousClient(BaseAsyncAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
 
-        country = Country.get_full(country)
+        country_full = Country.get_full(country)
         url = self._full_url(f"/bank?perPage={pagination}")
         query_params = [
-            ("country", country),
+            ("country", country_full),
             ("use_cursor", use_cursor),
-            ("next", next),
+            ("next", next_),
             ("previous", previous),
             ("gateway", gateway),
-            ("type", type),
+            ("type", type_),
             ("currency", currency),
             ("pay_with_bank_transfer", pay_with_bank_transfer),
             ("pay_with_bank", pay_with_bank),
@@ -88,7 +87,7 @@ class AsyncMiscellaneousClient(BaseAsyncAPIClient):
 
     async def get_countries(
         self,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[PaystackSupportedCountry]] | Response[PaystackDataModel]:
         """Gets a list of Countries that Paystack currently supports
 
@@ -120,7 +119,7 @@ class AsyncMiscellaneousClient(BaseAsyncAPIClient):
     async def get_states(
         self,
         country: Country | str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[State]] | Response[PaystackDataModel]:
         """Get a list of states for a country for address verification.
 

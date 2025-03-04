@@ -1,5 +1,5 @@
 from http import HTTPMethod
-from typing import Any, Type
+from typing import Any
 
 from pypaystack2.base_clients import (
     BaseAPIClient,
@@ -7,8 +7,8 @@ from pypaystack2.base_clients import (
     append_query_params,
 )
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models.response_models import PaymentPage
+from pypaystack2.types import PaystackDataModel
 
 
 class PaymentPageClient(BaseAPIClient):
@@ -27,8 +27,8 @@ class PaymentPageClient(BaseAPIClient):
         slug: str | None = None,
         metadata: dict[str, Any] | None = None,
         redirect_url: str | None = None,
-        custom_fields: list | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        custom_fields: list[Any] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[PaymentPage] | Response[PaystackDataModel]:
         """Create a payment page on your integration
 
@@ -89,7 +89,7 @@ class PaymentPageClient(BaseAPIClient):
         pagination: int = 50,
         start_date: str | None = None,
         end_date: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[PaymentPage]] | Response[PaystackDataModel]:
         """Fetch payment pages available on your integration.
 
@@ -132,8 +132,8 @@ class PaymentPageClient(BaseAPIClient):
 
     def get_page(
         self,
-        id_or_slug: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_or_slug: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[PaymentPage] | Response[PaystackDataModel]:
         """Get details of a payment page on your integration.
 
@@ -165,12 +165,12 @@ class PaymentPageClient(BaseAPIClient):
 
     def update(
         self,
-        id_or_slug: str,
+        id_or_slug: int | str,
         name: str,
         description: str | None = None,
         amount: int | None = None,
         active: bool | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[PaymentPage] | Response[PaystackDataModel]:
         """Get details of a payment page on your integration.
 
@@ -220,7 +220,7 @@ class PaymentPageClient(BaseAPIClient):
     def check_slug_available(
         self,
         slug: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Check the availability of a slug for a payment page.
 
@@ -252,14 +252,14 @@ class PaymentPageClient(BaseAPIClient):
 
     def add_products(
         self,
-        id: str,
+        id_: str,
         products: list[int],
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[PaymentPage] | Response[PaystackDataModel]:
         """Add products to a payment page
 
         Args:
-            id: ID of the payment page
+            id_: ID of the payment page
             products: Ids of all the products
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
@@ -278,7 +278,7 @@ class PaymentPageClient(BaseAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
 
-        url = self._full_url(f"/page/{id}/product")
+        url = self._full_url(f"/page/{id_}/product")
         payload = {"products": products}
         return self._handle_request(  # type: ignore
             HTTPMethod.POST,

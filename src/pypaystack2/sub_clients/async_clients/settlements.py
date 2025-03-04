@@ -67,17 +67,17 @@ class AsyncSettlementClient(BaseAsyncAPIClient):
 
     async def get_settlement_transactions(
         self,
-        id: str,
+        id_: int | str,
         pagination: int = 50,
         page: int = 1,
         start_date: str | None = None,
         end_date: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Get the transactions that make up a particular settlement
 
         Args:
-            id: The settlement ID in which you want to fetch its transactions
+            id_: The settlement ID in which you want to fetch its transactions
             pagination: Specifies how many records you want to retrieve per page. If not specified we
                 use a default value of 50.
             page: Specifies exactly what page you want to retrieve. If not specified we use a default value of 1.
@@ -102,7 +102,7 @@ class AsyncSettlementClient(BaseAsyncAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
 
-        url = self._full_url(f"/settlement/{id}/transactions?perPage={pagination}")
+        url = self._full_url(f"/settlement/{id_}/transactions?perPage={pagination}")
         query_params = [
             ("page", page),
             ("start_date", start_date),

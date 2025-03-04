@@ -41,7 +41,7 @@ class VerificationClientTestCase(TestCase):
         self.assertIsInstance(response.data, AccountVerificationInfo)
 
     def test_can_resolve_card_bin(self) -> None:
-        response = self.client.resolve_card_bin(bin="539983")
+        response = self.client.resolve_card_bin(bin_="539983")
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Bin resolved")

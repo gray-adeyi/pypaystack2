@@ -48,7 +48,7 @@ class TransactionClientTestCase(TestCase):
             self.assertIsInstance(response.data[0], Transaction)
 
     def test_can_get_transaction(self) -> None:
-        response = self.client.get_transaction(id="1728885471")
+        response = self.client.get_transaction(id_="1728885471")
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Transaction retrieved")

@@ -1,5 +1,4 @@
 from http import HTTPMethod
-from typing import Type
 
 from pypaystack2.base_clients import (
     BaseAPIClient,
@@ -7,10 +6,9 @@ from pypaystack2.base_clients import (
     append_query_params,
 )
 from pypaystack2.enums import Currency
-from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models.response_models import Product
+from pypaystack2.types import PaystackDataModel
 
 
 class ProductClient(BaseAPIClient):
@@ -28,7 +26,7 @@ class ProductClient(BaseAPIClient):
         currency: Currency,
         unlimited: bool | None = None,
         quantity: int | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Product] | Response[PaystackDataModel]:
         """Create a product on your integration
 
@@ -62,7 +60,7 @@ class ProductClient(BaseAPIClient):
         """
 
         if unlimited is True and quantity is not None:
-            raise InvalidDataException(
+            raise ValueError(
                 "You can't have unlimited set to True and have a quantity value."
             )
 
@@ -92,7 +90,7 @@ class ProductClient(BaseAPIClient):
         pagination: int = 50,
         start_date: str | None = None,
         end_date: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[Product]] | Response[PaystackDataModel]:
         """Fetches products available on your integration.
 
@@ -135,13 +133,13 @@ class ProductClient(BaseAPIClient):
 
     def get_product(
         self,
-        id: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Product] | Response[PaystackDataModel]:
         """Get details of a product on your integration.
 
         Args:
-            id: The product ``ID`` you want to fetch
+            id_: The product ``ID`` you want to fetch
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
@@ -159,7 +157,7 @@ class ProductClient(BaseAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
 
-        url = self._full_url(f"/product/{id}")
+        url = self._full_url(f"/product/{id_}")
         return self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
@@ -168,19 +166,19 @@ class ProductClient(BaseAPIClient):
 
     def update(
         self,
-        id: str,
+        id_: int | str,
         name: str,
         description: str,
         price: int,
         currency: Currency,
         unlimited: bool | None = None,
         quantity: int | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Product] | Response[PaystackDataModel]:
         """Update a product details on your integration
 
         Args:
-            id: Product ID
+            id_: Product ID
             name: Name of product
             description: A description for this product
             price: Price should be in kobo if currency is ``Currency.NGN``, pesewas,
@@ -210,10 +208,10 @@ class ProductClient(BaseAPIClient):
         """
 
         if unlimited is True and quantity is not None:
-            raise InvalidDataException(
+            raise ValueError(
                 "You can't have unlimited set to True and quantity have a value."
             )
-        url = self._full_url(f"/product/{id}")
+        url = self._full_url(f"/product/{id_}")
         payload = {
             "name": name,
             "description": description,

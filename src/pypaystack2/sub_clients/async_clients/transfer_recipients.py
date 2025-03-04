@@ -1,5 +1,5 @@
 from http import HTTPMethod
-from typing import Type, Any
+from typing import Any
 
 from pypaystack2.base_clients import (
     BaseAsyncAPIClient,
@@ -7,14 +7,13 @@ from pypaystack2.base_clients import (
     append_query_params,
 )
 from pypaystack2.enums import Currency, RecipientType
-from pypaystack2.exceptions import InvalidDataException
-from pypaystack2.types import PaystackDataModel
-from pypaystack2.models.payload_models import Recipient
 from pypaystack2.models import Response
+from pypaystack2.models.payload_models import Recipient
 from pypaystack2.models.response_models import (
     TransferRecipient,
     TransferRecipientBulkCreateData,
 )
+from pypaystack2.types import PaystackDataModel
 
 
 class AsyncTransferRecipientClient(BaseAsyncAPIClient):
@@ -30,7 +29,7 @@ class AsyncTransferRecipientClient(BaseAsyncAPIClient):
 
     async def create(
         self,
-        type: RecipientType,
+        type_: RecipientType,
         name: str,
         account_number: str,
         bank_code: str | None = None,
@@ -38,14 +37,14 @@ class AsyncTransferRecipientClient(BaseAsyncAPIClient):
         currency: Currency | None = None,
         auth_code: str | None = None,
         metadata: dict[str, Any] | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[TransferRecipient] | Response[PaystackDataModel]:
         """
         Creates a new recipient. A duplicate account number will lead to the
         retrieval of the existing record.
 
         Args:
-            type: Recipient Type. any value from the `RecipientType` enum
+            type_: Recipient Type. any value from the `RecipientType` enum
             name: A name for the recipient
             account_number: Required if `type` is `RecipientType.NUBAN` or `RecipientType.BASA`
             bank_code: Required if `type` is `RecipientType.NUBAN` or `RecipientType.BASA`.
@@ -70,16 +69,16 @@ class AsyncTransferRecipientClient(BaseAsyncAPIClient):
         Returns:
             A named tuple containing the response gotten from paystack's server.
         """
-        if type == RecipientType.NUBAN or type == RecipientType.BASA:
+        if type_ == RecipientType.NUBAN or type_ == RecipientType.BASA:
             if bank_code is None:
-                raise InvalidDataException(
+                raise ValueError(
                     "`bank_code` is required if type is `TRType.NUBAN` or `TRType.BASA`"
                 )
 
         url = self._full_url("/transferrecipient")
 
         payload = {
-            "type": type,
+            "type": type_,
             "name": name,
             "account_number": account_number,
         }
@@ -101,7 +100,7 @@ class AsyncTransferRecipientClient(BaseAsyncAPIClient):
     async def bulk_create(
         self,
         batch: list[Recipient],
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[TransferRecipientBulkCreateData] | Response[PaystackDataModel]:
         """
         Create multiple transfer recipients in batches. A duplicate account
@@ -146,7 +145,7 @@ class AsyncTransferRecipientClient(BaseAsyncAPIClient):
         pagination: int = 50,
         start_date: str | None = None,
         end_date: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[TransferRecipient]] | Response[PaystackDataModel]:
         """Fetch transfer recipients available on your integration
 
@@ -189,8 +188,8 @@ class AsyncTransferRecipientClient(BaseAsyncAPIClient):
 
     async def get_transfer_recipient(
         self,
-        id_or_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_or_code: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[TransferRecipient] | Response[PaystackDataModel]:
         """Fetch the details of a transfer recipient
 
@@ -221,10 +220,10 @@ class AsyncTransferRecipientClient(BaseAsyncAPIClient):
 
     async def update(
         self,
-        id_or_code: str,
+        id_or_code: int | str,
         name: str,
         email: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """
         Update an existing recipient. A duplicate account number will lead
@@ -264,8 +263,8 @@ class AsyncTransferRecipientClient(BaseAsyncAPIClient):
 
     async def delete(
         self,
-        id_or_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_or_code: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Deletes a transfer recipient (sets the transfer recipient to inactive)
 

@@ -23,7 +23,7 @@ class AsyncTransactionSplitClientTestCase(IsolatedAsyncioTestCase):
         ]
         response: Response[TransactionSplit] = await self.client.create(
             name="Pypaystack2 Test Split",
-            type=Split.PERCENTAGE,
+            type_=Split.PERCENTAGE,
             currency=Currency.NGN,
             subaccounts=sub_accounts,
             bearer_type=Bearer.ALL,
@@ -53,7 +53,7 @@ class AsyncTransactionSplitClientTestCase(IsolatedAsyncioTestCase):
 
     async def test_can_update(self) -> None:
         response: Response[TransactionSplit] = await self.client.update(
-            id="3885195", name="Pypaystack2 Test split updated", active=True
+            id_="3885195", name="Pypaystack2 Test split updated", active=True
         )
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
@@ -62,7 +62,7 @@ class AsyncTransactionSplitClientTestCase(IsolatedAsyncioTestCase):
 
     async def test_can_add_or_update(self) -> None:
         response: Response[TransactionSplit] = await self.client.add_or_update(
-            id="3885195", subaccount="ACCT_l6nz8ofjywrc66k", share=0.5
+            id_="3885195", subaccount="ACCT_l6nz8ofjywrc66k", share=0.5
         )
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
@@ -72,9 +72,9 @@ class AsyncTransactionSplitClientTestCase(IsolatedAsyncioTestCase):
     async def test_can_remove(self) -> None:
         id_ = "3885195"
         sub_account = "ACCT_l6nz8ofjywrc66k"
-        await self.client.add_or_update(id=id_, subaccount=sub_account, share=0.7)
+        await self.client.add_or_update(id_=id_, subaccount=sub_account, share=0.7)
         response: Response[None] = await self.client.remove(
-            id=id_, subaccount=sub_account
+            id_=id_, subaccount=sub_account
         )
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)

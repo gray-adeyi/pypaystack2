@@ -1,5 +1,5 @@
 from http import HTTPMethod
-from typing import Type
+from typing import Any
 
 from pypaystack2.base_clients import (
     BaseAsyncAPIClient,
@@ -7,9 +7,7 @@ from pypaystack2.base_clients import (
     append_query_params,
 )
 from pypaystack2.enums import Currency, Channel, Bearer, TransactionStatus
-from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models.response_models import (
     InitTransaction,
     Transaction,
@@ -17,6 +15,7 @@ from pypaystack2.models.response_models import (
     TransactionExport,
     TransactionTotal,
 )
+from pypaystack2.types import PaystackDataModel
 
 
 class AsyncTransactionClient(BaseAsyncAPIClient):
@@ -35,13 +34,13 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         callback_url: str | None = None,
         plan: str | None = None,
         invoice_limit: int | None = None,
-        metadata: dict | None = None,
+        metadata: dict[str, Any] | None = None,
         channels: list[Channel] | None = None,
         split_code: str | None = None,
         subaccount: str | None = None,
         transfer_charge: int | None = None,
         bearer: Bearer | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[InitTransaction] | Response[PaystackDataModel]:
         """Initialize a transaction from your backend
 
@@ -86,9 +85,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         """
 
         if not email:
-            raise InvalidDataException(
-                "Customer's Email is required for initialization"
-            )
+            raise ValueError("Customer's Email is required for initialization")
 
         url = self._full_url("/transaction/initialize")
         payload = {
@@ -124,7 +121,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
     async def verify(
         self,
         reference: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Confirm the status of a transaction
 
@@ -149,7 +146,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
 
         reference = str(reference)
         url = self._full_url(f"/transaction/verify/{reference}")
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
             response_data_model_class=alternate_model_class or Transaction,
@@ -157,14 +154,14 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
 
     async def get_transactions(
         self,
-        customer: str | None = None,
+        customer: int | str | None = None,
         start_date: str | None = None,
         end_date: str | None = None,
         status: TransactionStatus | None = None,
         page: int | None = None,
         amount: int | None = None,
         pagination: int = 50,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[Transaction]] | Response[PaystackDataModel]:
         """Fetch transactions carried out on your integration.
 
@@ -217,13 +214,13 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
 
     async def get_transaction(
         self,
-        id: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_: str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Get details of a transaction carried out on your integration.
 
         Args:
-            id: An ID for the transaction to fetch
+            id_: An ID for the transaction to fetch
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
@@ -241,7 +238,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
 
-        url = self._full_url(f"/transaction/{id}/")
+        url = self._full_url(f"/transaction/{id_}/")
         return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
@@ -255,13 +252,13 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         auth_code: str,
         reference: str | None = None,
         currency: Currency | None = None,
-        metadata: dict | None = None,
+        metadata: dict[str, Any] | None = None,
         channels: list[Channel] | None = None,
         subaccount: str | None = None,
         transaction_charge: int | None = None,
         bearer: Bearer | None = None,
         queue: bool = False,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transaction] | Response[PaystackDataModel]:
         """
         All authorizations marked as reusable can be charged with this
@@ -310,10 +307,10 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         """
 
         if not email:
-            raise InvalidDataException("Customer's Email is required to charge")
+            raise ValueError("Customer's Email is required to charge")
 
         if not auth_code:
-            raise InvalidDataException("Customer's Auth code is required to charge")
+            raise ValueError("Customer's Auth code is required to charge")
 
         url = self._full_url("/transaction/charge_authorization")
         payload = {
@@ -342,8 +339,8 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
 
     async def get_timeline(
         self,
-        id_or_ref: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_or_ref: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[TransactionLog] | Response[PaystackDataModel]:
         """View the timeline of a transaction
 
@@ -379,7 +376,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         start_date: str | None = None,
         end_date: str | None = None,
         pagination: int = 50,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[TransactionTotal] | Response[PaystackDataModel]:
         """Total amount received on your account
 
@@ -425,7 +422,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         page: int | None = None,
         start_date: str | None = None,
         end_date: str | None = None,
-        customer: str | None = None,
+        customer: str | int | None = None,
         status: TransactionStatus | None = None,
         currency: Currency | None = None,
         amount: int | None = None,
@@ -501,7 +498,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         email: str,
         reference: str | None = None,
         at_least: int | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transaction] | Response[PaystackDataModel]:
         """Retrieve part of a payment from a customer
 
@@ -536,10 +533,10 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         """
 
         if not email:
-            raise InvalidDataException("Customer's Email is required to charge")
+            raise ValueError("Customer's Email is required to charge")
 
         if not auth_code:
-            raise InvalidDataException("Customer's Auth code is required to charge")
+            raise ValueError("Customer's Auth code is required to charge")
 
         url = self._full_url("/transaction/partial_debit")
         payload = {

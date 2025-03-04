@@ -1,11 +1,10 @@
 from http import HTTPMethod
-from typing import Type
 
 from pypaystack2.base_clients import BaseAPIClient
 from pypaystack2.enums import Reason
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models.response_models import IntegrationBalance, BalanceLedgerItem
+from pypaystack2.types import PaystackDataModel
 
 
 class TransferControlClient(BaseAPIClient):
@@ -17,7 +16,7 @@ class TransferControlClient(BaseAPIClient):
 
     def check_balance(
         self,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[IntegrationBalance]] | Response[PaystackDataModel]:
         """Fetch the available balance on your integration
 
@@ -47,7 +46,7 @@ class TransferControlClient(BaseAPIClient):
 
     def get_balance_ledger(
         self,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[BalanceLedgerItem]] | Response[PaystackDataModel]:
         """Fetch all pay-ins and pay-outs that occurred on your integration
 
@@ -79,7 +78,7 @@ class TransferControlClient(BaseAPIClient):
         self,
         transfer_code: str,
         reason: Reason,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """
         Generates a new OTP and sends to customer in the event they are having trouble receiving one.
@@ -118,7 +117,7 @@ class TransferControlClient(BaseAPIClient):
 
     def disable_otp(
         self,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """
         This is used in the event that you want to be able to complete transfers
@@ -156,7 +155,7 @@ class TransferControlClient(BaseAPIClient):
     def finalize_disable_otp(
         self,
         otp: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Finalize the request to disable OTP on your transfers.
 
@@ -193,7 +192,7 @@ class TransferControlClient(BaseAPIClient):
 
     def enable_otp(
         self,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """
         In the event that a customer wants to stop being able to complete transfers

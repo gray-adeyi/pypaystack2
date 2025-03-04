@@ -1,5 +1,5 @@
 from http import HTTPMethod
-from typing import Type
+from typing import Any
 
 from pypaystack2.base_clients import (
     BaseAsyncAPIClient,
@@ -7,10 +7,10 @@ from pypaystack2.base_clients import (
     append_query_params,
 )
 from pypaystack2.enums import Currency, Status
-from pypaystack2.models.payload_models import LineItem, Tax
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
+from pypaystack2.models.payload_models import LineItem, Tax
 from pypaystack2.models.response_models import PaymentRequest, PaymentRequestStat
+from pypaystack2.types import PaystackDataModel
 
 
 class AsyncPaymentRequestClient(BaseAsyncAPIClient):
@@ -22,7 +22,7 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
 
     async def create(
         self,
-        customer: str,
+        customer: int | str,
         amount: int,
         due_date: str | None = None,
         description: str | None = None,
@@ -34,7 +34,7 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
         has_invoice: bool | None = None,
         invoice_number: int | None = None,
         split_code: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[PaymentRequest] | Response[PaystackDataModel]:
         """Create a payment request for a transaction on your integration
 
@@ -70,10 +70,12 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
         Returns:
             A pydantic model containing the response gotten from paystack's server.
         """
+        _line_items: list[dict[str, Any]] | None = None
+        _tax: list[dict[str, Any]] | None = None
         if line_items:
-            line_items = [item.model_dump() for item in line_items]
+            _line_items = [item.model_dump() for item in line_items]
         if tax:
-            tax = [unit_tax.model_dump() for unit_tax in tax]
+            _tax = [unit_tax.model_dump() for unit_tax in tax]
 
         url = self._full_url("/paymentrequest")
 
@@ -81,8 +83,8 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
         optional_params = [
             ("due_date", due_date),
             ("description", description),
-            ("line_items", line_items),
-            ("tax", tax),
+            ("line_items", _line_items),
+            ("tax", _tax),
             ("currency", currency),
             ("send_notification", send_notification),
             ("draft", draft),
@@ -100,7 +102,7 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
 
     async def get_payment_requests(
         self,
-        customer: str | None = None,
+        customer: str | int | None = None,
         status: Status | None = None,
         currency: Currency | None = None,
         include_archive: bool = False,
@@ -108,7 +110,7 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
         pagination: int = 50,
         start_date: str | None = None,
         end_date: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[PaymentRequest]] | Response[PaystackDataModel]:
         """Fetches the payment requests available on your integration.
 
@@ -159,8 +161,8 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
 
     async def get_payment_request(
         self,
-        id_or_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_or_code: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[PaymentRequest] | Response[PaystackDataModel]:
         """Get details of a payment request on your integration.
 
@@ -192,13 +194,13 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
 
     async def verify(
         self,
-        code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_or_code: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[PaymentRequest] | Response[PaystackDataModel]:
         """Verify details of a payment request on your integration.
 
         Args:
-            code: Payment Request id or code
+            id_or_code: Payment Request id or code
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
@@ -216,7 +218,7 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
 
-        url = self._full_url(f"/paymentrequest/verify/{code}")
+        url = self._full_url(f"/paymentrequest/verify/{id_or_code}")
         return await self._handle_request(  # type: ignore
             HTTPMethod.GET,
             url,
@@ -225,8 +227,8 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
 
     async def send_notification(
         self,
-        id_or_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_or_code: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Send notification of a payment request to your customers
 
@@ -258,7 +260,7 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
 
     async def get_total(
         self,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[PaymentRequestStat] | Response[PaystackDataModel]:
         """Get payment requests metric
 
@@ -289,8 +291,8 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
 
     async def finalize(
         self,
-        id_or_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_or_code: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[PaymentRequest] | Response[PaystackDataModel]:
         """Finalize a draft payment request
 
@@ -322,8 +324,8 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
 
     async def update(
         self,
-        id_or_code: str,
-        customer: str,
+        id_or_code: int | str,
+        customer: int | str,
         amount: int,
         due_date: str | None = None,
         description: str | None = None,
@@ -334,7 +336,7 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
         draft: bool | None = None,
         invoice_number: int | None = None,
         split_code: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[PaymentRequest] | Response[PaystackDataModel]:
         """Update a payment request details on your integration
 
@@ -370,11 +372,13 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
         Returns:
             A pydantic model containing the response gotten from paystack's server.
         """
+        _line_items: list[dict[str, Any]] | None = None
+        _tax: list[dict[str, Any]] | None = None
 
         if line_items:
-            line_items = [item.model_dump() for item in line_items]
+            _line_items = [item.model_dump() for item in line_items]
         if tax:
-            tax = [unit_tax.model_dump() for unit_tax in tax]
+            _tax = [unit_tax.model_dump() for unit_tax in tax]
 
         url = self._full_url(f"/paymentrequest/{id_or_code}")
         payload = {
@@ -384,8 +388,8 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
         optional_params = [
             ("due_date", due_date),
             ("description", description),
-            ("line_items", line_items),
-            ("tax", tax),
+            ("line_items", _line_items),
+            ("tax", _tax),
             ("currency", currency),
             ("send_notification", send_notification),
             ("draft", draft),
@@ -402,8 +406,8 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
 
     async def archive(
         self,
-        id_or_code: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        id_or_code: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Used to archive a payment request. A payment request will no longer be fetched on list or returned on verify.
 

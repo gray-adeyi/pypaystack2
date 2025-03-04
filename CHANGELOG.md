@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Pydantic v2 to project dependencies.
 - Utility methods for fees calculation `calculate_fee`, `to_base_unit`, `to_subunit`.
+- `ClientNetworkError`. An exception raised for all network related errors.
 
 ### Changed
 
@@ -32,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Support for `python<=3.10`
 - Package defined `HTTPMethod` enum. Now using `HTTPMethod` from the standard lib.
 - `validate_amount` and `validate_interval` helper methods
-- `InvalidMethodException`
+- `InvalidMethodException`, `InvalidDataException`
 
 ## [2.1.1] - 2024-12-09
 

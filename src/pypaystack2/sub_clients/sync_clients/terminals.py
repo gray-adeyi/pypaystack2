@@ -1,17 +1,16 @@
 from http import HTTPMethod
-from typing import Type
+from typing import Any
 
 from pypaystack2.base_clients import BaseAPIClient, append_query_params
 from pypaystack2.enums import TerminalEvent, TerminalEventAction
-from pypaystack2.exceptions import InvalidDataException
 from pypaystack2.models import Response
-from pypaystack2.types import PaystackDataModel
 from pypaystack2.models.response_models import (
     TerminalEventData,
     TerminalEventStatusData,
     TerminalStatusData,
     Terminal,
 )
+from pypaystack2.types import PaystackDataModel
 
 
 class TerminalClient(BaseAPIClient):
@@ -23,17 +22,17 @@ class TerminalClient(BaseAPIClient):
 
     def send_event(
         self,
-        terminal_id: str,
-        type: TerminalEvent,
+        terminal_id: int | str,
+        type_: TerminalEvent,
         action: TerminalEventAction,
-        data: dict,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        data: dict[str, Any],
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[TerminalEventData] | Response[PaystackDataModel]:
         """Send an event from your application to the Paystack Terminal
 
         Args:
             terminal_id: The ID of the Terminal the event should be sent to.
-            type: The type of event to push. Paystack currently supports `TerminalEventType.INVOICE` and
+            type_: The type of event to push. Paystack currently supports `TerminalEventType.INVOICE` and
                 `TerminalEventType.TRANSACTION`.
             action: The action the Terminal needs to perform. For the `TerminalEventType.INVOICE` type,
                 the action can either be `TerminalEventAction.PROCESS` or TerminalEventAction.VIEW.
@@ -68,15 +67,15 @@ class TerminalClient(BaseAPIClient):
                 TerminalEventAction.VIEW,
             },
         }
-        if action not in supported_actions_mapping[type]:
-            raise InvalidDataException(
-                f"Terminal Event: {type} does not support Terminal Event Action: {action}"
+        if action not in supported_actions_mapping[type_]:
+            raise ValueError(
+                f"Terminal Event: {type_} does not support Terminal Event Action: {action}"
             )
 
         url = self._full_url(f"/terminal/{terminal_id}/event")
 
         payload = {
-            "type": type,
+            "type": type_,
             "action": action,
             "data": data,
         }
@@ -89,9 +88,9 @@ class TerminalClient(BaseAPIClient):
 
     def get_event_status(
         self,
-        terminal_id: str,
-        event_id: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        terminal_id: int | str,
+        event_id: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[TerminalEventStatusData] | Response[PaystackDataModel]:
         """Check the status of an event sent to the Terminal
 
@@ -123,8 +122,8 @@ class TerminalClient(BaseAPIClient):
 
     def get_terminal_status(
         self,
-        terminal_id: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        terminal_id: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[TerminalStatusData] | Response[PaystackDataModel]:
         """Check the availability of a Terminal before sending an event to it.
 
@@ -156,15 +155,15 @@ class TerminalClient(BaseAPIClient):
     def get_terminals(
         self,
         pagination: int = 50,
-        next: str | None = None,
+        next_: str | None = None,
         previous: str | None = None,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[Terminal]] | Response[PaystackDataModel]:
         """List the Terminals available on your integration
 
         Args:
             pagination: Specifies how many records you want to retrieve per page. If not specified, it defaults to 50.
-            next: Specifies how many records you want to retrieve per page. If not specified
+            next_: Specifies how many records you want to retrieve per page. If not specified
                 we use a default value of 50.
             previous: A cursor that indicates your place in the list. It should be used to fetch the
                 previous page of the list after an initial next request
@@ -186,7 +185,7 @@ class TerminalClient(BaseAPIClient):
         """
         url = self._full_url(f"/terminal?perPage={pagination}")
         query_params = [
-            ("next", next),
+            ("next", next_),
             ("previous", previous),
         ]
         url = append_query_params(query_params, url)
@@ -198,8 +197,8 @@ class TerminalClient(BaseAPIClient):
 
     def get_terminal(
         self,
-        terminal_id: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        terminal_id: int | str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Terminal] | Response[PaystackDataModel]:
         """Get the details of a Terminal
 
@@ -230,10 +229,10 @@ class TerminalClient(BaseAPIClient):
 
     def update_terminal(
         self,
-        terminal_id: str,
+        terminal_id: int | str,
         name: str,
         address: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Update the details of a Terminal
 
@@ -270,7 +269,7 @@ class TerminalClient(BaseAPIClient):
     def commission_terminal(
         self,
         serial_number: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Activate your debug device by linking it to your integration
 
@@ -308,7 +307,7 @@ class TerminalClient(BaseAPIClient):
     def decommission_terminal(
         self,
         serial_number: str,
-        alternate_model_class: Type[PaystackDataModel] | None = None,
+        alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """Unlink your debug device from your integration
 
