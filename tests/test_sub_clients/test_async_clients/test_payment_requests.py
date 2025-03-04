@@ -48,7 +48,7 @@ class AsyncPaymentRequestClientTestCase(IsolatedAsyncioTestCase):
 
     async def test_can_verify(self) -> None:
         response: Response[PaymentRequest] = await self.client.verify(
-            code="PRQ_hj7hi07q6oibdof"
+            id_or_code="PRQ_hj7hi07q6oibdof"
         )
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)

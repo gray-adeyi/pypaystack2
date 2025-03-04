@@ -39,7 +39,7 @@ class PaymentRequestClientTestCase(TestCase):
         self.assertIsInstance(response.data, PaymentRequest)
 
     def test_can_verify(self) -> None:
-        response = self.client.verify(code="PRQ_hj7hi07q6oibdof")
+        response = self.client.verify(id_or_code="PRQ_hj7hi07q6oibdof")
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Payment request retrieved")
