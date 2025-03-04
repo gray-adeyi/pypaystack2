@@ -3,18 +3,16 @@ from unittest import TestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.sub_clients.sync_clients.transfer_recipients import (
-    TransferRecipientClient,
-)
-from pypaystack2.utils.enums import Currency, RecipientType
-from pypaystack2.utils.models import Recipient
-from pypaystack2.utils.response_models import (
+from pypaystack2.enums import Currency, RecipientType
+from pypaystack2.models import (
     TransferRecipient,
+    Recipient,
     TransferRecipientBulkCreateData,
 )
+from pypaystack2.sub_clients import TransferRecipientClient
 
 
-class TransferRecipientTestCase(TestCase):
+class TransferRecipientClientTestCase(TestCase):
     client: TransferRecipientClient
 
     @classmethod

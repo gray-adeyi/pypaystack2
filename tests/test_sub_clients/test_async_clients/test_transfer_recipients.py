@@ -4,18 +4,17 @@ from unittest import IsolatedAsyncioTestCase
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.sub_clients.async_clients.transfer_recipients import (
-    AsyncTransferRecipientClient,
-)
-from pypaystack2.utils.enums import RecipientType, Currency
-from pypaystack2.utils.models import Recipient, Response
-from pypaystack2.utils.response_models import (
+from pypaystack2.enums import RecipientType, Currency
+from pypaystack2.models import (
+    Response,
     TransferRecipient,
     TransferRecipientBulkCreateData,
+    Recipient,
 )
+from pypaystack2.sub_clients import AsyncTransferRecipientClient
 
 
-class AsyncTransferRecipientTestCase(IsolatedAsyncioTestCase):
+class AsyncTransferRecipientClientTestCase(IsolatedAsyncioTestCase):
     client: AsyncTransferRecipientClient
 
     @classmethod
@@ -88,7 +87,8 @@ class AsyncTransferRecipientTestCase(IsolatedAsyncioTestCase):
 
     async def test_can_delete(self) -> None:
         all_recipients_response = cast(
-            Response[TransferRecipient], await self.client.get_transfer_recipients()
+            Response[list[TransferRecipient]],
+            await self.client.get_transfer_recipients(),
         )
         response: Response[None] = await self.client.delete(
             id_or_code=all_recipients_response.data[0].id

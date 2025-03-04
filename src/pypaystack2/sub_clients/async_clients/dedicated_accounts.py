@@ -1,12 +1,18 @@
 from http import HTTPMethod
 from typing import Type
 
-from pypaystack2.base_api_client import BaseAsyncAPIClient
-from pypaystack2.utils.enums import Country, Currency
-from pypaystack2.utils.helpers import add_to_payload, append_query_params
-from pypaystack2.utils.models import PaystackDataModel
-from pypaystack2.utils.models import Response
-from pypaystack2.utils.response_models import DedicatedAccount, DedicatedAccountProvider
+from pypaystack2.base_clients import (
+    BaseAsyncAPIClient,
+    add_to_payload,
+    append_query_params,
+)
+from pypaystack2.enums import Country, Currency
+from pypaystack2.types import PaystackDataModel
+from pypaystack2.models import Response
+from pypaystack2.models.response_models import (
+    DedicatedAccount,
+    DedicatedAccountProvider,
+)
 
 
 class AsyncDedicatedAccountClient(BaseAsyncAPIClient):

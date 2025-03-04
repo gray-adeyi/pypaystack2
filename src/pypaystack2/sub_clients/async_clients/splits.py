@@ -1,13 +1,17 @@
 from http import HTTPMethod
 from typing import Type
 
-from pypaystack2.base_api_client import BaseAsyncAPIClient
+from pypaystack2.base_clients import (
+    BaseAsyncAPIClient,
+    add_to_payload,
+    append_query_params,
+)
+from pypaystack2.enums import Currency, Bearer, Split
 from pypaystack2.exceptions import InvalidDataException
-from pypaystack2.utils.helpers import append_query_params, add_to_payload
-from pypaystack2.utils.enums import Currency, Bearer, Split
-from pypaystack2.utils.models import PaystackDataModel
-from pypaystack2.utils.models import SplitAccount, Response
-from pypaystack2.utils.response_models import TransactionSplit
+from pypaystack2.types import PaystackDataModel
+from pypaystack2.models.payload_models import SplitAccount
+from pypaystack2.models import Response
+from pypaystack2.models.response_models import TransactionSplit
 
 
 class AsyncTransactionSplitClient(BaseAsyncAPIClient):

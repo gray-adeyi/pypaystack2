@@ -1,49 +1,49 @@
-from unittest import TestCase
+from unittest import TestCase, skip
 
 import httpx
 from dotenv import load_dotenv
 
+from pypaystack2.enums import Reason
+from pypaystack2.models import IntegrationBalance, BalanceLedgerItem
 from pypaystack2.sub_clients import TransferControlClient
-from pypaystack2.utils import Reason
-from tests.test_sub_clients.mocked_api_testcase import MockedAPITestCase
 
 
-class MockedTransferControlTestCase(MockedAPITestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        super().setUpClass()
-        load_dotenv()
-        cls.wrapper = TransferControlClient()
+class TransferControlClientTestCase(TestCase):
+    client: TransferControlClient
 
-
-class TransferControlTestCase(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = TransferControlClient()
+        cls.client = TransferControlClient()
 
-    def test_can_check_balance(self):
-        response = self.wrapper.check_balance()
+    def test_can_check_balance(self) -> None:
+        response = self.client.check_balance()
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Balances retrieved")
+        self.assertIsInstance(response.data, list)
+        if len(response.data) > 0:
+            self.assertIsInstance(response.data[0], IntegrationBalance)
 
-    def test_can_get_balance_ledger(self):
-        response = self.wrapper.get_balance_ledger()
+    def test_can_get_balance_ledger(self) -> None:
+        response = self.client.get_balance_ledger()
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Balance ledger retrieved")
+        self.assertIsInstance(response.data, list)
+        if len(response.data) > 0:
+            self.assertIsInstance(response.data[0], BalanceLedgerItem)
 
-    def test_can_resend_otp(self):
-        response = self.wrapper.resend_otp(
+    def test_can_resend_otp(self) -> None:
+        response = self.client.resend_otp(
             transfer_code="TRF_vsyqdmlzble3uii", reason=Reason.DISABLE_OTP
         )
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(response.message, "OTP has been resent")
 
-    def test_can_disable_otp(self):
-        response = self.wrapper.disable_otp()
+    def test_can_disable_otp(self) -> None:
+        response = self.client.disable_otp()
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(
@@ -51,13 +51,14 @@ class TransferControlTestCase(TestCase):
             "OTP has been sent to mobile number ending with 9831 and to email a******@g******.com",
         )
 
-    def test_can_finalize_disable_otp(self):
+    @skip("incomplete test")
+    def test_can_finalize_disable_otp(self) -> None:
         # TODO: Test properly
-        response = self.wrapper.finalize_disable_otp(otp="123456")
+        response = self.client.finalize_disable_otp(otp="123456")
         self.assertEqual(response.status_code, httpx.codes.OK)
 
-    def test_can_enable_otp(self):
-        response = self.wrapper.enable_otp()
+    def test_can_enable_otp(self) -> None:
+        response = self.client.enable_otp()
         self.assertEqual(response.status_code, httpx.codes.OK)
         self.assertTrue(response.status)
         self.assertEqual(

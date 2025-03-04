@@ -4,192 +4,188 @@ from dotenv import load_dotenv
 
 from pypaystack2 import PaystackClient, AsyncPaystackClient
 from pypaystack2.sub_clients import (
-    PaymentPageClient,
     ApplePayClient,
     BulkChargeClient,
-    ChargeClient,
     IntegrationClient,
     CustomerClient,
     DedicatedAccountClient,
     DisputeClient,
     PaymentRequestClient,
     MiscellaneousClient,
+    PaymentPageClient,
     PlanClient,
     ProductClient,
     RefundClient,
     SettlementClient,
+    TransactionSplitClient,
     SubAccountClient,
     SubscriptionClient,
-    TransactionSplitClient,
     TerminalClient,
     TransactionClient,
+    TransferRecipientClient,
     TransferClient,
     TransferControlClient,
     VerificationClient,
-)
-from pypaystack2.sub_clients.async_clients.apple_pay import AsyncApplePayClient
-from pypaystack2.sub_clients.async_clients.bulk_charges import AsyncBulkChargeClient
-from pypaystack2.sub_clients.async_clients.charge import AsyncChargeClient
-from pypaystack2.sub_clients.async_clients.customers import AsyncCustomerClient
-from pypaystack2.sub_clients.async_clients.dedicated_accounts import (
+    AsyncApplePayClient,
+    AsyncBulkChargeClient,
+    AsyncChargeClient,
+    AsyncIntegrationClient,
+    AsyncCustomerClient,
     AsyncDedicatedAccountClient,
-)
-from pypaystack2.sub_clients.async_clients.disputes import AsyncDisputeClient
-from pypaystack2.sub_clients.async_clients.integration import AsyncIntegrationClient
-from pypaystack2.sub_clients.async_clients.miscellaneous import AsyncMiscellaneousClient
-from pypaystack2.sub_clients.async_clients.payment_pages import AsyncPaymentPageClient
-from pypaystack2.sub_clients.async_clients.payment_requests import (
+    AsyncDisputeClient,
     AsyncPaymentRequestClient,
-)
-from pypaystack2.sub_clients.async_clients.plans import AsyncPlanClient
-from pypaystack2.sub_clients.async_clients.refunds import AsyncRefundClient
-from pypaystack2.sub_clients.async_clients.settlements import AsyncSettlementClient
-from pypaystack2.sub_clients.async_clients.splits import AsyncTransactionSplitClient
-from pypaystack2.sub_clients.async_clients.subaccounts import AsyncSubAccountClient
-from pypaystack2.sub_clients.async_clients.subscriptions import AsyncSubscriptionClient
-from pypaystack2.sub_clients.async_clients.terminals import AsyncTerminalClient
-from pypaystack2.sub_clients.async_clients.transactions import AsyncTransactionClient
-from pypaystack2.sub_clients.async_clients.transfer_recipients import (
+    AsyncMiscellaneousClient,
+    ChargeClient,
+    AsyncPaymentPageClient,
+    AsyncPlanClient,
+    AsyncProductClient,
+    AsyncRefundClient,
+    AsyncSettlementClient,
+    AsyncTransactionSplitClient,
+    AsyncVerificationClient,
+    AsyncTransferControlClient,
+    AsyncTransferClient,
     AsyncTransferRecipientClient,
+    AsyncTransactionClient,
+    AsyncTerminalClient,
+    AsyncSubscriptionClient,
+    AsyncSubAccountClient,
 )
-from pypaystack2.sub_clients.sync_clients.products import AsyncProductClient
-from pypaystack2.sub_clients.sync_clients.transfer_recipients import (
-    TransferRecipientClient,
-)
-from pypaystack2.sub_clients.transfers import AsyncTransferClient
-from pypaystack2.sub_clients.transfers_control import AsyncTransferControlClient
-from pypaystack2.sub_clients.verification import AsyncVerificationClient
 
 
-class PaystackTestcase(TestCase):
+class PaystackClientTestcase(TestCase):
+    client: PaystackClient
+
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = PaystackClient()
+        cls.client = PaystackClient()
 
-    def test_attributes(self):
-        self.assertIsInstance(getattr(self.wrapper, "apple_pay", None), ApplePayClient)
+    def test_attributes(self) -> None:
+        self.assertIsInstance(getattr(self.client, "apple_pay", None), ApplePayClient)
         self.assertIsInstance(
-            getattr(self.wrapper, "bulk_charges", None), BulkChargeClient
+            getattr(self.client, "bulk_charges", None), BulkChargeClient
         )
-        self.assertIsInstance(getattr(self.wrapper, "charge", None), ChargeClient)
+        self.assertIsInstance(getattr(self.client, "charge", None), ChargeClient)
         self.assertIsInstance(
-            getattr(self.wrapper, "integration", None), IntegrationClient
+            getattr(self.client, "integration", None), IntegrationClient
         )
-        self.assertIsInstance(getattr(self.wrapper, "customers", None), CustomerClient)
+        self.assertIsInstance(getattr(self.client, "customers", None), CustomerClient)
         self.assertIsInstance(
-            getattr(self.wrapper, "dedicated_accounts", None), DedicatedAccountClient
+            getattr(self.client, "dedicated_accounts", None), DedicatedAccountClient
         )
-        self.assertIsInstance(getattr(self.wrapper, "disputes", None), DisputeClient)
+        self.assertIsInstance(getattr(self.client, "disputes", None), DisputeClient)
         self.assertIsInstance(
-            getattr(self.wrapper, "payment_requests", None), PaymentRequestClient
-        )
-        self.assertIsInstance(
-            getattr(self.wrapper, "miscellaneous", None), MiscellaneousClient
+            getattr(self.client, "payment_requests", None), PaymentRequestClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "payment_pages", None), PaymentPageClient
-        )
-        self.assertIsInstance(getattr(self.wrapper, "plans", None), PlanClient)
-        self.assertIsInstance(getattr(self.wrapper, "products", None), ProductClient)
-        self.assertIsInstance(getattr(self.wrapper, "refunds", None), RefundClient)
-        self.assertIsInstance(
-            getattr(self.wrapper, "settlements", None), SettlementClient
+            getattr(self.client, "miscellaneous", None), MiscellaneousClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "splits", None), TransactionSplitClient
+            getattr(self.client, "payment_pages", None), PaymentPageClient
+        )
+        self.assertIsInstance(getattr(self.client, "plans", None), PlanClient)
+        self.assertIsInstance(getattr(self.client, "products", None), ProductClient)
+        self.assertIsInstance(getattr(self.client, "refunds", None), RefundClient)
+        self.assertIsInstance(
+            getattr(self.client, "settlements", None), SettlementClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "subaccounts", None), SubAccountClient
+            getattr(self.client, "splits", None), TransactionSplitClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "subscriptions", None), SubscriptionClient
-        )
-        self.assertIsInstance(getattr(self.wrapper, "terminals", None), TerminalClient)
-        self.assertIsInstance(
-            getattr(self.wrapper, "transactions", None), TransactionClient
+            getattr(self.client, "subaccounts", None), SubAccountClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "transfer_recipients", None), TransferRecipientClient
+            getattr(self.client, "subscriptions", None), SubscriptionClient
         )
-        self.assertIsInstance(getattr(self.wrapper, "transfers", None), TransferClient)
+        self.assertIsInstance(getattr(self.client, "terminals", None), TerminalClient)
         self.assertIsInstance(
-            getattr(self.wrapper, "transfer_control", None), TransferControlClient
+            getattr(self.client, "transactions", None), TransactionClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "verification", None), VerificationClient
+            getattr(self.client, "transfer_recipients", None), TransferRecipientClient
+        )
+        self.assertIsInstance(getattr(self.client, "transfers", None), TransferClient)
+        self.assertIsInstance(
+            getattr(self.client, "transfer_control", None), TransferControlClient
+        )
+        self.assertIsInstance(
+            getattr(self.client, "verification", None), VerificationClient
         )
 
 
-class AsyncPaystackTestcase(TestCase):
+class AsyncPaystackClientTestcase(TestCase):
+    client: AsyncPaystackClient
+
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
-        cls.wrapper = AsyncPaystackClient()
+        cls.client = AsyncPaystackClient()
 
-    def test_attributes(self):
+    def test_attributes(self) -> None:
         self.assertIsInstance(
-            getattr(self.wrapper, "apple_pay", None), AsyncApplePayClient
+            getattr(self.client, "apple_pay", None), AsyncApplePayClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "bulk_charges", None), AsyncBulkChargeClient
+            getattr(self.client, "bulk_charges", None), AsyncBulkChargeClient
         )
-        self.assertIsInstance(getattr(self.wrapper, "charge", None), AsyncChargeClient)
+        self.assertIsInstance(getattr(self.client, "charge", None), AsyncChargeClient)
         self.assertIsInstance(
-            getattr(self.wrapper, "integration", None), AsyncIntegrationClient
-        )
-        self.assertIsInstance(
-            getattr(self.wrapper, "customers", None), AsyncCustomerClient
+            getattr(self.client, "integration", None), AsyncIntegrationClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "dedicated_accounts", None),
+            getattr(self.client, "customers", None), AsyncCustomerClient
+        )
+        self.assertIsInstance(
+            getattr(self.client, "dedicated_accounts", None),
             AsyncDedicatedAccountClient,
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "disputes", None), AsyncDisputeClient
+            getattr(self.client, "disputes", None), AsyncDisputeClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "payment_requests", None), AsyncPaymentRequestClient
+            getattr(self.client, "payment_requests", None), AsyncPaymentRequestClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "miscellaneous", None), AsyncMiscellaneousClient
+            getattr(self.client, "miscellaneous", None), AsyncMiscellaneousClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "payment_pages", None), AsyncPaymentPageClient
+            getattr(self.client, "payment_pages", None), AsyncPaymentPageClient
         )
-        self.assertIsInstance(getattr(self.wrapper, "plans", None), AsyncPlanClient)
+        self.assertIsInstance(getattr(self.client, "plans", None), AsyncPlanClient)
         self.assertIsInstance(
-            getattr(self.wrapper, "products", None), AsyncProductClient
+            getattr(self.client, "products", None), AsyncProductClient
         )
-        self.assertIsInstance(getattr(self.wrapper, "refunds", None), AsyncRefundClient)
+        self.assertIsInstance(getattr(self.client, "refunds", None), AsyncRefundClient)
         self.assertIsInstance(
-            getattr(self.wrapper, "settlements", None), AsyncSettlementClient
-        )
-        self.assertIsInstance(
-            getattr(self.wrapper, "splits", None), AsyncTransactionSplitClient
+            getattr(self.client, "settlements", None), AsyncSettlementClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "subaccounts", None), AsyncSubAccountClient
+            getattr(self.client, "splits", None), AsyncTransactionSplitClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "subscriptions", None), AsyncSubscriptionClient
+            getattr(self.client, "subaccounts", None), AsyncSubAccountClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "terminals", None), AsyncTerminalClient
+            getattr(self.client, "subscriptions", None), AsyncSubscriptionClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "transactions", None), AsyncTransactionClient
+            getattr(self.client, "terminals", None), AsyncTerminalClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "transfer_recipients", None),
+            getattr(self.client, "transactions", None), AsyncTransactionClient
+        )
+        self.assertIsInstance(
+            getattr(self.client, "transfer_recipients", None),
             AsyncTransferRecipientClient,
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "transfers", None), AsyncTransferClient
+            getattr(self.client, "transfers", None), AsyncTransferClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "transfer_control", None), AsyncTransferControlClient
+            getattr(self.client, "transfer_control", None), AsyncTransferControlClient
         )
         self.assertIsInstance(
-            getattr(self.wrapper, "verification", None), AsyncVerificationClient
+            getattr(self.client, "verification", None), AsyncVerificationClient
         )

@@ -6,10 +6,11 @@ That has transformed into its own thing over the years
 Modules and packages exported by this package:
    - `sub_clients`: A package containing several clients for Paystack API, like apple pay sub_clients,
     bulk charges sub_clients e.t.c.
-   - `utils`: A module containing useful utilities and enums
+   - `models`: A module containing useful utilities and enums
    - `errors`: A module containing error types for pypaystack2
 """
 
+# ruff: noqa: F401
 from pypaystack2._metadata import (
     __title__,
     __version__,
@@ -18,35 +19,14 @@ from pypaystack2._metadata import (
     __copyright__,
 )
 
-# ruff: noqa: F401
-from pypaystack2.paystack import PaystackClient, AsyncPaystackClient
-from pypaystack2.utils import (
-    BulkChargeInstruction,
-    LineItem,
-    Tax,
-    SplitAccount,
-    Recipient,
-    TransferInstruction,
-    TerminalEvent,
-    TerminalEventAction,
-    Currency,
-    Interval,
-    Channel,
-    Bearer,
-    TransactionStatus,
-    Split,
-    Country,
-    RiskAction,
-    Identification,
-    RecipientType,
-    Document,
-    Status,
-    Schedule,
-    Reason,
-    Gateway,
-    AccountType,
-    Resolution,
-    BankType,
-    DisputeStatus,
-    Response,
-)
+from pypaystack2.main_clients import PaystackClient, AsyncPaystackClient
+
+__all__ = [
+    "__title__",
+    "__version__",
+    "__author__",
+    "__license__",
+    "__copyright__",
+    "PaystackClient",
+    "AsyncPaystackClient",
+]

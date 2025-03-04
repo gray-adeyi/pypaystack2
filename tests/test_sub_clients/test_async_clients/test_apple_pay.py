@@ -3,18 +3,22 @@ from unittest import IsolatedAsyncioTestCase
 
 from dotenv import load_dotenv
 
-from pypaystack2.sub_clients.async_clients.apple_pay import AsyncApplePayClient
-from pypaystack2.utils.models import Response
+from pypaystack2.models import Response, ApplePayDomains
+from pypaystack2.sub_clients import AsyncApplePayClient
 
 
-class AsyncApplePayTestCase(IsolatedAsyncioTestCase):
+class AsyncApplePayClientTestCase(IsolatedAsyncioTestCase):
+    client: AsyncApplePayClient
+
     @classmethod
     def setUpClass(cls) -> None:
         load_dotenv()
         cls.client = AsyncApplePayClient()
 
-    async def test_can_register_domain(self):
-        response = await self.client.register_domain(domain_name="example.com")
+    async def test_can_register_domain(self) -> None:
+        response: Response[None] = await self.client.register_domain(
+            domain_name="example.com"
+        )
         raw_data = {
             "status": False,
             "message": "Domain could not be registered on Apple Pay. Please verify that the correct file is hosted at https://example.com/.well-known/apple-developer-merchantid-domain-association",
@@ -38,8 +42,8 @@ class AsyncApplePayTestCase(IsolatedAsyncioTestCase):
         )
         self.assertEqual(response, expected_response)
 
-    async def test_can_get_domains(self):
-        response = await self.client.get_domains()
+    async def test_can_get_domains(self) -> None:
+        response: Response[ApplePayDomains] = await self.client.get_domains()
         expected_response = Response(
             status_code=HTTPStatus.NOT_FOUND,
             status=False,
@@ -52,8 +56,10 @@ class AsyncApplePayTestCase(IsolatedAsyncioTestCase):
         )
         self.assertEqual(response, expected_response)
 
-    async def test_can_unregister_domain(self):
-        response = await self.client.unregister_domain(domain_name="example.com")
+    async def test_can_unregister_domain(self) -> None:
+        response: Response[None] = await self.client.unregister_domain(
+            domain_name="example.com"
+        )
         raw_data = {
             "status": True,
             "message": "Domain successfully unregistered on Apple Pay",

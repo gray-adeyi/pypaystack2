@@ -1,92 +1,51 @@
-from pypaystack2.base_api_client import BaseAPIClient, BaseAsyncAPIClient
-from pypaystack2.sub_clients.async_clients.apple_pay import AsyncApplePayClient
-from pypaystack2.sub_clients.async_clients.bulk_charges import AsyncBulkChargeClient
-from pypaystack2.sub_clients.async_clients.charge import AsyncChargeClient
-from pypaystack2.sub_clients.async_clients.customers import AsyncCustomerClient
-from pypaystack2.sub_clients.async_clients.dedicated_accounts import (
-    AsyncDedicatedAccountClient,
-)
-from pypaystack2.sub_clients.async_clients.disputes import AsyncDisputeClient
-from pypaystack2.sub_clients.async_clients.integration import AsyncIntegrationClient
-from pypaystack2.sub_clients.async_clients.miscellaneous import AsyncMiscellaneousClient
-from pypaystack2.sub_clients.async_clients.payment_pages import AsyncPaymentPageClient
-from pypaystack2.sub_clients.async_clients.payment_requests import (
-    AsyncPaymentRequestClient,
-)
-from pypaystack2.sub_clients.async_clients.plans import AsyncPlanClient
-from pypaystack2.sub_clients.async_clients.products import AsyncProductClient
-from pypaystack2.sub_clients.async_clients.refunds import AsyncRefundClient
-from pypaystack2.sub_clients.async_clients.settlements import AsyncSettlementClient
-from pypaystack2.sub_clients.async_clients.splits import AsyncTransactionSplitClient
-from pypaystack2.sub_clients.async_clients.subaccounts import AsyncSubAccountClient
-from pypaystack2.sub_clients.async_clients.subscriptions import AsyncSubscriptionClient
-from pypaystack2.sub_clients.async_clients.terminals import AsyncTerminalClient
-from pypaystack2.sub_clients.async_clients.transactions import AsyncTransactionClient
-from pypaystack2.sub_clients.async_clients.transfer_recipients import (
-    AsyncTransferRecipientClient,
-)
-from pypaystack2.sub_clients.sync_clients.apple_pay import (
+from pypaystack2.base_clients import BaseAPIClient, BaseAsyncAPIClient
+from pypaystack2.sub_clients import (
     ApplePayClient,
-)
-from pypaystack2.sub_clients.sync_clients.bulk_charges import (
     BulkChargeClient,
-)
-from pypaystack2.sub_clients.sync_clients.charge import ChargeClient
-from pypaystack2.sub_clients.sync_clients.customers import (
-    CustomerClient,
-)
-from pypaystack2.sub_clients.sync_clients.dedicated_accounts import (
-    DedicatedAccountClient,
-)
-from pypaystack2.sub_clients.sync_clients.disputes import (
-    DisputeClient,
-)
-from pypaystack2.sub_clients.sync_clients.integration import (
+    ChargeClient,
     IntegrationClient,
-)
-from pypaystack2.sub_clients.sync_clients.miscellaneous import (
-    MiscellaneousClient,
-)
-from pypaystack2.sub_clients.sync_clients.payment_pages import (
-    PaymentPageClient,
-)
-from pypaystack2.sub_clients.sync_clients.payment_requests import (
+    CustomerClient,
+    DedicatedAccountClient,
+    DisputeClient,
     PaymentRequestClient,
-)
-from pypaystack2.sub_clients.sync_clients.plans import PlanClient
-from pypaystack2.sub_clients.sync_clients.products import (
+    MiscellaneousClient,
+    PaymentPageClient,
+    PlanClient,
     ProductClient,
-)
-from pypaystack2.sub_clients.sync_clients.refunds import RefundClient
-from pypaystack2.sub_clients.sync_clients.settlements import (
+    RefundClient,
     SettlementClient,
-)
-from pypaystack2.sub_clients.sync_clients.splits import (
     TransactionSplitClient,
-)
-from pypaystack2.sub_clients.sync_clients.subaccounts import (
     SubAccountClient,
-)
-from pypaystack2.sub_clients.sync_clients.subscriptions import (
     SubscriptionClient,
-)
-from pypaystack2.sub_clients.sync_clients.terminals import (
     TerminalClient,
-)
-from pypaystack2.sub_clients.sync_clients.transactions import (
     TransactionClient,
-)
-from pypaystack2.sub_clients.sync_clients.transfer_recipients import (
     TransferRecipientClient,
-)
-from pypaystack2.sub_clients.transfers import AsyncTransferClient, TransferClient
-from pypaystack2.sub_clients.transfers_control import (
-    AsyncTransferControlClient,
+    TransferClient,
     TransferControlClient,
-)
-from pypaystack2.sub_clients.verification import (
-    AsyncVerificationClient,
     VerificationClient,
+    AsyncApplePayClient,
+    AsyncBulkChargeClient,
+    AsyncChargeClient,
+    AsyncIntegrationClient,
+    AsyncCustomerClient,
+    AsyncDedicatedAccountClient,
+    AsyncDisputeClient,
+    AsyncPaymentRequestClient,
+    AsyncMiscellaneousClient,
+    AsyncPaymentPageClient,
+    AsyncPlanClient,
+    AsyncProductClient,
+    AsyncRefundClient,
+    AsyncSettlementClient,
+    AsyncTransactionSplitClient,
+    AsyncSubAccountClient,
+    AsyncSubscriptionClient,
+    AsyncTerminalClient,
+    AsyncTransactionClient,
+    AsyncTransferRecipientClient,
+    AsyncTransferClient,
+    AsyncTransferControlClient,
+    AsyncVerificationClient,
 )
 
 
@@ -98,7 +57,7 @@ class PaystackClient(BaseAPIClient):
     instance of this class.
     """
 
-    def __init__(self, secret_key: str = None):
+    def __init__(self, secret_key: str | None = None):
         super().__init__(secret_key=secret_key)
         self.apple_pay = ApplePayClient(secret_key=self._secret_key)
         self.bulk_charges = BulkChargeClient(secret_key=self._secret_key)
