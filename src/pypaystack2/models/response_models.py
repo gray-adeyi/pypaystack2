@@ -146,17 +146,18 @@ class Customer(BaseModel):
 
 
 class Authorization(BaseModel):
-    authorization_code: str
-    bin: str
-    last4: str
-    exp_month: str
-    exp_year: str
-    channel: str
-    card_type: str
-    bank: str
-    country_code: Country
-    brand: str
-    reusable: bool
+    authorization_code: str | None = None
+    bin: str | None = None
+    last4: str | None = None
+    exp_month: str | None = None
+    exp_year: str | None = None
+    channel: str | None = None
+    card_type: str | None = None
+    bank: str | None = None
+    country_code: Country | None = None
+    brand: str | None = None
+    reusable: bool | None = None
+    signature: str | None = None
     account_name: str | None = None
 
 
@@ -256,8 +257,8 @@ class TransactionSplit(BaseModel):
 
 
 class Subscription(BaseModel):
-    customer: int | Customer
-    plan: Union[int, "Plan"]
+    customer: int | Customer | dict[str, Any]
+    plan: Union[int, "Plan", dict[str, Any]]
     integration: int
     domain: Domain
     start: int | None = None
@@ -266,7 +267,7 @@ class Subscription(BaseModel):
     amount: int
     subscription_code: str
     email_token: str
-    authorization: int | Authorization
+    authorization: int | Authorization | None = None
     easy_cron_id: str | None = None
     cron_expression: str
     next_payment_date: datetime | None = None

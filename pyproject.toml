@@ -42,6 +42,7 @@ dev-dependencies = [
     "python-dotenv>=1.0.1",
     "ruff>=0.8.6",
     "tomli>=2.0.1",
+    "typer>=0.15.2",
 ]
 
 [tool.mypy]
