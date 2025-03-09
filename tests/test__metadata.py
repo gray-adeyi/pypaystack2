@@ -1,5 +1,5 @@
 from pathlib import Path
-from unittest import TestCase
+from unittest import TestCase, skip
 
 import tomli
 
@@ -14,28 +14,29 @@ class PackageMetadataTestCase(TestCase):
         with (BASE_DIR / "pyproject.toml").open("r") as f:
             cls.pyproject_data = tomli.loads(f.read())
 
-    def test_package_title(self):
+    def test_package_title(self) -> None:
         self.assertEqual(
             self.pyproject_data["project"]["name"],
             __title__,
             "Mismatched package name",
         )
 
-    def test_package_version(self):
+    @skip("Package version is now dynamic")
+    def test_package_version(self) -> None:
         self.assertEqual(
             self.pyproject_data["project"]["version"],
             __version__,
             "Mismatched package version",
         )
 
-    def test_package_author(self):
+    def test_package_author(self) -> None:
         self.assertListEqual(
             self.pyproject_data["project"]["authors"],
             __author__,
             "Mismatched package authors",
         )
 
-    def test_package_license(self):
+    def test_package_license(self) -> None:
         self.assertEqual(
             self.pyproject_data["project"]["license"],
             __license__,

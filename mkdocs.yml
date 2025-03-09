@@ -78,7 +78,7 @@ markdown_extensions:
 nav:
   - PyPaystack2: index.md
   - Tutorials:
-      - Paystack Command line Client: tutorials/tutorial1.md
+      - Paystack Command line Client: tutorials/tutorial-00.md
   - "How-To Guides": how-to-guides.md
   - Reference:
       - Introduction: reference/index.md

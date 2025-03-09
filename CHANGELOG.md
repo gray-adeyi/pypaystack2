@@ -7,7 +7,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## unreleased
 
-## [2.1.1] - 2024-12-09
+## [3.0.0] - 2025-03-
+
+### Added
+
+- Pydantic v2 to project dependencies.
+- Utility methods for fees calculation `calculate_fee`, `to_base_unit`, `to_subunit`.
+- `ClientNetworkError`. An exception raised for all network related errors.
+
+### Changed
+
+- `auth_key` parameter to `secret_key`.
+- secret key environmental variable name from `PAYSTACK_AUTHORIZATION_KEY` to `PAYSTACK_SECRET_KEY`
+- `MissingAuthKeyException` to  `MissingSecretKeyException`
+- Rename wrappers to clients. All usages of wrappers are now deprecated in favour of clients.
+  `Paystack` wrapper class in the past is now `PaystackClient` likewise all other api wrappers
+  are now sub clients e.g. `ApplePay` is now  `ApplePayClient`
+
+### Fixed
+
+- Unused `amount` parameter in `TransactionClient.export`
+
+### Removed
+
+- Support for `python<=3.10`
+- Package defined `HTTPMethod` enum. Now using `HTTPMethod` from the standard lib.
+- `validate_amount` and `validate_interval` helper methods
+- `InvalidMethodException`, `InvalidDataException`
+
+## [2.1.1] - (9th December 2024)
 
 ### Added
 
@@ -22,7 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Charge.setAddress -> Charge.submitAddress
 
-## [2.1.0] - 2024-10-08
+## [2.1.0] - (8th October 2024)
 
 ### Added
 
@@ -58,7 +86,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Redundant payload from Subscription.send_update_link
 - Redundant payload from AsyncSubscription.send_update_link
 
-## [2.0.3] - 2024-03-24
+## [2.0.3] - (24th March 2024)
 
 ### Added
 
@@ -71,7 +99,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `Response` with the `data` parameter containing a `content` field with the bytes content returned.
 - Mismatched source code and documentation links in docs
 
-## [2.0.2] - 2023-12-01
+## [2.0.2] - (1st December 2023)
 
 ### Added
 
@@ -91,13 +119,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Broken docstrings API reference documentation links
 
-## [2.0.1] - 2023-07-27
+## [2.0.1] - (27th July 2023)
 
 ### Changed
 
 - Refactor project internals
 
-## [2.0.0] - 2023-05-18
+## [2.0.0] - (18th May 2023)
 
 ### Added
 
@@ -108,25 +136,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Use `httpx` in place of `requests`
 
-## [1.1.3] - 2023-03-10
+## [1.1.3] - (10th March 2023)
 
 ### Added
 
 - `Paystack` class which had bindings to other wrappers
 
-## [1.0.3] - 2022-12-26
+## [1.0.3] - (26th December 2022)
 
 ### Added
 
 - Cleanup documentation
 
-## [1.0.2] - 2022-12-25
+## [1.0.2] - (25th December 2022)
 
 ### Added
 
 - Implement additional wrappers to cover all endpoints provided by paystack
 
-## [1.0.0] - 2022-07-25
+## [1.0.0] - (25th July 2022)
 
 ### Added
 
@@ -136,7 +164,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Breaks projects were it is added as a dependency
 
-[unreleased]: https://github.com/gray-adeyi/pypaystack2/compare/v2.0.3...HEAD
+[unreleased]: https://github.com/gray-adeyi/pypaystack2/compare/v2.1.1...HEAD
+
+[2.1.1]: https://github.com/gray-adeyi/pypaystack2/compare/v2.1.0...v2.1.1
+
+[2.1.0]: https://github.com/gray-adeyi/pypaystack2/compare/v2.0.3...v2.1.0
 
 [2.0.3]: https://github.com/gray-adeyi/pypaystack2/compare/v2.0.2...v2.0.3
 
@@ -144,8 +176,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [2.0.1]: https://github.com/gray-adeyi/pypaystack2/compare/v2.0.0...v2.0.1
 
+[2.0.0]: https://github.com/gray-adeyi/pypaystack2/compare/v1.1.3...v2.0.0
+
 [1.1.3]: https://github.com/gray-adeyi/pypaystack2/compare/v1.0.3...v1.1.3
 
 [1.0.3]: https://github.com/gray-adeyi/pypaystack2/compare/v1.0.2...v1.0.3
 
 [1.0.2]: https://github.com/gray-adeyi/pypaystack2/compare/v1.0.0...v1.0.2
+
+[1.0.0]: https://github.com/gray-adeyi/pypaystack2/releases/tag/v1.0.0

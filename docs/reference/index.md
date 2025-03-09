@@ -2,15 +2,7 @@
 
 ::: pypaystack2
 
-## `pypaystack2.paytack`
-
-::: pypaystack2.paystack
-
-## `pypaystack2.api`
-
-::: pypaystack2.api
-
-## wrappers within `pypaystack2.api`
+## sub-clients `pypaystack2.sub_clients`
 
 - [ApplePay & AsyncApplePay](./apple_pay.md)
 - [BulkCharge & AsyncBulkCharge](./bulk_charges.md)
@@ -36,9 +28,13 @@
 - [TransferControl & AsyncTransferControl](./transfers_control.md)
 - [Verification & AsyncVerification](./verification.md)
 
-## `pypaystack2.utils`
+## `pypaystack2.enums`
 
-::: pypaystack2.utils
+::: pypaystack2.enums
+
+## `pypaystack2.models`
+
+::: pypaystack2.models
 
 ## `pypaystack2.exceptions`
 

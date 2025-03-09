@@ -1,22 +1,14 @@
-class MissingAuthKeyException(Exception):
-    """
-    We can't find the authentication key
-    """
+class MissingSecretKeyException(Exception):
+    """Custom exception raised when we can't find the secret key"""
 
-    pass
+    ...
 
 
-class InvalidMethodException(Exception):
-    """
-    Invalid or unrecognized/unimplemented HTTP request method
-    """
+class ClientNetworkError(Exception):
+    """Custom exception for wrapping httpx-related errors."""
 
-    pass
-
-
-class InvalidDataException(Exception):
-    """
-    Invalid input recognized. Saves unnecessary request to the server
-    """
-
-    pass
+    def __init__(self, message: str, original_exception: Exception | None = None):
+        super().__init__(message)
+        self.original_exception = (
+            original_exception  # Store the original exception for debugging
+        )
