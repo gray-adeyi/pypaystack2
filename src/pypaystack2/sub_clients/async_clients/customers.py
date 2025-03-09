@@ -326,7 +326,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
             HTTPMethod.POST,
             url,
             payload,
-            response_data_model_class=alternate_model_class,
+            response_data_model_class=alternate_model_class or Customer,
         )
 
     async def deactivate(

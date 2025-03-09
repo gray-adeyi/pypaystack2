@@ -30,11 +30,11 @@ class BaseAPITestCase(MockedAPITestCase):
 
     def test__headers(self) -> None:
         load_dotenv()
-        wrapper = BaseAPIClient()
+        client = BaseAPIClient()
         self.assertDictEqual(
-            wrapper._headers,
+            client._headers,
             {
-                "Authorization": f"Bearer {os.getenv('PAYSTACK_AUTHORIZATION_KEY')}",
+                "Authorization": f"Bearer {os.getenv('PAYSTACK_SECRET_KEY')}",
                 "Content-Type": "application/json",
                 "User-Agent": f"PyPaystack2-{__version__}",
             },
@@ -104,11 +104,15 @@ class BaseAPITestCase(MockedAPITestCase):
             status_code=cast(HTTPStatus, httpx.codes.OK),
             status=True,
             message="This is a mocked response. No real API call to Paystack servers was made.",
-            data={"isValid": True},
+            data=None,
             meta=None,
             type=None,
             code=None,
-            raw={},
+            raw={
+                "status": True,
+                "message": "This is a mocked response. No real API call to Paystack servers was made.",
+                "data": {"isValid": True},
+            },
         )
         self.assertEqual(
             client._handle_request(
@@ -142,7 +146,7 @@ class BaseAsyncAPITestCase(MockedAsyncAPITestCase):
             code=None,
             raw={
                 "status": True,
-                "message": "valid response",
+                "message": "This is a mocked response. No real API call to Paystack servers was made.",
                 "data": {"isValid": True},
             },
         )
