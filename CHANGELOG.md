@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## unreleased
 
-## [3.0.0] - 2025-03-
+## [3.0.1] - (4th October 2025)
+
+### Fixed
+
+- Missing `update_existing_subscriptions` parameter in `AsyncPlanClient.update` and `PlanClient.update`
+
+## [3.0.0] - (9th March 2025)
 
 ### Added
 
