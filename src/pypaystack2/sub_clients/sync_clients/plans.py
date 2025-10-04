@@ -178,6 +178,7 @@ class PlanClient(BaseAPIClient):
         invoice_limit: int | None = None,
         send_invoices: bool = False,
         send_sms: bool = False,
+        update_existing_subscriptions: bool = True,
         alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[None] | Response[PaystackDataModel]:
         """update a plan details on your integration
@@ -196,6 +197,8 @@ class PlanClient(BaseAPIClient):
                 to be sent to your customers
             send_sms: Set to ``False`` if you don't want text messages to
                 be sent to your customers
+            update_existing_subscriptions: Flag to determine whether to update existing subscriptions based on the new
+                changes made to the plan.
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
@@ -226,6 +229,7 @@ class PlanClient(BaseAPIClient):
             ("description", description),
             ("currency", currency),
             ("invoice_limit", invoice_limit),
+            ("update_existing_subscriptions", update_existing_subscriptions),
         ]
         payload = add_to_payload(optional_params, payload)
         return self._handle_request(  # type: ignore
