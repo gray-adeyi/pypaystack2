@@ -123,6 +123,7 @@ class BulkChargeUnitCharge(BaseModel):
 
 class Customer(BaseModel):
     integration: int | None = None
+    domain: Domain | None = None
     id: int
     first_name: str | None = None
     last_name: str | None = None
