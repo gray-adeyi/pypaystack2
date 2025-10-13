@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## unreleased
 
+## [3.0.2] - (10th October 2025)
+
+### Fixed
+
+- Missing `domain` field in `Customer` model.
+
 ## [3.0.1] - (4th October 2025)
 
 ### Fixed
