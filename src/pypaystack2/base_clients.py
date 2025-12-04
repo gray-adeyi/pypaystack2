@@ -1,3 +1,4 @@
+import json
 import logging
 import os
 import re
@@ -17,6 +18,8 @@ from pypaystack2.exceptions import MissingSecretKeyException, ClientNetworkError
 from pypaystack2.fees_calculation_mixin import FeesCalculationMixin
 from pypaystack2.models import Response
 from pypaystack2.types import PaystackDataModel
+import hmac
+import hashlib
 
 logger = logging.getLogger(__name__)
 
@@ -62,6 +65,21 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
                 "secret key was not provided on client instantiation "
                 f"or set in env variables as `{self._SECRET_KEY_IN_ENV_KEY}`"
             )
+
+    def is_verified_webhook_payload(
+        self, payload: dict[str, Any], header_signature: str
+    ) -> bool:
+        """Checks if the webhook payload is indeed sent by paystack
+
+        Args:
+            payload: is the webhook data received that needs validation for authenticity.
+            header_signature: is the `x-paystack-signature` in the response headers of the
+                response that included the payload
+        """
+        digest = hmac.new(
+            self._secret_key.encode(), json.dumps(payload).encode(), hashlib.sha512
+        ).hexdigest()
+        return header_signature == digest
 
     @abstractmethod
     def _handle_request(
