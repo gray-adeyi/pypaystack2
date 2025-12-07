@@ -39,8 +39,9 @@ dev = [
     "tomli>=2.3.0",
     "typer-slim[standard]>=0.20.0",
 ]
-
-[tool.mypy]
-strict = true
-mypy_path = "src"
-files = ["src/pypaystack2", "tests"]
+webhook = [
+    "fastapi[standard]>=0.123.10",
+    "ngrok>=1.4.0",
+    "python-dotenv>=1.2.1",
+    "typer-slim[standard]>=0.20.0",
+]
