@@ -1,6 +1,6 @@
 [project]
 name = "pypaystack2"
-dynamic = ["version"]
+version = "3.1.0"
 description = "A developer-friendly client library for Paystack"
 readme = "README.md"
 license = "MIT"
