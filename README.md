@@ -23,6 +23,10 @@ projects. It aims at being developer friendly and easy to use.
 $ pip install -U pypaystack2
 # or install with uv
 $ uv add pypaystack2
+# For webhook cli
+$ pip install -U "pypaystack2[webhook]"
+or install with uv
+$ uv add "pypaystack2[webhook"
 ```
 
 ## Usage Preview
@@ -89,6 +93,8 @@ True
 ```
 
 #### Forward webhook events from paystack to your app running locally
+
+**Note:** This requires that you install `pypaystack2[webhook]`
 
 ```bash
 pypaystack2 webhook start-tunnel-server --addr localhost:8000 --ngrok-auth-token
