@@ -1,7 +1,9 @@
-from enum import StrEnum
 from typing import Any
 
 from pydantic import BaseModel
+
+from pypaystack2.enums import Country, Identification
+from pypaystack2.webhook.enums import PaystackWebhookEvent
 
 
 class EndpointAddress(BaseModel):
@@ -9,33 +11,35 @@ class EndpointAddress(BaseModel):
     port: int | None = None
 
 
-class PaystackWebhookEvent(StrEnum):
-    CHARGE_DISPUTE_CREATE = "charge.dispute.create"
-    CHARGE_DISPUTE_REMIND = "charge.dispute.remind"
-    CHARGE_DISPUTE_RESOLVE = "charge.dispute.resolve"
-    CHARGE_SUCCESS = "charge.success"
-    CUSTOMER_IDENTIFICATION_FAILED = "customeridentification.failed"
-    CUSTOMER_IDENTIFICATION_SUCCESS = "customeridentification.success"
-    DEDICATED_ACCOUNT_ASSIGN_FAILED = "dedicatedaccount.assign.failed"
-    DEDICATED_ACCOUNT_ASSIGN_SUCCESS = "dedicatedaccount.assign.success"
-    INVOICE_CREATE = "invoice.create"
-    INVOICE_PAYMENT_FAILED = "invoice.payment_failed"
-    INVOICE_UPDATE = "invoice.update"
-    PAYMENT_REQUEST_PENDING = "paymentrequest.pending"
-    PAYMENT_REQUEST_SUCCESS = "paymentrequet.success"
-    REFUND_FAILED = "refund.failed"
-    REFUND_PENDING = "refund.pending"
-    REFUND_PROCESSED = "refund.processed"
-    REFUND_PROCESSING = "refund.processing"
-    SUBSCRIPTION_CREATE = "subscription.create"
-    SUBSCRIPTION_DISABLE = "subscription.disable"
-    SUBSCRIPTION_EXPIRING_CARDS = "subscription.expiring_cards"
-    SUBSCRIPTION_NOT_RENEW = "subscription.not_renew"
-    TRANSFER_FAILED = "transfer.failed"
-    TRANSFER_SUCCESS = "transfer.success"
-    TRANSFER_REVERSED = "transfer.reversed"
-
-
 class PaystackWebhookPayload(BaseModel):
     event: PaystackWebhookEvent
     data: dict[str, Any]
+
+
+class CustomerIdentificationFailedDataIdentification(BaseModel):
+    country: Country
+    type: Identification
+    bvn: str
+    account_number: str
+    bank_code: str
+
+
+class CustomerIdentificationFailedData(BaseModel):
+    customer_id: int
+    customer_code: str
+    email: str
+    identification: CustomerIdentificationFailedDataIdentification  # I really don't know what to name this atm 😭
+    reason: str
+
+
+class CustomerIdentificationSuccessDataIdentification(BaseModel):
+    country: Country
+    type: Identification
+    value: str
+
+
+class CustomerIdentificationSuccessData(BaseModel):
+    customer_id: int
+    customer_code: str
+    email: str
+    identification: CustomerIdentificationSuccessDataIdentification
