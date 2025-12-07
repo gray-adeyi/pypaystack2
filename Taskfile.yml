@@ -1,0 +1,14 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  dev:lint:
+    cmds:
+      - uvx ty check . -W
+  docs:serve:
+    cmds:
+      - uv run mkdocs serve
+  docs:build:
+    cmds:
+      - uv run mkdocs build
