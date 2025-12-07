@@ -12,14 +12,13 @@ on:
   pull_request:
     branches: [ "main" ]
 
-env:
-  PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
-
 jobs:
   dev:
     name: Format, lint & test project
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
+    env:
+      PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
 
     steps:
       - name: Checkout
