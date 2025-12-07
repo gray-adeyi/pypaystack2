@@ -17,9 +17,10 @@ from tests.integration.test_sub_clients.mocked_api_testcase import (
 
 class BaseAPITestCase(MockedAPITestCase):
     def test_raises_exception_for_missing_key(self) -> None:
-        os.environ.pop("PAYSTACK_SECRET_KEY", None)
+        paystack_secret_key = os.environ.pop("PAYSTACK_SECRET_KEY", None)
         with self.assertRaises(MissingSecretKeyException):
             BaseAPIClient()
+        os.environ["PAYSTACK_SECRET_KEY"] = paystack_secret_key
 
     def test__full_url(self) -> None:
         load_dotenv()
