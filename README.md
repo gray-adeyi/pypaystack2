@@ -85,8 +85,8 @@ Python 3.11.13 (main, Sep  2 2025, 14:20:25) [Clang 20.1.4 ] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> from pypaystack2 import PaystackClient
 >>> client = PaystackClient()
->>> payload = ... # webhook payload e.g.{"event": "customeridentification.success", "data": {"customer_id": 324345768, "customer_code": "CUS_e7urjebaoyk1ze2", "email": "jddae8446e-e54c-42ab-bf37-e5abff14527e@example.com", "identification": {"country": "NG", "type": "bank_account", "bvn": "123*****543", "account_number": "342****22", "bank_code": "121"}}}
->>> signature = ... # x-paystack-signature
+>>> payload = ... # webhook payload e.g., b'{"event": "customeridentification.success", "data": {"customer_id": 324345768, "customer_code": "CUS_e7urjebaoyk1ze2", "email": "jddae8446e-e54c-42ab-bf37-e5abff14527e@example.com", "identification": {"country": "NG", "type": "bank_account", "bvn": "123*****543", "account_number": "342****22", "bank_code": "121"}}}'
+>>> signature = ... # x-paystack-signature e.g., "5d049eb93c7c71fa098f5215d7297bda401710b62df8b392b9052adf8d1a02ff308f6ca57a1db14ffeabd5b66264e9c42de029b7067b9c71eb9c231fb2a8e383"
 >>> is_verified_webhook_payload = client.is_verified_webhook_payload(payload,signature)
 >>> print(is_verified_webhook_payload)
 True
