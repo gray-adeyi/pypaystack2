@@ -21,6 +21,9 @@ dependencies = [
     "pydantic>=2.12.5",
 ]
 
+[project.scripts]
+pypaystack2 = "pypaystack2.cli:cli_app"
+
 [build-system]
 requires = ["uv_build>=0.9.10,<0.10.0"]
 build-backend = "uv_build"
