@@ -79,7 +79,7 @@ async def broadcast_webhook(signature: str, body: Any):
 
 
 async def send_webhook(
-    endpoint: str, signature: str, body: Any, sem
+    endpoint: str, signature: str, body: Any, sem: asyncio.Semaphore
 ) -> tuple[str, int]:
     async with httpx_module.AsyncClient() as client, sem:
         try:
@@ -111,7 +111,7 @@ def run_webhook_proxy_server(
     proxy_clients: list[str], addr: EndpointAddress, proxy_server_log_payload: bool
 ):
     GLOBAL_VARS["proxy_clients"] = proxy_clients
-    GLOBAL_VARS["proxy_server_log_payload"] = True
+    GLOBAL_VARS["proxy_server_log_payload"] = proxy_server_log_payload
 
     host = addr.host or "localhost"
     port = addr.port or 4044
