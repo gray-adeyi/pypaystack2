@@ -1,9 +1,9 @@
 from pathlib import Path
-from unittest import TestCase, skip
+from unittest import TestCase
 
 import tomli
 
-from pypaystack2 import __title__, __version__, __author__, __license__
+from pypaystack2 import __author__, __license__, __title__, __version__
 
 BASE_DIR = Path().parent
 
@@ -21,7 +21,7 @@ class PackageMetadataTestCase(TestCase):
             "Mismatched package name",
         )
 
-    @skip("Package version is now dynamic")
+    # @skip("Package version is now dynamic")
     def test_package_version(self) -> None:
         self.assertEqual(
             self.pyproject_data["project"]["version"],

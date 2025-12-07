@@ -4,8 +4,8 @@ import httpx
 from dotenv import load_dotenv
 
 from pypaystack2.enums import Status
+from pypaystack2.models import BulkCharge, BulkChargeInstruction, BulkChargeUnitCharge
 from pypaystack2.sub_clients import BulkChargeClient
-from pypaystack2.models import BulkChargeInstruction, BulkChargeUnitCharge, BulkCharge
 
 
 class BulkChargeClientTestCase(TestCase):

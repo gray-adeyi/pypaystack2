@@ -3,7 +3,7 @@ from typing import Any
 
 from pypaystack2.base_clients import BaseAsyncAPIClient, add_to_payload
 from pypaystack2.models import Response
-from pypaystack2.models.response_models import Transaction
+from pypaystack2.models.response_models import ChargeStep, Transaction
 from pypaystack2.types import PaystackDataModel
 
 
@@ -29,7 +29,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
         mobile_money: dict[str, Any] | None = None,
         device_id: str | None = None,
         alternate_model_class: type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction] | Response[PaystackDataModel]:
+    ) -> Response[ChargeStep] | Response[PaystackDataModel]:
         """Initiate a payment by integrating the payment channel of your choice.
 
         Args:
@@ -82,7 +82,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
             HTTPMethod.POST,
             url,
             payload,
-            response_data_model_class=alternate_model_class or Transaction,
+            response_data_model_class=alternate_model_class or ChargeStep,
         )
 
     async def submit_pin(
@@ -90,7 +90,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
         pin: str,
         reference: str,
         alternate_model_class: type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction] | Response[PaystackDataModel]:
+    ) -> Response[ChargeStep] | Response[PaystackDataModel]:
         """Submit PIN to continue a charge
 
         Args:
@@ -119,7 +119,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
             HTTPMethod.POST,
             url,
             payload,
-            response_data_model_class=alternate_model_class or Transaction,
+            response_data_model_class=alternate_model_class or ChargeStep,
         )
 
     async def submit_otp(
@@ -127,7 +127,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
         otp: str,
         reference: str,
         alternate_model_class: type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction] | Response[PaystackDataModel]:
+    ) -> Response[ChargeStep] | Response[PaystackDataModel]:
         """Submit OTP to complete a charge
 
         Args:
@@ -156,7 +156,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
             HTTPMethod.POST,
             url,
             payload,
-            response_data_model_class=alternate_model_class or Transaction,
+            response_data_model_class=alternate_model_class or ChargeStep,
         )
 
     async def submit_phone(
@@ -164,7 +164,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
         phone: str,
         reference: str,
         alternate_model_class: type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction] | Response[PaystackDataModel]:
+    ) -> Response[ChargeStep] | Response[PaystackDataModel]:
         """Submit Phone when requested
 
         Args:
@@ -193,7 +193,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
             HTTPMethod.POST,
             url,
             payload,
-            response_data_model_class=alternate_model_class or Transaction,
+            response_data_model_class=alternate_model_class or ChargeStep,
         )
 
     async def submit_birthday(
@@ -201,7 +201,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
         birthday: str,
         reference: str,
         alternate_model_class: type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction] | Response[PaystackDataModel]:
+    ) -> Response[ChargeStep] | Response[PaystackDataModel]:
         """Submit Birthday when requested
 
         Args:
@@ -230,7 +230,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
             HTTPMethod.POST,
             url,
             payload,
-            response_data_model_class=alternate_model_class or Transaction,
+            response_data_model_class=alternate_model_class or ChargeStep,
         )
 
     async def set_address(
@@ -241,7 +241,7 @@ class AsyncChargeClient(BaseAsyncAPIClient):
         state: str,
         zipcode: str,
         alternate_model_class: type[PaystackDataModel] | None = None,
-    ) -> Response[Transaction] | Response[PaystackDataModel]:
+    ) -> Response[ChargeStep] | Response[PaystackDataModel]:
         """Submit address to continue a charge
 
         Args:
