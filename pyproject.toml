@@ -24,17 +24,19 @@ dependencies = [
 [project.scripts]
 pypaystack2 = "pypaystack2.cli:cli_app"
 
-[build-system]
-requires = ["uv_build>=0.9.10,<0.10.0"]
-build-backend = "uv_build"
-
-[dependency-groups]
+[project.optional-dependencies]
 webhook = [
     "fastapi[standard]>=0.123.10",
     "ngrok>=1.4.0",
     "python-dotenv>=1.2.1",
     "typer-slim[standard]>=0.20.0",
 ]
+
+[build-system]
+requires = ["uv_build>=0.9.10,<0.10.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
 dev = [
     "pre-commit>=4.5.0",
     { include-group = "format" },

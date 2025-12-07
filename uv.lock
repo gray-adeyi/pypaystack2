@@ -985,6 +985,15 @@ dependencies = [
     { name = "pydantic" },
 ]
 
+[package.optional-dependencies]
+webhook = [
+    { name = "fastapi", extra = ["standard"] },
+    { name = "ngrok", version = "1.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "ngrok", version = "1.6.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "python-dotenv" },
+    { name = "typer-slim", extra = ["standard"] },
+]
+
 [package.dev-dependencies]
 dev = [
     { name = "pre-commit" },
@@ -1019,9 +1028,14 @@ webhook = [
 
 [package.metadata]
 requires-dist = [
+    { name = "fastapi", extras = ["standard"], marker = "extra == 'webhook'", specifier = ">=0.123.10" },
     { name = "httpx", specifier = ">=0.28.1" },
+    { name = "ngrok", marker = "extra == 'webhook'", specifier = ">=1.4.0" },
     { name = "pydantic", specifier = ">=2.12.5" },
+    { name = "python-dotenv", marker = "extra == 'webhook'", specifier = ">=1.2.1" },
+    { name = "typer-slim", extras = ["standard"], marker = "extra == 'webhook'", specifier = ">=0.20.0" },
 ]
+provides-extras = ["webhook"]
 
 [package.metadata.requires-dev]
 coverage = []
