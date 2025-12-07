@@ -188,8 +188,10 @@ def start_tunnel_server(
             )
             proxy_server_process.start()
 
+        endpoint_address = parse_address(addr)
+        endpoint = f"http://{endpoint_address.host if endpoint_address.host else '0.0.0.0'}:{endpoint_address.port if endpoint_address.port else 4044}"
         tunnel_server_listener = ngrok_module.forward(
-            addr, **tunnel_server_listener_options
+            endpoint, **tunnel_server_listener_options
         )
 
         # Output ngrok url to console
