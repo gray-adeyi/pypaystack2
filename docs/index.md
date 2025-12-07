@@ -23,6 +23,8 @@ The key features are:
   a transaction resource as the data. i.e. `Response.data` is `Transaction` which is also a pydantic model
 * **Fees Calculation utilities**: PyPaystack2 provides utilities for calculating paystack's transaction fees and
   converting between base units and subunits of a currency
+* **Webhook support & utilities**: From PyPaystack2 (>= v3.1.0), you can verify webhook payloads and also run
+  a tunnel server that forwards webhook events from paystack to your app running on localhost
 
 ## Requirements
 
@@ -32,9 +34,13 @@ this project
 ## Installation
 
 ```bash
-$ pip install pypaystack2
-# or with uv
+$ pip install -U pypaystack2
+# or install with uv
 $ uv add pypaystack2
+# For webhook cli
+$ pip install -U "pypaystack2[webhook]"
+or install with uv
+$ uv add "pypaystack2[webhook"
 ```
 
 ## Examples
@@ -55,153 +61,7 @@ Response(
   data=Customer(
     integration=630606,
     id=87934333,
-    first_name='john',
-    last_name='doe',
-    email='johndoe@example.com',
-    customer_code='CUS_8x2byd6x3dk5hp0',
-    phone=None,
-    metadata=None,
-    risk_action=<RiskAction.DEFAULT: 'default'>,
-    international_phone_format=None,
-    identified=False,
-    identifications=None,
-    transactions=[],
-    subscriptions=[
-      Subscription(
-        customer={'international_format_phone': None},
-        plan={},
-        integration=630606,
-        domain=<Domain.TEST: 'test'>,
-        start=None, status='active',
-        quantity=None,
-        amount=100000,
-        subscription_code='SUB_4sje2s7kb30m5bt',
-        email_token='uqzg0vneparuxtm',
-        authorization=Authorization(
-          authorization_code=None,
-          bin=None,
-          last4=None,
-          exp_month=None,
-          exp_year=None,
-          channel=None,
-          card_type=None,
-          bank=None,
-          country_code=None,
-          brand=None,
-          reusable=None,
-          account_name=None
-          ),
-        easy_cron_id=None,
-        cron_expression='54 20 5 3 *',
-        next_payment_date=datetime.datetime(2026, 3, 5, 20, 54, tzinfo=TzInfo(UTC)),
-        open_invoice=None,
-        invoice_limit=0,
-        id=759264,
-        split_code=None,
-        cancelled_at=None,
-        updated_at=None,
-        payments_count=None,
-        most_recent_invoice=None,
-        invoices=[],
-        invoice_history=None
-          )
-        ],
-        authorizations=[
-          Authorization(
-            authorization_code='AUTH_ohnpjcd7z9',
-            bin='408408',
-            last4='4081',
-            exp_month='12',
-            exp_year='2030',
-            channel='card',
-            card_type='visa ',
-            bank='TEST BANK',
-            country_code=<Country.NIGERIA: 'NG'>,
-            brand='visa',
-            reusable=True,
-            account_name=None
-          )],
-        created_at=datetime.datetime(2022, 7, 25, 3, 46, 1, tzinfo=TzInfo(UTC)),
-        updated_at=datetime.datetime(2022, 7, 25, 3, 46, 1, tzinfo=TzInfo(UTC)),
-        total_transactions=0,
-        total_transaction_value=[],
-        dedicated_account=None,
-        dedicated_accounts=[]
-        ), ]
-        meta=None,
-        type=None,
-        code=None,
-        raw={
-          'status': True,
-          'message': 'Customer retrieved',
-          'data': {
-            'transactions': [],
-            'subscriptions': [
-              {
-                'id': 759264,
-                'domain': 'test',
-                'status': 'active',
-                'subscription_code': 'SUB_4sje2s7kb30m5bt',
-                'email_token': 'uqzg0vneparuxtm',
-                'amount': 100000,
-                'cron_expression': '54 20 5 3 *',
-                'next_payment_date': '2026-03-05T20:54:00.000Z',
-                'open_invoice': None,
-                'createdAt': '2025-03-05T20:54:33.000Z',
-                'integration': 630606,
-                'plan': {},
-                'authorization': {
-                  'exp_month': None,
-                  'exp_year': None,
-                  'account_name': None
-                  },
-                'customer': {
-                  'international_format_phone': None
-                  },
-                'invoices': [],
-                'invoices_history': [],
-                'invoice_limit': 0,
-                'split_code': None,
-                'most_recent_invoice': None,
-                'metadata': None
-              }],
-            'authorizations': [
-            {
-              'authorization_code': 'AUTH_ohnpjcd7z9',
-              'bin': '408408',
-              'last4': '4081',
-              'exp_month': '12',
-              'exp_year': '2030',
-              'channel': 'card',
-              'card_type': 'visa ',
-              'bank': 'TEST BANK',
-              'country_code': 'NG',
-              'brand': 'visa',
-              'reusable': True,
-              'signature': 'SIG_JOdryeujwrsZryg0Lkrg',
-              'account_name': None
-              }],
-            'first_name': 'john',
-            'last_name': 'doe',
-            'email': 'johndoe@example.com',
-            'phone': None,
-            'metadata': None,
-            'domain': 'test',
-            'customer_code': 'CUS_8x2byd6x3dk5hp0',
-            'risk_action': 'default',
-            'id': 87934333,
-            'integration': 630606,
-            'createdAt': '2022-07-25T03:46:01.000Z',
-            'updatedAt': '2022-07-25T03:46:01.000Z',
-            'created_at': '2022-07-25T03:46:01.000Z',
-            'updated_at': '2022-07-25T03:46:01.000Z',
-            'total_transactions': 0,
-            'total_transaction_value': [],
-            'dedicated_account': None,
-            'dedicated_accounts': [],
-            'identified': False,
-            'identifications': None}})
->>>
+    first_name='john',...
 ```
 
 All you need to interact with Paystack's API in your python project is the `PaystackClient` class it provides bindings
@@ -234,153 +94,34 @@ Response(
   data=Customer(
     integration=630606,
     id=87934333,
-    first_name='john',
-    last_name='doe',
-    email='johndoe@example.com',
-    customer_code='CUS_8x2byd6x3dk5hp0',
-    phone=None,
-    metadata=None,
-    risk_action=<RiskAction.DEFAULT: 'default'>,
-    international_phone_format=None,
-    identified=False,
-    identifications=None,
-    transactions=[],
-    subscriptions=[
-      Subscription(
-        customer={'international_format_phone': None},
-        plan={},
-        integration=630606,
-        domain=<Domain.TEST: 'test'>,
-        start=None, status='active',
-        quantity=None,
-        amount=100000,
-        subscription_code='SUB_4sje2s7kb30m5bt',
-        email_token='uqzg0vneparuxtm',
-        authorization=Authorization(
-          authorization_code=None,
-          bin=None,
-          last4=None,
-          exp_month=None,
-          exp_year=None,
-          channel=None,
-          card_type=None,
-          bank=None,
-          country_code=None,
-          brand=None,
-          reusable=None,
-          account_name=None
-          ),
-        easy_cron_id=None,
-        cron_expression='54 20 5 3 *',
-        next_payment_date=datetime.datetime(2026, 3, 5, 20, 54, tzinfo=TzInfo(UTC)),
-        open_invoice=None,
-        invoice_limit=0,
-        id=759264,
-        split_code=None,
-        cancelled_at=None,
-        updated_at=None,
-        payments_count=None,
-        most_recent_invoice=None,
-        invoices=[],
-        invoice_history=None
-          )
-        ],
-        authorizations=[
-          Authorization(
-            authorization_code='AUTH_ohnpjcd7z9',
-            bin='408408',
-            last4='4081',
-            exp_month='12',
-            exp_year='2030',
-            channel='card',
-            card_type='visa ',
-            bank='TEST BANK',
-            country_code=<Country.NIGERIA: 'NG'>,
-            brand='visa',
-            reusable=True,
-            account_name=None
-          )],
-        created_at=datetime.datetime(2022, 7, 25, 3, 46, 1, tzinfo=TzInfo(UTC)),
-        updated_at=datetime.datetime(2022, 7, 25, 3, 46, 1, tzinfo=TzInfo(UTC)),
-        total_transactions=0,
-        total_transaction_value=[],
-        dedicated_account=None,
-        dedicated_accounts=[]
-        ), ]
-        meta=None,
-        type=None,
-        code=None,
-        raw={
-          'status': True,
-          'message': 'Customer retrieved',
-          'data': {
-            'transactions': [],
-            'subscriptions': [
-              {
-                'id': 759264,
-                'domain': 'test',
-                'status': 'active',
-                'subscription_code': 'SUB_4sje2s7kb30m5bt',
-                'email_token': 'uqzg0vneparuxtm',
-                'amount': 100000,
-                'cron_expression': '54 20 5 3 *',
-                'next_payment_date': '2026-03-05T20:54:00.000Z',
-                'open_invoice': None,
-                'createdAt': '2025-03-05T20:54:33.000Z',
-                'integration': 630606,
-                'plan': {},
-                'authorization': {
-                  'exp_month': None,
-                  'exp_year': None,
-                  'account_name': None
-                  },
-                'customer': {
-                  'international_format_phone': None
-                  },
-                'invoices': [],
-                'invoices_history': [],
-                'invoice_limit': 0,
-                'split_code': None,
-                'most_recent_invoice': None,
-                'metadata': None
-              }],
-            'authorizations': [
-            {
-              'authorization_code': 'AUTH_ohnpjcd7z9',
-              'bin': '408408',
-              'last4': '4081',
-              'exp_month': '12',
-              'exp_year': '2030',
-              'channel': 'card',
-              'card_type': 'visa ',
-              'bank': 'TEST BANK',
-              'country_code': 'NG',
-              'brand': 'visa',
-              'reusable': True,
-              'signature': 'SIG_JOdryeujwrsZryg0Lkrg',
-              'account_name': None
-              }],
-            'first_name': 'john',
-            'last_name': 'doe',
-            'email': 'johndoe@example.com',
-            'phone': None,
-            'metadata': None,
-            'domain': 'test',
-            'customer_code': 'CUS_8x2byd6x3dk5hp0',
-            'risk_action': 'default',
-            'id': 87934333,
-            'integration': 630606,
-            'createdAt': '2022-07-25T03:46:01.000Z',
-            'updatedAt': '2022-07-25T03:46:01.000Z',
-            'created_at': '2022-07-25T03:46:01.000Z',
-            'updated_at': '2022-07-25T03:46:01.000Z',
-            'total_transactions': 0,
-            'total_transaction_value': [],
-            'dedicated_account': None,
-            'dedicated_accounts': [],
-            'identified': False,
-            'identifications': None}})
->>>
+    first_name='john',...
+```
+
+### Webhook
+
+PyPaystack2 now supports verifying the authenticity of a webhook payload and a CLI to make working with webhooks locally
+seamless
+
+#### Verifying a webhook payload
+
+```bash
+Python 3.11.13 (main, Sep  2 2025, 14:20:25) [Clang 20.1.4 ] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from pypaystack2 import PaystackClient
+>>> client = PaystackClient()
+>>> payload = ... # webhook payload e.g., b'{"event": "customeridentification.success", "data": {"customer_id": 324345768, "customer_code": "CUS_e7urjebaoyk1ze2", "email": "jddae8446e-e54c-42ab-bf37-e5abff14527e@example.com", "identification": {"country": "NG", "type": "bank_account", "bvn": "123*****543", "account_number": "342****22", "bank_code": "121"}}}'
+>>> signature = ... # x-paystack-signature e.g., "5d049eb93c7c71fa098f5215d7297bda401710b62df8b392b9052adf8d1a02ff308f6ca57a1db14ffeabd5b66264e9c42de029b7067b9c71eb9c231fb2a8e383"
+>>> is_verified_webhook_payload = client.is_verified_webhook_payload(payload,signature)
+>>> print(is_verified_webhook_payload)
+True
+```
+
+#### Forward webhook events from paystack to your app running locally
+
+**Note:** This requires that you install `pypaystack2[webhook]`
+
+```bash
+pypaystack2 webhook start-tunnel-server --addr localhost:8000 --ngrok-auth-token
 ```
 
 ## License
