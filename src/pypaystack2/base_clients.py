@@ -1,3 +1,5 @@
+import hashlib
+import hmac
 import json
 import logging
 import os
@@ -7,19 +9,17 @@ from abc import ABC, abstractmethod
 from functools import reduce
 from http import HTTPMethod, HTTPStatus
 from json import JSONDecodeError
-from typing import Type, Any, cast
+from typing import Any, Type, cast
 
 import httpx
 from httpx import NetworkError
 from pydantic import ValidationError
 
 from pypaystack2._metadata import __version__
-from pypaystack2.exceptions import MissingSecretKeyException, ClientNetworkError
+from pypaystack2.exceptions import ClientNetworkError, MissingSecretKeyException
 from pypaystack2.fees_calculation_mixin import FeesCalculationMixin
 from pypaystack2.models import Response
 from pypaystack2.types import PaystackDataModel
-import hmac
-import hashlib
 
 logger = logging.getLogger(__name__)
 
@@ -67,19 +67,19 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
             )
 
     def is_verified_webhook_payload(
-        self, payload: dict[str, Any], header_signature: str
+        self, payload: dict[str, Any], signature: str
     ) -> bool:
         """Checks if the webhook payload is indeed sent by paystack
 
         Args:
             payload: is the webhook data received that needs validation for authenticity.
-            header_signature: is the `x-paystack-signature` in the response headers of the
+            signature: is the `x-paystack-signature` in the response headers of the
                 response that included the payload
         """
         digest = hmac.new(
             self._secret_key.encode(), json.dumps(payload).encode(), hashlib.sha512
         ).hexdigest()
-        return header_signature == digest
+        return signature == digest
 
     @abstractmethod
     def _handle_request(
