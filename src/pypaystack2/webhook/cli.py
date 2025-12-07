@@ -5,6 +5,7 @@ from enum import IntEnum
 from multiprocessing import Process
 from typing import Annotated, Literal
 
+from pypaystack2._metadata import __version__ as pypaystack2_version
 from pypaystack2.utils import (
     WEBHOOK_DEPENDENCY_IMPORT_ERROR_MESSAGE_TEMPLATE,
     parse_address,
@@ -19,6 +20,14 @@ typer_module = try_import_module(
         package_name="typer"
     ),
 )
+
+rich_module = try_import_module(
+    "rich",
+    error_msg=WEBHOOK_DEPENDENCY_IMPORT_ERROR_MESSAGE_TEMPLATE.format(
+        package_name="rich"
+    ),
+)
+
 ngrok_module = try_import_module(
     "ngrok",
     error_msg=WEBHOOK_DEPENDENCY_IMPORT_ERROR_MESSAGE_TEMPLATE.format(
@@ -66,6 +75,23 @@ receives from the tunnel server while forwarding it to the proxy clients."""
 
 DOTENV_PATH_FLAG = """This flag is used to set a custom dotenv file path, by default, this cli will look for your
 environmental variables in a `.env` file"""
+
+PACKAGE_CAMPAIGN_MESSAGE = f"""
+💪🏽 Paystack Integration powered by [blue bold]PyPaystack2 v{pypaystack2_version}[/] 🔥
+
+Need more guide on how to use this package?
+See documentation at https://gray-adeyi.github.io/pypaystack2/v3.1/
+
+Found a bug?
+Create an issue for it at https://github.com/gray-adeyi/pypaystack2/issues
+
+If this project is useful to you or your company, please consider sponsoring the project by
+
+- 🧑🏻‍🤝‍🧑 Sharing it with your developer friends
+- ✨ Starring it on github at https://github.com/gray-adeyi/pypaystack2
+- 💻 Contribute to it at https://github.com/gray-adeyi/pypaystack2
+- ☕ Buy me a coffee at https://buymeacoffee.com/jigani
+"""
 
 
 @webhook_cli_app.command()
@@ -125,6 +151,7 @@ def start_tunnel_server(
     tunnel_server_listener: ngrok_module.Listener | None = None
     proxy_server_process: Process | None = None
     tunnel_server_listener_options = {}
+    err_console = rich_module.console.Console(stderr=True)
 
     try:
         _ngrok_auth_token = ""
@@ -134,7 +161,9 @@ def start_tunnel_server(
                 hide_input=True,
             )
         if not ngrok_auth_token and not os.environ.get("PAYSTACK_NGROK_AUTH_TOKEN"):
-            print("ngrok auth token not provided in flags or environment variable")
+            err_console.print(
+                "[red]ngrok auth token not provided in flags or environment variable[/red]"
+            )
             raise typer_module.Exit(CLIExitCode.NGROK_TOKEN_NOT_SET)
         tunnel_server_listener_options["authtoken"] = (
             _ngrok_auth_token or os.environ.get("PAYSTACK_NGROK_AUTH_TOKEN")
@@ -142,8 +171,8 @@ def start_tunnel_server(
 
         if mode == "proxy":
             if not proxy_clients:
-                print(
-                    "proxy clients not provided in --proxy-clients flag and --mode flag is proxy"
+                err_console.print(
+                    "[red]proxy clients not provided in --proxy-clients flag and --mode flag is proxy[/red]"
                 )
                 raise typer_module.Exit(CLIExitCode.PROXY_CLIENTS_NOT_SET)
             _addr = parse_address(addr)
@@ -191,10 +220,10 @@ def start_tunnel_server(
             proxy_server_process.join()
             logger.info("PyPaystack2 Webhook Proxy Server shutdown successful")
         if tunnel_server_listener:
-            ...
             # TODO: Figure out how to close ngrok in synchronous mode
             # tunnel_server_listener.close()
             logger.info("PyPaystack2 Webhook Tunnel Server shutdown successful")
+        rich_module.print(PACKAGE_CAMPAIGN_MESSAGE)
         logger.info("Ìrè ó!")
         raise typer_module.Exit(CLIExitCode.SUCCESS)
 
