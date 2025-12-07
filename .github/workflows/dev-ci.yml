@@ -33,7 +33,9 @@ jobs:
       - name: Lint with ruff
         run: uv run ruff check . --fix
       - name: Test package
-        run: PAYSTACK_SECRET_KEY=${{ secrets.PAYSTACK_SECRET_KEY }} uv run python -m unittest discover tests/unit
+        run: |
+          echo "${{ secrets.PAYSTACK_SECRET_KEY }}"
+          PAYSTACK_SECRET_KEY=${{ secrets.PAYSTACK_SECRET_KEY }} uv run python -m unittest discover tests/unit
       - name: Commit changes
         run: |
           git config --global user.name "github-actions[bot]"
