@@ -19,3 +19,13 @@ tasks:
   docs:build:
     cmds:
       - uv run mkdocs build
+  test:all:
+    cmds:
+      - task: test:unit
+      - task: test:integration
+  test:unit:
+    cmds:
+      - uv run python -m unittest discover tests/unit
+  test:integration:
+    cmds:
+      - uv run python -m unittest discover test/integration
