@@ -1,21 +1,21 @@
 from datetime import datetime, timedelta
 from http import HTTPStatus
-from typing import Any, Optional, Literal, Generic, Union
+from typing import Any, Generic, Literal, Optional, Union
 
 from pydantic import BaseModel
 
 from pypaystack2.enums import (
-    Domain,
     BulkChargeStatus,
     Country,
     Currency,
+    DisputeStatus,
+    Domain,
+    Interval,
     RiskAction,
     SupportedCountryRelationshipType,
-    DisputeStatus,
-    Interval,
 )
 from pypaystack2.models.payload_models import LineItem, Tax
-from pypaystack2.types import PaystackResponseData, T, D
+from pypaystack2.types import D, PaystackResponseData, T
 
 
 class Response(BaseModel, Generic[PaystackResponseData]):
@@ -203,6 +203,14 @@ class TransactionSource(BaseModel):
     type: str = "api"
     identifier: Any | None = None
     entry_point: str = "charge"
+
+
+class ChargeStep(BaseModel):
+    reference: str
+    status: Literal[
+        "send_birthday", "send_otp", "send_pin", "send_phone", "send_address"
+    ]
+    display_text: str
 
 
 class Transaction(BaseModel):
