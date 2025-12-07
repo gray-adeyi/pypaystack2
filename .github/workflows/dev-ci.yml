@@ -36,18 +36,9 @@ jobs:
         run: uv run ruff format .
       - name: Lint with ruff
         run: uv run ruff check . --fix
-      - name: Check secret
-        run: |
-          if [ -z "$PAYSTACK_SECRET_KEY" ]; then
-            echo "SECRET NOT SET"
-            exit 1
-          else
-            echo "SECRET IS SET"
-          fi
       - name: Test package
         run: |
-          uv run python -c "import os; print('key is ->',os.environ['PAYSTACK_SECRET_KEY'])"
-          PAYSTACK_SECRET_KEY=${{ secrets.PAYSTACK_SECRET_KEY }} uv run python -m unittest discover tests/unit
+          uv run python -m unittest discover tests/unit
       - name: Commit changes
         run: |
           git config --global user.name "github-actions[bot]"
