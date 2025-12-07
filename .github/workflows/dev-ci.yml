@@ -6,6 +6,9 @@ name: Development Continuous Integration
 permissions:
   contents: write
 
+env:
+  PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
+
 on:
   push:
     branches: [ "main" ]
@@ -34,7 +37,7 @@ jobs:
         run: uv run ruff check . --fix
       - name: Test package
         run: |
-          echo "${{ secrets.PAYSTACK_SECRET_KEY }}"
+          uv run python -c "import os; print('key is ->',os.environ['PAYSTACK_SECRET_KEY'])"
           PAYSTACK_SECRET_KEY=${{ secrets.PAYSTACK_SECRET_KEY }} uv run python -m unittest discover tests/unit
       - name: Commit changes
         run: |
