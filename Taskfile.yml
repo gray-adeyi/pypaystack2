@@ -3,6 +3,13 @@
 version: '3'
 
 tasks:
+  default:
+    cmds:
+      - task: dev:setup
+  dev:setup:
+    cmds:
+      - uv sync --all-groups
+      - uv run pre-commit install
   dev:lint:
     cmds:
       - uvx ty check . -W
