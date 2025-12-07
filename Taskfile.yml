@@ -28,4 +28,4 @@ tasks:
       - uv run python -m unittest discover tests/unit
   test:integration:
     cmds:
-      - uv run python -m unittest discover test/integration
+      - uv run python -m unittest discover tests/integration
