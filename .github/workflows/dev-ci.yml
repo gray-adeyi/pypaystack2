@@ -6,8 +6,7 @@ name: Development Continuous Integration
 permissions:
   contents: write
 
-env:
-  PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
+
 
 on:
   push:
@@ -20,6 +19,8 @@ jobs:
     name: Format, lint & test project
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
+    env:
+      PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
 
     steps:
       - name: Checkout
@@ -35,6 +36,14 @@ jobs:
         run: uv run ruff format .
       - name: Lint with ruff
         run: uv run ruff check . --fix
+      - name: Check secret
+        run: |
+          if [ -z "$PAYSTACK_SECRET_KEY" ]; then
+            echo "SECRET NOT SET"
+            exit 1
+          else
+            echo "SECRET IS SET"
+          fi
       - name: Test package
         run: |
           uv run python -c "import os; print('key is ->',os.environ['PAYSTACK_SECRET_KEY'])"
