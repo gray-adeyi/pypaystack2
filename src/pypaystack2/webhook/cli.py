@@ -52,26 +52,51 @@ class CLIExitCode(IntEnum):
     PROXY_CLIENTS_NOT_SET = 402
 
 
-ADDR_FLAG_HELP = """The port or address in the form host:port where the tunnel server should forward the webhook payload
-to when in `--mode direct` i.e. you app running locally. Otherwise, it is the address where the proxy server is started
-when in `--mode proxy`. Note: the scheme should not be included when using --addr in the form host:port e.g.
-localhost:8080 and not https://localhost:8080"""
+ADDR_FLAG_HELP = """The port or address (formatted as host:port) where the tunnel server should forward
+webhook payloads when running in `--mode direct` (i.e., paystack -> tunnel server -> localhost).
+In `--mode proxy`, this specifies the address where the proxy server will start.
 
-NGROK_AUTH_TOKEN_FLAG_HELP = """Flag to enable passing your ngrok auth token via an input prompt. auth token accepted
-this way takes precedence over the value set in the environmental variable as `PAYSTACK_WEBHOOK_NGROK_AUTH_TOKEN`"""
+Note: Do NOT include a scheme when using `--addr`. The value must be in the form host:port
+(e.g., `localhost:8080`), not `https://localhost:8080`.
 
-MODE_FLAG_HELP = """The mode in which the tunnel server should operate in, when in `--mode direct`, the webook payload
-received by the tunnel server is forwarded directly to your local app via the specified --addr i.e.
-paystack -> tunnel server -> localhost. When in `--mode proxy`, the tunnel server forwards the webhook payload to
-the proxy server setup at --addr which then forward the payload to the clients specified via --proxy-clients i.e.
-paystack -> tunnel server -> proxy server -> proxy clients"""
+This can also be configured using the PAYSTACK_WEBHOOK_ADDRESS environment variable.
+If both the flag and the environment variable are set, the environment variable takes precedence.
+"""
+
+NGROK_AUTH_TOKEN_FLAG_HELP = """Flag to enable entering your ngrok auth token through an interactive prompt.
+An auth token provided this way takes precedence over the value set in the
+PAYSTACK_WEBHOOK_NGROK_AUTH_TOKEN environment variable.
+"""
+
+MODE_FLAG_HELP = """The mode in which the tunnel server should operate. In `--mode direct`, the webhook
+payload received by the tunnel server is forwarded directly to your local app via
+the specified `--addr` (i.e., paystack -> tunnel server -> localhost).
+
+In `--mode proxy`, the tunnel server forwards the webhook payload to the proxy
+server running at `--addr`, which then forwards the payload to the clients defined
+via `--proxy-clients` (i.e., paystack -> tunnel server -> proxy server -> proxy clients).
+
+This can also be set using the PAYSTACK_WEBHOOK_MODE environment variable. If both
+the flag and the environment variable are provided, the flag value takes precedence.
+"""
 
 PROXY_CLIENTS_FLAG_HELP = """The clients that a proxy server should forward webhook payloads to when operating in
-`--mode proxy`. This is a comma separated value of urls e.g. http://localhost:5173,http://127.0.0.1:8000/webhooks/paystack
-Note: the scheme must be included. http://localhost:5173 not localhost:5173"""
+`--mode proxy`. This is a comma-separated list of URLs, e.g.
+`http://localhost:5173,http://127.0.0.1:8000/webhooks/paystack`.
 
-PROXY_SERVER_LOG_PAYLOAD_FLAG_HELP = """This flag is used to enable the proxy server to log the webhook payload it
-receives from the tunnel server while forwarding it to the proxy clients."""
+Note: the scheme must be included (e.g., `http://localhost:5173`, not `localhost:5173`).
+
+This can also be configured using the PAYSTACK_WEBHOOK_PROXY_CLIENTS environment variable.
+If both the flag and the environment variable are set, the environment variable takes precedence.
+"""
+
+PROXY_SERVER_LOG_PAYLOAD_FLAG_HELP = """This flag enables the proxy server to log the webhook payload it receives from the
+tunnel server before forwarding it to the proxy clients.
+
+It can also be configured using the PAYSTACK_WEBHOOK_PROXY_SERVER_LOG_PAYLOAD
+environment variable. If both the flag and the environment variable are set,
+the flag value takes precedence.
+"""
 
 DOTENV_PATH_FLAG = """This flag is used to set a custom dotenv file path, by default, this cli will look for your
 environmental variables in a `.env` file"""
@@ -115,43 +140,49 @@ def start_tunnel_server(
 ) -> None:
     """Start a tunnel server for receiving webhook events on localhost over the internet.
 
-    This utility makes working with webhooks locally while developing easy by leveraging ngrok
-    which provides http tunneling functionality.
+    This utility makes working with webhooks during local development easy by leveraging
+    ngrok, which provides HTTP tunneling capabilities.
 
-    (note you'll need to sign up to ngrok to obtain your ngrok auth token that can be set via
-    --ngrok-auth-token flag or `PAYSTACK_NGROK_AUTH_TOKEN` environment variable.)
+    Note: You must sign up for ngrok to obtain an auth token, which can be provided via
+    the `--ngrok-auth-token` flag or the `PAYSTACK_WEBHOOK_NGROK_AUTH_TOKEN`
+    environment variable.
 
-    The real issue with working with webhooks while working locally is that the servers emitting
-    the webhook events cannot directly send the event payload to your local development endpoint
-    that's where a tunnel server comes into the picture and makes this possible by serving as an
-    intermediary between your local app and the webhook event producer server. The flow is that
-    you'd start the tunnel server while providing it with the port on your localhost you want
-    it to forward your incoming webhook events to. As a result of this, the tunnel server
-    provides you with a url that you can register with the webhook event producer (Paystack)
+    The main challenge when working with webhooks locally is that external servers cannot
+    directly send webhook payloads to your local development endpoint. A tunnel server solves
+    this by acting as an intermediary between your local app and the webhook event producer.
+    You start the tunnel server and provide the port on your localhost where incoming webhook
+    events should be forwarded. The tunnel server then provides a URL that you can register
+    with the webhook event producer (i.e., Paystack).
 
+    Example flows:
     paystack -> tunnel server -> localhost
-
     paystack -> tunnel server -> proxy server -> proxy clients
 
-    As you can see based on the diagram above, this tunnel server can work in two modes, i.e,
-    direct and proxy. In the direct mode, the tunnel server forwards the webhook events directly
-    to your local development app (localhost). There may be cases where you want the webhook
-    events forwarded to multiple local clients, you can use the proxy mode. In direct mode,
-    the port provided via the --addr flag or `PAYSTACK_WEBHOOK_PORT` environment variable,
-    is the port of your application running locally. If you have a custom endpoint in your
-    local app for handling webhook events like `http://127.0.0.1:8000/webhooks/paystack`,
-    and you obtained a tunnel url like ``, you should register `` with paystack as your
-    webhook event listening endpoint. In the proxy mode, an intermediate proxy server is set up
-    locally with its port at the value of --addr flag or `PAYSTACK_WEBHOOK_ADDRESS` environment variable.
-    (the --addr flag take precedence over the environment variable if both are set).
-    This proxy server running locally is then responsible for forwarding the webhook events directly
-    to a list of urls provided via the --proxy-clients flag.
+    The tunnel server supports two modes: `direct` and `proxy`.
+
+    In `direct` mode, the tunnel server forwards webhook events directly to your local app
+    (`localhost`). The port or `host:port` address is supplied via the `--addr` flag.
+    If your local webhook handler is `http://127.0.0.1:8000/webhooks/paystack` and the tunnel
+    URL is `https://338742e1646f.ngrok-free.app`, you should register:
+    `https://338742e1646f.ngrok-free.app/webhooks/paystack` as your webhook callback URL.
+
+    In `proxy` mode, an intermediate proxy server is started locally at the port specified via
+    `--addr` (the environment variable value takes precedence over the flag if both are set).
+    This proxy server then forwards webhook events to the URLs provided in the
+    `--proxy-clients` flag as a comma-separated list.
     """
     dotenv_module.load_dotenv(dotenv_path=dotenv_path)
     tunnel_server_listener: ngrok_module.Listener | None = None
     proxy_server_process: Process | None = None
     tunnel_server_listener_options = {}
     err_console = rich_module.console.Console(stderr=True)
+
+    addr = os.environ.get("PAYSTACK_WEBHOOK_ADDRESS") or addr
+    mode = mode or os.environ.get("PAYSTACK_WEBHOOK_MODE")
+    proxy_clients = os.environ.get("PAYSTACK_WEBHOOK_PROXY_CLIENTS") or proxy_clients
+    proxy_server_log_payload = proxy_server_log_payload or os.environ.get(
+        "PAYSTACK_WEBHOOK_PROXY_SERVER_LOG_PAYLOAD"
+    )
 
     try:
         _ngrok_auth_token = ""
@@ -160,13 +191,15 @@ def start_tunnel_server(
                 "Please enter or paste you NGROK auth token [input is hidden, press enter when done]",
                 hide_input=True,
             )
-        if not ngrok_auth_token and not os.environ.get("PAYSTACK_NGROK_AUTH_TOKEN"):
+        if not ngrok_auth_token and not os.environ.get(
+            "PAYSTACK_WEBHOOK_NGROK_AUTH_TOKEN"
+        ):
             err_console.print(
                 "[red]ngrok auth token not provided in flags or environment variable[/red]"
             )
             raise typer_module.Exit(CLIExitCode.NGROK_TOKEN_NOT_SET)
         tunnel_server_listener_options["authtoken"] = (
-            _ngrok_auth_token or os.environ.get("PAYSTACK_NGROK_AUTH_TOKEN")
+            _ngrok_auth_token or os.environ.get("PAYSTACK_WEBHOOK_NGROK_AUTH_TOKEN")
         )
 
         if mode == "proxy":
