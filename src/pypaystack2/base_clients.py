@@ -1,6 +1,5 @@
 import hashlib
 import hmac
-import json
 import logging
 import os
 import re
@@ -83,18 +82,16 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
                 f"or set in env variables as `{self._SECRET_KEY_IN_ENV_KEY}`"
             )
 
-    def is_verified_webhook_payload(
-        self, payload: dict[str, Any], signature: str
-    ) -> bool:
+    def is_verified_webhook_payload(self, payload: bytes, signature: str) -> bool:
         """Checks if the webhook payload is indeed sent by paystack
 
         Args:
-            payload: is the webhook data received that needs validation for authenticity.
+            payload: is the raw webhook data received that needs validation for authenticity.
             signature: is the `x-paystack-signature` in the response headers of the
                 response that included the payload
         """
         digest = hmac.new(
-            self._secret_key.encode(), json.dumps(payload).encode(), hashlib.sha512
+            self._secret_key.encode(), payload, hashlib.sha512
         ).hexdigest()
         return signature == digest
 
