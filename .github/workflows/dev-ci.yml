@@ -17,8 +17,6 @@ jobs:
     name: Format, lint & test project
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
-    env:
-      PAYSTACK_SECRET_KEY: ${{ secrets.PAYSTACK_SECRET_KEY }}
 
     steps:
       - name: Checkout
@@ -35,7 +33,7 @@ jobs:
       - name: Lint with ruff
         run: uv run ruff check . --fix
       - name: Test package
-        run: uv run python -m unittest discover tests/unit
+        run: PAYSTACK_SECRET_KEY=${{ secrets.PAYSTACK_SECRET_KEY }} uv run python -m unittest discover tests/unit
       - name: Commit changes
         run: |
           git config --global user.name "github-actions[bot]"
