@@ -1,0 +1,31 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task: dev:setup
+  dev:setup:
+    cmds:
+      - uv sync --all-groups
+      - uv run pre-commit install
+  dev:lint:
+    cmds:
+      - uvx ty check . -W
+  docs:serve:
+    cmds:
+      - uv run mkdocs serve
+  docs:build:
+    cmds:
+      - uv run mkdocs build
+  test:all:
+    cmds:
+      - task: test:unit
+      - task: test:integration
+  test:unit:
+    cmds:
+      - uv run python -m unittest discover tests/unit
+  test:integration:
+    cmds:
+      - uv run python -m unittest discover tests/integration

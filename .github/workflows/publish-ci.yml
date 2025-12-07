@@ -1,4 +1,4 @@
-name: Publish Pypaystack2 [version] to PYPI
+name: Publish Pypaystack2 to PYPI
 
 on:
   release:
@@ -10,16 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install uv
-        uses: astral-sh/setup-uv@v3
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
           cache-dependency-glob: uv.lock
-      - name: Set up Python
-        run: uv python install 3.12  # Or whatever version I want to use.
-
+      - name: Install documentation dependencies
+        run: uv sync --group doc
       - name: Build
         run: uv build
-
       - name: Publish
         run: uv publish -t ${{ secrets.PYPI_TOKEN }}

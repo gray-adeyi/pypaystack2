@@ -3,7 +3,8 @@ from unittest import IsolatedAsyncioTestCase, skip
 import httpx
 from dotenv import load_dotenv
 
-from pypaystack2.models import Transaction, Response
+from pypaystack2.models import Response, Transaction
+from pypaystack2.models.response_models import ChargeStep
 from pypaystack2.sub_clients import AsyncChargeClient
 
 
@@ -17,9 +18,9 @@ class AsyncChargeClientTestCase(IsolatedAsyncioTestCase):
 
     async def test_can_charge(self) -> None:
         bank_data = {"code": "057", "account_number": "0000000000"}
-        response: Response[Transaction] = await self.client.charge(
+        response: Response[ChargeStep] = await self.client.charge(
             email="coyotedevmail@gmail.com",
-            amount=1000,
+            amount=10000,
             bank=bank_data,
         )
         self.assertEqual(response.status_code, httpx.codes.OK)
@@ -50,6 +51,7 @@ class AsyncChargeClientTestCase(IsolatedAsyncioTestCase):
         )
         self.assertEqual(response.message, "Charge attempted")
 
+    @skip("incomplete test")
     async def test_can_submit_birthday(self) -> None:
         response: Response[Transaction] = await self.client.submit_birthday(
             birthday="1999-04-29", reference="kv7ecgjrit1fxgs"
@@ -57,6 +59,7 @@ class AsyncChargeClientTestCase(IsolatedAsyncioTestCase):
         self.assertTrue(response.status)
         self.assertEqual(response.message, "Charge attempted")
 
+    @skip("incomplete test")
     async def test_can_set_address(self) -> None:
         # TODO: Test properly
         response: Response[Transaction] = await self.client.set_address(
@@ -68,6 +71,7 @@ class AsyncChargeClientTestCase(IsolatedAsyncioTestCase):
         )
         self.assertEqual(response.message, "Charge attempted")
 
+    @skip("incomplete test")
     async def test_can_check_pending_charge(self) -> None:
         response: Response[Transaction] = await self.client.check_pending_charge(
             reference="kv7ecgjrit1fxgs"

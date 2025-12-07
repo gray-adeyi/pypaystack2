@@ -1,5 +1,5 @@
 import os
-from http import HTTPStatus, HTTPMethod
+from http import HTTPMethod, HTTPStatus
 from typing import cast
 
 import httpx
@@ -9,7 +9,7 @@ from pypaystack2 import __version__
 from pypaystack2.base_clients import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.exceptions import MissingSecretKeyException
 from pypaystack2.models import Response
-from tests.test_sub_clients.mocked_api_testcase import (
+from tests.integration.test_sub_clients.mocked_api_testcase import (
     MockedAPITestCase,
     MockedAsyncAPITestCase,
 )
@@ -75,7 +75,7 @@ class BaseAPITestCase(MockedAPITestCase):
         with self.assertRaises(ValueError):
             client._serialize_request_kwargs(url="", method=HTTPMethod.GET, data=None)
         headers = {
-            "Authorization": f"Bearer {os.getenv('PAYSTACK_AUTHORIZATION_KEY')}",
+            "Authorization": f"Bearer {os.getenv('PAYSTACK_SECRET_KEY')}",
             "Content-Type": "application/json",
             "User-Agent": f"PyPaystack2-{__version__}",
         }

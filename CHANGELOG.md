@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## unreleased
 
+## [3.1.0] - (8th December 2025)
+
+### Added
+
+- `PaystackClient.is_verified_webhook_payload` and `AsyncPaystackClient.is_verified_webhook_payload` methods for
+  checking the validity of a webhook payload
+- CLI command interface for webhooks with `pypaystack2 webhook start-tunnel-server`
+
+### Changed
+
+- `PaystackClient.charge.{charge,submit_pin,submit_otp,submit_phone,submit_birthday,set_address}` and
+  `AsyncPaystackClient.charge.{charge,submit_pin,submit_otp,submit_phone,submit_birthday,set_address}` response
+  model to `ChargeStep`
+
 ## [3.0.2] - (10th October 2025)
 
 ### Fixed

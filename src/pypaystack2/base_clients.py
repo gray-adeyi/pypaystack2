@@ -1,3 +1,5 @@
+import hashlib
+import hmac
 import logging
 import os
 import re
@@ -6,32 +8,49 @@ from abc import ABC, abstractmethod
 from functools import reduce
 from http import HTTPMethod, HTTPStatus
 from json import JSONDecodeError
-from typing import Type, Any, cast
+from typing import Any, Type, cast
 
 import httpx
 from httpx import NetworkError
 from pydantic import ValidationError
 
 from pypaystack2._metadata import __version__
-from pypaystack2.exceptions import MissingSecretKeyException, ClientNetworkError
+from pypaystack2.exceptions import ClientNetworkError, MissingSecretKeyException
 from pypaystack2.fees_calculation_mixin import FeesCalculationMixin
 from pypaystack2.models import Response
 from pypaystack2.types import PaystackDataModel
 
 logger = logging.getLogger(__name__)
 
-SERIALIZATION_FAILED_WARNING_MESSAGE = """An validation error occurred while trying to serialize the data returned
-by paystack with the pydantic model `%s` but has been allowed to
-fail silently. `Response.data` has been set to `None` but this data is still available in
-`Response.raw`. If the pydantic model that raised this error is from the
-library, It's not your fault, Its either I goofed up in the model definitions
-or the response data doesn't match the model.
-please create an issue at https://github.com/gray-adeyi/pypaystack2/issues
-If you're using a custom pydantic model other than the one from the library,
-please see that your model definitions match the data returned by paystack
+SERIALIZATION_FAILED_ON_SUCCESSFUL_RESPONSE_WARNING_MESSAGE_TEMPLATE = """\
+A validation error occurred while attempting to deserialize the data returned
+by Paystack using the Pydantic model `{response_data_model_class}`. The error
+was allowed to fail silently. As a result, `Response.data` has been set to
+`None`, but the original payload is still available in `Response.raw`.
 
-These are the validation errors:
-%s
+If this Pydantic model is provided by the library, this is not your fault—
+either the model definition is incorrect or Paystack returned data that
+does not match the expected schema. In this case, please open an issue at:
+https://github.com/gray-adeyi/pypaystack2/issues
+
+If you are using a custom Pydantic model, ensure that its fields match the
+structure of the data returned by Paystack.
+
+Validation errors:
+{error}
+
+"""
+
+SERIALIZATION_FAILED_ON_FAILURE_RESPONSE_WARNING_TEMPLATE = """\
+Deserializing the response returned by Paystack using the Pydantic model
+`{response_data_model_class}` may fail because the request did not return a
+successful HTTP status code. Instead, Paystack responded with
+`{http_status_code}`, which may indicate a different response schema than the
+one expected for a successful request.
+
+If a serialization error occurs, `Response.data` will be set to `None`, but the
+original response content will still be available in `Response.raw`.
+
 """
 
 # When the function that converts the payload keys that are on in snake_case from
@@ -62,6 +81,19 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
                 "secret key was not provided on client instantiation "
                 f"or set in env variables as `{self._SECRET_KEY_IN_ENV_KEY}`"
             )
+
+    def is_verified_webhook_payload(self, payload: bytes, signature: str) -> bool:
+        """Checks if the webhook payload is indeed sent by paystack
+
+        Args:
+            payload: is the raw webhook data received that needs validation for authenticity.
+            signature: is the `x-paystack-signature` in the response headers of the
+                response that included the payload
+        """
+        digest = hmac.new(
+            self._secret_key.encode(), payload, hashlib.sha512
+        ).hexdigest()
+        return signature == digest
 
     @abstractmethod
     def _handle_request(
@@ -123,6 +155,7 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
         if data := response_body.get("data", None):
             data = self._to_pydantic_model(
                 self._normalize_data(data),
+                raw_response.status_code,
                 response_data_model_class,
                 raise_serialization_exception,
             )
@@ -142,6 +175,7 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
     def _to_pydantic_model(
         self,
         data: dict[str, Any] | list[Any],
+        http_status_code: int,
         response_data_model_class: Type[PaystackDataModel] | None = None,
         raise_serialization_exception: bool = False,
     ) -> PaystackDataModel | list[PaystackDataModel] | None:
@@ -156,12 +190,21 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
             if isinstance(data, list):
                 return [response_data_model_class.model_validate(item) for item in data]
         except ValidationError as error:
+            if 200 <= http_status_code <= 299:
+                logger.warning(
+                    SERIALIZATION_FAILED_ON_SUCCESSFUL_RESPONSE_WARNING_MESSAGE_TEMPLATE.format(
+                        response_data_model_class=response_data_model_class, error=error
+                    )
+                )
+            else:
+                logger.warning(
+                    SERIALIZATION_FAILED_ON_FAILURE_RESPONSE_WARNING_TEMPLATE.format(
+                        response_data_model_class=response_data_model_class,
+                        http_status_code=http_status_code,
+                    )
+                )
             if raise_serialization_exception:
                 raise error
-            logger.warning(
-                SERIALIZATION_FAILED_WARNING_MESSAGE
-                % (response_data_model_class, error)
-            )
         return None
 
     def _serialize_request_kwargs(

@@ -44,7 +44,7 @@ class AsyncProductClientTestCase(IsolatedAsyncioTestCase):
         self.assertEqual(response.message, "Product retrieved")
         self.assertIsInstance(response.data, Product)
 
-    async def test_update(self) -> Product:
+    async def test_update(self) -> None:
         response: Response[Product] = await self.client.update(
             id_="1209661",
             name="Updated test product",

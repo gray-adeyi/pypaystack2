@@ -2,54 +2,54 @@ from unittest import TestCase
 
 from dotenv import load_dotenv
 
-from pypaystack2 import PaystackClient, AsyncPaystackClient
+from pypaystack2 import AsyncPaystackClient, PaystackClient
 from pypaystack2.sub_clients import (
     ApplePayClient,
-    BulkChargeClient,
-    IntegrationClient,
-    CustomerClient,
-    DedicatedAccountClient,
-    DisputeClient,
-    PaymentRequestClient,
-    MiscellaneousClient,
-    PaymentPageClient,
-    PlanClient,
-    ProductClient,
-    RefundClient,
-    SettlementClient,
-    TransactionSplitClient,
-    SubAccountClient,
-    SubscriptionClient,
-    TerminalClient,
-    TransactionClient,
-    TransferRecipientClient,
-    TransferClient,
-    TransferControlClient,
-    VerificationClient,
     AsyncApplePayClient,
     AsyncBulkChargeClient,
     AsyncChargeClient,
-    AsyncIntegrationClient,
     AsyncCustomerClient,
     AsyncDedicatedAccountClient,
     AsyncDisputeClient,
-    AsyncPaymentRequestClient,
+    AsyncIntegrationClient,
     AsyncMiscellaneousClient,
-    ChargeClient,
     AsyncPaymentPageClient,
+    AsyncPaymentRequestClient,
     AsyncPlanClient,
     AsyncProductClient,
     AsyncRefundClient,
     AsyncSettlementClient,
-    AsyncTransactionSplitClient,
-    AsyncVerificationClient,
-    AsyncTransferControlClient,
-    AsyncTransferClient,
-    AsyncTransferRecipientClient,
-    AsyncTransactionClient,
-    AsyncTerminalClient,
-    AsyncSubscriptionClient,
     AsyncSubAccountClient,
+    AsyncSubscriptionClient,
+    AsyncTerminalClient,
+    AsyncTransactionClient,
+    AsyncTransactionSplitClient,
+    AsyncTransferClient,
+    AsyncTransferControlClient,
+    AsyncTransferRecipientClient,
+    AsyncVerificationClient,
+    BulkChargeClient,
+    ChargeClient,
+    CustomerClient,
+    DedicatedAccountClient,
+    DisputeClient,
+    IntegrationClient,
+    MiscellaneousClient,
+    PaymentPageClient,
+    PaymentRequestClient,
+    PlanClient,
+    ProductClient,
+    RefundClient,
+    SettlementClient,
+    SubAccountClient,
+    SubscriptionClient,
+    TerminalClient,
+    TransactionClient,
+    TransactionSplitClient,
+    TransferClient,
+    TransferControlClient,
+    TransferRecipientClient,
+    VerificationClient,
 )
 
 
@@ -113,6 +113,19 @@ class PaystackClientTestcase(TestCase):
         self.assertIsInstance(
             getattr(self.client, "verification", None), VerificationClient
         )
+
+    def test_is_verified_webhook_payload(self):
+        valid_signature = "5d049eb93c7c71fa098f5215d7297bda401710b62df8b392b9052adf8d1a02ff308f6ca57a1db14ffeabd5b66264e9c42de029b7067b9c71eb9c231fb2a8e383"
+        invalid_signature = "invalid-signature"
+        payload = b'{"event":"refund.processed","data":{"status":"processed","transaction_reference":"MITH20220321675118","refund_reference":null,"amount":5000,"currency":"NGN","customer":{"first_name":"","last_name":"","email":"adeyibenga027@gmail.com"},"integration":630606,"domain":"test","id":"16074284","customer_note":"Refund for transaction MITH20220321675118","merchant_note":"Refund for transaction MITH20220321675118 by adeyigbenga005@gmail.com"}}'
+        is_verified_webhook_payload = self.client.is_verified_webhook_payload(
+            payload, valid_signature
+        )
+        self.assertTrue(is_verified_webhook_payload)
+        is_verified_webhook_payload = self.client.is_verified_webhook_payload(
+            payload, invalid_signature
+        )
+        self.assertFalse(is_verified_webhook_payload)
 
 
 class AsyncPaystackClientTestcase(TestCase):

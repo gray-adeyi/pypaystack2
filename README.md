@@ -15,6 +15,7 @@ projects. It aims at being developer friendly and easy to use.
 - Synchronous and Asynchronous clients.
 - Pydantic for data modelling.
 - Fees Calculation utilities.
+- Webhook support & utilities (>= v3.1.0).
 
 ## Installation
 
@@ -22,6 +23,10 @@ projects. It aims at being developer friendly and easy to use.
 $ pip install -U pypaystack2
 # or install with uv
 $ uv add pypaystack2
+# For webhook cli
+$ pip install -U "pypaystack2[webhook]"
+or install with uv
+$ uv add "pypaystack2[webhook"
 ```
 
 ## Usage Preview
@@ -39,7 +44,7 @@ you to provide a secret key. It also does not handle likely exceptions that call
 for network related issues and `ValueError` for validation related issues.
 
 ```bash
-Python 3.11.11 (main, Feb 12 2025, 14:51:05) [Clang 19.1.6 ] on linux
+Python 3.11.13 (main, Sep  2 2025, 14:20:25) [Clang 20.1.4 ] on linux
 Type "help", "copyright", "credits" or "license" for more information.
 >>> from pypaystack2 import __version__
 >>> print(__version__)
@@ -65,59 +70,34 @@ Response(
   message='Subscription successfully created',
   data=Subscription(
     customer=87934333,
-    plan=2237384,
-    integration=630606,
-    domain=<Domain.TEST: 'test'>,
-    start=1741208073,
-    status='active',
-    quantity=1,
-    amount=100000,
-    subscription_code='SUB_4sje2s7kb30m5bt',
-    email_token='uqzg0vneparuxtm',
-    authorization=368220905,
-    easy_cron_id=None,
-    cron_expression='54 20 5 3 *',
-    next_payment_date=datetime.datetime(2026, 3, 5, 20, 54, tzinfo=TzInfo(UTC)),
-    open_invoice=None,
-    invoice_limit=0,
-    id=759264,
-    split_code=None,
-    cancelled_at=None,
-    updated_at=datetime.datetime(2025, 3, 5, 20, 54, 33, tzinfo=TzInfo(UTC)),
-    payments_count=None,
-    most_recent_invoice=None,
-    invoices=None,
-    invoice_history=None),
-  meta=None,
-  type=None,
-  code=None,
-  raw={
-    'status': True,
-    'message': 'Subscription successfully created',
-    'data': {
-      'customer': 87934333,
-      'plan': 2237384,
-      'integration': 630606,
-      'domain': 'test',
-      'start': 1741208073,
-      'status': 'active',
-      'quantity': 1,
-      'amount': 100000,
-      'authorization': 368220905,
-      'invoice_limit': 0,
-      'split_code': None,
-      'metadata': None,
-      'subscription_code': 'SUB_4sje2s7kb30m5bt',
-      'email_token': 'uqzg0vneparuxtm',
-      'id': 759264,
-      'cancelledAt': None,
-      'createdAt': '2025-03-05T20:54:33.000Z',
-      'updatedAt': '2025-03-05T20:54:33.000Z',
-      'cron_expression': '54 20 5 3 *',
-      'next_payment_date': '2026-03-05T20:54:00.000Z',
-      'easy_cron_id': None,
-      'open_invoice': None}
-    })
+    plan=2237384,...
+```
+
+### Webhook
+
+PyPaystack2 now supports verifying the authenticity of a webhook payload and a CLI to make working with webhooks locally
+seamless
+
+#### Verifying a webhook payload
+
+```bash
+Python 3.11.13 (main, Sep  2 2025, 14:20:25) [Clang 20.1.4 ] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from pypaystack2 import PaystackClient
+>>> client = PaystackClient()
+>>> payload = ... # webhook payload e.g., b'{"event": "customeridentification.success", "data": {"customer_id": 324345768, "customer_code": "CUS_e7urjebaoyk1ze2", "email": "jddae8446e-e54c-42ab-bf37-e5abff14527e@example.com", "identification": {"country": "NG", "type": "bank_account", "bvn": "123*****543", "account_number": "342****22", "bank_code": "121"}}}'
+>>> signature = ... # x-paystack-signature e.g., "5d049eb93c7c71fa098f5215d7297bda401710b62df8b392b9052adf8d1a02ff308f6ca57a1db14ffeabd5b66264e9c42de029b7067b9c71eb9c231fb2a8e383"
+>>> is_verified_webhook_payload = client.is_verified_webhook_payload(payload,signature)
+>>> print(is_verified_webhook_payload)
+True
+```
+
+#### Forward webhook events from paystack to your app running locally
+
+**Note:** This requires that you install `pypaystack2[webhook]`
+
+```bash
+pypaystack2 webhook start-tunnel-server --addr localhost:8000 --ngrok-auth-token
 ```
 
 ## Documentation
