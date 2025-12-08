@@ -23,7 +23,7 @@ jobs:
           git config --global user.email docs@dummy.bot.com
       - name: Set release notes tag
         run: |
-          export RELEASE_TAG_VERSION="${{ github.event.release.tag_name }}"
-          echo RELEASE_TAG_VERSION="${RELEASE_TAG_VERSION:1}" >> "$GITHUB_ENV"
+          VERSION_TAG="v$(echo "${{ github.event.release.tag_name }}" | sed 's/^v//' | awk -F. '{print $1"."$2}')"
+          echo VERSION_TAG="${VERSION_TAG}" >> "$GITHUB_ENV"
       - name: Build docs website
-        run: uv run mike deploy "${RELEASE_TAG_VERSION}" --push
+        run: uv run mike deploy "$VERSION_TAG" --push

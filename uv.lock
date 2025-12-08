@@ -1018,13 +1018,6 @@ test = [
     { name = "tomli" },
     { name = "typer-slim", extra = ["standard"] },
 ]
-webhook = [
-    { name = "fastapi", extra = ["standard"] },
-    { name = "ngrok", version = "1.4.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
-    { name = "ngrok", version = "1.6.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
-    { name = "python-dotenv" },
-    { name = "typer-slim", extra = ["standard"] },
-]
 
 [package.metadata]
 requires-dist = [
@@ -1058,12 +1051,6 @@ format = [{ name = "ruff", specifier = ">=0.14.8" }]
 test = [
     { name = "python-dotenv", specifier = ">=1.2.1" },
     { name = "tomli", specifier = ">=2.3.0" },
-    { name = "typer-slim", extras = ["standard"], specifier = ">=0.20.0" },
-]
-webhook = [
-    { name = "fastapi", extras = ["standard"], specifier = ">=0.123.10" },
-    { name = "ngrok", specifier = ">=1.4.0" },
-    { name = "python-dotenv", specifier = ">=1.2.1" },
     { name = "typer-slim", extras = ["standard"], specifier = ">=0.20.0" },
 ]
 
