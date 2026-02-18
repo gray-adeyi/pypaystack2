@@ -44,10 +44,13 @@ class Channel(StrEnum):
 
     CARD = "card"
     BANK = "bank"
+    APPLE_PAY = "apple_pay"
     USSD = "ussd"
     QR = "qr"
     MOBILE_MONEY = "mobile_money"
     BANK_TRANSFER = "bank_transfer"
+    EFT = "eft"
+    PAYATTITUDE = "payattitude"
 
 
 class Bearer(StrEnum):
