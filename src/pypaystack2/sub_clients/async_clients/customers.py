@@ -451,7 +451,7 @@ class AsyncCustomerClient(BaseAsyncAPIClient):
             response_data_model_class=alternate_model_class,
         )
 
-    async def direct_debit_activation_charge(
+    async def trigger_activation_charge(
         self,
         customer_id: str | int,
         authorization_id: str | int,
