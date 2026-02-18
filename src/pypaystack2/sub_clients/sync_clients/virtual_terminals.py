@@ -65,7 +65,7 @@ class VirtualTerminalClient(BaseAPIClient):
             response_data_model_class=alternate_model_class,
         )
 
-    def list(
+    def all(
         self,
         status: Literal["active", "inactive"] | None = None,
         pagination: int = 50,

@@ -70,7 +70,7 @@ class AsyncVirtualTerminalClient(BaseAsyncAPIClient):
             response_data_model_class=alternate_model_class,
         )
 
-    async def list(
+    async def all(
         self,
         status: Literal["active", "inactive"] | None = None,
         pagination: int = 50,
