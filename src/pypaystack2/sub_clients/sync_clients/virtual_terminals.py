@@ -10,7 +10,7 @@ from pypaystack2.types import PaystackDataModel
 class VirtualTerminalClient(BaseAPIClient):
     """This client provides API for interacting with Paystack's Virtual Terminal API
 
-    he Virtual Terminal API allows you to accept in-person payments without a POS device.
+    The Virtual Terminal API allows you to accept in-person payments without a POS device.
     """
 
     def create(
