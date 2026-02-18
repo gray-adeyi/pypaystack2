@@ -111,10 +111,10 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
             payload,
         )
 
-        return await self._handle_request(
+        return await self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
-            payload,  # type: ignore
+            payload,
             response_data_model_class=alternate_model_class or InitTransaction,
         )
 
@@ -160,6 +160,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
         status: TransactionStatus | None = None,
         page: int | None = None,
         amount: int | None = None,
+        terminal_id: str | None = None,
         pagination: int = 50,
         alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[Transaction]] | Response[PaystackDataModel]:
@@ -178,6 +179,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
                 currency is ``Currency.ZAR``)
             pagination: Specifies how many records you want to retrieve per page. If not specified, we
                 use a default value of 50.
+            terminal_id: The Terminal ID for the transactions you want to receive.
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
@@ -202,6 +204,7 @@ class AsyncTransactionClient(BaseAsyncAPIClient):
             ("status", status),
             ("from", start_date),
             ("to", end_date),
+            ("terminalid", terminal_id),
             ("amount", amount),
         ]
         url = append_query_params(query_params, url)

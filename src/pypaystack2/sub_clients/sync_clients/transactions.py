@@ -162,6 +162,7 @@ class TransactionClient(BaseAPIClient):
         status: TransactionStatus | None = None,
         page: int | None = None,
         amount: int | None = None,
+        terminal_id: str | None = None,
         pagination: int = 50,
         alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[Transaction]] | Response[PaystackDataModel]:
@@ -178,6 +179,7 @@ class TransactionClient(BaseAPIClient):
                 Filter transactions by amount. Specify the amount (in kobo if currency is
                 ``Currency.NGN``, pesewas, if currency is ``Currency.GHS``, and cents, if
                 currency is ``Currency.ZAR``)
+            terminal_id: The Terminal ID for the transactions you want to receive.
             pagination: Specifies how many records you want to retrieve per page. If not specified, we
                 use a default value of 50.
             alternate_model_class: A pydantic model class to use instead of the
@@ -205,6 +207,7 @@ class TransactionClient(BaseAPIClient):
             ("from", start_date),
             ("to", end_date),
             ("amount", amount),
+            ("terminalid", terminal_id),
         ]
         url = append_query_params(query_params, url)
 
