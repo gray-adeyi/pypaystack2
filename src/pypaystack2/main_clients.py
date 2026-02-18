@@ -1,3 +1,5 @@
+from pypaystack2.sub_clients.async_clients.direct_debits import AsyncDirectDebitClient
+from pypaystack2.sub_clients.sync_clients.direct_debits import DirectDebitClient
 from pypaystack2.sub_clients.async_clients.virtual_terminals import (
     AsyncVirtualTerminalClient,
 )
@@ -108,6 +110,8 @@ class PaystackClient(BaseAPIClient):
             e.g. `PaystackClient.verification.resolve_account_number`.
         virtual_terminals: A binding to `VirtualTerminalClient` providing methods for interacting with Paystack's
             Virtual Terminal API e.g. `VirtualTerminalClient.list`.
+        direct_debits: A binding to `DirectDebitClient` providing methods for interacting with Paystack's
+            Direct Debit API e.g. `DirectDebitClient.trigger_activation_charge`.
     """
 
     def __init__(self, secret_key: str | None = None):
@@ -164,6 +168,7 @@ class PaystackClient(BaseAPIClient):
             secret_key=self._secret_key
         )
         self.virtual_terminals = VirtualTerminalClient(secret_key=self._secret_key)
+        self.direct_debits = DirectDebitClient(secret_key=self._secret_key)
 
 
 class AsyncPaystackClient(BaseAsyncAPIClient):
@@ -221,6 +226,8 @@ class AsyncPaystackClient(BaseAsyncAPIClient):
             API e.g. `AsyncPaystackClient.verification.resolve_account_number`.
         virtual_terminals: A binding to `VirtualTerminalClient` providing methods for interacting with Paystack's
             Virtual Terminal API e.g. `AsyncVirtualTerminalClient.list`.
+        direct_debits: A binding to `AsyncDirectDebitClient` providing methods for interacting with Paystack's
+            Direct Debit API e.g. `AsyncDirectDebitClient.trigger_activation_charge`.
 
     """
 
@@ -254,3 +261,4 @@ class AsyncPaystackClient(BaseAsyncAPIClient):
         self.transfer_control = AsyncTransferControlClient(secret_key=self._secret_key)
         self.verification = AsyncVerificationClient(secret_key=self._secret_key)
         self.virtual_terminals = AsyncVirtualTerminalClient(secret_key=self._secret_key)
+        self.direct_debits = AsyncDirectDebitClient(secret_key=self._secret_key)
