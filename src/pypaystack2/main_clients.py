@@ -1,3 +1,7 @@
+from pypaystack2.sub_clients.async_clients.virtual_terminals import (
+    AsyncVirtualTerminalClient,
+)
+from pypaystack2.sub_clients.sync_clients.virtual_terminals import VirtualTerminalClient
 from pypaystack2.base_clients import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.sub_clients import (
     ApplePayClient,
@@ -102,6 +106,8 @@ class PaystackClient(BaseAPIClient):
             Transfers control API e.g. `PaystackClient.transfer_control.check_balance`.
         verification: A binding to `VerificationClient` providing methods for interacting Paystack's Verification API
             e.g. `PaystackClient.verification.resolve_account_number`.
+        virtual_terminals: A binding to `VirtualTerminalClient` providing methods for interacting with Paystack's
+            Virtual Terminal API e.g. `VirtualTerminalClient.list`.
     """
 
     def __init__(self, secret_key: str | None = None):
@@ -157,6 +163,7 @@ class PaystackClient(BaseAPIClient):
         self.verification: VerificationClient = VerificationClient(
             secret_key=self._secret_key
         )
+        self.virtual_terminals = VirtualTerminalClient(secret_key=self._secret_key)
 
 
 class AsyncPaystackClient(BaseAsyncAPIClient):
@@ -167,51 +174,54 @@ class AsyncPaystackClient(BaseAsyncAPIClient):
 
     Attributes:
         apple_pay: A binding to `AsyncApplePayClient` providing methods for interacting Paystack's Apple Pay API
-            e.g. `PaystackClient.apple_pay.get_domains`.
+            e.g. `AsyncPaystackClient.apple_pay.get_domains`.
         bulk_charges: A binding to `AsyncBulkChargeClient` providing methods for interacting Paystack's Bulk charge API
-            e.g. `PaystackClient.bulk_charges.initiate`.
+            e.g. `AsyncPaystackClient.bulk_charges.initiate`.
         charge: A binding to `AsyncChargeClient` providing methods for interacting Paystack's Charge API
-            e.g. `PaystackClient.charge.charge`.
+            e.g. `AsyncPaystackClient.charge.charge`.
         integration: A binding to `AsyncIntegrationClient` providing methods for interacting Paystack's Integration API
-            e.g. `PaystackClient.integration.get_payment_session_timeout`.
+            e.g. `AsyncPaystackClient.integration.get_payment_session_timeout`.
         customers: A binding to `AsyncCustomerClient` providing methods for interacting Paystack's Customer API
-            e.g. `PaystackClient.customers.create`.
+            e.g. `AsyncPaystackClient.customers.create`.
         dedicated_accounts: A binding to `AsyncDedicatedAccountClient` providing methods for interacting
             Paystack's Dedicated account API e.g. `PaystackClient.dedicated_accounts.create`.
         disputes: A binding to `AsyncDisputeClient` providing methods for interacting Paystack's Dispute API
-            e.g. `PaystackClient.disputes.`.
+            e.g. `AsyncPaystackClient.disputes.`.
         payment_requests: A binding to `AsyncPaymentRequestClient` providing methods for interacting Paystack's Payment
-            request API e.g. `PaystackClient.payment_requests.create`.
+            request API e.g. `AsyncPaystackClient.payment_requests.create`.
         miscellaneous: A binding to `AsyncApplePayClient` providing methods for interacting Paystack's Apple Pay API
-            e.g. `PaystackClient.miscellaneous.get_banks`.
+            e.g. `AsyncPaystackClient.miscellaneous.get_banks`.
         payment_pages: A binding to `AsyncPaymentPageClient` providing methods for interacting Paystack's Payment Page
             API e.g. `PaystackClient.payment_pages.create`.
         plans: A binding to `AsyncPlanClient` providing methods for interacting Paystack's Plan API
-            e.g. `PaystackClient.plans.get_plans`.
+            e.g. `AsyncPaystackClient.plans.get_plans`.
         products: A binding to `AsyncProductClient` providing methods for interacting Paystack's Product API
             e.g. `PaystackClient.products.get_product`.
         refunds: A binding to `AsyncRefundClient` providing methods for interacting Paystack's Refund API
-            e.g. `PaystackClient.refunds.create`.
+            e.g. `AsyncPaystackClient.refunds.create`.
         settlements: A binding to `AsyncSettlementClient` providing methods for interacting Paystack's Settlement API
-            e.g. `PaystackClient.settlements.get_settlements`.
+            e.g. `AsyncPaystackClient.settlements.get_settlements`.
         splits: A binding to `AsyncTransactionSplitClient` providing methods for interacting Paystack's Transaction
-            split API e.g. `PaystackClient.splits.create`.
+            split API e.g. `AsyncPaystackClient.splits.create`.
         subaccounts: A binding to `AsyncSubAccountClient` providing methods for interacting Paystack's subaccount API
-            e.g. `PaystackClient.subaccounts.create`.
+            e.g. `AsyncPaystackClient.subaccounts.create`.
         subscriptions: A binding to `AsyncSubscriptionClient` providing methods for interacting Paystack's Subscription
-            API e.g. `PaystackClient.subscriptions.create`.
+            API e.g. `AsyncPaystackClient.subscriptions.create`.
         terminals: A binding to `AsyncTerminalClient` providing methods for interacting Paystack's Terminal API
-            e.g. `PaystackClient.terminals.send_event`.
+            e.g. `AsyncPaystackClient.terminals.send_event`.
         transactions: A binding to `AsyncTransactionClient` providing methods for interacting Paystack's Transaction
-            API e.g. `PaystackClient.transactions.initiate`.
+            API e.g. `AsyncPaystackClient.transactions.initiate`.
         transfer_recipients: A binding to `AsyncTransferRecipientClient` providing methods for interacting Paystack's
-            Transfer recipients API e.g. `PaystackClient.transfer_recipients.create`.
+            Transfer recipients API e.g. `AsyncPaystackClient.transfer_recipients.create`.
         transfers: A binding to `AsyncTransferClient` providing methods for interacting Paystack's Transfer API
             e.g. `PaystackClient.transfers.finalize`.
         transfer_control: A binding to `AsyncTransferControlClient` providing methods for interacting Paystack's
-            Transfers control API e.g. `PaystackClient.transfer_control.check_balance`.
+            Transfers control API e.g. `AsyncPaystackClient.transfer_control.check_balance`.
         verification: A binding to `AsyncVerificationClient` providing methods for interacting Paystack's Verification
-            API e.g. `PaystackClient.verification.resolve_account_number`.
+            API e.g. `AsyncPaystackClient.verification.resolve_account_number`.
+        virtual_terminals: A binding to `VirtualTerminalClient` providing methods for interacting with Paystack's
+            Virtual Terminal API e.g. `AsyncVirtualTerminalClient.list`.
+
     """
 
     def __init__(self, secret_key: str | None = None):
@@ -243,3 +253,4 @@ class AsyncPaystackClient(BaseAsyncAPIClient):
         self.transfers = AsyncTransferClient(secret_key=self._secret_key)
         self.transfer_control = AsyncTransferControlClient(secret_key=self._secret_key)
         self.verification = AsyncVerificationClient(secret_key=self._secret_key)
+        self.virtual_terminals = AsyncVirtualTerminalClient(secret_key=self._secret_key)
