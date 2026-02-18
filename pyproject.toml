@@ -1,6 +1,6 @@
 [project]
 name = "pypaystack2"
-version = "3.1.0"
+version = "3.1.1"
 description = "A developer-friendly client library for Paystack"
 readme = "README.md"
 license = "MIT"
@@ -29,7 +29,6 @@ webhook = [
     "fastapi[standard]>=0.123.10",
     "ngrok>=1.4.0",
     "python-dotenv>=1.2.1",
-    "typer-slim[standard]>=0.20.0",
 ]
 
 [build-system]
@@ -49,7 +48,6 @@ format = [
 test = [
     "python-dotenv>=1.2.1",
     "tomli>=2.3.0",
-    "typer-slim[standard]>=0.20.0",
 ]
 coverage = []
 doc = [
