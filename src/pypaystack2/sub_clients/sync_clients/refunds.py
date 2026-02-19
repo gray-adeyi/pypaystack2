@@ -1,3 +1,5 @@
+import warnings
+from pypaystack2.models.payload_models import RefundAccount
 from http import HTTPMethod
 
 from pypaystack2.base_clients import (
@@ -72,9 +74,48 @@ class RefundClient(BaseAPIClient):
             response_data_model_class=alternate_model_class or Refund,
         )
 
+    def retry_refund(
+        self,
+        refund_id: str | int,
+        refund_account: RefundAccount,
+        alternate_model_class: type[PaystackDataModel] | None = None,
+    ) -> Response[Refund] | Response[PaystackDataModel]:
+        """Retry a refund with a needs-attention status by providing the bank
+            account details of a customer.
+
+        Args:
+            refund_id: The ID of the previously initiated refund
+            refund_account: A pydantic model containing the customer's account
+                details for refund.
+            alternate_model_class: A pydantic model class to use instead of the
+                default pydantic model used by the library to present the data in
+                the `Response.data`. The default behaviour of the library is to
+                set  `Response.data` to `None` if it fails to serialize the data
+                returned from paystack with the model provided in the library.
+                Providing a pydantic model class via this parameter overrides
+                the library default model with the model class you provide.
+                This can come in handy when the models in the library do not
+                accurately represent the data returned, and you prefer working with the
+                data as a pydantic model instead of as a dict of the response returned
+                by  paystack before it is serialized with pydantic models, The original
+                data can be accessed via `Response.raw`.
+
+        Returns:
+            A pydantic model containing the response gotten from paystack's server.
+        """
+        url = self._full_url(f"/refund/retry_with_customer_details/{refund_id}")
+        payload = {"refund_account_details": refund_account.model_dump()}
+        return self._handle_request(  # type: ignore
+            HTTPMethod.POST,
+            url,
+            payload,
+            response_data_model_class=alternate_model_class or Refund,
+        )
+
     def get_refunds(
         self,
         reference: str | None = None,
+        transaction: str | None = None,
         currency: Currency | None = None,
         pagination: int = 50,
         page: int = 1,
@@ -86,6 +127,7 @@ class RefundClient(BaseAPIClient):
 
         Args:
             reference: Identifier for transaction to be refunded
+            transaction: The transaction ID of the refunded transaction
             currency: Any value from the ``Currency`` enum
             pagination: Specifies how many records you want to retrieve per page.
                 If not specified we use a default value of 50.
@@ -109,10 +151,16 @@ class RefundClient(BaseAPIClient):
         Returns:
             A pydantic model containing the response gotten from paystack's server.
         """
-
+        if reference:
+            warnings.warn(
+                "'reference' is deprecated; use 'transaction'",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            transaction = reference
         url = self._full_url(f"/refund?perPage={pagination}")
         query_params = [
-            ("reference", reference),
+            ("transaction", transaction),
             ("currency", currency),
             ("page", page),
             ("start_date", start_date),
