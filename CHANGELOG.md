@@ -7,11 +7,36 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## unreleased
 
-## [3.1.0] - (8th December 2025)
+## [3.2.0] - (8th February 2025)
 
 ### Added
 
-- `PaystackClient.is_verified_webhook_payload` and `AsyncPaystackClient.is_verified_webhook_payload` methods for
+- `VirtualTerminalClient` and `AsyncVirtualTerminalClient`
+- `DirectDebitClient` and `AsyncDirectDebitClient`
+- `initialize_authorization`,`verify_authorization`,`initialize_direct_debit`,`direct_debit_activation_charge` methods to `CustomerClient` and `AsyncCustomerClient`
+- `retry_refund` methods to `RefundClient` and `AsyncRefundClient`
+
+### Fixed
+- Missing `Channel` enum variants `APPLE_PAY`, `EFT`, `PAYATTITUDE`
+- Add missing `terminal_id` parameter to `AsyncTransactionClient.get_transactions` and `TransactionClient.get_transactions`
+- Add missing optional parameters `currency`,`type_`,`plan`, `fixed_amount`, `redirect_url`, `success_message`, `notification_email`, `collect_phone` to
+`PaymentPageClient` and `AsyncPaymentPageClient` `create` methods.
+- Add missing optional parameter `account_reference` to `TransferClient` and 
+`AsyncTransferClient` `initiate` methods.
+- Add missing optional parameters `split_code`, `subaccount`, `transaction_charge`, `bearer`, `qr` to `ChargeClient` and `AsyncChargeClient` `charge` methods.
+- Add missing optional parameter `enabled_for_verificaton` to `MiscellaneousClient`
+and `enabled_for_verificaton` `get_banks` method.
+
+### Changed
+
+- Endpoint for `CustomerClient` and `AsyncCustomerClient` method `deactivate` from `/customer/deactivate_authorization` 
+to `/customer/authorization/deactivate`
+- Deprecate `customer` parameter in `TransferClient` and `AsyncTransferClient` `get_tranfers` methods. It no longer exists in Paystack's API reference.
+It is now `recipeint`
+- Deprecate `reference` parameter in `RefundClient` and `AsyncRefundClient`
+`get_refunds` methods. It no longer exists in Paystack's API reference.
+
+## [3.1.0] - (8th December 2025) ### Added `PaystackClient.is_verified_webhook_payload` and `AsyncPaystackClient.is_verified_webhook_payload` methods for
   checking the validity of a webhook payload
 - CLI command interface for webhooks with `pypaystack2 webhook start-tunnel-server`
 
