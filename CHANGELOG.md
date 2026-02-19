@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## unreleased
 
-## [3.2.0] - (8th February 2025)
+## [3.2.0] - (19th February 2026)
 
 ### Added
 
@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add missing optional parameters `split_code`, `subaccount`, `transaction_charge`, `bearer`, `qr` to `ChargeClient` and `AsyncChargeClient` `charge` methods.
 - Add missing optional parameter `enabled_for_verificaton` to `MiscellaneousClient`
 and `enabled_for_verificaton` `get_banks` method.
+- Client error handling.
 
 ### Changed
 
@@ -36,8 +37,12 @@ It is now `recipeint`
 - Deprecate `reference` parameter in `RefundClient` and `AsyncRefundClient`
 `get_refunds` methods. It no longer exists in Paystack's API reference.
 
-## [3.1.0] - (8th December 2025) ### Added `PaystackClient.is_verified_webhook_payload` and `AsyncPaystackClient.is_verified_webhook_payload` methods for
-  checking the validity of a webhook payload
+## [3.1.0] - (8th December 2025) 
+
+### Added 
+
+- `PaystackClient.is_verified_webhook_payload` and `AsyncPaystackClient.is_verified_webhook_payload` methods for
+checking the validity of a webhook payload
 - CLI command interface for webhooks with `pypaystack2 webhook start-tunnel-server`
 
 ### Changed
