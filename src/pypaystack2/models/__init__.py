@@ -1,5 +1,6 @@
 # ruff: noqa: F401
 from pypaystack2.models.payload_models import (
+    RefundAccount,
     BulkChargeInstruction,
     LineItem,
     Tax,
