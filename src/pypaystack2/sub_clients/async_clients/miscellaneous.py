@@ -26,6 +26,7 @@ class AsyncMiscellaneousClient(BaseAsyncAPIClient):
         pay_with_bank_transfer: bool | None = None,
         pay_with_bank: bool | None = None,
         include_nip_sort_code: bool | None = None,
+        enabled_for_verificaton: bool | None = None,
         pagination: int = 50,
         alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[list[Bank]] | Response[PaystackDataModel]:
@@ -44,6 +45,8 @@ class AsyncMiscellaneousClient(BaseAsyncAPIClient):
             pay_with_bank_transfer: A flag to filter for available banks a customer can make a transfer to
                 complete a payment
             pay_with_bank: A flag to filter for banks a customer can pay directly from
+            enabled_for_verificaton: A flag to filter the banks that are supported for account verification in South Africa.
+                You need to combine this with either the currency or country filter.
             pagination: The number of objects to return per page. Defaults to 50, and limited to 100 records per page.
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
@@ -77,6 +80,7 @@ class AsyncMiscellaneousClient(BaseAsyncAPIClient):
             ("pay_with_bank_transfer", pay_with_bank_transfer),
             ("pay_with_bank", pay_with_bank),
             ("include_nip_sort_code", include_nip_sort_code),
+            ("enabled_for_verificaton", enabled_for_verificaton),
         ]
         url = append_query_params(query_params, url)
         return await self._handle_request(  # type: ignore
