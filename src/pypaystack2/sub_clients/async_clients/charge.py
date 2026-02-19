@@ -1,5 +1,5 @@
 from http import HTTPMethod
-from typing import Any
+from typing import Any, Literal
 
 from pypaystack2.base_clients import BaseAsyncAPIClient, add_to_payload
 from pypaystack2.models import Response
@@ -19,14 +19,19 @@ class AsyncChargeClient(BaseAsyncAPIClient):
         self,
         email: str,
         amount: int,
+        split_code: str | None = None,
+        subaccount: str | None = None,
+        transaction_charge: str | None = None,
+        bearer: Literal["account", "subaccount"] | None = "account",
         bank: dict[str, Any] | None = None,
         bank_transfer: dict[str, Any] | None = None,
+        ussd: dict[str, Any] | None = None,
+        mobile_money: dict[str, Any] | None = None,
+        qr: dict[str, Any] | None = None,
         auth_code: str | None = None,
         pin: str | None = None,
         metadata: dict[str, Any] | None = None,
         reference: str | None = None,
-        ussd: dict[str, Any] | None = None,
-        mobile_money: dict[str, Any] | None = None,
         device_id: str | None = None,
         alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[ChargeStep] | Response[PaystackDataModel]:
@@ -36,15 +41,21 @@ class AsyncChargeClient(BaseAsyncAPIClient):
             email: Customer's email address
             amount: Amount should be in kobo if currency is NGN, pesewas, if currency is GHS,
                 and cents, if currency is ZAR
+            split_code: The split code of a previously created split. e.g. `SPL_98WF13Eb3w`
+            subaccount: The code for the subaccount that owns the payment. e.g. `ACCT_8f4s1eq7ml6rlzj`
+            transaction_charge: An amount used to override the split configuration for a single split payment.
+                If set, the amount specified goes to the main account regardless of the split configuration.
+            bearer: Use this param to indicate who bears the transaction charges.
             bank: Bank account to charge (don't send if charging an authorization code)
             bank_transfer: Takes the settings for the Pay with Transfer (PwT) channel. Pass in the
                 account_expires_at param to set the expiry time.
+            ussd: USSD type to charge (don't send if charging an authorization code, bank or card)
+            mobile_money: Mobile details (don't send if charging an authorization code, bank or card)
+            qr: Takes a provider parameter with the value set to: scan-to-pay. Currently supported in South Africa only.
             auth_code: An authorization code to charge (don't send if charging a bank account)
             pin: 4-digit PIN (send with a non-reusable authorization code)
             metadata: A dictionary of data.
             reference: Unique transaction reference. Only -, .\\`, = and alphanumeric characters allowed.
-            ussd: USSD type to charge (don't send if charging an authorization code, bank or card)
-            mobile_money: Mobile details (don't send if charging an authorization code, bank or card)
             device_id: This is the unique identifier of the device a user uses in making payment. Only -, .\\`,
                 = and alphanumeric characters allowed.
             alternate_model_class: A pydantic model class to use instead of the
@@ -66,14 +77,19 @@ class AsyncChargeClient(BaseAsyncAPIClient):
 
         payload = {"email": email, "amount": amount}
         optional_params = [
+            ("split_code", split_code),
+            ("subaccount", subaccount),
+            ("transaction_charge", transaction_charge),
+            ("bearer", bearer),
             ("bank", bank),
             ("bank_transfer", bank_transfer),
+            ("ussd", ussd),
+            ("mobile_money", mobile_money),
+            ("qr", qr),
             ("authorization_code", auth_code),
             ("pin", pin),
             ("metadata", metadata),
             ("reference", reference),
-            ("ussd", ussd),
-            ("mobile_money", mobile_money),
             ("device_id", device_id),
         ]
         payload = add_to_payload(optional_params, payload)
