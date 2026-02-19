@@ -1,3 +1,4 @@
+import warnings
 from http import HTTPMethod
 
 from pypaystack2.base_clients import (
@@ -30,6 +31,7 @@ class TransferClient(BaseAPIClient):
         reason: str | None = None,
         currency: Currency | None = None,
         reference: str | None = None,
+        account_reference: str | None = None,
         source: str = "balance",
         alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[Transfer] | Response[PaystackDataModel]:
@@ -41,6 +43,7 @@ class TransferClient(BaseAPIClient):
             reason: narration of the transfer
             currency: transfer currency
             reference: reference id
+            account_reference: A unique identifier required in Kenya for MPESA Paybill and Till transfers
             source: transfer source
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
@@ -70,6 +73,7 @@ class TransferClient(BaseAPIClient):
             ("reason", reason),
             ("reference", reference),
             ("currency", currency),
+            ("account_reference", account_reference),
         ]
         payload = add_to_payload(optional_params, payload)
         return self._handle_request(  # type: ignore
@@ -166,6 +170,7 @@ class TransferClient(BaseAPIClient):
         page: int = 1,
         pagination: int = 50,
         customer: str | int | None = None,
+        recipient: str | int | None = None,
         start_date: str | None = None,
         end_date: str | None = None,
         alternate_model_class: type[PaystackDataModel] | None = None,
@@ -174,6 +179,7 @@ class TransferClient(BaseAPIClient):
 
         Args:
             customer: customer id
+            recipient: Filter by the recipient ID
             page: Specifies exactly what page you want to retrieve.
                 If not specified, we use a default value of 1.
             pagination: Specifies how many records you want to retrieve per page.
@@ -196,9 +202,16 @@ class TransferClient(BaseAPIClient):
         Returns:
             A pydantic model containing the response gotten from paystack's server.
         """
+        if customer:
+            warnings.warn(
+                "'customer' is deprecated; use 'recipient'",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+            recipient = customer
         url = self._full_url(f"/transfer?perPage={pagination}")
         query_params = [
-            ("customer", customer),
+            ("recipient", recipient),
             ("page", page),
             ("from", start_date),
             ("to", end_date),
