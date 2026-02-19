@@ -11,7 +11,7 @@ from json import JSONDecodeError
 from typing import Any, Type, cast
 
 import httpx
-from httpx import NetworkError
+from httpx import HTTPError
 from pydantic import ValidationError
 
 from pypaystack2._metadata import __version__
@@ -287,7 +287,7 @@ class BaseAPIClient(AbstractAPIClient):
 
         try:
             response = http_method_handler(**request_kwargs)  # type: ignore
-        except NetworkError as error:
+        except HTTPError as error:
             raise ClientNetworkError(f"network error occurred: {error}", error)
         return self._deserialize_response(
             response, response_data_model_class, raise_serialization_exception
@@ -327,7 +327,7 @@ class BaseAsyncAPIClient(AbstractAPIClient):
                 raise ValueError("HTTP Request method not recognised or implemented")
             try:
                 response = await http_method_handler(**request_kwargs)
-            except NetworkError as error:
+            except HTTPError as error:
                 raise ClientNetworkError(f"network error occurred: {error}", error)
 
         return self._deserialize_response(

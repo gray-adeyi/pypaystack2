@@ -5,6 +5,22 @@ from pydantic import BaseModel, model_validator
 from pypaystack2.enums import RecipientType, Currency
 
 
+class RefundAccount(BaseModel):
+    """A dataclass for representing refund account
+    details
+
+    Attributes:
+        currency:The currency of the customer's bank account.
+            It should be the same as the currency the payment was made
+        account_number: The customer's account number
+        bank_id: The ID representing the customer's bank.
+    """
+
+    currency: Currency
+    account_number: str
+    bank_id: str
+
+
 class BulkChargeInstruction(BaseModel):
     """A dataclass for bulk charge instruction.
 

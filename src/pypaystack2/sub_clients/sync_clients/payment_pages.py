@@ -1,5 +1,6 @@
+from pypaystack2.enums import Currency
 from http import HTTPMethod
-from typing import Any
+from typing import Any, Literal
 
 from pypaystack2.base_clients import (
     BaseAPIClient,
@@ -23,10 +24,17 @@ class PaymentPageClient(BaseAPIClient):
         name: str,
         description: str | None = None,
         amount: int | None = None,
-        split_code: str | None = None,
+        currency: Currency | None = None,
         slug: str | None = None,
+        type_: Literal["payment", "subscription", "product", "plan"] = "payment",
+        plan: str | None = None,
+        fixed_amount: bool | None = None,
+        split_code: str | None = None,
         metadata: dict[str, Any] | None = None,
         redirect_url: str | None = None,
+        success_message: str | None = None,
+        notification_email: str | None = None,
+        collect_phone: bool | None = None,
         custom_fields: list[Any] | None = None,
         alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[PaymentPage] | Response[PaystackDataModel]:
@@ -37,13 +45,22 @@ class PaymentPageClient(BaseAPIClient):
             description: A description for this page
             amount: Amount should be in kobo if currency is ``Currency.NGN``, pesewas, if
                 currency is ``Currency.GHS``, and cents, if currency is ``Currency.ZAR``
-            split_code: The split code of the transaction split. e.g. SPL_98WF13Eb3w
+            currency: The transaction currency.
             slug: URL slug you would like to be associated with this page.
                 Page will be accessible at ``https://paystack.com/pay/[slug]``
+            type_:The type of payment page to create.
+            plan: The ID of the plan to subscribe customers on this payment page to when
+                `type_` is set to `subscription`
+            fixed_amount: Specifies whether to collect a fixed amount on the payment page.
+                If true, amount must be passed.
+            split_code: The split code of the transaction split. e.g. SPL_98WF13Eb3w
             metadata: Extra data to configure the payment page including subaccount,
                 logo image, transaction charge
             redirect_url: If you would like Paystack to redirect someplace upon
                 successful payment, specify the URL here.
+            success_message: A success message to display to the customer after a successful transaction
+            notification_email: An email address that will receive transaction notifications for this payment page
+            collect_phone: Specify whether to collect phone numbers on the payment page
             custom_fields: If you would like to accept custom fields,
                 specify them here.
             alternate_model_class: A pydantic model class to use instead of the
@@ -69,10 +86,17 @@ class PaymentPageClient(BaseAPIClient):
         optional_params = [
             ("description", description),
             ("amount", amount),
-            ("split_code", split_code),
+            ("currency", currency),
             ("slug", slug),
+            ("type", type_),
+            ("plan", plan),
+            ("fixed_amount", fixed_amount),
+            ("split_code", split_code),
             ("metadata", metadata),
             ("redirect_url", redirect_url),
+            ("success_message", success_message),
+            ("notification_email", notification_email),
+            ("collect_phone", collect_phone),
             ("custom_fields", custom_fields),
         ]
         payload = add_to_payload(optional_params, payload)

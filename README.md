@@ -26,7 +26,7 @@ $ uv add pypaystack2
 # For webhook cli
 $ pip install -U "pypaystack2[webhook]"
 or install with uv
-$ uv add "pypaystack2[webhook"
+$ uv add "pypaystack2[webhook]"
 ```
 
 ## Usage Preview

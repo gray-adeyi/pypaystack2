@@ -328,6 +328,198 @@ class CustomerClient(BaseAPIClient):
             response_data_model_class=alternate_model_class or Customer,
         )
 
+    def initialize_authorization(
+        self,
+        email: str,
+        callback_url: str | None = None,
+        account: dict[str, Any] | None = None,
+        address: dict[str, Any] | None = None,
+        channel: str = "direct-debit",
+        alternate_model_class: type[PaystackDataModel] | None = None,
+    ):
+        """Initiate a request to create a reusable authorization code for recurring transactions.
+
+        Args:
+            alternate_model_class: A pydantic model class to use instead of the
+                default pydantic model used by the library to present the data in
+                the `Response.data`. The default behaviour of the library is to
+                set  `Response.data` to `None` if it fails to serialize the data
+                returned from paystack with the model provided in the library.
+                Providing a pydantic model class via this parameter overrides
+                the library default model with the model class you provide.
+                This can come in handy when the models in the library do not
+                accurately represent the data returned, and you prefer working with the
+                data as a pydantic model instead of as a dict of the response returned
+                by  paystack before it is serialized with pydantic models, The original
+                data can be accessed via `Response.raw`.
+
+        Returns:
+            A pydantic model containing the response gotten from paystack's server.
+        """
+        url = self._full_url("/customer/authorization/initialize")
+        payload = {
+            "email": email,
+            "channel": channel,
+        }
+        optional_params = [
+            ("callback_url", callback_url),
+            ("account", account),
+            ("address", address),
+        ]
+        payload = add_to_payload(optional_params, payload)
+        return self._handle_request(
+            HTTPMethod.POST,
+            url,
+            payload,
+            response_data_model_class=alternate_model_class,
+        )
+
+    def verify_authorization(
+        self,
+        reference: str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
+    ):
+        """Check the status of an authorization request.
+
+        Args:
+            reference: The reference returned in the initialization response
+            alternate_model_class: A pydantic model class to use instead of the
+                default pydantic model used by the library to present the data in
+                the `Response.data`. The default behaviour of the library is to
+                set  `Response.data` to `None` if it fails to serialize the data
+                returned from paystack with the model provided in the library.
+                Providing a pydantic model class via this parameter overrides
+                the library default model with the model class you provide.
+                This can come in handy when the models in the library do not
+                accurately represent the data returned, and you prefer working with the
+                data as a pydantic model instead of as a dict of the response returned
+                by  paystack before it is serialized with pydantic models, The original
+                data can be accessed via `Response.raw`.
+
+        Returns:
+            A pydantic model containing the response gotten from paystack's server.
+        """
+        url = self._full_url(f"/customer/authorization/verify/{reference}")
+        return self._handle_request(
+            HTTPMethod.GET,
+            url,
+            response_data_model_class=alternate_model_class,
+        )
+
+    def initialize_direct_debit(
+        self,
+        customer_id: str | int,
+        account: dict[str, Any],
+        address: dict[str, Any],
+        alternate_model_class: type[PaystackDataModel] | None = None,
+    ):
+        """Initialize the process of linking an account to a customer for Direct Debit transactions.
+
+        Args:
+            customer_id: The id of the customer.
+            account: the customer's acount details. it should have a key `number`
+                with a value that is the customer's account number, a key `bank_code`
+                that is the code representing the customer's bank.
+            address: the customer's address information. it should have the keys
+                `street`, `city` and `state` that is the customer's address information
+            alternate_model_class: A pydantic model class to use instead of the
+                default pydantic model used by the library to present the data in
+                the `Response.data`. The default behaviour of the library is to
+                set  `Response.data` to `None` if it fails to serialize the data
+                returned from paystack with the model provided in the library.
+                Providing a pydantic model class via this parameter overrides
+                the library default model with the model class you provide.
+                This can come in handy when the models in the library do not
+                accurately represent the data returned, and you prefer working with the
+                data as a pydantic model instead of as a dict of the response returned
+                by  paystack before it is serialized with pydantic models, The original
+                data can be accessed via `Response.raw`.
+
+        Returns:
+            A pydantic model containing the response gotten from paystack's server.
+        """
+        url = self._full_url(f"/customer/{customer_id}/initialize-direct-debit")
+        payload = {
+            "account": account,
+            "address": address,
+        }
+        return self._handle_request(
+            HTTPMethod.POST,
+            url,
+            payload,
+            response_data_model_class=alternate_model_class,
+        )
+
+    def trigger_activation_charge(
+        self,
+        customer_id: str | int,
+        authorization_id: str | int,
+        alternate_model_class: type[PaystackDataModel] | None = None,
+    ):
+        """Trigger an activation charge on an inactive mandate on behalf of your customer.
+
+        Args:
+            customer_id: The customer ID attacted to the authorization
+            authorization_id: The authorization ID gotten from the initiation response
+            alternate_model_class: A pydantic model class to use instead of the
+                default pydantic model used by the library to present the data in
+                the `Response.data`. The default behaviour of the library is to
+                set  `Response.data` to `None` if it fails to serialize the data
+                returned from paystack with the model provided in the library.
+                Providing a pydantic model class via this parameter overrides
+                the library default model with the model class you provide.
+                This can come in handy when the models in the library do not
+                accurately represent the data returned, and you prefer working with the
+                data as a pydantic model instead of as a dict of the response returned
+                by  paystack before it is serialized with pydantic models, The original
+                data can be accessed via `Response.raw`.
+
+        Returns:
+            A pydantic model containing the response gotten from paystack's server.
+        """
+        url = self._full_url(f"/customer/{customer_id}/directdebit-activation-charge")
+        payload = {
+            "authorization_id": authorization_id,
+        }
+        return self._handle_request(
+            HTTPMethod.PUT,
+            url,
+            payload,
+            response_data_model_class=alternate_model_class,
+        )
+
+    def get_mandate_authorizations(
+        self,
+        id_: str | int,
+        alternate_model_class: type[PaystackDataModel] | None = None,
+    ):
+        """Get the list of direct debit mandates associated with a customer.
+
+        Args:
+            id_: The customer ID for the authorizations to fetch
+            alternate_model_class: A pydantic model class to use instead of the
+                default pydantic model used by the library to present the data in
+                the `Response.data`. The default behaviour of the library is to
+                set  `Response.data` to `None` if it fails to serialize the data
+                returned from paystack with the model provided in the library.
+                Providing a pydantic model class via this parameter overrides
+                the library default model with the model class you provide.
+                This can come in handy when the models in the library do not
+                accurately represent the data returned, and you prefer working with the
+                data as a pydantic model instead of as a dict of the response returned
+                by  paystack before it is serialized with pydantic models, The original
+                data can be accessed via `Response.raw`.
+
+        Returns:
+            A pydantic model containing the response gotten from paystack's server.
+        """
+        url = self._full_url(f"/customer/{id_}/directdebit-mandate-authorizations")
+        return self._handle_request(
+            HTTPMethod.GET,
+            url,
+            response_data_model_class=alternate_model_class,
+        )
+
     def deactivate(
         self,
         auth_code: str,
@@ -354,7 +546,7 @@ class CustomerClient(BaseAPIClient):
             A pydantic model containing the response gotten from paystack's server.
         """
 
-        url = self._full_url("/customer/deactivate_authorization")
+        url = self._full_url("/customer/authorization/deactivate")
         payload = {
             "authorization_code": auth_code,
         }
