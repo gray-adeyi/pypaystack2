@@ -34,6 +34,7 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
         has_invoice: bool | None = None,
         invoice_number: int | None = None,
         split_code: str | None = None,
+        metadata: dict[str, Any] | None = None,
         alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[PaymentRequest] | Response[PaystackDataModel]:
         """Create a payment request for a transaction on your integration
@@ -54,6 +55,7 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
                 This field is to help override whatever value Paystack decides. Auto increment for
                 subsequent invoices continue from this point.
             split_code: The split code of the transaction split. e.g. SPL_98WF13Eb3w
+            metadata: Additional informations to the request
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
@@ -91,6 +93,7 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
             ("has_invoice", has_invoice),
             ("invoice_number", invoice_number),
             ("split_code", split_code),
+            ("metadata", metadata),
         ]
         payload = add_to_payload(optional_params, payload)
         return await self._handle_request(  # type: ignore
@@ -336,6 +339,7 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
         draft: bool | None = None,
         invoice_number: int | None = None,
         split_code: str | None = None,
+        metadata: dict[str, Any] | None = None,
         alternate_model_class: type[PaystackDataModel] | None = None,
     ) -> Response[PaymentRequest] | Response[PaystackDataModel]:
         """Update a payment request details on your integration
@@ -356,6 +360,7 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
                 This field is to help override whatever value Paystack decides. Auto increment for
                 subsequent invoices continue from this point.
             split_code: The split code of the transaction split. e.g. SPL_98WF13Eb3w
+            metadata: Additional informations to the request
             alternate_model_class: A pydantic model class to use instead of the
                 default pydantic model used by the library to present the data in
                 the `Response.data`. The default behaviour of the library is to
@@ -395,6 +400,7 @@ class AsyncPaymentRequestClient(BaseAsyncAPIClient):
             ("draft", draft),
             ("invoice_number", invoice_number),
             ("split_code", split_code),
+            ("metadata", metadata),
         ]
         payload = add_to_payload(optional_params, payload)
         return await self._handle_request(  # type: ignore
