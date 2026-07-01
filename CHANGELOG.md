@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## unreleased
 
+## 3.2.1 - (1st July 2026)
+
+### Fixed
+
+- Missing `metadata` param in `PaymentRequestClient` and `AsyncPaymentRequestClient` `create` and `update` methods.
+
 ## [3.2.0] - (19th February 2026)
 
 ### Added
