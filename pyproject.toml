@@ -9,7 +9,6 @@ authors = [
 ]
 keywords = ["paystack-python", "pypaystack", "paystack", "paystackapi"]
 classifiers = [
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
 ]
@@ -32,7 +31,7 @@ webhook = [
 ]
 
 [build-system]
-requires = ["uv_build>=0.9.10,<0.10.0"]
+requires = ["uv_build>=0.11.19,<0.12.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
