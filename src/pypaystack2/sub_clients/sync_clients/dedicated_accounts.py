@@ -82,7 +82,7 @@ class DedicatedAccountClient(BaseAPIClient):
             ("phone", phone),
         ]
         payload = add_to_payload(optional_params, payload)
-        return self._handle_request(
+        return self._handle_request(  # type: ignore
             HTTPMethod.POST,
             url,
             payload,
