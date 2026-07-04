@@ -1,3 +1,15 @@
+from pypaystack2.sub_clients.async_clients.storefronts import AsyncStorefrontClient
+from pypaystack2.sub_clients.async_clients.orders import AsyncOrderClient
+from pypaystack2.sub_clients.async_clients.preauthorizations import (
+    AsyncPreauthorizationClient,
+)
+from pypaystack2.sub_clients.sync_clients.preauthorizations import (
+    PreauthorizationClient,
+)
+from pypaystack2.sub_clients.sync_clients.orders import OrderClient
+from pypaystack2.sub_clients.sync_clients.storefronts import StorefrontClient
+from http import HTTPMethod
+from pypaystack2.types import PaystackDataModel
 from pypaystack2.sub_clients.async_clients.direct_debits import AsyncDirectDebitClient
 from pypaystack2.sub_clients.sync_clients.direct_debits import DirectDebitClient
 from pypaystack2.sub_clients.async_clients.virtual_terminals import (
@@ -112,6 +124,12 @@ class PaystackClient(BaseAPIClient):
             Virtual Terminal API e.g. `VirtualTerminalClient.list`.
         direct_debits: A binding to `DirectDebitClient` providing methods for interacting with Paystack's
             Direct Debit API e.g. `DirectDebitClient.trigger_activation_charge`.
+        storefronts: A binding to `StorefrontClient` providing methods for interacting with Paystack's
+            Storefront API e.g. `StorefrontClient.create`.
+        orders: A binding to `OrderClient` providing methods for interacting with Paystack's
+            Order API e.g. `OrderClient.create`.
+        preauthorizations: A binding to `PreauthorizationClient` providing methods for interacting with Paystack's
+            Preauthorization API e.g. `PreauthorizationClient.initialize`.
     """
 
     def __init__(self, secret_key: str | None = None):
@@ -169,6 +187,41 @@ class PaystackClient(BaseAPIClient):
         )
         self.virtual_terminals = VirtualTerminalClient(secret_key=self._secret_key)
         self.direct_debits = DirectDebitClient(secret_key=self._secret_key)
+        self.storefronts = StorefrontClient(secret_key=self._secret_key)
+        self.orders = OrderClient(secret_key=self._secret_key)
+        self.preauthorizations = PreauthorizationClient(secret_key=self._secret_key)
+
+    def get_capitec_pay_transaction(
+        self,
+        reference: str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
+    ):
+        """Check the status of a charge made with Capitec Pay.
+
+        Args:
+            reference: The transaction reference from the previously initiated charge request
+            alternate_model_class: A pydantic model class to use instead of the
+            default pydantic model used by the library to present the data in
+            the `Response.data`. The default behaviour of the library is to
+            set  `Response.data` to `None` if it fails to serialize the data
+            returned from paystack with the model provided in the library.
+            Providing a pydantic model class via this parameter overrides
+            the library default model with the model class you provide.
+            This can come in handy when the models in the library do not
+            accurately represent the data returned, and you prefer working with the
+            data as a pydantic model instead of as a dict of the response returned
+            by  paystack before it is serialized with pydantic models, The original
+            data can be accessed via `Response.raw`.
+
+        Returns:
+            A pydantic model containing the response gotten from paystack's server.
+        """
+        url = self._full_url(f"/capitec-pay/requery/{reference}")
+        return self._handle_request(
+            HTTPMethod.POST,
+            url,
+            response_data_model_class=alternate_model_class,
+        )
 
 
 class AsyncPaystackClient(BaseAsyncAPIClient):
@@ -228,6 +281,12 @@ class AsyncPaystackClient(BaseAsyncAPIClient):
             Virtual Terminal API e.g. `AsyncVirtualTerminalClient.list`.
         direct_debits: A binding to `AsyncDirectDebitClient` providing methods for interacting with Paystack's
             Direct Debit API e.g. `AsyncDirectDebitClient.trigger_activation_charge`.
+        storefronts: A binding to `AsyncStorefrontClient` providing methods for interacting with Paystack's
+            Storefront API e.g. `AsyncStorefrontClient.create`.
+        orders: A binding to `AsyncOrderClient` providing methods for interacting with Paystack's
+            Order API e.g. `AsyncOrderClient.create`.
+        preauthorizations: A binding to `AsyncPreauthorizationClient` providing methods for interacting with Paystack's
+            Preauthorization API e.g. `AsyncPreauthorizationClient.initialize`.
 
     """
 
@@ -262,3 +321,40 @@ class AsyncPaystackClient(BaseAsyncAPIClient):
         self.verification = AsyncVerificationClient(secret_key=self._secret_key)
         self.virtual_terminals = AsyncVirtualTerminalClient(secret_key=self._secret_key)
         self.direct_debits = AsyncDirectDebitClient(secret_key=self._secret_key)
+        self.storefronts = AsyncStorefrontClient(secret_key=self._secret_key)
+        self.orders = AsyncOrderClient(secret_key=self._secret_key)
+        self.preauthorizations = AsyncPreauthorizationClient(
+            secret_key=self._secret_key
+        )
+
+    async def get_capitec_pay_transaction(
+        self,
+        reference: str,
+        alternate_model_class: type[PaystackDataModel] | None = None,
+    ):
+        """Check the status of a charge made with Capitec Pay.
+
+        Args:
+            reference: The transaction reference from the previously initiated charge request
+            alternate_model_class: A pydantic model class to use instead of the
+            default pydantic model used by the library to present the data in
+            the `Response.data`. The default behaviour of the library is to
+            set  `Response.data` to `None` if it fails to serialize the data
+            returned from paystack with the model provided in the library.
+            Providing a pydantic model class via this parameter overrides
+            the library default model with the model class you provide.
+            This can come in handy when the models in the library do not
+            accurately represent the data returned, and you prefer working with the
+            data as a pydantic model instead of as a dict of the response returned
+            by  paystack before it is serialized with pydantic models, The original
+            data can be accessed via `Response.raw`.
+
+        Returns:
+            A pydantic model containing the response gotten from paystack's server.
+        """
+        url = self._full_url(f"/capitec-pay/requery/{reference}")
+        return await self._handle_request(
+            HTTPMethod.POST,
+            url,
+            response_data_model_class=alternate_model_class,
+        )
