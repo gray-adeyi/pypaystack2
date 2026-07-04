@@ -55,6 +55,7 @@ class VirtualTerminalClient(BaseAPIClient):
         optional_params = [
             ("currency", currency),
             ("custom_fields", custom_fields),
+            ("metadata", metadata),
         ]
         payload = add_to_payload(optional_params, payload)
 
