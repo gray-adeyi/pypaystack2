@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## unreleased
 
+## 3.3.0 - (4th July 2026)
+
+### Added
+
+- `get_capitec_pay_transaction` to `PaystackClient` and `AsyncPaystackClient`
+- `PreauthorizationClient` and `AsyncPreauthorizationClient` as `preauthorizations` to `PaystackClient` and `AsyncPaystackClient`
+
+- `StorefrontClient` and `AsyncStorefrontClient` as `storefronts` to `PaystackClient` and `AsyncPaystackClient`
+
+- `OrderClient` and `AsyncOrderClient` as `orders` to `PaystackClient` and `AsyncPaystackClient`
+
+
+### Fixed
+
+- Incorrect field spec for `PaymentRequest` model
+- Lint errors in fees calculation mixin
+- Missing `created_at` field on `Refund` model
+
 ## 3.2.1 - (1st July 2026)
 
 ### Fixed
