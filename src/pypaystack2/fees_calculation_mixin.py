@@ -119,19 +119,33 @@ class FeesCalculationMixin:
             )
         options_model = options_validator_class.model_validate(options)  # type: ignore
 
-        if currency == Currency.NGN:
+        if currency == Currency.NGN and isinstance(
+            options_model, NigeriaServiceFeeOptions
+        ):
             return self._calculate_ngn_fee(amount, options_model)
-        if currency == Currency.GHS:
+        if currency == Currency.GHS and isinstance(
+            options_model, GhanaServiceFeeOptions
+        ):
             return self._calculate_ghs_fee(amount, options_model)
-        if currency == Currency.ZAR:
+        if currency == Currency.ZAR and isinstance(
+            options_model, SouthAfricaServiceFeeOptions
+        ):
             return self._calculate_zar_fee(amount, options_model)
-        if currency == Currency.KES:
+        if currency == Currency.KES and isinstance(
+            options_model, KenyaServiceFeeOptions
+        ):
             return self._calculate_kes_fee(amount, options_model)
-        if currency == Currency.XOF:
+        if currency == Currency.XOF and isinstance(
+            options_model, CoteDIvoreServiceFeeOptions
+        ):
             return self._calculate_xof_fee(amount, options_model)
-        if currency == Currency.RWF:
+        if currency == Currency.RWF and isinstance(
+            options_model, RwandaServiceFeeOptions
+        ):
             return self._calculate_rwf_fee(amount, options_model)
-        if currency == Currency.EGP:
+        if currency == Currency.EGP and isinstance(
+            options_model, EgyptServiceFeeOptions
+        ):
             return self._calculate_egp_fee(amount, options_model)
         raise ValueError(
             f"calculations not supported for the provided currency {currency}"
