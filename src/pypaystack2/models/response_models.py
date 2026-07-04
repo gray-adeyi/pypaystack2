@@ -352,7 +352,7 @@ class PaymentRequestNotification(BaseModel):
 
 class PaymentRequest(BaseModel):
     id: int
-    integration: int | Integration
+    integration: int | Integration | None = None
     domain: Domain
     amount: int
     currency: Currency
@@ -368,7 +368,7 @@ class PaymentRequest(BaseModel):
     paid: bool
     paid_at: datetime | None = None
     metadata: dict[str, Any] | None = None
-    notifications: list[PaymentRequestNotification]
+    notifications: list[PaymentRequestNotification] | str
     offline_reference: str
     customer: Customer | int
     created_at: datetime
@@ -751,6 +751,7 @@ class Refund(BaseModel):
     refund_channel: str | None = None
     session_id: Any | None = None
     collect_account_number: bool | None = None
+    created_at: datetime | None = None
 
 
 class CardBin(BaseModel):
