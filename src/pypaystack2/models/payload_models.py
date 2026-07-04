@@ -1,12 +1,12 @@
 from typing import Any, Optional, Literal, Self
 
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel, model_validator, Field
 
 from pypaystack2.enums import RecipientType, Currency
 
 
 class RefundAccount(BaseModel):
-    """A dataclass for representing refund account
+    """A pydantic model for representing refund account
     details
 
     Attributes:
@@ -22,7 +22,7 @@ class RefundAccount(BaseModel):
 
 
 class BulkChargeInstruction(BaseModel):
-    """A dataclass for bulk charge instruction.
+    """A pydantic model for bulk charge instruction.
 
     Attributes:
         authorization: The authorization code of the customer you want to charge.
@@ -36,7 +36,7 @@ class BulkChargeInstruction(BaseModel):
 
 
 class LineItem(BaseModel):
-    """A dataclass for LineItem.
+    """A pydantic model for LineItem.
 
     Attributes:
         name: The name of the product.
@@ -49,8 +49,20 @@ class LineItem(BaseModel):
     quantity: int
 
 
+class OrderLineItem(BaseModel):
+    """A pydantic model for representing a line item in an order
+
+    Attributes:
+        product: The ID of the product
+        quantity: The quantity of of the product
+    """
+
+    product: int
+    quantity: int = Field(1, ge=1)
+
+
 class Tax(BaseModel):
-    """A dataclass for Tax.
+    """A pydantic model for Tax.
 
     Attributes:
         name: The name of the tax.
@@ -62,7 +74,7 @@ class Tax(BaseModel):
 
 
 class SplitAccount(BaseModel):
-    """A dataclass for SplitAccount.
+    """A pydantic model for SplitAccount.
 
     Attributes:
         subaccount: The id of the sub account.
@@ -99,7 +111,7 @@ class Recipient(BaseModel):
 
 
 class TransferInstruction(BaseModel):
-    """A dataclass for TransferInstruction.
+    """A pydantic model for TransferInstruction.
 
     Attributes:
         amount: The amount to be transferred.
