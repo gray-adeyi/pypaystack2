@@ -3,6 +3,7 @@ from pypaystack2.models.payload_models import (
     RefundAccount,
     BulkChargeInstruction,
     LineItem,
+    OrderLineItem,
     Tax,
     SplitAccount,
     Recipient,
@@ -90,6 +91,7 @@ __all__ = [
     #     payload models
     "BulkChargeInstruction",
     "LineItem",
+    "OrderLineItem",
     "Tax",
     "SplitAccount",
     "Recipient",
