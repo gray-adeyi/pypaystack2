@@ -1,6 +1,6 @@
 [project]
 name = "pypaystack2"
-version = "3.3.0"
+version = "3.4.0"
 description = "A developer-friendly client library for Paystack"
 readme = "README.md"
 license = "MIT"
@@ -14,10 +14,10 @@ classifiers = [
 ]
 
 
-requires-python = ">= 3.11"
+requires-python = ">=3.11"
 dependencies = [
     "httpx>=0.28.1",
-    "pydantic>=2.12.5",
+    "pydantic>=2.14.0",
 ]
 
 [project.scripts]
@@ -25,13 +25,13 @@ pypaystack2 = "pypaystack2.cli:cli_app"
 
 [project.optional-dependencies]
 webhook = [
-    "fastapi[standard]>=0.123.10",
+    "fastapi[standard]>=0.143.0",
     "ngrok>=1.4.0",
-    "python-dotenv>=1.2.1",
+    "python-dotenv>=1.2.4",
 ]
 
 [build-system]
-requires = ["uv_build>=0.11.19,<0.12.0"]
+requires = ["uv_build>=0.13.0,<0.14.0"]
 build-backend = "uv_build"
 
 [dependency-groups]
@@ -42,18 +42,19 @@ dev = [
     { include-group = "coverage" },
 ]
 format = [
-    "ruff>=0.14.8",
+    "ruff>=0.17.0",
 ]
 test = [
-    "python-dotenv>=1.2.1",
-    "tomli>=2.3.0",
+    "python-dotenv>=1.2.4",
+    "tomli>=2.5.0",
 ]
 coverage = []
 doc = [
-    "mike>=2.1.3",
+    "mike>=2.2.0",
     "mkdocs>=1.6.1",
     "mkdocs-glightbox>=0.5.2",
     "mkdocs-material>=9.7.0",
     "mkdocstrings>=1.0.0",
     "mkdocstrings-python>=2.0.1",
 ]
+
