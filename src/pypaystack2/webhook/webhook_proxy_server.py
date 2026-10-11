@@ -1,7 +1,7 @@
 import asyncio
 import json
 import logging
-from typing import Annotated, Any
+from typing import Annotated, Any, TypedDict
 
 from pypaystack2._metadata import __version__
 from pypaystack2.utils import (
@@ -33,7 +33,14 @@ httpx_module = try_import_module(
 )
 
 MAX_CONCURRENT_WEBHOOK_SEND = 50
-GLOBAL_VARS = {  # server global shared variables
+
+
+class ProxyServerGlobalVars(TypedDict):
+    proxy_clients: list[str]
+    proxy_server_log_payload: bool
+
+
+GLOBAL_VARS: ProxyServerGlobalVars = {  # server global shared variables
     "proxy_clients": [],
     "proxy_server_log_payload": True,
 }
@@ -51,6 +58,8 @@ If forwards the webhook payload it receives from the tunnel server to all the pr
 def extract_signature(
     x_paystack_signature: Annotated[str | None, fastapi_module.Header()] = None,
 ) -> str:
+    if not x_paystack_signature:
+        raise ValueError("X-Paystack-Signature not present in headers")
     return x_paystack_signature
 
 
@@ -65,7 +74,6 @@ async def webhook(
         logger.info("New webhook event received")
         logger.info(f"{json.dumps(body)}")
     background_tasks.add_task(broadcast_webhook, signature=signature, body=body)
-    return None
 
 
 async def broadcast_webhook(signature: str, body: Any):
