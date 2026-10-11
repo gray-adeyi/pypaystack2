@@ -178,10 +178,11 @@ def start_tunnel_server(
     err_console = rich_module.console.Console(stderr=True)
 
     addr = os.environ.get("PAYSTACK_WEBHOOK_ADDRESS") or addr
-    mode = mode or os.environ.get("PAYSTACK_WEBHOOK_MODE")
+    mode = os.environ.get("PAYSTACK_WEBHOOK_MODE") or mode
     proxy_clients = os.environ.get("PAYSTACK_WEBHOOK_PROXY_CLIENTS") or proxy_clients
-    proxy_server_log_payload = proxy_server_log_payload or os.environ.get(
-        "PAYSTACK_WEBHOOK_PROXY_SERVER_LOG_PAYLOAD"
+    proxy_server_log_payload = (
+        os.environ.get("PAYSTACK_WEBHOOK_PROXY_SERVER_LOG_PAYLOAD")
+        or proxy_server_log_payload
     )
 
     try:
