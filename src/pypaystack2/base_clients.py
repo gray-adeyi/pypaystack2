@@ -8,7 +8,7 @@ from abc import ABC, abstractmethod
 from functools import reduce
 from http import HTTPMethod, HTTPStatus
 from json import JSONDecodeError
-from typing import Any, Type, cast
+from typing import Any, cast
 
 import httpx
 from httpx import HTTPError
@@ -101,7 +101,7 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
         method: HTTPMethod,
         url: str,
         data: dict[str, Any] | list[Any] | None = None,
-        response_data_model_class: Type[PaystackDataModel] | None = None,
+        response_data_model_class: type[PaystackDataModel] | None = None,
         raise_serialization_exception: bool = False,
     ) -> (
         Response[None] | Response[list[PaystackDataModel]] | Response[PaystackDataModel]
@@ -121,7 +121,7 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
     def _deserialize_response(
         self,
         raw_response: httpx.Response,
-        response_data_model_class: Type[PaystackDataModel] | None = None,
+        response_data_model_class: type[PaystackDataModel] | None = None,
         raise_serialization_exception: bool = False,
     ) -> (
         Response[None] | Response[list[PaystackDataModel]] | Response[PaystackDataModel]
@@ -176,7 +176,7 @@ class AbstractAPIClient(FeesCalculationMixin, ABC):
         self,
         data: dict[str, Any] | list[Any],
         http_status_code: int,
-        response_data_model_class: Type[PaystackDataModel] | None = None,
+        response_data_model_class: type[PaystackDataModel] | None = None,
         raise_serialization_exception: bool = False,
     ) -> PaystackDataModel | list[PaystackDataModel] | None:
         """Tries to convert the provided data to the provided pydantic instance, on failure to do so,
@@ -248,7 +248,7 @@ class BaseAPIClient(AbstractAPIClient):
         method: HTTPMethod,
         url: str,
         data: dict[str, Any] | list[Any] | None = None,
-        response_data_model_class: Type[PaystackDataModel] | None = None,
+        response_data_model_class: type[PaystackDataModel] | None = None,
         raise_serialization_exception: bool = False,
     ) -> (
         Response[None] | Response[list[PaystackDataModel]] | Response[PaystackDataModel]
@@ -300,7 +300,7 @@ class BaseAsyncAPIClient(AbstractAPIClient):
         method: HTTPMethod,
         url: str,
         data: dict[str, Any] | list[Any] | None = None,
-        response_data_model_class: Type[PaystackDataModel] | None = None,
+        response_data_model_class: type[PaystackDataModel] | None = None,
         raise_serialization_exception: bool = False,
     ) -> (
         Response[None] | Response[list[PaystackDataModel]] | Response[PaystackDataModel]
@@ -373,16 +373,11 @@ def add_to_payload(
 def append_query_params(query_params: list[tuple[str, Any]], url: str) -> str:
     """Adds more queries to url that already have query parameters in its suffix
 
-    This function should only be used with urls that already have a
-    query parameter suffixed to it because it makes that assumption
-    that the url supplied is of the state ``http://example-url.com?firstQuery=1``
-    and it adds more query parameters delimited by & to the end of the provided
-    url ``http://example-url.com?firstQuery=1&otherQuery=2&...``
-
-    Args:
+        Args:
         query_params: A list of other query parameters that should be appended to the url
-            if it is not None. e.g ``[("page",2),("pagination",50),("currency",None)]`` ->
-            ``url&page=2&pagination=50``
+            if it is not None. e.g `[("page",2),("pagination",50),("currency",None)]` ->
+            `url&page=2&pagination=50` if the url already has queries else
+            `url?page=2&pagination=50`
         url: The url to which additional query parameters are added.
 
     Returns:
@@ -393,4 +388,9 @@ def append_query_params(query_params: list[tuple[str, Any]], url: str) -> str:
     ]
     if len(params) == 0:
         return url
+    if "?" not in url:
+        first_query = params[0].replace("&", "", 1)
+        url = f"{url}?{first_query}"
+        params = params[1:]
+
     return url + reduce(add, params)
