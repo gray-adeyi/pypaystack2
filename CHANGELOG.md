@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## unreleased
 
+## 3.4.0 - (12th October 2026)
+
+### Added 
+
+- `WebhookEventClient` and `AsyncWebhookEventClient` as `webhook_events` to `PaystackClient` and `AsyncPaystackClient`
+
 ## 3.3.0 - (4th July 2026)
 
 ### Added
