@@ -1,4 +1,3 @@
-# ruff: noqa: F401
 from pypaystack2.sub_clients.sync_clients.apple_pay import ApplePayClient
 from pypaystack2.sub_clients.sync_clients.bulk_charges import BulkChargeClient
 from pypaystack2.sub_clients.sync_clients.charge import ChargeClient
@@ -26,7 +25,7 @@ from pypaystack2.sub_clients.sync_clients.transfer_recipients import (
 from pypaystack2.sub_clients.sync_clients.transfers import TransferClient
 from pypaystack2.sub_clients.sync_clients.transfers_control import TransferControlClient
 from pypaystack2.sub_clients.sync_clients.verification import VerificationClient
-
+from pypaystack2.sub_clients.sync_clients.webhook_events import WebhookEventClient
 
 __all__ = [
     "ApplePayClient",
@@ -43,13 +42,14 @@ __all__ = [
     "ProductClient",
     "RefundClient",
     "SettlementClient",
-    "TransactionSplitClient",
     "SubAccountClient",
     "SubscriptionClient",
     "TerminalClient",
     "TransactionClient",
-    "TransferRecipientClient",
+    "TransactionSplitClient",
     "TransferClient",
     "TransferControlClient",
+    "TransferRecipientClient",
     "VerificationClient",
+    "WebhookEventClient",
 ]

@@ -1,6 +1,7 @@
-import httpx
 from http import HTTPMethod
 from typing import Any, Literal
+
+import httpx
 
 from pypaystack2.base_clients import BaseAPIClient, add_to_payload, append_query_params
 from pypaystack2.enums import Currency
