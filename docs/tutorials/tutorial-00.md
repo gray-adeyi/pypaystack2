@@ -180,10 +180,10 @@ client = PaystackClient()
 
 @app.command()
 def new_customer(
-        email: str,
-        first_name: str | None = None,
-        last_name: str | None = None,
-        phone: str | None = None,
+    email: str,
+    first_name: str | None = None,
+    last_name: str | None = None,
+    phone: str | None = None,
 ):
     print("Connecting to paystack...\n")
     response = client.customers.create(
@@ -295,16 +295,23 @@ resource, `Response[list[Customer]]` implies `Response.data` contains a list of 
     from pypaystack2 import PaystackClient
     from pypaystac2.models import Customer
 
-    class MyCustomCustomer(BaseModel):
-      ... # All attributes are skipped for simplicity
 
-    class MyImprovedCustomer(Customer):
-      ... # Overrides of incorrect attributes or addition of new attributes
+    class MyCustomCustomer(BaseModel): ...  # All attributes are skipped for simplicity
+
+
+    class MyImprovedCustomer(
+        Customer
+    ): ...  # Overrides of incorrect attributes or addition of new attributes
+
 
     client = PaystackClient()
-    response = client.customers.create(email="johndoe@example.com", alterate_model_class=MyCustomCusomer)
+    response = client.customers.create(
+        email="johndoe@example.com", alterate_model_class=MyCustomCusomer
+    )
     # or
-    response = client.customers.create(email="johndoe@example.com", alterate_model_class=MyImprovedCustomer)
+    response = client.customers.create(
+        email="johndoe@example.com", alterate_model_class=MyImprovedCustomer
+    )
     ```
     It means that `response` in  the first case is of type `Response[MyCustomCustomer]` and it is
     `Responnse[MyImprovedCustomer]` in the second case and `Response.data` is guaranteed  to be
@@ -315,7 +322,9 @@ resource, `Response[list[Customer]]` implies `Response.data` contains a list of 
     available in `Response.raw`
 
 ```python
-response = client.customers.create(email=email, first_name=first_name, last_name=last_name, phone=phone)
+response = client.customers.create(
+    email=email, first_name=first_name, last_name=last_name, phone=phone
+)
 ```
 
 You can access the attributes of the `Response` model instance like
@@ -340,10 +349,10 @@ client = PaystackClient()
 
 @app.command()
 def new_customer(
-        email: str,
-        first_name: str | None = None,
-        last_name: str | None = None,
-        phone: str | None = None,
+    email: str,
+    first_name: str | None = None,
+    last_name: str | None = None,
+    phone: str | None = None,
 ):
     response = client.customers.create(
         email=email, first_name=first_name, last_name=last_name, phone=phone
@@ -457,9 +466,9 @@ $ python main.py get-customer johndoe@example.com > dump.json
     from pypaystack2.exceptions import ClientNetworkError
 
     try:
-      response = client.customers.create(email="johndoe@example.com")
+        response = client.customers.create(email="johndoe@example.com")
     except ClientNetworkError as error:
-      print(f'ClientNetworkError was indeed raised: {error}')
+        print(f"ClientNetworkError was indeed raised: {error}")
     ```
 
 ## Where to go from here
