@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 from http import HTTPStatus
 from typing import Any, Generic, Literal, Optional, Union
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 from pypaystack2.enums import (
     BulkChargeStatus,
@@ -13,6 +13,8 @@ from pypaystack2.enums import (
     Interval,
     RiskAction,
     SupportedCountryRelationshipType,
+    WebhookEventType,
+    WebhookDeliveryStatus,
 )
 from pypaystack2.models.payload_models import LineItem, Tax
 from pypaystack2.types import D, PaystackResponseData, T
@@ -858,3 +860,26 @@ class SupportedCountryBank(BaseModel):
 class AccountNumberPattern(BaseModel):
     exact_match: bool
     pattern: str
+
+
+class WebhookPayload(BaseModel):
+    event: WebhookEventType
+    data: dict[str, Any]
+
+
+class WebhookEvent(BaseModel):
+    id: str = Field(alias="_id")
+    domain: Domain
+    category: str
+    event_name: WebhookEventType
+    category_row_id: int
+    status: WebhookDeliveryStatus
+    status_detail: str
+    response_code: int
+    trial_count: int
+    created_at: datetime
+    updated_at: datetime
+    webhook_url: str | None = None
+    webhook_url_code: str | None = None
+    event_payload: WebhookPayload | str | None = None
+    merchant_response_body: dict[str, Any] | str | None = None
