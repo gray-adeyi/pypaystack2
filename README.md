@@ -7,8 +7,6 @@
 PyPaystack2 is an Open Source Python client library for integrating [Paystack](https://paystack.com/) into your python
 projects. It aims at being developer friendly and easy to use.
 
-**Version 3 is here now**
-
 ## Features
 
 - 1st class support for type annotations.
