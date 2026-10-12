@@ -36,23 +36,21 @@ Example usage:
 For more details, refer to the documentation.
 """
 
-# ruff: noqa: F401
 from pypaystack2._metadata import (
+    __author__,
+    __copyright__,
+    __license__,
     __title__,
     __version__,
-    __author__,
-    __license__,
-    __copyright__,
 )
-
-from pypaystack2.main_clients import PaystackClient, AsyncPaystackClient
+from pypaystack2.main_clients import AsyncPaystackClient, PaystackClient
 
 __all__ = [
+    "AsyncPaystackClient",
+    "PaystackClient",
+    "__author__",
+    "__copyright__",
+    "__license__",
     "__title__",
     "__version__",
-    "__author__",
-    "__license__",
-    "__copyright__",
-    "PaystackClient",
-    "AsyncPaystackClient",
 ]

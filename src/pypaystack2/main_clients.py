@@ -1,70 +1,73 @@
-from pypaystack2.sub_clients.async_clients.storefronts import AsyncStorefrontClient
-from pypaystack2.sub_clients.async_clients.orders import AsyncOrderClient
-from pypaystack2.sub_clients.async_clients.preauthorizations import (
-    AsyncPreauthorizationClient,
-)
-from pypaystack2.sub_clients.sync_clients.preauthorizations import (
-    PreauthorizationClient,
-)
-from pypaystack2.sub_clients.sync_clients.orders import OrderClient
-from pypaystack2.sub_clients.sync_clients.storefronts import StorefrontClient
 from http import HTTPMethod
-from pypaystack2.types import PaystackDataModel
-from pypaystack2.sub_clients.async_clients.direct_debits import AsyncDirectDebitClient
-from pypaystack2.sub_clients.sync_clients.direct_debits import DirectDebitClient
-from pypaystack2.sub_clients.async_clients.virtual_terminals import (
-    AsyncVirtualTerminalClient,
-)
-from pypaystack2.sub_clients.sync_clients.virtual_terminals import VirtualTerminalClient
+
 from pypaystack2.base_clients import BaseAPIClient, BaseAsyncAPIClient
 from pypaystack2.sub_clients import (
     ApplePayClient,
-    BulkChargeClient,
-    ChargeClient,
-    IntegrationClient,
-    CustomerClient,
-    DedicatedAccountClient,
-    DisputeClient,
-    PaymentRequestClient,
-    MiscellaneousClient,
-    PaymentPageClient,
-    PlanClient,
-    ProductClient,
-    RefundClient,
-    SettlementClient,
-    TransactionSplitClient,
-    SubAccountClient,
-    SubscriptionClient,
-    TerminalClient,
-    TransactionClient,
-    TransferRecipientClient,
-    TransferClient,
-    TransferControlClient,
-    VerificationClient,
     AsyncApplePayClient,
     AsyncBulkChargeClient,
     AsyncChargeClient,
-    AsyncIntegrationClient,
     AsyncCustomerClient,
     AsyncDedicatedAccountClient,
     AsyncDisputeClient,
-    AsyncPaymentRequestClient,
+    AsyncIntegrationClient,
     AsyncMiscellaneousClient,
     AsyncPaymentPageClient,
+    AsyncPaymentRequestClient,
     AsyncPlanClient,
     AsyncProductClient,
     AsyncRefundClient,
     AsyncSettlementClient,
-    AsyncTransactionSplitClient,
     AsyncSubAccountClient,
     AsyncSubscriptionClient,
     AsyncTerminalClient,
     AsyncTransactionClient,
-    AsyncTransferRecipientClient,
+    AsyncTransactionSplitClient,
     AsyncTransferClient,
     AsyncTransferControlClient,
+    AsyncTransferRecipientClient,
     AsyncVerificationClient,
+    AsyncWebhookEventClient,
+    BulkChargeClient,
+    ChargeClient,
+    CustomerClient,
+    DedicatedAccountClient,
+    DisputeClient,
+    IntegrationClient,
+    MiscellaneousClient,
+    PaymentPageClient,
+    PaymentRequestClient,
+    PlanClient,
+    ProductClient,
+    RefundClient,
+    SettlementClient,
+    SubAccountClient,
+    SubscriptionClient,
+    TerminalClient,
+    TransactionClient,
+    TransactionSplitClient,
+    TransferClient,
+    TransferControlClient,
+    TransferRecipientClient,
+    VerificationClient,
+    WebhookEventClient,
 )
+from pypaystack2.sub_clients.async_clients.direct_debits import AsyncDirectDebitClient
+from pypaystack2.sub_clients.async_clients.orders import AsyncOrderClient
+from pypaystack2.sub_clients.async_clients.preauthorizations import (
+    AsyncPreauthorizationClient,
+)
+from pypaystack2.sub_clients.async_clients.storefronts import AsyncStorefrontClient
+from pypaystack2.sub_clients.async_clients.virtual_terminals import (
+    AsyncVirtualTerminalClient,
+)
+from pypaystack2.sub_clients.sync_clients.direct_debits import DirectDebitClient
+from pypaystack2.sub_clients.sync_clients.orders import OrderClient
+from pypaystack2.sub_clients.sync_clients.preauthorizations import (
+    PreauthorizationClient,
+)
+from pypaystack2.sub_clients.sync_clients.storefronts import StorefrontClient
+from pypaystack2.sub_clients.sync_clients.virtual_terminals import VirtualTerminalClient
+from pypaystack2.types import PaystackDataModel
 
 
 class PaystackClient(BaseAPIClient):
@@ -130,6 +133,8 @@ class PaystackClient(BaseAPIClient):
             Order API e.g. `OrderClient.create`.
         preauthorizations: A binding to `PreauthorizationClient` providing methods for interacting with Paystack's
             Preauthorization API e.g. `PreauthorizationClient.initialize`.
+        webhook_events: A binding to `WebhookEventClient` providing methods for interacting with Paystack's
+            Webook events API e.g. `WebhookEventClient.all`.
     """
 
     def __init__(self, secret_key: str | None = None):
@@ -190,6 +195,7 @@ class PaystackClient(BaseAPIClient):
         self.storefronts = StorefrontClient(secret_key=self._secret_key)
         self.orders = OrderClient(secret_key=self._secret_key)
         self.preauthorizations = PreauthorizationClient(secret_key=self._secret_key)
+        self.webhook_events = WebhookEventClient(secret_key=self._secret_key)
 
     def get_capitec_pay_transaction(
         self,
@@ -287,6 +293,8 @@ class AsyncPaystackClient(BaseAsyncAPIClient):
             Order API e.g. `AsyncOrderClient.create`.
         preauthorizations: A binding to `AsyncPreauthorizationClient` providing methods for interacting with Paystack's
             Preauthorization API e.g. `AsyncPreauthorizationClient.initialize`.
+        webhook_events: A binding to `AsyncWebhookEventClient` providing methods for interacting with Paystack's
+            Webook events API e.g. `AsyncWebhookEventClient.all`.
 
     """
 
@@ -326,6 +334,7 @@ class AsyncPaystackClient(BaseAsyncAPIClient):
         self.preauthorizations = AsyncPreauthorizationClient(
             secret_key=self._secret_key
         )
+        self.webhook_events = AsyncWebhookEventClient(secret_key=self._secret_key)
 
     async def get_capitec_pay_transaction(
         self,
